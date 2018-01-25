@@ -33,6 +33,7 @@ export default new Vuex.Store({
       state.profile.name = name
       state.profile.profileImage = profileImage
       state.profile.website = website
+      window.location.replace('/')
     },
     SET_lastPage (state, url) {
       state.lastPage = url
@@ -41,7 +42,7 @@ export default new Vuex.Store({
       state.lastPageTried = url
     },
     CLEAR_USER (state) {
-      state.authToken = ''
+      state.accessToken = ''
       state.username = ''
       state.tokenExpires = ''
       state.profile = {}

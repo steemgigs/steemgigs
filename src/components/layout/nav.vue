@@ -9,13 +9,13 @@
         </ul>
         <ul class="right" v-if="$store.state.accessToken">
           <li>
-            <router-link class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Messages" to="/message"><i class="icon ion-android-chat x2"></i></router-link>
+            <router-link to="/message"><i class="icon ion-android-chat x2"></i></router-link>
           </li>
           <li>
-            <router-link class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Dashboard" to="/dashboard"><i class="icon ion-speedometer x2"></i></router-link>
+            <router-link to="/dashboard"><i class="icon ion-speedometer x2"></i></router-link>
           </li>
           <li>
-            <router-link to="/cart" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cart"><i class="icon ion-bag x2"></i></router-link>
+            <router-link to="/cart" ><i class="icon ion-bag x2"></i></router-link>
           </li>
           <li>
             <router-link class="btn indigo white-text" to="/create_gig"><i class="icon left ion-plus-round"></i>Create</router-link>
@@ -36,7 +36,6 @@
 </template>
 
 <script>
-// import M from 'materialize-css'
 import sc2 from '@/services/sc2'
 export default {
   data () {
@@ -46,16 +45,6 @@ export default {
       user: '',
       metadata: ''
     }
-  },
-  mounted () {
-    sc2.setAccessToken(this.$store.state.accessToken)
-    sc2.me((err, result) => {
-      if (!err) {
-        console.log('result:', result)
-      } else {
-        console.log('err:', err)
-      }
-    })
   }
 }
 </script>
@@ -113,7 +102,7 @@ nav {
           position: relative;
           a {
             font-weight: bold;
-            line-height: 52px;
+            line-height: 57px;
             transition: all ease-in-out .3s;
             position: relative;
             &.btn {
@@ -127,9 +116,10 @@ nav {
             }
             img.profile_pic {
               border-radius: 50%;
-              max-width: 3em;
+              border: 1px solid $blue;
+              width: 3em;
+              height: 3em;
               margin-top: 5px;
-              background: grey;
               margin-left: -0.5em;
             }
           }
@@ -139,7 +129,6 @@ nav {
           &:hover ul {
             padding-top: 0.5em;
             display: block;
-            position: absolute;
             position: absolute;
             top: 55px;
             li a {

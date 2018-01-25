@@ -1,5 +1,5 @@
 import Index from '@/pages/index'
-import LoggedIn from '@/pages/access/loggedin'
+import LoggedIn from '@/pages/access/loggedIn'
 
 export default [
   {

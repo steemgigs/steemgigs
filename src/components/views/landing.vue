@@ -1,5 +1,5 @@
 <template>
-  <div>
-    <h1> Welcome to STEEMGIGS landing page</h1>
+  <div class="center">
+    <h1><br> Welcome to STEEMGIGS landing page</h1>
   </div>
 </template>

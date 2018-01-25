@@ -1,7 +1,7 @@
 <template>
   <div class="center">
     <h1><br>You are logged in.</h1>
-    <p>Redirecting...</p>
+    <p class="flow-text">Redirecting...</p>
   </div>
 </template>
 
@@ -21,16 +21,9 @@ export default {
       } else {
         console.log('error:', JSON.stringify(err, null, 2))
       }
+    }, () => {
+      console.log('done')
     })
-    console.log('redirecting...')
-    this.$router.push('/')
-    // sc2.me(function (err, result) {
-    //   console.log('/me', err, result)
-    //   if (!err) {
-    //     this.user = result.account
-    //     this.metadata = JSON.stringify(result.user_metadata, null, 2)
-    //   }
-    // })
   }
 }
 </script>
