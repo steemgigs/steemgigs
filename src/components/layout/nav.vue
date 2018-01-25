@@ -1,11 +1,34 @@
-<template>
+ <template>
   <div class="navbar-fixed">
     <nav class="white">
       <div class="nav-wrapper container">
         <router-link to="/" class="brand-logo left">STEEMGIGS<sub>alpha</sub></router-link>
-        <ul class="right">
+        <ul class="right notIn" v-if="!$store.state.accessToken">
           <li><a href="https://steemit.com/pick_account" rel="noopener noreferrer" target="_blank">Sign up</a></li>
-          <li><a :href="loginURL" >Log in</a></li>
+          <li><a :href="loginURL">Log in</a></li>
+        </ul>
+        <ul class="right" v-if="$store.state.accessToken">
+          <li>
+            <router-link class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Messages" to="/message"><i class="icon ion-android-chat x2"></i></router-link>
+          </li>
+          <li>
+            <router-link class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Dashboard" to="/dashboard"><i class="icon ion-speedometer x2"></i></router-link>
+          </li>
+          <li>
+            <router-link to="/cart" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cart"><i class="icon ion-bag x2"></i></router-link>
+          </li>
+          <li>
+            <router-link class="btn indigo white-text" to="/create_gig"><i class="icon left ion-plus-round"></i>Create</router-link>
+          </li>
+          <li>
+            <a><img class="profile_pic" :src="$store.state.profile.profileImage" alt=""></a>
+            <ul class="white z-depth-1">
+              <li><router-link to="/profile" v-text="$store.state.username"></router-link></li>
+              <li><router-link to="/settings">Settings</router-link></li>
+              <li><router-link to="/help">Help</router-link></li>
+              <li><a @click.prevent="logout()">logout</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
     </nav>
@@ -13,25 +36,24 @@
 </template>
 
 <script>
-import steemconnect from 'steemconnect/lib/steemconnect'
+// import M from 'materialize-css'
+import sc2 from '@/services/sc2'
 export default {
   data () {
     return {
       isAuth: false,
-      loginURL: steemconnect.getLoginURL()
+      loginURL: sc2.getLoginURL(),
+      user: '',
+      metadata: ''
     }
   },
   mounted () {
-    steemconnect.init({
-      app: 'steemgig',
-      callbackURL: 'http://localhost:8080/'
-    })
-    console.log('loginURL:', this.loginURL)
-    steemconnect.isAuthenticated((err, result) => {
-      if (!err && result.isAuthenticated) {
-        this.isAuth = true
-        var username = result.username
-        console.log(username, ' is logged in')
+    sc2.setAccessToken(this.$store.state.accessToken)
+    sc2.me((err, result) => {
+      if (!err) {
+        console.log('result:', result)
+      } else {
+        console.log('err:', err)
       }
     })
   }
@@ -68,15 +90,9 @@ nav {
           bottom: 0;
         }
       }
-
-      ul {
-        li {
-          a {
-            font-weight: bold;
-            line-height: 52px;
-            transition: all ease-in-out .3s;
-            position: relative;
-            &:hover::after {
+      ul.notIn {
+        li a {
+          &:hover::after {
               width: 100%;
             }
             &::after {
@@ -89,6 +105,46 @@ nav {
               left: 0;
               bottom: 0;
               transition: all ease-in-out .3s;
+            }
+        }
+      }
+      ul {
+        li {
+          position: relative;
+          a {
+            font-weight: bold;
+            line-height: 52px;
+            transition: all ease-in-out .3s;
+            position: relative;
+            &.btn {
+              line-height: 35px;
+              font-size: 1.2em;
+              padding: 0 1em;
+              i.icon {
+                line-height: 38px;
+                margin-right: 0.5em;
+              }
+            }
+            img.profile_pic {
+              border-radius: 50%;
+              max-width: 3em;
+              margin-top: 5px;
+              background: grey;
+              margin-left: -0.5em;
+            }
+          }
+          ul {
+            display: none;
+          }
+          &:hover ul {
+            padding-top: 0.5em;
+            display: block;
+            position: absolute;
+            position: absolute;
+            top: 55px;
+            li a {
+              padding: 0 1em;
+              margin-top: -1em;
             }
           }
         }

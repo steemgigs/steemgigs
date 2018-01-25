@@ -1,17 +1,17 @@
 <template>
   <div class="App__index">
-    <home-page v-if="!auth" />
-    <!-- <landing-page v-else /> -->
+    <home-page v-if="$store.state.accessToken" />
+    <landing-page v-else />
   </div>
 </template>
 
 <script>
 import HomePage from '@/components/views/home'
-// import LandingPage from '@/components/views/landing'
+import LandingPage from '@/components/views/landing'
 export default {
   components: {
-    HomePage
-    // LandingPage
+    HomePage,
+    LandingPage
   },
   data () {
     return {
