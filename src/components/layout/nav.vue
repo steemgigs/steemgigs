@@ -76,7 +76,7 @@ nav {
   border-bottom: 0px solid #e9e7e7;
   .nav-wrapper {
     &.container {
-      min-width: 80%;
+      min-width: 90%;
 
       a.brand-logo {
         font-size: 28px;
