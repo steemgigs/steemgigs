@@ -23,9 +23,11 @@
           <li>
             <a><img class="profile_pic" :src="$store.state.profile.profileImage" alt=""></a>
             <ul class="white z-depth-1">
-              <li><router-link to="/profile" v-text="$store.state.username"></router-link></li>
-              <li><router-link to="/settings">Settings</router-link></li>
-              <li><router-link to="/help">Help</router-link></li>
+              <li><router-link class="waves-effect" to="/profile" v-text="$store.state.username"></router-link></li>
+              <li><router-link class="waves-effect" to="/wallet">Wallet</router-link></li>
+              <li><router-link class="waves-effect" to="/settings">Settings</router-link></li>
+              <li><router-link class="waves-effect red-text" to="/invite">Invite friends</router-link></li>
+              <li><router-link class="waves-effect" to="/help">Help</router-link></li>
               <li><a @click.prevent="logout()">logout</a></li>
             </ul>
           </li>
@@ -127,13 +129,18 @@ nav {
             display: none;
           }
           &:hover ul {
-            padding-top: 0.5em;
+            padding-top: 0.3em;
+            padding-bottom: 0.3em;
             display: block;
             position: absolute;
             top: 55px;
-            li a {
-              padding: 0 1em;
-              margin-top: -1em;
+            li {
+              a {
+                padding: 0 1em;
+                line-height: 25px;
+                display: block;
+                width: 8em;
+              }
             }
           }
         }

@@ -42,15 +42,6 @@ Other -->
       font-weight: 500;
       position: relative;
       transition: all ease-in-out .3s;
-      // ul {
-      //   display: none;
-      // }
-      // &:hover ul {
-      //   display: block;
-      //   padding-top: 0.5em;
-      //   position: absolute;
-      //   top: 40px;
-      // }
       &:hover::after {
         width: 100%;
       }
@@ -66,9 +57,13 @@ Other -->
         transition: all ease-in-out .3s;
       }
     }
+    ul.drop {
+      display: none;
+    }
+    &:hover ul {
+      display: block;
+      position: absolute;
+    }
   }
-}
-.subnav li a ul.drop {
-  display: none;
 }
 </style>
