@@ -5,7 +5,7 @@
     </div>
     <div class="card-content">
       <img :src="profilePicUrl" alt="" class="sellerPic">
-      <router-link class="sellerName" :to="'/users/' + sellerUsername" v-text="sellerUsername"></router-link>
+      <router-link class="sellerName" :to="'/@' + sellerUsername" v-text="sellerUsername"></router-link>
       <p class="task" v-text="task"></p>
       <p class="price">
         <span v-if="price">Starting at {{ price }} {{ currency }}</span>

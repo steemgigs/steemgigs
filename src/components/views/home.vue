@@ -1,6 +1,6 @@
 <template>
   <div class="home__view row">
-    <cat-nav v-if="$store.state.accessToken" />
+    <cat-nav />
     <div class="col s12 m4 l2 steemgigs_ads">
       <div class="card center center-align request">
         <div class="card-content">
@@ -237,9 +237,6 @@ export default {
 
 <style lang="scss" scoped>
 $blue: #4757b2;
-.home__view {
-  padding-top: 5em;
-}
 .steemgigs_ads {
   box-sizing: border-box;
   padding: 0;

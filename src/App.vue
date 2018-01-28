@@ -26,5 +26,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: #f9f9f9;
   min-height: calc(100vh - 56px);
+  [class*="__view"] {
+    padding-top: 4em;
+  }
 }
 </style>

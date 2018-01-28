@@ -14,6 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "materialize-css": "^1.0.0-alpha.3",
     "sc2-sdk": "^1.0.2",
     "steem": "^0.6.7",
