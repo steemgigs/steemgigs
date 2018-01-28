@@ -116,11 +116,11 @@ export default {
       position: absolute;
       z-index: 1;
       top: 100%;
-      left: auto;
+      left: 50%;
       right: auto;
       vertical-align: baseline;
       border: 1px #e5e5e5 solid;
-      transform: translateX(-37%);
+      transform: translateX(-50%);
       // box-shadow: 0 1px 3px #dddddd;
       padding: 0 0;
       -webkit-transition: opacity .1s;
@@ -128,9 +128,6 @@ export default {
       -webkit-transition-delay: .2s;
       transition-delay: .2s;
 
-      // &:last-child {
-      //   right: 1em;
-      // }
 
       ul {
         padding: 0 10px;
@@ -144,6 +141,19 @@ export default {
       ul:first-of-type {
         // margin-right: 15px;
       }
+    }
+
+    &:last-child:hover .dropdown {
+        right: 0;
+        left: auto;
+        transform: translateX(0);
+
+    }
+    &:first-child:hover .dropdown {
+        right: auto;
+        left: 0;
+        transform: translateX(0);
+
     }
   }
 }

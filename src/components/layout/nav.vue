@@ -136,12 +136,13 @@ nav {
             display: block;
             position: absolute;
             top: 55px;
+            transform: translateX(-7px);
             li {
               a {
                 padding: 0 1em;
                 line-height: 25px;
                 display: block;
-                width: 8em;
+                min-width: 8em;
               }
             }
           }
