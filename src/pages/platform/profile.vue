@@ -12,14 +12,31 @@
 </template>
 
 <script>
-import sc2 from '@/services/sc2'
 import CatNav from '@/components/layout/catNav'
 export default {
   components: {
     CatNav
   },
+  data () {
+    return {
+      profileUsername: ''
+    }
+  },
   mounted () {
-    console.log(this.$route.params.username)
+    this.profileUsername = this.$route.params.username
+    steem.api.getAccounts([this.profileUsername], (err, response) => {
+      console.log(err, response)
+    })
+  },
+  methods: {
+    async fetchUserInfo (username) {
+      // try {
+      //   let response = await Api.fetchUserInfo(username)
+      //   console.log(response)
+      // } catch (err) {
+      //   console.log('error retrieving user info: \n error:', this.stringify(err))
+      // }
+    }
   }
 }
 </script>
