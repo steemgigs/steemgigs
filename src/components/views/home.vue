@@ -5,7 +5,7 @@
       <div class="card center center-align request">
         <div class="card-content">
           <p>Can&rsquo;t find what you&rsquo;re looking Seeking?<br>You can post Custom request and we&rsquo;ll lovingly look for reputable great minds to handle it</p>
-          <button class="btn btn-block indigo">Post a Custom request</button>
+          <button class="btn btn-block indigo">Post custom request</button>
         </div>
       </div>
       <div class="card searches">
@@ -59,7 +59,7 @@
           </span>
         </div>
         <div class="col s12 m4 l3" v-for="(gig, index) in 8" :key="index">
-          <gig-card profilePicUrl="https://avatars2.githubusercontent.com/u/7319749?s=400&v=4" taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" price="3" currency="SBD" upvotes="336" comments="323" payout="$884.3" />
+          <gig-card profilePicUrl="https://avatars2.githubusercontent.com/u/7319749?s=400&v=4" taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" :price="3" currency="SBD" :upvotes="336" :comments="323" payout="$884.3" />
         </div>
       </section>
       <section id="untalented" class="row">
@@ -77,7 +77,7 @@
           </span>
         </div>
         <div class="col s12 m4 l3" v-for="(gig, index) in 4" :key="index">
-          <gig-card profilePicUrl="https://avatars2.githubusercontent.com/u/7319749?s=400&v=4" taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" price="3" currency="SBD" upvotes="336" comments="323" payout="$884.3" />
+          <gig-card profilePicUrl="https://avatars2.githubusercontent.com/u/7319749?s=400&v=4" taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" :price="3" currency="SBD" :upvotes="336" :comments="323" payout="$884.3" />
         </div>
       </section>
       <section id="featured" class="row">
@@ -95,7 +95,7 @@
           </span>
         </div>
         <div class="col s12 m4 l3" v-for="(gig, index) in 8" :key="index">
-          <gig-card profilePicUrl="https://avatars2.githubusercontent.com/u/7319749?s=400&v=4" taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" price="3" currency="SBD" upvotes="336" comments="323" payout="$884.3" />
+          <gig-card profilePicUrl="https://avatars2.githubusercontent.com/u/7319749?s=400&v=4" taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" :price="3" currency="SBD" :upvotes="336" :comments="323" payout="$884.3" />
         </div>
       </section>
       <section id="testimonials" class="row">
@@ -262,13 +262,15 @@ $blue: #4757b2;
         }
       }
     }
+    &.request {
+      .card-content {
+        padding: 20px 10px;
+      }
+    }
     .card-title {
       margin-top: -0.7em;
       font-size: 1.5em;
       text-decoration: underline;
-    }
-    .card-content {
-      padding: 24px 10px;
     }
     button.btn {
       display: block;
@@ -276,6 +278,9 @@ $blue: #4757b2;
       margin-top: 18px;
       text-transform: none;
       width: 100%;
+      padding: 0;
+      font-size: 0.9em;
+      font-weight: 500;
     }
   }
 }

@@ -120,7 +120,7 @@ export default {
       vertical-align: baseline;
       border: 1px #e5e5e5 solid;
       // box-shadow: 0 1px 3px #dddddd;
-      padding: 10px 0;
+      padding: 0 0;
       -webkit-transition: opacity .1s;
       transition: opacity .1s;
       -webkit-transition-delay: .2s;
@@ -131,7 +131,7 @@ export default {
       // }
 
       ul {
-        padding: 0 20px;
+        padding: 0 10px;
         li {
           display: block;
           text-align: left;
@@ -140,7 +140,7 @@ export default {
       }
 
       ul:first-of-type {
-        margin-right: 15px;
+        // margin-right: 15px;
       }
     }
   }
