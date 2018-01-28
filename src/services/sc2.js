@@ -11,6 +11,7 @@ const sc = sc2.Initialize({
   baseURL: 'https://v2.steemconnect.com',
   app: 'steemgig.app',
   callbackURL: 'http://localhost:8080/complete',
+  // callbackURL: 'https://steemgigsorg.firebaseapp.com/complete',
   scope: ['vote', 'comment', 'comment_options', 'comment_delete', 'post', 'custom_json', 'login']
 })
 

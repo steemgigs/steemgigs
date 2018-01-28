@@ -16,8 +16,9 @@ export default {
       if (!err) {
         console.log('/me: ', result)
         let {about, cover_image: coverImage, location, name, profile_image: profileImage, website} = JSON.parse(result.account.json_metadata).profile
-        console.log(about, coverImage, location, name, profileImage, website)
-        this.$store.commit('SET_PROFILE', {about, coverImage, location, name, profileImage, website})
+        let walletBal = result.account.balance
+        console.log(about, coverImage, location, name, profileImage, website, walletBal)
+        this.$store.commit('SET_PROFILE', {about, coverImage, location, name, profileImage, website, walletBal})
       } else {
         console.log('error:', JSON.stringify(err, null, 2))
       }

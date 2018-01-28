@@ -17,7 +17,8 @@ export default new Vuex.Store({
       location: '',
       name: '',
       profileImage: '',
-      website: ''
+      website: '',
+      balance: ''
     }
   },
   mutations: {
@@ -26,13 +27,14 @@ export default new Vuex.Store({
       state.tokenExpires = tokenExpires
       state.username = username
     },
-    SET_PROFILE (state, {about, coverImage, location, name, profileImage, website}) {
+    SET_PROFILE (state, {about, coverImage, location, name, profileImage, website, walletBal}) {
       state.profile.about = about
       state.profile.coverImage = coverImage
       state.profile.location = location
       state.profile.name = name
       state.profile.profileImage = profileImage
       state.profile.website = website
+      state.profile.balance = walletBal
       window.location.replace('/')
     },
     SET_lastPage (state, url) {

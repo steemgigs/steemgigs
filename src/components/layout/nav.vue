@@ -24,7 +24,7 @@
             <a><img class="profile_pic" :src="$store.state.profile.profileImage" alt=""></a>
             <ul class="white z-depth-1">
               <li><router-link class="waves-effect" to="/profile" v-text="$store.state.username"></router-link></li>
-              <li><router-link class="waves-effect" to="/wallet">Wallet</router-link></li>
+              <li><router-link class="waves-effect" to="/wallet">Wallet - {{ $store.state.profile.balance }}</router-link></li>
               <li><router-link class="waves-effect" to="/settings">Settings</router-link></li>
               <li><router-link class="waves-effect red-text" to="/invite">Invite friends</router-link></li>
               <li><router-link class="waves-effect" to="/help">Help</router-link></li>
@@ -118,11 +118,13 @@ nav {
             }
             img.profile_pic {
               border-radius: 50%;
-              border: 1px solid $blue;
-              width: 3em;
-              height: 3em;
-              margin-top: 5px;
+              border: 1px solid #4757b2;
+              width: 2.7em;
+              height: 2.7em;
+              margin-top: 7px;
+              // background: grey;
               margin-left: -0.5em;
+              display: inline-block;
             }
           }
           ul {

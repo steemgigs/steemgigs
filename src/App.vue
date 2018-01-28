@@ -17,7 +17,9 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
+body {
+  overflow-x: hidden;
+}
 #app {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -10,7 +10,7 @@
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
+    "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs --fix",
     "build": "node build/build.js"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "steem": "^0.6.7",
     "steemconnect": "0.0.35",
     "vue": "^2.5.2",
+    "vue-carousel": "^0.6.5",
     "vue-notification": "^1.3.4",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
