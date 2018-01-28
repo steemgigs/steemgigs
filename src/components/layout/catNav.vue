@@ -1,6 +1,6 @@
 <template>
   <ul class="subnav center center-align">
-    <li v-for="(category, index) in categories" :key="index">
+    <li class="main-li" v-for="(category, index) in categories" :key="index">
       <router-link :to="'/categories/' + category.name">{{ category.name }}</router-link>
       <div class="dropdown white z-depth-1 drop">
         <ul>
@@ -70,8 +70,9 @@ export default {
   position: fixed;
   width: 100%;
   z-index: 2;
-  li {
+  li.main-li {
     display: inline-block;
+    position: relative;
     a {
       padding: 11.5px 0.5em;
       line-height: 40px;
@@ -119,6 +120,7 @@ export default {
       right: auto;
       vertical-align: baseline;
       border: 1px #e5e5e5 solid;
+      transform: translateX(-37%);
       // box-shadow: 0 1px 3px #dddddd;
       padding: 0 0;
       -webkit-transition: opacity .1s;
