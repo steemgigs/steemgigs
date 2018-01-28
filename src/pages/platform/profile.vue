@@ -24,9 +24,7 @@ export default {
   },
   mounted () {
     this.profileUsername = this.$route.params.username
-    steem.api.getAccounts([this.profileUsername], (err, response) => {
-      console.log(err, response)
-    })
+    // get profile details
   },
   methods: {
     async fetchUserInfo (username) {

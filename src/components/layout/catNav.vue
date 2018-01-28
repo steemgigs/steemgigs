@@ -116,11 +116,11 @@ export default {
       position: absolute;
       z-index: 1;
       top: 100%;
-      left: auto;
+      left: 50%;
       right: auto;
       vertical-align: baseline;
       border: 1px #e5e5e5 solid;
-      transform: translateX(-37%);
+      transform: translateX(-50%);
       // box-shadow: 0 1px 3px #dddddd;
       padding: 0 0;
       -webkit-transition: opacity .1s;
