@@ -128,9 +128,6 @@ export default {
       -webkit-transition-delay: .2s;
       transition-delay: .2s;
 
-      // &:last-child {
-      //   right: 1em;
-      // }
 
       ul {
         padding: 0 10px;
@@ -144,6 +141,19 @@ export default {
       ul:first-of-type {
         // margin-right: 15px;
       }
+    }
+
+    &:last-child:hover .dropdown {
+        right: 0;
+        left: auto;
+        transform: translateX(0);
+
+    }
+    &:first-child:hover .dropdown {
+        right: auto;
+        left: 0;
+        transform: translateX(0);
+
     }
   }
 }
