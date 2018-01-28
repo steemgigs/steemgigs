@@ -1,12 +1,18 @@
 <template>
-  <div class="card">
+  <div class="card gig" tag="div">
+    <div class="card-content" v-if="meantFor === 'gigDetails'">
+      <span class="card-title" v-text="task"></span>
+    </div>
     <div class="card-image">
-      <img :src="taskPicture" :alt="task">
+      <router-link :to="taskLink">
+        <img :src="taskPicture" :alt="task">
+      </router-link>
     </div>
     <div class="card-content">
-      <img :src="profilePicUrl" alt="" class="sellerPic">
-      <router-link class="sellerName" :to="'/@' + sellerUsername" v-text="sellerUsername"></router-link>
-      <p class="task" v-text="task"></p>
+      <img v-if="profilePicUrl" :src="profilePicUrl" alt="" class="sellerPic">
+      <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername" v-text="sellerUsername"></router-link>
+      <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" tag="p" v-text="task" />
+      <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
       <p class="price">
         <span v-if="price">Starting at {{ price }} {{ currency }}</span>
         <span v-if="!price">FREE</span>
@@ -24,10 +30,17 @@
 <script>
 export default {
   props: {
+    meantFor: {
+      type: String,
+      default: 'results'
+    },
     profilePicUrl: {
       type: String
     },
     task: {
+      type: String
+    },
+    taskDetails: {
       type: String
     },
     sellerUsername: {
@@ -53,13 +66,19 @@ export default {
     payout: {
       type: String
     }
+  },
+  computed: {
+    taskLink () {
+      return '/@' + this.sellerUsername + '/' + this.slugify(this.task)
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 $blue: #4757b2;
-.card {
+.card.gig {
+  cursor: pointer;
   .card-content {
     padding: 1em;
     .sellerPic {

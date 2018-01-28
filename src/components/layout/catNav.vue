@@ -128,7 +128,6 @@ export default {
       -webkit-transition-delay: .2s;
       transition-delay: .2s;
 
-
       ul {
         padding: 0 10px;
         li {

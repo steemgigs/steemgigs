@@ -6,6 +6,9 @@ export default {
     },
     stringify (obj) {
       return JSON.stringify(obj, null, 2)
+    },
+    slugify (word) {
+      return word.replace(/\s+/g, '-').toLowerCase()
     }
   },
   mounted () {

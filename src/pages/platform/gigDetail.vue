@@ -1,61 +1,50 @@
 <template>
   <div class="profile__view row">
     <cat-nav />
-    <div class="col s12 m4 l3">
-      <div class="card-panel profileOwner">
-        <span class="editProfile waves-effect" v-if="$store.state.username === profileData.account">
-          <i class="icon ion-android-create"></i>
-        </span>
-        <label class="profilePic" for="profile_image">
-          <input type="file" accept="image/png,image/jpeg" class="hide" id="profile_image">
-          <img :src="profile.profile_image" class="user-pict-img" :alt="profileData.account" width="150" height="150">
-        </label>
-        <span class="username" v-text="profile.name"></span>
-        <span class="expertise">Experienced Web Developer</span>
-        <span class="ratings">
-          <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (2 reviews)
-        </span>
-        <p class="location"><i class="icon ion-android-pin"></i> From <span class="right" v-text="profile.location"></span></p>
-        <p class="member_since"> <i class="icon ion-android-person"></i> Member since <span class="right" v-text="since"></span></p>
-        <p class="member_since"> <i class="icon ion-ios-briefcase"></i> Last delivery <span class="right" v-text="ago"></span></p>
-        <p>
-          <i class="icon ion-android-plane"></i>
-          Vacation mode
-          <span class="right">
-            <div class="switch" v-if="$store.state.username === profileData.account">
-              <label>
-                <input type="checkbox" v-model="vacation_mode" :disabled="$store.state.username !== profileData.account">
-                <span class="lever"></span>
-              </label>
-            </div>
+    <div class="container">
+      <div class="col s12 m8 l9 row">
+        <ul class="tabs">
+          <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">DETAILS</a></li>
+          <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'inactive_gigs'}" @click="changeView('inactive_gigs')">REVIEWS</a></li>
+        </ul>
+        <div class="col s12">
+          <gig-card meantFor="gigDetails" taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer that you will always love to show and get plenty auidience" taskDetails="<h3>Hello there and welcome to my great gig that is sure to satisfy you</h3><p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, ab quisquam! Cupiditate doloribus deleniti reprehenderit quisquam earum eum laboriosam recusandae, at quo natus enim placeat illo dicta molestiae ab facilis.</p>" :price="3" currency="SBD" :upvotes="336" :comments="323" payout="$884.3" />
+        </div>
+      </div>
+       <div class="col s12 m4 l3">
+        <div class="card-panel profileOwner">
+          <span class="editProfile waves-effect" v-if="$store.state.username === profileData.account">
+            <i class="icon ion-android-create"></i>
           </span>
-        </p>
-      </div>
-      <div class="card moreProfileInfo">
-        <div class="card-content">
-          <span class="card-title">Description</span>
-          <p v-text="profile.about"></p>
-          <span class="card-title">Languages</span>
-          <ul>
-            <li>English - fluent</li>
-            <li>French (Français) - Conversational</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m8 l9 row">
-      <ul class="tabs">
-        <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">ACTIVE STEEMGIGS</a></li>
-        <!-- <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'inactive_gigs'}" @click="changeView('inactive_gigs')">INACTIVE STEEMGIGS</a></li> -->
-      </ul>
-      <div v-if="currentView === 'active_gigs'" class="activeGigs">
-        <div class="col s12 m6 l4" v-for="(gig, index) in 8" :key="index">
-          <gig-card taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" :price="3" currency="SBD" :upvotes="336" :comments="323" payout="$884.3" meantFor="profile" />
-        </div>
-      </div>
-      <div v-if="currentView !== 'active_gigs'" class="inactiveGigs">
-        <div class="col s12 m6 l4" v-for="(gig, index) in 3" :key="index">
-          <gig-card taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" :price="3" currency="SBD" :upvotes="336" :comments="323" payout="$884.3" meantFor="profile" />
+          <label class="profilePic" for="profile_image">
+            <input type="file" accept="image/png,image/jpeg" class="hide" id="profile_image">
+            <img :src="profile.profile_image" class="user-pict-img" :alt="profileData.account" width="150" height="150">
+          </label>
+          <span class="username" v-text="profile.name"></span>
+          <span class="expertise">Experienced Web Developer</span>
+          <span class="ratings">
+            <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (2 reviews)
+          </span>
+          <p class="location"><i class="icon ion-android-pin"></i> From <span class="right" v-text="profile.location"></span></p>
+          <p class="member_since"> <i class="icon ion-android-person"></i> Member since <span class="right" v-text="since"></span></p>
+          <p class="member_since"> <i class="icon ion-ios-briefcase"></i> Last delivery <span class="right" v-text="ago"></span></p>
+          <p>
+            <i class="icon ion-android-plane"></i>
+            Vacation mode
+            <span class="right">
+              <div class="switch" v-if="$store.state.username === profileData.account">
+                <label>
+                  <input type="checkbox" v-model="vacation_mode" :disabled="$store.state.username !== profileData.account">
+                  <span class="lever"></span>
+                </label>
+              </div>
+            </span>
+          </p>
+          <hr>
+          <div class="moreProfileInfo">
+            <span class="card-title">Description</span>
+            <p v-text="profile.about"></p>
+          </div>
         </div>
       </div>
     </div>
@@ -113,6 +102,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .container {
+    min-width: 90%;
+  }
   .profileOwner {
     position: relative;
     .profilePic {
@@ -185,8 +177,9 @@ export default {
       font-weight: 600;
       &:first-child {
         font-size: 1.2em;
-        margin-top: -0.5em;
-        margin-bottom: 0em;
+        margin-top: 1em;
+        margin-bottom: -0.6em;
+        text-align: left;
       }
       &:not(:first-child) {
         margin-top: 1em;
@@ -197,7 +190,7 @@ export default {
     }
   }
   .tabs {
-    width: 98.5%;
+    width: 100%;
     float: left;
     margin-top: 0.5em;
     margin-bottom: 0.5em;

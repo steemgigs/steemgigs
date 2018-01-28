@@ -2,6 +2,7 @@ import Index from '@/pages/index'
 import LoggedIn from '@/pages/access/loggedIn'
 import NewSteemGig from '@/pages/platform/newSteemgig'
 import Profile from '@/pages/platform/profile'
+import GigDetail from '@/pages/platform/gigDetail'
 
 export default [
   {
@@ -23,6 +24,11 @@ export default [
     path: '/@:username',
     name: 'STEEMGIGS | Profile',
     component: Profile
+  },
+  {
+    path: '/@:username/:task',
+    name: 'STEEMGIGS | Task Detail',
+    component: GigDetail
   },
   {
     path: '*',
