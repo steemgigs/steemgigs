@@ -136,6 +136,8 @@ nav {
             display: block;
             position: absolute;
             top: 55px;
+            width: 160px;
+            right: -4em;
             transform: translateX(-7px);
             li {
               a {
@@ -143,6 +145,7 @@ nav {
                 line-height: 25px;
                 display: block;
                 min-width: 8em;
+                font-size: 0.9em;
               }
             }
           }
