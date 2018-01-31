@@ -8,6 +8,8 @@ import mixins from '@/plugins/mixins'
 import Notifications from 'vue-notification'
 import Vuex from 'vuex'
 
+require('./assets/steemgigs.scss')
+
 Vue.config.productionTip = false
 
 Vue.use(Vuex)

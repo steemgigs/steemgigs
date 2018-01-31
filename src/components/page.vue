@@ -1,17 +1,25 @@
 <template>
-  <div class="center">
-    <h1><br>You are logged in.</h1>
-    <p class="flow-text">Redirecting...</p>
+  <div :class="pageClassList">
+    <slot>Empty Page</slot>
   </div>
 </template>
 
 <script>
 import sc2 from '@/services/sc2'
 export default {
+  props: {
+    pageClasses: {
+      type: Array,
+      required: true
+    }
+  },
+  computed: {
+    pageClassList () {
+      return this.pageClasses.join(' ')
+    }
+  },
   mounted () {
-    let {access_token: accessToken, expires_in: tokenExpires, username} = this.$route.query
-    this.$store.commit('SET_USER', {accessToken, tokenExpires, username})
-    sc2.setAccessToken(accessToken)
+    sc2.setAccessToken(this.$store.state.accessToken)
     sc2.me((err, result) => {
       if (!err) {
         console.log('/me: ', result)
@@ -24,7 +32,6 @@ export default {
     }, () => {
       console.log('done')
     })
-    this.$router.push('/')
   }
 }
 </script>

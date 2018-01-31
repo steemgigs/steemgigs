@@ -16,7 +16,7 @@ export default new Vuex.Store({
       coverImage: '',
       location: '',
       name: '',
-      profileImage: '',
+      profileImage: 'http://via.placeholder.com/100x100',
       website: '',
       balance: ''
     }
@@ -35,7 +35,6 @@ export default new Vuex.Store({
       state.profile.profileImage = profileImage
       state.profile.website = website
       state.profile.balance = walletBal
-      window.location.replace('/')
     },
     SET_lastPage (state, url) {
       state.lastPage = url
@@ -47,7 +46,9 @@ export default new Vuex.Store({
       state.accessToken = ''
       state.username = ''
       state.tokenExpires = ''
+      let prevImage = state.profile.profileImage
       state.profile = {}
+      state.profile.profileImage = prevImage
     }
   },
   plugins: [createPersist({

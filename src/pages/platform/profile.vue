@@ -1,5 +1,5 @@
 <template>
-  <div class="profile__view row">
+  <page :pageClass="['profile__view', 'row']">
     <cat-nav />
     <div class="col s12 m4 l3">
       <div class="card-panel profileOwner">
@@ -59,16 +59,18 @@
         </div>
       </div>
     </div>
-  </div>
+  </page>
 </template>
 
 <script>
 import Api from '@/services/api'
+import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
 import moment from 'moment'
 export default {
   components: {
+    Page,
     CatNav,
     GigCard
   },

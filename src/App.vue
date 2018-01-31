@@ -16,18 +16,4 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-body {
-  overflow-x: hidden;
-}
-#app {
-  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: #f9f9f9;
-  min-height: calc(100vh - 56px);
-  [class*="__view"] {
-    padding-top: 4em;
-  }
-}
 </style>

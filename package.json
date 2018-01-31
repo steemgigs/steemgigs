@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "highlightjs": "^9.10.0",
     "markdown-it-editor": "^1.1.4",
     "materialize-css": "^1.0.0-alpha.3",
     "moment": "^2.20.1",
