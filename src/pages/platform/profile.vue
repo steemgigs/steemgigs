@@ -1,5 +1,5 @@
 <template>
-  <page :pageClass="['profile__view', 'row']">
+  <page :pageClasses="['profile__view', 'row']">
     <cat-nav />
     <div class="col s12 m4 l3">
       <div class="card-panel profileOwner">
