@@ -205,6 +205,8 @@
               <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
               POST #STEEMGIG
             </button>
+            <p class="red-text" v-if="errorText">Error: {{ errorText }}</p>
+            <p class="indigo-text" v-if="successText">{{ successText }}</p>
           </div>
         </div>
       </div>
@@ -235,9 +237,11 @@ export default {
   },
   data () {
     return {
+      successText: '',
+      errorText: '',
+      isPosting: false,
       sections: ['Overview', 'Description', 'Pricing', 'Requirements', 'Portfolio', 'Publish'],
       currentSection: 0,
-      isPosting: false,
       totalPics: 1,
       newGigData: {
         title: 'record myself in HD crying out your name in my city: Ilorin, Nigeria',
@@ -317,12 +321,35 @@ export default {
     },
     submit () {
       let that = this
+      this.errorText = ''
+      this.successText = ''
       this.isPosting = true
-      let jsonMetadata = {}
+      this.isPosting = true
+      let jsonMetadata = {
+        app: 'steemgig',
+        tags: ['steemgigs', this.newGigData.category, this.newGigData.subcategory, 'testing'],
+        format: 'Markdown'
+      }
       sc2.setAccessToken(this.$store.state.accessToken)
-      sc2.comment('jalasem', this.slugify(this.newGigData.title), 'jalasem', this.slugify(this.newGigData.title), this.newGigData.title, (this.previewData), jsonMetadata, function (err, res) {
-        that.isPosting = false
+      let textifiedPics = '\n## Portfolio\n----\n'
+      this.newGigData.portfolio.forEach(url => {
+        textifiedPics += '![Potfolio](' + url + ')\n\n'
+      })
+      let body = this.previewData + textifiedPics + `
+#### this post was posted on #STEEMGIGS
+where everyone has something to offer
+      `
+      let permlink = this.slugify(this.newGigData.title)
+      let username = this.$store.state.username
+      let title = '#STEEMGIGS: I will ' + this.newGigData.title
+      sc2.comment('', 'steemgigs', username, permlink, title, body, jsonMetadata, (err, res) => {
         console.log(err, res)
+        that.isPosting = false
+        if (err) {
+          that.errorText = 'Error pushing post to steem, try again'
+        } else {
+          that.successText = 'Successfully pushed to steem!'
+        }
       })
     }
   },
@@ -342,17 +369,17 @@ export default {
       }
     },
     previewData () {
-      return `## #Description
+      return `## Description
 ----
 ${this.newGigData.description}
-## #Pricing
+## Pricing
 ----
 ${this.newGigData.pricing}
 
 #### Price: Starting at ${this.newGigData.price} ${this.newGigData.currency}
 #### Delivery: ${this.newGigData.days} day(s) ${this.newGigData.hours} hour(s)
 ----
-## #Requirements
+## Requirements
 ----
 ${this.newGigData.requirements}
       `
