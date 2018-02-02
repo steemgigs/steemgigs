@@ -60,7 +60,7 @@
               </div>
             </div>
             <div class="col s12 row">
-                <button @click.prevent="prevSection" class="btn indigo lighten-1 waves-effect">back</button>
+                <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
                 <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
             </div>
           </div>
@@ -106,7 +106,7 @@
               <input type="number" v-model="newGigData.price" class="price" placeholder="price">
             </div>
             <div class="col s12 row" style="margin-top: 3em;">
-                <button @click.prevent="prevSection" class="btn indigo lighten-1 waves-effect">back</button>
+                <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
                 <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
             </div>
           </div>
@@ -130,7 +130,7 @@
               </div>
             </div>
             <div class="col s12 row">
-                <button @click.prevent="prevSection" class="btn indigo lighten-1 waves-effect">back</button>
+                <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
                 <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
             </div>
           </div>
@@ -175,21 +175,51 @@
               </p>
             </div>
             <div class="col s12 row">
-                <button @click.prevent="prevSection" class="btn indigo lighten-1 waves-effect">back</button>
+                <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
                 <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
             </div>
           </div>
         </form>
+        <div class="row" v-if="currentSection === 5">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">#STEEMGIGS: I will {{ newGigData.title }}</span>
+                <p><router-link :to="'/categories/' + this.newGigData.category">{{ this.newGigData.category }}</router-link> / <router-link :to="'/categories/' + this.newGigData.category + '/' + this.newGigData.subcategory">{{ this.newGigData.subcategory }}</router-link></p>
+              </div>
+              <div class="card-image">
+                <carousel :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
+                  <slide v-for="(image, index) in newGigData.portfolio" :key="index">
+                    <img :src="image" class="responsive-img" :alt="newGigData.title">
+                  </slide>
+                </carousel>
+              </div>
+              <div class="card-content">
+                <vue-markdown :source="previewData" />
+              </div>
+            </div>
+          </div>
+          <div class="col s12 row">
+            <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
+            <button class="right btn indigo waves-effect" @click.prevent="submit">
+              <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
+              POST #STEEMGIG
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </page>
 </template>
 
 <script>
+import sc2 from '@/services/sc2'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import ImgUpload from '@/components/snippets/imgUpload'
 import { MarkdownEditor } from 'markdown-it-editor'
+import VueMarkdown from 'vue-markdown'
+import { Carousel, Slide } from 'vue-carousel'
 import hljs from 'highlightjs'
 import 'highlightjs/styles/github.css'
 
@@ -198,26 +228,30 @@ export default {
     Page,
     CatNav,
     MarkdownEditor,
+    VueMarkdown,
+    Carousel,
+    Slide,
     ImgUpload
   },
   data () {
     return {
       sections: ['Overview', 'Description', 'Pricing', 'Requirements', 'Portfolio', 'Publish'],
       currentSection: 0,
+      isPosting: false,
       totalPics: 1,
       newGigData: {
-        title: '',
-        category: '',
-        subcategory: '',
-        description: '',
-        requirements: '',
-        pricing: '',
-        hours: '',
-        days: '',
-        currency: '',
-        portfolio: [],
-        reward: '',
-        price: '',
+        title: 'record myself in HD crying out your name in my city: Ilorin, Nigeria',
+        category: 'Untalented',
+        subcategory: 'pranks & stunts',
+        description: "That's the name we gave to the gig cos that's simply what it is\n**I can bet you wouldn't believe it when I start to play my pranks. I can bet you'll be amazed at my stunts when I start to roll.Prepare to feel neausated**",
+        requirements: '**Just tell me your name and any additional information that might help**',
+        pricing: '- I will say your name for 2 STEEM \n- I will shout your name for 3 STEEM \n- I will scream your name for 5 STEEM',
+        hours: 1,
+        days: 1,
+        currency: 'STEEM',
+        portfolio: ['http://res.cloudinary.com/jalasem/image/upload/v1517535886/vkplxvcwbwjvst4ci2ts.png', 'http://res.cloudinary.com/jalasem/image/upload/v1517535926/o1vdfxm4ghduei9fr06t.png'],
+        reward: '100% STEEM POWER',
+        price: '2',
         liked: true
       },
       categories: [
@@ -280,6 +314,16 @@ export default {
     },
     morePics () {
       if (this.totalPics < 4) this.totalPics++
+    },
+    submit () {
+      let that = this
+      this.isPosting = true
+      let jsonMetadata = {}
+      sc2.setAccessToken(this.$store.state.accessToken)
+      sc2.comment('jalasem', this.slugify(this.newGigData.title), 'jalasem', this.slugify(this.newGigData.title), this.newGigData.title, (this.previewData), jsonMetadata, function (err, res) {
+        that.isPosting = false
+        console.log(err, res)
+      })
     }
   },
   computed: {
@@ -296,6 +340,22 @@ export default {
       } else {
         return `90 Characters`
       }
+    },
+    previewData () {
+      return `## #Description
+----
+${this.newGigData.description}
+## #Pricing
+----
+${this.newGigData.pricing}
+
+#### Price: Starting at ${this.newGigData.price} ${this.newGigData.currency}
+#### Delivery: ${this.newGigData.days} day(s) ${this.newGigData.hours} hour(s)
+----
+## #Requirements
+----
+${this.newGigData.requirements}
+      `
     }
   },
   mounted () {

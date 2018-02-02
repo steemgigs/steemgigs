@@ -154,7 +154,7 @@ export default {
     i.ion-upload {
       opacity: 1;
     }
-    bacckground: lightblue; /* when mouse over to the drop zone, change color */
+    background: lightblue; /* when mouse over to the drop zone, change color */
   }
   p {
     text-align: center;
