@@ -135,42 +135,51 @@
             </div>
           </div>
         </form>
-        <div v-if="currentSection === 4">
-          <form enctype="multipart/form-data" novalidate v-if="isInitial || isSaving" class="card-panel row">
-            <div class="container gigForm">
-              <p class="flow-text title">Portfolio</p>
-              <div class="dropbox">
-                <input type="file" multiple :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*" class="input-file">
-                  <p v-if="isInitial">
-                    Drag your file(s) here to begin<br> or click to browse
-                  </p>
-                  <p v-if="isSaving">
-                    Uploading {{ fileCount }} files...
-                  </p>
+        <form class="card-panel row" v-if="currentSection === 4">
+          <div class="container gigForm">
+            <p class="flow-text title">Portfolio</p>
+            <div class="input-field col s12 row">
+              <div class="col s12 m4 l3" v-for="(uploader, index) in totalPics" :key="index">
+                <img-upload :id="index" />
               </div>
-              <p class="flow-text title">Reward</p>
-              <div class="input-field col s12 m3 l3">
-                <select class="browser-default my-select category_select" v-model="newGigData.reward">
-                  <option>100% STEEM POWER</option>
-                  <option>50% SBD 50% SP</option>
-                  <option>Declined</option>
-                </select>
+              <div class="col s12 m4 l3" v-if="totalPics < 4">
+                <button @click.prevent="morePics" class="btn-floating indigo addPic">
+                  <i class="icon ion-android-add"></i>
+                </button>
               </div>
-              <div class="input-field col s12 m3 l4" style="margin-top: 0.5em">
-                <p>
-                  <label>
-                    <input class="filled-in" type="checkbox" v-model="newGigData.liked" />
-                    <span>Like your post</span>
-                  </label>
-                </p>
-              </div>
-              <div class="col s12 row">
-                  <button @click.prevent="prevSection" class="btn indigo lighten-1 waves-effect">back</button>
-                  <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
+              <div class="tutorial_guide center-align">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title"></span>
+                    <p>Attach images of past works etc Plus a Video describing your #STEEMGIG or why people should avail your STEEMGIG.</p>
+                    <p>Videos do better in helping you stand out from competition</p>
+                    <p>Note: The first Image or Video on the list of your uploaded media is what will appear as the thumbnail of your STEEMGIG</p>
+                  </div>
+                </div>
               </div>
             </div>
-          </form>
-        </div>
+            <p class="flow-text title">Reward</p>
+            <div class="input-field col s12 m3 l3">
+              <select class="browser-default my-select category_select" v-model="newGigData.reward">
+                <option>100% STEEM POWER</option>
+                <option>50% SBD 50% SP</option>
+                <option>Declined</option>
+              </select>
+            </div>
+            <div class="input-field col s12 m3 l4" style="margin-top: 0.5em">
+              <p>
+                <label>
+                  <input class="filled-in" type="checkbox" v-model="newGigData.liked" />
+                  <span>Like your post</span>
+                </label>
+              </p>
+            </div>
+            <div class="col s12 row">
+                <button @click.prevent="prevSection" class="btn indigo lighten-1 waves-effect">back</button>
+                <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </page>
@@ -179,30 +188,23 @@
 <script>
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
+import ImgUpload from '@/components/snippets/imgUpload'
 import { MarkdownEditor } from 'markdown-it-editor'
 import hljs from 'highlightjs'
 import 'highlightjs/styles/github.css'
-import Api from '@/services/api'
-
-const STATUS_INITIAL = 0
-const STATUS_SAVING = 1
-const STATUS_SUCCESS = 2
-const STATUS_FAILED = 3
 
 export default {
   components: {
     Page,
     CatNav,
-    MarkdownEditor
+    MarkdownEditor,
+    ImgUpload
   },
   data () {
     return {
       sections: ['Overview', 'Description', 'Pricing', 'Requirements', 'Portfolio', 'Publish'],
       currentSection: 0,
-      uploadedFiles: [],
-      uploadError: null,
-      currentStatus: null,
-      uploadFieldName: 'photos',
+      totalPics: 1,
       newGigData: {
         title: '',
         category: '',
@@ -213,7 +215,7 @@ export default {
         hours: '',
         days: '',
         currency: '',
-        portfolio: '',
+        portfolio: [],
         reward: '',
         price: '',
         liked: true
@@ -276,50 +278,11 @@ export default {
     refreshSubCategory () {
       this.newGigData.subcategory = ''
     },
-    reset () {
-      // reset form to initial state
-      this.currentStatus = STATUS_INITIAL
-      this.uploadedFiles = []
-      this.uploadError = null
-    },
-    save (formData) {
-      // upload data to the server
-      this.currentStatus = STATUS_SAVING
-
-      Api.imageUpload(formData)
-        .then(x => {
-          console.log(x)
-          this.uploadedFiles = [].concat(x)
-          this.currentStatus = STATUS_SUCCESS
-        })
-        .catch(err => {
-          this.uploadError = err.response
-          this.currentStatus = STATUS_FAILED
-        })
-    },
-    filesChange (fieldName, fileList) {
-      // handle file changes
-      const formData = new FormData()
-
-      if (!fileList.length) return
-
-      // append the files to FormData
-      Array
-        .from(Array(fileList.length).keys())
-        .map(x => {
-          formData.append(fieldName, fileList[x], fileList[x].name)
-        })
-
-      // save it
-      this.save(formData)
+    morePics () {
+      if (this.totalPics < 4) this.totalPics++
     }
   },
   computed: {
-    wordCount () {
-      if (this.newGigData.title.length > 0) {
-        return `${this.newGigData.title.length} / 90 characters`
-      }
-    },
     selectedCategoryIndex () {
       let catIndex = 0
       this.categories.forEach((category, index) => {
@@ -327,21 +290,22 @@ export default {
       })
       return catIndex
     },
-    isInitial () {
-      return this.currentStatus === STATUS_INITIAL
-    },
-    isSaving () {
-      return this.currentStatus === STATUS_SAVING
-    },
-    isSuccess () {
-      return this.currentStatus === STATUS_SUCCESS
-    },
-    isFailed () {
-      return this.currentStatus === STATUS_FAILED
+    wordCount () {
+      if (this.newGigData.title.length > 0) {
+        return `${this.newGigData.title.length} / 90 Characters`
+      } else {
+        return `90 Characters`
+      }
     }
   },
   mounted () {
-    this.reset()
+    this.$eventBus.$on('img-uploaded', payload => {
+      console.log(payload)
+      this.newGigData.portfolio[payload.index] = payload.url
+    })
+  },
+  deforeDestroy () {
+    this.$eventBus.$off('img-uploaded')
   }
 }
 </script>
@@ -519,32 +483,9 @@ p.title {
 .push-down {
   margin-top: 4.2em;
 }
-.dropbox {
-    outline: 2px dashed grey; /* the dash box */
-    outline-offset: -10px;
-    background: lightcyan;
-    color: dimgray;
-    padding: 10px 10px;
-    min-height: 200px; /* minimum height */
-    position: relative;
-    cursor: pointer;
-  }
-
-  .input-file {
-    opacity: 0; /* invisible but it's there! */
-    width: 100%;
-    height: 200px;
-    position: absolute;
-    cursor: pointer;
-  }
-
-  .dropbox:hover {
-    background: lightblue; /* when mouse over to the drop zone, change color */
-  }
-
-  .dropbox p {
-    font-size: 1.2em;
-    text-align: center;
-    padding: 50px 0;
-  }
+button.addPic {
+  position: absolute;
+  top: 50%;
+  transform: translate(50%, -50%);
+}
 </style>

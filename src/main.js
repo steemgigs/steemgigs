@@ -11,7 +11,7 @@ import Vuex from 'vuex'
 require('./assets/steemgigs.scss')
 
 Vue.config.productionTip = false
-
+Vue.prototype.$eventBus = new Vue()
 Vue.use(Vuex)
 Vue.mixin(mixins)
 Vue.use(Notifications)

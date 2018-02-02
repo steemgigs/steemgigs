@@ -5,7 +5,7 @@ export default {
     return axios.post(`/fetchUserData/`, {username})
   },
   imageUpload (formdata) {
-    // return axios.post('/imageUpload', formdata)
-    return axios.post('/multiple_uploads', formdata)
+    return axios.post('/imgUpload', formdata)
+    // return axios.post('/multiple_uploads', formdata)
   }
 }
