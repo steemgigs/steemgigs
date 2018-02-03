@@ -139,8 +139,8 @@ export default {
     }
     .main {
       position: relative;
-      padding-top: 3rem;
-      min-height: 100vh;
+      padding-top: 15vh;
+      padding-bottom: 15vh;
       img.bg{
           position: absolute;
           top: 0;
