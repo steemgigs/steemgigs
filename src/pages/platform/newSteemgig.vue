@@ -244,14 +244,13 @@ export default {
       currentSection: 0,
       totalPics: 1,
       newGigData: {
-        title: 'record myself in HD crying out your name in my city: Ilorin, Nigeria',
-        category: 'Untalented',
-        subcategory: 'pranks & stunts',
-        description: "That's the name we gave to the gig cos that's simply what it is\n**I can bet you wouldn't believe it when I start to play my pranks. I can bet you'll be amazed at my stunts when I start to roll.Prepare to feel neausated**",
-        requirements: '**Just tell me your name and any additional information that might help**',
-        pricing: '- I will say your name for 2 STEEM \n- I will shout your name for 3 STEEM \n- I will scream your name for 5 STEEM',
-        hours: 1,
-        days: 1,
+        title: '',
+        category: '',
+        subcategory: '',
+        description: '',
+        pricing: '',
+        hours: 0,
+        days: 0,
         currency: 'STEEM',
         portfolio: ['http://res.cloudinary.com/jalasem/image/upload/v1517535886/vkplxvcwbwjvst4ci2ts.png', 'http://res.cloudinary.com/jalasem/image/upload/v1517535926/o1vdfxm4ghduei9fr06t.png'],
         reward: '100% STEEM POWER',
@@ -327,8 +326,10 @@ export default {
       this.isPosting = true
       let jsonMetadata = {
         app: 'steemgig',
-        tags: ['steemgigs', this.newGigData.category, this.newGigData.subcategory, 'testing'],
-        format: 'Markdown'
+        tags: ['steemgigs', this.slugify(this.newGigData.category), this.slugify(this.newGigData.subcategory), 'testing'],
+        format: 'Markdown',
+        timestamp: new Date().getTime(),
+        generated: true
       }
       sc2.setAccessToken(this.$store.state.accessToken)
       let textifiedPics = '\n## Portfolio\n----\n'
@@ -337,7 +338,7 @@ export default {
       })
       let body = this.previewData + textifiedPics + `
 #### this post was posted on #STEEMGIGS
-where everyone has something to offer
+"where everyone has something to offer"
       `
       let permlink = this.slugify(this.newGigData.title)
       let username = this.$store.state.username

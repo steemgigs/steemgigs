@@ -11,6 +11,19 @@ export default {
       // return word.replace(/\s+/g, '-').toLowerCase()
       // eslint-disable-next-line
       return word.toString().trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '')
+    },
+    extractBody (data) {
+      return data.split(`## Portfolio
+----`)[0]
+    },
+    extractportfolio (data) {
+      let portfolio = []
+      let test = data.split(`## Portfolio
+      ----`)[1].split(`![Potfolio](`)
+      test.forEach(testCase => {
+        if (testCase.search('http') > -1) portfolio.push(testCase)
+      })
+      return portfolio
     }
   }
 }

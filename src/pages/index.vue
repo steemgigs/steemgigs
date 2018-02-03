@@ -1,7 +1,7 @@
 <template>
   <page :pageClasses="['App__index']">
-    <home-page v-if="$store.state.accessToken" />
-    <landing-page v-else />
+    <home-page :steemgigs="steemgigs" v-if="$store.state.accessToken" />
+    <landing-page :steemgigs="steemgigs" v-else />
   </page>
 </template>
 
@@ -9,6 +9,7 @@
 import Page from '@/components/page'
 import HomePage from '@/components/views/home'
 import LandingPage from '@/components/views/landing'
+import Api from '@/services/api'
 export default {
   components: {
     Page,
@@ -17,8 +18,15 @@ export default {
   },
   data () {
     return {
-      auth: false
+      steemgigs: []
     }
+  },
+  beforeCreate () {
+    Api.fetchPosts().then(response => {
+      this.steemgigs = response.data
+    }).catch(err => {
+      console.log(err)
+    })
   }
 }
 </script>
