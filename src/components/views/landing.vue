@@ -44,8 +44,7 @@
           <div class="col m7"></div>
         </div>
       </div>
-
-    </section> 
+    </section>
     <footer class="white page-footer z-depth-2">
           <div class="container">
             <div class="row">

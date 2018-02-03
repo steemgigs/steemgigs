@@ -299,7 +299,7 @@ export default {
         name: 'file',
         accept: 'image/jpg,image/jpeg,image/png',
         // url: 'https://steemgigsbackend-drwheuhunc.now.sh/imgUpload'
-        url: 'http://localhost:3000/imgUpload'
+        url: 'https://steemgigsbackend-bqbytxurhu.now.sh/imgUpload'
       }
     }
   },
