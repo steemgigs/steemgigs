@@ -89,7 +89,7 @@
             </div>
             <div class="input-field col s12 m3 l8">
               <select class="browser-default my-select category_select" v-model="newGigData.days">
-                <option value="" disabled selected>Days</option>
+                <option value="0">Less than a day</option>
                 <option v-for="(day, index) in 30" :key="index" :value="day">{{ day }} day(s)</option>
               </select>
             </div>
@@ -254,7 +254,7 @@ export default {
         currency: 'STEEM',
         portfolio: ['http://res.cloudinary.com/jalasem/image/upload/v1517535886/vkplxvcwbwjvst4ci2ts.png', 'http://res.cloudinary.com/jalasem/image/upload/v1517535926/o1vdfxm4ghduei9fr06t.png'],
         reward: '100% STEEM POWER',
-        price: '2',
+        price: 0,
         liked: true
       },
       categories: [
@@ -297,8 +297,7 @@ export default {
       uploadConfig: {
         name: 'file',
         accept: 'image/jpg,image/jpeg,image/png',
-        // url: 'https://steemgigsbackend-drwheuhunc.now.sh/imgUpload'
-        url: 'https://steemgigsbackend-bqbytxurhu.now.sh/imgUpload'
+        url: 'https://steemgigsbackend-vsgvenqnzh.now.sh/imgUpload'
       }
     }
   },
@@ -329,6 +328,9 @@ export default {
         tags: ['steemgigs', this.slugify(this.newGigData.category), this.slugify(this.newGigData.subcategory), 'testing'],
         format: 'Markdown',
         timestamp: new Date().getTime(),
+        price: this.newGigData.price,
+        currency: this.newGigData.currency,
+        authorPic: this.$store.state.profile.profileImage,
         generated: true
       }
       sc2.setAccessToken(this.$store.state.accessToken)
