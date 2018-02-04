@@ -23,7 +23,6 @@ export default {
   },
   beforeCreate () {
     Api.fetchPosts().then(response => {
-      console.log(response)
       this.steemgigs = response.data
       console.log('fetched', this.steemgigs)
     }).catch(err => {

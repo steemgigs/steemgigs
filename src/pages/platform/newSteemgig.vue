@@ -45,10 +45,7 @@
           <div class="container gigForm">
             <p class="flow-text title">Describe your STEEMGIG</p>
             <div class="input-field col s12">
-              <span>
-                <a href="//guides.github.com/features/mastering-markdown/"> Markdown</a> &amp; <a href="//developer.mozilla.org/en-US/docs/Learn/HTML/Cheatsheet">HTML Supported</a> <br>
-              </span>
-              <markdown-editor v-model="newGigData.description" :options="editorOptions" :upload="uploadConfig"></markdown-editor>
+              <vue-editor v-model="newGigData.description" :upload="uploadConfig"></vue-editor>
               <div class="tutorial_guide center-align">
                 <div class="card">
                   <div class="card-content">
@@ -69,8 +66,7 @@
           <div class="container gigForm">
             <p class="flow-text title">Pricing</p>
             <div class="input-field col s12">
-              <small>Markdown &amp; HTML Supported</small>
-              <markdown-editor v-model="newGigData.pricing" :options="editorOptions" :upload="uploadConfig"></markdown-editor>
+              <vue-editor v-model="newGigData.pricing" :upload="uploadConfig"></vue-editor>
               <div class="tutorial_guide center-align">
                 <div class="card">
                   <div class="card-content">
@@ -115,10 +111,7 @@
           <div class="container gigForm">
             <p class="flow-text title">Requirements</p>
             <div class="input-field col s12">
-              <span>
-                <a href="//guides.github.com/features/mastering-markdown/"> Markdown</a> &amp; <a href="//developer.mozilla.org/en-US/docs/Learn/HTML/Cheatsheet">HTML Supported</a> <br>
-              </span>
-              <markdown-editor v-model="newGigData.requirements" :options="editorOptions" :upload="uploadConfig"></markdown-editor>
+              <vue-editor v-model="newGigData.requirements" :upload="uploadConfig"></vue-editor>
               <div class="tutorial_guide center-align">
                 <div class="card">
                   <div class="card-content">
@@ -221,6 +214,8 @@ import CatNav from '@/components/layout/catNav'
 import ImgUpload from '@/components/snippets/imgUpload'
 import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
+import marked from 'marked'
+import { VueEditor } from 'vue2-editor'
 import { Carousel, Slide } from 'vue-carousel'
 import hljs from 'highlightjs'
 import 'highlightjs/styles/github.css'
@@ -233,7 +228,8 @@ export default {
     VueMarkdown,
     Carousel,
     Slide,
-    ImgUpload
+    ImgUpload,
+    VueEditor
   },
   data () {
     return {
@@ -248,11 +244,12 @@ export default {
         category: '',
         subcategory: '',
         description: '',
+        requirements: '',
         pricing: '',
         hours: 0,
         days: 0,
         currency: 'STEEM',
-        portfolio: ['http://res.cloudinary.com/jalasem/image/upload/v1517535886/vkplxvcwbwjvst4ci2ts.png', 'http://res.cloudinary.com/jalasem/image/upload/v1517535926/o1vdfxm4ghduei9fr06t.png'],
+        portfolio: [],
         reward: '100% STEEM POWER',
         price: '2',
         liked: true
@@ -294,6 +291,11 @@ export default {
           return ''
         }
       },
+      customToolbar: [
+        ['bold', 'italic', 'underline'],
+        [{'list': 'ordered'}, {'list': 'bullet'}],
+        ['image', 'code-block']
+      ],
       uploadConfig: {
         name: 'file',
         accept: 'image/jpg,image/jpeg,image/png',
