@@ -231,6 +231,11 @@ export default {
     GigCard,
     Carousel,
     Slide
+  },
+  props: {
+    steemgigs: {
+      type: Array
+    }
   }
 }
 </script>

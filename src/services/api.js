@@ -7,5 +7,8 @@ export default {
   imageUpload (formdata) {
     return axios.post('/imgUpload', formdata)
     // return axios.post('/multiple_uploads', formdata)
+  },
+  fetchPosts () {
+    return axios.post('/steemgigs')
   }
 }
