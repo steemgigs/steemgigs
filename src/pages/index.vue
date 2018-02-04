@@ -24,8 +24,9 @@ export default {
   beforeCreate () {
     Api.fetchPosts().then(response => {
       this.steemgigs = response.data
+      console.log('fetched', this.steemgigs)
     }).catch(err => {
-      console.log(err)
+      console.log('error:', err)
     })
   }
 }
