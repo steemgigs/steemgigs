@@ -58,8 +58,13 @@
             </select>
           </span>
         </div>
-        <div class="col s12 m4 l3" v-for="(gig, index) in 8" :key="index">
-          <gig-card profilePicUrl="https://avatars2.githubusercontent.com/u/7319749?s=400&v=4" taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" :price="3" currency="SBD" :upvotes="336" :comments="323" payout="$884.3" />
+        <div v-if="steemgigs.length < 1" class="col s12 center-align center">
+          <plane size="100" />
+          <br><br>
+          <br><br>
+        </div>
+        <div class="col s12 m4 l3" v-for="(gig, index) in steemgigs" :key="index">
+          <gig-card :profilePicUrl="gig.json_metadata.authorPic" taskPicture="/static/img/banner.jpeg" :sellerUsername="gig.author" :task="gig.title.split('#STEEMGIGS: ')[1]" :price="gig.json_metadata.price" :currency="gig.json_metadata.currency" :upvotes="gig.active_votes.length" :comments="gig.children" :payout="'$' + gig.pending_payout_value.amount" />
         </div>
       </section>
       <section id="untalented" class="row">
@@ -94,7 +99,7 @@
             </select>
           </span>
         </div>
-        <div class="col s12 m4 l3" v-for="(gig, index) in 8" :key="index">
+        <div class="col s12 m4 l3" v-for="(gig, index) in 4" :key="index">
           <gig-card profilePicUrl="https://avatars2.githubusercontent.com/u/7319749?s=400&v=4" taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" :price="3" currency="SBD" :upvotes="336" :comments="323" payout="$884.3" />
         </div>
       </section>
@@ -223,10 +228,12 @@
 
 <script>
 import { Carousel, Slide } from 'vue-carousel'
+import {Plane} from 'vue-loading-spinner'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
 export default {
   components: {
+    Plane,
     CatNav,
     GigCard,
     Carousel,

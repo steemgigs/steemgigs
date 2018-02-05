@@ -9,6 +9,6 @@ export default {
     // return axios.post('/multiple_uploads', formdata)
   },
   fetchPosts () {
-    return axios.post('/posts')
+    return axios.get('/posts')
   }
 }

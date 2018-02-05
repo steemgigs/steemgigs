@@ -66,6 +66,19 @@ strong {
   }
 }
 
+.spinner {
+  margin: auto;
+  #top .plane {
+    background: #5C6BC0 !important;
+  }
+  #middle .plane {
+    background: #3F51B5 !important;
+  }
+  #bottom .plane {
+    background: #5C6BC0 !important;
+  }
+}
+
 // helpers
 
 .w-25 {
