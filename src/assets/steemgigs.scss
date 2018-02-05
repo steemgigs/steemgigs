@@ -66,6 +66,41 @@ strong {
   }
 }
 
+.tooltip {
+  background: rgba(63, 81, 181, 0.8);
+  color: white;
+  padding: 5px 0.5em;
+  font-size: 0.9em;
+  border-radius: 4px;
+}
+
+.vue-input-tag-wrapper {
+  display: inline-block;
+  height: 2.45em;
+  &.editable {
+    padding-top: 0px;
+    .input-tag {
+      margin-top: 4px;
+      position: relative;
+      .remove {
+        color: rgb(255, 255, 255) !important;
+        margin-left: 1em !important;
+      }
+    }
+  }
+  .input-tag {
+    background: rgb(63, 81, 181) !important;
+    color: rgb(255, 255, 255) !important;
+    border: 1px solid rgb(63, 81, 181) !important;
+    padding: 3px 1em !important;
+  }
+  input[type=text]:not(.browser-default) {
+    width: auto;
+    height: 100%;
+    border-bottom: 0;
+  }
+}
+
 .spinner {
   margin: auto;
   #top .plane {

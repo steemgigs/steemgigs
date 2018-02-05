@@ -16,7 +16,7 @@ export default {
       return data.split(`## Portfolio
 ----`)[0]
     },
-    extractportfolio (data) {
+    extractPortfolio (data) {
       let portfolio = []
       let test = data.split(`## Portfolio
       ----`)[1].split(`![Potfolio](`)

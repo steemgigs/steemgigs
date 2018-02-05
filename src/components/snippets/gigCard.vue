@@ -5,7 +5,12 @@
     </div>
     <div class="card-image">
       <router-link :to="taskLink">
-        <img :src="taskPicture" :alt="task">
+        <img v-if="portfolio.length < 1" src="/static/img/banner.jpeg" :alt="task">
+        <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
+          <slide v-for="(image, index) in portfolio" :key="index">
+            <img :src="image" class="responsive-img" :alt="task">
+          </slide>
+        </carousel>
       </router-link>
     </div>
     <div class="card-content">
@@ -22,20 +27,22 @@
       <a><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
       <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> {{ comments }}</a>
       <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-      <span class="right">{{ payout }}</span>
+      <span class="right" v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{ payout }}</span>
     </div>
   </div>
 </template>
 
 <script>
+import { Carousel, Slide } from 'vue-carousel'
 export default {
+  components: {
+    Carousel,
+    Slide
+  },
   props: {
     meantFor: {
       type: String,
       default: 'results'
-    },
-    profilePicUrl: {
-      type: String
     },
     task: {
       type: String
@@ -55,21 +62,34 @@ export default {
     currency: {
       type: String
     },
-    upvotes: {
-      type: Number,
-      default: 0.0
-    },
-    comments: {
-      type: Number,
-      default: 0.0
-    },
-    payout: {
-      type: String
-    }
+    gigData: Object
   },
   computed: {
+    profilePicUrl () {
+      return this.gigData.json_metadata.authorPic
+    },
     taskLink () {
       return '/@' + this.sellerUsername + '/' + this.slugify(this.task)
+    },
+    portfolio () {
+      return this.gigData.json_metadata.images
+    },
+    comments () {
+      return this.gigData.children
+    },
+    upvotes () {
+      return this.gigData.active_votes.length
+    },
+    payout () {
+      return `${'$' + (this.gigData.pending_payout_value.amount || (parseFloat(this.gigData.total_payout_value) + parseFloat(this.gigData.curator_payout_value)))}`
+    },
+    paymentInfo () {
+      if ((new Date(this.gigData.cashout_time).getTime()) > (new Date().getTime())) {
+        return `Will payout in ${Math.floor((new Date(this.gigData.cashout_time) - (new Date())) / (1000 * 60 * 60 * 24))} days`
+      } else {
+        return `Author Payout: ${'$' + this.gigData.total_payout_value}
+        Curator Payout: ${'$' + this.gigData.curator_payout_value}`
+      }
     }
   }
 }

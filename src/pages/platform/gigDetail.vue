@@ -8,7 +8,11 @@
           <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'inactive_gigs'}" @click="changeView('inactive_gigs')">REVIEWS</a></li>
         </ul>
         <div class="col s12">
-          <gig-card meantFor="gigDetails" taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer that you will always love to show and get plenty auidience" taskDetails="<h3>Hello there and welcome to my great gig that is sure to satisfy you</h3><p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, ab quisquam! Cupiditate doloribus deleniti reprehenderit quisquam earum eum laboriosam recusandae, at quo natus enim placeat illo dicta molestiae ab facilis.</p>" :price="3" currency="SBD" :upvotes="336" :comments="323" payout="$884.3" />
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title"></span>
+            </div>
+          </div>
         </div>
       </div>
        <div class="col s12 m4 l3">
