@@ -50,7 +50,7 @@ export default {
       type: String
     },
     price: {
-      type: Number
+      type: String
     },
     currency: {
       type: String
@@ -80,15 +80,19 @@ $blue: #4757b2;
 .card.gig {
   cursor: pointer;
   .card-content {
-    padding: 1em;
+    padding: 3em 1em 1em;
+    position: relative;
+    min-height: 11em;
     .sellerPic {
       border-radius: 50%;
-      border: 1px solid $blue;
+      border: 1px solid #4757b2;
       width: 2.1em;
       height: 2.1em;
       margin-top: 0px;
       margin-left: 0em;
       display: inline-block;
+      position: absolute;
+      top: 1em;
     }
     .sellerName {
       position: absolute;
@@ -96,6 +100,7 @@ $blue: #4757b2;
       color: black;
       margin-top: 0.2em;
       transition: all ease-in .3s;
+      top: 1em;
       &:hover {
         text-decoration: underline;
       }

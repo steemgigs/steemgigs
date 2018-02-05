@@ -21,7 +21,7 @@ export default {
       let test = data.split(`## Portfolio
       ----`)[1].split(`![Potfolio](`)
       test.forEach(testCase => {
-        if (testCase.includes('http')) portfolio.push(testCase)
+        if (testCase.startsWith('http')) portfolio.push(testCase)
       })
       return portfolio
     }

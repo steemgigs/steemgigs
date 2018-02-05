@@ -19,6 +19,13 @@ export default new Vuex.Store({
       profileImage: 'http://via.placeholder.com/100x100',
       website: '',
       balance: ''
+    },
+    posts: {
+      steemgigs: [],
+      gigrequests: [],
+      untalented: [],
+      featured: [],
+      testimonials: []
     }
   },
   mutations: {
@@ -49,6 +56,12 @@ export default new Vuex.Store({
       let prevImage = state.profile.profileImage
       state.profile = {}
       state.profile.profileImage = prevImage
+    },
+    SET_STEEMGIGS (state, {fetched}) {
+      state.posts.steemgigs = fetched
+    },
+    SET_GIGREQUESTS (state, data) {
+      state.posts.gigrequests = data
     }
   },
   plugins: [createPersist({

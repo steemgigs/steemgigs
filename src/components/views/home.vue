@@ -46,7 +46,7 @@
       </carousel>
       <section id="steemgigs" class="row">
         <div class="col s12">
-          <h4 class="left">STEEMGIGS</h4>
+          <h4 class="left">#STEEMGIGS</h4>
           <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
@@ -63,7 +63,7 @@
           <br><br>
           <br><br>
         </div>
-        <div class="col s12 m4 l3" v-for="(gig, index) in steemgigs" :key="index">
+        <div class="col s12 m6 l3" v-for="(gig, index) in steemgigs" :key="index">
           <gig-card :profilePicUrl="gig.json_metadata.authorPic" taskPicture="/static/img/banner.jpeg" :sellerUsername="gig.author" :task="gig.title.split('#STEEMGIGS: ')[1]" :price="gig.json_metadata.price" :currency="gig.json_metadata.currency" :upvotes="gig.active_votes.length" :comments="gig.children" :payout="'$' + gig.pending_payout_value.amount" />
         </div>
       </section>
@@ -81,13 +81,20 @@
             </select>
           </span>
         </div>
-        <div class="col s12 m4 l3" v-for="(gig, index) in 4" :key="index">
-          <gig-card profilePicUrl="https://avatars2.githubusercontent.com/u/7319749?s=400&v=4" taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" :price="3" currency="SBD" :upvotes="336" :comments="323" payout="$884.3" />
+        <div v-if="untalented.length < 1" class="col s12 center-align center">
+          <!-- <plane size="100" /> -->
+          <p class="flow-text grey-text">Be the first to post under this section</p>
+          <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+          <br><br>
+          <br><br>
+        </div>
+        <div class="col s12 m6 l3" v-for="(gig, index) in untalented" :key="index">
+          <gig-card :profilePicUrl="gig.json_metadata.authorPic" taskPicture="/static/img/banner.jpeg" :sellerUsername="gig.author" :task="gig.title.split('#STEEMGIGS: ')[1]" :price="gig.json_metadata.price" :currency="gig.json_metadata.currency" :upvotes="gig.active_votes.length" :comments="gig.children" :payout="'$' + gig.pending_payout_value.amount" />
         </div>
       </section>
       <section id="featured" class="row">
         <div class="col s12">
-          <h5 class="left">Featured SteemGigs</h5>
+          <h5 class="left">#FEATURED</h5>
           <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
@@ -99,8 +106,40 @@
             </select>
           </span>
         </div>
-        <div class="col s12 m4 l3" v-for="(gig, index) in 4" :key="index">
-          <gig-card profilePicUrl="https://avatars2.githubusercontent.com/u/7319749?s=400&v=4" taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" :price="3" currency="SBD" :upvotes="336" :comments="323" payout="$884.3" />
+        <div v-if="featured.length < 1" class="col s12 center-align center">
+          <!-- <plane size="100" /> -->
+          <p class="flow-text grey-text">Post a fantastic STEEMGIG, it stands a chance of being featured here</p>
+          <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+          <br><br>
+          <br><br>
+        </div>
+        <div class="col s12 m6 l3" v-for="(gig, index) in featured" :key="index">
+          <gig-card :profilePicUrl="gig.json_metadata.authorPic" taskPicture="/static/img/banner.jpeg" :sellerUsername="gig.author" :task="gig.title.split('#STEEMGIGS: ')[1]" :price="gig.json_metadata.price" :currency="gig.json_metadata.currency" :upvotes="gig.active_votes.length" :comments="gig.children" :payout="'$' + gig.pending_payout_value.amount" />
+        </div>
+      </section>
+      <section id="gigrequests" class="row">
+        <div class="col s12">
+          <h5 class="left">#STEEMGIG REQUESTS</h5>
+          <span class="right">
+            <select class="browser-default">
+              <option value="" disabled selected>Sort By</option>
+              <option value="tranding">Trending</option>
+              <option value="new">New</option>
+              <option value="active">Active</option>
+              <option value="hot">Hot</option>
+              <option value="promoted">Promoted</option>
+            </select>
+          </span>
+        </div>
+        <div v-if="gigRequests.length < 1" class="col s12 center-align center">
+          <!-- <plane size="100" /> -->
+          <p class="flow-text grey-text">Couldn&rsquo;t find what you&rsquo;re looking for?</p>
+          <router-link to="/create_gig" tag="button" class="btn indigo waves-effect waves-light"><i class="icon ion-android-add"></i> Post a request</router-link>
+          <br><br>
+          <br><br>
+        </div>
+        <div class="col s12 m6 l3" v-for="(gig, index) in featured" :key="index">
+          <gig-card :profilePicUrl="gig.json_metadata.authorPic" taskPicture="/static/img/banner.jpeg" :sellerUsername="gig.author" :task="gig.title.split('#STEEMGIGS: ')[1]" :price="gig.json_metadata.price" :currency="gig.json_metadata.currency" :upvotes="gig.active_votes.length" :comments="gig.children" :payout="'$' + gig.pending_payout_value.amount" />
         </div>
       </section>
       <section id="testimonials" class="row">
@@ -239,9 +278,21 @@ export default {
     Carousel,
     Slide
   },
-  props: {
-    steemgigs: {
-      type: Array
+  computed: {
+    steemgigs () {
+      return this.$store.state.posts.steemgigs
+    },
+    untalented () {
+      return this.$store.state.posts.untalented
+    },
+    gigRequests () {
+      return this.$store.state.posts.gigrequests
+    },
+    featured () {
+      return this.$store.state.posts.featured
+    },
+    testimonials () {
+      return this.$store.state.posts.testimonials
     }
   }
 }
