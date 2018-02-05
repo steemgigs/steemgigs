@@ -35,6 +35,10 @@
                   <option v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory" v-text="subcategory"></option>
                 </select>
               </div>
+              <div class="col input-field s12">
+                <input-tag limit="3" :read-only="true" :tags="defaultTags" />
+                <input-tag limit="2" class="editable" placeholder="add tags" @update:tags="getTags" :tags="userTags" />
+              </div>
               <div class="form-navs">
                 <button @click.prevent="nextSection" class="right btn indigo waves-effect">Save and Proceed</button>
               </div>
@@ -216,6 +220,7 @@ import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import { Carousel, Slide } from 'vue-carousel'
+import InputTag from 'vue-input-tag'
 import hljs from 'highlightjs'
 import 'highlightjs/styles/github.css'
 
@@ -227,6 +232,7 @@ export default {
     VueMarkdown,
     Carousel,
     Slide,
+    InputTag,
     ImgUpload,
     VueEditor
   },
@@ -238,6 +244,7 @@ export default {
       sections: ['Overview', 'Description', 'Pricing', 'Requirements', 'Portfolio', 'Publish'],
       currentSection: 0,
       totalPics: 1,
+      userTags: [],
       newGigData: {
         title: '',
         category: '',
@@ -315,6 +322,9 @@ export default {
     refreshSubCategory () {
       this.newGigData.subcategory = ''
     },
+    getTags (entries) {
+      this.userTags = entries
+    },
     morePics () {
       if (this.totalPics < 4) this.totalPics++
     },
@@ -326,12 +336,15 @@ export default {
       this.isPosting = true
       let jsonMetadata = {
         app: 'steemgig',
-        tags: ['steemgigs', this.slugify(this.newGigData.category), this.slugify(this.newGigData.subcategory), 'testing'],
+        tags: [...this.userTags, ...this.defaultTags],
         format: 'Markdown',
         timestamp: new Date().getTime(),
         price: this.newGigData.price,
         currency: this.newGigData.currency,
         authorPic: this.$store.state.profile.profileImage,
+        category: this.slugify(this.newGigData.category),
+        subcategory: this.slugify(this.newGigData.subcategory),
+        images: this.newGigData.portfolio,
         generated: true
       }
       sc2.setAccessToken(this.$store.state.accessToken)
@@ -364,6 +377,9 @@ export default {
         if (category.name === this.newGigData.category) catIndex = index
       })
       return catIndex
+    },
+    defaultTags () {
+      return ['steemgigs', this.slugify(this.newGigData.category), this.slugify(this.newGigData.subcategory)]
     },
     wordCount () {
       if (this.newGigData.title.length > 0) {

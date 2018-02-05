@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 import mixins from '@/plugins/mixins'
 import Notifications from 'vue-notification'
+import VTooltip from 'v-tooltip'
 import Vuex from 'vuex'
 
 require('./assets/steemgigs.scss')
@@ -15,6 +16,7 @@ Vue.prototype.$eventBus = new Vue()
 Vue.use(Vuex)
 Vue.mixin(mixins)
 Vue.use(Notifications)
+Vue.use(VTooltip)
 
 /* eslint-disable no-new */
 new Vue({

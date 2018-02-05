@@ -64,7 +64,7 @@
           <br><br>
         </div>
         <div class="col s12 m6 l3" v-for="(gig, index) in steemgigs" :key="index">
-          <gig-card :profilePicUrl="gig.json_metadata.authorPic" taskPicture="/static/img/banner.jpeg" :sellerUsername="gig.author" :task="gig.title.split('#STEEMGIGS: ')[1]" :price="gig.json_metadata.price" :currency="gig.json_metadata.currency" :upvotes="gig.active_votes.length" :comments="gig.children" :payout="'$' + gig.pending_payout_value.amount" :body="gig.body" />
+          <gig-card taskPicture="/static/img/banner.jpeg" :sellerUsername="gig.author" :task="gig.title.split('#STEEMGIGS: ')[1]" :price="gig.json_metadata.price" :currency="gig.json_metadata.currency" :gigData="gig" />
         </div>
       </section>
       <section id="untalented" class="row">
