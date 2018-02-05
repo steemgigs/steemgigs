@@ -171,6 +171,7 @@ export default {
       let profile = this.profileUpdate
       profile.languages_i_speak = this.languages_i_speak || this.i_speak
       console.log('I got called with')
+      sc2.setAccessToken(this.$store.state.accessToken)
       sc2.updateUserMetadata = (profile, (err, res) => {
         alert(res, err)
         console.log('res', res)

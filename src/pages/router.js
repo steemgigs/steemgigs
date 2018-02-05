@@ -1,6 +1,7 @@
 import Index from '@/pages/index'
 import LoggedIn from '@/pages/access/loggedIn'
 import NewSteemGig from '@/pages/platform/newSteemgig'
+import NewGigRequest from '@/pages/platform/newGigRequest'
 import Profile from '@/pages/platform/profile'
 import GigDetail from '@/pages/platform/gigDetail'
 
@@ -19,6 +20,11 @@ export default [
     path: '/create_gig',
     name: 'STEEMGIGS | New Steemgig',
     component: NewSteemGig
+  },
+  {
+    path: '/post_gig_request',
+    name: 'STEEMGIGS | Post Gig Request',
+    component: NewGigRequest
   },
   {
     path: '/@:username',
