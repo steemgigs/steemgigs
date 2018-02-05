@@ -5,7 +5,7 @@
     </div>
     <div class="card-image">
       <router-link :to="taskLink">
-        <img v-if="portfolio.length < 1" src="/static/img/banner.jpeg" :alt="task">
+        <img v-if="portfolio.length < 1" :src="taskPicture || '/static/img/banner.jpeg'" :alt="task">
         <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
           <slide v-for="(image, index) in portfolio" :key="index">
             <img :src="image" class="responsive-img" :alt="task">
@@ -39,49 +39,66 @@ export default {
     Carousel,
     Slide
   },
+  data () {
+    return {
+      taskDetails: {
+        type: String
+      }
+    }
+  },
   props: {
     meantFor: {
       type: String,
       default: 'results'
     },
-    task: {
-      type: String
-    },
-    taskDetails: {
-      type: String
-    },
-    sellerUsername: {
-      type: String
-    },
-    taskPicture: {
-      type: String
-    },
-    price: {
-      type: String
-    },
-    currency: {
-      type: String
-    },
     gigData: Object
   },
   computed: {
     profilePicUrl () {
-      return this.gigData.json_metadata.authorPic
+      if (this.gigData.json_metadata) {
+        return this.gigData.json_metadata.authorPic
+      } else return ''
+    },
+    task () {
+      if (this.gigData.title) {
+        return this.gigData.title.split('#STEEMGIGS: ')[1]
+      } else return ''
     },
     taskLink () {
       return '/@' + this.sellerUsername + '/' + this.slugify(this.task)
     },
+    price () {
+      if (this.gigData.json_metadata) {
+        return this.gigData.json_metadata.price
+      }
+    },
+    currency () {
+      if (this.gigData.json_metadata) {
+        return this.gigData.json_metadata.currency
+      }
+    },
+    sellerUsername () {
+      return this.gigData.author
+    },
     portfolio () {
-      return this.gigData.json_metadata.images
+      if (this.gigData.json_metadata) {
+        return this.gigData.json_metadata.images
+      }
     },
     comments () {
       return this.gigData.children
     },
     upvotes () {
-      return this.gigData.active_votes.length
+      if (this.gigData.active_votes) {
+        return this.gigData.active_votes.length
+      }
     },
     payout () {
-      return `${'$' + (this.gigData.pending_payout_value.amount || (parseFloat(this.gigData.total_payout_value) + parseFloat(this.gigData.curator_payout_value)))}`
+      if (this.gigData.pending_payout_value) {
+        return '$' + this.gigData.pending_payout_value.amount
+      } else {
+        return '$' + (parseFloat(this.gigData.total_payout_value) + parseFloat(this.gigData.curator_payout_value))
+      }
     },
     paymentInfo () {
       if ((new Date(this.gigData.cashout_time).getTime()) > (new Date().getTime())) {

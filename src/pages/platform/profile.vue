@@ -84,16 +84,16 @@
     <div class="col s12 m8 l9 row">
       <ul class="tabs">
         <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">ACTIVE STEEMGIGS</a></li>
-        <!-- <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'inactive_gigs'}" @click="changeView('inactive_gigs')">INACTIVE STEEMGIGS</a></li> -->
+        <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'gig_requests'}" @click="changeView('gig_request')">CUSTOM REQUESTS</a></li>
       </ul>
       <div v-if="currentView === 'active_gigs'" class="activeGigs">
-        <div class="col s12 m6 l4" v-for="(gig, index) in 8" :key="index">
-          <gig-card taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" :price="3" currency="SBD" :upvotes="336" :comments="323" payout="$884.3" meantFor="profile" />
+        <div class="col s12 m6 l4" v-for="(gig, index) in usergigs" :key="index">
+          <gig-card :gigData="gig" meantFor="profile" />
         </div>
       </div>
-      <div v-if="currentView !== 'active_gigs'" class="inactiveGigs">
-        <div class="col s12 m6 l4" v-for="(gig, index) in 3" :key="index">
-          <gig-card taskPicture="/static/img/banner.jpeg" sellerUsername="jalasem" task="I will make you a simple animation video explainer" :price="3" currency="SBD" :upvotes="336" :comments="323" payout="$884.3" meantFor="profile" />
+      <div v-if="currentView !== 'gig_requests'" class="inactiveGigs">
+        <div class="col s12 m6 l4" v-for="(gig, index) in userRequests" :key="index">
+          <gig-card :gigData="gig" meantFor="profile" />
         </div>
       </div>
     </div>
@@ -119,6 +119,8 @@ export default {
     return {
       profile: {},
       profileData: {},
+      usergigs: [],
+      userRequests: [],
       profileUpdate: {
         country: '',
         about: '',
@@ -132,9 +134,22 @@ export default {
       editMode: false
     }
   },
+  beforeCreate () {
+    Api.fetchUserData(this.profileUsername).then(response => {
+      this.profileData = response.data
+      this.profile = this.profileData.profile
+      console.log(this.profileData)
+    }).catch(err => {
+      console.log('error retrieving user info: \n error:', this.stringify(err))
+    })
+    Api.fetchUserGigs(this.profileUsername).then(response => {
+      console.log(response.data)
+    }).catch(err => {
+      console.log('error retrieving user gigs: \n error:', this.stringify(err))
+    })
+  },
   mounted () {
     this.profileUsername = this.$route.params.username
-    this.fetchUserInfo(this.profileUsername)
   },
   computed: {
     since () {
@@ -145,18 +160,6 @@ export default {
     }
   },
   methods: {
-    async fetchUserInfo (username) {
-      try {
-        let response = await Api.fetchUserData(username)
-        this.profileData = response.data
-        this.profile = this.profileData.profile
-        console.log(this.profileData)
-        console.log(this.profileData.profile)
-        this.fetchUserInfo(this.profileUsername)
-      } catch (err) {
-        console.log('error retrieving user info: \n error:', this.stringify(err))
-      }
-    },
     changeView (view) {
       this.currentView = view
     },

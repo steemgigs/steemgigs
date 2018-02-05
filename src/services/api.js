@@ -10,5 +10,8 @@ export default {
   },
   fetchPosts () {
     return axios.get('/posts')
+  },
+  fetchUserGigs (username) {
+    return axios.get('/fetchUserGigs', username)
   }
 }

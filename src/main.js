@@ -8,7 +8,6 @@ import mixins from '@/plugins/mixins'
 import Notifications from 'vue-notification'
 import VTooltip from 'v-tooltip'
 import Vuex from 'vuex'
-import M from 'materialize-css'
 
 require('./assets/steemgigs.scss')
 
