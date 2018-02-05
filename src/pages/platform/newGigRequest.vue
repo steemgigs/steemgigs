@@ -7,19 +7,34 @@
       <div class="col s12 m7 l9 row" >
         <form class="card-panel row" v-if="currentSection === 0">
           <div class="container gigForm">
-            <p class="sub-title">Oh you didn't find your gig! Post a custom request below</p>
-            <div class="input-field col s12">
-              <vue-editor v-model="newGigRequest.pricing" :upload="uploadConfig"></vue-editor>
+            <!-- <p class="sub-title">Oh you didn't find your gig! Post a custom request below</p> -->
+            <div class="mx-2">
+              <p class="flow-text title">Gig Title</p>
+              <div class="input-field col s12">
+            </div>
+              <textarea @keypress.enter.prevent @keyup.enter="''" v-model="newGigRequest.title" type="text" placeholder="Give a title to this gig" row="2" maxlength="90" minlength="5" required>
+              </textarea>
+              <p class="word-count right" v-text="wordCount"></p>
               <div class="tutorial_guide center-align">
                 <div class="card">
                   <div class="card-content">
-                    <span class="card-title">Give a detailed description of what you are looking for</span>
-                    <p>Are you willing to do revisions with your STEEMGIGS? If so, how many e.t.c, Gig Extras and Pricing</p>
+                    <span class="card-title">Make your Title Short, Simple and Clear to boost sales</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="ml-2">
+            <div class="input-field col s12">
+              <vue-editor v-model="newGigRequest.description" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
+              <div class="tutorial_guide center-align">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Give a detailed description of what you are looking for</span>
+                    <p>How much are you willing to pay for this gig? etc. State these and other information clearly</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mx-2">
               <p class="flow-text title">Category</p>
               <div class="row">
                 <div class="input-field col s12 m6 l4">
@@ -74,17 +89,17 @@
           <div class="col s12">
             <div class="card">
               <div class="card-content">
-                <span class="card-title">#STEEMGIGS: I will {{ newGigRequest.title }}</span>
+                <span class="card-title"> {{ newGigRequest.title }}</span>
                 <p><router-link :to="'/categories/' + this.newGigRequest.category">{{ this.newGigRequest.category }}</router-link> / <router-link :to="'/categories/' + this.newGigRequest.category + '/' + this.newGigRequest.subcategory">{{ this.newGigRequest.subcategory }}</router-link></p>
               </div>
-              <div class="card-image">
+              <!-- <div class="card-image">
                 <carousel :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
                   <slide v-for="(image, index) in newGigRequest.portfolio" :key="index">
                     <img :src="image" class="responsive-img" :alt="newGigRequest.title">
                   </slide>
                 </carousel>
-              </div>
-              <div class="card-content">
+              </div> -->
+              <div class="card-content pt-0">
                 <vue-markdown :source="previewData" />
               </div>
             </div>
@@ -140,12 +155,10 @@ export default {
         category: '',
         subcategory: '',
         description: '',
-        requirements: '',
-        pricing: '',
         hours: 0,
         days: 0,
         currency: 'STEEM',
-        portfolio: [],
+        images: [],
         reward: '100% STEEM POWER',
         price: 0,
         liked: true
@@ -270,19 +283,12 @@ export default {
       }
     },
     previewData () {
-      return `## Description
+      return `##### Description
 ----
 ${this.newGigRequest.description}
-## Pricing
-----
-${this.newGigRequest.pricing}
 
-#### Price: Starting at ${this.newGigRequest.price} ${this.newGigRequest.currency}
-#### Delivery: ${this.newGigRequest.days} day(s) ${this.newGigRequest.hours} hour(s)
-----
-## Requirements
-----
-${this.newGigRequest.requirements}
+##### Maximum Budget: ${this.newGigRequest.price} ${this.newGigRequest.currency}
+##### Delivery: ${this.newGigRequest.days} day(s) ${this.newGigRequest.hours} hour(s)
       `
     }
   },
@@ -421,10 +427,9 @@ p {
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     line-height: 41.5px;
-    text-indent: 7.8em;
     font-size: 28px;
-    padding: 0px 6px;
-    min-height: 4.7em;
+    padding: 10px;
+    min-height: 3.5em;
     resize: none;
     color: #757575;
     overflow-y: auto;
