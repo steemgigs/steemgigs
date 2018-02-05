@@ -5,7 +5,7 @@
       <div class="card center center-align request">
         <div class="card-content">
           <p>Can&rsquo;t find what you&rsquo;re looking Seeking?<br>You can post Custom request and we&rsquo;ll lovingly look for reputable great minds to handle it</p>
-          <button class="btn btn-block indigo">Post custom request</button>
+          <router-link to="/post_gig_request" tag="button" class="btn btn-block indigo">Post custom request</router-link>
         </div>
       </div>
       <div class="card searches">
