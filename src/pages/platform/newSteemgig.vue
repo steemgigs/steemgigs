@@ -297,7 +297,7 @@ export default {
       uploadConfig: {
         name: 'file',
         accept: 'image/jpg,image/jpeg,image/png',
-        url: 'https://steemgigsbackend-vsgvenqnzh.now.sh/imgUpload'
+        url: 'https://steemgigsbackend-uqhxfldikh.now.sh/imgUpload'
       }
     }
   },

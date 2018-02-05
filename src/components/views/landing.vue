@@ -77,11 +77,6 @@ export default {
     Carousel,
     Slide
   },
-  props: {
-    steemgigs: {
-      type: Array
-    }
-  },
   data () {
     return {
       categories: [{
