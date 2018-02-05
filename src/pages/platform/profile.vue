@@ -2,34 +2,39 @@
   <page :pageClasses="['profile__view', 'row']">
     <cat-nav />
     <div class="col s12 m4 l3">
-      <div class="card-panel profileOwner">
-        <span class="editProfile waves-effect" v-if="$store.state.username === profileData.account">
-          <i class="icon ion-android-create"></i>
-        </span>
-        <label class="profilePic" for="profile_image">
-          <input type="file" accept="image/png,image/jpeg" class="hide" id="profile_image">
-          <img :src="profile.profile_image" class="user-pict-img" :alt="profileData.account" width="150" height="150">
-        </label>
-        <span class="username" v-text="profile.name"></span>
-        <span class="expertise">Experienced Web Developer</span>
-        <span class="ratings">
-          <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (2 reviews)
-        </span>
-        <p class="location"><i class="icon ion-android-pin"></i> From <span class="right" v-text="profile.location"></span></p>
-        <p class="member_since"> <i class="icon ion-android-person"></i> Member since <span class="right" v-text="since"></span></p>
-        <p class="member_since"> <i class="icon ion-ios-briefcase"></i> Last delivery <span class="right" v-text="ago"></span></p>
-        <p>
-          <i class="icon ion-android-plane"></i>
-          Vacation mode
-          <span class="right">
-            <div class="switch" v-if="$store.state.username === profileData.account">
-              <label>
-                <input type="checkbox" v-model="vacation_mode" :disabled="$store.state.username !== profileData.account">
-                <span class="lever"></span>
-              </label>
-            </div>
+      <div class="rotating-card">
+        <div class="card-panel front profileOwner">
+          <span class="editProfile waves-effect" v-if="$store.state.username === profileData.account">
+            <i class="icon ion-android-create"></i>
           </span>
-        </p>
+          <label class="profilePic" for="profile_image">
+            <input type="file" accept="image/png,image/jpeg" class="hide" id="profile_image">
+            <img :src="profile.profile_image" class="user-pict-img" :alt="profileData.account" width="150" height="150">
+          </label>
+          <span class="username" v-text="profile.name"></span>
+          <span class="expertise">Experienced Web Developer</span>
+          <span class="ratings">
+            <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (2 reviews)
+          </span>
+          <p class="location"><i class="icon ion-android-pin"></i> From <span class="right" v-text="profile.location"></span></p>
+          <p class="member_since"> <i class="icon ion-android-person"></i> Member since <span class="right" v-text="since"></span></p>
+          <p class="member_since"> <i class="icon ion-ios-briefcase"></i> Last delivery <span class="right" v-text="ago"></span></p>
+          <p>
+            <i class="icon ion-android-plane"></i>
+            Vacation mode
+            <span class="right">
+              <div class="switch" v-if="$store.state.username === profileData.account">
+                <label>
+                  <input type="checkbox" v-model="vacation_mode" :disabled="$store.state.username !== profileData.account">
+                  <span class="lever"></span>
+                </label>
+              </div>
+            </span>
+          </p>
+        </div>
+        <div class="back">
+          
+        </div>
       </div>
       <div class="card moreProfileInfo">
         <div class="card-content">
@@ -116,6 +121,30 @@ export default {
 
 <style lang="scss" scoped>
   .profileOwner {
+    .rotating-card{
+      position: relative;
+      .face{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+        transition: transform 1s ease-in;
+      }
+      .back{
+        transform: rotateY(-180deg);
+        transition: transform 1s ease-in;
+      }
+      &.flipped {
+        .face{
+          transform: rotateY(180deg);
+        }
+        .back{
+          transform: rotateY(0);
+        }
+      }
+    }
     position: relative;
     .profilePic {
       cursor: pointer;
