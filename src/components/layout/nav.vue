@@ -23,7 +23,7 @@
           <li>
             <a><img class="profile_pic" :src="$store.state.profile.profileImage" alt=""></a>
             <ul class="white z-depth-1">
-              <li><router-link class="waves-effect" to="/profile" v-text="$store.state.username"></router-link></li>
+              <li><router-link class="waves-effect" :to="'/@' + $store.state.username" v-text="$store.state.username"></router-link></li>
               <li><router-link class="waves-effect" to="/wallet">Wallet - {{ $store.state.profile.balance }}</router-link></li>
               <li><router-link class="waves-effect" to="/settings">Settings</router-link></li>
               <li><router-link class="waves-effect red-text" to="/invite">Invite friends</router-link></li>
