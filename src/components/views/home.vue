@@ -167,10 +167,9 @@
           <br><br>
           <br><br>
         </div>
-        <div v-if="gigrequestsFetched">
-        </div>
         <div class="col s12 m6 l3" v-for="(gig, index) in gigrequests" :key="index">
-          <gig-card :gigData="gig" />
+          <!-- <gig-card :gigData="gig" /> -->
+          {{gig.title}}
         </div>
       </section>
       <section id="testimonials" class="row">
@@ -243,6 +242,7 @@ import { Carousel, Slide } from 'vue-carousel'
 import {Plane} from 'vue-loading-spinner'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
+import GigRequest from '@/components/snippets/requestGigCard'
 import sc2 from '@/services/sc2'
 import InputTag from 'vue-input-tag'
 
@@ -253,7 +253,8 @@ export default {
     GigCard,
     Carousel,
     Slide,
-    InputTag
+    InputTag,
+    GigRequest
   },
   data () {
     return {

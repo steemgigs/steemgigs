@@ -32,7 +32,7 @@ export default {
     Api.fetchGigRequests().then(response => {
       let fetched = response.data
       console.log('fetched', fetched)
-      this.$store.commit('SET_GIGREQUESTS', {fetched})
+      this.$store.commit('SET_GIGREQUESTS', fetched)
       this.$eventBus.$emit('gigrequests-fetched', fetched)
     }).catch(err => {
       this.$eventBus.$emit('gigrequests-fetched', err)
@@ -41,7 +41,7 @@ export default {
     Api.fetchFeatured().then(response => {
       let fetched = response.data
       console.log('fetched', fetched)
-      this.$store.commit('SET_FEATURED', {fetched})
+      this.$store.commit('SET_FEATURED', fetched)
       this.$eventBus.$emit('featured-fetched', fetched)
     }).catch(err => {
       this.$eventBus.$emit('featured-fetched', err)
@@ -50,7 +50,7 @@ export default {
     Api.fetchTestimonials().then(response => {
       let fetched = response.data
       console.log('fetched', fetched)
-      this.$store.commit('SET_TESTIMONIALS', {fetched})
+      this.$store.commit('SET_TESTIMONIALS', fetched)
       this.$eventBus.$emit('testimonials-fetched', fetched)
     }).catch(err => {
       this.$eventBus.$emit('testimonials-fetched', err)
@@ -59,7 +59,7 @@ export default {
     Api.fetchUntalented().then(response => {
       let fetched = response.data
       console.log('fetched', fetched)
-      this.$store.commit('SET_UNTALENTED', {fetched})
+      this.$store.commit('SET_UNTALENTED', fetched)
       this.$eventBus.$emit('untalented-fetched', fetched)
     }).catch(err => {
       this.$eventBus.$emit('untalented-fetched', err)
