@@ -13,5 +13,17 @@ export default {
   },
   fetchPosts () {
     return axios.get('/posts')
+  },
+  fetchGigRequests () {
+    return axios.get('/gigrequests')
+  },
+  fetchFeatured () {
+    return axios.get('/featured')
+  },
+  fetchTestimonials () {
+    return axios.get('/testimonials')
+  },
+  fetchUntalented () {
+    return axios.get('/untalented')
   }
 }

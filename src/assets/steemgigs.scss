@@ -124,7 +124,7 @@ img {
 }
 .vue-input-tag-wrapper {
   display: inline-block;
-  min-height: 2.45em;
+  height: 2.45em;
   &.editable {
     padding-top: 0px;
     .input-tag {
@@ -145,12 +145,16 @@ img {
 }
 input[type=text]:not(.browser-default) {
   width: auto;
-  height: 100%;
-  border-bottom: 0;
+  height: 100%
 }
 .back {
+  .vue-input-tag-wrapper {
+    min-height: 2.45em;
+    height: auto;  
+  }
   .vue-input-tag-wrapper input[type=text]:not(.browser-default) {
     width: 100%;
+    height: 100%;
     color: rgb(69, 54, 79);
     border-bottom: 0;
   }

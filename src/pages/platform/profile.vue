@@ -38,29 +38,32 @@
                 <input type="file" accept="image/png,image/jpeg" class="hide" id="profile_image">
                 <img :src="profile.profile_image" class="user-pict-img" :alt="profileData.account" width="150" height="150">
               </label>
-              <div class="input-field">
-                <input type="text" placeholder="About me" v-model="profileUpdate.about" id="desc">
+              <div class="input-field row">
+                <textarea id="about_me" placeholder="about_me" v-model="profile.about" class="materialize-textarea"></textarea>
               </div>
-              <div class="input-field">
+              <div class="input-field row">
                 <input type="text" @keyup.enter="addToSpeakArray" placeholder="I speak (Languages)" v-model="i_speak" id="desc">
                 <i @click="addToSpeakArray" class="ion-plus add-lang-icon right"></i>
               </div>
               <ul class="language-list">
-                <li v-for="(spoken, i) in languages_i_speak" :key="i" v-text="spoken" />
+                <li v-for="(spoken, i) in languages_i_speak" :key="i">
+                  {{spoken}}
+                  <span class="right"><i class="ion-close-round"></i></span>
+                </li>
               </ul>
               <p>
                 I'm on vacation <i class="icon ion-android-plane"></i>
                 <span class="right">
                   <div class="switch" v-if="true">
                     <label>
-                      <input type="checkbox" v-model="profileUpdate.vacation_mode" >
+                      <input type="checkbox" v-model="profile.vacation_mode" >
                       <span class="lever"></span>
                     </label>
                   </div>
                 </span>
               </p>
               <div class="input-field">
-                <select class="validate browser-default my-select" v-model="profileUpdate.country">
+                <select class="validate browser-default my-select" v-model="profile.country">
                   <option selected value="" disabled>I am from</option>
                   <option v-for="(country, index) in countries" :key="index" :value="country">{{ country }}</option>
                 </select>
@@ -124,11 +127,6 @@ export default {
       profileData: {},
       usergigs: [],
       userRequests: [],
-      profileUpdate: {
-        country: '',
-        about: '',
-        vacation_mode: false
-      },
       languages_i_speak: [],
       profileUsername: '',
       currentView: 'active_gigs',
@@ -174,12 +172,11 @@ export default {
       this.i_speak = ''
     },
     updateProfile () {
-      let profile = this.profileUpdate
+      let profile = this.profile
       profile.languages_i_speak = this.languages_i_speak || this.i_speak
-      console.log('I got called with')
+      console.log('I got called with', profile)
       sc2.setAccessToken(this.$store.state.accessToken)
       sc2.updateUserMetadata = (profile, (err, res) => {
-        alert(res, err)
         console.log('res', res)
         console.log('err', err)
       })
@@ -221,12 +218,24 @@ export default {
           color: #d1d1d1;
           margin-left: 21px;
           font-size: .93rem;
+          i.ion-close-round {
+            cursor: pointer;
+            transition: transform .5s ease-in-out;
+            &:hover {
+              transform: rotate(90deg)
+            }
+          }
         }
         input[type=text] {
           color: white;
+          width: 100%;
+          height: 3rem
+        }
+        textarea {
+          min-height: 63px;
         }
         i.add-lang-icon, i.ion-close {
-          transform: translateY(-35px);
+          transform: translateY(-38px);
           cursor: pointer;
         }
         transform: rotateY(-180deg);
