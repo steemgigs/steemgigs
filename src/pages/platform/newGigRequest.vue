@@ -169,17 +169,6 @@ export default {
         price: 0,
         liked: true
       },
-      editorOptions: {
-        linkify: true,
-        highlight (str, lang) { // you can add highlightjs plugin to highlight your code
-          if (lang && hljs.getLanguage(lang)) {
-            try {
-              return hljs.highlight(lang, str).value
-            } catch (__) {}
-          }
-          return ''
-        }
-      },
       customToolbar: [
         ['bold', 'italic', 'underline'],
         [{'list': 'ordered'}, {'list': 'bullet'}],

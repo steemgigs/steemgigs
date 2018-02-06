@@ -61,6 +61,7 @@ import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
 import moment from 'moment'
+import steem from 'steem'
 export default {
   components: {
     Page,
@@ -75,6 +76,11 @@ export default {
       vacation_mode: false,
       currentView: 'active_gigs'
     }
+  },
+  deforeCreate () {
+    steem.api.getContent(this.$routes.params.username, this.$routes.param.task, (err, result) => {
+      console.log('postDetails::', err, result)
+    })
   },
   mounted () {
     this.profileUsername = this.$route.params.username
@@ -95,7 +101,6 @@ export default {
         this.profileData = response.data
         this.profile = this.profileData.profile
         console.log(this.profileData)
-        console.log(this.profileData.profile)
       } catch (err) {
         console.log('error retrieving user info: \n error:', this.stringify(err))
       }
@@ -120,6 +125,7 @@ export default {
       position: relative;
       margin: 0 auto 15px;
       border-radius: 0;
+      object-fit: cover;
       overflow: visible;
       box-sizing: border-box;
       width: 150px;
