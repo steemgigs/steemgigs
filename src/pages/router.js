@@ -22,7 +22,7 @@ export default [
     component: NewSteemGig
   },
   {
-    path: '/post_gig_request',
+    path: '/steemgig_request',
     name: 'STEEMGIGS | Post Gig Request',
     component: NewGigRequest
   },
