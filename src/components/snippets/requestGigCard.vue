@@ -1,18 +1,33 @@
 <template>
   <div class="card gig" tag="div">
+    <div class="card-content" v-if="meantFor === 'gigDetails'">
+      <span class="card-title" v-text="task"></span>
+    </div>
     <div class="card-image">
-      <router-link>
+      <router-link :to="taskLink">
+        <img v-if="portfolio.length < 1" :src="taskPicture || '/static/img/banner.jpeg'" :alt="task">
+        <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
+          <slide v-for="(image, index) in portfolio" :key="index">
+            <img :src="image" class="responsive-img" :alt="task">
+          </slide>
+        </carousel>
       </router-link>
     </div>
     <div class="card-content">
       <img v-if="profilePicUrl" :src="profilePicUrl" alt="" class="sellerPic">
-      {{requestGigData.body}}
+      <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + authorUsername" v-text="authorUsername"></router-link>
+      <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" tag="p" v-text="task" />
+      <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
+      <p class="price">
+        <span v-if="price">Starting at {{ price }} {{ currency }}</span>
+        <span v-if="!price">FREE</span>
+      </p>
     </div>
     <div class="card-action">
-      <a><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
-      <a><i class="icon ion-chatbox-working" aria-hidden="true"></i></a>
+      <a><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
+      <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> {{ comments }}</a>
       <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-      <span class="right"></span>
+      <span class="right" v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{ payout }}</span>
     </div>
   </div>
 </template>
@@ -26,74 +41,80 @@ export default {
   },
   data () {
     return {
+      taskDetails: {
+        type: String
+      }
     }
   },
   props: {
-    requestGigData: Object
+    meantFor: {
+      type: String,
+      default: 'results'
+    },
+    gigData: Object
+  },
+  computed: {
+    profilePicUrl () {
+      if (this.gigData.json_metadata) {
+        return this.gigData.json_metadata.authorPic
+      } else return ''
+    },
+    task () {
+      if (this.gigData.title) {
+        return this.gigData.title.split('#STEEMGIGS: ')[1]
+      } else return ''
+    },
+    taskLink () {
+      return '/@' + this.authorUsername + '/' + this.slugify(this.task)
+    },
+    price () {
+      if (this.gigData.json_metadata) {
+        return this.gigData.json_metadata.price
+      }
+    },
+    currency () {
+      if (this.gigData.json_metadata) {
+        return this.gigData.json_metadata.currency
+      }
+    },
+    authorUsername () {
+      return this.gigData.author
+    },
+    portfolio () {
+      if (this.gigData.json_metadata) {
+        return this.gigData.json_metadata.images
+      }
+    },
+    comments () {
+      return this.gigData.children
+    },
+    upvotes () {
+      if (this.gigData.active_votes) {
+        return this.gigData.active_votes.length
+      }
+    },
+    payout () {
+      if (this.gigData.pending_payout_value) {
+        return '$' + this.gigData.pending_payout_value.amount
+      } else {
+        return '$' + (parseFloat(this.gigData.total_payout_value) + parseFloat(this.gigData.curator_payout_value))
+      }
+    },
+    paymentInfo () {
+      if ((new Date(this.gigData.cashout_time).getTime()) > (new Date().getTime())) {
+        return `Will payout in ${Math.floor((new Date(this.gigData.cashout_time) - (new Date())) / (1000 * 60 * 60 * 24))} days`
+      } else {
+        return `Author Payout: ${'$' + this.gigData.total_payout_value}
+        Curator Payout: ${'$' + this.gigData.curator_payout_value}`
+      }
+    }
   }
-  // computed: {
-  //   profilePicUrl () {
-  //     if (this.gigData.json_metadata) {
-  //       return this.gigData.json_metadata.authorPic
-  //     } else return ''
-  //   },
-  //   task () {
-  //     if (this.gigData.title) {
-  //       return this.gigData.title.split('#STEEMGIGS: ')[1]
-  //     } else return ''
-  //   },
-  //   taskLink () {
-  //     return '/@' + this.sellerUsername + '/' + this.slugify(this.task)
-  //   },
-  //   price () {
-  //     if (this.gigData.json_metadata) {
-  //       return this.gigData.json_metadata.price
-  //     }
-  //   },
-  //   currency () {
-  //     if (this.gigData.json_metadata) {
-  //       return this.gigData.json_metadata.currency
-  //     }
-  //   },
-  //   sellerUsername () {
-  //     return this.gigData.author
-  //   },
-  //   portfolio () {
-  //     if (this.gigData.json_metadata) {
-  //       return this.gigData.json_metadata.images
-  //     }
-  //   },
-  //   comments () {
-  //     return this.gigData.children
-  //   },
-  //   upvotes () {
-  //     if (this.gigData.active_votes) {
-  //       return this.gigData.active_votes.length
-  //     }
-  //   },
-  //   payout () {
-  //     if (this.gigData.pending_payout_value) {
-  //       return '$' + this.gigData.pending_payout_value.amount
-  //     } else {
-  //       return '$' + (parseFloat(this.gigData.total_payout_value) + parseFloat(this.gigData.curator_payout_value))
-  //     }
-  //   },
-  //   paymentInfo () {
-  //     if ((new Date(this.gigData.cashout_time).getTime()) > (new Date().getTime())) {
-  //       return `Will payout in ${Math.floor((new Date(this.gigData.cashout_time) - (new Date())) / (1000 * 60 * 60 * 24))} days`
-  //     } else {
-  //       return `Author Payout: ${'$' + this.gigData.total_payout_value}
-  //       Curator Payout: ${'$' + this.gigData.curator_payout_value}`
-  //     }
-  //   }
-  // }
 }
 </script>
 
 <style lang="scss" scoped>
 $blue: #4757b2;
 .card.gig {
-  box-shadow: 0 3px 5px rgba($color: #000000, $alpha: .3);
   cursor: pointer;
   .card-image {
     position: relative;

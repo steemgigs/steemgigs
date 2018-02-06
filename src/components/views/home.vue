@@ -44,7 +44,7 @@
               </div>
             <button class="btn-floating grey  right lighten-3" @click="submitTestimonial">
               <i class="ion-checkmark-round indigo-text" v-if="!isPosting"></i>
-              <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
+              <i class="fa fa-spinner fa-pulse indigo-text" v-if="isPosting"></i>
             </button>
         </div>
       </div>
@@ -141,7 +141,7 @@
           <br><br>
         </div>
         <div class="col s12 m6 l3" v-for="(gig, index) in featured" :key="index">
-          <gig-card :gigData="gig" />
+          <!-- <gig-card :gigData="gig" /> -->
         </div>
       </section>
       <section id="gigrequests" class="row">
@@ -168,8 +168,7 @@
           <br><br>
         </div>
         <div class="col s12 m6 l3" v-for="(gig, index) in gigrequests" :key="index">
-          <!-- <gig-card :gigData="gig" /> -->
-          {{gig.title}}
+          <gig-card :gigData="gig" />
         </div>
       </section>
       <section id="testimonials" class="row">
@@ -191,18 +190,8 @@
           <br><br>
           <br><br>
         </div>
-        <div class="col s12 m4 l3" v-for="(testimonial, index) in testimonials" :key="index">
-          <div class="card">
-            <div class="card-content">
-              <p><router-link to="/users/eric">@eric </router-link> {{testimonial.title}} </p>
-            </div>
-            <div class="card-action">
-              <a><i class="fa fa-thumbs-up" aria-hidden="true"></i>{{testimonial.active_votes.length}}</a>
-              <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> 323</a>
-              <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-              <span class="right">$884.3</span>
-            </div>
-          </div>
+        <div class="col s12 m6 l3" v-for="(testimonial, index) in testimonials" :key="index">
+          <testimonial-card :testimonial="testimonial" />
         </div>
       </section>
       <!-- <section id="testimonials" class="row">
@@ -243,6 +232,7 @@ import {Plane} from 'vue-loading-spinner'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
 import GigRequest from '@/components/snippets/requestGigCard'
+import TestimonialCard from '@/components/snippets/testimonialCard'
 import sc2 from '@/services/sc2'
 import InputTag from 'vue-input-tag'
 
@@ -254,7 +244,8 @@ export default {
     Carousel,
     Slide,
     InputTag,
-    GigRequest
+    GigRequest,
+    TestimonialCard
   },
   data () {
     return {
