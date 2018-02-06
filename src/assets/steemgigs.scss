@@ -17,6 +17,9 @@ body {
 strong {
   font-weight: 600;
 }
+img {
+  object-fit: cover;
+}
 .markdown__editor {
   height: auto !important;
   .markdown__editor-content textarea {

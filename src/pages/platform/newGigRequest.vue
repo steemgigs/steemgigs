@@ -134,7 +134,6 @@ import { VueEditor } from 'vue2-editor'
 import { Carousel, Slide } from 'vue-carousel'
 import InputTag from 'vue-input-tag'
 
-
 export default {
   components: {
     Page,

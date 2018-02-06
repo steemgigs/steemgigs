@@ -77,8 +77,11 @@ export default {
       currentView: 'active_gigs'
     }
   },
-  deforeCreate () {
-    steem.api.getContent(this.$routes.params.username, this.$routes.param.task, (err, result) => {
+  beforeCreate () {
+    let {username, task} = this.$route.params
+    steem.api.setOptions({ url: 'wss://steemd.privex.io' })
+    steem.api.getContent(username, task, function (err, result) {
+      console.log('username:', username, 'task:', task)
       console.log('postDetails::', err, result)
     })
   },

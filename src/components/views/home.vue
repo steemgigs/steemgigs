@@ -47,7 +47,7 @@
       <section id="steemgigs" class="row">
         <div class="col s12">
           <h4 class="left">#STEEMGIGS</h4>
-          <span class="right">
+          <span class="right" style="margin-top: 1.5em;">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
               <option value="tranding">Trending</option>
