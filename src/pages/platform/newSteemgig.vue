@@ -332,6 +332,7 @@ export default {
         category: this.slugify(this.newGigData.category),
         subcategory: this.slugify(this.newGigData.subcategory),
         images: this.newGigData.portfolio,
+        type: 'steemgig_post',
         generated: true
       }
       sc2.setAccessToken(this.$store.state.accessToken)
