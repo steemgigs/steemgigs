@@ -116,6 +116,10 @@ export default {
 $blue: #4757b2;
 .card.gig {
   cursor: pointer;
+  .card-image {
+    position: relative;
+    min-height: 10em;
+  }
   .card-content {
     padding: 3em 1em 1em;
     position: relative;

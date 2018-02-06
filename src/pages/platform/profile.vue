@@ -107,6 +107,7 @@ import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
 import moment from 'moment'
+// import steem from 'steem'
 const countries = require('country-list')()
 
 export default {
@@ -135,18 +136,21 @@ export default {
     }
   },
   beforeCreate () {
-    Api.fetchUserData(this.profileUsername).then(response => {
+    Api.fetchUserData(this.$route.params.username).then(response => {
       this.profileData = response.data
       this.profile = this.profileData.profile
       console.log(this.profileData)
     }).catch(err => {
       console.log('error retrieving user info: \n error:', this.stringify(err))
     })
-    Api.fetchUserGigs(this.profileUsername).then(response => {
-      console.log(response.data)
+    Api.fetchUserGigs(this.$route.params.username).then(response => {
+      this.usergigs = response.data
     }).catch(err => {
       console.log('error retrieving user gigs: \n error:', this.stringify(err))
     })
+    // steem.api.lookupAccountNames(this.$route.params.username, (err, result) => {
+    //   console.log('via steemjs::', err, result)
+    // })
   },
   mounted () {
     this.profileUsername = this.$route.params.username
