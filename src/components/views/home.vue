@@ -5,7 +5,7 @@
       <div class="card center center-align request">
         <div class="card-content">
           <p>Can&rsquo;t find what you&rsquo;re looking Seeking?<br>You can post Custom request and we&rsquo;ll lovingly look for reputable great minds to handle it</p>
-          <router-link to="/steemgig_request" tag="button" class="btn btn-block indigo">Post custom request</router-link>
+          <router-link to="/steemgigs_request" tag="button" class="btn btn-block indigo">Post custom request</router-link>
         </div>
       </div>
       <div class="card searches">
@@ -156,7 +156,7 @@
         <div v-if="gigRequests.length < 1" class="col s12 center-align center">
           <!-- <plane size="100" /> -->
           <p class="flow-text grey-text">Couldn&rsquo;t find what you&rsquo;re looking for?</p>
-          <router-link to="/steemgig_request" tag="button" class="btn indigo waves-effect waves-light"><i class="icon ion-android-add"></i> Post a request</router-link>
+          <router-link to="/steemgigs_request" tag="button" class="btn indigo waves-effect waves-light"><i class="icon ion-android-add"></i> Post a request</router-link>
           <br><br>
           <br><br>
         </div>
