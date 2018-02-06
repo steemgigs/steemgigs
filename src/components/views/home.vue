@@ -36,8 +36,8 @@
               <label for="textarea1">Subject</label>
             </div>
             <div class="input-field">
-              <textarea id="textarea1" v-model="testimonial" class="materialize-textarea"></textarea>
-              <label for="textarea1">Write your testimonial</label>
+              <textarea id="testimonial" v-model="testimonial" class="materialize-textarea"></textarea>
+              <label for="testimonial">Write your testimonial</label>
             </div>
               <div class="jjinput-field">
                 <input-tag limit="2" class="editable" placeholder="add tags" @update:tags="getTags" :tags="userTags" />
@@ -81,7 +81,11 @@
           </span>
         </div>
         <div v-if="steemgigs.length < 1" class="col s12 center-align center">
-          <plane size="100" />
+          <plane v-if="!postsFetched" size="100" />
+          <div v-if="postsFetched">
+            <p class="flow-text grey-text">Be the first to post gig, click button below</p>
+            <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+          </div>
           <br><br>
           <br><br>
         </div>
@@ -104,14 +108,13 @@
           </span>
         </div>
         <div v-if="untalented.length < 1" class="col s12 center-align center">
-          <!-- <plane size="100" /> -->
-          <p class="flow-text grey-text">Be the first to post under this section</p>
-          <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+          <plane v-if="!untalentedFetched" size="100" />
+          <div v-if="untalentedFetched">
+            <p class="flow-text grey-text">Post a fantastic STEEMGIG, it stands a chance of being featured here</p>
+            <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+          </div>
           <br><br>
           <br><br>
-        </div>
-        <div class="col s12 m6 l3" v-for="(gig, index) in untalented" :key="index">
-          <gig-card :gigData="gig" />
         </div>
       </section>
       <section id="featured" class="row">
@@ -129,9 +132,11 @@
           </span>
         </div>
         <div v-if="featured.length < 1" class="col s12 center-align center">
-          <!-- <plane size="100" /> -->
-          <p class="flow-text grey-text">Post a fantastic STEEMGIG, it stands a chance of being featured here</p>
-          <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+          <plane v-if="!featuredFetched" size="100" />
+          <div v-if="featuredFetched">
+            <p class="flow-text grey-text">Post a fantastic STEEMGIG, it stands a chance of being featured here</p>
+            <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+          </div>
           <br><br>
           <br><br>
         </div>
@@ -141,8 +146,8 @@
       </section>
       <section id="gigrequests" class="row">
         <div class="col s12">
-          <h5 class="left">#STEEMGIG REQUESTS</h5>
-          <span class="right">
+          <h5 class="left">#GIGREQUESTS</h5>
+          <span class="right" style="margin-top: 1.5em;">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
               <option value="tranding">Trending</option>
@@ -153,18 +158,55 @@
             </select>
           </span>
         </div>
-        <div v-if="gigRequests.length < 1" class="col s12 center-align center">
-          <!-- <plane size="100" /> -->
-          <p class="flow-text grey-text">Couldn&rsquo;t find what you&rsquo;re looking for?</p>
-          <router-link to="/steemgigs_request" tag="button" class="btn indigo waves-effect waves-light"><i class="icon ion-android-add"></i> Post a request</router-link>
+        <div v-if="gigrequests.length < 1" class="col s12 center-align center">
+          <plane v-if="!gigrequestsFetched" size="100" />
+          <div v-if="gigrequestsFetched" class="center center-align">
+            <p class="flow-text grey-text">Can&rsquo;t find what you&rsquo;re looking Seeking?<br>You can post Custom request and we&rsquo;ll lovingly look for reputable great minds to handle it</p>
+            <router-link to="/steemgigs_request" tag="button" class="btn btn-large indigo">Post custom request</router-link>
+          </div>
           <br><br>
           <br><br>
         </div>
-        <div class="col s12 m6 l3" v-for="(gig, index) in featured" :key="index">
+        <div v-if="gigrequestsFetched">
+        </div>
+        <div class="col s12 m6 l3" v-for="(gig, index) in gigrequests" :key="index">
           <gig-card :gigData="gig" />
         </div>
       </section>
       <section id="testimonials" class="row">
+        <div class="col s12">
+          <h5 class="left">#TESTIMONIALS</h5>
+          <span class="right" style="margin-top: 1.5em;">
+            <select class="browser-default">
+              <option value="" disabled selected>Sort By</option>
+              <option value="tranding">Trending</option>
+              <option value="new">New</option>
+              <option value="active">Active</option>
+              <option value="hot">Hot</option>
+              <option value="promoted">Promoted</option>
+            </select>
+          </span>
+        </div>
+        <div v-if="!testimonialsFetched && testimonials.length < 1" class="col s12 center-align center">
+          <plane size="100" />
+          <br><br>
+          <br><br>
+        </div>
+        <div class="col s12 m4 l3" v-for="(testimonial, index) in testimonials" :key="index">
+          <div class="card">
+            <div class="card-content">
+              <p><router-link to="/users/eric">@eric </router-link> {{testimonial.title}} </p>
+            </div>
+            <div class="card-action">
+              <a><i class="fa fa-thumbs-up" aria-hidden="true"></i>{{testimonial.active_votes.length}}</a>
+              <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> 323</a>
+              <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
+              <span class="right">$884.3</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- <section id="testimonials" class="row">
         <div class="col s12">
           <h5 class="left">Steemgigs Testimonials</h5>
           <span class="right">
@@ -191,98 +233,7 @@
             </div>
           </div>
         </div>
-        <div class="col s12 m4 l3">
-          <div class="card">
-            <div class="card-content">
-              <p><router-link to="/users/eric">@eric</router-link> did a very job and delivered on time</p>
-            </div>
-            <div class="card-action">
-              <a><i class="fa fa-thumbs-up" aria-hidden="true"></i> 336</a>
-              <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> 323</a>
-              <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-              <span class="right">$884.3</span>
-            </div>
-          </div>
-        </div>
-        <div class="col s12 m4 l3">
-          <div class="card">
-            <div class="card-content">
-              <p><router-link to="/users/eric">@eric</router-link> did a very job and delivered on time</p>
-            </div>
-            <div class="card-action">
-              <a><i class="fa fa-thumbs-up" aria-hidden="true"></i> 336</a>
-              <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> 323</a>
-              <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-              <span class="right">$884.3</span>
-            </div>
-          </div>
-        </div>
-        <div class="col s12 m4 l3">
-          <div class="card">
-            <div class="card-content">
-              <p><router-link to="/users/eric">@eric</router-link> did a very job and delivered on time</p>
-            </div>
-            <div class="card-action">
-              <a><i class="fa fa-thumbs-up" aria-hidden="true"></i> 336</a>
-              <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> 323</a>
-              <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-              <span class="right">$884.3</span>
-            </div>
-          </div>
-        </div>
-        <div class="col s12 m4 l3">
-          <div class="card">
-            <div class="card-content">
-              <p><router-link to="/users/eric">@eric</router-link> did a very job and delivered on time</p>
-            </div>
-            <div class="card-action">
-              <a><i class="fa fa-thumbs-up" aria-hidden="true"></i> 336</a>
-              <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> 323</a>
-              <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-              <span class="right">$884.3</span>
-            </div>
-          </div>
-        </div>
-        <div class="col s12 m4 l3">
-          <div class="card">
-            <div class="card-content">
-              <p><router-link to="/users/eric">@eric</router-link> did a very job and delivered on time</p>
-            </div>
-            <div class="card-action">
-              <a><i class="fa fa-thumbs-up" aria-hidden="true"></i> 336</a>
-              <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> 323</a>
-              <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-              <span class="right">$884.3</span>
-            </div>
-          </div>
-        </div>
-        <div class="col s12 m4 l3">
-          <div class="card">
-            <div class="card-content">
-              <p><router-link to="/users/eric">@eric</router-link> did a very job and delivered on time</p>
-            </div>
-            <div class="card-action">
-              <a><i class="fa fa-thumbs-up" aria-hidden="true"></i> 336</a>
-              <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> 323</a>
-              <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-              <span class="right">$884.3</span>
-            </div>
-          </div>
-        </div>
-        <div class="col s12 m4 l3">
-          <div class="card">
-            <div class="card-content">
-              <p><router-link to="/users/eric">@eric</router-link> did a very job and delivered on time</p>
-            </div>
-            <div class="card-action">
-              <a><i class="fa fa-thumbs-up" aria-hidden="true"></i> 336</a>
-              <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> 323</a>
-              <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-              <span class="right">$884.3</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      </section> -->
     </div>
   </div>
 </template>
@@ -312,7 +263,12 @@ export default {
       userTags: [],
       errorText: '',
       successText: '',
-      isPosting: false
+      isPosting: false,
+      featuredFetched: false,
+      postsFetched: false,
+      gigrequestsFetched: false,
+      testimonialsFetched: false,
+      untalentedFetched: false
     }
   },
   methods: {
@@ -330,7 +286,7 @@ export default {
         timestamp: new Date().getTime(),
         authorPic: this.$store.state.profile.profileImage,
         type: 'steemgigs_testimonial',
-        deleted: false,
+        deleted: true,
         generated: true
       }
       sc2.setAccessToken(this.$store.state.accessToken)
@@ -356,7 +312,7 @@ export default {
     untalented () {
       return this.$store.state.posts.untalented
     },
-    gigRequests () {
+    gigrequests () {
       return this.$store.state.posts.gigrequests
     },
     featured () {
@@ -365,6 +321,30 @@ export default {
     testimonials () {
       return this.$store.state.posts.testimonials
     }
+  },
+  mounted () {
+    this.$eventBus.$on('featured-fetched', payload => {
+      this.featuredFetched = true
+    })
+    this.$eventBus.$on('posts-fetched', payload => {
+      this.postsFetched = true
+    })
+    this.$eventBus.$on('gigrequests-fetched', payload => {
+      this.gigrequestsFetched = true
+    })
+    this.$eventBus.$on('testimonials-fetched', payload => {
+      this.testimonialsFetched = true
+    })
+    this.$eventBus.$on('untalented-fetched', payload => {
+      this.untalentedFetched = true
+    })
+  },
+  beforeDestroy () {
+    this.$eventBus.$off('featured-fetched')
+    this.$eventBus.$off('posts-fetched')
+    this.$eventBus.$off('gigrequests-fetched')
+    this.$eventBus.$off('testimonials-fetched')
+    this.$eventBus.$off('untalented-fetched')
   }
 }
 </script>

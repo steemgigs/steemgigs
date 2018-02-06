@@ -242,7 +242,7 @@ export default {
         category: this.slugify(this.newGigRequest.category),
         subcategory: this.slugify(this.newGigRequest.subcategory),
         type: 'steemgigs_request',
-        deleted: false,
+        deleted: true,
         // images: this.newGigRequest.portfolio,
         generated: true
       }

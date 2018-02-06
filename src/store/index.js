@@ -62,6 +62,15 @@ export default new Vuex.Store({
     },
     SET_GIGREQUESTS (state, data) {
       state.posts.gigrequests = data
+    },
+    SET_FEATURED (state, data) {
+      state.posts.featured = data
+    },
+    SET_TESTIMONIALS (state, data) {
+      state.posts.testimonials = data
+    },
+    SET_UNTALENTED (state, data) {
+      state.posts.untalented = data
     }
   },
   plugins: [createPersist({
