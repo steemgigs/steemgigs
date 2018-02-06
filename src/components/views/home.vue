@@ -311,7 +311,8 @@ export default {
       testimonialSubject: '',
       userTags: [],
       errorText: '',
-      successText: ''
+      successText: '',
+      isPosting: false
     }
   },
   methods: {
@@ -328,7 +329,7 @@ export default {
         tags: ['steemgigs', 'testimonial'].concat(this.userTags),
         timestamp: new Date().getTime(),
         authorPic: this.$store.state.profile.profileImage,
-        type: 'testimonial',
+        type: 'steemgigs_testimonial',
         deleted: false,
         generated: true
       }
