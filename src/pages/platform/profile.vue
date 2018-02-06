@@ -106,6 +106,7 @@ import sc2 from '@/services/sc2'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
+import RotatingCard from '@/components/snippets/rotatingCard'
 import moment from 'moment'
 // import steem from 'steem'
 const countries = require('country-list')()
@@ -114,7 +115,8 @@ export default {
   components: {
     Page,
     CatNav,
-    GigCard
+    GigCard,
+    RotatingCard
   },
   data () {
     return {

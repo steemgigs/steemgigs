@@ -20,10 +20,32 @@
           </ul>
         </div>
       </div>
-      <div class="card center center-align request">
-        <div class="card-content">
-          <p>Earn some rewards by telling us about your successful STEEMGIGS EXPERIENCE (both SteemGiggers &amp; Clients)</p>
-          <button class="btn btn-block indigo">Post a Testimonial</button>
+      <div class="rotating-card" :class="editMode ? 'flipped' : ''">
+        <div class="face">
+          <div class="card center center-align request">
+            <div class="card-content">
+              <p>Earn some rewards by telling us about your successful STEEMGIGS EXPERIENCE (both SteemGiggers &amp; Clients)</p>
+              <button class="btn btn-block indigo" @click="editMode = true">Post a Testimonial</button>
+            </div>
+          </div>
+        </div>
+        <div class="back card-panel indigo lighten-1 white-text">
+            <i class="icon ion-close" @click="editMode = false"></i>
+            <div class="input-field">
+              <textarea id="textarea1" v-model="testimonialSubject" class="materialize-textarea"></textarea>
+              <label for="textarea1">Subject</label>
+            </div>
+            <div class="input-field">
+              <textarea id="textarea1" v-model="testimonial" class="materialize-textarea"></textarea>
+              <label for="textarea1">Write your testimonial</label>
+            </div>
+              <div class="jjinput-field">
+                <input-tag limit="2" class="editable" placeholder="add tags" @update:tags="getTags" :tags="userTags" />
+              </div>
+            <button class="btn-floating grey  right lighten-3" @click="submitTestimonial">
+              <i class="ion-checkmark-round indigo-text" v-if="!isPosting"></i>
+              <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
+            </button>
         </div>
       </div>
     </div>
@@ -270,13 +292,61 @@ import { Carousel, Slide } from 'vue-carousel'
 import {Plane} from 'vue-loading-spinner'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
+import sc2 from '@/services/sc2'
+import InputTag from 'vue-input-tag'
+
 export default {
   components: {
     Plane,
     CatNav,
     GigCard,
     Carousel,
-    Slide
+    Slide,
+    InputTag
+  },
+  data () {
+    return {
+      editMode: false,
+      testimonial: '',
+      testimonialSubject: '',
+      userTags: [],
+      errorText: '',
+      successText: ''
+    }
+  },
+  methods: {
+    getTags (entries) {
+      this.userTags = entries
+    },
+    submitTestimonial () {
+      let that = this
+      this.errorText = ''
+      this.successText = ''
+      this.isPosting = true
+      let jsonMetadata = {
+        app: 'steemgig',
+        tags: ['steemgigs', 'testimonial'].concat(this.userTags),
+        timestamp: new Date().getTime(),
+        authorPic: this.$store.state.profile.profileImage,
+        type: 'testimonial',
+        deleted: false,
+        generated: true
+      }
+      sc2.setAccessToken(this.$store.state.accessToken)
+      let body = this.testimonial
+      let permlink = this.slugify(this.testimonialSubject)
+      let username = this.$store.state.username
+      let title = '#STEEMGIGS ' + this.testimonialSubject
+      sc2.comment('', 'steemgigs', username, permlink, title, body, jsonMetadata, (err, res) => {
+        console.log(err, res)
+        that.isPosting = false
+        if (err) {
+          that.errorText = 'Error pushing post to steem, try again'
+        } else {
+          that.successText = 'Successfully pushed to steem!'
+        }
+      })
+    }
   },
   computed: {
     steemgigs () {
