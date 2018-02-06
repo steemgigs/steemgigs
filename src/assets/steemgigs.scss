@@ -69,6 +69,52 @@ img {
   }
 }
 
+.rotating-card{
+  position: relative;
+  min-height: 120px;
+  .face{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 1;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: transform .6s ease-in;
+  }
+  .back{
+    ul.language-list li {
+      list-style-type: initial;
+      color: #d1d1d1;
+      margin-left: 21px;
+      font-size: .93rem;
+    }
+    input[type=text] {
+      color: white;
+    }
+    textarea, label:not(.active) {
+      color: rgb(225, 225, 225);
+    }
+    i.add-lang-icon, i.ion-close {
+      transform: translateY(-35px);
+      cursor: pointer;
+    }
+    transform: rotateY(-180deg);
+    backface-visibility: hidden;
+    transition: transform .6s ease-in;
+    .btn-floating i {
+      font-size: 1rem
+    }
+  }
+  &.flipped {
+    .face{
+      transform: rotateY(180deg);
+    }
+    .back{
+      transform: rotateY(0);
+    }
+  }
+}
 .tooltip {
   background: rgba(63, 81, 181, 0.8);
   color: white;
@@ -76,10 +122,9 @@ img {
   font-size: 0.9em;
   border-radius: 4px;
 }
-
 .vue-input-tag-wrapper {
   display: inline-block;
-  height: 2.45em;
+  min-height: 2.45em;
   &.editable {
     padding-top: 0px;
     .input-tag {
@@ -91,19 +136,25 @@ img {
       }
     }
   }
-  .input-tag {
-    background: rgb(63, 81, 181) !important;
-    color: rgb(255, 255, 255) !important;
-    border: 1px solid rgb(63, 81, 181) !important;
-    padding: 3px 1em !important;
-  }
-  input[type=text]:not(.browser-default) {
-    width: auto;
-    height: 100%;
+}
+.input-tag {
+  background: rgb(63, 81, 181) !important;
+  color: rgb(255, 255, 255) !important;
+  border: 1px solid rgb(63, 81, 181) !important;
+  padding: 3px 1em !important;
+}
+input[type=text]:not(.browser-default) {
+  width: auto;
+  height: 100%;
+  border-bottom: 0;
+}
+.back {
+  .vue-input-tag-wrapper input[type=text]:not(.browser-default) {
+    width: 100%;
+    color: rgb(69, 54, 79);
     border-bottom: 0;
   }
 }
-
 .spinner {
   margin: auto;
   #top .plane {
