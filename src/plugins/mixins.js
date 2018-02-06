@@ -12,6 +12,13 @@ export default {
       // eslint-disable-next-line
       return word.toString().trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '')
     },
+    capitalize (str) {
+      let formatted = []
+      str.split(' ').forEach(i => {
+        formatted.push(i[0].toUpperCase() + i.substr(1))
+      })
+      return formatted.join(' ')
+    },
     extractBody (data) {
       return data.split(`## Portfolio
 ----`)[0]

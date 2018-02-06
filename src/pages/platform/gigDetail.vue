@@ -80,7 +80,7 @@ export default {
   beforeCreate () {
     let {username, task} = this.$route.params
     steem.api.setOptions({ url: 'wss://steemd.privex.io' })
-    steem.api.getContent(username, task, function (err, result) {
+    steem.api.getContent(username, task, (err, result) => {
       console.log('username:', username, 'task:', task)
       console.log('postDetails::', err, result)
     })

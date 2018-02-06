@@ -24,9 +24,9 @@
       </p>
     </div>
     <div class="card-action">
-      <a><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
-      <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> {{ comments }}</a>
-      <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
+      <a v-tooltip="{ content: 'upvote', classes: ['tooltip'] }"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
+      <a v-tooltip="{ content: 'comment', classes: ['tooltip'] }"><i class="icon ion-chatbox-working" aria-hidden="true"></i> {{ comments }}</a>
+      <a v-tooltip="{ content: 'resteem', classes: ['tooltip'] }"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
       <span class="right" v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{ payout }}</span>
     </div>
   </div>

@@ -371,6 +371,9 @@ export default {
 
 <style lang="scss" scoped>
 $blue: #4757b2;
+.card.gig .card-image {
+  height: 10em;
+}
 .steemgigs_ads {
   box-sizing: border-box;
   padding: 0;
