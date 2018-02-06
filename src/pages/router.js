@@ -12,6 +12,12 @@ export default [
     component: Index
   },
   {
+    path: '/categories/:category',
+    name: 'STEEMGIGS | Categories',
+    component: Index
+  },
+  // TODO: Finish this
+  {
     path: '/complete',
     name: 'STEEMGIGS | Logged in',
     component: LoggedIn

@@ -134,7 +134,7 @@
         <div v-if="gigRequests.length < 1" class="col s12 center-align center">
           <!-- <plane size="100" /> -->
           <p class="flow-text grey-text">Couldn&rsquo;t find what you&rsquo;re looking for?</p>
-          <router-link to="/create_gig" tag="button" class="btn indigo waves-effect waves-light"><i class="icon ion-android-add"></i> Post a request</router-link>
+          <router-link to="/steemgig_request" tag="button" class="btn indigo waves-effect waves-light"><i class="icon ion-android-add"></i> Post a request</router-link>
           <br><br>
           <br><br>
         </div>
