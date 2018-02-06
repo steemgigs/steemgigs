@@ -4,6 +4,7 @@ import NewSteemGig from '@/pages/platform/newSteemgig'
 import NewGigRequest from '@/pages/platform/newGigRequest'
 import Profile from '@/pages/platform/profile'
 import GigDetail from '@/pages/platform/gigDetail'
+import Categories from '@/pages/platform/category'
 
 export default [
   {
@@ -14,7 +15,7 @@ export default [
   {
     path: '/categories/:category',
     name: 'STEEMGIGS | Categories',
-    component: Index
+    component: Categories
   },
   // TODO: Finish this
   {

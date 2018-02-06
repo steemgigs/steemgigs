@@ -24,9 +24,12 @@
       </p>
     </div>
     <div class="card-action">
-      <a><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
-      <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> {{ comments }}</a>
-      <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
+      <a v-if="processing" v-tooltip="{content: 'please wait'}">
+        <i class="fa fa-spinner fa-pulse"></i>
+      </a>
+      <a @click="upvote" v-tooltip="{ content: 'upvote', classes: ['tooltip'] }"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
+      <a v-tooltip="{ content: 'comment', classes: ['tooltip'] }"><i class="icon ion-chatbox-working" aria-hidden="true"></i> {{ comments }}</a>
+      <a v-tooltip="{ content: 'resteem', classes: ['tooltip'] }"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
       <span class="right" v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{ payout }}</span>
     </div>
   </div>
@@ -34,6 +37,7 @@
 
 <script>
 import { Carousel, Slide } from 'vue-carousel'
+import sc2 from '@/services/sc2'
 export default {
   components: {
     Carousel,
@@ -43,7 +47,8 @@ export default {
     return {
       taskDetails: {
         type: String
-      }
+      },
+      processing: false
     }
   },
   props: {
@@ -107,6 +112,22 @@ export default {
         return `Author Payout: ${'$' + this.gigData.total_payout_value}
         Curator Payout: ${'$' + this.gigData.curator_payout_value}`
       }
+    }
+  },
+  methods: {
+    upvote () {
+      this.processing = true
+      sc2.setAccessToken(this.$store.state.accessToken)
+      sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, 10000, (err, res) => {
+        this.processing = false
+        console.log(err, res)
+        if (!err) {
+          this.gigData.active_votes.push({'new': 'vote'})
+          console.log(res)
+        } else {
+          console.log('there was an error voting this\n', 'err:', err)
+        }
+      })
     }
   }
 }
