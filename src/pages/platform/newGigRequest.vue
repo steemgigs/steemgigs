@@ -79,6 +79,10 @@
                   <input type="number" v-model="newGigRequest.price" class="price" placeholder="price">
                 </div>
               </div>
+              <div class="col input-field s12">
+                <input-tag limit="3" :read-only="true" :tags="defaultTags" />
+                <input-tag limit="2" class="editable" placeholder="add tags" @update:tags="getTags" :tags="userTags" />
+              </div>
               <div class="col s12 row">
                   <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
               </div>
@@ -128,8 +132,8 @@ import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import { Carousel, Slide } from 'vue-carousel'
-import hljs from 'highlightjs'
-import 'highlightjs/styles/github.css'
+import InputTag from 'vue-input-tag'
+
 
 export default {
   components: {
@@ -140,7 +144,8 @@ export default {
     Carousel,
     Slide,
     ImgUpload,
-    VueEditor
+    VueEditor,
+    InputTag
   },
   data () {
     return {
@@ -150,6 +155,7 @@ export default {
       sections: ['Post a Gig request', 'Publish'],
       currentSection: 0,
       totalPics: 1,
+      userTags: [],
       newGigRequest: {
         title: '',
         category: '',
@@ -228,6 +234,9 @@ export default {
     morePics () {
       if (this.totalPics < 4) this.totalPics++
     },
+    getTags (entries) {
+      this.userTags = entries
+    },
     submit () {
       let that = this
       this.errorText = ''
@@ -236,12 +245,15 @@ export default {
       this.isPosting = true
       let jsonMetadata = {
         app: 'steemgig',
-        tags: ['steemgigs', this.slugify(this.newGigRequest.category), this.slugify(this.newGigRequest.subcategory), 'testing'],
+        tags: [...this.userTags, ...this.defaultTags],
         format: 'Markdown',
         timestamp: new Date().getTime(),
-        price: this.newGigRequest.price,
-        currency: this.newGigRequest.currency,
+        price: this.newGigData.price,
+        currency: this.newGigData.currency,
         authorPic: this.$store.state.profile.profileImage,
+        category: this.slugify(this.newGigData.category),
+        subcategory: this.slugify(this.newGigData.subcategory),
+        // images: this.newGigData.portfolio,
         generated: true
       }
       sc2.setAccessToken(this.$store.state.accessToken)
@@ -277,10 +289,12 @@ export default {
     },
     wordCount () {
       if (this.newGigRequest.title.length > 0) {
-        return `${this.newGigRequest.title.length} / 90 Characters`
       } else {
         return `90 Characters`
       }
+    },
+    defaultTags () {
+      return ['steemgigs', this.slugify(this.newGigRequest.category), this.slugify(this.newGigRequest.subcategory)]
     },
     previewData () {
       return `##### Description

@@ -69,7 +69,7 @@
           </div>
         </div>
       </div>
-      <div class="card moreProfileInfo">
+      <div v-show="!editMode" class="card moreProfileInfo">
         <div class="card-content">
           <span class="card-title">Description</span>
           <p v-text="profile.about"></p>

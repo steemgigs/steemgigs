@@ -221,8 +221,6 @@ import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import { Carousel, Slide } from 'vue-carousel'
 import InputTag from 'vue-input-tag'
-import hljs from 'highlightjs'
-import 'highlightjs/styles/github.css'
 
 export default {
   components: {
