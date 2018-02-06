@@ -18,7 +18,7 @@
               <div class="tutorial_guide center-align">
                 <div class="card">
                   <div class="card-content">
-                    <span class="card-title">Make your Title Short, Simple and Clear to boost sales</span>
+                    <span class="card-title">Make your Title Short, Simple and Clear to understand</span>
                   </div>
                 </div>
               </div>
@@ -93,7 +93,7 @@
           <div class="col s12">
             <div class="card">
               <div class="card-content">
-                <span class="card-title"> {{ newGigRequest.title }}</span>
+                <span class="card-title"> {{ steemedTitle }}</span>
                 <p><router-link :to="'/categories/' + this.newGigRequest.category">{{ this.newGigRequest.category }}</router-link> / <router-link :to="'/categories/' + this.newGigRequest.category + '/' + this.newGigRequest.subcategory">{{ this.newGigRequest.subcategory }}</router-link></p>
               </div>
               <!-- <div class="card-image">
@@ -236,27 +236,29 @@ export default {
         tags: [...this.userTags, ...this.defaultTags],
         format: 'Markdown',
         timestamp: new Date().getTime(),
-        price: this.newGigData.price,
-        currency: this.newGigData.currency,
+        price: this.newGigRequest.price,
+        currency: this.newGigRequest.currency,
         authorPic: this.$store.state.profile.profileImage,
-        category: this.slugify(this.newGigData.category),
-        subcategory: this.slugify(this.newGigData.subcategory),
-        // images: this.newGigData.portfolio,
-        type: 'steemgig_request',
+        category: this.slugify(this.newGigRequest.category),
+        subcategory: this.slugify(this.newGigRequest.subcategory),
+        type: 'steemgigs_request',
+        deleted: false,
+        // images: this.newGigRequest.portfolio,
         generated: true
       }
       sc2.setAccessToken(this.$store.state.accessToken)
-      let textifiedPics = '\n## Portfolio\n----\n'
-      this.newGigRequest.portfolio.forEach(url => {
-        textifiedPics += '![Potfolio](' + url + ')\n\n'
-      })
-      let body = this.previewData + textifiedPics + `
-#### this post was posted on #STEEMGIGS
+      // let textifiedPics = '\n## Portfolio\n----\n'
+      // this.newGigRequest.portfolio.forEach(url => {
+      //   textifiedPics += '![Potfolio](' + url + ')\n\n'
+      // })
+      // let body = this.previewData + textifiedPics + `
+      let body = this.previewData + `
+#### this post was made on #STEEMGIGS
 "where everyone has something to offer"
       `
       let permlink = this.slugify(this.newGigRequest.title)
       let username = this.$store.state.username
-      let title = '#STEEMGIGS: I will ' + this.newGigRequest.title
+      let title = this.steemedTitle
       sc2.comment('', 'steemgigs', username, permlink, title, body, jsonMetadata, (err, res) => {
         console.log(err, res)
         that.isPosting = false
@@ -282,6 +284,9 @@ export default {
         return `90 Characters`
       }
     },
+    steemedTitle () {
+      return '#STEEMGIGS: ' + this.newGigRequest.title
+    },
     defaultTags () {
       return ['steemgigs', this.slugify(this.newGigRequest.category), this.slugify(this.newGigRequest.subcategory)]
     },
@@ -291,6 +296,7 @@ export default {
 ${this.newGigRequest.description}
 
 ##### Maximum Budget: ${this.newGigRequest.price} ${this.newGigRequest.currency}
+
 ##### Delivery: ${this.newGigRequest.days} day(s) ${this.newGigRequest.hours} hour(s)
       `
     }

@@ -341,7 +341,7 @@ export default {
         textifiedPics += '![Potfolio](' + url + ')\n\n'
       })
       let body = this.previewData + textifiedPics + `
-#### this post was posted on #STEEMGIGS
+#### this post was made on #STEEMGIGS
 "where everyone has something to offer"
       `
       let permlink = this.slugify(this.newGigData.title)
