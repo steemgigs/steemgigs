@@ -19,6 +19,9 @@ export default {
       })
       return formatted.join(' ')
     },
+    desteemgify (word) {
+      return word.split('#STEEMGIGS: ')[1]
+    },
     extractBody (data) {
       return data.split(`## Portfolio
 ----`)[0]

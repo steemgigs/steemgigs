@@ -10,7 +10,17 @@
         <div class="col s12">
           <div class="card">
             <div class="card-content">
-              <span class="card-title"></span>
+              <span class="card-title">{{ title }}</span>
+            </div>
+            <div class="card-image">
+              <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
+                <slide v-for="(image, index) in portfolio" :key="index">
+                  <img :src="image" class="responsive-img" :alt="currentGig.title">
+                </slide>
+              </carousel>
+            </div>
+            <div class="card-content">
+              <div v-html="currentGig.body"></div>
             </div>
           </div>
         </div>
@@ -60,36 +70,47 @@ import Api from '@/services/api'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
+import { Carousel, Slide } from 'vue-carousel'
 import moment from 'moment'
-import steem from 'steem'
+// import steem from 'steem'
 export default {
   components: {
     Page,
     CatNav,
-    GigCard
+    GigCard,
+    Carousel,
+    Slide
   },
   data () {
     return {
       profile: {},
       profileData: {},
-      profileUsername: '',
+      currentGig: {
+        title: '',
+        json_metadata: {
+          images: []
+        }
+      },
       vacation_mode: false,
       currentView: 'active_gigs'
     }
   },
-  beforeCreate () {
+  mounted () {
     let {username, task} = this.$route.params
-    steem.api.setOptions({ url: 'wss://steemd.privex.io' })
-    steem.api.getContent(username, task, (err, result) => {
-      console.log('username:', username, 'task:', task)
-      console.log('postDetails::', err, result)
+    this.fetchUserInfo(username)
+    Api.fetchSinglePost(username, task).then(response => {
+      this.currentGig = response.data
+    }).catch(err => {
+      console.log(err)
     })
   },
-  mounted () {
-    this.profileUsername = this.$route.params.username
-    this.fetchUserInfo(this.profileUsername)
-  },
   computed: {
+    title () {
+      return this.desteemgify(this.currentGig.title)
+    },
+    portfolio () {
+      return this.currentGig.json_metadata.images
+    },
     since () {
       return moment(this.profileData.created).format('MMMM YYYY')
     },

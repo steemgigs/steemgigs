@@ -7,6 +7,9 @@ export default {
   fetchUserGigs (username) {
     return axios.post('/fetchUserGigs', {username})
   },
+  fetchSinglePost (username, permlink) {
+    return axios.post('/fetchSinglePost', {username, permlink})
+  },
   imageUpload (formdata) {
     return axios.post('/imgUpload', formdata)
     // return axios.post('/multiple_uploads', formdata)
