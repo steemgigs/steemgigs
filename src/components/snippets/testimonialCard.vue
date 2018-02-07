@@ -8,7 +8,7 @@
         <p>{{body}}</p>
       </div>
     </div>
-    <div class="card-action">
+    <div class="card-action left-align">
       <a v-if="processing" v-tooltip="{content: 'please wait'}">
         <i class="fa fa-spinner fa-pulse"></i>
       </a>
@@ -94,6 +94,9 @@ export default {
   .testimonial-card {
     box-shadow: 0 3px 20px rgba($color: #000000, $alpha: .25);
     border-radius: 5px;
+    .card-content {
+      min-height: 360px;
+    }
     img.userImage {
       height: 80px;
       width: 80px;
@@ -103,7 +106,7 @@ export default {
     }
     h3 {
       font-size: 1.4rem;
-      color: gray;
+      color: #cfcfcf;
       margin: 7px auto;
 
     }
@@ -112,8 +115,9 @@ export default {
       font-size: .9rem;
     }
     p {
-      font-size: 1.2rem;
-      color: #0c0b0b;
+      font-size: 1.1rem;
+      color: #494646;
+      margin: 20px auto;
     }
   }
 </style>

@@ -19,7 +19,10 @@
       <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" tag="p" v-text="task" />
       <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
       <p class="price">
-        <span v-if="price">Starting at {{ price }} {{ currency }}</span>
+        <span v-if="price">
+          <span v-if="type === 'steemgigs'">{{ 'Starting At ' + price + currency }}</span>
+          <span v-if="type === 'gigRequest'">{{ 'Max Budget: ' + price + currency }}</span>
+        </span>
         <span v-if="!price">FREE</span>
       </p>
     </div>
@@ -48,7 +51,8 @@ export default {
       taskDetails: {
         type: String
       },
-      processing: false
+      processing: false,
+      taskPicture: ''
     }
   },
   props: {
@@ -56,7 +60,11 @@ export default {
       type: String,
       default: 'results'
     },
-    gigData: Object
+    gigData: Object,
+    type: {
+      type: String,
+      default: 'steemgigs'
+    }
   },
   computed: {
     profilePicUrl () {
@@ -86,9 +94,9 @@ export default {
       return this.gigData.author
     },
     portfolio () {
-      if (this.gigData.json_metadata) {
+      if (this.gigData.json_metadata.images) {
         return this.gigData.json_metadata.images
-      }
+      } else return []
     },
     comments () {
       return this.gigData.children
