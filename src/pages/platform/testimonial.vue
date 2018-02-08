@@ -1,94 +1,51 @@
 <template>
   <page :pageClasses="['post_new_steemgig__view', 'row']">
+    <dismissible-notice>
+      <span>The steemgigs testimonial editor can be used by both steemgigan and steemian client over the course of a successful transaction and will appear as full blown blog posts both on steemgigs.org and steemit for potential rewards. Both parties can earn additional rewards from writing steemgigs testimonials as not only does it increase the reputation of both parties but it creates values as post, creates transparency and promotes steem in the search engine and also as a blockchain where "where everyone is a reputable/talented brother"</span>
+    </dismissible-notice>
     <ul class="sections center">
       <li v-for="(section, index) in sections" :key="index"><a v-text="section" :class="{active: index === currentSection}" @click="switchTo(index)"></a></li>
     </ul>
-    <dismissible-notice>
-      <span>Oh you didn't find your gig! Post a custom request below</span>
-    </dismissible-notice>
     <div class="container" @keypress.tab="nextSection">
       <div class="col s12 m7 l9 row" >
         <form class="card-panel row" v-if="currentSection === 0">
           <div class="container gigForm">
+            <!-- <p class="sub-title">Oh you didn't find your gig! Post a custom request below</p> -->
             <div class="mx-2">
-              <p class="flow-text title">Gig Title</p>
+              <p class="flow-text title">Title</p>
               <div class="input-field col s12">
             </div>
-              <textarea @keypress.enter.prevent @keyup.enter="''" v-model="newGigRequest.title" type="text" placeholder="Give a title to this gig" row="2" maxlength="90" minlength="5" required>
+              <textarea @keypress.enter.prevent @keyup.enter="''" v-model="newTestimonial.title" type="text" placeholder="Give a title to this testimonial" row="2" maxlength="90" minlength="5" required>
               </textarea>
               <p class="word-count right" v-text="wordCount"></p>
               <div class="tutorial_guide center-align">
                 <div class="card">
                   <div class="card-content">
-                    <span class="card-title">Make your Title Short, Simple and Clear to understand</span>
+                    <span class="card-title">How delighted are you by steemgigs?</span>
                   </div>
                 </div>
               </div>
             </div>
             <div class="input-field col s12">
-              <vue-editor v-model="newGigRequest.description" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
+              <vue-editor v-model="newTestimonial.description" placeholder="Describe your experience with steemgigs" :upload="uploadConfig"></vue-editor>
               <div class="tutorial_guide center-align">
                 <div class="card">
                   <div class="card-content">
-                    <span class="card-title">Give a detailed description of what you are looking for</span>
-                    <p>How much are you willing to pay for this gig? etc. State these and other information clearly</p>
+                    <span class="card-title grey-text text-darken-1 left-align mb-4">If you're a steemgiger, you can apply this flow as yours</span>
+                    <p class="grey-text text-darken-3">Give a detailed description to what your gig was about </p>
+                    <p class="grey-text text-darken-3">You can document your processes</p>
+                    <p class="grey-text text-darken-3">You can explain your general experiences with clients e.g prompt payment, easy to reach etc</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="mx-2">
-              <p class="flow-text title">Category</p>
-              <div class="row">
-                <div class="input-field col s12 m6 l4">
-                  <select class="browser-default my-select category_select" @change="refreshSubCategory" v-model="newGigRequest.category">
-                    <option value="" disabled selected>Select Category</option>
-                    <option v-for="(category, index) in categories" :key="index" :value="category.name" v-text="category.name"></option>
-                  </select>
-                </div>
-                <div class="input-field col s12 m6 l4" v-show="newGigRequest.category">
-                  <select class="my-select browser-default subCategory_select" v-model="newGigRequest.subcategory">
-                    <option value="" disabled selected>Select Subcategory</option>
-                    <option v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory" v-text="subcategory"></option>
-                  </select>
-                </div>
-              </div>
-              <p class="flow-text title">How soon do you want your order delivered?</p>
-              <div class="row">
-                <div class="input-field col s12 m3">
-                  <select class="browser-default my-select category_select" v-model="newGigRequest.days">
-                    <option value="0">Less than a day</option>
-                    <option v-for="(day, index) in 30" :key="index" :value="day">{{ day }} day(s)</option>
-                  </select>
-                </div>
-                <div class="input-field col s12 m3">
-                  <select class="browser-default my-select category_select" v-model="newGigRequest.hours">
-                    <option value="0">Less than an Hour</option>
-                    <option v-for="(hour, index) in 24" :key="index" :value="hour">{{ hour }} hours(s)</option>
-                  </select>
-                </div>
-              </div>
-              <p class="flow-text title">What is your maximum budget? (Optional)</p>
-              <div class="row">
-                <div class="input-field col s12 m3">
-                  <select class="browser-default my-select category_select" v-model="newGigRequest.currency">
-                    <option value="" disabled selected>currency</option>
-                    <option>STEEM</option>
-                    <option>SBD</option>
-                    <option>SP</option>
-                  </select>
-                </div>
-                <div class="input-field col s12 m3">
-                  <input type="number" v-model="newGigRequest.price" class="price" placeholder="price">
-                </div>
-              </div>
-              <div class="col input-field s12">
-                <input-tag limit="3" :read-only="true" :tags="defaultTags" />
-                <input-tag limit="2" class="editable" placeholder="add tags" @update:tags="getTags" :tags="userTags" />
-              </div>
-              <div class="col s12 row">
-                  <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
-              </div>
+            <div class="col input-field s12">
+              <input-tag limit="2" :read-only="true" :tags="defaultTags" />
+              <input-tag limit="3" class="editable" placeholder="add tags" @update:tags="getTags" :tags="userTags" />
             </div>
+          </div>
+          <div class="col s12 row">
+              <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
           </div>
         </form>
         <div class="row" v-if="currentSection === 1">
@@ -96,12 +53,11 @@
             <div class="card">
               <div class="card-content">
                 <span class="card-title"> {{ steemedTitle }}</span>
-                <p><router-link :to="'/categories/' + this.newGigRequest.category">{{ this.newGigRequest.category }}</router-link> / <router-link :to="'/categories/' + this.newGigRequest.category + '/' + this.newGigRequest.subcategory">{{ this.newGigRequest.subcategory }}</router-link></p>
               </div>
               <!-- <div class="card-image">
                 <carousel :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
-                  <slide v-for="(image, index) in newGigRequest.portfolio" :key="index">
-                    <img :src="image" class="responsive-img" :alt="newGigRequest.title">
+                  <slide v-for="(image, index) in newTestimonial.portfolio" :key="index">
+                    <img :src="image" class="responsive-img" :alt="newTestimonial.title">
                   </slide>
                 </carousel>
               </div> -->
@@ -155,22 +111,15 @@ export default {
       successText: '',
       errorText: '',
       isPosting: false,
-      sections: ['Post a Gig request', 'Publish'],
+      sections: ['Post a Testimonial', 'Publish'],
       currentSection: 0,
       totalPics: 1,
       userTags: [],
-      newGigRequest: {
+      defaultTags: ['steemgigs', 'steemgigs-testimonial'],
+      newTestimonial: {
         title: '',
-        category: '',
-        subcategory: '',
         description: '',
-        hours: 0,
-        days: 0,
-        currency: 'STEEM',
-        images: [],
-        reward: '100% STEEM POWER',
-        price: 0,
-        liked: true
+        images: []
       },
       customToolbar: [
         ['bold', 'italic', 'underline'],
@@ -181,33 +130,7 @@ export default {
         name: 'file',
         accept: 'image/jpg,image/jpeg,image/png',
         url: 'https://steemgigsbackend-lyktdrqlxz.now.sh/imgUpload'
-      },
-      categories: [
-        {
-          'name': 'Graphics & Design', 'subcategories': ['logo design', 'business cards and stationery', 'illustration', 'cartoons and carricatures', 'flyers and posters', 'book covers and packaging', 'web and mobile design', 'social media design', 'banner ads', 'photoshop editing', '3D & 2D models', 'T-shirts', 'presentation design', 'infographics', 'vector tracing', 'invitations', 'other']
-        },
-        {
-          'name': 'Digital marketing', 'subcategories': ['social media marketing', 'SEO', 'content marketing', 'video marketing', 'email marketing', 'search & display marketing', 'marketing strategy', 'web analysis', 'influencer marketing', 'local listings', 'domain research', 'e-commerce marketing', 'mobile advertising', 'nusic promotion', 'web traffic', 'other']
-        },
-        {
-          'name': 'Writing and translation', 'subcategories': ['resumes and cover letters', 'proof reading and editing', 'translation', 'creative writing', 'business copywriting', 'research & summaries', 'articles & blog posts', 'press releases', 'transcription', 'legal writing', 'other']
-        },
-        {
-          'name': 'Videos and animation', 'subcategories': ['whiteboard & animated explainers', 'intros & animated logos', 'promotional videos', 'editing and post production', 'lyric & music video', 'spokeperson videos', 'animated characters & modelling', 'short videos ads', 'live action explainers', 'other']
-        },
-        {
-          'name': 'Music & Audio', 'subcategories': ['voice over', 'mixing & mastering', 'producers & composers', 'singer-songwriters', 'session musicians & singers', 'jingles and drops', 'sound effects', 'other']
-        },
-        {
-          'name': 'Programming & tech', 'subcategories': ['wordpress', 'website builders & cms', 'web programming', 'e-commerce', 'mobile apps & web', 'desktop applications', 'support & IT', 'chatbots', 'data analysis & reports', 'convert files', 'databses', 'user testing', 'QA', 'other']
-        },
-        {
-          'name': 'Business', 'subcategories': ['virtual assistant', 'market research', 'business plans', 'branding services', 'legal consulting', 'financial consulting', 'business tips', 'presentations', 'career advice', 'flyer distribution', 'other']
-        },
-        {
-          'name': 'Untalented', 'subcategories': ['online lessons', 'arts and crafts', 'relationship advice', 'health, nutrition and fitness', 'astrology & readings', 'spiritual & healing', 'family & Genealogy', 'gaming', 'greeting cards & videos', 'your message on ...', 'viral videos', 'pranks & stunts', 'celebrity impersonators', 'collectibles', 'global culture', 'other']
-        }
-      ]
+      }
     }
   },
   methods: {
@@ -221,10 +144,7 @@ export default {
       if (this.currentSection > 0) this.currentSection--
     },
     refreshSubCategory () {
-      this.newGigRequest.subcategory = ''
-    },
-    morePics () {
-      if (this.totalPics < 4) this.totalPics++
+      this.newTestimonial.subcategory = ''
     },
     getTags (entries) {
       this.userTags = entries
@@ -240,19 +160,15 @@ export default {
         tags: [...this.userTags, ...this.defaultTags],
         format: 'Markdown',
         timestamp: new Date().getTime(),
-        price: this.newGigRequest.price,
-        currency: this.newGigRequest.currency,
         authorPic: this.$store.state.profile.profileImage,
-        category: this.slugify(this.newGigRequest.category),
-        subcategory: this.slugify(this.newGigRequest.subcategory),
-        type: 'steemgigs_request',
-        deleted: true,
-        // images: this.newGigRequest.portfolio,
+        type: 'steemgigs_testimonial',
+        deleted: false,
+        // images: this.newTestimonial.portfolio,
         generated: true
       }
       sc2.setAccessToken(this.$store.state.accessToken)
       // let textifiedPics = '\n## Portfolio\n<hr />\n'
-      // this.newGigRequest.portfolio.forEach(url => {
+      // this.newTestimonial.portfolio.forEach(url => {
       //   textifiedPics += '![Potfolio](' + url + ')\n\n'
       // })
       // let body = this.previewData + textifiedPics + `
@@ -260,7 +176,7 @@ export default {
 <h5>this post was made on #STEEMGIGS</h5>
 "where everyone has something to offer"
       `
-      let permlink = this.slugify(this.newGigRequest.title)
+      let permlink = this.slugify(this.newTestimonial.title)
       let username = this.$store.state.username
       let title = this.steemedTitle
       sc2.comment('', 'steemgigs', username, permlink, title, body, jsonMetadata, (err, res) => {
@@ -275,40 +191,26 @@ export default {
     }
   },
   computed: {
-    selectedCategoryIndex () {
-      let catIndex = 0
-      this.categories.forEach((category, index) => {
-        if (category.name === this.newGigRequest.category) catIndex = index
-      })
-      return catIndex
-    },
     wordCount () {
-      if (this.newGigRequest.title.length > 0) {
+      if (this.newTestimonial.title.length > 0) {
       } else {
         return `90 Characters`
       }
     },
     steemedTitle () {
-      return '#STEEMGIGS: ' + this.newGigRequest.title
-    },
-    defaultTags () {
-      return ['steemgigs', this.slugify(this.newGigRequest.category), this.slugify(this.newGigRequest.subcategory)]
+      return '#STEEMGIGS: ' + this.newTestimonial.title
     },
     previewData () {
       return `<h2 class="headline">Description</h2>
 <hr />
-${this.newGigRequest.description}
-
-<h5>Maximum Budget: ${this.newGigRequest.price} ${this.newGigRequest.currency}</h5>
-
-<h5>Delivery: ${this.newGigRequest.days} day(s) ${this.newGigRequest.hours} hour(s)</h5>
+${this.newTestimonial.description}
       `
     }
   },
   mounted () {
     this.$eventBus.$on('img-uploaded', payload => {
       console.log(payload)
-      this.newGigRequest.portfolio[payload.index] = payload.url
+      this.newTestimonial.portfolio[payload.index] = payload.url
     })
   },
   deforeDestroy () {
@@ -471,7 +373,7 @@ p {
   position: absolute;
   right: -28vw;
   width: 23.5vw;
-  top: 0em;
+  top: 4em;
   &::before {
     content: ' ';
     width: 0;
