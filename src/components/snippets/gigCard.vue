@@ -20,8 +20,8 @@
       <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
       <p class="price">
         <span v-if="price">
-          <span v-if="type === 'steemgigs'">{{ 'Starting At ' + price + currency }}</span>
-          <span v-if="type === 'gigRequest'">{{ 'Max Budget: ' + price + currency }}</span>
+          <span v-if="type === 'steemgigs'">{{ 'Starting At ' + price + ' ' + currency }}</span>
+          <span v-if="type === 'gigRequest'">{{ 'Max Budget: ' + price + ' ' + currency }}</span>
         </span>
         <span v-if="!price">FREE</span>
       </p>

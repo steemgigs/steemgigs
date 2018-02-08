@@ -336,12 +336,12 @@ export default {
         generated: true
       }
       sc2.setAccessToken(this.$store.state.accessToken)
-      let textifiedPics = '\n## Portfolio\n----\n'
+      let textifiedPics = '\n## Portfolio\n<hr />\n'
       this.newGigData.portfolio.forEach(url => {
         textifiedPics += '![Potfolio](' + url + ')\n\n'
       })
       let body = this.previewData + textifiedPics + `
-#### this post was made on #STEEMGIGS
+<h5>this post was made on #STEEMGIGS</h5>
 "where everyone has something to offer"
       `
       let permlink = this.slugify(this.newGigData.title)
@@ -377,18 +377,19 @@ export default {
       }
     },
     previewData () {
-      return `## Description
-----
+      return `
+<h2 class="headline">Description</h2>
+<hr />
 ${this.newGigData.description}
-## Pricing
-----
+<h2 class="headline">Pricing</h2>
+<hr />
 ${this.newGigData.pricing}
 
-#### Price: Starting at ${this.newGigData.price} ${this.newGigData.currency}
-#### Delivery: ${this.newGigData.days} day(s) ${this.newGigData.hours} hour(s)
-----
-## Requirements
-----
+<h5>Price: Starting at ${this.newGigData.price} ${this.newGigData.currency}</h5>
+<h5>Delivery: ${this.newGigData.days} day(s) ${this.newGigData.hours} hour(s)</h5>
+<hr />
+<h2 class="headline">Requirements</h2>
+<hr />
 ${this.newGigData.requirements}
       `
     }

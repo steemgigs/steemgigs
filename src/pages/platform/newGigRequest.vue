@@ -247,13 +247,13 @@ export default {
         generated: true
       }
       sc2.setAccessToken(this.$store.state.accessToken)
-      // let textifiedPics = '\n## Portfolio\n----\n'
+      // let textifiedPics = '\n## Portfolio\n<hr />\n'
       // this.newGigRequest.portfolio.forEach(url => {
       //   textifiedPics += '![Potfolio](' + url + ')\n\n'
       // })
       // let body = this.previewData + textifiedPics + `
       let body = this.previewData + `
-#### this post was made on #STEEMGIGS
+<h5>this post was made on #STEEMGIGS</h5>
 "where everyone has something to offer"
       `
       let permlink = this.slugify(this.newGigRequest.title)
@@ -291,13 +291,13 @@ export default {
       return ['steemgigs', this.slugify(this.newGigRequest.category), this.slugify(this.newGigRequest.subcategory)]
     },
     previewData () {
-      return `##### Description
-----
+      return `<h2 class="headline">Description</h2>
+<hr />
 ${this.newGigRequest.description}
 
-##### Maximum Budget: ${this.newGigRequest.price} ${this.newGigRequest.currency}
+<h5>Maximum Budget: ${this.newGigRequest.price} ${this.newGigRequest.currency}</h5>
 
-##### Delivery: ${this.newGigRequest.days} day(s) ${this.newGigRequest.hours} hour(s)
+<h5>Delivery: ${this.newGigRequest.days} day(s) ${this.newGigRequest.hours} hour(s)</h5>
       `
     }
   },
