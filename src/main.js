@@ -48,9 +48,14 @@ Vue.prototype.categories = [
     subcategories: ['virtual assistant', 'market research', 'business plans', 'branding services', 'legal consulting', 'financial consulting', 'business tips', 'presentations', 'career advice', 'flyer distribution', 'other']
   },
   {
-    name: '#Untalented',
+    name: 'Fun & Lifestyle',
     description: 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
     subcategories: ['online lessons', 'arts and crafts', 'relationship advice', 'health, nutrition and fitness', 'astrology & readings', 'spiritual & healing', 'family & Genealogy', 'gaming', 'greeting cards & videos', 'your message on ...', 'viral videos', 'pranks & stunts', 'celebrity impersonators', 'collectibles', 'global culture', 'other']
+  },
+  {
+    name: 'Untalented-Steemgigs',
+    description: 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+    subcategories: ['Photoshop editing', 'Cartoons & Carricatures', 'Flyers And Posters', 'Presentation Design', 'T-shirts', 'Creative Writing', 'Proof Reading And Editing', 'Contests', 'Transcription', 'Translation', 'Intro & Animated Logos', 'Lyric & Music Video', 'Promotional Videos', 'Short Video ADs', 'Singer Song-writers', 'Voice over', 'Jingles And Drops', 'Wordpress', 'Convert Files', 'Virtual Assistant', 'Flyer Distribution', 'Arts And Crafts', 'Relationship Advice', 'Your Message on...', 'Pranks & Stunts', 'Celebrity Impersonators', 'Steem Graphics', 'Steem Tutors']
   },
   {
     name: 'Steem & Steemit',
