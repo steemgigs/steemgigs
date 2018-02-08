@@ -140,6 +140,10 @@ export default {
   .container {
     min-width: 90%;
   }
+  h2.headline {
+    color: rgb(160, 158, 158);
+    font-size: 2.5;
+  }
   .profileOwner {
     position: relative;
     .profilePic {
