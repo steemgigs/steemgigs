@@ -7,7 +7,7 @@
       <router-link :to="taskLink">
         <img v-if="portfolio.length < 1" :src="taskPicture || '/static/img/banner.jpeg'" :alt="task">
         <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
-          <slide v-for="(image, index) in portfolio" :key="index">
+          <slide v-for="(image, i) in portfolio" :key="i">
             <img :src="image" class="responsive-img" :alt="task">
           </slide>
         </carousel>
@@ -110,15 +110,16 @@ export default {
       if (this.gigData.pending_payout_value) {
         return '$' + this.gigData.pending_payout_value.amount
       } else {
-        return '$' + (parseFloat(this.gigData.total_payout_value) + parseFloat(this.gigData.curator_payout_value))
+        return '$' + (this.gigData.total_payout_value.amount + this.gigData.curator_payout_value.amount)
       }
     },
     paymentInfo () {
       if ((new Date(this.gigData.cashout_time).getTime()) > (new Date().getTime())) {
         return `Will payout in ${Math.floor((new Date(this.gigData.cashout_time) - (new Date())) / (1000 * 60 * 60 * 24))} days`
       } else {
-        return `Author Payout: ${'$' + this.gigData.total_payout_value}
-        Curator Payout: ${'$' + this.gigData.curator_payout_value}`
+        // return `Author Payout: ${'$' + this.gigData.total_payout_value.amount}
+        // Curator Payout: ${'$' + this.gigData.curator_payout_value.amount}`
+        return ''
       }
     }
   },

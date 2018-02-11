@@ -23,7 +23,7 @@
       <div class="card center center-align request">
         <div class="card-content">
           <p>Earn some rewards by telling us about your successful STEEMGIGS EXPERIENCE (both SteemGiggers &amp; Clients)</p>
-          <router-link to="/create_testimonial" tag="button" class="btn btn-block indigo">Post a testimonial</router-link>  
+          <router-link to="/create_testimonial" tag="button" class="btn btn-block indigo">Post a testimonial</router-link>
         </div>
       </div>
       <div class="card center center-align request">

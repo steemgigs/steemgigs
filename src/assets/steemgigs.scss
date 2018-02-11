@@ -69,7 +69,7 @@ img {
   }
 }
 
-.rotating-card{
+.rotating-card {
   position: relative;
   min-height: 120px;
   .face{
@@ -121,6 +121,8 @@ img {
   padding: 5px 0.5em;
   font-size: 0.9em;
   border-radius: 4px;
+  max-width: 12rem;
+  text-align: center;
 }
 .vue-input-tag-wrapper {
   display: inline-block;
