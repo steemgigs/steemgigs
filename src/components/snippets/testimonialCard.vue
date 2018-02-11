@@ -92,17 +92,18 @@ export default {
 
 <style lang="scss" scoped>
   .testimonial-card {
-    box-shadow: 0 3px 20px rgba($color: #000000, $alpha: .25);
+    box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     .card-content {
       min-height: 360px;
     }
     img.userImage {
-      height: 80px;
-      width: 80px;
+      height: 90px;
+      width: 90px;
       border-radius: 50%;
       margin: auto;
       cursor: pointer;
+      box-shadow: 1px 1px 7px rgba(0,0,0, .3);
     }
     h3 {
       font-size: 1.4rem;

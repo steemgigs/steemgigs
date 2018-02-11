@@ -20,32 +20,16 @@
           </ul>
         </div>
       </div>
-      <div class="rotating-card" :class="editMode ? 'flipped' : ''">
-        <div class="face">
-          <div class="card center center-align request">
-            <div class="card-content">
-              <p>Earn some rewards by telling us about your successful STEEMGIGS EXPERIENCE (both SteemGiggers &amp; Clients)</p>
-              <button class="btn btn-block indigo" @click="editMode = true">Post a Testimonial</button>
-            </div>
-          </div>
+      <div class="card center center-align request">
+        <div class="card-content">
+          <p>Earn some rewards by telling us about your successful STEEMGIGS EXPERIENCE (both SteemGiggers &amp; Clients)</p>
+          <router-link to="/create_testimonial" tag="button" class="btn btn-block indigo">Post a testimonial</router-link>  
         </div>
-        <div class="back card-panel indigo lighten-1 white-text">
-            <i class="icon ion-close" @click="editMode = false"></i>
-            <div class="input-field">
-              <textarea id="textarea1" v-model="testimonialSubject" class="materialize-textarea"></textarea>
-              <label for="textarea1">Subject</label>
-            </div>
-            <div class="input-field">
-              <textarea id="testimonial" v-model="testimonial" class="materialize-textarea"></textarea>
-              <label for="testimonial">Write your testimonial</label>
-            </div>
-              <div class="jjinput-field">
-                <input-tag limit="2" class="editable" placeholder="add tags" @update:tags="getTags" :tags="userTags" />
-              </div>
-            <button class="btn-floating grey  right lighten-3" @click="submitTestimonial">
-              <i class="ion-checkmark-round indigo-text" v-if="!isPosting"></i>
-              <i class="fa fa-spinner fa-pulse indigo-text" v-if="isPosting"></i>
-            </button>
+      </div>
+      <div class="card center center-align request">
+        <div class="card-content">
+          <p>New to steemgigs and not sure what to do?</p>
+          <router-link to="/untalented_editor" tag="button" class="btn btn-block indigo">Use the Untalented Editor</router-link>
         </div>
       </div>
     </div>
