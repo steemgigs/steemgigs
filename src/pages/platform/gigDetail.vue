@@ -21,6 +21,8 @@
             </div>
             <div class="card-content">
               <div v-html="currentGig.body"></div>
+              <hr class="my-4">
+              <vue-editor editorToolbar="[]" v-model="comment" placeholder="Type your comment here" :upload="uploadConfig"></vue-editor>
             </div>
           </div>
         </div>
@@ -71,6 +73,7 @@ import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
 import { Carousel, Slide } from 'vue-carousel'
+import { VueEditor } from 'vue2-editor'
 import moment from 'moment'
 // import steem from 'steem'
 export default {
@@ -79,7 +82,8 @@ export default {
     CatNav,
     GigCard,
     Carousel,
-    Slide
+    Slide,
+    VueEditor
   },
   data () {
     return {
@@ -92,7 +96,8 @@ export default {
         }
       },
       vacation_mode: false,
-      currentView: 'active_gigs'
+      currentView: 'active_gigs',
+      comment: ''
     }
   },
   mounted () {
@@ -137,6 +142,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .ql-editor {
+      min-height: 80px;
+      font-size: 16px;
+  }
   .container {
     min-width: 90%;
   }

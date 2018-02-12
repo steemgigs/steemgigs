@@ -159,7 +159,7 @@ export default {
         timestamp: new Date().getTime(),
         authorPic: this.$store.state.profile.profileImage,
         type: 'steemgigs_untalented',
-        deleted: false,
+        deleted: false
         // images: this.untalented.portfolio,
       }
       sc2.setAccessToken(this.$store.state.accessToken)

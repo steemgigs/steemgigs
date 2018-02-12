@@ -172,7 +172,7 @@ export default {
       //   textifiedPics += '![Potfolio](' + url + ')\n\n'
       // })
       // let body = this.previewData + textifiedPics + `
-      let body = this.previewData + `
+      let body = this.newTestimonial.description + `
 <h5>this post was made on #STEEMGIGS</h5>
 "where everyone has something to offer"
       `

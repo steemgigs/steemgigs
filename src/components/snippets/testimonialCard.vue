@@ -1,29 +1,25 @@
 <template>
-  <div class="testimonial-card center card">
-    <div class="card-content">
+  <div class="testimonial-card card">
+    <div class="card-content center">
       <img :src="userImage" class="userImage" alt="">
       <div class="content">
         <h3>{{subject}}</h3>
         <router-link class="username" :to="'/@' + username" v-text="username"></router-link>
-        <p>{{body}}</p>
+        <div v-html="body" />
       </div>
     </div>
-    <div class="card-action left-align">
-      <a v-if="processing" v-tooltip="{content: 'please wait'}">
-        <i class="fa fa-spinner fa-pulse"></i>
-      </a>
-      <a @click="upvote" v-tooltip="{ content: 'upvote', classes: ['tooltip'] }"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
-      <a v-tooltip="{ content: 'comment', classes: ['tooltip'] }"><i class="icon ion-chatbox-working" aria-hidden="true"></i> {{ comments }}</a>
-      <a v-tooltip="{ content: 'resteem', classes: ['tooltip'] }"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-      <span class="right" v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{ payout }}</span>
-    </div>
+    <gig-action :gigData="testimonial" />
   </div>
 </template>
 
 <script>
 import sc2 from '@/services/sc2'
+import GigAction from '@/components/snippets/gigAction'
 
 export default {
+  components: {
+    GigAction
+  },
   props: {
     testimonial: Object
   },
@@ -38,11 +34,11 @@ export default {
     },
     subject () {
       if (this.testimonial.title) {
-        return this.testimonial.title.split('#STEEMGIGS ')[1]
+        return this.testimonial.title.split('#STEEMGIGS: ')[1]
       } else return ''
     },
     body () {
-      return this.testimonial.body
+      return this.testimonial.body.split('<h5>this post was made on #STEEMGIGS</h5>')[0]
     },
     username () {
       return '@' + this.testimonial.author
@@ -103,7 +99,7 @@ export default {
       border-radius: 50%;
       margin: auto;
       cursor: pointer;
-      box-shadow: 1px 1px 7px rgba(0,0,0, .3);
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
     }
     h3 {
       font-size: 1.4rem;

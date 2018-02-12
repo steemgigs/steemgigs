@@ -23,7 +23,7 @@
       <div class="card center center-align request">
         <div class="card-content">
           <p>Earn some rewards by telling us about your successful STEEMGIGS EXPERIENCE (both SteemGiggers &amp; Clients)</p>
-          <router-link to="/create_testimonial" tag="button" class="btn btn-block indigo">Post a testimonial</router-link>  
+          <router-link to="/create_testimonial" tag="button" class="btn btn-block indigo">Post a testimonial</router-link>
         </div>
       </div>
       <div class="card center center-align request">
@@ -76,6 +76,9 @@
         <div class="col s12 m6 l3" v-for="(gig, index) in steemgigs" :key="index">
           <gig-card :gigData="gig" />
         </div>
+        <div class="col s12 center-align py-3">
+          <button @click="moreSteemgigs" v-if="steemgigs.length > 0" class="btn indigo">View More <i v-if="fetchingSteemgigs" class="fa fa-spinner fa-pulse"></i></button>
+        </div>
       </section>
       <section id="untalented" class="row">
         <div class="col s12">
@@ -127,6 +130,11 @@
         <div class="col s12 m6 l3" v-for="(gig, index) in featured" :key="index">
           <!-- <gig-card :gigData="gig" /> -->
         </div>
+        <div class="col s12 center-align py-3">
+          <button @click="moreFeatured" v-if="featured.length > 0" class="btn indigo">View More
+            <i v-if="fetchingFeatured" class="fa fa-spinner fa-pulse"></i>
+          </button>
+        </div>
       </section>
       <section id="gigrequests" class="row">
         <div class="col s12">
@@ -154,6 +162,9 @@
         <div class="col s12 m6 l3" v-for="(gig, index) in gigrequests" :key="index">
           <gig-card type="gigRequest" :gigData="gig" />
         </div>
+        <!-- <div class="col s12 center-align py-3">
+          <button v-if="gigrequests.length > 0" class="btn indigo">View More</button>
+        </div>   -->
       </section>
       <section id="testimonials" class="row">
         <div class="col s12">
@@ -176,6 +187,11 @@
         </div>
         <div class="col s12 m6 l3" v-for="(testimonial, index) in testimonials" :key="index">
           <testimonial-card :testimonial="testimonial" />
+        </div>
+        <div class="col s12 center-align py-3">
+          <button @click="moreTestimonials" v-if="testimonials.length > 0" class="btn indigo">View More
+            <i v-if="fetchingTestimonials" class="fa fa-spinner fa-pulse"></i>
+          </button>
         </div>
       </section>
       <!-- <section id="testimonials" class="row">
@@ -217,6 +233,7 @@ import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
 import TestimonialCard from '@/components/snippets/testimonialCard'
 import sc2 from '@/services/sc2'
+import Api from '@/services/api'
 import InputTag from 'vue-input-tag'
 
 export default {
@@ -242,7 +259,10 @@ export default {
       postsFetched: false,
       gigrequestsFetched: false,
       testimonialsFetched: false,
-      untalentedFetched: false
+      untalentedFetched: false,
+      fetchingSteemgigs: false,
+      fetchingFeatured: false,
+      fetchingTestimonials: false
     }
   },
   methods: {
@@ -277,6 +297,27 @@ export default {
           that.successText = 'Successfully pushed to steem!'
         }
       })
+    },
+    moreSteemgigs () {
+      this.fetchingSteemgigs = true
+      Api.morePosts().then((result) => {
+        this.steemgigs = result.data
+        this.fetchingSteemgigs = false
+      }).catch()
+    },
+    moreFeatured () {
+      this.fetchingFeatured = true
+      Api.moreFeatured().then((result) => {
+        this.featured = result.data
+        this.featuredFetched = false
+      }).catch()
+    },
+    moreTestimonials () {
+      this.fetchingTestimonials = true
+      Api.moreTestimonials().then((result) => {
+        this.testimonials = result.data
+        this.fetchingTestimonials = false
+      }).catch()
     }
   },
   computed: {

@@ -26,25 +26,19 @@
         <span v-if="!price">FREE</span>
       </p>
     </div>
-    <div class="card-action">
-      <a v-if="processing" v-tooltip="{content: 'please wait'}">
-        <i class="fa fa-spinner fa-pulse"></i>
-      </a>
-      <a @click="upvote" v-tooltip="{ content: 'upvote', classes: ['tooltip'] }"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
-      <a v-tooltip="{ content: 'comment', classes: ['tooltip'] }"><i class="icon ion-chatbox-working" aria-hidden="true"></i> {{ comments }}</a>
-      <a v-tooltip="{ content: 'resteem', classes: ['tooltip'] }"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-      <span class="right" v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{ payout }}</span>
-    </div>
+    <gig-action :gigData="gigData" />
   </div>
 </template>
 
 <script>
 import { Carousel, Slide } from 'vue-carousel'
+import GigAction from '@/components/snippets/gigAction'
 import sc2 from '@/services/sc2'
 export default {
   components: {
     Carousel,
-    Slide
+    Slide,
+    GigAction
   },
   data () {
     return {
@@ -110,7 +104,7 @@ export default {
       if (this.gigData.pending_payout_value) {
         return '$' + this.gigData.pending_payout_value.amount
       } else {
-        return '$' + (parseFloat(this.gigData.total_payout_value) + parseFloat(this.gigData.curator_payout_value))
+        return '$' + (parseFloat(this.gigData.total_payout_value.amount) + parseFloat(this.gigData.curator_payout_value.amount))
       }
     },
     paymentInfo () {

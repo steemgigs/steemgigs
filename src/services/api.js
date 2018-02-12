@@ -28,5 +28,14 @@ export default {
   },
   fetchUntalented () {
     return axios.get('/untalented')
+  },
+  morePosts () {
+    return axios.get('/moreposts')
+  },
+  moreFeatured () {
+    return axios.get('/morefeatured')
+  },
+  moreTestimonials () {
+    return axios.get('/moretestimonials')
   }
 }
