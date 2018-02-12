@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visible" class="card-panel dismissible-notice">
+  <div v-if="visible" class="card-panel dismissible-notice indigo white-text">
     <i class="ion-close" @click="visible = false"></i>
     <slot />
   </div>
@@ -21,7 +21,7 @@ export default {
     padding-right: 60px;
     line-height: 1.6;
     color: #848484;
-    max-width: 900px;
+    // max-width: 900px;
     margin: 20px 10px;
     font-size: 1rem;
     i.ion-close {
