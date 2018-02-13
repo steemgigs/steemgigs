@@ -22,7 +22,8 @@
             <div class="card-content">
               <div v-html="currentGig.body"></div>
               <hr class="my-4">
-              <vue-editor editorToolbar="[]" v-model="comment" placeholder="Type your comment here" :upload="uploadConfig"></vue-editor>
+              <v-comment />
+              <!-- <comment-box /> -->
             </div>
           </div>
         </div>
@@ -72,8 +73,9 @@ import Api from '@/services/api'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
+import CommentBox from '@/components/snippets/commentBox'
+import VComment from '@/components/snippets/comment'
 import { Carousel, Slide } from 'vue-carousel'
-import { VueEditor } from 'vue2-editor'
 import moment from 'moment'
 // import steem from 'steem'
 export default {
@@ -83,7 +85,8 @@ export default {
     GigCard,
     Carousel,
     Slide,
-    VueEditor
+    CommentBox,
+    VComment
   },
   data () {
     return {
@@ -142,10 +145,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .ql-editor {
-      min-height: 80px;
-      font-size: 16px;
-  }
   .container {
     min-width: 90%;
   }
