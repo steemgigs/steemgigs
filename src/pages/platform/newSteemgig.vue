@@ -297,6 +297,7 @@ export default {
       this.isPosting = true
       let jsonMetadata = {
         app: 'steemgig',
+        users: ['steemgigs', this.$store.state.username],
         tags: [...this.userTags, ...this.defaultTags],
         format: 'Markdown',
         timestamp: new Date().getTime(),

@@ -1,6 +1,9 @@
 <template>
   <div class="card-action">
-    <a :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="upvoteActive = !upvoteActive" v-tooltip="{ content: 'upvote', classes: ['tooltip'] }"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
+    <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
+      <i class="fa fa-spinner fa-pulse"></i>
+    </a>
+    <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
     <a v-tooltip="{ content: 'comment', classes: ['tooltip'] }"><i class="icon ion-chatbox-working" aria-hidden="true"></i> {{ comments }}</a>
     <a v-tooltip="{ content: 'resteem', classes: ['tooltip'] }"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
     <span class="right" v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{ payout }}</span>
@@ -9,10 +12,10 @@
        <slider-range :min="1" v-model="upvoteRange" />
       </div>
       <div class="col offset-s1 s2">
-        <a v-if="processing" v-tooltip="{content: 'please wait'}">
+        <a v-if="voting" v-tooltip="{content: 'please wait'}">
           <i class="fa fa-spinner fa-pulse"></i>
         </a>
-        <a @click="vote" v-tooltip="{ content: 'upvote', classes: ['tooltip'] }" class="upvote-btn" :class="upvoted ? 'upvoted' : ''" v-if="!processing">
+        <a @click="upvote" v-tooltip="voteBtnTitle" class="upvote-btn" :class="upvoted ? 'upvoted' : ''" v-if="!voting">
           <i class="ion-chevron-up"></i>
         </a>
       </div>
@@ -32,9 +35,11 @@ export default {
       taskDetails: {
         type: String
       },
-      processing: false,
+      voting: false,
+      unvoting: false,
       taskPicture: '',
-      upvoteActive: false
+      upvoteActive: false,
+      upvoteRange: 100
     }
   },
   props: {
@@ -86,11 +91,11 @@ export default {
     upvoted () {
       return this.myVote.length > 0
     },
-    upvoteRange () {
+    voteBtnTitle () {
       if (this.upvoted) {
-        return this.myVote[0].weight / 100
+        return { content: 'unvote', classes: ['tooltip'] }
       } else {
-        return 100
+        return { content: 'upvote', classes: ['tooltip'] }
       }
     }
   },
@@ -99,16 +104,17 @@ export default {
       if (this.upvoted) {
         this.downvote()
       } else {
-        this.upvote()
+        this.upvoteActive = !this.upvoteActive
       }
     },
     upvote () {
-      this.processing = true
+      this.voting = true
       sc2.setAccessToken(this.$store.state.accessToken)
       sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, parseInt(this.upvoteRange) * 100, (err, res) => {
-        this.processing = false
+        this.voting = false
         console.log(err, res)
         if (!err) {
+          this.upvoteActive = false
           this.gigData.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
           console.log(res)
         } else {
@@ -117,10 +123,10 @@ export default {
       })
     },
     downvote () {
-      this.processing = true
+      this.unvoting = true
       sc2.setAccessToken(this.$store.state.accessToken)
       sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, 0, (err, res) => {
-        this.processing = false
+        this.unvoting = false
         console.log(err, res)
         if (!err) {
           this.gigData.active_votes = this.gigData.active_votes.filter((x) => x.voter !== this.$store.state.username)
@@ -134,7 +140,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $blue: #4757b2;
   a.upvote-btn {
     display: inline-block;

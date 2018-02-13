@@ -39,5 +39,11 @@ export default {
   },
   moreTestimonials () {
     return axios.get('/moretestimonials')
+  },
+  fetchComments (credentials) {
+    return axios.post('/comments', credentials)
+  },
+  fetchCommentImg (username) {
+    return axios.post('/fetchUserPic', username)
   }
 }

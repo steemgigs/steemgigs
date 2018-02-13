@@ -8,6 +8,7 @@
           <li><a :href="loginURL">Log in</a></li>
         </ul>
         <ul class="right" v-if="$store.state.accessToken">
+          <li><a href="#"><i class="ion-ios-search x2"></i></a></li>
           <li>
             <router-link to="/message"><i class="icon ion-android-chat x2"></i></router-link>
           </li>

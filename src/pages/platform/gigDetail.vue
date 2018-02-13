@@ -3,7 +3,7 @@
     <cat-nav />
     <div class="container">
       <div class="col s12 m8 l9 row">
-        <ul class="tabs">
+        <ul class="tabs hide">
           <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">DETAILS</a></li>
           <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'inactive_gigs'}" @click="changeView('inactive_gigs')">REVIEWS</a></li>
         </ul>
@@ -22,8 +22,16 @@
             <div class="card-content">
               <div v-html="currentGig.body"></div>
               <hr class="my-4">
-              <v-comment />
-              <!-- <comment-box /> -->
+              <div v-if="commentMode">
+                <vue-editor :editorToolbar="[]" v-model="myComment" placeholder="Type comment here, you can drag and drop images" ></vue-editor>
+                <div class="row right-align">
+                  <div class="col s12 pt-2">
+                    <button @click.prevent="commentMode = false" class="btn indigo lighten-2 waves-effect">Cancel</button>
+                    <button class="btn indigo waves-effect" @click="postComment"><i class="fa fa-spinner fa-pulse" v-if="isPosting"></i> Post</button>
+                  </div>
+                </div>
+              </div>
+              <v-comment v-for="(comment, index) in comments" :commentFor="comment" :key="index" />
             </div>
           </div>
         </div>
@@ -73,8 +81,9 @@ import Api from '@/services/api'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
-import CommentBox from '@/components/snippets/commentBox'
+import { VueEditor } from 'vue2-editor'
 import VComment from '@/components/snippets/comment'
+import sc2 from '@/services/sc2'
 import { Carousel, Slide } from 'vue-carousel'
 import moment from 'moment'
 // import steem from 'steem'
@@ -85,7 +94,7 @@ export default {
     GigCard,
     Carousel,
     Slide,
-    CommentBox,
+    VueEditor,
     VComment
   },
   data () {
@@ -100,7 +109,15 @@ export default {
       },
       vacation_mode: false,
       currentView: 'active_gigs',
-      comment: ''
+      myComment: '',
+      comments: [],
+      commentMode: true,
+      voting: false,
+      unvoting: false,
+      taskPicture: '',
+      upvoteActive: false,
+      upvoteRange: 100,
+      isPosting: false
     }
   },
   mounted () {
@@ -108,6 +125,7 @@ export default {
     this.fetchUserInfo(username)
     Api.fetchSinglePost(username, task).then(response => {
       this.currentGig = response.data
+      this.fetchComments()
     }).catch(err => {
       console.log(err)
     })
@@ -139,6 +157,28 @@ export default {
     },
     changeView (view) {
       this.currentView = view
+    },
+    async fetchComments () {
+      console.log('Fetching comments')
+      try {
+        let response = await Api.fetchComments({parent_author: this.currentGig.author, parent_permlink: this.currentGig.permlink})
+        this.comments = response.data
+        console.log(this.comments)
+      } catch (err) {
+        console.log('error retrieving comments: \n error:', this.stringify(err))
+      }
+    },
+    postComment () {
+      let now = new Date().toISOString().replace(/-/g, '').replace(/:/g, '').replace(/\./g, '').replace(/Z/, 'z').replace(/T/, 't')
+      this.isPosting = true
+      let that = this
+      let permlink = `re-${this.currentGig.author}-${this.currentGig.permlink}-${now}`
+      console.log(permlink)
+      sc2.comment(this.currentGig.author, this.currentGig.permlink, this.$store.state.username, permlink, '', this.myComment, {generated: true}, (err, res) => {
+        console.log(err, res)
+        that.isPosting = false
+        if (!err) this.fetchComments()
+      })
     }
   }
 }
