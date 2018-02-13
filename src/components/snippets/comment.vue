@@ -1,8 +1,8 @@
 <template>
   <div class="comment py-3">
-    <img src="https://avatars2.githubusercontent.com/u/7319749?s=400&v=4" class="author-image">
+    <img :src="imgUrl" class="author-image">
     <p>
-      <span class="username">{{commentFor.author}}</span><span>&nbsp;(50)</span><span class="how-long">&nbsp;&nbsp; yesterday</span>
+      <span class="username">{{commentFor.author}}</span><span>&nbsp;({{rep}})</span><span class="how-long">&nbsp;&nbsp; yesterday</span>
     </p>
     <p class="post" v-html="commentFor.body"></p>
     <div class="menu mb-2">
@@ -10,7 +10,7 @@
       <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
         <i class="fa fa-spinner fa-pulse"></i>
       </a>&nbsp;
-      <span class="payout">$0.00</span>&nbsp; | &nbsp; <a @click="commentMode = !commentMode" class="reply">Reply</a>
+      <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{ payout }}</span>&nbsp; | &nbsp; <a @click="commentMode = !commentMode" class="reply">Reply</a>
       <div class="vote-slider py-3" v-if="upvoteActive">
         <div class="col s9">
           <slider-range :min="1" v-model="upvoteRange" />
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div v-if="commentMode">
-      <vue-editor v-model="myComment" placeholder="Type your comment here, you can drag and drop images" ></vue-editor>
+      <textarea rows="20" v-model="myComment" placeholder="Type your comment here, you can drag and drop images" ></textarea>
       <div class="row right-align">
         <div class="col s12 pt-2">
           <button @click.prevent="commentMode = false" class="btn indigo lighten-2 waves-effect">Cancel</button>
@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <v-comment v-for="(comment, index) in comments" :key="index" :commentFor="comment"/>
+    <v-comment v-for="(comment, index) in comments" :key="index" :thisComment="comment"/>
   </div>
 </template>
 <script>
@@ -51,6 +51,7 @@ export default {
   },
   data () {
     return {
+      commentFor: this.thisComment,
       commentMode: false,
       myComment: '',
       comments: [],
@@ -59,11 +60,13 @@ export default {
       taskPicture: '',
       upvoteActive: false,
       upvoteRange: 100,
-      isPosting: false
+      isPosting: false,
+      imgUrl: '',
+      rep: ''
     }
   },
   props: {
-    commentFor: {
+    thisComment: {
       type: Object,
       required: true
     }
@@ -73,17 +76,27 @@ export default {
       try {
         let response = await Api.fetchComments({parent_author: this.commentFor.author, parent_permlink: this.commentFor.permlink})
         this.comments = response.data
-        console.log(this.comments)
+        console.log('comments fetched')
       } catch (err) {
         console.log('error retrieving comments: \n error:', this.stringify(err))
       }
     },
-    async fetchCommentImg () {
+    async fetchCommentInfo () {
       try {
-        let result = await Api.fetchCommentImg(this.commentFor.author).data
-        console.log(result)
+        let result = await Api.fetchCommentInfo(this.commentFor.author)
+        this.imgUrl = result.data.profileImage
+        this.rep = result.data.rep
       } catch (err) {
         return 'error retrieving comments: \n error:'
+      }
+    },
+    async fetchThisComment () {
+      try {
+        let response = await Api.fetchSingleComment({author: this.commentFor.author, permlink: this.commentFor.permlink})
+        this.commentFor = response.data
+        console.log('post fetched', response.data)
+      } catch (err) {
+        console.log(err)
       }
     },
     postComment () {
@@ -91,11 +104,12 @@ export default {
       this.isPosting = true
       let that = this
       let permlink = `re-${this.commentFor.author}-${this.commentFor.permlink}-${now}`
-      console.log(this.myComment)
       sc2.comment(this.commentFor.author, this.commentFor.permlink, this.$store.state.username, permlink, '', this.myComment, {generated: true}, (err, res) => {
         console.log(err, res)
         that.isPosting = false
-        if (!err) this.fetchComments()
+        that.commentMode = false
+        that.myComment = ''
+        that.fetchComments()
       })
     },
     vote () {
@@ -107,12 +121,14 @@ export default {
     },
     upvote () {
       this.voting = true
+      console.log('upvoting')
       sc2.setAccessToken(this.$store.state.accessToken)
       sc2.vote(this.$store.state.username, this.commentFor.author, this.commentFor.permlink, parseInt(this.upvoteRange) * 100, (err, res) => {
         this.voting = false
-        console.log(err, res)
         if (!err) {
-          this.fetchComments()
+          // this.fetchThisComment()
+          this.upvoteActive = false
+          this.commentFor.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
           console.log(res)
         } else {
           console.log('there was an error voting this\n', 'err:', err)
@@ -126,7 +142,7 @@ export default {
         this.unvoting = false
         console.log(err, res)
         if (!err) {
-          this.fetchComments()
+          this.commentFor.active_votes = this.commentFor.active_votes.filter((x) => x.voter !== this.$store.state.username)
           console.log(res)
         } else {
           console.log('there was an error unvoting this\n', 'err:', err)
@@ -171,7 +187,15 @@ export default {
       }
     },
     upvoted () {
-      return this.myVote.length > 0
+      if (this.myVote.length > 0) {
+        let status = false
+        this.myVote.forEach(element => {
+          status = status || element.weight > 0
+        })
+        return status
+      } else {
+        return false
+      }
     },
     voteBtnTitle () {
       if (this.upvoted) {
@@ -179,16 +203,13 @@ export default {
       } else {
         return { content: 'upvote', classes: ['tooltip'] }
       }
-    },
-    imgUrl () {
-      // return this.fetchCommentImg()
-      return ''
     }
   },
   watch: {
   },
   mounted () {
     this.fetchComments()
+    this.fetchCommentInfo()
   }
 }
 </script>
@@ -196,7 +217,7 @@ export default {
   $blue: #4757b2;
 .comment {
   position: relative;
-  padding-left: 80px;
+  padding-left: 65px;
   margin: 10px auto;
   a,.link,a *{
     cursor: pointer;
@@ -216,15 +237,15 @@ export default {
     color: #939edc
   }
   img.author-image {
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
     background: indigo;
     position: absolute;
     left: 0;
-    top: 25px;
+    top: 15px;
   }
   .vote-slider {
     max-width: 300px;

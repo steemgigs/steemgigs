@@ -22,6 +22,28 @@
             <div class="card-content">
               <div v-html="currentGig.body"></div>
               <hr class="my-4">
+              <div class="menu row mb-2">
+                <div class="col m3 offset-m9">
+                  <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
+                  <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
+                    <i class="fa fa-spinner fa-pulse"></i>
+                  </a>&nbsp;
+                  <span v-tooltip="{ content: 'paymentInfo', classes: ['tooltip'] }">44</span>&nbsp; | &nbsp; <a @click="commentMode = !commentMode" class="link">Reply</a>
+                  <div class="vote-slider py-3" v-if="upvoteActive">
+                    <div class="col s9">
+                      <slider-range :min="1" v-model="upvoteRange" />
+                    </div>
+                    <div class="col offset-s1 s2">
+                      <a v-if="voting" v-tooltip="{content: 'please wait'}">
+                        <i class="fa fa-spinner fa-pulse"></i>
+                      </a>
+                      <a @click="upvote" v-tooltip="voteBtnTitle" class="upvote-btn" :class="upvoted ? 'upvoted' : ''" v-if="!voting">
+                        <i class="ion-chevron-up"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div v-if="commentMode">
                 <vue-editor :editorToolbar="[]" v-model="myComment" placeholder="Type comment here, you can drag and drop images" ></vue-editor>
                 <div class="row right-align">
@@ -31,7 +53,7 @@
                   </div>
                 </div>
               </div>
-              <v-comment v-for="(comment, index) in comments" :commentFor="comment" :key="index" />
+              <v-comment v-for="(comment, index) in comments" :thisComment="comment" :key="index" />
             </div>
           </div>
         </div>
@@ -86,6 +108,7 @@ import VComment from '@/components/snippets/comment'
 import sc2 from '@/services/sc2'
 import { Carousel, Slide } from 'vue-carousel'
 import moment from 'moment'
+import SliderRange from 'vue-slider-component'
 // import steem from 'steem'
 export default {
   components: {
@@ -95,7 +118,8 @@ export default {
     Carousel,
     Slide,
     VueEditor,
-    VComment
+    VComment,
+    SliderRange
   },
   data () {
     return {
@@ -111,7 +135,7 @@ export default {
       currentView: 'active_gigs',
       myComment: '',
       comments: [],
-      commentMode: true,
+      commentMode: false,
       voting: false,
       unvoting: false,
       taskPicture: '',
@@ -142,6 +166,59 @@ export default {
     },
     ago () {
       return moment(this.profileData.last_post).fromNow()
+    },
+    sellerUsername () {
+      return this.currentGig.author
+    },
+    genuineVoters () {
+      if (this.currentGig.active_votes) {
+        return this.currentGig.active_votes.filter((x) => x.weight !== 0)
+      } else {
+        return []
+      }
+    },
+    upvotes () {
+      return this.genuineVoters.length
+    },
+    // payout () {
+    //   if (this.currentGig.pending_payout_value.amount) {
+    //     return '$' + this.currentGig.pending_payout_value.amount
+    //   } else {
+    //     return '$' + (parseFloat(this.currentGig.total_payout_value.amount) + parseFloat(this.currentGig.curator_payout_value.amount))
+    //   }
+    // },
+    // paymentInfo () {
+    //   if ((new Date(this.currentGig.cashout_time).getTime()) > (new Date().getTime())) {
+    //     return `Will payout in ${Math.floor((new Date(this.currentGig.cashout_time) - (new Date())) / (1000 * 60 * 60 * 24))} days`
+    //   } else {
+    //     return `Author Payout: ${'$' + this.currentGig.total_payout_value.amount}
+    //     Curator Payout: ${'$' + this.currentGig.curator_payout_value.amount}`
+    //   }
+    // },
+    myVote () {
+      if (this.currentGig.active_votes) {
+        return this.currentGig.active_votes.filter((x) => x.voter === this.$store.state.username)
+      } else {
+        return []
+      }
+    },
+    upvoted () {
+      if (this.myVote.length > 0) {
+        let status = false
+        this.myVote.forEach(element => {
+          status = status || element.weight > 0
+        })
+        return status
+      } else {
+        return false
+      }
+    },
+    voteBtnTitle () {
+      if (this.upvoted) {
+        return { content: 'unvote', classes: ['tooltip'] }
+      } else {
+        return { content: 'upvote', classes: ['tooltip'] }
+      }
     }
   },
   methods: {
@@ -179,14 +256,60 @@ export default {
         that.isPosting = false
         if (!err) this.fetchComments()
       })
+    },
+    vote () {
+      if (this.upvoted) {
+        this.downvote()
+      } else {
+        this.upvoteActive = !this.upvoteActive
+      }
+    },
+    upvote () {
+      this.voting = true
+      console.log('upvoting')
+      sc2.setAccessToken(this.$store.state.accessToken)
+      sc2.vote(this.$store.state.username, this.currentGig.author, this.currentGig.permlink, parseInt(this.upvoteRange) * 100, (err, res) => {
+        this.voting = false
+        if (!err) {
+          // this.fetchThisComment()
+          this.upvoteActive = false
+          this.currentGig.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
+          console.log(res)
+        } else {
+          console.log('there was an error voting this\n', 'err:', err)
+        }
+      })
+    },
+    downvote () {
+      this.unvoting = true
+      sc2.setAccessToken(this.$store.state.accessToken)
+      sc2.vote(this.$store.state.username, this.currentGig.author, this.currentGig.permlink, 0, (err, res) => {
+        this.unvoting = false
+        console.log(err, res)
+        if (!err) {
+          this.currentGig.active_votes = this.currentGig.active_votes.filter((x) => x.voter !== this.$store.state.username)
+          console.log(res)
+        } else {
+          console.log('there was an error unvoting this\n', 'err:', err)
+        }
+      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+  .vote-slider {
+    max-width: 300px;
+  }
   .container {
     min-width: 90%;
+  }
+  .menu {
+    height: 50px;
+    a,.link,a *{
+      cursor: pointer;
+    }
   }
   h2.headline {
     color: rgb(160, 158, 158);

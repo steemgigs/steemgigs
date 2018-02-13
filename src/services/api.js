@@ -43,7 +43,10 @@ export default {
   fetchComments (credentials) {
     return axios.post('/comments', credentials)
   },
-  fetchCommentImg (username) {
-    return axios.post('/fetchUserPic', username)
+  fetchSingleComment (credentials) {
+    return axios.post('/fetchSingleComment', credentials)
+  },
+  fetchCommentInfo (username) {
+    return axios.post('/fetchUserInfo', {username})
   }
 }
