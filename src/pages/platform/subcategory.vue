@@ -1,7 +1,7 @@
 <template>
   <page :pageClasses="['categories__view', 'row']">
     <cat-nav />
-    <div class="col s12 m8 l9 right center-align row">
+    <div class="col s12 right center-align row">
       <h1>{{ categoryDetails.name }}</h1>
       <p class="flow-text">{{ categoryDetails.description }}</p>
       <div v-if="this.loading">
@@ -14,11 +14,6 @@
         <div class="col s12 m6 l4">
           <loading-placeholder />
         </div>
-      </div>
-    </div>
-    <div class="col s12 m4 l3 center center-align subcats">
-      <div v-for="(subcategory, index) in categoryDetails.subcategories" :key="index" class="card-panel subcatCard waves-effect">
-        <p class="">{{ capitalize(subcategory) }}</p>
       </div>
     </div>
   </page>
