@@ -7,6 +7,7 @@ import store from './store'
 import mixins from '@/plugins/mixins'
 import Notifications from 'vue-notification'
 import VTooltip from 'v-tooltip'
+import VueContentPlaceholders from 'vue-content-placeholders'
 import Vuex from 'vuex'
 
 require('./assets/steemgigs.scss')
@@ -70,6 +71,7 @@ Vue.use(Vuex)
 Vue.mixin(mixins)
 Vue.use(Notifications)
 Vue.use(VTooltip)
+Vue.use(VueContentPlaceholders)
 
 /* eslint-disable no-new */
 new Vue({

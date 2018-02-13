@@ -41,20 +41,6 @@ export default {
       loading: true
     }
   },
-  computed: {
-    categoryDetails () {
-      let pageCategory = this.$route.params.category
-      let details = {}
-      this.categories.forEach((category, index) => {
-        if (this.slugify(category.name) === pageCategory) {
-          details.name = this.capitalize(category.name)
-          details.description = category.description
-          details.subcategories = category.subcategories
-        }
-      })
-      return details
-    }
-  },
   beforeMount () {
     Api.fetchCatPosts(this.$route.params.category).then(result => {
       console.log('fetchedCatPosts::', result.data)

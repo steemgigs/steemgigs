@@ -28,6 +28,8 @@
     "v-tooltip": "^2.0.0-rc.30",
     "vue": "^2.5.2",
     "vue-carousel": "^0.6.5",
+    "vue-content-loading": "^1.3.0",
+    "vue-content-placeholders": "^0.2.1",
     "vue-input-tag": "^1.0.0",
     "vue-loading-spinner": "^1.0.11",
     "vue-markdown": "^2.2.4",

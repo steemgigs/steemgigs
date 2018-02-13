@@ -12,10 +12,12 @@ export default {
   },
   imageUpload (formdata) {
     return axios.post('/imgUpload', formdata)
-    // return axios.post('/multiple_uploads', formdata)
   },
   fetchPosts () {
     return axios.get('/posts')
+  },
+  fetchCatPosts (category) {
+    return axios.post('/fetchCatPosts', {category})
   },
   fetchGigRequests () {
     return axios.get('/gigrequests')
