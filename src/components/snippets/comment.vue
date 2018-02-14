@@ -42,6 +42,7 @@ import { VueEditor } from 'vue2-editor'
 import SliderRange from 'vue-slider-component'
 import Api from '@/services/api'
 import sc2 from '@/services/sc2'
+import moment from 'moment'
 
 export default {
   name: 'v-comment',
@@ -205,7 +206,7 @@ export default {
       }
     },
     timeAgo () {
-      return this.commentFor.created
+      return moment(this.commentFor.created, 'YYYYMMDD').startOf('hour').fromNow()
     }
   },
   watch: {

@@ -4,7 +4,7 @@
       <div class="nav-wrapper container">
         <router-link to="/" class="brand-logo left">STEEMGIGS<sub>alpha</sub></router-link>
         <ul class="right notIn" v-if="!$store.state.accessToken">
-          <li><a href="https://steemit.com/pick_account" rel="noopener noreferrer" target="_blank">Sign up</a></li>
+          <li><a href="https://signup.steemit.com" rel="noopener noreferrer" target="_blank">Sign up</a></li>
           <li><a :href="loginURL">Log in</a></li>
         </ul>
         <ul class="right" v-if="$store.state.accessToken">

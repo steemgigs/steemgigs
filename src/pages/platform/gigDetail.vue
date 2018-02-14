@@ -22,14 +22,14 @@
             <div class="card-content">
               <loading-placeholder v-if="!contentLoaded" />
               <div v-html="currentGig.body"></div>
-              <hr class="my-4">
+              <hr class="my-2">
               <div class="menu row mb-2">
-                <div class="col m3 offset-m9">
+                <div class="col detail-action m3 offset-m9">
                   <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
                   <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
                     <i class="fa fa-spinner fa-pulse"></i>
                   </a>&nbsp;
-                  <span v-tooltip="{ content: 'paymentInfo', classes: ['tooltip'] }">44</span>&nbsp; | &nbsp; <a @click="commentMode = !commentMode" class="link">Reply</a>
+                  <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{payout}}</span>&nbsp; | &nbsp; <a @click="commentMode = !commentMode" class="reply">Reply</a>
                   <div class="vote-slider py-3" v-if="upvoteActive">
                     <div class="col s9">
                       <slider-range :min="1" v-model="upvoteRange" />
@@ -190,21 +190,21 @@ export default {
     upvotes () {
       return this.genuineVoters.length
     },
-    // payout () {
-    //   if (this.currentGig.pending_payout_value.amount) {
-    //     return '$' + this.currentGig.pending_payout_value.amount
-    //   } else {
-    //     return '$' + (parseFloat(this.currentGig.total_payout_value.amount) + parseFloat(this.currentGig.curator_payout_value.amount))
-    //   }
-    // },
-    // paymentInfo () {
-    //   if ((new Date(this.currentGig.cashout_time).getTime()) > (new Date().getTime())) {
-    //     return `Will payout in ${Math.floor((new Date(this.currentGig.cashout_time) - (new Date())) / (1000 * 60 * 60 * 24))} days`
-    //   } else {
-    //     return `Author Payout: ${'$' + this.currentGig.total_payout_value.amount}
-    //     Curator Payout: ${'$' + this.currentGig.curator_payout_value.amount}`
-    //   }
-    // },
+    payout () {
+      if (this.currentGig.pending_payout_value.amount) {
+        return '$' + this.currentGig.pending_payout_value.amount
+      } else {
+        return '$' + (parseFloat(this.currentGig.total_payout_value.amount) + parseFloat(this.currentGig.curator_payout_value.amount))
+      }
+    },
+    paymentInfo () {
+      if ((new Date(this.currentGig.cashout_time).getTime()) > (new Date().getTime())) {
+        return `Will payout in ${Math.floor((new Date(this.currentGig.cashout_time) - (new Date())) / (1000 * 60 * 60 * 24))} days`
+      } else {
+        return `Author Payout: ${'$' + this.currentGig.total_payout_value.amount}
+        Curator Payout: ${'$' + this.currentGig.curator_payout_value.amount}`
+      }
+    },
     myVote () {
       if (this.currentGig.active_votes) {
         return this.currentGig.active_votes.filter((x) => x.voter === this.$store.state.username)
@@ -263,9 +263,11 @@ export default {
       let permlink = `re-${this.currentGig.author}-${this.currentGig.permlink}-${now}`
       console.log(permlink)
       sc2.comment(this.currentGig.author, this.currentGig.permlink, this.$store.state.username, permlink, '', this.myComment, {generated: true}, (err, res) => {
-        console.log(err, res)
         that.isPosting = false
-        if (!err) this.fetchComments()
+        if (!err) {
+          this.fetchComments()
+          this.commentMode = false
+        }
       })
     },
     vote () {
@@ -310,6 +312,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .detail-action {
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    background-color: aliceblue;
+    padding: 10px;
+    .reply {
+      color: #4d5db6
+    }
+  }
   .vote-slider {
     max-width: 300px;
   }
