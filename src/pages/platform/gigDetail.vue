@@ -20,6 +20,7 @@
               </carousel>
             </div>
             <div class="card-content">
+              <loading-placeholder v-if="!contentLoaded" />
               <div v-html="currentGig.body"></div>
               <hr class="my-4">
               <div class="menu row mb-2">
@@ -60,6 +61,10 @@
       </div>
        <div class="col s12 m4 l3">
         <div class="card-panel profileOwner">
+          <content-placeholders v-if="!profileLoaded">
+            <content-placeholders-img />
+            <content-placeholders-text :lines="10" />
+          </content-placeholders>
           <span class="editProfile waves-effect" v-if="$store.state.username === profileData.account">
             <i class="icon ion-android-create"></i>
           </span>
@@ -109,6 +114,7 @@ import sc2 from '@/services/sc2'
 import { Carousel, Slide } from 'vue-carousel'
 import moment from 'moment'
 import SliderRange from 'vue-slider-component'
+import LoadingPlaceholder from '@/components/widgets/gigLoading'
 // import steem from 'steem'
 export default {
   components: {
@@ -119,10 +125,13 @@ export default {
     Slide,
     VueEditor,
     VComment,
-    SliderRange
+    SliderRange,
+    LoadingPlaceholder
   },
   data () {
     return {
+      contentLoaded: false,
+      profileLoaded: false,
       profile: {},
       profileData: {},
       currentGig: {
@@ -148,6 +157,7 @@ export default {
     let {username, task} = this.$route.params
     this.fetchUserInfo(username)
     Api.fetchSinglePost(username, task).then(response => {
+      this.contentLoaded = true
       this.currentGig = response.data
       this.fetchComments()
     }).catch(err => {
@@ -227,6 +237,7 @@ export default {
         let response = await Api.fetchUserData(username)
         this.profileData = response.data
         this.profile = this.profileData.profile
+        this.profileLoaded = true
         console.log(this.profileData)
       } catch (err) {
         console.log('error retrieving user info: \n error:', this.stringify(err))

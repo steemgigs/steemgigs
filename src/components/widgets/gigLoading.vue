@@ -7,12 +7,3 @@
     </content-placeholders>
   </div>
 </template>
-
-<script>
-import VueContentPlaceholders from 'vue-content-placeholders'
-export default {
-  components: {
-    VueContentPlaceholders
-  }
-}
-</script>
