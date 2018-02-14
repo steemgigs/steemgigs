@@ -68,7 +68,7 @@ export default {
     },
     task () {
       if (this.gigData.title) {
-        return this.gigData.title.split('#STEEMGIGS: I will ')[1]
+        return this.gigData.title.split('#STEEMGIGS: I will ')[1] || this.gigData.title.split('#STEEMGIGS: ')[1]
       } else return ''
     },
     taskLink () {
