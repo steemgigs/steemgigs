@@ -2,7 +2,7 @@
   <div class="comment py-3">
     <img :src="imgUrl" class="author-image">
     <p>
-      <router-link class="username" :to="'/@' + commentFor.author" v-text="commentFor.author"></router-link><span>&nbsp;({{rep}})</span><span class="how-long">&nbsp;&nbsp; yesterday</span>
+      <router-link class="username" :to="'/@' + commentFor.author" v-text="commentFor.author"></router-link><span>&nbsp;({{rep}})</span><span class="how-long">&nbsp;&nbsp; {{timeAgo}}</span>
     </p>
     <p class="post" v-html="commentFor.body"></p>
     <div class="menu mb-2">
@@ -203,6 +203,9 @@ export default {
       } else {
         return { content: 'upvote', classes: ['tooltip'] }
       }
+    },
+    timeAgo () {
+      return this.commentFor.created
     }
   },
   watch: {
