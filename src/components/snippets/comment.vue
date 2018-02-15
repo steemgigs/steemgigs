@@ -237,7 +237,7 @@ export default {
     },
     payout () {
       if (this.commentFor.pending_payout_value.amount) {
-        return '$' + this.commentFor.pending_payout_value.amount
+        return '$' + parseFloat(this.commentFor.pending_payout_value.amount)
       } else {
         return '$' + (parseFloat(this.commentFor.total_payout_value.amount) + parseFloat(this.commentFor.curator_payout_value.amount))
       }

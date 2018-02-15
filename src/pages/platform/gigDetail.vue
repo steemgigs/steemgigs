@@ -203,7 +203,7 @@ export default {
     },
     payout () {
       if (this.currentGig.pending_payout_value.amount) {
-        return '$' + this.currentGig.pending_payout_value.amount
+        return '$' + parseFloat(this.currentGig.pending_payout_value.amount)
       } else {
         return '$' + (parseFloat(this.currentGig.total_payout_value.amount) + parseFloat(this.currentGig.curator_payout_value.amount))
       }
