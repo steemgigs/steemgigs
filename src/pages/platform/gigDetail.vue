@@ -65,37 +65,39 @@
             <content-placeholders-img />
             <content-placeholders-text :lines="10" />
           </content-placeholders>
-          <span class="editProfile waves-effect" v-if="$store.state.username === profileData.account">
-            <i class="icon ion-android-create"></i>
-          </span>
-          <label class="profilePic" for="profile_image">
-            <input type="file" accept="image/png,image/jpeg" class="hide" id="profile_image">
-            <img :src="profile.profile_image" class="user-pict-img" :alt="profileData.account" width="150" height="150">
-          </label>
-          <span class="username" v-text="profile.name"></span>
-          <span class="expertise">Experienced Web Developer</span>
-          <span class="ratings">
-            <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (2 reviews)
-          </span>
-          <p class="location"><i class="icon ion-android-pin"></i> From <span class="right" v-text="profile.location"></span></p>
-          <p class="member_since"> <i class="icon ion-android-person"></i> Member since <span class="right" v-text="since"></span></p>
-          <p class="member_since"> <i class="icon ion-ios-briefcase"></i> Last delivery <span class="right" v-text="ago"></span></p>
-          <p>
-            <i class="icon ion-android-plane"></i>
-            Vacation mode
-            <span class="right">
-              <div class="switch" v-if="$store.state.username === profileData.account">
-                <label>
-                  <input type="checkbox" v-model="vacation_mode" :disabled="$store.state.username !== profileData.account">
-                  <span class="lever"></span>
-                </label>
-              </div>
+          <div v-if="profileLoaded">
+            <span class="editProfile waves-effect" v-if="$store.state.username === profileData.account">
+              <i class="icon ion-android-create"></i>
             </span>
-          </p>
-          <hr>
-          <div class="moreProfileInfo">
-            <span class="card-title">Description</span>
-            <p v-text="profile.about"></p>
+            <label class="profilePic" for="profile_image">
+              <input type="file" accept="image/png,image/jpeg" class="hide" id="profile_image">
+              <img :src="profile.profile_image" class="user-pict-img" :alt="profileData.account" width="150" height="150">
+            </label>
+            <span class="username" v-text="profile.name"></span>
+            <span class="expertise" v-text="profile.about"></span>
+            <span class="ratings">
+              <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (2 reviews)
+            </span>
+            <p class="location"><i class="icon ion-android-pin"></i> From <span class="right" v-text="profile.location"></span></p>
+            <p class="member_since"> <i class="icon ion-android-person"></i> Member since <span class="right" v-text="since"></span></p>
+            <p class="member_since"> <i class="icon ion-ios-briefcase"></i> Last delivery <span class="right" v-text="ago"></span></p>
+            <p>
+              <i class="icon ion-android-plane"></i>
+              Vacation mode
+              <span class="right">
+                <div class="switch" v-if="$store.state.username === profileData.account">
+                  <label>
+                    <input type="checkbox" v-model="vacation_mode" :disabled="$store.state.username !== profileData.account">
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </span>
+            </p>
+            <hr>
+            <div class="moreProfileInfo">
+              <span class="card-title">Description</span>
+              <p v-text="profile.about"></p>
+            </div>
           </div>
         </div>
       </div>
@@ -138,6 +140,15 @@ export default {
         title: '',
         json_metadata: {
           images: []
+        },
+        pending_payout_value: {
+          amount: 0
+        },
+        total_payout_value: {
+          amount: 0
+        },
+        curator_payout_value: {
+          amount: 0
         }
       },
       vacation_mode: false,
@@ -265,8 +276,80 @@ export default {
       sc2.comment(this.currentGig.author, this.currentGig.permlink, this.$store.state.username, permlink, '', this.myComment, {generated: true}, (err, res) => {
         that.isPosting = false
         if (!err) {
-          this.fetchComments()
           this.commentMode = false
+          let commentObject = {
+            '_id': '5a8497b24938f68db8de0102',
+            'abs_rshares': 971952359,
+            'active_votes': [],
+            'allow_curation_rewards': true,
+            'allow_replies': true,
+            'allow_votes': true,
+            'author': that.$store.state.username,
+            'author_rewards': 0,
+            'beneficiaries': [],
+            'body': that.myComment,
+            'body_length': 0,
+            'cashout_time': '2018-02-21T20:08:00.000Z',
+            'category': 'steemgigs',
+            'children': 0,
+            'children_abs_rshares': 0,
+            'community': '',
+            'created': new Date(),
+            'curator_payout_value': {
+              'amount': 0,
+              'asset': 'SBD'
+            },
+            'depth': 6,
+            'id': 32680753,
+            'json_metadata': {
+              'generated': true,
+              'tags': [],
+              'users': []
+            },
+            'last_payout': '1970-01-01T00:00:00.000Z',
+            'last_update': '2018-02-14T20:08:00.000Z',
+            'max_accepted_payout': {
+              'amount': 1000000,
+              'asset': 'SBD'
+            },
+            'max_cashout_time': '1969-12-31T23:59:59.000Z',
+            'net_rshares': 366020034,
+            'net_votes': 1,
+            'parent_author': that.currentGig.author,
+            'parent_permlink': that.currentGig.permlink,
+            'patched': false,
+            'pending_payout_value': {
+              'amount': 0,
+              'asset': 'SBD'
+            },
+            'percent_steem_dollars': 10000,
+            'permlink': permlink,
+            'promoted': {
+              'amount': 0,
+              'asset': 'SBD'
+            },
+            'reblogged_by': [],
+            'replies': [],
+            'reward_weight': 10000,
+            'root_comment': 29989383,
+            'root_identifier': that.currentGig.root_identifier,
+            'root_title': that.currentGig.root_title,
+            'tags': [],
+            'title': '',
+            'total_payout_value': {
+              'amount': 0,
+              'asset': 'SBD'
+            },
+            'total_pending_payout_value': {
+              'amount': 0,
+              'asset': 'STEEM'
+            },
+            'total_vote_weight': 0,
+            'updatedAt': '2018-02-15T11:31:41.024Z',
+            'vote_rshares': 605932325
+          }
+          that.comments.push(commentObject)
+          that.myComment = ''
         }
       })
     },

@@ -111,9 +111,11 @@ h1 {
     margin: 1px;
     padding: 0px 24px;
     cursor: pointer;
+    color:#434343;
     transition: background ease-in-out .3s;
     &:hover {
-      background: rgb(240, 248, 255);
+      background: rgb(152, 142, 160);
+      color: white
     }
   }
 }

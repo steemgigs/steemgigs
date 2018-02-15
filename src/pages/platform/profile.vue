@@ -12,7 +12,7 @@
               <img :src="profile.profile_image" class="user-pict-img" :alt="profileData.account" width="150" height="150">
             </div>
             <span class="username" v-text="profile.name"></span>
-            <span class="expertise">Experienced Web Developer</span>
+            <span class="expertise" v-text="profile.about"></span>
             <span class="ratings">
               <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (2 reviews)
             </span>

@@ -367,7 +367,7 @@ export default {
 <style lang="scss">
 $blue: #4757b2;
 .card.gig .card-image {
-  height: 10em !important;
+  // height: 10em !important;
 }
 .steemgigs_ads {
   box-sizing: border-box;
