@@ -7,6 +7,7 @@ import UntalentedEditor from '@/pages/platform/untalentedEditor'
 import Profile from '@/pages/platform/profile'
 import GigDetail from '@/pages/platform/gigDetail'
 import Categories from '@/pages/platform/category'
+import SubCategories from '@/pages/platform/subcategory'
 
 export default [
   {
@@ -18,6 +19,11 @@ export default [
     path: '/categories/:category',
     name: 'STEEMGIGS | Categories',
     component: Categories
+  },
+  {
+    path: '/categories/:category/:subcategory',
+    name: 'STEEMGIGS | Subcategories',
+    component: SubCategories
   },
   // TODO: Finish this
   {

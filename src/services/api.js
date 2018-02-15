@@ -19,6 +19,9 @@ export default {
   fetchCatPosts (category) {
     return axios.post('/fetchCatPosts', {category})
   },
+  fetchSubCatPosts (category, subcategory) {
+    return axios.post('/fetchSubCatPosts', {category, subcategory})
+  },
   fetchGigRequests () {
     return axios.get('/gigrequests')
   },

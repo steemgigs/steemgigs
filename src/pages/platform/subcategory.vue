@@ -1,18 +1,30 @@
 <template>
   <page :pageClasses="['categories__view', 'row']">
     <cat-nav />
-    <div class="col s12 right center-align row">
-      <h1>{{ categoryDetails.name }}</h1>
+    <div class="col s12 center-align row">
+      <h1 class="grey-text darken-1">{{ categoryDetails.name }} > <span class="grey-text text-darken-2">{{categoryDetails.subcategory}}</span></h1>
       <p class="flow-text">{{ categoryDetails.description }}</p>
-      <div v-if="this.loading">
-        <div class="col s12 m6 l4">
+      <div v-if="loading">
+        <div class="col s12 m6 l3">
           <loading-placeholder />
         </div>
-        <div class="col s12 m6 l4">
+        <div class="col s12 m6 l3">
           <loading-placeholder />
         </div>
-        <div class="col s12 m6 l4">
+        <div class="col s12 m6 l3">
           <loading-placeholder />
+        </div>
+        <div class="col s12 m6 l3">
+          <loading-placeholder />
+        </div>
+      </div>
+      <div v-if="!loading">
+        <div v-if="catgigs.length > 0" class="col s12 m6 l3" v-for="(gig, index) in catgigs" :key="index">
+          <gig-card :gigData="gig" />
+        </div>
+        <div v-if="catgigs.length <= 0">
+          <p class="flow-text grey-text">There are no posts yet in this category. Be the first to post in the <span class="grey-text text-darken-2">{{categoryDetails.name}}</span> category</p>
+          <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
         </div>
       </div>
     </div>
@@ -23,25 +35,64 @@
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
+import GigCard from '@/components/snippets/gigCard'
 import Api from '@/services/api'
 
 export default {
   components: {
     Page,
     CatNav,
-    LoadingPlaceholder
+    LoadingPlaceholder,
+    GigCard
   },
   data () {
     return {
-      loading: true
+      loading: true,
+      catgigs: []
     }
   },
-  beforeMount () {
-    Api.fetchCatPosts(this.$route.params.category).then(result => {
-      console.log('fetchedCatPosts::', result.data)
-    }).catch(err => {
-      console.log('error fetching catPosts::', err)
-    })
+  methods: {
+    fetchSubCatPosts () {
+      this.loading = true
+      Api.fetchSubCatPosts(this.$route.params.category, this.$route.params.subcategory).then(result => {
+        this.catgigs = result.data
+        this.loading = false
+        console.log('fetchedSubCatPosts::', result.data)
+      }).catch(err => {
+        console.log('error fetching subCatPosts::', err)
+      })
+    }
+  },
+  computed: {
+    categoryDetails () {
+      let pageCategory = this.$route.params.category
+      let pageSubCategory = this.$route.params.subcategory
+      let details = {}
+      this.categories.forEach((category, index) => {
+        if (this.slugify(category.name) === pageCategory) {
+          category.subcategories.forEach((subcategory) => {
+            if (this.slugify(subcategory) === pageSubCategory) {
+              details.subcategory = this.capitalize(subcategory)
+              console.log('found it ', pageSubCategory)
+            }
+          })
+          details.name = this.capitalize(category.name)
+          details.description = category.description
+        }
+      })
+      return details
+    },
+    detailsname () {
+      return this.categoryDetails.subcategory
+    }
+  },
+  watch: {
+    detailsname () {
+      this.fetchSubCatPosts()
+    }
+  },
+  mounted () {
+    this.fetchSubCatPosts()
   }
 }
 </script>

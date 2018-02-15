@@ -4,7 +4,7 @@
     <div class="col s12 m8 l9 right center-align row">
       <h1>{{ categoryDetails.name }}</h1>
       <p class="flow-text">{{ categoryDetails.description }}</p>
-      <div v-if="this.loading">
+      <div v-if="loading">
         <div class="col s12 m6 l4">
           <loading-placeholder />
         </div>
@@ -15,15 +15,20 @@
           <loading-placeholder />
         </div>
       </div>
-      <div v-if="!this.loading" class="col s12 m6 l3" v-for="(gig, index) in catgigs" :key="index">
+      <div v-if="!loading">
+        <div v-if="catgigs.length > 0" class="col s12 m6 l3" v-for="(gig, index) in catgigs" :key="index">
           <gig-card :gigData="gig" />
+        </div>
+        <div v-if="catgigs.length <= 0">
+          <p class="flow-text grey-text">There are no posts yet in this category. Be the first to post in the <span class="grey-text text-darken-2">{{categoryDetails.name}}</span> category</p>
+          <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+        </div>
       </div>
     </div>
     <div class="col s12 m4 l3 center center-align subcats">
-      loaded
-      <div v-for="(subcategory, index) in categoryDetails.subcategories" :key="index" class="card-panel subcatCard waves-effect">
+      <router-link :to="'/categories/' + slugify(categoryDetails.name) + '/' + slugify(subcategory)" v-for="(subcategory, index) in categoryDetails.subcategories" :key="index" class="card-panel subcatCard waves-effect">
         <p class="">{{ capitalize(subcategory) }}</p>
-      </div>
+      </router-link>
     </div>
   </page>
 </template>
@@ -48,6 +53,18 @@ export default {
       catgigs: []
     }
   },
+  methods: {
+    fetchCatPosts () {
+      this.loading = true
+      Api.fetchCatPosts(this.$route.params.category).then(result => {
+        this.catgigs = result.data
+        this.loading = false
+        console.log('fetchedCatPosts::', result.data)
+      }).catch(err => {
+        console.log('error fetching catPosts::', err)
+      })
+    }
+  },
   computed: {
     categoryDetails () {
       let pageCategory = this.$route.params.category
@@ -60,15 +77,18 @@ export default {
         }
       })
       return details
+    },
+    detailsname () {
+      return this.categoryDetails.name
     }
   },
-  beforeMount () {
-    Api.fetchCatPosts(this.$route.params.category).then(result => {
-      this.catgigs = result.data
-      console.log('fetchedCatPosts::', result.data)
-    }).catch(err => {
-      console.log('error fetching catPosts::', err)
-    })
+  watch: {
+    detailsname () {
+      this.fetchCatPosts()
+    }
+  },
+  mounted () {
+    this.fetchCatPosts()
   }
 }
 </script>
