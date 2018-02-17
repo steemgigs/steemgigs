@@ -2,6 +2,7 @@
   <div id="app">
     <nav-bar />
     <router-view/>
+    <notifications group="foo" position="top left" />
   </div>
 </template>
 

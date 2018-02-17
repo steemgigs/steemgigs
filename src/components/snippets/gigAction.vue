@@ -109,16 +109,22 @@ export default {
     },
     upvote () {
       this.voting = true
+      console.log('upvoting')
       sc2.setAccessToken(this.$store.state.accessToken)
       sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, parseInt(this.upvoteRange) * 100, (err, res) => {
         this.voting = false
-        console.log(err, res)
         if (!err) {
+          // this.fetchThisComment()
           this.upvoteActive = false
           this.gigData.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
           console.log(res)
         } else {
-          console.log('there was an error voting this\n', 'err:', err)
+          this.$notify({
+            group: 'foo',
+            title: 'Error voting',
+            text: 'You have exceeded maximum vote toggles for this post',
+            type: 'error'
+          })
         }
       })
     },
@@ -132,7 +138,12 @@ export default {
           this.gigData.active_votes = this.gigData.active_votes.filter((x) => x.voter !== this.$store.state.username)
           console.log(res)
         } else {
-          console.log('there was an error unvoting this\n', 'err:', err)
+          this.$notify({
+            group: 'foo',
+            title: 'Error unvoting',
+            text: 'You have exceeded maximum vote toggles for this post',
+            type: 'error'
+          })
         }
       })
     }

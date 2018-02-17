@@ -26,8 +26,8 @@
       </div>
     </div>
     <div class="col s12 m4 l3 center center-align subcats">
-      <router-link :to="'/categories/' + slugify(categoryDetails.name) + '/' + slugify(subcategory)" v-for="(subcategory, index) in categoryDetails.subcategories" :key="index" class="card-panel subcatCard waves-effect">
-        <p class="">{{ capitalize(subcategory) }}</p>
+      <router-link :to="'/categories/' + slugify(categoryDetails.name) + '/' + slugify(subcategory.name)" v-for="(subcategory, index) in categoryDetails.subcategories" :key="index" class="card-panel subcatCard waves-effect">
+        <p class="">{{ capitalize(subcategory.name) }}</p>
       </router-link>
     </div>
   </page>

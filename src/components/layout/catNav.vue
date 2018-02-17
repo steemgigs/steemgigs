@@ -5,12 +5,12 @@
       <div class="dropdown white z-depth-1 drop">
         <ul>
           <li v-for="(subcategory, subIndex) in half1(category.subcategories)" :key="subIndex">
-            <router-link :to="'/categories/' + slugify(category.name) + '/' + slugify(subcategory)">{{ capitalize(subcategory) }}</router-link>
+            <router-link :to="'/categories/' + slugify(category.name) + '/' + slugify(subcategory.name)">{{ capitalize(subcategory.name) }}</router-link>
           </li>
         </ul>
         <ul>
           <li v-for="(subcategory, subIndex) in half2(category.subcategories)" :key="subIndex">
-            <router-link :to="'/categories/' + slugify(category.name) + '/' + slugify(subcategory)">{{ capitalize(subcategory) }}</router-link>
+            <router-link :to="'/categories/' + slugify(category.name) + '/' + slugify(subcategory.name)">{{ capitalize(subcategory.name) }}</router-link>
           </li>
         </ul>
       </div>

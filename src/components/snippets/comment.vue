@@ -42,7 +42,6 @@ import { VueEditor } from 'vue2-editor'
 import SliderRange from 'vue-slider-component'
 import Api from '@/services/api'
 import sc2 from '@/services/sc2'
-import moment from 'moment'
 
 export default {
   name: 'v-comment',
@@ -63,7 +62,8 @@ export default {
       upvoteRange: 100,
       isPosting: false,
       imgUrl: '',
-      rep: ''
+      rep: '',
+      timeAgo: ''
     }
   },
   props: {
@@ -202,7 +202,12 @@ export default {
           this.commentFor.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
           console.log(res)
         } else {
-          console.log('there was an error voting this\n', 'err:', err)
+          this.$notify({
+            group: 'foo',
+            title: 'Error voting',
+            text: 'You have exceeded maximum vote toggles for this post',
+            type: 'error'
+          })
         }
       })
     },
@@ -216,7 +221,12 @@ export default {
           this.commentFor.active_votes = this.commentFor.active_votes.filter((x) => x.voter !== this.$store.state.username)
           console.log(res)
         } else {
-          console.log('there was an error unvoting this\n', 'err:', err)
+          this.$notify({
+            group: 'foo',
+            title: 'Error voting',
+            text: 'You have exceeded maximum vote toggles for this post',
+            type: 'error'
+          })
         }
       })
     }
@@ -274,9 +284,6 @@ export default {
       } else {
         return { content: 'upvote', classes: ['tooltip'] }
       }
-    },
-    timeAgo () {
-      return moment(this.commentFor.created, 'YYYYMMDD').startOf('hour').fromNow()
     }
   },
   watch: {
@@ -284,6 +291,46 @@ export default {
   mounted () {
     this.fetchComments()
     this.fetchCommentInfo()
+    setInterval(() => {
+      let created = new Date(this.commentFor.created)
+      let second = 1000
+      let minute = 1000 * 60
+      let hour = 1000 * 60 * 60
+      let day = 1000 * 60 * 60 * 24
+      let month = 1000 * 60 * 60 * 24 * 30
+      let year = 1000 * 60 * 60 * 24 * 365
+      if ((new Date() - created) < minute) {
+        if (Math.floor((new Date() - created) / second) < 2) {
+          this.timeAgo = `${Math.floor((new Date() - created) / second)} second ago`
+        } else {
+          this.timeAgo = `${Math.floor((new Date() - created) / second)} seconds ago`
+        }
+      } else if ((new Date() - created) < hour) {
+        if (Math.floor((new Date() - created) / minute) < 2) {
+          this.timeAgo = `${Math.floor((new Date() - created) / minute)} minute ago`
+        } else {
+          this.timeAgo = `${Math.floor((new Date() - created) / minute)} minutes ago`
+        }
+      } else if ((new Date() - created) < day) {
+        this.timeAgo = `${Math.floor((new Date() - created) / hour)} hours ago`
+      } else if ((new Date() - created) < 2 * day) {
+        this.timeAgo = `yesterday`
+      } else if ((new Date() - created) > 2 * day) {
+        this.timeAgo = `${Math.floor((new Date() - created) / day)} days ago`
+      } else if ((new Date() - created) > month) {
+        if (Math.floor((new Date() - created) / month) < 2) {
+          this.timeAgo = `${Math.floor((new Date() - created) / month)} month ago`
+        } else {
+          this.timeAgo = `${Math.floor((new Date() - created) / month)} months ago`
+        }
+      } else if ((new Date() - created) > year) {
+        if (Math.floor((new Date() - created) / year) < 2) {
+          this.timeAgo = `${Math.floor((new Date() - created) / year)} year ago`
+        } else {
+          this.timeAgo = `${Math.floor((new Date() - created) / year)} years ago`
+        }
+      }
+    }, 10000)
   }
 }
 </script>

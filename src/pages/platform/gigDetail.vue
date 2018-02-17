@@ -24,7 +24,7 @@
               <div v-html="currentGig.body"></div>
               <hr class="my-2">
               <div class="menu row mb-2">
-                <div class="col detail-action m3 offset-m9">
+                <div v-if="contentLoaded" class="col detail-action m3 offset-m9">
                   <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
                   <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
                     <i class="fa fa-spinner fa-pulse"></i>
@@ -180,7 +180,11 @@ export default {
       return this.desteemgify(this.currentGig.title)
     },
     portfolio () {
-      return this.currentGig.json_metadata.images
+      if (this.currentGig.json_metadata.images) {
+        return this.currentGig.json_metadata.images
+      } else {
+        return []
+      }
     },
     since () {
       return moment(this.profileData.created).format('MMMM YYYY')
@@ -372,7 +376,12 @@ export default {
           this.currentGig.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
           console.log(res)
         } else {
-          console.log('there was an error voting this\n', 'err:', err)
+          this.$notify({
+            group: 'foo',
+            title: 'Error voting',
+            text: 'You have exceeded maximum vote toggles for this post',
+            type: 'error'
+          })
         }
       })
     },
@@ -387,6 +396,12 @@ export default {
           console.log(res)
         } else {
           console.log('there was an error unvoting this\n', 'err:', err)
+          this.$notify({
+            group: 'foo',
+            title: 'Error voting',
+            text: 'You have exceeded maximum vote toggles for this post',
+            type: 'error'
+          })
         }
       })
     }

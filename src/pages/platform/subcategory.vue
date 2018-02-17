@@ -71,13 +71,13 @@ export default {
       this.categories.forEach((category, index) => {
         if (this.slugify(category.name) === pageCategory) {
           category.subcategories.forEach((subcategory) => {
-            if (this.slugify(subcategory) === pageSubCategory) {
-              details.subcategory = this.capitalize(subcategory)
+            if (this.slugify(subcategory.name) === pageSubCategory) {
+              details.subcategory = this.capitalize(subcategory.name)
+              details.description = subcategory.description
               console.log('found it ', pageSubCategory)
             }
           })
           details.name = this.capitalize(category.name)
-          details.description = category.description
         }
       })
       return details
