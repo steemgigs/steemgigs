@@ -141,7 +141,7 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Digital marketing',
-    'description': 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+    'description': 'Make the growth of your brand more organic. We will help you with all your digital marketing services',
     'subcategories': [
       {
         'name': 'social media marketing',
@@ -211,7 +211,7 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Writing and translation',
-    'description': 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+    'description': "You have the words, let's pen it right. Try a steemgigger now for your copy, translation & editorial work",
     'subcategories': [
       {
         'name': 'resumes and cover letters',
@@ -261,7 +261,7 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Videos and animation',
-    'description': 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+    'description': "You have the words, let's pen it right. Try a steemgigger now for your copy, translation & editorial work",
     'subcategories': [
       {
         'name': 'whiteboard & animated explainers',
