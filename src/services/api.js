@@ -14,7 +14,13 @@ export default {
     return axios.post('/imgUpload', formdata)
   },
   fetchPosts () {
-    return axios.get('/posts')
+    return axios.get('/steemgigs/steemgigs_post/')
+  },
+  fetchGigRequests () {
+    return axios.get('/steemgigs/steemgigs_request/')
+  },
+  fetchTestimonials () {
+    return axios.get('/steemgigs/steemgigs_testimonial/')
   },
   fetchCatPosts (category) {
     return axios.post('/fetchCatPosts', {category})
@@ -22,14 +28,8 @@ export default {
   fetchSubCatPosts (category, subcategory) {
     return axios.post('/fetchSubCatPosts', {category, subcategory})
   },
-  fetchGigRequests () {
-    return axios.get('/gigrequests')
-  },
   fetchFeatured () {
     return axios.get('/featured')
-  },
-  fetchTestimonials () {
-    return axios.get('/testimonials')
   },
   fetchUntalented () {
     return axios.get('/untalented')
@@ -51,5 +51,13 @@ export default {
   },
   fetchCommentInfo (username) {
     return axios.post('/fetchUserInfo', {username})
+  },
+  //  new routes
+  post (credentials, token) {
+    return axios.post('/post', credentials, {
+      headers: {
+        token: token
+      }
+    })
   }
 }

@@ -48,7 +48,7 @@
                 <div class="input-field col s12 m6 l4" v-show="newGigRequest.category">
                   <select class="my-select browser-default subCategory_select" v-model="newGigRequest.subcategory">
                     <option value="" disabled selected>Select Subcategory</option>
-                    <option v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory" v-text="subcategory"></option>
+                    <option v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory.name" v-text="subcategory.name"></option>
                   </select>
                 </div>
               </div>
@@ -126,7 +126,7 @@
 </template>
 
 <script>
-import sc2 from '@/services/sc2'
+import Api from '@/services/api'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import ImgUpload from '@/components/snippets/imgUpload'
@@ -250,12 +250,12 @@ export default {
         // images: this.newGigRequest.portfolio,
         generated: true
       }
-      sc2.setAccessToken(this.$store.state.accessToken)
       // let textifiedPics = '\n## Portfolio\n<hr />\n'
       // this.newGigRequest.portfolio.forEach(url => {
       //   textifiedPics += '![Potfolio](' + url + ')\n\n'
       // })
       // let body = this.previewData + textifiedPics + `
+      let token = this.$store.state.accessToken
       let body = this.previewData + `
 <h5>this post was made on #STEEMGIGS</h5>
 "where everyone has something to offer"
@@ -263,14 +263,13 @@ export default {
       let permlink = this.slugify(this.newGigRequest.title)
       let username = this.$store.state.username
       let title = this.steemedTitle
-      sc2.comment('', 'steemgigs', username, permlink, title, body, jsonMetadata, (err, res) => {
+
+      Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
         console.log(err, res)
         that.isPosting = false
-        if (err) {
-          that.errorText = 'Error pushing post to steem, try again'
-        } else {
-          that.successText = 'Successfully pushed to steem!'
-        }
+        that.successText = 'Successfully pushed to steem!'
+      }).catch((e) => {
+        that.errorText = 'Error pushing post to steem, try again'
       })
     }
   },

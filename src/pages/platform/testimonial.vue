@@ -143,9 +143,6 @@ export default {
     prevSection () {
       if (this.currentSection > 0) this.currentSection--
     },
-    refreshSubCategory () {
-      this.newTestimonial.subcategory = ''
-    },
     getTags (entries) {
       this.userTags = entries
     },

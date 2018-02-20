@@ -140,9 +140,6 @@ export default {
     prevSection () {
       if (this.currentSection > 0) this.currentSection--
     },
-    refreshSubCategory () {
-      this.untalented.subcategory = ''
-    },
     getTags (entries) {
       this.userTags = entries
     },

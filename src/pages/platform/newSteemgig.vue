@@ -32,7 +32,7 @@
               <div class="input-field col s12 m6 l4" v-show="newGigData.category">
                 <select class="my-select browser-default subCategory_select" v-model="newGigData.subcategory">
                   <option value="" disabled selected>Select Subcategory</option>
-                  <option v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory" v-text="subcategory"></option>
+                  <option v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory.name" v-text="subcategory.name"></option>
                 </select>
               </div>
               <div class="col input-field s12">
@@ -212,7 +212,7 @@
 </template>
 
 <script>
-import sc2 from '@/services/sc2'
+import Api from '@/services/api'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import ImgUpload from '@/components/snippets/imgUpload'
@@ -310,26 +310,25 @@ export default {
         type: 'steemgigs_post',
         generated: true
       }
-      sc2.setAccessToken(this.$store.state.accessToken)
-      let textifiedPics = '\n## Portfolio\n<hr />\n'
+      let textifiedPics = '\n<h2>Portfolio</h2>\n<hr />\n'
       this.newGigData.portfolio.forEach(url => {
         textifiedPics += '![Potfolio](' + url + ')\n\n'
       })
-      let body = this.previewData + textifiedPics + `
-<h5>this post was made on #STEEMGIGS</h5>
-"where everyone has something to offer"
-      `
-      let permlink = this.slugify(this.newGigData.title)
       let username = this.$store.state.username
+      let permlink = this.slugify(this.newGigData.title)
+      let body = this.previewData + textifiedPics + `
+<i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
+      `
+      let token = this.$store.state.accessToken
       let title = '#STEEMGIGS: I will ' + this.newGigData.title
-      sc2.comment('', 'steemgigs', username, permlink, title, body, jsonMetadata, (err, res) => {
+      // username, permlink, title, body, jsonMetadata, token
+      Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
         console.log(err, res)
         that.isPosting = false
-        if (err) {
-          that.errorText = 'Error pushing post to steem, try again'
-        } else {
-          that.successText = 'Successfully pushed to steem!'
-        }
+        that.successText = 'Successfully pushed to steem!'
+      }).catch((e) => {
+        that.isPosting = false
+        that.errorText = 'Error pushing post to steem, try again'
       })
     }
   },
