@@ -1,14 +1,13 @@
  <template>
   <div class="navbar-fixed">
-    <nav class="white">
+    <nav class="white"  :class="searchActive ? 'search-active': ''">
       <div class="nav-wrapper container">
         <router-link to="/" class="brand-logo left">STEEMGIGS<sub>alpha</sub></router-link>
         <ul class="right notIn" v-if="!$store.state.accessToken">
           <li><a href="https://signup.steemit.com" rel="noopener noreferrer" target="_blank">Sign up</a></li>
           <li><a :href="loginURL">Log in</a></li>
         </ul>
-        <ul class="right" v-if="$store.state.accessToken">
-          <li><a href="#"><i class="ion-ios-search x2"></i></a></li>
+        <ul class="right shrink" v-if="$store.state.accessToken">
           <li>
             <router-link to="/message"><i class="icon ion-android-chat x2"></i></router-link>
           </li>
@@ -33,6 +32,9 @@
             </ul>
           </li>
         </ul>
+        <ul class="right stretch">
+          <li><a href="#" @click="searchActive = !searchActive" class="inline-block"><i class="ion-ios-search-strong x2"></i></a><input type="text" class="search-panel browser-default"></li>
+        </ul>
       </div>
     </nav>
   </div>
@@ -46,7 +48,8 @@ export default {
       isAuth: false,
       loginURL: sc2.getLoginURL(),
       user: '',
-      metadata: ''
+      metadata: '',
+      searchActive: false
     }
   }
 }
@@ -66,10 +69,37 @@ nav a.brand-logo, nav li a, nav a {
 nav {
   box-shadow: 0 0;
   border-bottom: 0px solid #e9e7e7;
+  .search-panel {
+    width: 0;
+    overflow: hidden;
+    transition: all .7s ease-in;
+    border-radius: 50px;
+    border: none;
+    background: beige;
+    display: inline-block;
+    transform: translateY(-6.1px);
+    &:focus {
+      outline: 0 solid;
+      border: 1px solid rgb(203, 135, 252);
+    }
+  }
+  // .shrink {
+  //   width: initial;
+  //   transition: all .5s ease-in;
+  //   overflow: hidden;
+  // }
+  &.search-active {
+    .search-panel {
+      width: 300px;
+      padding: 7px 15px;
+    }
+    // .shrink {
+    //   width: 0;
+    // }
+  }
   .nav-wrapper {
     &.container {
       min-width: 90%;
-
       a.brand-logo {
         font-size: 28px;
         font-weight: bold;
