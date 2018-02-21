@@ -34,11 +34,6 @@
         </ul>
         <ul class="right stretch">
           <li><a href="#" @click="searchActive = true" class="search-icon inline-block"><i class="ion-ios-search-strong x2"></i></a></li>
-          <ul v-if="searchList > 1" class="search-dropdown">
-            <li>I Will build a responsive website for only 3steem</li>
-            <li>I Will build a responsive website for only 3steem</li>
-            <li>I Will build a responsive website for only 3steem</li>
-          </ul>
         </ul>
       </div>
     </nav>
@@ -50,7 +45,7 @@
         <span class="left searchIcon">
           <i class="icon ion-ios-search-strong white-text"></i>
         </span>
-        <input v-model="searchTerm" placeholder="type to start searching..." type="text" @keypress="updateSearchList" class="search-panel">
+        <input v-model="searchTerm" placeholder="type to start searching..." type="text" @input="search" class="search-panel">
         <p class="right-align hint-text amber-text text-lighten-5">Hit ENTER to search or ESC to close</p>
       </div>
       <div class="results row">
@@ -86,21 +81,25 @@ export default {
       user: '',
       metadata: '',
       searchActive: false,
-      searchList: [],
+      searchResults: [],
       searchTerm: '',
       isSearching: false
     }
   },
   methods: {
-    updateSearchList () {
-      Api.search(this.searchTerm).then((result) => {
-        console.log(result)
-        this.isSearching = false
-        this.searchList = result.data
-      }).catch((e) => {
-        this.isPosting = false
-        this.errorText = 'Error pushing post to steem, try again'
-      })
+    search () {
+      this.debounce(() => {
+        this.isSearching = true
+        Api.search(this.searchTerm).then(result => {
+          this.isSearching = false
+          this.searchResults = result.data
+          console.log(this.searchResults)
+        }).catch(e => {
+          this.isSearching = false
+          this.errorText = 'there was an error with search'
+          console.log('error:', e)
+        })
+      }, 1000)
     }
   }
 }
