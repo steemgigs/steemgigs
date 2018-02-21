@@ -21,7 +21,7 @@
             </div>
             <div class="card-content">
               <loading-placeholder v-if="!contentLoaded" />
-              <div v-html="currentGig.body"></div>
+              <div class="gigBody" v-html="currentGig.body"></div>
               <hr class="my-2">
               <div class="menu row mb-2">
                 <div v-if="contentLoaded" class="col detail-action m3 offset-m9">
@@ -97,6 +97,7 @@
             <div class="moreProfileInfo">
               <span class="card-title">Description</span>
               <p v-text="profile.about"></p>
+              <router-link :to="'/@' + profileData.account"></router-link>
             </div>
           </div>
         </div>
@@ -433,7 +434,7 @@ export default {
   }
   h2.headline {
     color: rgb(160, 158, 158);
-    font-size: 2.5;
+    font-size: 2.5rem;
   }
   .profileOwner {
     position: relative;

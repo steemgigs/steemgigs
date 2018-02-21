@@ -2,7 +2,7 @@ import axios from '@/plugins/axios'
 
 export default {
   search (term) {
-    return axios.post('/', { query: { searchText: term } })
+    return axios.post('/search', { query: { searchText: term } })
   },
   fetchUserData (username) {
     return axios.get(`/profile/${username}`)

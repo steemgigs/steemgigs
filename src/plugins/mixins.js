@@ -7,24 +7,24 @@ export default {
     stringify (obj) {
       return JSON.stringify(obj, null, 2)
     },
-    // debounce: function (callback, wait, context = this) {
-    //   let timeout = null
-    //   let callbackArgs = null
-    //   const later = () => callback.apply(context, callbackArgs)
-    //   return function() {
-    //     callbackArgs = arguments
-    //     clearTimeout(timeout)
-    //     timeout = setTimeout(later, wait)
-    //   }
-    // },
-    debounce: (fn, time) => {
-      let timeout
+    debounce: function (callback, wait, context = this) {
+      let timeout = null
+      let callbackArgs = null
+      const later = () => callback.apply(context, callbackArgs)
       return function () {
-        const functionCall = () => fn.apply(this, arguments)
+        callbackArgs = arguments
         clearTimeout(timeout)
-        timeout = setTimeout(functionCall, time)
+        timeout = setTimeout(later, wait)
       }
     },
+    // debounce: (fn, time) => {
+    //   let timeout
+    //   return function () {
+    //     const functionCall = () => fn.apply(this, arguments)
+    //     clearTimeout(timeout)
+    //     timeout = setTimeout(functionCall, time)
+    //   }
+    // },
     slugify (word) {
       // return word.replace(/\s+/g, '-').toLowerCase()
       // eslint-disable-next-line

@@ -312,7 +312,7 @@ export default {
       }
       let textifiedPics = '\n<h2>Portfolio</h2>\n<hr />\n'
       this.newGigData.portfolio.forEach(url => {
-        textifiedPics += '![Potfolio](' + url + ')\n\n'
+        textifiedPics += `<img src="${url}"> <br />`
       })
       let username = this.$store.state.username
       let permlink = this.slugify(this.newGigData.title)
