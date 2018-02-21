@@ -97,7 +97,7 @@
             <div class="moreProfileInfo">
               <span class="card-title">Description</span>
               <p v-text="profile.about"></p>
-              <router-link :to="'/@' + profileData.account"></router-link>
+              <router-link class="see-more" :to="'/@' + sellerUsername">See More <i class="ion-plus-round"></i></router-link>   
             </div>
           </div>
         </div>
@@ -363,10 +363,6 @@ export default {
     a,.link,a *{
       cursor: pointer;
     }
-  }
-  h2.headline {
-    color: rgb(160, 158, 158);
-    font-size: 2.5rem;
   }
   .profileOwner {
     position: relative;

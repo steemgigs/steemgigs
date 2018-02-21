@@ -8,7 +8,8 @@
         <i class="icon ion-ios-search-strong white-text"></i>
       </span>
       <input v-model="searchTerm" placeholder="type to start searching..." type="text" @input="search" class="search-panel">
-      <p class="right-align hint-text amber-text text-lighten-5">Hit ENTER to search or ESC to close</p>
+      <p class="right-align hint-text amber-text text-lighten-5">
+        <i class="fa fa-spinner fa-pulse search-loader" v-if="isSearching" /> Hit ENTER to search or ESC to close</p>
     </div>
     <div class="results row">
       <div v-if="currentResults" class="col s12 m6" v-for="(result, i) in currentResults" :key="i">
@@ -111,6 +112,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.search-loader {
+  display: inline-block;
+  margin: 0 6vw;
+  font-size: 1.5rem;
+}
 .searchBox {
   width: 90vw;
   height: 95vh;
