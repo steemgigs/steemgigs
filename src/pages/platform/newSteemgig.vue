@@ -316,7 +316,7 @@ export default {
       })
       let username = this.$store.state.username
       let permlink = this.slugify(this.newGigData.title)
-      let body = this.previewData + `
+      let body = this.previewData + textifiedPics + `
 <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
       `
       let token = this.$store.state.accessToken
