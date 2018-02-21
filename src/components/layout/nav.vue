@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import sc2 from '@/services/sc2'
 import SearchBox from '@/components/layout/searchBox'
 export default {
   components: {
@@ -55,6 +56,8 @@ export default {
       searchResults: [],
       currentSearchPage: 1,
       searchTerm: '',
+      isAuth: false,
+      loginURL: sc2.getLoginURL(),
       isSearching: false
     }
   },
