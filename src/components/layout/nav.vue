@@ -33,7 +33,7 @@
           </li>
         </ul>
         <ul class="right stretch">
-          <li><a href="#" @click="searchActive = true" class="search-icon inline-block"><i class="ion-ios-search-strong x2"></i></a><input v-model="searchTerm" type="text" @keypress="updateSearchList" @blur="searchActive = false" class="search-panel browser-default"></li>
+          <li><a href="#" @click="searchActive = true" class="search-icon inline-block"><i class="ion-ios-search-strong x2"></i></a></li>
           <ul v-if="searchList > 1" class="search-dropdown">
             <li>I Will build a responsive website for only 3steem</li>
             <li>I Will build a responsive website for only 3steem</li>
@@ -42,7 +42,38 @@
         </ul>
       </div>
     </nav>
-    <div class="searchBox">
+    <div v-if="searchActive" class="searchBox">
+      <span class="close" @click="searchActive = false">
+        <i class="icon ion-close-round white-text"></i>
+      </span>
+      <div class="queryBox">
+        <span class="left searchIcon">
+          <i class="icon ion-ios-search-strong white-text"></i>
+        </span>
+        <input v-model="searchTerm" placeholder="type to start searching..." type="text" @keypress="updateSearchList" class="search-panel">
+        <p class="right-align hint-text amber-text text-lighten-5">Hit ENTER to search or ESC to close</p>
+      </div>
+      <div class="results row">
+        <div class="col s12 m6" v-for="(result, i) in 10" :key="i">
+          <div class="result">
+            <p class="title">I will sleep on the floor for 3 STEEM</p>
+            <p class="description">by @jalasem in Web Programming / Web Design</p>
+            <span class="price">3 STEEM</span>
+          </div>
+        </div>
+      </div>
+      <div class="more">
+        <ul class="pagination">
+          <span>More results</span>
+          <li class="disabled"><a href="#!"><i class="icon ion-ios-arrow-left"></i></a></li>
+          <li class="active"><a href="#!">1</a></li>
+          <li class="waves-effect"><a href="#!">2</a></li>
+          <li class="waves-effect"><a href="#!">3</a></li>
+          <li class="waves-effect"><a href="#!">4</a></li>
+          <li class="waves-effect"><a href="#!">5</a></li>
+          <li class="waves-effect"><a href="#!"><i class="icon ion-ios-arrow-right"></i></a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -62,7 +93,7 @@ export default {
   },
   methods: {
     updateSearchList () {
-      Api.search(searchTerm).then((result) => {
+      Api.search(this.searchTerm).then((result) => {
         console.log(result)
         this.isSearching = false
         this.searchList = result.data
@@ -82,11 +113,101 @@ $blue:#4757b2;
   margin-bottom: -1.5em;
   .searchBox {
     width: 90vw;
-    height: 90vh;
-    bottom: 8vh;
-    background: #4757b2;
-    position: absolute;
+    height: 95vh;
+    top: 2vh;
+    background: rgb(96, 125, 139);
+    position: fixed;
     left: 5vw;
+    span.close {
+      position: fixed;
+      cursor: pointer;
+      z-index: 20;
+      top: 1.5em;
+      right: 6.5vw;
+      i.icon {
+        font-size: 2em;
+      }
+    }
+    .queryBox {
+      width: fit-content;
+      margin: 2em auto;
+      text-align: center;
+      .searchIcon {
+        cursor: pointer;
+        i.icon {
+          font-size: 3em;
+          position: absolute;
+          margin-left: -0.5em;
+        }
+      }
+      input[type="text"] {
+        font-size: 3em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        border-bottom: 2px solid rgb(247, 247, 247);
+        font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+        width: 100%;
+        color: rgb(247, 247, 247);
+        text-align: center;
+        max-width: 20em;
+        &+.hint-text {
+          margin-top: 0;
+        }
+      }
+    }
+    .results {
+      height: 62vh;
+      overflow-y: auto;
+      .result {
+        background: rgb(255, 255, 255);
+        box-sizing: border-box;
+        position: relative;
+        padding: 1px 1em;
+        margin: 1em;
+        .title {
+          font-size: 1.7em;
+          line-height: 100%;
+          margin-top: 0.7em;
+          max-width: 35.5vw;
+        }
+        .description {
+          margin-top: -1em;
+        }
+        .price {
+          float: right;
+          font-size: 1.5em;
+          top: 1.3em;
+          position: absolute;
+          right: 0.5em;
+          color: rgb(55, 71, 79)
+        }
+      }
+    }
+    .more {
+      padding: 0 2em 0 1em;
+      color: rgb(255, 255, 255);
+      text-align: right;
+      .pagination {
+        margin-top: -0.5em;
+        &>span:first-child {
+          display: inline-block;
+          margin-top: 0.2em;
+          margin-right: 0.5em;
+          font-size: 1.1em;
+        }
+        li {
+          a {
+            color: #f7f7f7;
+          }
+        }
+        li.active {
+          background-color: #f7f7f7;
+          a {
+            color: black;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -102,14 +223,14 @@ nav {
     right: 0;
   }
   .search-panel {
-    width: 0;
-    overflow: hidden;
-    transition: all .7s ease-in;
-    border-radius: 50px;
-    border: none;
-    background: rgb(238, 238, 238);
-    display: inline-block;
-    transform: translateY(-2.3px);
+    // width: 0;
+    // overflow: hidden;
+    // transition: all .7s ease-in;
+    // border-radius: 50px;
+    // border: none;
+    // background: rgb(238, 238, 238);
+    // display: inline-block;
+    // transform: translateY(-2.3px);
     &:focus {
       outline: 0 solid;
       border: 1px solid rgb(203, 135, 252);
