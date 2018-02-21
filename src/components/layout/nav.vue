@@ -37,6 +37,8 @@
         </ul>
       </div>
     </nav>
+    <div class="searchBox">
+    </div>
   </div>
 </template>
 
@@ -60,6 +62,14 @@ $blue:#4757b2;
 
 .navbar-fixed {
   margin-bottom: -1.5em;
+  .searchBox {
+    width: 90vw;
+    height: 90vh;
+    bottom: 8vh;
+    background: #4757b2;
+    position: absolute;
+    left: 5vw;
+  }
 }
 
 nav a.brand-logo, nav li a, nav a {
