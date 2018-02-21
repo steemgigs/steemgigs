@@ -1,13 +1,15 @@
 <template>
   <div class="testimonial-card card">
     <div class="card-content center">
+        <router-link class="username" :to="username">
       <img :src="userImage" class="userImage" alt="">
+      </router-link>
       <div class="content">
         <h3>{{subject}}</h3>
         <div class="my-2">
-          <router-link class="username" :to="'/@' + username" v-text="username"></router-link>
+          <router-link class="username" :to="username" v-text="username"></router-link>
         </div>
-        <router-link class="grey-text text-darken-3" :to="'/@' + username + '/' + permlink">
+        <router-link class="grey-text text-darken-3" :to="username + '/' + permlink">
           <div v-html="body" />
         </router-link>
       </div>
