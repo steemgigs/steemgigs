@@ -2,13 +2,15 @@ import axios from '@/plugins/axios'
 
 export default {
   fetchUserData (username) {
-    return axios.post(`/fetchUserData/`, {username})
+    // return axios.post(`/fetchUserData/`, {username})
+    return axios.get(`/profile/${username}`)
   },
   fetchUserGigs (username) {
     return axios.post('/fetchUserGigs', {username})
   },
   fetchSinglePost (username, permlink) {
-    return axios.post('/fetchSinglePost', {username, permlink})
+    // return axios.post('/fetchSinglePost', {username, permlink})
+    return axios.get(`/steemgig/${username}/${permlink}`)
   },
   imageUpload (formdata) {
     return axios.post('/imgUpload', formdata)
