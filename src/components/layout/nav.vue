@@ -33,7 +33,12 @@
           </li>
         </ul>
         <ul class="right stretch">
-          <li><a href="#" @click="searchActive = !searchActive" class="inline-block"><i class="ion-ios-search-strong x2"></i></a><input type="text" class="search-panel browser-default"></li>
+          <li><a href="#" @click="searchActive = true" class="search-icon inline-block"><i class="ion-ios-search-strong x2"></i></a><input v-model="searchTerm" type="text" @keypress="updateSearchList" @blur="searchActive = false" class="search-panel browser-default"></li>
+          <ul v-if="searchList > 1" class="search-dropdown">
+            <li>I Will build a responsive website for only 3steem</li>
+            <li>I Will build a responsive website for only 3steem</li>
+            <li>I Will build a responsive website for only 3steem</li>
+          </ul>
         </ul>
       </div>
     </nav>
@@ -41,15 +46,28 @@
 </template>
 
 <script>
-import sc2 from '@/services/sc2'
+import Api from '@/services/api'
 export default {
   data () {
     return {
-      isAuth: false,
-      loginURL: sc2.getLoginURL(),
       user: '',
       metadata: '',
-      searchActive: false
+      searchActive: false,
+      searchList: [],
+      searchTerm: '',
+      isSearching: false
+    }
+  },
+  methods: {
+    updateSearchList () {
+      Api.search(searchTerm).then((result) => {
+        console.log(result)
+        this.isSearching = false
+        this.searchList = result.data
+      }).catch((e) => {
+        this.isPosting = false
+        this.errorText = 'Error pushing post to steem, try again'
+      })
     }
   }
 }
@@ -69,6 +87,10 @@ nav a.brand-logo, nav li a, nav a {
 nav {
   box-shadow: 0 0;
   border-bottom: 0px solid #e9e7e7;
+  .search-icon {
+    position: absolute;
+    right: 0;
+  }
   .search-panel {
     width: 0;
     overflow: hidden;
@@ -92,6 +114,25 @@ nav {
     .search-panel {
       width: 300px;
       padding: 7px 15px;
+    }
+    .search-dropdown {
+      display: block !important;
+      margin-top: 58px;
+      margin-left: 50px;
+      color: #333;
+      background: #eeeeef;
+      text-align: center;
+      padding: 2px 25px;
+      border-radius: 3px;
+      box-shadow: 0 3px 9px rgba(223, 223, 223, 0.2);
+      li {
+        float: none;
+        cursor: pointer;
+        transition: color .3s ease;
+        &:hover {
+          color: #4757b2;
+        }
+      }
     }
     // .shrink {
     //   width: 0;
