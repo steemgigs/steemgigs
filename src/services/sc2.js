@@ -5,7 +5,7 @@ const sc = sc2.Initialize({
   app: 'steemgig.app',
   callbackURL: 'http://localhost:8080/complete',
   // callbackURL: 'https://steemgigsorg.firebaseapp.com/complete',
-  scope: ['login', 'vote', 'comment', 'comment_delete', 'comment_options', 'custom_json', 'claim_reward_balance']
+  scope: ['login', 'vote', 'comment', 'comment_delete', 'comment_options', 'custom_json']
 })
 
 export default sc

@@ -686,7 +686,7 @@ Vue.prototype.categories = [
     ]
   }
 ]
-Vue.prototype.$imgUploadURL = 'http://localhost:5000/imgUpload'
+Vue.prototype.$imgUploadURL = 'https://steemgigsbackend-ybbwjqrfgw.now.sh/imgUpload'
 
 Vue.config.productionTip = false
 Vue.prototype.$eventBus = new Vue()
