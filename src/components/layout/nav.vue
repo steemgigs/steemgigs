@@ -75,9 +75,9 @@ nav {
     transition: all .7s ease-in;
     border-radius: 50px;
     border: none;
-    background: beige;
+    background: rgb(238, 238, 238);
     display: inline-block;
-    transform: translateY(-6.1px);
+    transform: translateY(-2.3px);
     &:focus {
       outline: 0 solid;
       border: 1px solid rgb(203, 135, 252);
