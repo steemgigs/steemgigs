@@ -83,11 +83,6 @@ nav {
       border: 1px solid rgb(203, 135, 252);
     }
   }
-  // .shrink {
-  //   width: initial;
-  //   transition: all .5s ease-in;
-  //   overflow: hidden;
-  // }
   &.search-active {
     .search-panel {
       width: 300px;
