@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import sc2 from '@/services/sc2'
+import Api from '@/services/api'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import ImgUpload from '@/components/snippets/imgUpload'
@@ -163,27 +163,21 @@ export default {
         // images: this.newTestimonial.portfolio,
         generated: true
       }
-      sc2.setAccessToken(this.$store.state.accessToken)
-      // let textifiedPics = '\n## Portfolio\n<hr />\n'
-      // this.newTestimonial.portfolio.forEach(url => {
-      //   textifiedPics += '![Potfolio](' + url + ')\n\n'
-      // })
-      // let body = this.previewData + textifiedPics + `
-      let body = this.newTestimonial.description + `
-<h5>this post was made on #STEEMGIGS</h5>
-"where everyone has something to offer"
-      `
-      let permlink = this.slugify(this.newTestimonial.title)
       let username = this.$store.state.username
+      let permlink = this.slugify(this.newTestimonial.title)
+      let body = this.newTestimonial.description + `
+<i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
+      `
       let title = this.steemedTitle
-      sc2.comment('', 'steemgigs', username, permlink, title, body, jsonMetadata, (err, res) => {
+      let token = this.$store.state.accessToken
+      // username, permlink, title, body, jsonMetadata, token
+      Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
         console.log(err, res)
         that.isPosting = false
-        if (err) {
-          that.errorText = 'Error pushing post to steem, try again'
-        } else {
-          that.successText = 'Successfully pushed to steem!'
-        }
+        that.successText = 'Successfully pushed to steem!'
+      }).catch((e) => {
+        that.isPosting = false
+        that.errorText = 'Error pushing post to steem, try again'
       })
     }
   },
@@ -206,8 +200,8 @@ ${this.newTestimonial.description}
   },
   mounted () {
     this.$eventBus.$on('img-uploaded', payload => {
-      console.log(payload)
-      this.newTestimonial.portfolio[payload.index] = payload.url
+    //   console.log(payload)
+    //   this.newTestimonial.portfolio[payload.index] = payload.url
     })
   },
   deforeDestroy () {

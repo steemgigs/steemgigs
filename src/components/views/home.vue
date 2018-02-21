@@ -180,8 +180,12 @@
             </select>
           </span>
         </div>
-        <div v-if="!testimonialsFetched && testimonials.length < 1" class="col s12 center-align center">
-          <plane size="100" />
+        <div v-if="testimonials.length < 1" class="col s12 center-align center">
+          <plane v-if="!testimonialsFetched" size="100" />
+          <div v-if="testimonialsFetched" class="center center-align">
+            <p class="flow-text grey-text">Be the first to tell how much you love steemgigs</p>
+            <router-link to="/create_testimonial" tag="button" class="btn indigo">Post a testimonial</router-link>
+          </div>
           <br><br>
           <br><br>
         </div>

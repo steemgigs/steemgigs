@@ -24,17 +24,17 @@ export default {
   fetchTestimonials () {
     return axios.get('/steemgigs/steemgigs_testimonial/')
   },
+  fetchUntalented () {
+    return axios.get('/steemgigs/steemgigs_untalented/')
+  },
+  fetchFeatured () {
+    return axios.get('/featured')
+  },
   fetchCatPosts (category) {
     return axios.post('/fetchCatPosts', {category})
   },
   fetchSubCatPosts (category, subcategory) {
     return axios.post('/fetchSubCatPosts', {category, subcategory})
-  },
-  fetchFeatured () {
-    return axios.get('/featured')
-  },
-  fetchUntalented () {
-    return axios.get('/untalented')
   },
   morePosts () {
     return axios.get('/moreposts')
