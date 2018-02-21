@@ -1,11 +1,12 @@
 <template>
-  <div :class="pageClassList">
+  <div @click="closeSearch" :class="pageClassList">
     <slot>Empty Page</slot>
   </div>
 </template>
 
 <script>
 import sc2 from '@/services/sc2'
+
 export default {
   props: {
     pageClasses: {
@@ -16,6 +17,11 @@ export default {
   computed: {
     pageClassList () {
       return this.pageClasses.join(' ')
+    }
+  },
+  methods: {
+    closeSearch () {
+      this.$eventBus.$emit('close-search')
     }
   },
   mounted () {
