@@ -686,6 +686,7 @@ Vue.prototype.categories = [
     ]
   }
 ]
+Vue.prototype.$imgUploadURL = 'http://localhost:5000/imgUpload'
 
 Vue.config.productionTip = false
 Vue.prototype.$eventBus = new Vue()
