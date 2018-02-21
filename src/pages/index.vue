@@ -22,7 +22,6 @@ export default {
     // })
     Api.fetchPosts().then(response => {
       let fetched = response.data
-      console.log('fetched', fetched)
       this.$store.commit('SET_STEEMGIGS', {fetched})
       this.$eventBus.$emit('posts-fetched', fetched)
     }).catch(err => {
@@ -31,7 +30,6 @@ export default {
     })
     Api.fetchGigRequests().then(response => {
       let fetched = response.data
-      console.log('fetched', fetched)
       this.$store.commit('SET_GIGREQUESTS', fetched)
       this.$eventBus.$emit('gigrequests-fetched', fetched)
     }).catch(err => {
@@ -40,7 +38,6 @@ export default {
     })
     Api.fetchFeatured().then(response => {
       let fetched = response.data
-      console.log('fetched', fetched)
       this.$store.commit('SET_FEATURED', fetched)
       this.$eventBus.$emit('featured-fetched', fetched)
     }).catch(err => {
@@ -49,7 +46,6 @@ export default {
     })
     Api.fetchTestimonials().then(response => {
       let fetched = response.data
-      console.log('fetched', fetched)
       this.$store.commit('SET_TESTIMONIALS', fetched)
       this.$eventBus.$emit('testimonials-fetched', fetched)
     }).catch(err => {
@@ -58,7 +54,6 @@ export default {
     })
     Api.fetchUntalented().then(response => {
       let fetched = response.data
-      console.log('fetched', fetched)
       this.$store.commit('SET_UNTALENTED', fetched)
       this.$eventBus.$emit('untalented-fetched', fetched)
     }).catch(err => {

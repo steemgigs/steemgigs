@@ -5,14 +5,21 @@ export default {
     return axios.post('/search', { query: { searchText: term } })
   },
   fetchUserData (username) {
+    // return axios.post(`/fetchUserData/`, {username})
     return axios.get(`/profile/${username}`)
   },
   fetchUserGigs (username) {
-    return axios.post('/fetchUserGigs', {username})
+    return axios.get(`/usergigs/${username}`)
   },
   fetchSinglePost (username, permlink) {
     // return axios.post('/fetchSinglePost', {username, permlink})
     return axios.get(`/steemgig/${username}/${permlink}`)
+  },
+  fetchComments (username, permlink) {
+    return axios.get(`/comments/${username}/${permlink}`)
+  },
+  fetchSingleComment (username, permlink) {
+    return axios.get(`/comment/${username}/${permlink}`)
   },
   imageUpload (formdata) {
     return axios.post('/imgUpload', formdata)
@@ -33,10 +40,10 @@ export default {
     return axios.get('/featured')
   },
   fetchCatPosts (category) {
-    return axios.post('/fetchCatPosts', {category})
+    return axios.get(`/steembycat/${category}`)
   },
-  fetchSubCatPosts (category, subcategory) {
-    return axios.post('/fetchSubCatPosts', {category, subcategory})
+  fetchSubCatPosts (subcategory) {
+    return axios.get(`/steembysubcat/${subcategory}`)
   },
   morePosts () {
     return axios.get('/moreposts')
@@ -47,15 +54,6 @@ export default {
   moreTestimonials () {
     return axios.get('/moretestimonials')
   },
-  fetchComments (credentials) {
-    return axios.post('/comments', credentials)
-  },
-  fetchSingleComment (credentials) {
-    return axios.post('/fetchSingleComment', credentials)
-  },
-  fetchCommentInfo (username) {
-    return axios.post('/fetchUserInfo', {username})
-  },
   //  new routes
   post (credentials, token) {
     return axios.post('/post', credentials, {
@@ -63,5 +61,15 @@ export default {
         token: token
       }
     })
+  },
+  comment (credentials, token) {
+    return axios.post('/comment', credentials, {
+      headers: {
+        token: token
+      }
+    })
+  },
+  fetchCommentInfo (username) {
+    return axios.get(`/userImage/${username}`)
   }
 }

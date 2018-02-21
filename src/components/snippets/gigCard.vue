@@ -142,7 +142,12 @@ $blue: #4757b2;
   cursor: pointer;
   .card-image {
     position: relative;
-    min-height: 10em;
+    height: 12em;
+    object-fit: cover;
+    .VueCarousel {
+        height: 100%;
+        overflow: hidden;
+    }
   }
   .card-content {
     padding: 3em 1em 1em;

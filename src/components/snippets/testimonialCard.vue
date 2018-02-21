@@ -1,11 +1,15 @@
 <template>
   <div class="testimonial-card card">
     <div class="card-content center">
+        <router-link class="username" :to="username">
       <img :src="userImage" class="userImage" alt="">
+      </router-link>
       <div class="content">
         <h3>{{subject}}</h3>
-        <router-link class="username" :to="'/@' + username" v-text="username"></router-link>
-        <router-link :to="'/@' + username + '/' + permlink">
+        <div class="my-2">
+          <router-link class="username" :to="username" v-text="username"></router-link>
+        </div>
+        <router-link class="grey-text text-darken-3" :to="username + '/' + permlink">
           <div v-html="body" />
         </router-link>
       </div>
@@ -96,7 +100,7 @@ export default {
     box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     .card-content {
-      min-height: 360px;
+      min-height: 315px;
     }
     img.userImage {
       height: 90px;

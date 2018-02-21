@@ -316,14 +316,14 @@ export default {
       })
       let username = this.$store.state.username
       let permlink = this.slugify(this.newGigData.title)
-      let body = this.previewData + textifiedPics + `
+      let body = this.previewData + `
 <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
       `
       let token = this.$store.state.accessToken
       let title = '#STEEMGIGS: I will ' + this.newGigData.title
       // username, permlink, title, body, jsonMetadata, token
       Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
-        console.log(err, res)
+        console.log('err', err, 'res', res)
         that.isPosting = false
         that.successText = 'Successfully pushed to steem!'
       }).catch((e) => {

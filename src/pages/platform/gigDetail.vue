@@ -21,7 +21,7 @@
             </div>
             <div class="card-content">
               <loading-placeholder v-if="!contentLoaded" />
-              <div class="gigBody" v-html="currentGig.body"></div>
+              <div v-html="parsedBody"></div>
               <hr class="my-2">
               <div class="menu row mb-2">
                 <div v-if="contentLoaded" class="col detail-action m3 offset-m9">
@@ -150,7 +150,8 @@ export default {
         },
         curator_payout_value: {
           amount: 0
-        }
+        },
+        body: ''
       },
       vacation_mode: false,
       currentView: 'active_gigs',
@@ -179,6 +180,11 @@ export default {
   computed: {
     title () {
       return this.desteemgify(this.currentGig.title)
+    },
+    parsedBody () {
+      return this.currentGig.body.split(`
+<i>this post was made on <a href="https://steemgigs.org/@${this.currentGig.author}/${this.currentGig.permlink}">STEEMGIGS Where everyone has something to offer</a></i>
+      `)[0]
     },
     portfolio () {
       if (this.currentGig.json_metadata.images) {
@@ -265,7 +271,7 @@ export default {
     async fetchComments () {
       console.log('Fetching comments')
       try {
-        let response = await Api.fetchComments({parent_author: this.currentGig.author, parent_permlink: this.currentGig.permlink})
+        let response = await Api.fetchComments(this.currentGig.author, this.currentGig.permlink)
         this.comments = response.data
         console.log(this.comments)
       } catch (err) {
@@ -273,89 +279,15 @@ export default {
       }
     },
     postComment () {
-      let now = new Date().toISOString().replace(/-/g, '').replace(/:/g, '').replace(/\./g, '').replace(/Z/, 'z').replace(/T/, 't')
       this.isPosting = true
-      let that = this
-      let permlink = `re-${this.currentGig.author}-${this.currentGig.permlink}-${now}`
-      console.log(permlink)
-      sc2.comment(this.currentGig.author, this.currentGig.permlink, this.$store.state.username, permlink, '', this.myComment, {generated: true}, (err, res) => {
-        that.isPosting = false
-        if (!err) {
-          this.commentMode = false
-          let commentObject = {
-            '_id': '5a8497b24938f68db8de0102',
-            'abs_rshares': 971952359,
-            'active_votes': [],
-            'allow_curation_rewards': true,
-            'allow_replies': true,
-            'allow_votes': true,
-            'author': that.$store.state.username,
-            'author_rewards': 0,
-            'beneficiaries': [],
-            'body': that.myComment,
-            'body_length': 0,
-            'cashout_time': '2018-02-21T20:08:00.000Z',
-            'category': 'steemgigs',
-            'children': 0,
-            'children_abs_rshares': 0,
-            'community': '',
-            'created': new Date(),
-            'curator_payout_value': {
-              'amount': 0,
-              'asset': 'SBD'
-            },
-            'depth': 6,
-            'id': 32680753,
-            'json_metadata': {
-              'generated': true,
-              'tags': [],
-              'users': []
-            },
-            'last_payout': '1970-01-01T00:00:00.000Z',
-            'last_update': '2018-02-14T20:08:00.000Z',
-            'max_accepted_payout': {
-              'amount': 1000000,
-              'asset': 'SBD'
-            },
-            'max_cashout_time': '1969-12-31T23:59:59.000Z',
-            'net_rshares': 366020034,
-            'net_votes': 1,
-            'parent_author': that.currentGig.author,
-            'parent_permlink': that.currentGig.permlink,
-            'patched': false,
-            'pending_payout_value': {
-              'amount': 0,
-              'asset': 'SBD'
-            },
-            'percent_steem_dollars': 10000,
-            'permlink': permlink,
-            'promoted': {
-              'amount': 0,
-              'asset': 'SBD'
-            },
-            'reblogged_by': [],
-            'replies': [],
-            'reward_weight': 10000,
-            'root_comment': 29989383,
-            'root_identifier': that.currentGig.root_identifier,
-            'root_title': that.currentGig.root_title,
-            'tags': [],
-            'title': '',
-            'total_payout_value': {
-              'amount': 0,
-              'asset': 'SBD'
-            },
-            'total_pending_payout_value': {
-              'amount': 0,
-              'asset': 'STEEM'
-            },
-            'total_vote_weight': 0,
-            'updatedAt': '2018-02-15T11:31:41.024Z',
-            'vote_rshares': 605932325
-          }
-          that.comments.push(commentObject)
-          that.myComment = ''
-        }
+      Api.comment({parentAuthor: this.currentGig.author, parentPermlink: this.currentGig.permlink, username: this.$store.state.username, body: this.myComment}, this.$store.state.accessToken).then((result) => {
+        this.isPosting = false
+        this.commentMode = false
+        this.comments.push(result.data)
+        this.myComment = ''
+      }).catch((e) => {
+        this.isPosting = false
+        console.log(e)
       })
     },
     vote () {

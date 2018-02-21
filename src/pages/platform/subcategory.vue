@@ -19,7 +19,7 @@
         </div>
       </div>
       <div v-if="!loading">
-        <div v-if="catgigs.length > 0" class="col s12 m6 l3" v-for="(gig, index) in catgigs" :key="index">
+        <div v-if="catgigs.length > 0" class="col s12 m6 l3 left-align" v-for="(gig, index) in catgigs" :key="index">
           <gig-card :gigData="gig" />
         </div>
         <div v-if="catgigs.length <= 0">
@@ -54,7 +54,7 @@ export default {
   methods: {
     fetchSubCatPosts () {
       this.loading = true
-      Api.fetchSubCatPosts(this.$route.params.category, this.$route.params.subcategory).then(result => {
+      Api.fetchSubCatPosts(this.$route.params.subcategory).then(result => {
         this.catgigs = result.data
         this.loading = false
         console.log('fetchedSubCatPosts::', result.data)

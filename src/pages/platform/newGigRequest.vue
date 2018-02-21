@@ -181,33 +181,7 @@ export default {
         name: 'file',
         accept: 'image/jpg,image/jpeg,image/png',
         url: this.$imgUploadURL
-      },
-      categories: [
-        {
-          'name': 'Graphics & Design', 'subcategories': ['logo design', 'business cards and stationery', 'illustration', 'cartoons and carricatures', 'flyers and posters', 'book covers and packaging', 'web and mobile design', 'social media design', 'banner ads', 'photoshop editing', '3D & 2D models', 'T-shirts', 'presentation design', 'infographics', 'vector tracing', 'invitations', 'other']
-        },
-        {
-          'name': 'Digital marketing', 'subcategories': ['social media marketing', 'SEO', 'content marketing', 'video marketing', 'email marketing', 'search & display marketing', 'marketing strategy', 'web analysis', 'influencer marketing', 'local listings', 'domain research', 'e-commerce marketing', 'mobile advertising', 'nusic promotion', 'web traffic', 'other']
-        },
-        {
-          'name': 'Writing and translation', 'subcategories': ['resumes and cover letters', 'proof reading and editing', 'translation', 'creative writing', 'business copywriting', 'research & summaries', 'articles & blog posts', 'press releases', 'transcription', 'legal writing', 'other']
-        },
-        {
-          'name': 'Videos and animation', 'subcategories': ['whiteboard & animated explainers', 'intros & animated logos', 'promotional videos', 'editing and post production', 'lyric & music video', 'spokeperson videos', 'animated characters & modelling', 'short videos ads', 'live action explainers', 'other']
-        },
-        {
-          'name': 'Music & Audio', 'subcategories': ['voice over', 'mixing & mastering', 'producers & composers', 'singer-songwriters', 'session musicians & singers', 'jingles and drops', 'sound effects', 'other']
-        },
-        {
-          'name': 'Programming & tech', 'subcategories': ['wordpress', 'website builders & cms', 'web programming', 'e-commerce', 'mobile apps & web', 'desktop applications', 'support & IT', 'chatbots', 'data analysis & reports', 'convert files', 'databses', 'user testing', 'QA', 'other']
-        },
-        {
-          'name': 'Business', 'subcategories': ['virtual assistant', 'market research', 'business plans', 'branding services', 'legal consulting', 'financial consulting', 'business tips', 'presentations', 'career advice', 'flyer distribution', 'other']
-        },
-        {
-          'name': 'Untalented', 'subcategories': ['online lessons', 'arts and crafts', 'relationship advice', 'health, nutrition and fitness', 'astrology & readings', 'spiritual & healing', 'family & Genealogy', 'gaming', 'greeting cards & videos', 'your message on ...', 'viral videos', 'pranks & stunts', 'celebrity impersonators', 'collectibles', 'global culture', 'other']
-        }
-      ]
+      }
     }
   },
   methods: {
@@ -256,13 +230,12 @@ export default {
       // })
       // let body = this.previewData + textifiedPics + `
       let token = this.$store.state.accessToken
-      let body = this.previewData + `
-<h5>this post was made on #STEEMGIGS</h5>
-"where everyone has something to offer"
-      `
       let permlink = this.slugify(this.newGigRequest.title)
       let username = this.$store.state.username
       let title = this.steemedTitle
+      let body = this.previewData + `
+<i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
+      `
 
       Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
         console.log(err, res)

@@ -87,17 +87,20 @@
     <div class="col s12 m8 l9 row">
       <ul class="tabs">
         <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">ACTIVE STEEMGIGS</a></li>
-        <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'gig_requests'}" @click="changeView('gig_request')">CUSTOM REQUESTS</a></li>
+        <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'gig_request'}" @click="changeView('gig_request')">CUSTOM REQUESTS</a></li>
       </ul>
       <div v-if="currentView === 'active_gigs'" class="activeGigs">
-        <div class="col s12 m6 l4" v-for="(gig, index) in usergigs" :key="index">
+        <div class="col s12 m6 l4" v-for="(gig, index) in steemgigs" :key="index">
           <gig-card :gigData="gig" meantFor="profile" />
         </div>
       </div>
-      <div v-if="currentView !== 'gig_requests'" class="inactiveGigs">
-        <div class="col s12 m6 l4" v-for="(gig, index) in userRequests" :key="index">
+      <div v-if="currentView === 'gig_request'">
+        <div class="col s12 m6 l4" v-for="(gig, index) in gigrequests" :key="index">
           <gig-card :gigData="gig" meantFor="profile" />
         </div>
+      </div>
+      <div>
+
       </div>
     </div>
   </page>
@@ -145,6 +148,7 @@ export default {
     })
     Api.fetchUserGigs(this.$route.params.username).then(response => {
       this.usergigs = response.data
+      console.log(response)
     }).catch(err => {
       console.log('error retrieving user gigs: \n error:', this.stringify(err))
     })
@@ -161,6 +165,16 @@ export default {
     },
     ago () {
       return moment(this.profileData.last_post).fromNow()
+    },
+    steemgigs () {
+      return this.usergigs.filter((gig) => {
+        return gig.json_metadata.type === 'steemgigs_post'
+      })
+    },
+    gigrequests () {
+      return this.usergigs.filter((gig) => {
+        return gig.json_metadata.type === 'steemgigs_request'
+      })
     }
   },
   methods: {
