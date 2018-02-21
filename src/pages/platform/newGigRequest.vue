@@ -180,7 +180,7 @@ export default {
       uploadConfig: {
         name: 'file',
         accept: 'image/jpg,image/jpeg,image/png',
-        url: 'https://steemgigsbackend-lyktdrqlxz.now.sh/imgUpload'
+        url: this.$imgUploadURL
       },
       categories: [
         {

@@ -5,7 +5,9 @@
       <div class="content">
         <h3>{{subject}}</h3>
         <router-link class="username" :to="'/@' + username" v-text="username"></router-link>
-        <div v-html="body" />
+        <router-link :to="'/@' + username + '/' + permlink">
+          <div v-html="body" />
+        </router-link>
       </div>
     </div>
     <gig-action :gigData="testimonial" />
@@ -38,10 +40,13 @@ export default {
       } else return ''
     },
     body () {
-      return this.testimonial.body.split('<h5>this post was made on #STEEMGIGS</h5>')[0]
+      return this.testimonial.body.split(`<i>this post was made on <a href="https://steemgigs.org/${this.username}/${this.permlink}">STEEMGIGS Where everyone has something to offer</a></i>`)[0]
     },
     username () {
       return '@' + this.testimonial.author
+    },
+    permlink () {
+      return this.testimonial.permlink
     },
     comments () {
       return this.testimonial.children
