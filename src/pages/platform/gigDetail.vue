@@ -97,7 +97,7 @@
             <div class="moreProfileInfo">
               <span class="card-title">Description</span>
               <p v-text="profile.about"></p>
-              <router-link class="see-more" :to="'/@' + sellerUsername">See More <i class="ion-plus-round"></i></router-link>   
+              <router-link class="see-more" :to="'/@' + sellerUsername">See More <i class="ion-plus-round"></i></router-link>
             </div>
           </div>
         </div>
