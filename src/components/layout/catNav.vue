@@ -1,5 +1,5 @@
 <template>
-  <ul class="subnav center center-align hide-on-small-only">
+  <ul class="subnav center center-align hide-on-med-and-down">
     <li class="main-li" v-for="(category, index) in categories" :key="index">
       <router-link :to="'/categories/' + slugify(category.name)">{{ capitalize(category.name) }}</router-link>
       <div class="dropdown white z-depth-1 drop">

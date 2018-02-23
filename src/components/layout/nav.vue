@@ -8,7 +8,7 @@
           <li><a :href="loginURL">Log in</a></li>
         </ul>
         <ul class="right shrink" v-if="$store.state.accessToken">
-          <div class="hide-on-small-only left">
+          <div class="hide-on-med-and-down left">
             <li><a href="#" @click="openSearch" class="search-icon"><i class="ion-ios-search-strong x2"></i></a></li>
             <li>
               <router-link to="/message"><i class="icon ion-android-chat x2"></i></router-link>
