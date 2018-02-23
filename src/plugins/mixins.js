@@ -17,6 +17,14 @@ export default {
         timeout = setTimeout(later, wait)
       }
     },
+    rep (value) {
+      let rep = Math.log10(value)
+      if (isNaN(rep)) rep = 0
+      rep = Math.max(rep - 9, 0)
+      rep = (rep * 9) + 25
+      rep = parseInt(rep)
+      return rep
+    },
     // debounce: (fn, time) => {
     //   let timeout
     //   return function () {

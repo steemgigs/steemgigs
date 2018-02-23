@@ -23,7 +23,7 @@
           <li>
             <a><img class="profile_pic" :src="$store.state.profile.profileImage" alt=""></a>
             <ul class="white z-depth-1">
-              <li><router-link class="waves-effect" :to="'/@' + $store.state.username" v-text="$store.state.username"></router-link></li>
+              <li><router-link class="waves-effect" :to="'/@' + $store.state.username"> {{ $store.state.username + ' (' + repp + ') ' }} </router-link></li>
               <li><router-link class="waves-effect" to="/wallet">Wallet - {{ $store.state.profile.balance }}</router-link></li>
               <li><router-link class="waves-effect" to="/settings">Settings</router-link></li>
               <li><router-link class="waves-effect red-text" to="/invite">Invite friends</router-link></li>
@@ -43,6 +43,7 @@
 
 <script>
 import sc2 from '@/services/sc2'
+import Api from '@/services/api'
 import SearchBox from '@/components/layout/searchBox'
 export default {
   components: {
@@ -58,13 +59,22 @@ export default {
       searchTerm: '',
       isAuth: false,
       loginURL: sc2.getLoginURL(),
-      isSearching: false
+      isSearching: false,
+      repp: ''
     }
   },
   methods: {
     openSearch () {
       this.$eventBus.$emit('open-search')
+    },
+    fetchUserRep () {
+      Api.fetchCommentInfo(this.$store.state.username).then((result) => {
+        this.repp = result.data.rep
+      })
     }
+  },
+  mounted () {
+    this.fetchUserRep()
   }
   // methods: {
   //   search: debounce(function () {
