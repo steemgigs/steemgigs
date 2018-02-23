@@ -28,6 +28,7 @@ export default {
     sc2.setAccessToken(this.$store.state.accessToken)
     sc2.me((err, result) => {
       if (!err) {
+        console.log('my profile obj:', result)
         let {about, cover_image: coverImage, location, name, profile_image: profileImage, website} = JSON.parse(result.account.json_metadata).profile
         let walletBal = result.account.balance
         this.$store.commit('SET_PROFILE', {about, coverImage, location, name, profileImage, website, walletBal})

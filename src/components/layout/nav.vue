@@ -8,22 +8,25 @@
           <li><a :href="loginURL">Log in</a></li>
         </ul>
         <ul class="right shrink" v-if="$store.state.accessToken">
-          <li>
-            <router-link to="/message"><i class="icon ion-android-chat x2"></i></router-link>
-          </li>
-          <li>
-            <router-link to="/dashboard"><i class="icon ion-speedometer x2"></i></router-link>
-          </li>
-          <li>
-            <router-link to="/cart" ><i class="icon ion-bag x2"></i></router-link>
-          </li>
-          <li>
-            <router-link class="btn indigo white-text" to="/create_gig"><i class="icon left ion-plus-round"></i>Create</router-link>
-          </li>
+          <div class="hide-on-med-and-down left">
+            <li><a href="#" @click="openSearch" class="search-icon"><i class="ion-ios-search-strong x2"></i></a></li>
+            <li>
+              <router-link to="/message"><i class="icon ion-android-chat x2"></i></router-link>
+            </li>
+            <li>
+              <router-link to="/dashboard"><i class="icon ion-speedometer x2"></i></router-link>
+            </li>
+            <li>
+              <router-link to="/cart" ><i class="icon ion-bag x2"></i></router-link>
+            </li>
+            <li>
+              <router-link class="btn indigo white-text" to="/create_gig"><i class="icon left ion-plus-round"></i>Create</router-link>
+            </li>
+          </div>
           <li>
             <a><img class="profile_pic" :src="$store.state.profile.profileImage" alt=""></a>
             <ul class="white z-depth-1">
-              <li><router-link class="waves-effect" :to="'/@' + $store.state.username" v-text="$store.state.username"></router-link></li>
+              <li><router-link class="waves-effect" :to="'/@' + $store.state.username"> {{ $store.state.username + ' (' + repp + ') ' }} </router-link></li>
               <li><router-link class="waves-effect" to="/wallet">Wallet - {{ $store.state.profile.balance }}</router-link></li>
               <li><router-link class="waves-effect" to="/settings">Settings</router-link></li>
               <li><router-link class="waves-effect red-text" to="/invite">Invite friends</router-link></li>
@@ -31,9 +34,11 @@
               <li><a @click.prevent="logout()">logout</a></li>
             </ul>
           </li>
-        </ul>
-        <ul class="right stretch">
-          <li><a href="#" @click="openSearch" class="search-icon inline-block"><i class="ion-ios-search-strong x2"></i></a></li>
+          <li class="hide-on-large-only">
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger mx-0">
+              <i class="icon ion-navicon x2"></i>
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -43,7 +48,9 @@
 
 <script>
 import sc2 from '@/services/sc2'
+import Api from '@/services/api'
 import SearchBox from '@/components/layout/searchBox'
+
 export default {
   components: {
     SearchBox
@@ -58,13 +65,22 @@ export default {
       searchTerm: '',
       isAuth: false,
       loginURL: sc2.getLoginURL(),
-      isSearching: false
+      isSearching: false,
+      repp: ''
     }
   },
   methods: {
     openSearch () {
       this.$eventBus.$emit('open-search')
+    },
+    fetchUserRep () {
+      Api.fetchCommentInfo(this.$store.state.username).then((result) => {
+        this.repp = result.data.rep
+      })
     }
+  },
+  mounted () {
+    this.fetchUserRep()
   }
   // methods: {
   //   search: debounce(function () {
@@ -172,7 +188,7 @@ nav {
     &.container {
       min-width: 90%;
       a.brand-logo {
-        font-size: 28px;
+        font-size: 1.6rem;
         font-weight: bold;
         letter-spacing: 1px;
 

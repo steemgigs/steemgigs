@@ -18,7 +18,7 @@
               <textarea @keypress.enter.prevent @keyup.enter="''" v-model="newTestimonial.title" type="text" placeholder="Give a title to this testimonial" row="2" maxlength="90" minlength="5" required>
               </textarea>
               <p class="word-count right" v-text="wordCount"></p>
-              <div class="tutorial_guide center-align">
+              <div class="tutorial_guide center-align hide-on-small-only">
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title">How delighted are you by steemgigs?</span>
@@ -28,7 +28,7 @@
             </div>
             <div class="input-field col s12">
               <vue-editor v-model="newTestimonial.description" placeholder="Describe your experience with steemgigs" :upload="uploadConfig"></vue-editor>
-              <div class="tutorial_guide center-align">
+              <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title grey-text text-darken-1 left-align mb-4">If you're a steemgiger, you can apply this flow as yours</span>
