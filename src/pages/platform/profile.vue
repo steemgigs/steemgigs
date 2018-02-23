@@ -17,14 +17,14 @@
       </ul>
       <div v-if="currentView === 'active_gigs'" class="activeGigs">
         <div v-if="loading">
-          <div class="col s12 m6 l4 card-panel">
-            <loading-placeholder />
+          <div class="col s12 m6 l4">
+            <loading-placeholder class="card-panel" />
           </div>
-          <div class="col s12 m6 l4 card-panel">
-            <loading-placeholder />
+          <div class="col s12 m6 l4">
+            <loading-placeholder class="card-panel" />
           </div>
-          <div class="col s12 m6 l4 card-panel">
-            <loading-placeholder />
+          <div class="col s12 m6 l4">
+            <loading-placeholder class="card-panel" />
           </div>
         </div>
         <div class="col s12 m6 l4" v-for="(gig, index) in steemgigs" :key="index">
@@ -33,14 +33,14 @@
       </div>
       <div v-if="currentView === 'gig_request'">
         <div v-if="loading">
-          <div class="col s12 m6 l4 card-panel">
-            <loading-placeholder />
+          <div class="col s12 m6 l4">
+            <loading-placeholder class="card-panel" />
           </div>
-          <div class="col s12 m6 l4 card-panel">
-            <loading-placeholder />
+          <div class="col s12 m6 l4">
+            <loading-placeholder class="card-panel" />
           </div>
-          <div class="col s12 m6 l4 card-panel">
-            <loading-placeholder />
+          <div class="col s12 m6 l4">
+            <loading-placeholder class="card-panel" />
           </div>
         </div>
         <div class="col s12 m6 l4" v-for="(gig, index) in gigrequests" :key="index">

@@ -42,19 +42,37 @@
               <input type="file" accept="image/png,image/jpeg" class="hide" id="profile_image">
               <img :src="profileEdit.profile_image" class="user-pict-img" :alt="profile.account" width="150" height="150">
             </label>
-            <div class="input-field row">
+            <div class="row">
               <textarea id="about_me" placeholder="about_me" v-model="profileEdit.about" class="materialize-textarea"></textarea>
             </div>
-            <div class="input-field row">
-              <input type="text" @keyup.enter="addToSpeakArray" placeholder="I speak (Languages)" v-model="i_speak" id="desc">
+            <div class="row">
+              <input type="text" @keyup.enter="addToSpeakArray" placeholder="I speak (Languages)" v-model="i_speak">
               <i @click="addToSpeakArray" class="ion-plus add-lang-icon right"></i>
             </div>
             <ul class="language-list">
-              <li v-for="(spoken, i) in profileEdit.languages_i_speak" :key="i">
+              <li v-for="(spoken, i) in profileEdit.languages" :key="i">
                 {{spoken}}
                 <span class="right" @click="removeLanguage(i)"><i class="ion-close-round"></i></span>
               </li>
             </ul>
+            <div v-for="(social, i) in profileEdit.socialArray" :key="i" class="row">
+              <input type="text" :placeholder="capitalize(social.feed)" v-model="social.value">
+            </div>
+            <ul class="language-list">
+              <li v-for="(social, i) in socialFeeds" :key="i">
+                <b>{{social.feed}} :</b> {{social.value}}
+                <span class="right" @click="removeSocial(i)"><i class="ion-close-round"></i></span>
+              </li>
+            </ul>
+            <div class="row">
+              <div class="col m5 pl-0">
+                <input v-model="socialFeed" placeholder="Social">
+              </div>
+              <div class="col m7 pr-0">
+                <input type="text" @keyup.enter="addToSocialArray" placeholder="Username" v-model="socialValue">
+                <i @click="addToSocialArray" class="ion-plus add-lang-icon right"></i>
+              </div>
+            </div>
             <p>
               I'm on vacation <i class="icon ion-android-plane"></i>
               <span class="right">
@@ -66,13 +84,21 @@
                 </div>
               </span>
             </p>
-            <div class="input-field">
-              <select class="validate browser-default my-select" v-model="profileEdit.from">
+            <div class="row">
+              <select class="validate browser-default my-select" v-model="profileEdit.gender">
+                <option selected value="" disabled>Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="unknown">Will rather not tell</option>
+              </select>
+            </div>
+            <div class="row">
+              <select class="validate browser-default my-select" v-model="profileEdit.location">
                 <option selected value="" disabled>I am from</option>
                 <option v-for="(country, index) in countries" :key="index" :value="country">{{ country }}</option>
               </select>
             </div>
-            <button @click.prevent="updateProfile" class="btn-floating grey  right lighten-3"><i v-if="!isUpdating" class="ion-checkmark-round indigo-text"></i><i class="fa fa-spinner fa-pulse" v-if="isUpdating"></i></button>
+            <button @click.prevent="updateProfile" class="btn-floating grey  right lighten-3"><i v-if="!isUpdating" class="ion-checkmark-round indigo-text"></i><i class="fa fa-spinner indigo-text fa-pulse" v-if="isUpdating"></i></button>
         </div>
       </div>
     </div>
@@ -106,41 +132,91 @@ export default {
       profileUsername: '',
       currentView: 'active_gigs',
       i_speak: '',
+      socialFeed: '',
+      socialValue: '',
+      socialFeeds: [],
       countries: countries.getNames(),
       editMode: false,
       isUpdating: false,
       profileEdit: {
-        languages_i_speak: [],
-        from: '',
-        vacation_mode: false,
+        username: this.profile.account,
+        expertise: '',
+        profilePic: '',
+        coverPic: '',
+        languages: [],
+        location: '',
+        vacation: false,
         about: this.profile.profile.about,
-        profile_image: this.profile.profile.profile_image
+        profile_image: this.profile.profile.profile_image,
+        gender: '',
+        social: {
+          facebook: '',
+          website: '',
+          discord: ''
+        },
+        socialArray: [
+          {
+            feed: 'website',
+            value: ''
+          },
+          {
+            feed: 'github',
+            value: ''
+          },
+          {
+            feed: 'facebook',
+            value: ''
+          }
+        ]
       }
     }
   },
   methods: {
     addToSpeakArray () {
-      this.profileEdit.languages_i_speak.push(this.i_speak)
+      if (!this.i_speak) return
+      this.profileEdit.languages.push(this.i_speak)
       this.i_speak = ''
+    },
+    addToSocialArray () {
+      if (!this.socialFeed) return
+      let obj = {
+        feed: this.socialFeed,
+        value: this.socialValue
+      }
+      this.socialFeeds.push(obj)
+      this.socialFeed = ''
+      this.socialValue = ''
     },
     updateProfile () {
       let profile = this.profile
       this.isUpdating = true
-      profile.languages_i_speak = this.languages_i_speak || this.i_speak
+      profile.languages = this.languages || this.i_speak
       console.log('I got called with', this.profileEdit)
-      sc2.setAccessToken(this.$store.state.accessToken)
-      sc2.updateUserMetadata(this.profileEdit, (err, res) => {
+      Api.profileUpdate(this.profileEdit, this.$store.state.accessToken).then((result) => {
         this.isUpdating = false
-        console.log('res', res)
-        console.log('err', err)
+        console.log('update', result)
+      }).catch((e) => {
+        this.isUpdating = false
+        console.log(e)
       })
+      // sc2.setAccessToken(this.$store.state.accessToken)
+      // sc2.updateUserMetadata(this.profileEdit, (err, res) => {
+      //   this.isUpdating = false
+      //   console.log('res', res)
+      //   console.log('err', err)
+      // })
     },
     closeEdit () {
       this.editMode = false
       this.i_speak = ''
     },
     removeLanguage (index) {
-      this.profileEdit.languages_i_speak = this.profileEdit.languages_i_speak.filter((language, i) => {
+      this.profileEdit.languages = this.profileEdit.languages.filter((language, i) => {
+        return index !== i
+      })
+    },
+    removeSocial (index) {
+      this.socialFeeds = this.socialFeeds.filter((social, i) => {
         return index !== i
       })
     },
@@ -167,6 +243,11 @@ export default {
         return gig.json_metadata.type === 'steemgigs_request'
       })
     }
+    // social () {
+    //   return [...this.profileEdit.socialArray, ...this.socialFeeds].reduce((a) => {
+        
+    //   })
+    // }
   },
   props: {
     profile: {
@@ -206,6 +287,7 @@ export default {
         transition: transform .6s ease-in;
       }
       .back{
+        position: absolute;
         ul.language-list li {
           list-style-type: initial;
           color: #d1d1d1;

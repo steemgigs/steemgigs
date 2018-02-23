@@ -31,7 +31,7 @@
           <li v-for="(subcategory, index) in categoryDetails.subcategories" :key="index">
             <router-link :to="'/categories/' + slugify(categoryDetails.name) + '/' + slugify(subcategory.name)" class="">
               {{ capitalize(subcategory.name) }}
-            </router-link>  
+            </router-link>
           </li>
         </ul>
       </div>
