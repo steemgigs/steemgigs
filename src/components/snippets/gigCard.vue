@@ -123,6 +123,7 @@ export default {
     fetchUserRep () {
       Api.fetchCommentInfo(this.sellerUsername).then((result) => {
         this.repp = result.data.rep
+        this.imgUrl = result.data.profileImage
       })
     }
   },
