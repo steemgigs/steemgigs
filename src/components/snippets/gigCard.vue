@@ -14,8 +14,8 @@
       </router-link>
     </div>
     <div class="card-content">
-      <img v-if="profilePicUrl" :src="profilePicUrl" alt="" class="sellerPic">
-      <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername" v-text="sellerUsername"></router-link>
+      <img v-if="imgUrl" :src="imgUrl" alt="" class="sellerPic">
+      <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername"> {{sellerUsername + ' (' + repp + ') '}} </router-link>
       <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" tag="p" v-text="task" />
       <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
       <p class="price">
@@ -33,7 +33,7 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel'
 import GigAction from '@/components/snippets/gigAction'
-import sc2 from '@/services/sc2'
+import Api from '@/services/api'
 export default {
   components: {
     Carousel,
@@ -46,7 +46,9 @@ export default {
         type: String
       },
       processing: false,
-      taskPicture: ''
+      taskPicture: '',
+      imgUrl: '',
+      repp: ''
     }
   },
   props: {
@@ -118,20 +120,15 @@ export default {
     }
   },
   methods: {
-    upvote () {
-      this.processing = true
-      sc2.setAccessToken(this.$store.state.accessToken)
-      sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, 10000, (err, res) => {
-        this.processing = false
-        console.log(err, res)
-        if (!err) {
-          this.gigData.active_votes.push({'new': 'vote'})
-          console.log(res)
-        } else {
-          console.log('there was an error voting this\n', 'err:', err)
-        }
+    fetchUserRep () {
+      Api.fetchCommentInfo(this.sellerUsername).then((result) => {
+        this.repp = result.data.rep
+        this.imgUrl = result.data.profileImage
       })
     }
+  },
+  mounted () {
+    this.fetchUserRep()
   }
 }
 </script>

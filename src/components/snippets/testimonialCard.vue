@@ -2,12 +2,12 @@
   <div class="testimonial-card card">
     <div class="card-content center">
         <router-link class="username" :to="username">
-      <img :src="userImage" class="userImage" alt="">
+      <img v-if="imgUrl" :src="imgUrl" class="userImage" alt="">
       </router-link>
       <div class="content">
         <h3>{{subject}}</h3>
         <div class="my-2">
-          <router-link class="username" :to="username" v-text="username"></router-link>
+          <router-link class="username" :to="username">{{`${username} (${repp})`}}</router-link>
         </div>
         <router-link class="grey-text text-darken-3" :to="username + '/' + permlink">
           <div v-html="body" />
@@ -20,6 +20,7 @@
 
 <script>
 import sc2 from '@/services/sc2'
+import Api from '@/services/api'
 import GigAction from '@/components/snippets/gigAction'
 
 export default {
@@ -31,13 +32,12 @@ export default {
   },
   data () {
     return {
-      processing: false
+      processing: false,
+      imgUrl: '',
+      repp: ''
     }
   },
   computed: {
-    userImage () {
-      return this.testimonial.json_metadata.authorPic
-    },
     subject () {
       if (this.testimonial.title) {
         return this.testimonial.title.split('#STEEMGIGS: ')[1]
@@ -90,7 +90,16 @@ export default {
           console.log('there was an error voting this\n', 'err:', err)
         }
       })
+    },
+    fetchUserRep () {
+      Api.fetchCommentInfo(this.testimonial.author).then((result) => {
+        this.repp = result.data.rep
+        this.imgUrl = result.data.profileImage
+      })
     }
+  },
+  mounted () {
+    this.fetchUserRep()
   }
 }
 </script>
