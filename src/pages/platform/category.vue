@@ -25,10 +25,16 @@
         </div>
       </div>
     </div>
-    <div class="col s12 m4 l3 center center-align subcats">
-      <router-link :to="'/categories/' + slugify(categoryDetails.name) + '/' + slugify(subcategory.name)" v-for="(subcategory, index) in categoryDetails.subcategories" :key="index" class="card-panel subcatCard waves-effect">
-        <p class="">{{ capitalize(subcategory.name) }}</p>
-      </router-link>
+    <div class="col s12 m4 l3 hide-on-med-and-down">
+      <div class="subcats py-2">
+        <ul>
+          <li v-for="(subcategory, index) in categoryDetails.subcategories" :key="index">
+            <router-link :to="'/categories/' + slugify(categoryDetails.name) + '/' + slugify(subcategory.name)" class="">
+              {{ capitalize(subcategory.name) }}
+            </router-link>
+          </li>
+        </ul>
+      </div>
     </div>
   </page>
 </template>
@@ -98,25 +104,44 @@ h1 {
   font-size: 3rem;
 }
 .subcats {
-  padding-top: 2em;
-  p {
-    font-size: 1.3em;
-    line-height: 125%;
-    text-align: left;
-    margin: 0.5em 0;
-  }
-  .subcatCard.card-panel {
-    width: 100%;
-    display: inline-block;
-    margin: 1px;
-    padding: 0px 24px;
-    cursor: pointer;
-    color:#434343;
-    transition: background ease-in-out .3s;
-    &:hover {
-      background: rgb(152, 142, 160);
-      color: white
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  background-color: white;
+  &>ul {
+    &>li {
+      a {
+        color: gray;
+        font-size: 1.15rem;
+        display: block;
+        padding: 7px 25px;
+        transition: all .3s ease;
+        &:hover {
+          background-color: #4b5ab9;
+          color: white;
+          box-shadow: 0 6px 13px rgba(0, 0, 0, 0.2);
+          padding: 7px 35px;
+        }
+      }
     }
   }
+  // p {
+  //   font-size: 1.3em;
+  //   line-height: 125%;
+  //   text-align: left;
+  //   margin: 0.5em 0;
+  // }
+  // .subcatCard.card-panel {
+  //   width: 100%;
+  //   display: inline-block;
+  //   margin: 1px;
+  //   padding: 0px 24px;
+  //   cursor: pointer;
+  //   color:#434343;
+  //   transition: background ease-in-out .3s;
+  //   &:hover {
+  //     background: rgb(152, 142, 160);
+  //     color: white
+  //   }
+  // }
 }
 </style>

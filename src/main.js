@@ -20,27 +20,27 @@ require('./assets/steemgigs.scss')
 //   },
 //   {
 //     name: 'Digital marketing',
-//     description: 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+//     description: '',
 //     subcategories: ['social media marketing', 'SEO', 'content marketing', 'video marketing', 'email marketing', 'search & display marketing', 'marketing strategy', 'web analysis', 'influencer marketing', 'local listings', 'domain research', 'e-commerce marketing', 'mobile advertising', 'music promotion', 'web traffic', 'other']
 //   },
 //   {
 //     name: 'Writing and translation',
-//     description: 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+//     description: '',
 //     subcategories: ['resumes and cover letters', 'proof reading and editing', 'translation', 'creative writing', 'business copywriting', 'research & summaries', 'articles & blog posts', 'press releases', 'transcription', 'legal writing', 'other']
 //   },
 //   {
 //     name: 'Videos and animation',
-//     description: 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+//     description: '',
 //     subcategories: ['whiteboard & animated explainers', 'intros & animated logos', 'promotional videos', 'editing and post production', 'lyric & music video', 'spokeperson videos', 'animated characters & modelling', 'short videos ads', 'live action explainers', 'other']
 //   },
 //   {
 //     name: 'Music & Audio',
-//     description: 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+//     description: '',
 //     subcategories: ['voice over', 'mixing & mastering', 'producers & composers', 'singer-songwriters', 'session musicians & singers', 'jingles and drops', 'sound effects', 'other']
 //   },
 //   {
 //     name: 'Programming & tech',
-//     description: 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+//     description: '',
 //     subcategories: ['wordpress', 'website builders & cms', 'web programming', 'e-commerce', 'mobile apps & web', 'desktop applications', 'support & IT', 'chatbots', 'data analysis & reports', 'convert files', 'databses', 'user testing', 'QA', 'other']
 //   },
 //   {
@@ -50,17 +50,17 @@ require('./assets/steemgigs.scss')
 //   },
 //   {
 //     name: 'Fun & Lifestyle',
-//     description: 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+//     description: '',
 //     subcategories: ['online lessons', 'arts and crafts', 'relationship advice', 'health, nutrition and fitness', 'astrology & readings', 'spiritual & healing', 'family & Genealogy', 'gaming', 'greeting cards & videos', 'your message on ...', 'viral videos', 'pranks & stunts', 'celebrity impersonators', 'collectibles', 'global culture', 'other']
 //   },
 //   {
 //     name: 'Untalented-Steemgigs',
-//     description: 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+//     description: '',
 //     subcategories: ['Photoshop editing', 'Cartoons & Carricatures', 'Flyers And Posters', 'Presentation Design', 'T-shirts', 'Creative Writing', 'Proof Reading And Editing', 'Contests', 'Transcription', 'Translation', 'Intro & Animated Logos', 'Lyric & Music Video', 'Promotional Videos', 'Short Video ADs', 'Singer Song-writers', 'Voice over', 'Jingles And Drops', 'Wordpress', 'Convert Files', 'Virtual Assistant', 'Flyer Distribution', 'Arts And Crafts', 'Relationship Advice', 'Your Message on...', 'Pranks & Stunts', 'Celebrity Impersonators', 'Steem Graphics', 'Steem Tutors']
 //   },
 //   {
 //     name: 'Steem & Steemit',
-//     description: 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+//     description: '',
 //     subcategories: ['Steem projects', 'Curation projects', 'Steem tutors', 'Steem Graphics', 'Steem Coders', 'Steem Coders', 'Steem Veterans', 'Witness services', 'Steem Writers']
 //   }
 // ]
@@ -307,7 +307,7 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Music & Audio',
-    'description': 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+    'description': '',
     'subcategories': [
       {
         'name': 'voice over',
@@ -345,7 +345,7 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Programming & tech',
-    'description': 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+    'description': '',
     'subcategories': [
       {
         'name': 'wordpress',
@@ -457,7 +457,7 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Fun & Lifestyle',
-    'description': 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+    'description': '',
     'subcategories': [
       {
         'name': 'online lessons',
@@ -527,7 +527,7 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Untalented-Steemgigs',
-    'description': 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+    'description': '',
     'subcategories': [
       {
         'name': 'Photoshop editing',
@@ -645,7 +645,7 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Steem & Steemit',
-    'description': 'Fantastic Category lorem ipsum dolor sit amet jTem boucoup merci',
+    'description': '',
     'subcategories': [
       {
         'name': 'Steem projects',
@@ -686,7 +686,7 @@ Vue.prototype.categories = [
     ]
   }
 ]
-Vue.prototype.$imgUploadURL = 'https://steemgigsbackend-ybbwjqrfgw.now.sh/imgUpload'
+Vue.prototype.$imgUploadURL = 'http://178.63.209.34:5000/imgUpload'
 
 Vue.config.productionTip = false
 Vue.prototype.$eventBus = new Vue()

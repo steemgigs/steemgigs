@@ -13,7 +13,7 @@
               <textarea @keypress.enter.prevent @keyup.enter="''" v-model="newGigData.title" type="text" placeholder="do this (what you can do well) just the way they want it" row="2" maxlength="90" minlength="5" required>
               </textarea>
               <p class="word-count right" v-text="wordCount"></p>
-              <div class="tutorial_guide center-align">
+              <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title">Make your Title Short, Simple and Clear to boost sales</span>
@@ -50,7 +50,7 @@
             <p class="flow-text title">Describe your STEEMGIG</p>
             <div class="input-field col s12">
               <vue-editor v-model="newGigData.description" :upload="uploadConfig"></vue-editor>
-              <div class="tutorial_guide center-align">
+              <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title">Describe your STEEMGIG</span>
@@ -71,7 +71,7 @@
             <p class="flow-text title">Pricing</p>
             <div class="input-field col s12">
               <vue-editor v-model="newGigData.pricing" :upload="uploadConfig"></vue-editor>
-              <div class="tutorial_guide center-align">
+              <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title">Name your Package and describe the detail of your package</span>
@@ -116,7 +116,7 @@
             <p class="flow-text title">Requirements</p>
             <div class="input-field col s12">
               <vue-editor v-model="newGigData.requirements" :upload="uploadConfig"></vue-editor>
-              <div class="tutorial_guide center-align">
+              <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title"></span>
@@ -144,7 +144,7 @@
                   <i class="icon ion-android-add"></i>
                 </button>
               </div>
-              <div class="tutorial_guide center-align">
+              <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title"></span>

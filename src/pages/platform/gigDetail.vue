@@ -9,8 +9,9 @@
         </ul>
         <div class="col s12">
           <div class="card">
-            <div class="card-content">
+            <div v-if="contentLoaded" class="card-content">
               <span class="card-title">{{ title }}</span>
+                <p><router-link :to="'/categories/' + currentGig.json_metadata.oncategory">{{ currentGig.json_metadata.category }}</router-link> / <router-link :to="'/categories/' + currentGig.json_metadata.category + '/' + currentGig.json_metadata.subcategory">{{ currentGig.json_metadata.subcategory }}</router-link></p>
             </div>
             <div class="card-image">
               <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
@@ -60,63 +61,29 @@
         </div>
       </div>
        <div class="col s12 m4 l3">
-        <div class="card-panel profileOwner">
-          <content-placeholders v-if="!profileLoaded">
+        <div v-if="!profileLoaded" class="card-panel">
+          <content-placeholders>
             <content-placeholders-img />
             <content-placeholders-text :lines="10" />
           </content-placeholders>
-          <div v-if="profileLoaded">
-            <span class="editProfile waves-effect" v-if="$store.state.username === profileData.account">
-              <i class="icon ion-android-create"></i>
-            </span>
-            <label class="profilePic" for="profile_image">
-              <input type="file" accept="image/png,image/jpeg" class="hide" id="profile_image">
-              <img :src="profile.profile_image" class="user-pict-img" :alt="profileData.account" width="150" height="150">
-            </label>
-            <span class="username" v-text="profile.name"></span>
-            <span class="expertise" v-text="profile.about"></span>
-            <span class="ratings">
-              <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (2 reviews)
-            </span>
-            <p class="location"><i class="icon ion-android-pin"></i> From <span class="right" v-text="profile.location"></span></p>
-            <p class="member_since"> <i class="icon ion-android-person"></i> Member since <span class="right" v-text="since"></span></p>
-            <p class="member_since"> <i class="icon ion-ios-briefcase"></i> Last delivery <span class="right" v-text="ago"></span></p>
-            <p>
-              <i class="icon ion-android-plane"></i>
-              Vacation mode
-              <span class="right">
-                <div class="switch" v-if="$store.state.username === profileData.account">
-                  <label>
-                    <input type="checkbox" v-model="vacation_mode" :disabled="$store.state.username !== profileData.account">
-                    <span class="lever"></span>
-                  </label>
-                </div>
-              </span>
-            </p>
-            <hr>
-            <div class="moreProfileInfo">
-              <span class="card-title">Description</span>
-              <p v-text="profile.about"></p>
-              <router-link class="see-more" :to="'/@' + sellerUsername">See More <i class="ion-plus-round"></i></router-link>
-            </div>
-          </div>
         </div>
+        <profile-card v-if="profileLoaded" :profilepage="false" :profile="profile"></profile-card>
       </div>
     </div>
   </page>
 </template>
 
 <script>
+import sc2 from '@/services/sc2'
 import Api from '@/services/api'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
 import { VueEditor } from 'vue2-editor'
 import VComment from '@/components/snippets/comment'
-import sc2 from '@/services/sc2'
 import { Carousel, Slide } from 'vue-carousel'
-import moment from 'moment'
 import SliderRange from 'vue-slider-component'
+import ProfileCard from '@/components/layout/profileCard'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
 // import steem from 'steem'
 export default {
@@ -129,14 +96,16 @@ export default {
     VueEditor,
     VComment,
     SliderRange,
-    LoadingPlaceholder
+    LoadingPlaceholder,
+    ProfileCard
   },
   data () {
     return {
       contentLoaded: false,
       profileLoaded: false,
-      profile: {},
-      profileData: {},
+      profile: {
+        profile: {}
+      },
       currentGig: {
         title: '',
         json_metadata: {
@@ -153,7 +122,6 @@ export default {
         },
         body: ''
       },
-      vacation_mode: false,
       currentView: 'active_gigs',
       myComment: '',
       comments: [],
@@ -192,12 +160,6 @@ export default {
       } else {
         return []
       }
-    },
-    since () {
-      return moment(this.profileData.created).format('MMMM YYYY')
-    },
-    ago () {
-      return moment(this.profileData.last_post).fromNow()
     },
     sellerUsername () {
       return this.currentGig.author
@@ -257,10 +219,8 @@ export default {
     async fetchUserInfo (username) {
       try {
         let response = await Api.fetchUserData(username)
-        this.profileData = response.data
-        this.profile = this.profileData.profile
+        this.profile = response.data
         this.profileLoaded = true
-        console.log(this.profileData)
       } catch (err) {
         console.log('error retrieving user info: \n error:', this.stringify(err))
       }

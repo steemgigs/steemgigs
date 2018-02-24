@@ -1,7 +1,7 @@
 <template>
   <div class="home__view row">
     <cat-nav />
-    <div class="col s12 m4 l2 steemgigs_ads">
+    <div class="col s12 m4 l2 hide-on-med-and-down steemgigs_ads">
       <div class="card center center-align request">
         <div class="card-content">
           <p>Can&rsquo;t find what you&rsquo;re looking Seeking?<br>You can post Custom request and we&rsquo;ll lovingly look for reputable great minds to handle it</p>
@@ -67,7 +67,7 @@
         <div v-if="steemgigs.length < 1" class="col s12 center-align center">
           <plane v-if="!postsFetched" size="100" />
           <div v-if="postsFetched">
-            <p class="flow-text grey-text">Be the first to post gig, click button below</p>
+            <p class="flow-text grey-text">Be the first to post a gig, click button below</p>
             <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
           </div>
           <br><br>
@@ -76,8 +76,8 @@
         <div class="col s12 m6 l3" v-for="(gig, index) in steemgigs" :key="index">
           <gig-card :gigData="gig" />
         </div>
-        <div class="col s12 center-align py-3">
-          <button @click="moreSteemgigs" v-if="steemgigs.length > 0" class="btn indigo">View More <i v-if="fetchingSteemgigs" class="fa fa-spinner fa-pulse"></i></button>
+        <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
+          <router-link class="btn indigo" to="/steemgigs" tag="button">View More</router-link>
         </div>
       </section>
       <section id="untalented" class="row">
@@ -162,9 +162,9 @@
         <div class="col s12 m6 l3" v-for="(gig, index) in gigrequests" :key="index">
           <gig-card type="gigRequest" :gigData="gig" />
         </div>
-        <!-- <div class="col s12 center-align py-3">
-          <button v-if="gigrequests.length > 0" class="btn indigo">View More</button>
-        </div>   -->
+        <div v-if="gigrequests.length > 0" class="col s12 center-align py-3">
+          <router-link class="btn indigo" to="/requested_gigs" tag="button">View More</router-link>
+        </div>
       </section>
       <section id="testimonials" class="row">
         <div class="col s12">
@@ -192,40 +192,10 @@
         <div class="col s12 m6 l3" v-for="(testimonial, index) in testimonials" :key="index">
           <testimonial-card :testimonial="testimonial" />
         </div>
-        <div class="col s12 center-align py-3">
-          <button @click="moreTestimonials" v-if="testimonials.length > 0" class="btn indigo">View More
-            <i v-if="fetchingTestimonials" class="fa fa-spinner fa-pulse"></i>
-          </button>
+        <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
+          <router-link class="btn indigo" to="/testimonials" tag="button">View More</router-link>
         </div>
       </section>
-      <!-- <section id="testimonials" class="row">
-        <div class="col s12">
-          <h5 class="left">Steemgigs Testimonials</h5>
-          <span class="right">
-            <select class="browser-default">
-              <option value="" disabled selected>Sort By</option>
-              <option value="tranding">Trending</option>
-              <option value="new">New</option>
-              <option value="active">Active</option>
-              <option value="hot">Hot</option>
-              <option value="promoted">Promoted</option>
-            </select>
-          </span>
-        </div>
-        <div class="col s12 m4 l3">
-          <div class="card">
-            <div class="card-content">
-              <p><router-link to="/users/eric">@eric</router-link> did a very job and delivered on time</p>
-            </div>
-            <div class="card-action">
-              <a><i class="fa fa-thumbs-up" aria-hidden="true"></i> 336</a>
-              <a><i class="icon ion-chatbox-working" aria-hidden="true"></i> 323</a>
-              <a><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-              <span class="right">$884.3</span>
-            </div>
-          </div>
-        </div>
-      </section> -->
     </div>
   </div>
 </template>
@@ -236,8 +206,6 @@ import {Plane} from 'vue-loading-spinner'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
 import TestimonialCard from '@/components/snippets/testimonialCard'
-import sc2 from '@/services/sc2'
-import Api from '@/services/api'
 import InputTag from 'vue-input-tag'
 
 export default {
@@ -272,56 +240,6 @@ export default {
   methods: {
     getTags (entries) {
       this.userTags = entries
-    },
-    submitTestimonial () {
-      let that = this
-      this.errorText = ''
-      this.successText = ''
-      this.isPosting = true
-      let jsonMetadata = {
-        app: 'steemgig',
-        tags: ['steemgigs', 'testimonial'].concat(this.userTags),
-        timestamp: new Date().getTime(),
-        authorPic: this.$store.state.profile.profileImage,
-        type: 'steemgigs_testimonial',
-        deleted: true,
-        generated: true
-      }
-      sc2.setAccessToken(this.$store.state.accessToken)
-      let body = this.testimonial
-      let permlink = this.slugify(this.testimonialSubject)
-      let username = this.$store.state.username
-      let title = '#STEEMGIGS ' + this.testimonialSubject
-      sc2.comment('', 'steemgigs', username, permlink, title, body, jsonMetadata, (err, res) => {
-        console.log(err, res)
-        that.isPosting = false
-        if (err) {
-          that.errorText = 'Error pushing post to steem, try again'
-        } else {
-          that.successText = 'Successfully pushed to steem!'
-        }
-      })
-    },
-    moreSteemgigs () {
-      this.fetchingSteemgigs = true
-      Api.morePosts().then((result) => {
-        this.steemgigs = result.data
-        this.fetchingSteemgigs = false
-      }).catch()
-    },
-    moreFeatured () {
-      this.fetchingFeatured = true
-      Api.moreFeatured().then((result) => {
-        this.featured = result.data
-        this.featuredFetched = false
-      }).catch()
-    },
-    moreTestimonials () {
-      this.fetchingTestimonials = true
-      Api.moreTestimonials().then((result) => {
-        this.testimonials = result.data
-        this.fetchingTestimonials = false
-      }).catch()
     }
   },
   computed: {

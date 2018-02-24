@@ -62,6 +62,13 @@ export default {
       }
     })
   },
+  profileUpdate (credentials, token) {
+    return axios.post('/editProfile', credentials, {
+      headers: {
+        token: token
+      }
+    })
+  },
   comment (credentials, token) {
     return axios.post('/comment', credentials, {
       headers: {
