@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import sc2 from '@/services/sc2'
+// import sc2 from '@/services/sc2'
 import Api from '@/services/api'
 import moment from 'moment'
 
@@ -245,7 +245,6 @@ export default {
     }
     // social () {
     //   return [...this.profileEdit.socialArray, ...this.socialFeeds].reduce((a) => {
-        
     //   })
     // }
   },
