@@ -14,8 +14,8 @@
       </router-link>
     </div>
     <div class="card-content">
-      <img v-if="imgUrl" :src="imgUrl" alt="" class="sellerPic">
-      <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername"> {{sellerUsername + ' (' + repp + ') '}} </router-link>
+      <img v-if="imgUrl || sellerImg" :src="sellerImg" alt="" class="sellerPic">
+      <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername"> {{sellerUsername + ' (' + sellerRep + ') '}} </router-link>
       <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" tag="p" v-text="task" />
       <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
       <p class="price">
@@ -33,7 +33,6 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel'
 import GigAction from '@/components/snippets/gigAction'
-import Api from '@/services/api'
 export default {
   components: {
     Carousel,
@@ -89,6 +88,12 @@ export default {
     sellerUsername () {
       return this.gigData.author
     },
+    sellerImg () {
+      return this.gigData.userImg
+    },
+    sellerRep () {
+      return this.gigData.rep
+    },
     portfolio () {
       if (this.gigData.json_metadata.images) {
         return this.gigData.json_metadata.images
@@ -118,17 +123,6 @@ export default {
         return ''
       }
     }
-  },
-  methods: {
-    fetchUserRep () {
-      Api.fetchCommentInfo(this.sellerUsername).then((result) => {
-        this.repp = result.data.rep
-        this.imgUrl = result.data.profileImage
-      })
-    }
-  },
-  mounted () {
-    this.fetchUserRep()
   }
 }
 </script>

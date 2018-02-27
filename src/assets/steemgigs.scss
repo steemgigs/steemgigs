@@ -9,7 +9,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #eee;
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh);
   [class*="__view"] {
     padding-top: 4em;
   }

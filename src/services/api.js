@@ -60,6 +60,11 @@ export default {
       headers: {token}
     })
   },
+  profile (username, token) {
+    return axios.post('/profile', {username}, {
+      headers: {token}
+    })
+  },
   post (credentials, token) {
     return axios.post('/post', credentials, {
       headers: {

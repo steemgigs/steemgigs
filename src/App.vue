@@ -3,7 +3,7 @@
     <nav-bar />
     <router-view/>
     <notifications group="foo" position="top left" />
-    <div class="fixed-action-btn hide-on-large-only">
+    <div v-if="$store.state.accessToken" class="fixed-action-btn hide-on-large-only">
       <a class="btn-floating btn indigo">
         <i class="ion-plus-round"></i>
       </a>
@@ -22,42 +22,6 @@
         </li>
       </ul>
     </div>
-    <!-- <ul>
-      <li class="main-li" v-for="(category, index) in categories" :key="index">
-        <router-link :to="'/categories/' + slugify(category.name)">{{ capitalize(category.name) }}</router-link>
-        <div class="dropdown white z-depth-1 drop">
-          <ul>
-            <li v-for="(subcategory, subIndex) in half1(category.subcategories)" :key="subIndex">
-              <router-link :to="'/categories/' + slugify(category.name) + '/' + slugify(subcategory.name)">{{ capitalize(subcategory.name) }}</router-link>
-            </li>
-          </ul>
-          <ul>
-            <li v-for="(subcategory, subIndex) in half2(category.subcategories)" :key="subIndex">
-              <router-link :to="'/categories/' + slugify(category.name) + '/' + slugify(subcategory.name)">{{ capitalize(subcategory.name) }}</router-link>
-            </li>
-          </ul>
-        </div>
-      </li>
-    </ul> -->
-    <!-- <ul>
-      <li><a href="#!">First Sidebar Link</a></li>
-      <li><a href="#!">Second Sidebar Link</a></li>
-      <li class="no-padding">
-        <ul class="collapsible collapsible-accordion">
-          <li>
-            <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
-            <div class="collapsible-body">
-              <ul>
-                <li><a href="#!">First</a></li>
-                <li><a href="#!">Second</a></li>
-                <li><a href="#!">Third</a></li>
-                <li><a href="#!">Fourth</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </li>
-    </ul> -->
     <ul class="sidenav collapsible" id="mobile-demo">
       <li v-for="(category, index) in categories" :key="index">
         <div class="collapsible-header"><div>{{capitalize(category.name)}}</div><div @click="closeNav(`/categories/${slugify(category.name)}`)" class="go-to"> Go To</div></div>

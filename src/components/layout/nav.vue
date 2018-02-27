@@ -2,7 +2,7 @@
   <div class="navbar-fixed">
     <nav class="white"  :class="searchActive ? 'search-active': ''">
       <div class="nav-wrapper container">
-        <router-link to="/" class="brand-logo left">STEEMGIGS<sub>alpha</sub></router-link>
+        <router-link to="/" class="brand-logo left"><img src="/static/img/logo.gif" alt="logo"></router-link>
         <ul class="right notIn" v-if="!$store.state.accessToken">
           <li><a href="https://signup.steemit.com" rel="noopener noreferrer" target="_blank">Sign up</a></li>
           <li><a :href="loginURL">Log in</a></li>
@@ -24,10 +24,10 @@
             </li>
           </div>
           <li>
-            <a><img class="profile_pic" :src="$store.state.profile.profileImage" alt=""></a>
+            <a><img class="profile_pic" :src="profileImg" alt=""></a>
             <ul class="white z-depth-1">
               <li><router-link class="waves-effect" :to="'/@' + $store.state.username"> {{ $store.state.username + ' (' + repp + ') ' }} </router-link></li>
-              <li><router-link class="waves-effect" to="/wallet">Wallet - {{ $store.state.profile.balance }}</router-link></li>
+              <li><router-link class="waves-effect" to="/wallet">Wallet - {{ wallet }}</router-link></li>
               <li><router-link class="waves-effect" to="/settings">Settings</router-link></li>
               <li><router-link class="waves-effect red-text" to="/invite">Invite friends</router-link></li>
               <li><router-link class="waves-effect" to="/help">Help</router-link></li>
@@ -48,7 +48,6 @@
 
 <script>
 import sc2 from '@/services/sc2'
-import Api from '@/services/api'
 import SearchBox from '@/components/layout/searchBox'
 
 export default {
@@ -66,21 +65,32 @@ export default {
       isAuth: false,
       loginURL: sc2.getLoginURL(),
       isSearching: false,
-      repp: ''
+      profile: this.$store.state.profile
     }
   },
   methods: {
     openSearch () {
       this.$eventBus.$emit('open-search')
+    }
+  },
+  computed: {
+    repp () {
+      return this.profile.rep
     },
-    fetchUserRep () {
-      Api.fetchCommentInfo(this.$store.state.username).then((result) => {
-        this.repp = result.data.rep
-      })
+    profileImg () {
+      return this.profile.profileImage
+    },
+    wallet () {
+      return this.profile.balance.amount
     }
   },
   mounted () {
-    this.fetchUserRep()
+    this.$eventBus.$on('profile-fetched', () => {
+      this.profile = this.$store.state.profile
+    })
+  },
+  beforeDestroy () {
+    this.$eventBus.$off('profile-fetched')
   }
   // methods: {
   //   search: debounce(function () {
@@ -187,17 +197,9 @@ nav {
   .nav-wrapper {
     &.container {
       min-width: 90%;
-      a.brand-logo {
-        font-size: 1.6rem;
-        font-weight: bold;
-        letter-spacing: 1px;
-
-        sub {
-          margin-left: 2px;
-          color: #99aab5;
-          font-size: 59%;
-          bottom: 0;
-        }
+      a.brand-logo img {
+        height: 1em;
+        margin-top: 13px;
       }
       ul.notIn {
         li a {

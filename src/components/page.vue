@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import sc2 from '@/services/sc2'
+import Api from '@/services/api'
 
 export default {
   props: {
@@ -25,18 +25,13 @@ export default {
     }
   },
   mounted () {
-    sc2.setAccessToken(this.$store.state.accessToken)
-    sc2.me((err, result) => {
-      if (!err) {
-        console.log('my profile obj:', result)
-        let {about, cover_image: coverImage, location, name, profile_image: profileImage, website} = JSON.parse(result.account.json_metadata).profile
-        let walletBal = result.account.balance
-        this.$store.commit('SET_PROFILE', {about, coverImage, location, name, profileImage, website, walletBal})
-      } else {
-        console.log('error:', JSON.stringify(err, null, 2))
-      }
-    }, () => {
-      console.log('done')
+    let {accessToken, username} = this.$store.state
+    Api.profile(username, accessToken).then(response => {
+      let responseData = response.data
+      console.log('from page', responseData)
+      let {about, coverImage, location, name, profilePic, rep, balance: walletBal} = responseData
+      this.$store.commit('SET_PROFILE', {about, coverImage, location, name, profilePic, walletBal, rep})
+      this.$eventBus.$emit('profile-fetched', responseData)
     })
   }
 }

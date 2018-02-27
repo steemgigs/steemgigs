@@ -2,38 +2,51 @@
   <div>
     <div class="owner">
       <div class="rotating-card" :class="editMode ? 'flipped' : ''">
-        <div class="card-panel face">
-          <span class="editProfile waves-effect" v-if="$store.state.username === profile.account">
-            <i v-if="!editMode" @click="editMode = true" class="icon ion-android-create"></i>
-          </span>
-          <div class="profilePic">
-            <img :src="profile.profile.profile_image" class="user-pict-img" :alt="profile.account" width="150" height="150">
-          </div>
-          <span class="username"> {{ profile.account + ' (' + repp + ') ' }} </span>
-          <span class="expertise" v-text="profile.profile.about"></span>
-          <span class="ratings">
-            <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (No Reviews)
-          </span>
-          <p class="location"><i class="icon ion-android-pin"></i> From <span class="right" v-text="profile.location"></span></p>
-          <p class="member_since"> <i class="icon ion-android-person"></i> Member since <span class="right" v-text="since"></span></p>
-          <p class="member_since"> <i class="icon ion-ios-briefcase"></i> Last delivery <span class="right" v-text="ago"></span></p>
-          <p>
-            <i class="icon ion-android-plane"></i>
-            Vacation mode
-            <span class="right">
-              <div class="switch" v-if="true">
-                <label>
-                  <input checked type="checkbox" disabled v-model="updateProfile.vacation_mode" >
-                  <span class="lever"></span>
-                </label>
-              </div>
+        <div class="face">
+          <div class="card-panel">
+            <span class="editProfile waves-effect" v-if="$store.state.username === profile.account">
+              <i v-if="!editMode" @click="editMode = true" class="icon ion-android-create"></i>
             </span>
-          </p>
-          <hr class="my-4">
-          <div class="moreProfileInfo">
-            <span class="card-title left-align">Description</span>
-            <p v-text="profile.profile.about"></p>
-            <router-link v-if="!profilepage" :to="'/@' + profile.account">See More <i class="ion-plus-round"></i></router-link>
+            <div class="profilePic">
+              <img :src="profile.profile.profile_image" class="user-pict-img" :alt="profile.account" width="150" height="150">
+            </div>
+            <span class="username"> {{ profile.account + ' (' + repp + ') ' }} </span>
+            <span class="expertise" v-text="profile.profile.about"></span>
+            <span class="ratings">
+              <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (No Reviews)
+            </span>
+            <p class="location"><i class="icon ion-android-pin"></i> From <span class="right" v-text="profile.location"></span></p>
+            <p class="member_since"> <i class="icon ion-android-person"></i> Member since <span class="right" v-text="since"></span></p>
+            <p class="member_since"> <i class="icon ion-ios-briefcase"></i> Last delivery <span class="right" v-text="ago"></span></p>
+            <p>
+              <i class="icon ion-android-plane"></i>
+              Vacation mode
+              <span class="right">
+                <div class="switch" v-if="true">
+                  <label>
+                    <input checked type="checkbox" disabled v-model="updateProfile.vacation_mode" >
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </span>
+            </p>
+            <hr class="my-4">
+            <div class="moreProfileInfo">
+              <span class="card-title left-align">Description</span>
+              <p v-text="profile.profile.about"></p>
+              <router-link v-if="!profilepage" :to="'/@' + profile.account">See More <i class="ion-plus-round"></i></router-link>
+            </div>
+          </div>
+          <div v-show="!editMode" class="card moreProfileInfo">
+            <div class="card-content">
+              <span class="card-title">Description</span>
+              <p v-text="profile.about"></p>
+              <span class="card-title">Languages</span>
+              <ul>
+                <li>English - fluent</li>
+                <li>French (Français) - Conversational</li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="back card-panel indigo lighten-1 white-text">
@@ -100,17 +113,6 @@
             </div>
             <button @click.prevent="updateProfile" class="btn-floating grey  right lighten-3"><i v-if="!isUpdating" class="ion-checkmark-round indigo-text"></i><i class="fa fa-spinner indigo-text fa-pulse" v-if="isUpdating"></i></button>
         </div>
-      </div>
-    </div>
-    <div v-show="!editMode" class="card moreProfileInfo">
-      <div class="card-content">
-        <span class="card-title">Description</span>
-        <p v-text="profile.about"></p>
-        <span class="card-title">Languages</span>
-        <ul>
-          <li>English - fluent</li>
-          <li>French (Français) - Conversational</li>
-        </ul>
       </div>
     </div>
   </div>
@@ -274,7 +276,7 @@ export default {
   .owner {
     .rotating-card{
       position: relative;
-      min-height: 600px;
+      min-height: 850px;
       .face{
         position: absolute;
         width: 100%;

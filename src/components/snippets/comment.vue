@@ -1,8 +1,8 @@
 <template>
   <div class="comment py-3">
-    <img :src="imgUrl" class="author-image">
+    <img :src="sellerImg" class="author-image">
     <p>
-      <router-link class="username" :to="'/@' + commentFor.author" v-text="commentFor.author"></router-link><span>&nbsp;({{rep}})</span><span class="how-long">&nbsp;&nbsp; {{timeAgo}}</span>
+      <router-link class="username" :to="'/@' + commentFor.author" v-text="commentFor.author"></router-link><span>&nbsp;({{sellerRep}})</span><span class="how-long">&nbsp;&nbsp; {{timeAgo}}</span>
     </p>
     <p class="post" v-html="commentFor.body"></p>
     <div  v-if="commentFor.allow_replies" class="menu mb-2">
@@ -62,7 +62,6 @@ export default {
       upvoteRange: 100,
       isPosting: false,
       imgUrl: '',
-      rep: '',
       timeAgo: ''
     }
   },
@@ -81,16 +80,6 @@ export default {
         console.log(this.comments)
       } catch (err) {
         console.log('error retrieving comments: \n error:', this.stringify(err))
-      }
-    },
-    async fetchCommentInfo () {
-      try {
-        console.log('fetching user image')
-        let result = await Api.fetchCommentInfo(this.commentFor.author)
-        this.imgUrl = result.data.profileImage
-        this.rep = result.data.rep
-      } catch (err) {
-        return 'error retrieving comments: \n error:'
       }
     },
     async fetchThisComment () {
@@ -166,6 +155,12 @@ export default {
     sellerUsername () {
       return this.commentFor.author
     },
+    sellerImg () {
+      return this.commentFor.userImg
+    },
+    sellerRep () {
+      return this.commentFor.rep
+    },
     genuineVoters () {
       if (this.commentFor.active_votes) {
         return this.commentFor.active_votes.filter((x) => x.weight !== 0)
@@ -221,7 +216,6 @@ export default {
   },
   mounted () {
     this.fetchComments()
-    this.fetchCommentInfo()
     setInterval(() => {
       let created = new Date(this.commentFor.created)
       let second = 1000

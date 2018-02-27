@@ -13,10 +13,10 @@
               <span class="card-title">{{ title }}</span>
                 <p><router-link :to="'/categories/' + currentGig.json_metadata.oncategory">{{ currentGig.json_metadata.category }}</router-link> / <router-link :to="'/categories/' + currentGig.json_metadata.category + '/' + currentGig.json_metadata.subcategory">{{ currentGig.json_metadata.subcategory }}</router-link></p>
             </div>
-            <div class="card-image">
+            <div class="card-image z-depth-1">
               <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
                 <slide v-for="(image, index) in portfolio" :key="index">
-                  <img :src="image" class="responsive-img" :alt="currentGig.title">
+                  <img :src="image" :alt="currentGig.title">
                 </slide>
               </carousel>
             </div>
@@ -303,6 +303,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .card-image img {
+    height: 30em;
+  }
   .detail-action {
     box-shadow: 0 4px 17px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
@@ -324,90 +327,9 @@ export default {
       cursor: pointer;
     }
   }
-  .profileOwner {
-    position: relative;
-    .profilePic {
-      cursor: pointer;
-      float: none;
-      display: block;
-      position: relative;
-      margin: 0 auto 15px;
-      border-radius: 0;
-      object-fit: cover;
-      overflow: visible;
-      box-sizing: border-box;
-      width: 150px;
-      height: 150px;
-      &::before {
-        background: rgba(0,0,0,.65);
-        content: "\F030";
-        font: 30px/150px FontAwesome;
-        color: #fff;
-        border-radius: 50%;
-        position: absolute;
-        z-index: 3;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        opacity: 0;
-        text-align: center;
-      }
-      img.user-pict-img {
-        border-radius: 50%;
-        width: 150px;
-        height: 150px;
-        display: block;
-      }
-    }
-    span {
-      display: block;
-      text-align: center;
-      &.username {
-        font-weight: 600;
-      }
-      &.editProfile {
-        cursor: pointer;
-        display: inline-block;
-        position: absolute;
-        border-radius: 50%;
-        padding: 0 0.5em;
-        top: 1em;
-        right: 0.5em;
-        i.icon {
-          font-size: 1.5em;
-        }
-      }
-    }
-    p {
-      i.icon {
-        margin-right: 0.5em;
-      }
-      span.right {
-        font-weight: 600;
-        .switch {
-          margin-top: 0.2em;
-        }
-      }
-    }
-  }
-  .moreProfileInfo {
-    .card-title {
-      font-size: 1.2em;
-      font-weight: 600;
-      &:first-child {
-        font-size: 1.2em;
-        margin-top: 1em;
-        margin-bottom: -0.6em;
-        text-align: left;
-      }
-      &:not(:first-child) {
-        margin-top: 1em;
-      }
-    }
-    ul {
-      margin-top: 0;
-    }
+  .card-title {
+    font-size: 1.7em;
+    font-weight: 600;
   }
   .tabs {
     width: 100%;
