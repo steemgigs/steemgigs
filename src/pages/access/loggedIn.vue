@@ -7,10 +7,16 @@
 
 <script>
 import sc2 from '@/services/sc2'
+import Api from '@/services/api'
 export default {
   mounted () {
     let {access_token: accessToken, expires_in: tokenExpires, username} = this.$route.query
     this.$store.commit('SET_USER', {accessToken, tokenExpires, username})
+    Api.loggedIn(username, accessToken).then(response => {
+      let responseData = response.data
+      let {about, coverImage, location, name, profileImage, website, rep, balance: walletBal} = responseData.profile
+      this.$store.commit('SET_PROFILE', {about, coverImage, location, name, profileImage, walletBal})
+    })
     sc2.setAccessToken(accessToken)
     sc2.me((err, result) => {
       if (!err) {
@@ -24,7 +30,7 @@ export default {
     }, () => {
       console.log('done')
     })
-    this.$router.push('/')
+    // this.$router.push('/')
   }
 }
 </script>

@@ -55,6 +55,11 @@ export default {
     return axios.get('/moretestimonials')
   },
   //  new routes
+  loggedIn (username, token) {
+    return axios.post('/loggedIn', {username}, {
+      headers: {token}
+    })
+  },
   post (credentials, token) {
     return axios.post('/post', credentials, {
       headers: {
