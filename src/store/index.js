@@ -16,7 +16,7 @@ export default new Vuex.Store({
       coverImage: '',
       location: '',
       name: '',
-      profileImage: 'http://via.placeholder.com/100x100',
+      profileImage: 'https://via.placeholder.com/100x100',
       website: '',
       balance: {
         amount: ''
@@ -66,7 +66,7 @@ export default new Vuex.Store({
         coverImage: '',
         location: '',
         name: '',
-        profileImage: 'http://via.placeholder.com/100x100',
+        profileImage: 'https://via.placeholder.com/100x100',
         website: '',
         balance: {
           amount: ''

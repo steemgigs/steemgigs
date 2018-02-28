@@ -18,6 +18,7 @@ h2.headline {
   font-size: 2.5rem;
   background: rgb(238, 238, 238);
   padding: 0.2em 1em 0.2em 0.2em;
+  margin-bottom: -0.1em;
   color: rgb(0, 0, 0);
   border-bottom: 1px solid rgb(219, 219, 219);
 }
@@ -182,7 +183,9 @@ input[type=text]:not(.browser-default) {
     background: #5C6BC0 !important;
   }
 }
-
+.card .card-content p {
+  font-size: 1.5rem;
+}
 .gigBody {
   h2 {
     font-size: 2.5rem;
