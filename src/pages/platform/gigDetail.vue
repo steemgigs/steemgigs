@@ -23,7 +23,6 @@
             <div class="card-content">
               <loading-placeholder v-if="!contentLoaded" />
               <div v-html="parsedBody"></div>
-              <hr class="my-2">
               <div class="menu row mb-2">
                 <div v-if="contentLoaded" class="col detail-action m3 offset-m9">
                   <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>

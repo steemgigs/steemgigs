@@ -46,29 +46,46 @@
           <div class="col m7"></div>
         </div>
       </div> -->
-      <carousel  :autoplay="true" :perPage="4">
-        <slide v-for="(slider, i) in sliders" :key="i">
-          <div class="slide mx-3" :style="{'background-image': 'url('+ slider.url +')'}">
-            <h3>{{slider.header}}</h3>
-            <p>{{slider.small}}</p>
-            <!-- <img :src="slider.url" alt=""> -->
-          </div>
-        </slide>
-      </carousel>
+      <div class="slide-container">
+        <carousel :autoplay="true" :paginationEnabled="true" :navigationEnabled="true" :perPage="4">
+          <slide v-for="(slider, i) in sliders" :key="i">
+            <div class="slide mx-3 my-5 px-3 left-align" :style="{'background-image': 'url('+ slider.url +')'}">
+              <h5 class="head">{{slider.header}}</h5>
+              <p>{{slider.small}}</p>
+            </div>
+          </slide>
+        </carousel>
+      </div>
     </section>
-    <footer class="white page-footer z-depth-2">
+    <section class="trio py-5">
+      <div class="container center py-5">
+        <div class="row">
+          <div class="col m4">
+            <h4 class="mb-1 grey-text text-lighten-2">Your Terms</h4>
+            <p class="mb-5 grey-text">Our existing categories are sure to inspire you</p>
+          </div>
+          <div class="col m4">
+            <h4 class="mb-1 grey-text text-lighten-2">Your Timeline</h4>
+            <p class="mb-5 grey-text">Our existing categories are sure to inspire you</p>
+          </div>
+          <div class="col m4">
+            <h4 class="mb-1 grey-text text-lighten-2">Your Safety</h4>
+            <p class="mb-5 grey-text">Our existing categories are sure to inspire you</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="page-footer z-depth-2">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
                 <h5 class="indigo-text">SteemGigs</h5>
-                <p class="">Here, everyone has something to offer</p>
+                <p class="">Here, everyone has something to offer<br />Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit harum perferendis quaerat inventore ipsa, quasi, quibusdam corporis labore, temporibus dolore voluptas voluptate vero. Iure esse, deleniti nesciunt sequi quibusdam laborum.</p>
               </div>
               <div class="col l4 offset-l2 s12">
-                <h5 class="indigo-text">Quick Links</h5>
+                <h5 class="indigo-text">Our categories</h5>
                 <ul>
-                  <li><a class="" href="#!">Link 1</a></li>
-                  <li><a class="" href="#!">Link 2</a></li>
-                  <li><a class="" href="#!">Link 3</a></li>
+                  <li v-for="(category, i) in categories" :key="i"><a class="" href="#!">{{category.title}}</a></li>
                 </ul>
               </div>
             </div>
@@ -133,8 +150,13 @@ export default {
       }],
       sliders: [
         {
-          url: '/static/img/steemslide1.jpeg',
-          header: 'Do something awesome',
+          url: '/static/img/steemslide7.jpeg',
+          header: 'All your logo designs',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/steemslide8.jpeg',
+          header: 'Hand crafts and similar',
           small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
         },
         {
@@ -153,23 +175,58 @@ export default {
           small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
         },
         {
-          url: '/static/img/steemslide5.jpeg',
-          header: 'Do something awesome',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
-        },
-        {
-          url: '/static/img/steemslide6.jpeg',
+          url: '/static/img/agreement.jpeg',
           header: 'Do something awesome',
           small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
         },
         {
           url: '/static/img/steemslide7.jpeg',
+          header: 'All your logo designs',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/time.jpeg',
           header: 'Do something awesome',
           small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
         },
         {
-          url: '/static/img/time.jpg',
+          url: '/static/img/steemslide7.jpeg',
+          header: 'All your logo designs',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/steemslide8.jpeg',
+          header: 'Hand crafts and similar',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/steemslide2.jpeg',
           header: 'Do something awesome',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/steemslide3.jpeg',
+          header: 'Do something awesome',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/steemslide4.jpeg',
+          header: 'Do something awesome',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/agreement.jpeg',
+          header: 'Do something awesome',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/time.jpeg',
+          header: 'Do something awesome',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/steemslide7.jpeg',
+          header: 'All your logo designs',
           small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
         }
       ]
@@ -226,10 +283,20 @@ export default {
       }
     }
     .slide {
-      height: 450px;
+      height: 400px;
       box-shadow: 0 6px 50px 0 rgba(0,0,0,.35);
       border-radius: 5px;
       position: relative;
+      padding: 15px 10px;
+      h5 {
+        color: #535353;
+        margin: 10px 0;
+      }
+      p {
+        color: gray;
+        font-size: 1em;
+        margin: 5px 0;
+      }
     }
     .cat-showcase {
       padding: 50px 7rem;
@@ -265,6 +332,12 @@ export default {
         }
       }
     }
+    .trio {
+      background: linear-gradient(to bottom right,#4757b2,#393953);
+      h4 {
+        font-weight: 600;
+      }
+    }
     .sm-banner {
       background: linear-gradient(to bottom right,#4757b2,#393953);
       padding: 50px;
@@ -274,6 +347,7 @@ export default {
       }
     }
     .page-footer {
+      background-color: #eee;
       a, p {
         color: #3f51b5;
       }
