@@ -71,9 +71,6 @@ export default {
 </script>
 
 <style lang="scss">
-  .emoji {
-    color: #ecba0a
-  }
   ul.sidenav > li
   {
     .go-to {

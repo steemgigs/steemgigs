@@ -35,15 +35,26 @@
         </div>
       </div>
     </section>
-    <section class="reviews blue-grey lighten-5 py-5">
-      <div class="container">
+    <section class="reviews center blue-grey lighten-5 py-5">
+      <h2 class="mb-1">Take the first step</h2>
+      <p class="mb-5 grey-text">Whatever your dreams are, here's a few places to get started</p>
+      <!-- <div class="container">
         <div class="row">
           <div class="col m5 white">
             <p class="title">Steem Gigs is awesome</p>
           </div>
           <div class="col m7"></div>
         </div>
-      </div>
+      </div> -->
+      <carousel  :autoplay="true" :perPage="5">
+        <slide v-for="(slider, i) in sliders" :key="i">
+          <div class="slide mx-2" :style="{'background-image': 'url('+ slider.url +')'}">
+            <h3>{{slider.header}}</h3>
+            <p>{{slider.small}}</p>
+            <!-- <img :src="slider.url" alt=""> -->
+          </div>
+        </slide>
+      </carousel>
     </section>
     <footer class="white page-footer z-depth-2">
           <div class="container">
@@ -119,7 +130,49 @@ export default {
         title: 'Business',
         icon: 'ion-stats-bars',
         description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil explicabo excepturi vitae'
-      }]
+      }],
+      sliders: [
+        {
+          url: '/static/img/steemslide1.jpeg',
+          header: 'Do something awesome',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/steemslide2.jpeg',
+          header: 'Do something awesome',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/steemslide3.jpeg',
+          header: 'Do something awesome',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/steemslide4.jpeg',
+          header: 'Do something awesome',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/steemslide5.jpeg',
+          header: 'Do something awesome',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/steemslide6.jpeg',
+          header: 'Do something awesome',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/steemslide7.jpeg',
+          header: 'Do something awesome',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        },
+        {
+          url: '/static/img/time.jpg',
+          header: 'Do something awesome',
+          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+        }
+      ]
     }
   },
   methods: {
@@ -141,7 +194,9 @@ export default {
       }
     }
     h2 {
-      font-size: 2.5rem
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #474747;
     }
     .main {
       position: relative;
@@ -169,6 +224,12 @@ export default {
         min-width: 300px;
         margin-top: 15px;
       }
+    }
+    .slide {
+      height: 400px;
+      box-shadow: 0 6px 50px 0 rgba(0,0,0,.35);
+      border-radius: 5px;
+      position: relative;
     }
     .cat-showcase {
       padding: 50px 7rem;
