@@ -83,7 +83,7 @@ export default {
     },
     myVote () {
       if (this.gigData.active_votes) {
-        return this.gigData.active_votes.filter((x) => x.voter === this.$store.state.username)
+        return this.genuineVoters.filter((x) => x.voter === this.$store.state.username)
       } else {
         return []
       }

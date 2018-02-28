@@ -79,6 +79,9 @@ export default {
       }
     })
   },
+  sendFeedback (credentials) {
+    return axios.post('/feedback', credentials)
+  },
   comment (credentials, token) {
     return axios.post('/comment', credentials, {
       headers: {

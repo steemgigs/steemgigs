@@ -22,6 +22,7 @@
         </li>
       </ul>
     </div>
+    <feed-back></feed-back>
     <ul class="sidenav collapsible" id="mobile-demo">
       <li v-for="(category, index) in categories" :key="index">
         <div class="collapsible-header"><div>{{capitalize(category.name)}}</div><div @click="closeNav(`/categories/${slugify(category.name)}`)" class="go-to"> Go To</div></div>
@@ -36,11 +37,13 @@
 
 <script>
 import NavBar from '@/components/layout/nav'
+import FeedBack from '@/components/layout/feedback'
 import M from 'materialize-css'
 export default {
   name: 'App',
   components: {
-    NavBar
+    NavBar,
+    FeedBack
   },
   data () {
     return {
