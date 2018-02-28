@@ -48,6 +48,7 @@
               </ul>
             </div>
           </div>
+          <witness-card v-if="!$store.state.profile.steemgigsWitness"/>
         </div>
         <div class="back card-panel indigo lighten-1 white-text">
             <i @click="closeEdit" class="icon ion-close"></i>
@@ -122,10 +123,14 @@
 // import sc2 from '@/services/sc2'
 import Api from '@/services/api'
 import moment from 'moment'
+import WitnessCard from '@/components/snippets/witnessCard'
 
 const countries = require('country-list')()
 
 export default {
+  components: {
+    WitnessCard
+  },
   data () {
     return {
       repp: '',

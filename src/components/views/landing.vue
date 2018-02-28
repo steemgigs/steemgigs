@@ -5,10 +5,10 @@
       <h1>Everyone has something to offer</h1>
       <p>Freelance services for the lean entrepreneur</p>
       <div class="input-container">
-        <input type="text" class="browser-default my-input">
-        <a href="#join" class="btn-large white-text light-blue darken-4">Search</a>
+        <input type="text" @keyup.enter="openSearch" v-model="searchString" class="browser-default my-input">
+        <button @click.stop="openSearch" class="btn-large white-text light-blue darken-4">Search</button>
       </div>
-      <p class="link">Hi Beautiful, <a href="#">Check out our categories</a></p>
+      <p class="link">Hi Beautiful, <a href="#">see for yourself</a></p>
     </div>
     <section class="center cat-showcase">
       <h2 class="mb-1">Explore SteemGigs</h2>
@@ -79,6 +79,7 @@ export default {
   },
   data () {
     return {
+      searchString: '',
       categories: [{
         title: 'Nature & Tourism',
         icon: 'ion-compass',
@@ -120,6 +121,11 @@ export default {
         description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil explicabo excepturi vitae'
       }]
     }
+  },
+  methods: {
+    openSearch () {
+      this.$eventBus.$emit('open-search', this.searchString)
+    }
   }
 }
 </script>
@@ -141,6 +147,9 @@ export default {
       position: relative;
       padding-top: 15vh;
       padding-bottom: 15vh;
+      .input-container button{
+        margin-top: -3.6px;
+      }
       img.bg{
           position: absolute;
           top: 0;
@@ -156,8 +165,9 @@ export default {
         z-index: 1;
       }
       input.my-input {
-        padding: 16px 5px;
+        padding: 16px 15px;
         min-width: 300px;
+        margin-top: 15px;
       }
     }
     .cat-showcase {

@@ -70,7 +70,7 @@ export default {
       if (this.gigData.pending_payout_value.amount) {
         return '$' + this.gigData.pending_payout_value.amount
       } else {
-        return '$' + (parseFloat(this.gigData.total_payout_value.amount) + parseFloat(this.gigData.curator_payout_value.amount))
+        return '$' + (this.gigData.total_payout_value.amount + this.gigData.curator_payout_value.amount).toFixed(2)
       }
     },
     paymentInfo () {

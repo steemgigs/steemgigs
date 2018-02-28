@@ -3,6 +3,7 @@ import sc2 from 'sc2-sdk'
 const sc = sc2.Initialize({
   baseURL: 'https://v2.steemconnect.com',
   app: 'steemgigs.app',
+  // app: 'steemgig.app',
   callbackURL: 'http://steemgigs.org/complete',
   // callbackURL: 'http://localhost:8080/complete',
   // callbackURL: 'https://steemgigsorg.firebaseapp.com/complete',

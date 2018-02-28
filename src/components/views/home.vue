@@ -32,6 +32,7 @@
           <router-link to="/untalented_editor" tag="button" class="btn btn-block indigo">Use the Untalented Editor</router-link>
         </div>
       </div>
+      <witness-card v-if="!$store.state.profile.steemgigsWitness"/>
     </div>
     <div class="col s12 m8 l10">
       <carousel id="home_ad_slider" :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
@@ -206,6 +207,7 @@ import {Plane} from 'vue-loading-spinner'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
 import TestimonialCard from '@/components/snippets/testimonialCard'
+import WitnessCard from '@/components/snippets/witnessCard'
 import InputTag from 'vue-input-tag'
 
 export default {
@@ -216,7 +218,8 @@ export default {
     Carousel,
     Slide,
     InputTag,
-    TestimonialCard
+    TestimonialCard,
+    WitnessCard
   },
   data () {
     return {
@@ -296,6 +299,10 @@ $blue: #4757b2;
   padding: 0;
   padding-left: 0.5em;
   .card {
+    p {
+      font-size: 16px;
+      font-weight: 700;
+    }
     &.searches {
       padding-bottom: 0px;
       .card-content {

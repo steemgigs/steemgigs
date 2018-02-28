@@ -57,8 +57,10 @@ export default {
     }
   },
   mounted () {
-    this.$eventBus.$on('open-search', () => {
+    this.$eventBus.$on('open-search', (payload) => {
       this.searchActive = true
+      this.searchTerm = payload
+      this.search()
     })
     this.$eventBus.$on('close-search', () => {
       this.searchActive = false

@@ -21,7 +21,8 @@ export default new Vuex.Store({
       balance: {
         amount: ''
       },
-      rep: ''
+      rep: '',
+      steemgigsWitness: ''
     },
     posts: {
       steemgigs: [],
@@ -37,7 +38,7 @@ export default new Vuex.Store({
       state.tokenExpires = tokenExpires
       state.username = username
     },
-    SET_PROFILE (state, {about, coverImage, location, name, profilePic, rep, website, walletBal}) {
+    SET_PROFILE (state, {about, coverImage, location, name, profilePic, rep, website, walletBal, steemgigsWitness}) {
       state.profile.about = about
       state.profile.coverImage = coverImage
       state.profile.location = location
@@ -46,6 +47,7 @@ export default new Vuex.Store({
       state.profile.rep = rep
       state.profile.website = website
       state.profile.balance = walletBal
+      state.profile.steemgigsWitness = steemgigsWitness
     },
     SET_lastPage (state, url) {
       state.lastPage = url

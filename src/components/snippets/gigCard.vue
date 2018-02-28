@@ -1,7 +1,7 @@
 <template>
   <div class="card gig" tag="div">
     <div class="card-content" v-if="meantFor === 'gigDetails'">
-      <span class="card-title" v-text="task"></span>
+      <span class="card-title" v-text="title"></span>
     </div>
     <div class="card-image">
       <router-link :to="taskLink">
@@ -16,7 +16,7 @@
     <div class="card-content">
       <img v-if="imgUrl || sellerImg" :src="sellerImg" alt="" class="sellerPic">
       <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername"> {{sellerUsername + ' (' + sellerRep + ') '}} </router-link>
-      <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" tag="p" v-text="task" />
+      <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" tag="p" v-text="title" />
       <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
       <p class="price">
         <span v-if="price">
@@ -70,6 +70,11 @@ export default {
     task () {
       if (this.gigData.title) {
         return this.gigData.title.split('#STEEMGIGS: I will ')[1] || this.gigData.title.split('#STEEMGIGS: ')[1]
+      } else return ''
+    },
+    title () {
+      if (this.gigData.title) {
+        return this.gigData.title.split('#STEEMGIGS: ')[1]
       } else return ''
     },
     taskLink () {
