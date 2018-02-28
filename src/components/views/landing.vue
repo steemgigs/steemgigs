@@ -46,9 +46,9 @@
           <div class="col m7"></div>
         </div>
       </div> -->
-      <carousel  :autoplay="true" :perPage="5">
+      <carousel  :autoplay="true" :perPage="4">
         <slide v-for="(slider, i) in sliders" :key="i">
-          <div class="slide mx-2" :style="{'background-image': 'url('+ slider.url +')'}">
+          <div class="slide mx-3" :style="{'background-image': 'url('+ slider.url +')'}">
             <h3>{{slider.header}}</h3>
             <p>{{slider.small}}</p>
             <!-- <img :src="slider.url" alt=""> -->
@@ -226,7 +226,7 @@ export default {
       }
     }
     .slide {
-      height: 400px;
+      height: 450px;
       box-shadow: 0 6px 50px 0 rgba(0,0,0,.35);
       border-radius: 5px;
       position: relative;

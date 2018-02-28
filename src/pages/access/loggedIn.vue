@@ -14,9 +14,8 @@ export default {
     this.$store.commit('SET_USER', {accessToken, tokenExpires, username})
     Api.loggedIn(username, accessToken).then(response => {
       let responseData = response.data
-      console.log('from logged in', responseData)
-      let {about, coverImage, location, name, profilePic, rep, balance: walletBal} = responseData.profile
-      this.$store.commit('SET_PROFILE', {about, coverImage, location, name, profilePic, walletBal, rep})
+      let {about, coverImage, location, name, profilePic, rep, balance: walletBal, steemgigsWitness} = responseData.profileObject
+      this.$store.commit('SET_PROFILE', {about, coverImage, location, name, profilePic, walletBal, rep, steemgigsWitness})
     })
     // sc2.setAccessToken(accessToken)
     // sc2.me((err, result) => {

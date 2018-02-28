@@ -57,11 +57,30 @@ export default new Vuex.Store({
     },
     CLEAR_USER (state) {
       state.accessToken = ''
-      state.username = ''
       state.tokenExpires = ''
-      let prevImage = state.profile.profileImage
-      state.profile = {}
-      state.profile.profileImage = prevImage
+      state.username = ''
+      state.lastPageTried = ''
+      state.lastPage = ''
+      state.profile = {
+        about: '',
+        coverImage: '',
+        location: '',
+        name: '',
+        profileImage: 'http://via.placeholder.com/100x100',
+        website: '',
+        balance: {
+          amount: ''
+        },
+        rep: '',
+        steemgigsWitness: ''
+      }
+      state.posts = {
+        steemgigs: [],
+        gigrequests: [],
+        untalented: [],
+        featured: [],
+        testimonials: []
+      }
     },
     SET_STEEMGIGS (state, {fetched}) {
       state.posts.steemgigs = fetched

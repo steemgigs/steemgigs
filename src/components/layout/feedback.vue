@@ -25,7 +25,7 @@
         <div class="email-area">
           <input v-model="email" class="browser-default" placeholder="Enter Email">
         </div>
-        <div class="p-2 right-align"><span style="cursor: pointer" @click="email = ''; send()" class="indigo-text mr-3">Skip</span><button @click="send" class="btn px-2 grey send">Send</button></div>
+        <div class="p-2 right-align"><span style="cursor: pointer" @click="email = ''; send()" class="indigo-text mr-3">Skip</span><button @click="send" class="btn px-2 grey send"><i class="fa fa-spinner fa-pulse search-loader" v-if="sending" /> Send</button></div>
       </div>
     </div>
   </div>
@@ -42,7 +42,8 @@ export default {
       rating: 0,
       message: '',
       email: '',
-      feedbackActive: false
+      feedbackActive: false,
+      sending: false
     }
   },
   methods: {
@@ -56,8 +57,10 @@ export default {
       this.rating = 0
       this.message = ''
       this.email = ''
+      this.sending = false
     },
     send () {
+      this.sending = true
       Api.sendFeedback({rating: this.rating, message: this.message, email: this.email, username: this.$store.state.username || ''}).then((response) => {
         console.log(response.data)
         this.closeFeedback()
@@ -114,7 +117,7 @@ export default {
         span.emojis.active span:not(.active) i.em {
           filter: saturate(.2)
         }
-        &:hover span.emojis{
+        span.emojis:hover {
           span:not(:hover) i.em {
             filter: saturate(.2)
           }
