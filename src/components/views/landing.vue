@@ -3,22 +3,24 @@
     <div class="main center-align grey-text z-depth-3 text-lighten-4">
       <img class="bg" src="static/img/black-expert.jpeg" alt="">
       <h1>Everyone has something to offer</h1>
-      <p>Freelance services for the lean entrepreneur</p>
+      <p>Do the dreaming, leave the building to us</p>
       <div class="input-container">
         <input type="text" @keyup.enter="openSearch" v-model="searchString" class="browser-default my-input">
         <button @click.stop="openSearch" class="btn-large white-text light-blue darken-4">Search</button>
       </div>
       <p class="link">Hi Beautiful, <a href="#">see for yourself</a></p>
     </div>
-    <section class="center cat-showcase">
-      <h2 class="mb-1">Explore SteemGigs</h2>
-      <p class="mb-5 grey-text">Our existing categories are sure to inspire you</p>
-      <div class="row pt-5">
-        <div v-for="(category, index) in categories" :key="index" class="col m4 l3">
-          <div class="category">
-            <i :class="category.icon" class="icon cat-icon"></i>
-            <h6 class="cat-title">{{category.title}}</h6>
-            <span class="cat-description">{{category.description}}</span>
+    <section class="center cat-showcase py-5">
+      <div class="container">
+        <h2 class="mb-1">Explore SteemGigs</h2>
+        <p class="mb-5 grey-text">Our existing categories are sure to inspire you</p>
+        <div class="row pt-5">
+          <div v-for="(category, index) in categories" :key="index" class="col s4 l3">
+            <div class="category">
+              <i :class="category.icon" class="icon cat-icon"></i>
+              <h6 class="cat-title">{{category.title}}</h6>
+              <span class="cat-description">{{category.description}}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -27,8 +29,12 @@
       <div class="row">
         <div class="col m8 grey-text text-lighten-2">
           <h3>We made Steem Gigs for you</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, provident vel! Accusantium nesciunt obcaecati, beatae consectetur fuga est dolorum aut, culpa rem iure sint dicta facilis sequi quod mollitia perspiciatis?</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+          <p>You have successfully connected to SteemGigs, the first freelancing social network on a decentralized steem blockchain with the power of Fiverr, Upwork &amp; Freelancer combined.
+          We will passionately &amp; proactively help you bring your innovation, dreams, vision, enterprise etc into full-blown life.</p>
+          <p>
+          In our space, "everyone has something to offer"!<br>
+          So do you want to offer a service in exchange for Steem/Steem Dollars/Steem Power or are you in need of someone to help you accomplish a service e.g build a dream?
+          We will gladly help! </p>
         </div>
         <div class="col m4">
           <img class="responsive-img z-depth-5" src="/static/img/agreement.jpeg" alt="">
@@ -49,7 +55,7 @@
       <div class="slide-container">
         <carousel :autoplay="true" :paginationEnabled="true" :navigationEnabled="true" :perPage="4">
           <slide v-for="(slider, i) in sliders" :key="i">
-            <div class="slide mx-3 my-5 px-3 left-align" :style="{'background-image': 'url('+ slider.url +')'}">
+            <div class="slide mx-3 my-5 px-3 left-align" :style="{'background': 'linear-gradient(150deg, #1c1c1ce0, transparent), url('+ slider.url +') no-repeat center', 'background-size': 'cover' }">
               <h5 class="head">{{slider.header}}</h5>
               <p>{{slider.small}}</p>
             </div>
@@ -289,17 +295,16 @@ export default {
       position: relative;
       padding: 15px 10px;
       h5 {
-        color: #535353;
+        color: #ededed;
         margin: 10px 0;
       }
       p {
-        color: gray;
+        color: #c8c8c8;
         font-size: 1em;
         margin: 5px 0;
       }
     }
     .cat-showcase {
-      padding: 50px 7rem;
       .category {
         min-height: 205px;
         cursor: pointer;

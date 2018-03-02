@@ -28,6 +28,7 @@
             </div>
             <div class="input-field col s12">
               <vue-editor v-model="newTestimonial.description" placeholder="Describe your experience with steemgigs" :upload="uploadConfig"></vue-editor>
+              <p v-if="descError" class="red-text right" v-text="descError" />            
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
@@ -49,7 +50,7 @@
           </div>
         </form>
         <div class="row" v-if="currentSection === 1">
-          <div class="col s12">
+          <div class="col s12 preview">
             <div class="card">
               <div class="card-content">
                 <span class="card-title"> {{ steemedTitle }}</span>
@@ -63,6 +64,16 @@
               </div> -->
               <div class="card-content pt-0">
                 <vue-markdown :source="previewData" />
+              </div>
+            </div>
+            <div class="tutorial_guide hide-on-small-only">
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title">How Nice?</span>
+                  <p class="mt-1">Take a look at your Steemgigs Post to see if you have made errors</p>
+                  <p class="mt-1">If error free, hit "publish", else, correct errors</p>
+                  <p class="mt-1">Note: Your post will also appear on the Steem Blockchain</p>
+                </div>
               </div>
             </div>
           </div>
@@ -114,6 +125,7 @@ export default {
       sections: ['Post a Testimonial', 'Publish'],
       currentSection: 0,
       totalPics: 1,
+      nextPressed: false,
       userTags: [],
       defaultTags: ['steemgigs', 'steemgigs-testimonial'],
       newTestimonial: {
@@ -135,10 +147,14 @@ export default {
   },
   methods: {
     switchTo (index) {
-      this.currentSection = index
+      if (!this.descError) {
+        this.nextPressed = true
+        this.currentSection = index
+      }
     },
     nextSection () {
-      if (this.currentSection < this.sections.length) this.currentSection++
+      this.nextPressed = true
+      if (!this.descError && this.currentSection < this.sections.length) this.currentSection++
     },
     prevSection () {
       if (this.currentSection > 0) this.currentSection--
@@ -147,41 +163,50 @@ export default {
       this.userTags = entries
     },
     submit () {
-      let that = this
-      this.errorText = ''
-      this.successText = ''
-      this.isPosting = true
-      this.isPosting = true
-      let jsonMetadata = {
-        app: 'steemgig',
-        tags: [...this.userTags, ...this.defaultTags],
-        format: 'Markdown',
-        timestamp: new Date().getTime(),
-        authorPic: this.$store.state.profile.profileImage,
-        type: 'steemgigs_testimonial',
-        deleted: false,
-        // images: this.newTestimonial.portfolio,
-        generated: true
+      if (!this.descError) {
+        let that = this
+        this.errorText = ''
+        this.successText = ''
+        this.isPosting = true
+        this.isPosting = true
+        let jsonMetadata = {
+          app: 'steemgig',
+          tags: [...this.userTags, ...this.defaultTags],
+          format: 'Markdown',
+          timestamp: new Date().getTime(),
+          authorPic: this.$store.state.profile.profileImage,
+          type: 'steemgigs_testimonial',
+          deleted: false,
+          // images: this.newTestimonial.portfolio,
+          generated: true
+        }
+        let username = this.$store.state.username
+        let permlink = this.slugify(this.newTestimonial.title)
+        let body = this.newTestimonial.description + `
+  <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
+        `
+        let title = this.steemedTitle
+        let token = this.$store.state.accessToken
+        // username, permlink, title, body, jsonMetadata, token
+        Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
+          console.log(err, res)
+          that.isPosting = false
+          that.successText = 'Successfully pushed to steem!'
+        }).catch((e) => {
+          that.isPosting = false
+          that.errorText = 'Error pushing post to steem, try again'
+        })
       }
-      let username = this.$store.state.username
-      let permlink = this.slugify(this.newTestimonial.title)
-      let body = this.newTestimonial.description + `
-<i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
-      `
-      let title = this.steemedTitle
-      let token = this.$store.state.accessToken
-      // username, permlink, title, body, jsonMetadata, token
-      Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
-        console.log(err, res)
-        that.isPosting = false
-        that.successText = 'Successfully pushed to steem!'
-      }).catch((e) => {
-        that.isPosting = false
-        that.errorText = 'Error pushing post to steem, try again'
-      })
     }
   },
   computed: {
+    descError () {
+      if (this.nextPressed && this.newTestimonial.description.length < 20) {
+        return 'Your description should be 20 Characters or more, please read style guide for clarification'
+      } else {
+        return ''
+      }
+    },
     wordCount () {
       if (this.newTestimonial.title.length > 0) {
       } else {

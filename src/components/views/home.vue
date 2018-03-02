@@ -22,7 +22,7 @@
       </div>
       <div class="card center center-align request">
         <div class="card-content">
-          <p>Earn some rewards by telling us about your successful STEEMGIGS EXPERIENCE (both SteemGiggers &amp; Clients)</p>
+          <p>Earn some rewards by telling us about your successful "SteemGigs Experience"</p><p> (For both SteemGiggers &amp; Clients)</p>
           <router-link to="/create_testimonial" tag="button" class="btn btn-block indigo">Post a testimonial</router-link>
         </div>
       </div>
@@ -154,7 +154,7 @@
         <div v-if="gigrequests.length < 1" class="col s12 center-align center">
           <plane v-if="!gigrequestsFetched" size="100" />
           <div v-if="gigrequestsFetched" class="center center-align">
-            <p class="flow-text grey-text">Can&rsquo;t find what you&rsquo;re looking Seeking?<br>You can post Custom request and we&rsquo;ll lovingly look for reputable great minds to handle it</p>
+            <p class="flow-text grey-text">Can&rsquo;t find what you&rsquo;re Seeking?<br>You can post Custom requests and we&rsquo;ll lovingly look for reputable great minds to handle it</p>
             <router-link to="/steemgigs_request" tag="button" class="btn btn-large indigo">Post custom request</router-link>
           </div>
           <br><br>
