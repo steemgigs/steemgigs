@@ -16,7 +16,7 @@
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
-                    <span class="card-title">Make your Title Short, Simple and Clear to boost sales</span>
+                    <span>Make your title short, describing exactly what service(s) you offer as this is the likliest way to boost viewership and postential &amp; eventual sales</span>
                   </div>
                 </div>
               </div>
@@ -42,6 +42,15 @@
               <div class="form-navs">
                 <button @click.prevent="nextSection" class="right btn indigo waves-effect">Save and Proceed</button>
               </div>
+              <div class="tutorial_guide guide-2 hide-on-small-only">
+                <div class="card">
+                  <div class="card-content">
+                    <p>Select the most accurately describing category and subcategory</p>
+                    <p class="mb-3">Choose the best follow up tags</p>
+                    <span>"This will enhance visibility of your gigs on our website search engine and steem blockchain".</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </form>
@@ -50,19 +59,20 @@
             <p class="flow-text title">Describe your STEEMGIG</p>
             <div class="input-field col s12">
               <vue-editor v-model="newGigData.description" :upload="uploadConfig"></vue-editor>
+              <p v-if="descError" class="red-text right" v-text="descError" />            
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title">Describe your STEEMGIG</span>
-                    <p>Be as detailed as possible so that potential buyers can understand what you offer and see whether it fits into their needs.</p>
-                    <p>Set and Answer your FAQs</p>
+                    <p>Be as expressive as possible as this is your chance to tell postential clients and steemians what you offer, why you gig is special and why they should give you opportunities etc.</p>
+                    <p>Set up a viable list of potential FAQs and to try to answer each one.</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col s12 row">
                 <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-                <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
+                <button class="right btn indigo waves-effect" @click.prevent="descNext = true; nextSection()">Save and Proceed</button>
             </div>
           </div>
         </form>
@@ -71,11 +81,15 @@
             <p class="flow-text title">Pricing</p>
             <div class="input-field col s12">
               <vue-editor v-model="newGigData.pricing" :upload="uploadConfig"></vue-editor>
+              <p v-if="pricingError" class="red-text right" v-text="pricingError" />
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
-                    <span class="card-title">Name your Package and describe the detail of your package</span>
-                    <p>Are you willing to do revisions with your STEEMGIGS? If so, how many e.t.c, Gig Extras and Pricing</p>
+                    <p class="mb-2">PricingGive your PACKAGE an appealing name.
+                    <p class="mb-2">Describe what will be contained in your package for each price.</p>
+                    <p class="mb-2">Tell us if you are willing to do revisions. If so, "how many revisions?"; "will it cost extra?" etc</p>
+                    <p class="mb-2">Can you render more "speed of delivery", if offered extra payment?</p>
+                    <p>Are there aspects of your GIG that you are will to offering lovingly for free etc?</p>
                   </div>
                 </div>
               </div>
@@ -107,7 +121,7 @@
             </div>
             <div class="col s12 row" style="margin-top: 3em;">
                 <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-                <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
+                <button class="right btn indigo waves-effect" @click.prevent="priceNext = true; nextSection()">Save and Proceed</button>
             </div>
           </div>
         </form>
@@ -116,19 +130,24 @@
             <p class="flow-text title">Requirements</p>
             <div class="input-field col s12">
               <vue-editor v-model="newGigData.requirements" :upload="uploadConfig"></vue-editor>
+              <p v-if="requirementError" class="red-text right" v-text="requirementError" />
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title"></span>
-                    <p>Explain what you expect of your client to help you start rendering the service e.g submit files, images, video to edit, links etc</p>
-                    <p>Tell them whether your requirments are optional or 'compulsory'</p>
+                    <p class="mb-2">Explain what you would want your clients to provide you with, to help you start the GIG. 
+                      e.g if your GIG is SEO-related, you may want them to drop "the URL of their website.
+                      If your GIG is "graphics-related", you may request images, GIFs etc to guide you during your creation
+                      If your GIG is "video-editing", you may require them to drop you "video files"
+                      etc.</p>
+                    <p>Tell them if your "requirements" are optional or compulsory.</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col s12 row">
                 <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-                <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
+                <button class="right btn indigo waves-effect" @click.prevent="reqNext = true; nextSection()">Save and Proceed</button>
             </div>
           </div>
         </form>
@@ -148,9 +167,9 @@
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title"></span>
-                    <p>Attach images of past works etc Plus a Video describing your #STEEMGIG or why people should avail your STEEMGIG.</p>
-                    <p>Videos do better in helping you stand out from competition</p>
-                    <p>Note: The first Image or Video on the list of your uploaded media is what will appear as the thumbnail of your STEEMGIG</p>
+                    <p class="mb-2">Attach images, videos, GIFs etc showcasing your past work. Add any additional media that describes your SteemGig or tells potential client what they can do to help you serve them better.</p>
+                    <p class="mb-3">Consider attaching a video telling potential clients as well as steemians, why your service is outstanding.</p>
+                    <span class="ml-1">Note: The first uploaded media is what will appear in the thumbnail of your SteemGig both here and on the steem blockchain.</span>
                   </div>
                 </div>
               </div>
@@ -178,7 +197,7 @@
           </div>
         </form>
         <div class="row" v-if="currentSection === 5">
-          <div class="col s12">
+          <div class="col s12 preview">
             <div class="card">
               <div class="card-content">
                 <span class="card-title">#STEEMGIGS: I will {{ newGigData.title }}</span>
@@ -195,10 +214,27 @@
                 <vue-markdown :source="previewData" />
               </div>
             </div>
+            <div class="tutorial_guide hide-on-small-only">
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title">How Nice?</span>
+                  <p class="mt-1">Take a look at your Steemgigs Post to see if you have made errors</p>
+                  <p class="mb-3">If error free, hit "publish", else, correct errors</p>
+                  <span>Note: Your post will also appear on the Steem Blockchain</span>
+                </div>
+              </div>
+            </div>
+            <div v-if="errorr" class="card-panel">
+              <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
+              <p v-if="pricingError" class="red-text mt-1 mb-0" v-text="pricingError" />
+              <p v-if="requirementError" class="red-text mt-1 mb-0" v-text="requirementError" />
+              <p v-if="subcatError" class="red-text mt-1 mb-0" v-text="subcatError" />
+            </div>
+            
           </div>
           <div class="col s12 row">
             <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-            <button class="right btn indigo waves-effect" @click.prevent="submit">
+            <button :disabled="Boolean(errorr)" class="right btn indigo waves-effect" @click.prevent="submit">
               <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
               POST #STEEMGIG
             </button>
@@ -242,6 +278,9 @@ export default {
       sections: ['Overview', 'Description', 'Pricing', 'Requirements', 'Portfolio', 'Publish'],
       currentSection: 0,
       totalPics: 1,
+      descNext: false,
+      reqNext: false,
+      priceNext: false,
       userTags: [],
       newGigData: {
         title: '',
@@ -272,10 +311,21 @@ export default {
   },
   methods: {
     switchTo (index) {
+      if (index === 5) {
+        this.descNext = this.priceNext = this.reqNext = true
+      } else if (this.currentSection >= 3) {
+        this.reqNext = true
+      } else if (this.currentSection >= 2) {
+        this.priceNext = true
+      } else if (this.currentSection >= 1) {
+        this.descNext = true
+      }
       this.currentSection = index
     },
     nextSection () {
-      if (this.currentSection < this.sections.length) this.currentSection++
+      if (!this.errorr) {
+        if (this.currentSection < this.sections.length) this.currentSection++
+      }
     },
     prevSection () {
       if (this.currentSection > 0) this.currentSection--
@@ -290,49 +340,82 @@ export default {
       if (this.totalPics < 4) this.totalPics++
     },
     submit () {
-      let that = this
-      this.errorText = ''
-      this.successText = ''
-      this.isPosting = true
-      this.isPosting = true
-      let jsonMetadata = {
-        app: 'steemgig',
-        users: ['steemgigs', this.$store.state.username],
-        tags: [...this.userTags, ...this.defaultTags],
-        format: 'Markdown',
-        timestamp: new Date().getTime(),
-        price: this.newGigData.price,
-        currency: this.newGigData.currency,
-        authorPic: this.$store.state.profile.profileImage,
-        category: this.slugify(this.newGigData.category),
-        subcategory: this.slugify(this.newGigData.subcategory),
-        images: this.newGigData.portfolio,
-        type: 'steemgigs_post',
-        generated: true
+      if (!this.errorr) {
+        let that = this
+        this.errorText = ''
+        this.successText = ''
+        this.isPosting = true
+        this.isPosting = true
+        let jsonMetadata = {
+          app: 'steemgig',
+          users: ['steemgigs', this.$store.state.username],
+          tags: [...this.userTags, ...this.defaultTags],
+          format: 'Markdown',
+          timestamp: new Date().getTime(),
+          price: this.newGigData.price,
+          currency: this.newGigData.currency,
+          authorPic: this.$store.state.profile.profileImage,
+          category: this.slugify(this.newGigData.category),
+          subcategory: this.slugify(this.newGigData.subcategory),
+          images: this.newGigData.portfolio,
+          type: 'steemgigs_post',
+          generated: true
+        }
+        let textifiedPics = '\n<h2>Portfolio</h2>\n<hr />\n'
+        this.newGigData.portfolio.forEach(url => {
+          textifiedPics += `<img src="${url}"> <br />`
+        })
+        let username = this.$store.state.username
+        let permlink = this.slugify(this.newGigData.title)
+        let body = this.previewData + textifiedPics + `
+  <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
+        `
+        let token = this.$store.state.accessToken
+        let title = '#STEEMGIGS: I will ' + this.newGigData.title
+        // username, permlink, title, body, jsonMetadata, token
+        Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
+          console.log('err', err, 'res', res)
+          that.isPosting = false
+          that.successText = 'Successfully pushed to steem!'
+        }).catch((e) => {
+          that.isPosting = false
+          that.errorText = 'Error pushing post to steem, try again'
+        })
       }
-      let textifiedPics = '\n<h2>Portfolio</h2>\n<hr />\n'
-      this.newGigData.portfolio.forEach(url => {
-        textifiedPics += `<img src="${url}"> <br />`
-      })
-      let username = this.$store.state.username
-      let permlink = this.slugify(this.newGigData.title)
-      let body = this.previewData + textifiedPics + `
-<i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
-      `
-      let token = this.$store.state.accessToken
-      let title = '#STEEMGIGS: I will ' + this.newGigData.title
-      // username, permlink, title, body, jsonMetadata, token
-      Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
-        console.log('err', err, 'res', res)
-        that.isPosting = false
-        that.successText = 'Successfully pushed to steem!'
-      }).catch((e) => {
-        that.isPosting = false
-        that.errorText = 'Error pushing post to steem, try again'
-      })
     }
   },
   computed: {
+    descError () {
+      if (this.descNext && this.newGigData.description.length < 100) {
+        return 'Your description should be 100 Characters or more, please read style guide for clarification'
+      } else {
+        return ''
+      }
+    },
+    pricingError () {
+      if (this.priceNext && this.newGigData.pricing.length < 50) {
+        return 'Your pricing description should be 50 Characters or more, please read style guide for clarification'
+      } else {
+        return ''
+      }
+    },
+    requirementError () {
+      if (this.reqNext && this.newGigData.requirements.length < 30) {
+        return 'Your requirments description should be 30 Characters or more, please read style guide for clarification'
+      } else {
+        return ''
+      }
+    },
+    subcatError () {
+      if (!this.newGigData.subcategory) {
+        return 'You must select a category/subcategory'
+      } else {
+        return ''
+      }
+    },
+    errorr () {
+      return this.descError || this.requirementError || this.pricingError || this.subcatError
+    },
     selectedCategoryIndex () {
       let catIndex = 0
       this.categories.forEach((category, index) => {
@@ -539,7 +622,7 @@ p.title {
     border-right: 10px solid #FFFFFC;
     position: absolute;
     left: -10px;
-    top: 45%;
+    top: 20%;
     z-index: 3;
     box-shadow: 0px 0px 0px black;
   }

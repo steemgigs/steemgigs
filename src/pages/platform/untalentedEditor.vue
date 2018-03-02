@@ -27,11 +27,21 @@
             </div>
             <div class="input-field col s12">
               <vue-editor v-model="untalented.description" placeholder="Type your post here" :upload="uploadConfig"></vue-editor>
-              <div class="tutorial_guide center-align">
+              <p v-if="descError" class="red-text right" v-text="descError" />            
+              <div class="tutorial_guide">
                 <div class="card">
                   <div class="card-content">
-                    <span class="card-title grey-text text-darken-1 left-align mb-4">Want to write a perfect #introduceyourself post</span>
-                    <p class="grey-text text-darken-3">Read style guide</p>
+                    <span class="card-title grey-text text-darken-1 left-align mb-2">Want to write a perfect #introduceyourself post</span>
+                    <p class="mb-4 grey-text text-darken-3"><a target="_blank" href="https://steemit.com/steemit/@surpassinggoogle/steemit-s-untalented-is-in-beta-participate-freely-because-every-participant-in-this-contest-will-win-something-no-losers">Read</a> the style guide</p>
+                    <span class="grey-text text-darken-1 left-align mb-4">Follow these tips to create a magical steemit post. (Make it "curator-worthy" and free of "cheetah worries")</span>
+                    <p class="mt-2 mb-2">Give us a preface of what your post is about to be about.</p>
+                    <p class="mb-2">If you are using resources from the internet, digest it first, then tell us about it, using your own words.</p>
+                    <p class="mb-2">Be expressive. Relegate reservations. Flaws allowed
+(The more pictures, words etc, the more exciting).</p>
+                    <p class="mb-2">To conclude, ask us questions. Make us think. Aim to truly touch us with your beauty.</p>
+                    <p class="mb-2">You have an audience in the search engines as well, so aim to touch them too.</p>
+                    <p class="mb-3">Make sure to state source URL of every image resourced online. No loss, if you always give credit.</p>
+                    <span>Conclusion: Be confident about tell us why people should support your content, share and return</span>
                   </div>
                 </div>
               </div>
@@ -46,7 +56,7 @@
           </div>
         </form>
         <div class="row" v-if="currentSection === 1">
-          <div class="col s12">
+          <div class="col s12 preview">
             <div class="card">
               <div class="card-content">
                 <span class="card-title"> {{ steemedTitle }}</span>
@@ -62,10 +72,23 @@
                 <vue-markdown :source="previewData" />
               </div>
             </div>
+            <div class="tutorial_guide hide-on-small-only">
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title">How Nice?</span>
+                  <p class="mt-1">Take a look at your Steemgigs Post to see if you have made errors</p>
+                  <p class="mt-1">If error free, hit "publish", else, correct errors</p>
+                  <p class="mt-1">Note: Your post will also appear on the Steem Blockchain</p>
+                </div>
+              </div>
+            </div>
+            <div v-if="descError" class="card-panel">
+              <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
+            </div>
           </div>
           <div class="col s12 row">
             <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-            <button class="right btn indigo waves-effect" @click.prevent="submit">
+            <button :disabled="Boolean(descError)" class="right btn indigo waves-effect" @click.prevent="submit">
               <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
               POST #STEEMGIG
             </button>
@@ -112,6 +135,7 @@ export default {
       currentSection: 0,
       totalPics: 1,
       userTags: [],
+      nextPressed: false,
       defaultTags: ['steemgigs', 'untalented'],
       untalented: {
         title: '',
@@ -132,9 +156,11 @@ export default {
   },
   methods: {
     switchTo (index) {
+      this.nextPressed = true
       this.currentSection = index
     },
     nextSection () {
+      this.nextPressed = true
       if (this.currentSection < this.sections.length) this.currentSection++
     },
     prevSection () {
@@ -144,46 +170,62 @@ export default {
       this.userTags = entries
     },
     submit () {
-      let that = this
-      this.errorText = ''
-      this.successText = ''
-      this.isPosting = true
-      this.isPosting = true
-      let jsonMetadata = {
-        app: 'steemgig',
-        tags: [...this.userTags, ...this.defaultTags],
-        format: 'Markdown',
-        timestamp: new Date().getTime(),
-        authorPic: this.$store.state.profile.profileImage,
-        type: 'steemgigs_untalented',
-        deleted: false
-        // images: this.untalented.portfolio,
-      }
-      sc2.setAccessToken(this.$store.state.accessToken)
-      // let textifiedPics = '\n## Portfolio\n<hr />\n'
-      // this.untalented.portfolio.forEach(url => {
-      //   textifiedPics += '![Potfolio](' + url + ')\n\n'
-      // })
-      // let body = this.previewData + textifiedPics + `
-      let body = this.previewData + `
-<h5>this post was made on #STEEMGIGS</h5>
-"where everyone has something to offer"
-      `
-      let permlink = this.slugify(this.untalented.title)
-      let username = this.$store.state.username
-      let title = this.steemedTitle
-      sc2.comment('', 'steemgigs', username, permlink, title, body, jsonMetadata, (err, res) => {
-        console.log(err, res)
-        that.isPosting = false
-        if (err) {
-          that.errorText = 'Error pushing post to steem, try again'
-        } else {
-          that.successText = 'Successfully pushed to steem!'
+      if (!this.descError) {
+        let that = this
+        this.errorText = ''
+        this.successText = ''
+        this.isPosting = true
+        this.isPosting = true
+        let jsonMetadata = {
+          app: 'steemgig',
+          tags: [...this.userTags, ...this.defaultTags],
+          format: 'Markdown',
+          timestamp: new Date().getTime(),
+          authorPic: this.$store.state.profile.profileImage,
+          type: 'steemgigs_untalented',
+          deleted: false
+          // images: this.untalented.portfolio,
         }
-      })
+        sc2.setAccessToken(this.$store.state.accessToken)
+        // let textifiedPics = '\n## Portfolio\n<hr />\n'
+        // this.untalented.portfolio.forEach(url => {
+        //   textifiedPics += '![Potfolio](' + url + ')\n\n'
+        // })
+        // let body = this.previewData + textifiedPics + `
+        let body = this.previewData + `
+  <h5>this post was made on #STEEMGIGS</h5>
+  "where everyone has something to offer"
+        `
+        let permlink = this.slugify(this.untalented.title)
+        let username = this.$store.state.username
+        let title = this.steemedTitle
+        sc2.comment('', 'steemgigs', username, permlink, title, body, jsonMetadata, (err, res) => {
+          console.log(err, res)
+          that.isPosting = false
+          if (err) {
+            that.errorText = 'Error pushing post to steem, try again'
+          } else {
+            that.successText = 'Successfully pushed to steem!'
+          }
+        })
+      }
     }
   },
   computed: {
+    descError () {
+      if (this.nextPressed && this.untalented.description.length < 200) {
+        return 'Your description should be 200 Characters or more, please read style guide for clarification'
+      } else {
+        return ''
+      }
+    },
+    subcatError () {
+      if (!this.untalented.subcategory) {
+        return 'You must select a category/subcategory'
+      } else {
+        return ''
+      }
+    },
     wordCount () {
       if (this.untalented.title.length > 0) {
       } else {
@@ -376,7 +418,7 @@ p {
     border-right: 10px solid #FFFFFC;
     position: absolute;
     left: -10px;
-    top: 45%;
+    top: 20%;
     z-index: 3;
     box-shadow: 0px 0px 0px black;
   }

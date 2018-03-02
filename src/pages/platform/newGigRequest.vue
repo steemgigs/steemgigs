@@ -11,10 +11,10 @@
         <form class="card-panel row" v-if="currentSection === 0">
           <div class="container gigForm">
             <div class="mx-2">
-              <p class="flow-text title">Gig Title</p>
+              <p class="flow-text title">Custom Request</p>
               <div class="input-field col s12">
             </div>
-              <textarea @keypress.enter.prevent @keyup.enter="''" v-model="newGigRequest.title" type="text" placeholder="Give a title to this gig" row="2" maxlength="90" minlength="5" required>
+              <textarea @keypress.enter.prevent @keyup.enter="''" v-model="newGigRequest.title" type="text" placeholder="Give a title to this custom request" row="2" maxlength="90" minlength="5" required>
               </textarea>
               <p class="word-count right" v-text="wordCount"></p>
               <div class="tutorial_guide center-align">
@@ -27,6 +27,7 @@
             </div>
             <div class="input-field col s12">
               <vue-editor v-model="newGigRequest.description" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
+              <p v-if="descError" class="red-text right" v-text="descError" />
               <div class="tutorial_guide center-align">
                 <div class="card">
                   <div class="card-content">
@@ -92,7 +93,7 @@
           </div>
         </form>
         <div class="row" v-if="currentSection === 1">
-          <div class="col s12">
+          <div class="col s12 preview">
             <div class="card">
               <div class="card-content">
                 <span class="card-title"> {{ steemedTitle }}</span>
@@ -109,10 +110,24 @@
                 <vue-markdown :source="previewData" />
               </div>
             </div>
+            <div class="tutorial_guide hide-on-small-only">
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title">How Nice?</span>
+                  <p class="mt-1">Take a look at your Steemgigs Post to see if you have made errors</p>
+                  <p class="mt-1">If error free, hit "publish", else, correct errors</p>
+                  <p class="mt-1">Note: Your post will also appear on the Steem Blockchain</p>
+                </div>
+              </div>
+            </div>
+            <div v-if="errorr" class="card-panel">
+              <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
+              <p v-if="subcatError" class="red-text mt-1 mb-0" v-text="subcatError" />
+            </div>
           </div>
           <div class="col s12 row">
             <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-            <button class="right btn indigo waves-effect" @click.prevent="submit">
+            <button :disabled="Boolean(errorr)" class="right btn indigo waves-effect" @click.prevent="submit">
               <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
               POST #STEEMGIG
             </button>
@@ -159,6 +174,7 @@ export default {
       currentSection: 0,
       totalPics: 1,
       userTags: [],
+      nextPressed: false,
       newGigRequest: {
         title: '',
         category: '',
@@ -186,9 +202,11 @@ export default {
   },
   methods: {
     switchTo (index) {
+      this.nextPressed = true
       this.currentSection = index
     },
     nextSection () {
+      this.nextPressed = true
       if (this.currentSection < this.sections.length) this.currentSection++
     },
     prevSection () {
@@ -204,49 +222,68 @@ export default {
       this.userTags = entries
     },
     submit () {
-      let that = this
-      this.errorText = ''
-      this.successText = ''
-      this.isPosting = true
-      this.isPosting = true
-      let jsonMetadata = {
-        app: 'steemgig',
-        tags: [...this.userTags, ...this.defaultTags],
-        format: 'Markdown',
-        timestamp: new Date().getTime(),
-        price: this.newGigRequest.price,
-        currency: this.newGigRequest.currency,
-        authorPic: this.$store.state.profile.profileImage,
-        category: this.slugify(this.newGigRequest.category),
-        subcategory: this.slugify(this.newGigRequest.subcategory),
-        type: 'steemgigs_request',
-        deleted: true,
-        // images: this.newGigRequest.portfolio,
-        generated: true
-      }
-      // let textifiedPics = '\n## Portfolio\n<hr />\n'
-      // this.newGigRequest.portfolio.forEach(url => {
-      //   textifiedPics += '![Potfolio](' + url + ')\n\n'
-      // })
-      // let body = this.previewData + textifiedPics + `
-      let token = this.$store.state.accessToken
-      let permlink = this.slugify(this.newGigRequest.title)
-      let username = this.$store.state.username
-      let title = this.steemedTitle
-      let body = this.previewData + `
-<i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
-      `
+      if (!this.errorr) {
+        let that = this
+        this.errorText = ''
+        this.successText = ''
+        this.isPosting = true
+        this.isPosting = true
+        let jsonMetadata = {
+          app: 'steemgig',
+          tags: [...this.userTags, ...this.defaultTags],
+          format: 'Markdown',
+          timestamp: new Date().getTime(),
+          price: this.newGigRequest.price,
+          currency: this.newGigRequest.currency,
+          authorPic: this.$store.state.profile.profileImage,
+          category: this.slugify(this.newGigRequest.category),
+          subcategory: this.slugify(this.newGigRequest.subcategory),
+          type: 'steemgigs_request',
+          deleted: true,
+          // images: this.newGigRequest.portfolio,
+          generated: true
+        }
+        // let textifiedPics = '\n## Portfolio\n<hr />\n'
+        // this.newGigRequest.portfolio.forEach(url => {
+        //   textifiedPics += '![Potfolio](' + url + ')\n\n'
+        // })
+        // let body = this.previewData + textifiedPics + `
+        let token = this.$store.state.accessToken
+        let permlink = this.slugify(this.newGigRequest.title)
+        let username = this.$store.state.username
+        let title = this.steemedTitle
+        let body = this.previewData + `
+  <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
+        `
 
-      Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
-        console.log(err, res)
-        that.isPosting = false
-        that.successText = 'Successfully pushed to steem!'
-      }).catch((e) => {
-        that.errorText = 'Error pushing post to steem, try again'
-      })
+        Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
+          console.log(err, res)
+          that.isPosting = false
+          that.successText = 'Successfully pushed to steem!'
+        }).catch((e) => {
+          that.errorText = 'Error pushing post to steem, try again'
+        })
+      }
     }
   },
   computed: {
+    descError () {
+      if (this.nextPressed && this.newGigRequest.description.length < 100) {
+        return 'Your description should be 100 Characters or more, please read style guide for clarification'
+      } else {
+        return ''
+      }
+    },
+    subcatError () {
+      if (!this.newGigRequest.subcategory) {
+        return 'You must select a category/subcategory'
+      } else {
+        return ''
+      }
+    },
+    errorr () {
+      return this.descError || this.subcatError
+    },
     selectedCategoryIndex () {
       let catIndex = 0
       this.categories.forEach((category, index) => {

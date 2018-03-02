@@ -1,7 +1,7 @@
 <template>
   <page :pageClasses="['profile__view', 'row']">
     <cat-nav />
-    <div class="container">
+    <div class="container gig-detail">
       <div class="col s12 m8 l9 row">
         <ul class="tabs hide">
           <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">DETAILS</a></li>
