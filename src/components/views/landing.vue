@@ -4,7 +4,7 @@
       <img class="bg" src="static/img/black-expert.jpeg" alt="">
       <h1>Everyone has something to offer</h1>
       <p>Do the dreaming, leave the building to us</p>
-      <div class="input-container">
+      <div class="input-container row">
         <input type="text" @keyup.enter="openSearch" v-model="searchString" class="browser-default my-input">
         <button @click.stop="openSearch" class="btn-large white-text light-blue darken-4">Search</button>
       </div>
@@ -15,7 +15,7 @@
         <h2 class="mb-1">Explore SteemGigs</h2>
         <p class="mb-5 grey-text">Our existing categories are sure to inspire you</p>
         <div class="row pt-5">
-          <div v-for="(category, index) in categories" :key="index" class="col s4 l3">
+          <div v-for="(category, index) in categories" :key="index" class="col s6 m4 l3">
             <div class="category">
               <i :class="category.icon" class="icon cat-icon"></i>
               <h6 class="cat-title">{{category.title}}</h6>
@@ -53,7 +53,7 @@
         </div>
       </div> -->
       <div class="slide-container">
-        <carousel :autoplay="true" :paginationEnabled="true" :navigationEnabled="true" :perPage="4">
+        <carousel :autoplay="true" :perPage="1" :perPageCustom="[[768, 3], [1024, 4]]">
           <slide v-for="(slider, i) in sliders" :key="i">
             <div class="slide mx-3 my-5 px-3 left-align" :style="{'background': 'linear-gradient(150deg, #1c1c1ce0, transparent), url('+ slider.url +') no-repeat center', 'background-size': 'cover' }">
               <h5 class="head">{{slider.header}}</h5>
@@ -68,15 +68,15 @@
         <div class="row">
           <div class="col m4">
             <h4 class="mb-1 grey-text text-lighten-2">Your Terms</h4>
-            <p class="mb-5 grey-text">Our existing categories are sure to inspire you</p>
+            <p class="mb-5 grey-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur repudiandae quo doloremque, est eligendi amet veritatis ex dolorum sed.</p>
           </div>
           <div class="col m4">
             <h4 class="mb-1 grey-text text-lighten-2">Your Timeline</h4>
-            <p class="mb-5 grey-text">Our existing categories are sure to inspire you</p>
+            <p class="mb-5 grey-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur repudiandae quo doloremque, est eligendi amet veritatis ex dolorum sed.</p>
           </div>
           <div class="col m4">
             <h4 class="mb-1 grey-text text-lighten-2">Your Safety</h4>
-            <p class="mb-5 grey-text">Our existing categories are sure to inspire you</p>
+            <p class="mb-5 grey-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur repudiandae quo doloremque, est eligendi amet veritatis ex dolorum sed.</p>
           </div>
         </div>
       </div>
@@ -306,7 +306,7 @@ export default {
     }
     .cat-showcase {
       .category {
-        min-height: 205px;
+        min-height: 230px;
         cursor: pointer;
         .cat-title {
           transition: transform .2s ease-in;
@@ -331,7 +331,9 @@ export default {
         span.cat-description {
           color: #949494;
           height: 0;
-          opacity: 0;
+          @media (min-width: 768px) {
+            opacity: 0;
+          }
           transform: translateY(10px);
           transition: all .5s ease-in-out;
         }
