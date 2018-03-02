@@ -53,7 +53,7 @@
         </div>
       </div> -->
       <div class="slide-container">
-        <carousel :autoplay="true" :perPage="1" :perPageCustom="[[768, 3], [1024, 4]]">
+        <carousel class="m-md-5" :autoplay="true" navigationNextLabel="<i class='navicon indigo-text ion-chevron-right'></i>" navigationPrevLabel="<i class='navicon indigo-text ion-chevron-left'></i>" :navigationEnabled="true" :perPage="1" :perPageCustom="[[768, 3], [1024, 4]]">
           <slide v-for="(slider, i) in sliders" :key="i">
             <div class="slide mx-3 my-5 px-3 left-align" :style="{'background': 'linear-gradient(150deg, #1c1c1ce0, transparent), url('+ slider.url +') no-repeat center', 'background-size': 'cover' }">
               <h5 class="head">{{slider.header}}</h5>
@@ -287,6 +287,9 @@ export default {
         min-width: 300px;
         margin-top: 15px;
       }
+    }
+    .navicon {
+      font-size: 1.7em;
     }
     .slide {
       height: 400px;
