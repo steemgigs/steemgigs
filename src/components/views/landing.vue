@@ -293,7 +293,7 @@ export default {
     }
     .slide {
       height: 400px;
-      box-shadow: 0 6px 50px 0 rgba(0,0,0,.35);
+      box-shadow: 0 6px 24px 0 rgba(0, 0, 0, 0.4);
       border-radius: 5px;
       position: relative;
       padding: 15px 10px;
