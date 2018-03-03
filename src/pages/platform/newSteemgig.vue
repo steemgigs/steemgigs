@@ -85,7 +85,7 @@
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
-                    <p class="mb-2">PricingGive your PACKAGE an appealing name.
+                    <p class="mb-2">Give your PACKAGE an appealing name.
                     <p class="mb-2">Describe what will be contained in your package for each price.</p>
                     <p class="mb-2">Tell us if you are willing to do revisions. If so, "how many revisions?"; "will it cost extra?" etc</p>
                     <p class="mb-2">Can you render more "speed of delivery", if offered extra payment?</p>

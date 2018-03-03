@@ -21,7 +21,10 @@
               <div class="tutorial_guide center-align hide-on-small-only">
                 <div class="card">
                   <div class="card-content">
-                    <span class="card-title">How delighted are you by steemgigs?</span>
+                    <!-- <span class="card-title">How delighted are you by steemgigs?</span> -->
+                    <p class="grey-text text-darken-3">For Clients
+Were you delighted with the service of the SteemGigger who rendered your service? Tell us!
+Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look to support it and it appears on the steem blockchain as well</p>
                   </div>
                 </div>
               </div>

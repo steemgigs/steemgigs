@@ -86,7 +86,8 @@
             <div class="row">
               <div class="col l6 s12">
                 <h5 class="indigo-text">SteemGigs</h5>
-                <p class="">Here, everyone has something to offer<br />Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit harum perferendis quaerat inventore ipsa, quasi, quibusdam corporis labore, temporibus dolore voluptas voluptate vero. Iure esse, deleniti nesciunt sequi quibusdam laborum.</p>
+                <p class="">SteemGigs incentivizes you to build your dreams by rewarding SteemGiggers for passionate striving to assist you.
+SteemGigs is built using the decentralized & open-source "steem" protocol, where every transaction is public, thus, eliminating the need for third party merchants, incentivizing the need for talents to stay "reputable" and giving you more optiions when it comes to paying for GIGs. Imagine paying for your next GIG using a simple "upvote" or "like" action.</p>
               </div>
               <div class="col l4 offset-l2 s12">
                 <h5 class="indigo-text">Our categories</h5>
