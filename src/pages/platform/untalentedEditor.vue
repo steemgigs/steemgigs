@@ -27,7 +27,7 @@
             </div>
             <div class="input-field col s12">
               <vue-editor v-model="untalented.description" placeholder="Type your post here" :upload="uploadConfig"></vue-editor>
-              <p v-if="descError" class="red-text right" v-text="descError" />            
+              <p v-if="descError" class="red-text right" v-text="descError" />
               <div class="tutorial_guide">
                 <div class="card">
                   <div class="card-content">

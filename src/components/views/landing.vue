@@ -81,6 +81,14 @@
         </div>
       </div>
     </section>
+    <section class="py-5 blue-grey lighten-5">
+      <div class="container">
+        <div class="row">
+          <div class="col m5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia corrupti, est ea beatae unde temporibus reprehenderit, quos magni deserunt praesentium dolorem similique accusantium, odio architecto eveniet molestias eius id perferendis.</div>
+          <div class="col m7"></div>
+        </div>
+      </div>
+    </section>
     <footer class="page-footer z-depth-2">
           <div class="container">
             <div class="row">
