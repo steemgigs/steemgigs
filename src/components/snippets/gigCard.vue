@@ -94,7 +94,7 @@ export default {
       return this.gigData.author
     },
     sellerImg () {
-      return this.gigData.userImg
+      return this.gigData.json_metadata.authorPic
     },
     sellerRep () {
       return this.gigData.rep

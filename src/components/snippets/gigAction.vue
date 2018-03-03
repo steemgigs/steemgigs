@@ -67,8 +67,8 @@ export default {
       return this.genuineVoters.length
     },
     payout () {
-      if (this.gigData.pending_payout_value.amount) {
-        return '$' + this.gigData.pending_payout_value.amount
+      if (this.gigData.pending_payout_value) {
+        return '$' + this.gigData.pending_payout_value
       } else {
         return '$' + (this.gigData.total_payout_value.amount + this.gigData.curator_payout_value.amount).toFixed(2)
       }

@@ -23,6 +23,7 @@ body {
 .gig-detail {
   .card p {
     font-size: 1.5rem;
+    overflow-wrap: break-word;
   }
   h2.headline {    
     font-size: 2.5rem;
@@ -40,6 +41,9 @@ strong {
   position: relative;
   .tutorial_guide {
     right: -21em !important
+  }
+  p {
+    overflow-wrap: break-word;
   }
 }
 .guide-2 {
