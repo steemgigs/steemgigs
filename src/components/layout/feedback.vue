@@ -62,7 +62,7 @@ export default {
     send () {
       this.sending = true
       Api.sendFeedback({rating: this.rating, message: this.message, email: this.email, username: this.$store.state.username || ''}).then((response) => {
-        console.log('feedback',response.data)
+        console.log('feedback', response.data)
         this.closeFeedback()
         this.$notify({
           group: 'foo',
