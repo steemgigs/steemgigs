@@ -171,7 +171,11 @@ export default {
           this.timeAgo = `${Math.floor((milSecAgo) / minute)} minutes ago`
         }
       } else if ((milSecAgo) < day) {
-        this.timeAgo = `${Math.floor((milSecAgo) / hour)} hours ago`
+        if (Math.floor((milSecAgo) / hour) < 2) {
+          this.timeAgo = `${Math.floor((milSecAgo) / hour)} hour ago`
+        } else {
+          this.timeAgo = `${Math.floor((milSecAgo) / hour)} hours ago`
+        }
       } else if ((milSecAgo) < 2 * day) {
         this.timeAgo = `yesterday`
       } else if ((milSecAgo) > 2 * day) {
@@ -189,6 +193,7 @@ export default {
           this.timeAgo = `${Math.floor((milSecAgo) / year)} years ago`
         }
       }
+      return milSecAgo
     }
   },
   computed: {
@@ -256,7 +261,7 @@ export default {
   },
   mounted () {
     this.fetchComments()
-    this.getTimeAgo()
+    console.log(this.getTimeAgo())
     setInterval(() => {this.getTimeAgo()}, 10000)
   }
 }
