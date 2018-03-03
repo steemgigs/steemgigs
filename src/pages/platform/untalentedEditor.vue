@@ -1,10 +1,10 @@
 <template>
   <page :pageClasses="['post_new_steemgig__view', 'row']">
     <dismissible-notice>
-      <span>#Untalented editor: This is a simple preview into the future of https://steemgigs.org and for now, it is simply a "specialized editor" for posting awesome steemit blog posts. 
-      
-      This editor can be used by any steemian and to create posts in any genre or tag. 
-      (#untalented covers all levels of talent.) 
+      <span>#Untalented editor: This is a simple preview into the future of https://steemgigs.org and for now, it is simply a "specialized editor" for posting awesome steemit blog posts.
+
+      This editor can be used by any steemian and to create posts in any genre or tag.
+      (#untalented covers all levels of talent.)
       We simply offer you a simple editor that guides the format of your steemit posts and making them worthier of support by steemit curators.
       Products of this editor will be celebrated and propagated to curators all-round steemit as hotcake.
       You can also use this editor if you're a new steemian to startup your steemit journey (#introduceyourself) as this editor will create a flow that you can follow closely for your posts to appear enviable on steemit.
