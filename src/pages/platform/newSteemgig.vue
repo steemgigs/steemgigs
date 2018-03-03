@@ -230,7 +230,7 @@
           </div>
           <div class="col s12 row">
             <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-            <button :disabled="Boolean(errorr)" class="right btn indigo waves-effect" @click.prevent="submit">
+            <button :disabled="errorr" class="right btn indigo waves-effect" @click.prevent="submit">
               <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
               POST #STEEMGIG
             </button>
@@ -319,9 +319,7 @@ export default {
       this.currentSection = index
     },
     nextSection () {
-      if (!this.errorr) {
-        if (this.currentSection < this.sections.length) this.currentSection++
-      }
+      if (this.currentSection < this.sections.length) this.currentSection++
     },
     prevSection () {
       if (this.currentSection > 0) this.currentSection--
@@ -374,6 +372,7 @@ export default {
           that.isPosting = false
           that.successText = 'Successfully pushed to steem!'
         }).catch((e) => {
+          console.log(e)
           that.isPosting = false
           that.errorText = 'Error pushing post to steem, try again'
         })
@@ -403,14 +402,14 @@ export default {
       }
     },
     subcatError () {
-      if (!this.newGigData.subcategory) {
+      if (this.descNext && !this.newGigData.subcategory) {
         return 'You must select a category/subcategory'
       } else {
         return ''
       }
     },
     errorr () {
-      return this.descError || this.requirementError || this.pricingError || this.subcatError
+      return Boolean(this.descError || this.requirementError || this.pricingError || this.subcatError)
     },
     selectedCategoryIndex () {
       let catIndex = 0

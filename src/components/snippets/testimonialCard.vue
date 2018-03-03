@@ -47,7 +47,7 @@ export default {
       return '@' + this.testimonial.author
     },
     userImg () {
-      return this.testimonial.userImg
+      return this.testimonial.json_metadata.authorPic
     },
     userRep () {
       return this.testimonial.rep

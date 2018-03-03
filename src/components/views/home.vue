@@ -83,7 +83,7 @@
           <router-link class="btn indigo" to="/steemgigs" tag="button">View More</router-link>
         </div>
       </section>
-      <section id="untalented" class="row">
+      <!-- <section id="untalented" class="row">
         <div class="col s12">
           <h5 class="left">#Untalented-Steemgigs</h5>
           <span class="right">
@@ -106,7 +106,7 @@
           <br><br>
           <br><br>
         </div>
-      </section>
+      </section> -->
       <section id="featured" class="row">
         <div class="col s12">
           <h5 class="left">#FEATURED</h5>
@@ -251,9 +251,9 @@ export default {
     steemgigs () {
       return this.$store.state.posts.steemgigs
     },
-    untalented () {
-      return this.$store.state.posts.untalented
-    },
+    // untalented () {
+    //   return this.$store.state.posts.untalented
+    // },
     gigrequests () {
       return this.$store.state.posts.gigrequests
     },

@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import sc2 from '@/services/sc2'
+import Api from '@/services/api'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import ImgUpload from '@/components/snippets/imgUpload'
@@ -193,7 +193,6 @@ export default {
           deleted: false
           // images: this.untalented.portfolio,
         }
-        sc2.setAccessToken(this.$store.state.accessToken)
         // let textifiedPics = '\n## Portfolio\n<hr />\n'
         // this.untalented.portfolio.forEach(url => {
         //   textifiedPics += '![Potfolio](' + url + ')\n\n'
@@ -205,15 +204,15 @@ export default {
         `
         let permlink = this.slugify(this.untalented.title)
         let username = this.$store.state.username
+        let token = this.$store.state.accessToken
         let title = this.steemedTitle
-        sc2.comment('', 'steemgigs', username, permlink, title, body, jsonMetadata, (err, res) => {
+        Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
           console.log(err, res)
           that.isPosting = false
-          if (err) {
-            that.errorText = 'Error pushing post to steem, try again'
-          } else {
-            that.successText = 'Successfully pushed to steem!'
-          }
+          that.successText = 'Successfully pushed to steem!'
+        }).catch((e) => {
+          that.isPosting = false
+          that.errorText = 'Error pushing post to steem, try again'
         })
       }
     }
