@@ -96,7 +96,7 @@ export default {
       Api.comment({parentAuthor: this.commentFor.author, parentPermlink: this.commentFor.permlink, username: this.$store.state.username, body: this.myComment}, this.$store.state.accessToken).then((result) => {
         this.isPosting = false
         this.commentMode = false
-        this.comments.push(result.data)
+        this.comments = result.data
         this.myComment = ''
       }).catch((e) => {
         this.isPosting = false
@@ -149,6 +149,46 @@ export default {
           })
         }
       })
+    },
+    getTimeAgo () {
+      let milSecAgo = new Date() - new Date(this.commentFor.created)
+      let second = 1000
+      let minute = 1000 * 60
+      let hour = 1000 * 60 * 60
+      let day = 1000 * 60 * 60 * 24
+      let month = 1000 * 60 * 60 * 24 * 30
+      let year = 1000 * 60 * 60 * 24 * 365
+      if ((milSecAgo) < minute) {
+        if (Math.floor((milSecAgo) / second) < 2) {
+          this.timeAgo = `${Math.floor((milSecAgo) / second)} second ago`
+        } else {
+          this.timeAgo = `${Math.floor((milSecAgo) / second)} seconds ago`
+        }
+      } else if ((milSecAgo) < hour) {
+        if (Math.floor((milSecAgo) / minute) < 2) {
+          this.timeAgo = `${Math.floor((milSecAgo) / minute)} minute ago`
+        } else {
+          this.timeAgo = `${Math.floor((milSecAgo) / minute)} minutes ago`
+        }
+      } else if ((milSecAgo) < day) {
+        this.timeAgo = `${Math.floor((milSecAgo) / hour)} hours ago`
+      } else if ((milSecAgo) < 2 * day) {
+        this.timeAgo = `yesterday`
+      } else if ((milSecAgo) > 2 * day) {
+        this.timeAgo = `${Math.floor((milSecAgo) / day)} days ago`
+      } else if ((milSecAgo) > month) {
+        if (Math.floor((milSecAgo) / month) < 2) {
+          this.timeAgo = `${Math.floor((milSecAgo) / month)} month ago`
+        } else {
+          this.timeAgo = `${Math.floor((milSecAgo) / month)} months ago`
+        }
+      } else if ((milSecAgo) > year) {
+        if (Math.floor((milSecAgo) / year) < 2) {
+          this.timeAgo = `${Math.floor((milSecAgo) / year)} year ago`
+        } else {
+          this.timeAgo = `${Math.floor((milSecAgo) / year)} years ago`
+        }
+      }
     }
   },
   computed: {
@@ -172,8 +212,8 @@ export default {
       return this.genuineVoters.length
     },
     payout () {
-      if (this.commentFor.pending_payout_value.amount) {
-        return '$' + parseFloat(this.commentFor.pending_payout_value.amount)
+      if (this.commentFor.pending_payout_value) {
+        return '$' + parseFloat(this.commentFor.pending_payout_value)
       } else {
         return '$' + (parseFloat(this.commentFor.total_payout_value.amount) + parseFloat(this.commentFor.curator_payout_value.amount))
       }
@@ -216,46 +256,8 @@ export default {
   },
   mounted () {
     this.fetchComments()
-    setInterval(() => {
-      let created = new Date(this.commentFor.created)
-      let second = 1000
-      let minute = 1000 * 60
-      let hour = 1000 * 60 * 60
-      let day = 1000 * 60 * 60 * 24
-      let month = 1000 * 60 * 60 * 24 * 30
-      let year = 1000 * 60 * 60 * 24 * 365
-      if ((new Date() - created) < minute) {
-        if (Math.floor((new Date() - created) / second) < 2) {
-          this.timeAgo = `${Math.floor((new Date() - created) / second)} second ago`
-        } else {
-          this.timeAgo = `${Math.floor((new Date() - created) / second)} seconds ago`
-        }
-      } else if ((new Date() - created) < hour) {
-        if (Math.floor((new Date() - created) / minute) < 2) {
-          this.timeAgo = `${Math.floor((new Date() - created) / minute)} minute ago`
-        } else {
-          this.timeAgo = `${Math.floor((new Date() - created) / minute)} minutes ago`
-        }
-      } else if ((new Date() - created) < day) {
-        this.timeAgo = `${Math.floor((new Date() - created) / hour)} hours ago`
-      } else if ((new Date() - created) < 2 * day) {
-        this.timeAgo = `yesterday`
-      } else if ((new Date() - created) > 2 * day) {
-        this.timeAgo = `${Math.floor((new Date() - created) / day)} days ago`
-      } else if ((new Date() - created) > month) {
-        if (Math.floor((new Date() - created) / month) < 2) {
-          this.timeAgo = `${Math.floor((new Date() - created) / month)} month ago`
-        } else {
-          this.timeAgo = `${Math.floor((new Date() - created) / month)} months ago`
-        }
-      } else if ((new Date() - created) > year) {
-        if (Math.floor((new Date() - created) / year) < 2) {
-          this.timeAgo = `${Math.floor((new Date() - created) / year)} year ago`
-        } else {
-          this.timeAgo = `${Math.floor((new Date() - created) / year)} years ago`
-        }
-      }
-    }, 10000)
+    this.getTimeAgo()
+    setInterval(() => {this.getTimeAgo()}, 10000)
   }
 }
 </script>

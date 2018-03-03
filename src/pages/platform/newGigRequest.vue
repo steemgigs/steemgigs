@@ -97,7 +97,7 @@
             <div class="card">
               <div class="card-content">
                 <span class="card-title"> {{ steemedTitle }}</span>
-                <p><router-link :to="'/categories/' + this.newGigRequest.category">{{ this.newGigRequest.category }}</router-link> / <router-link :to="'/categories/' + this.newGigRequest.category + '/' + this.newGigRequest.subcategory">{{ this.newGigRequest.subcategory }}</router-link></p>
+                <p><span>{{ this.newGigRequest.category }}</span> / <span>{{ this.newGigRequest.subcategory }}</span></p>
               </div>
               <!-- <div class="card-image">
                 <carousel :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
@@ -243,18 +243,14 @@ export default {
           // images: this.newGigRequest.portfolio,
           generated: true
         }
-        // let textifiedPics = '\n## Portfolio\n<hr />\n'
-        // this.newGigRequest.portfolio.forEach(url => {
-        //   textifiedPics += '![Potfolio](' + url + ')\n\n'
-        // })
-        // let body = this.previewData + textifiedPics + `
-        let token = this.$store.state.accessToken
-        let permlink = this.slugify(this.newGigRequest.title)
         let username = this.$store.state.username
-        let title = this.steemedTitle
-        let body = this.previewData + `
+        let permlink = this.slugify(this.newGigRequest.title)
+        let steemGigsTag = this.htmlHide(`
   <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
-        `
+        `)
+        let body = this.previewData + steemGigsTag
+        let token = this.$store.state.accessToken
+        let title = this.steemedTitle
 
         Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
           console.log(err, res)

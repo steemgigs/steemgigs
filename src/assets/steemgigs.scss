@@ -20,6 +20,12 @@ body {
     padding-top: 4em;
   }
 }
+a {
+  color: #3f51b5;
+}
+.hide-on-steemgigs {
+  display: none !important;
+}
 .gig-detail {
   .card p {
     font-size: 1.5rem;

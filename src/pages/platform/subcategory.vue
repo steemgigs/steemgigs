@@ -3,7 +3,7 @@
     <cat-nav />
     <div class="col s12 center-align row">
       <h1 class="grey-text darken-1">
-            <router-link tag="span" :to="'/categories/' + slugify(categoryDetails.name)">{{ capitalize(categoryDetails.name) }}</router-link> > <span class="grey-text text-darken-2">{{categoryDetails.subcategory}}</span></h1>
+            <router-link class="grey-text text-lighten-1" :to="'/categories/' + slugify(categoryDetails.name)">{{ capitalize(categoryDetails.name) }}</router-link> > <span class="grey-text text-darken-2">{{categoryDetails.subcategory}}</span></h1>
       <p class="flow-text">{{ categoryDetails.description }}</p>
       <div v-if="loading">
         <div class="col s12 m6 l3">

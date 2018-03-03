@@ -103,30 +103,6 @@ export default {
       if (this.gigData.json_metadata.images) {
         return this.gigData.json_metadata.images
       } else return []
-    },
-    comments () {
-      return this.gigData.children
-    },
-    upvotes () {
-      if (this.gigData.active_votes) {
-        return this.gigData.active_votes.length
-      }
-    },
-    payout () {
-      if (this.gigData.pending_payout_value) {
-        return '$' + this.gigData.pending_payout_value.amount
-      } else {
-        return '$' + (parseFloat(this.gigData.total_payout_value.amount) + parseFloat(this.gigData.curator_payout_value.amount))
-      }
-    },
-    paymentInfo () {
-      if ((new Date(this.gigData.cashout_time).getTime()) > (new Date().getTime())) {
-        return `Will payout in ${Math.floor((new Date(this.gigData.cashout_time) - (new Date())) / (1000 * 60 * 60 * 24))} days`
-      } else {
-        // return `Author Payout: ${'$' + this.gigData.total_payout_value.amount}
-        // Curator Payout: ${'$' + this.gigData.curator_payout_value.amount}`
-        return ''
-      }
     }
   }
 }

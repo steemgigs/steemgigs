@@ -147,7 +147,7 @@
             </div>
           </div>
         </form>
-        <form class="card-panel row" v-if="currentSection === 4">
+        <form class="card-panel row" v-show="currentSection === 4">
           <div class="container gigForm">
             <p class="flow-text title">Portfolio</p>
             <div class="input-field col s12 row">
@@ -361,9 +361,12 @@ export default {
         })
         let username = this.$store.state.username
         let permlink = this.slugify(this.newGigData.title)
-        let body = this.previewData + textifiedPics + `
+        let steemGigsTag = `
   <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
         `
+        let contentToHide = textifiedPics + steemGigsTag
+        let hiddenContainer = this.htmlHide(contentToHide)
+        let body = this.previewData + hiddenContainer
         let token = this.$store.state.accessToken
         let title = '#STEEMGIGS: I will ' + this.newGigData.title
         // username, permlink, title, body, jsonMetadata, token

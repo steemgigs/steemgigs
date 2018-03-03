@@ -18,7 +18,7 @@
         <div class="text-area">
           <textarea v-model="message" class="browser-default" placeholder="Tell us about your experience with steemgigs" id="" cols="30" rows="10"></textarea>
         </div>
-        <div class="p-2 right-align"><button @click="mode = 'email'" class="btn px-2 grey send">Send</button></div>
+        <div class="p-2 right-align"><button @click="mode = 'email'" :disabled="!Boolean(message)" class="btn px-2 grey send">Send</button></div>
       </div>
       <div v-if="mode == 'email'">
         <p class="title">Enter your email address if you would like to receive a follow up.</p>

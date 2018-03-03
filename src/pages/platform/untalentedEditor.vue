@@ -39,7 +39,7 @@
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title grey-text text-darken-1 left-align mb-2">Want to write a perfect #introduceyourself post</span>
-                    <p class="mb-4 grey-text text-darken-3"><a target="_blank" href="https://steemit.com/steemit/@surpassinggoogle/steemit-s-untalented-is-in-beta-participate-freely-because-every-participant-in-this-contest-will-win-something-no-losers">Read</a> the style guide</p>
+                    <p class="mb-4 grey-text text-darken-3"><a class="indigo-text" target="_blank" href="https://steemit.com/steemit/@surpassinggoogle/steemit-s-untalented-is-in-beta-participate-freely-because-every-participant-in-this-contest-will-win-something-no-losers">Read</a> the style guide</p>
                     <span class="grey-text text-darken-1 left-align mb-4">Follow these tips to create a magical steemit post. (Make it "curator-worthy" and free of "cheetah worries")</span>
                     <p class="mt-2 mb-2">Give us a preface of what your post is about to be about.</p>
                     <p class="mb-2">If you are using resources from the internet, digest it first, then tell us about it, using your own words.</p>
@@ -193,17 +193,12 @@ export default {
           deleted: false
           // images: this.untalented.portfolio,
         }
-        // let textifiedPics = '\n## Portfolio\n<hr />\n'
-        // this.untalented.portfolio.forEach(url => {
-        //   textifiedPics += '![Potfolio](' + url + ')\n\n'
-        // })
-        // let body = this.previewData + textifiedPics + `
-        let body = this.previewData + `
-  <h5>this post was made on #STEEMGIGS</h5>
-  "where everyone has something to offer"
-        `
-        let permlink = this.slugify(this.untalented.title)
         let username = this.$store.state.username
+        let permlink = this.slugify(this.untalented.title)
+        let steemGigsTag = this.htmlHide(`
+  <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
+        `)
+        let body = this.previewData + steemGigsTag
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
         Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
