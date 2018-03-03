@@ -28,14 +28,14 @@
             </div>
             <div class="input-field col s12">
               <vue-editor v-model="newTestimonial.description" placeholder="Describe your experience with steemgigs" :upload="uploadConfig"></vue-editor>
-              <p v-if="descError" class="red-text right" v-text="descError" />            
+              <p v-if="descError" class="red-text right" v-text="descError" />
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
-                    <span class="card-title grey-text text-darken-1 left-align mb-4">If you're a steemgiger, you can apply this flow as yours</span>
-                    <p class="grey-text text-darken-3">Give a detailed description to what your gig was about </p>
-                    <p class="grey-text text-darken-3">You can document your processes</p>
-                    <p class="grey-text text-darken-3">You can explain your general experiences with clients e.g prompt payment, easy to reach etc</p>
+                    <span class="card-title grey-text text-darken-1 left-align mb-4">If you're a steemgiger, you can apply this flow below in writing your SteemGigs testimonial:</span>
+                    <p class="grey-text text-darken-3">Give a detailed description about what your GIG was about</p>
+                    <p class="grey-text text-darken-3">You can document "the process" e.g if it is a logo, you can decide to put samples in your post for further transparency</p>
+                    <p class="grey-text text-darken-3">You can explain your general experiences with clients e.g "was payment prompt"; "was communication easy"; "would you love future relationships" etc</p>
                   </div>
                 </div>
               </div>

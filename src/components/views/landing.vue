@@ -3,7 +3,7 @@
     <div class="main center-align grey-text z-depth-3 text-lighten-4">
       <img class="bg" src="static/img/black-expert.jpeg" alt="">
       <h1>Everyone has something to offer</h1>
-      <p>Do the dreaming, leave the building to us</p>
+      <p>Do the "dreaming"; leave the "building" to us.</p>
       <div class="input-container row">
         <input type="text" @keyup.enter="openSearch" v-model="searchString" class="browser-default my-input">
         <button @click.stop="openSearch" class="btn-large white-text light-blue darken-4">Search</button>
@@ -67,16 +67,16 @@
       <div class="container center py-5">
         <div class="row">
           <div class="col m4">
-            <h4 class="mb-1 grey-text text-lighten-2">Your Terms</h4>
-            <p class="mb-5 grey-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur repudiandae quo doloremque, est eligendi amet veritatis ex dolorum sed.</p>
+            <h4 class="mb-1 grey-text text-lighten-2">Your Dream</h4>
+            <p class="mb-5 grey-text">Put us to testimonial good use. Simply dream BIG, then tell us what you want. <br>On SteemGigs, "everyone has something to offer".</p>
           </div>
           <div class="col m4">
-            <h4 class="mb-1 grey-text text-lighten-2">Your Timeline</h4>
-            <p class="mb-5 grey-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur repudiandae quo doloremque, est eligendi amet veritatis ex dolorum sed.</p>
+            <h4 class="mb-1 grey-text text-lighten-2">Your Specifications</h4>
+            <p class="mb-5 grey-text">It's your dream, so we will passionately follow your lead. <br>On SteemGigs, "every talent is also a reputable great mind".</p>
           </div>
           <div class="col m4">
-            <h4 class="mb-1 grey-text text-lighten-2">Your Safety</h4>
-            <p class="mb-5 grey-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur repudiandae quo doloremque, est eligendi amet veritatis ex dolorum sed.</p>
+            <h4 class="mb-1 grey-text text-lighten-2">Our Passion</h4>
+            <p class="mb-5 grey-text">In an ecosystem where "everyone has something to offer", dreams can equal reality. <br>Bringing your dreams into reality is our passion, for if "going to the moon" happened, your dreams are attainable.</p>
           </div>
         </div>
       </div>
@@ -117,123 +117,123 @@ export default {
       categories: [{
         title: 'Nature & Tourism',
         icon: 'ion-compass',
-        description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil explicabo excepturi vitae'
+        description: 'Our talents are reputable great minds'
       },
       {
         title: 'Graphics & Design',
         icon: 'ion-paintbrush',
-        description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil explicabo excepturi vitae'
+        description: 'Our talents are reputable great minds'
       },
       {
         title: 'Digital Marketing',
         icon: 'ion-arrow-graph-up-left',
-        description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil explicabo excepturi vitae'
+        description: 'Our talents are reputable great minds'
       },
       {
         title: 'Writing and translation',
         icon: 'ion-edit',
-        description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil explicabo excepturi vitae'
+        description: 'Our talents are reputable great minds'
       },
       {
         title: 'Videos and animation',
         icon: 'ion-videocamera',
-        description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil explicabo excepturi vitae'
+        description: 'Our talents are reputable great minds'
       },
       {
         title: 'Music & Audio',
         icon: 'ion-ios-musical-note',
-        description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil explicabo excepturi vitae'
+        description: 'Our talents are reputable great minds'
       },
       {
         title: 'Programming & tech',
         icon: 'ion-android-laptop',
-        description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil explicabo excepturi vitae'
+        description: 'Our talents are reputable great minds'
       },
       {
         title: 'Business',
         icon: 'ion-stats-bars',
-        description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil explicabo excepturi vitae'
+        description: 'Our talents are reputable great minds'
       }],
       sliders: [
         {
           url: '/static/img/steemslide7.jpeg',
           header: 'All your logo designs',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/steemslide8.jpeg',
           header: 'Hand crafts and similar',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/steemslide2.jpeg',
-          header: 'Do something awesome',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          header: 'We can act out your scripts',
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/steemslide3.jpeg',
-          header: 'Do something awesome',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          header: 'We will give your images limelight',
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/steemslide4.jpeg',
-          header: 'Do something awesome',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          header: 'We will write your code',
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/agreement.jpeg',
-          header: 'Do something awesome',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          header: "Let's Get Your Steemit Posts To Trend.",
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/steemslide7.jpeg',
           header: 'All your logo designs',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/time.jpeg',
-          header: 'Do something awesome',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          header: 'Let Us Render Some Virtual Assistance.',
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/steemslide7.jpeg',
           header: 'All your logo designs',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/steemslide8.jpeg',
           header: 'Hand crafts and similar',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/steemslide2.jpeg',
           header: 'Do something awesome',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/steemslide3.jpeg',
           header: 'Do something awesome',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/steemslide4.jpeg',
           header: 'Do something awesome',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/agreement.jpeg',
           header: 'Do something awesome',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/time.jpeg',
           header: 'Do something awesome',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          small: 'Our talents are reputable great minds'
         },
         {
           url: '/static/img/steemslide7.jpeg',
           header: 'All your logo designs',
-          small: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+          small: 'Our talents are reputable great minds'
         }
       ]
     }

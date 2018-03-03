@@ -16,7 +16,7 @@
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
-                    <span>Make your title short, describing exactly what service(s) you offer as this is the likliest way to boost viewership and postential &amp; eventual sales</span>
+                    <span>Make your title short, describing exactly what service(s) you offer as this is the likeliest way to boost viewership, potential &amp; eventual sales</span>
                   </div>
                 </div>
               </div>
@@ -47,7 +47,7 @@
                   <div class="card-content">
                     <p>Select the most accurately describing category and subcategory</p>
                     <p class="mb-3">Choose the best follow up tags</p>
-                    <span>"This will enhance visibility of your gigs on our website search engine and steem blockchain".</span>
+                    <span>"This will enhance the visibility of your gigs on our website&rsquo;s search engine and on the steem blockchain".</span>
                   </div>
                 </div>
               </div>
@@ -59,7 +59,7 @@
             <p class="flow-text title">Describe your STEEMGIG</p>
             <div class="input-field col s12">
               <vue-editor v-model="newGigData.description" :upload="uploadConfig"></vue-editor>
-              <p v-if="descError" class="red-text right" v-text="descError" />            
+              <p v-if="descError" class="red-text right" v-text="descError" />
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
@@ -135,11 +135,7 @@
                 <div class="card">
                   <div class="card-content">
                     <span class="card-title"></span>
-                    <p class="mb-2">Explain what you would want your clients to provide you with, to help you start the GIG. 
-                      e.g if your GIG is SEO-related, you may want them to drop "the URL of their website.
-                      If your GIG is "graphics-related", you may request images, GIFs etc to guide you during your creation
-                      If your GIG is "video-editing", you may require them to drop you "video files"
-                      etc.</p>
+                    <p class="mb-2">Explain what you would want your clients to provide you with, to help you start the GIG. e.g if your GIG is SEO-related, you may want them to drop "the URL of their website; If your GIG is "graphics-related", you may request images, GIFs etc to guide you during your creation; If your GIG is "video-editing", you may require them to drop you "video files" etc.</p>
                     <p>Tell them if your "requirements" are optional or compulsory.</p>
                   </div>
                 </div>
@@ -230,7 +226,7 @@
               <p v-if="requirementError" class="red-text mt-1 mb-0" v-text="requirementError" />
               <p v-if="subcatError" class="red-text mt-1 mb-0" v-text="subcatError" />
             </div>
-            
+
           </div>
           <div class="col s12 row">
             <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
