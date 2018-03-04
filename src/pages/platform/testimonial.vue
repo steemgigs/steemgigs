@@ -31,7 +31,11 @@ Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look
             </div>
             <div class="input-field col s12">
               <vue-editor v-model="newTestimonial.description" placeholder="Describe your experience with steemgigs" :upload="uploadConfig"></vue-editor>
-              <p v-if="descError" class="red-text right" v-text="descError" />
+              <div v-if="descError" class="col s12 my-3">
+                <span class="simple-card">
+                  <span class="red-text" v-text="descError" />
+                </span>
+              </div>
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">

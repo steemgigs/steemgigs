@@ -27,7 +27,11 @@
             </div>
             <div class="input-field col s12">
               <vue-editor v-model="newGigRequest.description" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
-              <p v-if="descError" class="red-text right" v-text="descError" />
+              <div v-if="descError" class="col s12 my-3">
+                <span class="simple-card">
+                  <span class="red-text" v-text="descError" />
+                </span>
+              </div>
               <div class="tutorial_guide center-align">
                 <div class="card">
                   <div class="card-content">
@@ -133,7 +137,7 @@
                 </div>
               </div>
             </div>
-            <div v-if="errorr" class="card-panel">
+            <div v-if="errorr" class="simple-card card-panel">
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
               <p v-if="subcatError" class="red-text mt-1 mb-0" v-text="subcatError" />
             </div>

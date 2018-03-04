@@ -24,7 +24,7 @@
               <span class="right">
                 <div class="switch" v-if="true">
                   <label>
-                    <input checked type="checkbox" disabled v-model="profileEdit.vacation_mode" >
+                    <input checked type="checkbox" disabled v-model="profileEdit.vacation" >
                     <span class="lever"></span>
                   </label>
                 </div>
@@ -69,22 +69,22 @@
                 <span class="right" @click="removeLanguage(i)"><i class="ion-close-round"></i></span>
               </li>
             </ul>
-            <div v-for="(social, i) in profileEdit.socialArray" :key="i" class="row">
-              <input type="text" :placeholder="capitalize(social.feed)" v-model="social.value">
+            <div v-for="(social, key, i) in profileEdit.social" :key="i" class="row">
+              <input type="text" :placeholder="capitalize(key)" v-model="profileEdit.social[key]">
             </div>
-            <ul class="language-list">
+            <!-- <ul class="language-list">
               <li v-for="(social, i) in socialFeeds" :key="i">
                 <b>{{social.feed}} :</b> {{social.value}}
                 <span class="right" @click="removeSocial(i)"><i class="ion-close-round"></i></span>
               </li>
-            </ul>
+            </ul> -->
             <div class="row">
               <div class="col m5 pl-0">
                 <input v-model="socialFeed" placeholder="Social">
               </div>
               <div class="col m7 pr-0">
-                <input type="text" @keyup.enter="addToSocialArray" placeholder="Username" v-model="socialValue">
-                <i @click="addToSocialArray" class="ion-plus add-lang-icon right"></i>
+                <input type="text" @keyup.enter="addToSocial" placeholder="Username" v-model="socialName">
+                <i @click="addToSocial" class="ion-plus add-lang-icon right"></i>
               </div>
             </div>
             <p>
@@ -139,42 +139,27 @@ export default {
       profileUsername: '',
       currentView: 'active_gigs',
       i_speak: '',
-      socialFeed: '',
-      socialValue: '',
-      socialFeeds: [],
       countries: countries.getNames(),
       editMode: false,
       isUpdating: false,
+      socialFeed: '',
+      socialName: '',
       profileEdit: {
         username: this.profile.account,
         expertise: '',
         profilePic: '',
         coverPic: '',
-        languages: [],
-        location: '',
+        languages: ['English', 'Yoruba'],
+        location: 'Nigeria',
         vacation: false,
         about: this.profile.profile.about,
         profile_image: this.profile.profile.profile_image,
-        gender: '',
+        gender: 'male',
         social: {
-          facebook: '',
-          website: '',
-          discord: ''
-        },
-        socialArray: [
-          {
-            feed: 'website',
-            value: ''
-          },
-          {
-            feed: 'github',
-            value: ''
-          },
-          {
-            feed: 'facebook',
-            value: ''
-          }
-        ]
+          facebook: 'damafeez',
+          website: 'damafeez',
+          discord: 'damafeez'
+        }
       }
     }
   },
@@ -184,15 +169,15 @@ export default {
       this.profileEdit.languages.push(this.i_speak)
       this.i_speak = ''
     },
-    addToSocialArray () {
-      if (!this.socialFeed) return
+    addToSocial () {
+      if (!this.socialFeed || !this.socialName) return
       let obj = {
         feed: this.socialFeed,
         value: this.socialValue
       }
-      this.socialFeeds.push(obj)
+      this.profileEdit.social[this.socialFeed] = this.socialName
       this.socialFeed = ''
-      this.socialValue = ''
+      this.socialName = ''
     },
     updateProfile () {
       let profile = this.profile
@@ -223,9 +208,9 @@ export default {
       })
     },
     removeSocial (index) {
-      this.socialFeeds = this.socialFeeds.filter((social, i) => {
-        return index !== i
-      })
+      // this.socialFeeds = this.socialFeeds.filter((social, i) => {
+      //   return index !== i
+      // })
     },
     fetchUserRep () {
       Api.fetchCommentInfo(this.profile.account).then((result) => {

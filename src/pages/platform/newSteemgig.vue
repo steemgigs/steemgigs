@@ -59,7 +59,11 @@
             <p class="flow-text title">Describe your STEEMGIG</p>
             <div class="input-field col s12">
               <vue-editor v-model="newGigData.description" :upload="uploadConfig"></vue-editor>
-              <p v-if="descError" class="red-text right" v-text="descError" />
+              <div v-if="descError" class="col s12 my-3">
+                <span class="simple-card">
+                  <span class="red-text" v-text="descError" />
+                </span>
+              </div>
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
@@ -81,7 +85,11 @@
             <p class="flow-text title">Pricing</p>
             <div class="input-field col s12">
               <vue-editor v-model="newGigData.pricing" :upload="uploadConfig"></vue-editor>
-              <p v-if="pricingError" class="red-text right" v-text="pricingError" />
+              <div v-if="pricingError" class="col s12 my-3">
+                <span class="simple-card">
+                  <span class="red-text" v-text="pricingError" />
+                </span>
+              </div>
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
@@ -130,7 +138,11 @@
             <p class="flow-text title">Requirements</p>
             <div class="input-field col s12">
               <vue-editor v-model="newGigData.requirements" :upload="uploadConfig"></vue-editor>
-              <p v-if="requirementError" class="red-text right" v-text="requirementError" />
+              <div v-if="requirementError" class="col s12 my-3">
+                <span class="simple-card">
+                  <span class="red-text" v-text="requirementError" />
+                </span>
+              </div>
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
@@ -154,7 +166,7 @@
               <div class="col s12 m4 l3" v-for="(uploader, index) in totalPics" :key="index">
                 <img-upload :id="index" />
               </div>
-              <div class="col s12 m4 l3" v-if="totalPics < 4">
+              <div class="col s12 m4 l3 center center-align" v-if="totalPics < 4">
                 <button @click.prevent="morePics" class="btn-floating indigo addPic">
                   <i class="icon ion-android-add"></i>
                 </button>
@@ -191,6 +203,11 @@
                 <slider-range v-if="newGigData.liked" :min="1" v-model="newGigData.upvoteRange" />
               </div>
             </div>
+            <div v-if="portfolioError" class="col s12 my-3">
+              <span class="simple-card">
+                <span class="red-text" v-text="portfolioError" />
+              </span>
+            </div>
             <div class="col s12 row">
                 <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
                 <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
@@ -225,10 +242,11 @@
                 </div>
               </div>
             </div>
-            <div v-if="errorr" class="card-panel">
+            <div v-if="errorr" class="simple-card card-panel">
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
               <p v-if="pricingError" class="red-text mt-1 mb-0" v-text="pricingError" />
               <p v-if="requirementError" class="red-text mt-1 mb-0" v-text="requirementError" />
+              <p v-if="portfolioError" class="red-text mt-1 mb-0" v-text="portfolioError" />
               <p v-if="subcatError" class="red-text mt-1 mb-0" v-text="subcatError" />
             </div>
 
@@ -284,6 +302,7 @@ export default {
       descNext: false,
       reqNext: false,
       priceNext: false,
+      portNext: false,
       userTags: [],
       newGigData: {
         title: '',
@@ -323,7 +342,7 @@ export default {
     },
     switchTo (index) {
       if (index === 5) {
-        this.descNext = this.priceNext = this.reqNext = true
+        this.descNext = this.priceNext = this.reqNext = this.portNext = true
       } else if (this.currentSection >= 3) {
         this.reqNext = true
       } else if (this.currentSection >= 2) {
@@ -428,8 +447,15 @@ export default {
         return ''
       }
     },
+    portfolioError () {
+      if (this.portNext && this.newGigData.portfolio.length < 1) {
+        return 'You must add at least one image to your portfolio'
+      } else {
+        return ''
+      }
+    },
     errorr () {
-      return Boolean(this.descError || this.requirementError || this.pricingError || this.subcatError)
+      return Boolean(this.descError || this.requirementError || this.pricingError || this.subcatError || this.portfolioError)
     },
     selectedCategoryIndex () {
       let catIndex = 0

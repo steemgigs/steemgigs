@@ -27,6 +27,13 @@ a {
 .hide-on-steemgigs {
   display: none !important;
 }
+.simple-card {
+  box-shadow: 0 4px 17px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: aliceblue;
+  padding: 12px 10px;
+  display: inline-block;
+}
 .gig-detail {
   .card p {
     font-size: 1.5rem;

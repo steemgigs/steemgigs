@@ -1,30 +1,32 @@
 <template>
   <div class="card gig" tag="div">
-    <div class="card-content" v-if="meantFor === 'gigDetails'">
-      <span class="card-title" v-text="title"></span>
-    </div>
-    <div class="card-image">
-      <router-link :to="taskLink">
-        <img v-if="portfolio.length < 1" :src="taskPicture || '/static/img/banner.jpeg'" :alt="task">
-        <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
-          <slide v-for="(image, i) in portfolio" :key="i">
-            <img :src="image" class="responsive-img" :alt="task">
-          </slide>
-        </carousel>
-      </router-link>
-    </div>
-    <div class="card-content">
-      <img v-if="imgUrl || sellerImg" :src="sellerImg" alt="" class="sellerPic">
-      <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername"> {{sellerUsername + ' (' + sellerRep + ') '}} </router-link>
-      <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" tag="p" v-text="title" />
-      <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
-      <p class="price">
-        <span v-if="price">
-          <span v-if="type === 'steemgigs'">{{ 'Starting At ' + price + ' ' + currency }}</span>
-          <span v-if="type === 'gigRequest'">{{ 'Max Budget: ' + price + ' ' + currency }}</span>
-        </span>
-        <span v-if="!price">FREE</span>
-      </p>
+    <div class="card-cont">
+      <div class="card-content" v-if="meantFor === 'gigDetails'">
+        <span class="card-title" v-text="title"></span>
+      </div>
+      <div class="card-image">
+        <router-link :to="taskLink">
+          <img v-if="portfolio.length < 1" :src="taskPicture || '/static/img/banner.jpeg'" :alt="task">
+          <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
+            <slide v-for="(image, i) in portfolio" :key="i">
+              <img :src="image" class="responsive-img" :alt="task">
+            </slide>
+          </carousel>
+        </router-link>
+      </div>
+      <div class="card-content">
+        <img v-if="imgUrl || sellerImg" :src="sellerImg" alt="" class="sellerPic">
+        <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername"> {{sellerUsername + ' (' + sellerRep + ') '}} </router-link>
+        <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" tag="p" v-text="title" />
+        <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
+        <p class="price">
+          <span v-if="price">
+            <span v-if="type === 'steemgigs'">{{ 'Starting At ' + price + ' ' + currency }}</span>
+            <span v-if="type === 'gigRequest'">{{ 'Max Budget: ' + price + ' ' + currency }}</span>
+          </span>
+          <span v-if="!price">FREE</span>
+        </p>
+      </div>
     </div>
     <gig-action :gigData="gigData" />
   </div>
@@ -120,17 +122,17 @@ $blue: #4757b2;
   cursor: pointer;
   .card-image {
     position: relative;
-    height: 12em;
     object-fit: cover;
-    .VueCarousel {
-        height: 100%;
-        overflow: hidden;
-    }
+    max-height: 10em;
+    overflow: hidden;
+  }
+  .card-cont {
+    height: 23em;
+    overflow: hidden;
   }
   .card-content {
     padding: 3em 1em 1em;
     position: relative;
-    min-height: 11em;
     .sellerPic {
       border-radius: 50%;
       border: 1px solid #4757b2;

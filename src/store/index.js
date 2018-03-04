@@ -38,7 +38,7 @@ export default new Vuex.Store({
       state.tokenExpires = tokenExpires
       state.username = username
     },
-    SET_PROFILE (state, {about, coverImage, location, name, profilePic, rep, website, walletBal, steemgigsWitness}) {
+    SET_PROFILE (state, {about, coverImage, location, name, profilePic, rep, website, walletBal, steemgigsWitness, social}) {
       state.profile.about = about
       state.profile.coverImage = coverImage
       state.profile.location = location
@@ -48,6 +48,7 @@ export default new Vuex.Store({
       state.profile.website = website
       state.profile.balance = walletBal
       state.profile.steemgigsWitness = steemgigsWitness
+      state.profile.social = social
     },
     SET_lastPage (state, url) {
       state.lastPage = url
