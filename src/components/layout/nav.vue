@@ -30,7 +30,7 @@
               <li><router-link class="waves-effect" to="/wallet">Wallet - {{ wallet }}</router-link></li>
               <li><router-link class="waves-effect" to="/settings">Settings</router-link></li>
               <li><router-link class="waves-effect red-text" to="/invite">Invite friends</router-link></li>
-              <li><router-link class="waves-effect" to="/help">Help</router-link></li>
+              <li><a class="waves-effect" href="https://discord.gg/CGuPyyT" target="_blank">Help</a></li>
               <li><a @click.prevent="logout()">logout</a></li>
             </ul>
           </li>

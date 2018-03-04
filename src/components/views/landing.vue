@@ -83,7 +83,7 @@
     </section>
     <section class="py-5 blue-grey lighten-5">
       <div class="container">
-        <div class="row">
+        <div class="row hide">
           <div class="col m5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia corrupti, est ea beatae unde temporibus reprehenderit, quos magni deserunt praesentium dolorem similique accusantium, odio architecto eveniet molestias eius id perferendis.</div>
           <div class="col m7"></div>
         </div>
