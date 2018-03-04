@@ -43,8 +43,8 @@
               <p v-text="profile.about"></p>
               <span class="card-title">Languages</span>
               <ul>
-                <li>English - fluent</li>
-                <li>French (Français) - Conversational</li>
+                <li v-for="(language, index) in profile.languages" :key="index">{{language}}</li>
+                <li>English - Fluent</li>
               </ul>
             </div>
           </div>
@@ -146,19 +146,19 @@ export default {
       socialName: '',
       profileEdit: {
         username: this.profile.account,
-        expertise: '',
-        profilePic: '',
-        coverPic: '',
-        languages: ['English', 'Yoruba'],
-        location: 'Nigeria',
-        vacation: false,
-        about: this.profile.profile.about,
+        expertise: this.profile.expertise || '',
+        profilePic: this.profile.profilePic || '',
+        coverPic: this.profile.coverPic || '',
+        languages: this.profile.languages || [],
+        location: this.profile.location || '',
+        vacation: this.profile.vaction || false,
+        about: this.profile.profile.about || '',
         profile_image: this.profile.profile.profile_image,
-        gender: 'male',
-        social: {
-          facebook: 'damafeez',
-          website: 'damafeez',
-          discord: 'damafeez'
+        gender: this.profile.gender || '',
+        social: this.profile.social || {
+          facebook: '',
+          website: '',
+          discord: ''
         }
       }
     }
@@ -171,10 +171,6 @@ export default {
     },
     addToSocial () {
       if (!this.socialFeed || !this.socialName) return
-      let obj = {
-        feed: this.socialFeed,
-        value: this.socialValue
-      }
       this.profileEdit.social[this.socialFeed] = this.socialName
       this.socialFeed = ''
       this.socialName = ''
@@ -186,9 +182,22 @@ export default {
       console.log('I got called with', this.profileEdit)
       Api.profileUpdate(this.profileEdit, this.$store.state.accessToken).then((result) => {
         this.isUpdating = false
+        this.$notify({
+          group: 'foo',
+          title: 'Success',
+          text: 'Profile update successful',
+          type: 'success'
+        })
+        this.closeEdit()
         console.log('update', result)
       }).catch((e) => {
         this.isUpdating = false
+        this.$notify({
+          group: 'foo',
+          title: 'Error',
+          text: 'Could not update profile, please try again',
+          type: 'error'
+        })
         console.log(e)
       })
       // sc2.setAccessToken(this.$store.state.accessToken)
