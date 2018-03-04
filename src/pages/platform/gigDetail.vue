@@ -297,6 +297,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+img {
+  max-width: 100% !important;
+}
   .card-image img {
     height: 30em;
   }

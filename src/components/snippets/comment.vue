@@ -262,7 +262,7 @@ export default {
   mounted () {
     this.fetchComments()
     console.log(this.getTimeAgo())
-    setInterval(() => {this.getTimeAgo()}, 10000)
+    setInterval(() => { this.getTimeAgo() }, 10000)
   }
 }
 </script>
