@@ -24,7 +24,7 @@
               <span class="right">
                 <div class="switch" v-if="true">
                   <label>
-                    <input checked type="checkbox" disabled v-model="updateProfile.vacation_mode" >
+                    <input checked type="checkbox" disabled v-model="profileEdit.vacation_mode" >
                     <span class="lever"></span>
                   </label>
                 </div>

@@ -11,7 +11,7 @@
           <div class="card">
             <div v-if="contentLoaded" class="card-content">
               <span class="card-title">{{ title }}</span>
-                <p><router-link :to="'/categories/' + currentGig.json_metadata.oncategory">{{ currentGig.json_metadata.category }}</router-link> / <router-link :to="'/categories/' + currentGig.json_metadata.category + '/' + currentGig.json_metadata.subcategory">{{ currentGig.json_metadata.subcategory }}</router-link></p>
+                <p v-if="currentGig.json_metadata.category"><router-link :to="'/categories/' + currentGig.json_metadata.category">{{ currentGig.json_metadata.category }}</router-link> / <router-link :to="'/categories/' + currentGig.json_metadata.category + '/' + currentGig.json_metadata.subcategory">{{ currentGig.json_metadata.subcategory }}</router-link></p>
             </div>
             <div class="card-image z-depth-1">
               <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
@@ -22,7 +22,7 @@
             </div>
             <div class="card-content">
               <loading-placeholder v-if="!contentLoaded" />
-              <div v-html="parsedBody"></div>
+              <div v-html="currentGig.body"></div>
               <div class="menu row mb-2">
                 <div v-if="contentLoaded" class="col detail-action m3 offset-m9">
                   <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
@@ -148,11 +148,6 @@ export default {
     title () {
       return this.desteemgify(this.currentGig.title)
     },
-    parsedBody () {
-      return this.currentGig.body.split(`
-<i>this post was made on <a href="https://steemgigs.org/@${this.currentGig.author}/${this.currentGig.permlink}">STEEMGIGS Where everyone has something to offer</a></i>
-      `)[0]
-    },
     portfolio () {
       if (this.currentGig.json_metadata.images) {
         return this.currentGig.json_metadata.images
@@ -174,8 +169,8 @@ export default {
       return this.genuineVoters.length
     },
     payout () {
-      if (this.currentGig.pending_payout_value.amount) {
-        return '$' + parseFloat(this.currentGig.pending_payout_value.amount)
+      if (this.currentGig.pending_payout_value) {
+        return '$' + parseFloat(this.currentGig.pending_payout_value)
       } else {
         return '$' + (parseFloat(this.currentGig.total_payout_value.amount) + parseFloat(this.currentGig.curator_payout_value.amount))
       }
@@ -242,7 +237,7 @@ export default {
       Api.comment({parentAuthor: this.currentGig.author, parentPermlink: this.currentGig.permlink, username: this.$store.state.username, body: this.myComment}, this.$store.state.accessToken).then((result) => {
         this.isPosting = false
         this.commentMode = false
-        this.comments.push(result.data)
+        this.comments = result.data
         this.myComment = ''
       }).catch((e) => {
         this.isPosting = false

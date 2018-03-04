@@ -668,10 +668,6 @@ Vue.prototype.categories = [
         'description': ''
       },
       {
-        'name': 'Steem Coders',
-        'description': ''
-      },
-      {
         'name': 'Steem Veterans',
         'description': ''
       },

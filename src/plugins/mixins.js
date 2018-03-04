@@ -25,6 +25,9 @@ export default {
       rep = parseInt(rep)
       return rep
     },
+    htmlHide (content) {
+      return `<div class="hide-on-steemgigs">${content}</div>`
+    },
     // debounce: (fn, time) => {
     //   let timeout
     //   return function () {
