@@ -3,7 +3,7 @@
     <dismissible-notice>
       <span>The steemgigs testimonial editor can be used by both steemgigan and steemian client over the course of a successful transaction and will appear as full blown blog posts both on steemgigs.org and steemit for potential rewards. Both parties can earn additional rewards from writing steemgigs testimonials as not only does it increase the reputation of both parties but it creates values as post, creates transparency and promotes steem in the search engine and also as a blockchain where "where everyone is a reputable/talented brother"</span>
     </dismissible-notice>
-    <ul class="sections center">
+    <ul class="sections hide-on-med-and-down center">
       <li v-for="(section, index) in sections" :key="index"><a v-text="section" :class="{active: index === currentSection}" @click="switchTo(index)"></a></li>
     </ul>
     <div class="container" @keypress.tab="nextSection">
@@ -79,10 +79,13 @@ Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look
                 </div>
               </div>
             </div>
+            <div v-if="descError" class="card-panel">
+              <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
+            </div>
           </div>
           <div class="col s12 row">
             <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-            <button class="right btn indigo waves-effect" @click.prevent="submit">
+            <button :disabled="Boolean(descError)" class="right btn indigo waves-effect" @click.prevent="submit">
               <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
               POST #STEEMGIG
             </button>
@@ -150,10 +153,8 @@ export default {
   },
   methods: {
     switchTo (index) {
-      if (!this.descError) {
-        this.nextPressed = true
-        this.currentSection = index
-      }
+      this.nextPressed = true
+      this.currentSection = index
     },
     nextSection () {
       this.nextPressed = true

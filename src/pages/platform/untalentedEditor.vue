@@ -10,7 +10,7 @@
       You can also use this editor if you're a new steemian to startup your steemit journey (#introduceyourself) as this editor will create a flow that you can follow closely for your posts to appear enviable on steemit.
       Posts created on this editor will only appear on https://busy.org and https://steemit.com for now and will not appear on https://steemgigs.org yet</span>
     </dismissible-notice>
-    <ul class="sections center">
+    <ul class="sections hide-on-med-and-down center">
       <li v-for="(section, index) in sections" :key="index"><a v-text="section" :class="{active: index === currentSection}" @click="switchTo(index)"></a></li>
     </ul>
     <div class="container" @keypress.tab="nextSection">

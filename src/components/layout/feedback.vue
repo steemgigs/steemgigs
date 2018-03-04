@@ -1,6 +1,6 @@
  <template>
   <div class="feedback">
-    <div class="feedback-btn indigo" @click="feedbackActive = true" v-if="!feedbackActive"><span>😃</span> Feedback</div>
+    <div class="feedback-btn indigo" @click="feedbackActive = true" v-if="!feedbackActive"><span class="emoji">😃</span><span class="hide-on-med-and-down feedbackk"> Feedback</span></div>
     <div v-if="feedbackActive" class="feedback-panel center-align pt-2" @mouseover="feedbackHoverText = ' '">
       <span class="close indigo white-text z-depth-2" @click="closeFeedback"><i class="ion-close"></i></span>
       <p v-if="mode === 'initial'" class="title">How would you rate your SteemGigs experience?</p>
@@ -175,10 +175,11 @@ export default {
     }
     right: -35px;
     .feedback-btn {
-      span {
-        transform: rotate(90deg);
-        margin-right: 20px;
+      span.emoji {
         font-size: 1.3em
+      }
+      span.feedbackk {
+        margin-left: 20px;
       }
       transform: rotate(-90deg);
       color: white;

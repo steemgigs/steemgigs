@@ -1,6 +1,6 @@
 <template>
   <page :pageClasses="['post_new_steemgig__view', 'row']">
-    <ul class="sections center">
+    <ul class="sections hide-on-med-and-down center">
       <li v-for="(section, index) in sections" :key="index"><a v-text="section" :class="{active: index === currentSection}" @click="switchTo(index)"></a></li>
     </ul>
     <dismissible-notice>
