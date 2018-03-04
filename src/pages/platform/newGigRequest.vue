@@ -257,7 +257,7 @@ export default {
           that.isPosting = false
           that.successText = 'Successfully pushed to steem!'
         }).catch((e) => {
-          that.errorText = 'Error pushing post to steem, try again'
+          that.errorText = 'Error pushing post to steem, you might have used the same title previous time'
         })
       }
     }

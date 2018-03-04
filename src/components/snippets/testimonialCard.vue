@@ -102,6 +102,10 @@ export default {
   .testimonial-card {
     box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
+    transition: all .2s ease-in;
+    &:hover {
+      box-shadow: 0 3px 30px rgba(0, 0, 0, 0.25);
+    }
     .card-content {
       min-height: 315px;
     }
