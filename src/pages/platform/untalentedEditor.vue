@@ -58,6 +58,19 @@
               <input-tag limit="3" class="editable" placeholder="add tags" @update:tags="getTags" :tags="userTags" />
             </div>
           </div>
+          <div class="input-field col s12 m6 row">
+            <div class="col s5">
+              <p>
+                <label>
+                  <input type="checkbox" :checked="untalented.liked ? 'checked' : ''" v-model="untalented.liked" />
+                  <span>Like your post</span>
+                </label>
+              </p>
+            </div>
+            <div class="col s7 mt-4">
+              <slider-range v-if="untalented.liked" :min="1" v-model="untalented.upvoteRange" />
+            </div>
+          </div>
           <div class="col s12 row">
               <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
           </div>
@@ -118,6 +131,7 @@ import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import { Carousel, Slide } from 'vue-carousel'
+import SliderRange from 'vue-slider-component'
 import InputTag from 'vue-input-tag'
 
 export default {
@@ -131,7 +145,8 @@ export default {
     ImgUpload,
     VueEditor,
     InputTag,
-    DismissibleNotice
+    DismissibleNotice,
+    SliderRange
   },
   data () {
     return {
@@ -147,7 +162,9 @@ export default {
       untalented: {
         title: '',
         description: '',
-        images: []
+        images: [],
+        liked: false,
+        upvoteRange: 100
       },
       customToolbar: [
         ['bold', 'italic', 'underline'],
@@ -162,6 +179,13 @@ export default {
     }
   },
   methods: {
+    vote () {
+      if (!this.untalented.liked) {
+        this.untalented.liked = true
+      } else {
+        this.untalented.liked = false
+      }
+    },
     switchTo (index) {
       this.nextPressed = true
       this.currentSection = index
@@ -201,7 +225,9 @@ export default {
         let body = this.previewData + steemGigsTag
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
-        Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
+        let liked = this.untalented.liked
+        let upvoteRange = this.untalented.upvoteRange
+        Api.post({username, permlink, title, body, jsonMetadata, liked, upvoteRange}, token).then((err, res) => {
           console.log(err, res)
           that.isPosting = false
           that.successText = 'Successfully pushed to steem!'

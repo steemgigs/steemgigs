@@ -47,6 +47,19 @@ Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look
               <input-tag limit="2" :read-only="true" :tags="defaultTags" />
               <input-tag limit="3" class="editable" placeholder="add tags" @update:tags="getTags" :tags="userTags" />
             </div>
+            <div class="input-field col s12 m6 row">
+              <div class="col s5">
+                <p>
+                  <label>
+                    <input type="checkbox" :checked="newTestimonial.liked ? 'checked' : ''" v-model="newTestimonial.liked" />
+                    <span>Like your post</span>
+                  </label>
+                </p>
+              </div>
+              <div class="col s7 mt-4">
+                <slider-range v-if="newTestimonial.liked" :min="1" v-model="newTestimonial.upvoteRange" />
+              </div>
+            </div>
           </div>
           <div class="col s12 row">
               <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
@@ -109,6 +122,7 @@ import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import { Carousel, Slide } from 'vue-carousel'
 import InputTag from 'vue-input-tag'
+import SliderRange from 'vue-slider-component'
 
 export default {
   components: {
@@ -121,7 +135,8 @@ export default {
     ImgUpload,
     VueEditor,
     InputTag,
-    DismissibleNotice
+    DismissibleNotice,
+    SliderRange
   },
   data () {
     return {
@@ -137,7 +152,9 @@ export default {
       newTestimonial: {
         title: '',
         description: '',
-        images: []
+        images: [],
+        upvoteRange: 100,
+        liked: false
       },
       customToolbar: [
         ['bold', 'italic', 'underline'],
@@ -152,6 +169,13 @@ export default {
     }
   },
   methods: {
+    vote () {
+      if (!this.newTestimonial.liked) {
+        this.newTestimonial.liked = true
+      } else {
+        this.newTestimonial.liked = false
+      }
+    },
     switchTo (index) {
       this.nextPressed = true
       this.currentSection = index
@@ -191,8 +215,10 @@ export default {
         `
         let title = this.steemedTitle
         let token = this.$store.state.accessToken
+        let liked = this.newTestimonial.liked
+        let upvoteRange = this.newTestimonial.upvoteRange
         // username, permlink, title, body, jsonMetadata, token
-        Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
+        Api.post({username, permlink, title, body, jsonMetadata, liked, upvoteRange}, token).then((err, res) => {
           console.log(err, res)
           that.isPosting = false
           that.successText = 'Successfully pushed to steem!'
@@ -204,6 +230,13 @@ export default {
     }
   },
   computed: {
+    voteBtnTitle () {
+      if (!this.newTestimonial.liked) {
+        return { content: 'Like your post', classes: ['tooltip'] }
+      } else {
+        return { content: 'Remove upvote', classes: ['tooltip'] }
+      }
+    },
     descError () {
       if (this.nextPressed && this.newTestimonial.description.length < 20) {
         return 'Your description should be 20 Characters or more, please read style guide for clarification'

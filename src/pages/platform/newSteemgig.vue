@@ -178,13 +178,18 @@
                 <option>Declined</option>
               </select>
             </div>
-            <div class="input-field col s12 m3 l4" style="margin-top: 0.5em">
-              <p>
-                <label>
-                  <input class="filled-in" type="checkbox" v-model="newGigData.liked" />
-                  <span>Like your post</span>
-                </label>
-              </p>
+            <div class="input-field col s12 m6 row">
+              <div class="col s5">
+                <p>
+                  <label>
+                    <input type="checkbox" :checked="newGigData.liked ? 'checked' : ''" v-model="newGigData.liked" />
+                    <span>Like your post</span>
+                  </label>
+                </p>
+              </div>
+              <div class="col s7 mt-4">
+                <slider-range v-if="newGigData.liked" :min="1" v-model="newGigData.upvoteRange" />
+              </div>
             </div>
             <div class="col s12 row">
                 <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
@@ -253,6 +258,7 @@ import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import { Carousel, Slide } from 'vue-carousel'
 import InputTag from 'vue-input-tag'
+import SliderRange from 'vue-slider-component'
 
 export default {
   components: {
@@ -264,7 +270,8 @@ export default {
     Slide,
     InputTag,
     ImgUpload,
-    VueEditor
+    VueEditor,
+    SliderRange
   },
   data () {
     return {
@@ -291,7 +298,8 @@ export default {
         portfolio: [],
         reward: '100% STEEM POWER',
         price: 0,
-        liked: true
+        liked: false,
+        upvoteRange: 100
       },
       customToolbar: [
         ['bold', 'italic', 'underline'],
@@ -306,6 +314,13 @@ export default {
     }
   },
   methods: {
+    vote () {
+      if (!this.newGigData.liked) {
+        this.newGigData.liked = true
+      } else {
+        this.newGigData.liked = false
+      }
+    },
     switchTo (index) {
       if (index === 5) {
         this.descNext = this.priceNext = this.reqNext = true
@@ -369,8 +384,10 @@ export default {
         let body = this.previewData + hiddenContainer
         let token = this.$store.state.accessToken
         let title = '#STEEMGIGS: I will ' + this.newGigData.title
+        let liked = this.newGigData.liked
+        let upvoteRange = this.newGigData.upvoteRange
         // username, permlink, title, body, jsonMetadata, token
-        Api.post({username, permlink, title, body, jsonMetadata}, token).then((err, res) => {
+        Api.post({username, permlink, title, body, liked, upvoteRange, jsonMetadata}, token).then((err, res) => {
           console.log('err', err, 'res', res)
           that.isPosting = false
           that.successText = 'Successfully pushed to steem!'
