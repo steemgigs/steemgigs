@@ -41,7 +41,7 @@ export default {
       } else return ''
     },
     body () {
-      return this.testimonial.body.split(`<i>this post was made on <a href="https://steemgigs.org/${this.username}/${this.permlink}">STEEMGIGS Where everyone has something to offer</a></i>`)[0]
+      return this.testimonial.body
     },
     username () {
       return '@' + this.testimonial.author

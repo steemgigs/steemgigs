@@ -137,9 +137,9 @@ export default {
     let {username, task} = this.$route.params
     this.fetchUserInfo(username)
     Api.fetchSinglePost(username, task).then(response => {
-      this.contentLoaded = true
       this.currentGig = response.data
       this.fetchComments()
+      this.contentLoaded = true
     }).catch(err => {
       console.log(err)
     })

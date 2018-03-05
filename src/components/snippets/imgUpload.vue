@@ -60,6 +60,7 @@ export default {
 
       Api.imageUpload(formData)
         .then(x => {
+          console.log('img-upload', x.data)
           this.imgUrl = x.data
           this.uploadedFiles = [].concat(x)
           this.currentStatus = STATUS_SUCCESS

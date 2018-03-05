@@ -176,6 +176,7 @@ export default {
       this.socialName = ''
     },
     updateProfile () {
+      if (this.isUpdating) return
       let profile = this.profile
       this.isUpdating = true
       profile.languages = this.languages || this.i_speak
@@ -331,7 +332,6 @@ export default {
     }
     position: relative;
     .profilePic {
-      cursor: pointer;
       float: none;
       display: block;
       position: relative;

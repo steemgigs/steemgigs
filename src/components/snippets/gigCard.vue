@@ -80,7 +80,7 @@ export default {
       } else return ''
     },
     taskLink () {
-      return '/@' + this.sellerUsername + '/' + this.slugify(this.task)
+      return '/@' + this.sellerUsername + '/' + this.gigData.permlink
     },
     price () {
       if (this.gigData.json_metadata) {
