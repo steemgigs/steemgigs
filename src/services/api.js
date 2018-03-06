@@ -88,8 +88,5 @@ export default {
         token: token
       }
     })
-  },
-  fetchCommentInfo (username) {
-    return axios.get(`/userImage/${username}`)
   }
 }

@@ -83,6 +83,7 @@ export default {
   },
   beforeCreate () {
     Api.fetchUserData(this.$route.params.username).then(response => {
+      console.log('from profile', response)
       this.profile = response.data
       this.profileFetched = true
     }).catch(err => {
@@ -118,6 +119,17 @@ export default {
     changeView (view) {
       this.currentView = view
     }
+  },
+  mounted () {
+    this.$eventBus.$on('profile-updated', payload => {
+      payload.rep = this.profile.rep
+      this.profile = payload
+      this.$store.commit('SET_PROFILE', payload)
+      console.log('updating.....', payload)
+    })
+  },
+  deforeDestroy () {
+    this.$eventBus.$off('profile-updated')
   }
 }
 </script>

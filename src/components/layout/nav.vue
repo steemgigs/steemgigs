@@ -81,7 +81,7 @@ export default {
       return this.profile.profileImage
     },
     wallet () {
-      return this.profile.balance.amount
+      return this.profile.balance
     }
   },
   mounted () {
