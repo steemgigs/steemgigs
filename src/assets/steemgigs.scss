@@ -130,6 +130,9 @@ img {
     backface-visibility: hidden;
     transition: transform .6s ease-in;
   }
+  .block {
+    display: block;
+  }
   .back{
     ul.language-list li {
       list-style-type: initial;

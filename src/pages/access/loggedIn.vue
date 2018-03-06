@@ -13,9 +13,11 @@ export default {
     let {access_token: accessToken, expires_in: tokenExpires, username} = this.$route.query
     this.$store.commit('SET_USER', {accessToken, tokenExpires, username})
     Api.loggedIn(username, accessToken).then(response => {
-      let responseData = response.data
-      let {about, coverImage, location, name, profilePic, rep, balance: walletBal, steemgigsWitness} = responseData.profileObject
-      this.$store.commit('SET_PROFILE', {about, coverImage, location, name, profilePic, walletBal, rep, steemgigsWitness})
+      let responseData = response.data.profile
+      console.log('FROM LOGGED IN', {responseData})
+      let {social, name, profilePic, about, location, coverPic, rep, balance, steemgigsWitness} = responseData
+      this.$store.commit('SET_PROFILE', {social, name, profilePic, about, location, coverPic, rep, balance, steemgigsWitness})
+      this.$router.push('/')
     })
     // sc2.setAccessToken(accessToken)
     // sc2.me((err, result) => {
@@ -30,7 +32,6 @@ export default {
     // }, () => {
     //   console.log('done')
     // })
-    this.$router.push('/')
   }
 }
 </script>

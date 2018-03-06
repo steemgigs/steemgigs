@@ -369,6 +369,7 @@ export default {
     },
     submit () {
       if (!this.errorr) {
+        if (this.isPosting) return
         let that = this
         this.errorText = ''
         this.successText = ''
@@ -385,7 +386,7 @@ export default {
           authorPic: this.$store.state.profile.profileImage,
           category: this.slugify(this.newGigData.category),
           subcategory: this.slugify(this.newGigData.subcategory),
-          images: this.newGigData.portfolio,
+          images: this.newGigData.portfolio.filter((image) => image),
           type: 'steemgigs_post',
           generated: true
         }

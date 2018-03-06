@@ -250,6 +250,7 @@ export default {
     },
     submit () {
       if (!this.errorr) {
+        if (this.isPosting) return
         let that = this
         this.errorText = ''
         this.successText = ''
