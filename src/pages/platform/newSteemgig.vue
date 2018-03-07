@@ -166,14 +166,17 @@
           <div class="container gigForm">
             <p class="flow-text title">Portfolio</p>
             <div class="input-field col s12 row">
-              <div class="col s12 m4 l3" v-for="(uploader, index) in totalPics" :key="index">
+              <div v-for="(index) in 8" :key="index">
                 <img-upload :id="index" />
               </div>
-              <div class="col s12 m4 l3 center center-align" v-if="totalPics < 4">
-                <button @click.prevent="morePics" class="btn-floating indigo addPic">
-                  <i class="icon ion-android-add"></i>
-                </button>
-              </div>
+              <!-- <div class="col s12 m4 l3 mb-3" v-if="totalPics < 8">
+                <div class="add-box center center-align pt-5" @click.prevent="morePics">
+                  <button class="btn-floating indigo">
+                    <i class="icon ion-android-add"></i>
+                  </button><br><br>
+                  <span>Click to add more images</span>
+                </div>
+              </div> -->
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
@@ -226,7 +229,7 @@
               </div>
               <div class="card-image">
                 <carousel :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
-                  <slide v-for="(image, index) in newGigData.portfolio" :key="index">
+                  <slide v-for="(image, index) in portfolio" :key="index">
                     <img :src="image" class="responsive-img" :alt="newGigData.title">
                   </slide>
                 </carousel>
@@ -303,12 +306,12 @@ export default {
       isPosting: false,
       sections: ['Overview', 'Description', 'Pricing', 'Requirements', 'Portfolio', 'Publish'],
       currentSection: 0,
-      totalPics: 1,
       descNext: false,
       reqNext: false,
       priceNext: false,
       portNext: false,
       userTags: [],
+      totalPics: 1,
       newGigData: {
         title: '',
         category: '',
@@ -319,7 +322,7 @@ export default {
         hours: 0,
         days: 0,
         currency: 'STEEM',
-        portfolio: [],
+        portfolio: [''],
         reward: '100% STEEM POWER',
         price: 0,
         liked: false,
@@ -370,7 +373,10 @@ export default {
       this.userTags = entries
     },
     morePics () {
-      if (this.totalPics < 4) this.totalPics++
+      if (this.totalPics < 8) {
+        this.totalPics ++
+        this.newGigData.portfolio.push('')
+      }
     },
     submit () {
       if (!this.errorr) {
@@ -378,7 +384,6 @@ export default {
         let that = this
         this.errorText = ''
         this.successText = ''
-        this.isPosting = true
         this.isPosting = true
         let jsonMetadata = {
           app: 'steemgig',
@@ -391,12 +396,12 @@ export default {
           authorPic: this.$store.state.profile.profileImage,
           category: this.slugify(this.newGigData.category),
           subcategory: this.slugify(this.newGigData.subcategory),
-          images: this.newGigData.portfolio.filter((image) => image),
+          images: this.portfolio,
           type: 'steemgigs_post',
           generated: true
         }
         let textifiedPics = '\n<h2>Portfolio</h2>\n<hr />\n'
-        this.newGigData.portfolio.forEach(url => {
+        this.portfolio.forEach(url => {
           textifiedPics += `<img src="${url}"> <br />`
         })
         let username = this.$store.state.username
@@ -415,16 +420,31 @@ export default {
         Api.post({username, permlink, title, body, liked, upvoteRange, jsonMetadata}, token).then((err, res) => {
           console.log('err', err, 'res', res)
           that.isPosting = false
+          this.$notify({
+            group: 'foo',
+            title: 'Success',
+            text: 'Successfully pushed to steem!',
+            type: 'success'
+          })
           that.successText = 'Successfully pushed to steem!'
         }).catch((e) => {
           console.log(e)
           that.isPosting = false
+          this.$notify({
+            group: 'foo',
+            title: 'Error',
+            text: 'Error pushing post to steem, you might have used the same title previous time',
+            type: 'error'
+          })
           that.errorText = 'Error pushing post to steem, you might have used the same title previous time'
         })
       }
     }
   },
   computed: {
+    portfolio () {
+      return this.newGigData.portfolio.filter((image) => image)
+    },
     descError () {
       if (this.descNext && this.newGigData.description.length < 300) {
         return 'Your description should be 300 Characters or more, please read style guide for clarification'
@@ -503,9 +523,13 @@ ${this.newGigData.requirements}
       console.log(payload)
       this.newGigData.portfolio[payload.index] = payload.url
     })
+    this.$eventBus.$on('delete-image-url', payload => {
+      this.newGigData.portfolio.splice(payload, 1)
+    })
   },
   deforeDestroy () {
     this.$eventBus.$off('img-uploaded')
+    this.$eventBus.$off('delete-image-url')
   }
 }
 </script>
@@ -513,6 +537,18 @@ ${this.newGigData.requirements}
 <style lang="scss" scoped>
 form .input-field {
   position: relative;
+}
+.add-box {
+  box-shadow: 0 1px 1px;
+  background: #f9f9f9;
+  color: dimgray;
+  padding: 10px 10px;
+  height: 200px; /* minimum height */
+  position: relative;
+  cursor: pointer;
+  span {
+    font-size: .9em;
+  }
 }
 select.my-select {
   width: initial !important;
@@ -682,10 +718,5 @@ p.title {
 }
 .push-down {
   margin-top: 4.2em;
-}
-button.addPic {
-  position: absolute;
-  top: 50%;
-  transform: translate(50%, -50%);
 }
 </style>

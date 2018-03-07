@@ -11,9 +11,9 @@ export default {
   fetchUserGigs (username) {
     return axios.get(`/usergigs/${username}`)
   },
-  fetchSinglePost (username, permlink) {
+  fetchSinglePost (username, permlink, viewer) {
     // return axios.post('/fetchSinglePost', {username, permlink})
-    return axios.get(`/steemgig/${username}/${permlink}`)
+    return axios.get(`/steemgig/${username}/${permlink}/${viewer}`)
   },
   fetchComments (username, permlink) {
     return axios.get(`/comments/${username}/${permlink}`)

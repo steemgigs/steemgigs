@@ -28,7 +28,8 @@
                   <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
                   <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
                     <i class="fa fa-spinner fa-pulse"></i>
-                  </a>&nbsp;
+                  </a>&nbsp;&nbsp;
+                  <a v-if="currentGig.views" class="indigo-text" v-tooltip="'Number of views'"><i class="ion-eye"></i> {{ currentGig.views.length +'&nbsp;&nbsp;&nbsp;'}}</a>
                   <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{payout}}</span>&nbsp; | &nbsp; <a @click="commentMode = !commentMode" class="reply">Reply</a>
                   <div class="vote-slider py-3" v-if="upvoteActive">
                     <div class="col s9">
@@ -136,7 +137,7 @@ export default {
   mounted () {
     let {username, task} = this.$route.params
     this.fetchUserInfo(username)
-    Api.fetchSinglePost(username, task).then(response => {
+    Api.fetchSinglePost(username, task, this.$store.state.username || '').then(response => {
       this.currentGig = response.data
       this.fetchComments()
       this.contentLoaded = true

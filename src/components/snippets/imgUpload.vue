@@ -1,27 +1,29 @@
 <template>
-  <div class="dropform" :style="dropformstyle">
-        <!-- <i class="icon ion-close" @click="closeUploader" /> -->
+    <div v-if="!closed" class="col s12 m4 l3 mb-3">
+      <div class="dropform" :style="dropformstyle">
+        <!-- <i class="closecon ion-close" @click="closeUploader" /> -->
         <p v-if="isSaving" class="center center-align">
           <i class="fa fa-spinner fa-pulse"></i> <br>
           <span>Uploading your image</span>
         </p>
-    <form enctype="multipart/form-data" novalidate v-if="isInitial || uploadError">
-    <div>
-      <input type="file" :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*" class="input-file">
-        <p v-if="isInitial">
-          Drag your file here to begin<br> or click to browse
-        </p>
-        <p v-if="isFailed" class="red-text">
-          An Error Occoured<br>Please reupload
-        </p>
-        <!-- <i class="icon ion-upload" /> -->
-      </div>
-    </form>
-    <div class="uploaded-image" :style="{ 'background-image': 'url(' + imgUrl + ')' }" v-if="isSuccess">
-      <!-- <i class="icon ion-eye" /> -->
+        <form enctype="multipart/form-data" novalidate v-if="isInitial || uploadError || isSuccess">
+          <div>
+            <input type="file" :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*" class="input-file">
+            <p v-if="isInitial">
+              Drag your file here to begin<br> or click to browse
+            </p>
+            <p v-if="isFailed" class="red-text">
+              An Error Occoured<br>Please reupload
+            </p>
+            <!-- <i class="icon ion-upload" /> -->
+          </div>
+        </form>
+        <div class="uploaded-image" :style="{ 'background-image': 'url(' + imgUrl + ')' }" v-if="isSuccess">
+          <!-- <i class="icon ion-eye" /> -->
 
+        </div>
+      </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -44,7 +46,8 @@ export default {
       uploadError: null,
       currentStatus: null,
       uploadFieldName: 'photos',
-      imgUrl: ''
+      imgUrl: '',
+      closed: false
     }
   },
   methods: {
@@ -57,7 +60,7 @@ export default {
     save (formData) {
       // upload data to the server
       this.currentStatus = STATUS_SAVING
-
+      console.log('gormdata', formData)
       Api.imageUpload(formData)
         .then(x => {
           console.log('img-upload', x.data)
@@ -77,6 +80,7 @@ export default {
     },
     filesChange (fieldName, fileList) {
       // handle file changes
+      console.log({fieldName, fileList})
       const formData = new FormData()
 
       if (!fileList.length) return
@@ -92,9 +96,8 @@ export default {
       this.save(formData)
     },
     closeUploader () {
-      // if (this.imgUrl.length > 0) {
-      //   this.$eventBus.$emit('delete-image-url')
-      // }
+      this.closed = true
+      this.$eventBus.$emit('delete-image-url', this.id)
     }
   },
   computed: {
@@ -150,6 +153,15 @@ export default {
     opacity: 0;
     transition: opacity .2s ease-in-out;
 
+  }
+  i.closecon {
+    background: #ee6464;
+    padding: 1px 6px;
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 5px;
   }
   &:hover {
     i.ion-upload {

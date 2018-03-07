@@ -1,6 +1,6 @@
 <template>
   <div class="testimonial-card card">
-    <div class="card-content center">
+    <div class="card-content scrollbar center">
         <router-link class="username" :to="username">
       <img :src="userImg" class="userImage" alt="">
       </router-link>
@@ -107,7 +107,8 @@ export default {
       box-shadow: 0 3px 30px rgba(0, 0, 0, 0.25);
     }
     .card-content {
-      min-height: 315px;
+        height: 30em;
+        overflow: auto;
     }
     img.userImage {
       height: 90px;

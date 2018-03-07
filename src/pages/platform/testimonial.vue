@@ -215,9 +215,10 @@ export default {
         }
         let username = this.$store.state.username
         let permlink = this.slugify(this.newTestimonial.title)
-        let body = this.newTestimonial.description + `
+        let steemGigsTag = this.htmlHide(`
   <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
-        `
+        `)
+        let body = this.newTestimonial.description + steemGigsTag
         let title = this.steemedTitle
         let token = this.$store.state.accessToken
         let liked = this.newTestimonial.liked
@@ -226,9 +227,21 @@ export default {
         Api.post({username, permlink, title, body, jsonMetadata, liked, upvoteRange}, token).then((err, res) => {
           console.log(err, res)
           that.isPosting = false
+          this.$notify({
+            group: 'foo',
+            title: 'Success',
+            text: 'Successfully pushed to steem!',
+            type: 'success'
+          })
           that.successText = 'Successfully pushed to steem!'
         }).catch((e) => {
           that.isPosting = false
+          this.$notify({
+            group: 'foo',
+            title: 'Error',
+            text: 'Error pushing post to steem, you might have used the same title previous time',
+            type: 'error'
+          })
           that.errorText = 'Error pushing post to steem, you might have used the same title previous time'
         })
       }

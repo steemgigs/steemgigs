@@ -27,6 +27,24 @@ a {
 .hide-on-steemgigs {
   display: none !important;
 }
+.testimonial-card {
+  ::-webkit-scrollbar {
+      width: 7px;
+      cursor: pointer;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey; 
+      border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+      background: #8e99d9; 
+      border-radius: 10px;
+  }
+}
 .simple-card {
   box-shadow: 0 4px 17px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -38,6 +56,9 @@ a {
   .card p {
     font-size: 1.25rem;
     overflow-wrap: break-word;
+  }
+  img {
+    max-width: 100%;
   }
   h2.headline {    
     font-size: 2.5rem;

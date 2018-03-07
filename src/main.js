@@ -684,7 +684,7 @@ Vue.prototype.categories = [
 ]
 
 Vue.prototype.$imgUploadURL = 'https://server.steemgigs.org/imgUpload'
-
+Vue.prototype.placeholderImg = 'https://via.placeholder.com/100x100'
 Vue.config.productionTip = false
 Vue.prototype.$eventBus = new Vue()
 Vue.use(Vuex)

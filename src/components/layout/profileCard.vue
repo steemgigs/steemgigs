@@ -8,7 +8,7 @@
               <i v-if="!editMode" @click="editMode = true" class="icon ion-android-create"></i>
             </span>
             <div class="profilePic">
-              <img :src="profile.profilePic" class="user-pict-img" :alt="profile.username" width="150" height="150">
+              <img :src="profile.profilePic || placeholderImg" class="user-pict-img" :alt="profile.username" width="150" height="150">
             </div>
             <span class="username"> {{ profile.username + ' (' + profile.rep + ') ' }} </span>
             <span class="expertise" v-text="profile.about"></span>
@@ -143,7 +143,7 @@ export default {
       profileEdit: {
         username: this.profile.username,
         expertise: this.profile.expertise || '',
-        profilePic: this.profile.profilePic || '',
+        profilePic: this.profile.profilePic || this.placeholderImg,
         coverPic: this.profile.coverPic || '',
         languages: this.profile.languages || [],
         location: this.profile.location || '',

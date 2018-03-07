@@ -235,9 +235,21 @@ export default {
         Api.post({username, permlink, title, body, jsonMetadata, liked, upvoteRange}, token).then((err, res) => {
           console.log(err, res)
           that.isPosting = false
+          this.$notify({
+            group: 'foo',
+            title: 'Success',
+            text: 'Successfully pushed to steem!',
+            type: 'success'
+          })
           that.successText = 'Successfully pushed to steem!'
         }).catch((e) => {
           that.isPosting = false
+          this.$notify({
+            group: 'foo',
+            title: 'Error',
+            text: 'Error pushing post to steem, you might have used the same title previous time',
+            type: 'error'
+          })
           that.errorText = 'Error pushing post to steem, you might have used the same title previous time'
         })
       }
@@ -265,7 +277,7 @@ export default {
       }
     },
     steemedTitle () {
-      return '#STEEMGIGS: ' + this.untalented.title
+      return this.untalented.title
     },
     previewData () {
       return `<h2 class="headline">Description</h2>
