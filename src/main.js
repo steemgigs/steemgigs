@@ -683,7 +683,6 @@ Vue.prototype.categories = [
   }
 ]
 
-// Vue.prototype.$imgUploadURL = 'https://178.63.209.34:8443/imgUpload'
 Vue.prototype.$imgUploadURL = 'https://server.steemgigs.org/imgUpload'
 
 Vue.config.productionTip = false

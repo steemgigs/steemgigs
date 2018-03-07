@@ -100,7 +100,7 @@ export default {
     //   console.log('via steemjs::', err, result)
     // })
   },
-  async mounted () {
+  beforeMount () {
     this.profileUsername = this.$route.params.username
   },
   computed: {
