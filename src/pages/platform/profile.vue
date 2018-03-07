@@ -100,9 +100,6 @@ export default {
     //   console.log('via steemjs::', err, result)
     // })
   },
-  async mounted () {
-    this.profileUsername = this.$route.params.username
-  },
   computed: {
     steemgigs () {
       return this.usergigs.filter((gig) => {
@@ -121,6 +118,7 @@ export default {
     }
   },
   mounted () {
+    this.profileUsername = this.$route.params.username
     this.$eventBus.$on('profile-updated', payload => {
       payload.rep = this.profile.rep
       this.profile = payload

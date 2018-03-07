@@ -17,8 +17,8 @@ export default {
       console.log('FROM LOGGED IN', {responseData})
       let {social, name, profilePic, about, location, coverPic, rep, balance, steemgigsWitness} = responseData
       this.$store.commit('SET_PROFILE', {social, name, profilePic, about, location, coverPic, rep, balance, steemgigsWitness})
-      this.$router.push('/')
     })
+    this.$router.push('/')
     // sc2.setAccessToken(accessToken)
     // sc2.me((err, result) => {
     //   if (!err) {
