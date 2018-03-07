@@ -162,7 +162,7 @@ export default {
       totalPics: 1,
       userTags: [],
       nextPressed: false,
-      defaultTags: ['steemgigs', 'untalented'],
+      defaultTags: ['untalented'],
       untalented: {
         title: '',
         description: '',
