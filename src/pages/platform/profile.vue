@@ -100,12 +100,6 @@ export default {
     //   console.log('via steemjs::', err, result)
     // })
   },
-<<<<<<< HEAD
-  beforeMount () {
-    this.profileUsername = this.$route.params.username
-  },
-=======
->>>>>>> 3d25a01cf7c8c81930e671642094ae0110ca005a
   computed: {
     steemgigs () {
       return this.usergigs.filter((gig) => {
