@@ -3,7 +3,7 @@
     <nav-bar />
     <router-view/>
     <notifications group="foo" position="top left" />
-    <div v-if="$store.state.accessToken" class="fixed-action-btn hide-on-large-only">
+    <div v-show="$store.state.accessToken" class="fixed-action-btn hide-on-large-only">
       <a class="btn-floating btn indigo">
         <i class="ion-plus-round"></i>
       </a>

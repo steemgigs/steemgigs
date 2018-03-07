@@ -243,8 +243,8 @@ export default {
       }
     },
     descError () {
-      if (this.nextPressed && this.newTestimonial.description.length < 20) {
-        return 'Your description should be 20 Characters or more, please read style guide for clarification'
+      if (this.nextPressed && this.newTestimonial.description.length < 300) {
+        return 'Your description should be 300 Characters or more, please read style guide for clarification'
       } else {
         return ''
       }

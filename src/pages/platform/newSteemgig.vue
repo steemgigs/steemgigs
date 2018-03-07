@@ -160,6 +160,9 @@
           </div>
         </form>
         <form class="card-panel row" v-show="currentSection === 4">
+          <dismissible-notice>
+            <span>Please ensure all images are yours or give credit to source (URL) where required.<br>Remember that your posts appear on the steem blochain and are subject to curation. Please read style guide on right.</span>
+          </dismissible-notice>
           <div class="container gigForm">
             <p class="flow-text title">Portfolio</p>
             <div class="input-field col s12 row">
@@ -275,6 +278,7 @@ import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import { Carousel, Slide } from 'vue-carousel'
+import DismissibleNotice from '@/components/snippets/dismissibleNotice'
 import InputTag from 'vue-input-tag'
 import SliderRange from 'vue-slider-component'
 
@@ -289,7 +293,8 @@ export default {
     InputTag,
     ImgUpload,
     VueEditor,
-    SliderRange
+    SliderRange,
+    DismissibleNotice
   },
   data () {
     return {
@@ -421,22 +426,22 @@ export default {
   },
   computed: {
     descError () {
-      if (this.descNext && this.newGigData.description.length < 100) {
-        return 'Your description should be 100 Characters or more, please read style guide for clarification'
+      if (this.descNext && this.newGigData.description.length < 300) {
+        return 'Your description should be 300 Characters or more, please read style guide for clarification'
       } else {
         return ''
       }
     },
     pricingError () {
-      if (this.priceNext && this.newGigData.pricing.length < 50) {
-        return 'Your pricing description should be 50 Characters or more, please read style guide for clarification'
+      if (this.priceNext && this.newGigData.pricing.length < 100) {
+        return 'Your pricing description should be 100 Characters or more, please read style guide for clarification'
       } else {
         return ''
       }
     },
     requirementError () {
-      if (this.reqNext && this.newGigData.requirements.length < 30) {
-        return 'Your requirments description should be 30 Characters or more, please read style guide for clarification'
+      if (this.reqNext && this.newGigData.requirements.length < 100) {
+        return 'Your requirments description should be 100 Characters or more, please read style guide for clarification'
       } else {
         return ''
       }

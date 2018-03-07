@@ -162,7 +162,7 @@ export default {
       totalPics: 1,
       userTags: [],
       nextPressed: false,
-      defaultTags: ['steemgigs', 'untalented'],
+      defaultTags: ['untalented'],
       untalented: {
         title: '',
         description: '',
@@ -245,8 +245,8 @@ export default {
   },
   computed: {
     descError () {
-      if (this.nextPressed && this.untalented.description.length < 200) {
-        return 'Your description should be 200 Characters or more, please read style guide for clarification'
+      if (this.nextPressed && this.untalented.description.length < 300) {
+        return 'Your description should be 300 Characters or more, please read style guide for clarification'
       } else {
         return ''
       }
