@@ -55,6 +55,9 @@ export default {
       return data.split(`## Portfolio
 ----`)[0]
     },
+    replaceAt (string, index, replace) {
+      return string.substring(0, index) + replace + string.substring(index + 1)
+    },
     extractPortfolio (data) {
       let portfolio = []
       let test = data.split(`## Portfolio

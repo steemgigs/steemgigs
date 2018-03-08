@@ -4,6 +4,9 @@ export default {
   search (term) {
     return axios.post('/search', { query: { searchText: term } })
   },
+  checkTitleExistence (credentials) {
+    return axios.post('/checktitle', credentials)
+  },
   fetchUserData (username) {
     // return axios.post(`/fetchUserData/`, {username})
     return axios.get(`/profile/${username}`)

@@ -10,9 +10,15 @@
             <p class="flow-text title">Gig Title</p>
             <div class="input-field col s12">
               <span class="title-before">#STEEMGIGS: I will</span>
-              <textarea @keypress.enter.prevent @keyup.enter="''" v-model="newGigData.title" type="text" placeholder="do this (what you can do well) just the way they want it" row="2" maxlength="90" minlength="5" required>
+              <textarea @keypress.enter.prevent @keyup.enter="''" @input="search" v-model="newGigData.title" type="text" placeholder="do this (what you can do well) just the way they want it" row="2" maxlength="90" minlength="5" required>
               </textarea>
               <p class="word-count right" v-text="wordCount"></p>
+              <div v-if="newGigData.title.length > 5" class="col s12 mb-2">
+                <span class="simple-card">
+                  <span v-if="duplicateTitle" class="red-text text-lighten-2">You have already used this <router-link :to="`/@${$store.state.username}/${duplicateTitle.permlink}`" target="_blank">title</router-link>, Proceed?</span>
+                  <span v-if="!duplicateTitle" class="green-text" v-text="validTitle" />
+                </span>
+              </div>
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
@@ -166,17 +172,17 @@
           <div class="container gigForm">
             <p class="flow-text title">Portfolio</p>
             <div class="input-field col s12 row">
-              <div v-for="(index) in 8" :key="index">
+              <div v-for="(url, index) in newGigData.portfolio" :key="index">
                 <img-upload :id="index" />
               </div>
-              <!-- <div class="col s12 m4 l3 mb-3" v-if="totalPics < 8">
+              <div class="col s12 m4 l3 mb-3" v-if="newGigData.portfolio.length < 8">
                 <div class="add-box center center-align pt-5" @click.prevent="morePics">
                   <button class="btn-floating indigo">
                     <i class="icon ion-android-add"></i>
                   </button><br><br>
                   <span>Click to add more images</span>
                 </div>
-              </div> -->
+              </div>
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
@@ -249,6 +255,7 @@
               </div>
             </div>
             <div v-if="errorr" class="simple-card card-panel">
+              <p v-if="!validTitle" class="red-text mt-1 mb-0" >Title must be at least 5 characters</p>
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
               <p v-if="pricingError" class="red-text mt-1 mb-0" v-text="pricingError" />
               <p v-if="requirementError" class="red-text mt-1 mb-0" v-text="requirementError" />
@@ -284,6 +291,7 @@ import { Carousel, Slide } from 'vue-carousel'
 import DismissibleNotice from '@/components/snippets/dismissibleNotice'
 import InputTag from 'vue-input-tag'
 import SliderRange from 'vue-slider-component'
+import debounce from '@/plugins/debounce'
 
 export default {
   components: {
@@ -312,6 +320,9 @@ export default {
       portNext: false,
       userTags: [],
       totalPics: 1,
+      existingTitle: false,
+      checkingTitle: false,
+      duplicateTitle: '',
       newGigData: {
         title: '',
         category: '',
@@ -373,10 +384,33 @@ export default {
       this.userTags = entries
     },
     morePics () {
-      if (this.totalPics < 8) {
-        this.totalPics ++
+      if (this.newGigData.portfolio.length < 8) {
         this.newGigData.portfolio.push('')
       }
+    },
+    search: debounce(function () {
+      this.checkingTitle = true
+      let searchTerm = this.steemedTitle
+      console.log('search term:', searchTerm)
+      Api.checkTitleExistence({username: this.$store.state.username, title: this.steemedTitle}).then(result => {
+        this.checkingTitle = false
+        this.duplicateTitle = result.data
+        console.log(result)
+      }).catch(e => {
+        this.checkingTitle = false
+        this.errorText = 'there was an error with search'
+        console.log('error:', e)
+      })
+    }, 1000),
+    closeSearch (cb) {
+      this.searchTerm = ''
+      this.searchResults = []
+      this.searchActive = false
+      cb()
+    },
+    goto (where) {
+      this.closeSearch(this.$router.push(where))
+      // this.$router.push(where)
     },
     submit () {
       if (!this.errorr) {
@@ -413,7 +447,10 @@ export default {
         let hiddenContainer = this.htmlHide(contentToHide)
         let body = this.previewData + hiddenContainer
         let token = this.$store.state.accessToken
-        let title = '#STEEMGIGS: I will ' + this.newGigData.title
+        let title = this.steemedTitle
+        if (this.duplicateTitle) {
+          title = this.steemedTitle + '2'
+        }
         let liked = this.newGigData.liked
         let upvoteRange = this.newGigData.upvoteRange
         // username, permlink, title, body, jsonMetadata, token
@@ -442,6 +479,18 @@ export default {
     }
   },
   computed: {
+    validTitle () {
+      if (this.newGigData.title.length > 5 && this.checkingTitle) {
+        return 'Wait a sec...'
+      } else if (this.newGigData.title.length > 5) {
+        return 'Title is valid, your\'re cool!'
+      } else {
+        return ''
+      }
+    },
+    steemedTitle () {
+      return '#STEEMGIGS: I will ' + this.newGigData.title
+    },
     portfolio () {
       return this.newGigData.portfolio.filter((image) => image)
     },
@@ -481,7 +530,7 @@ export default {
       }
     },
     errorr () {
-      return Boolean(this.descError || this.requirementError || this.pricingError || this.subcatError || this.portfolioError)
+      return Boolean(this.descError || this.requirementError || this.pricingError || this.subcatError || this.portfolioError || !this.validTitle)
     },
     selectedCategoryIndex () {
       let catIndex = 0
