@@ -23,8 +23,8 @@
             <div class="card-content">
               <loading-placeholder v-if="!contentLoaded" />
               <div v-html="currentGig.body"></div>
-              <div class="menu row mb-2">
-                <div v-if="contentLoaded" class="col detail-action m3 offset-m9">
+              <div class="menu row my-2">
+                <div v-if="contentLoaded" class="detail-action">
                   <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
                   <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
                     <i class="fa fa-spinner fa-pulse"></i>
@@ -111,15 +111,6 @@ export default {
         json_metadata: {
           images: []
         },
-        pending_payout_value: {
-          amount: 0
-        },
-        total_payout_value: {
-          amount: 0
-        },
-        curator_payout_value: {
-          amount: 0
-        },
         body: ''
       },
       currentView: 'active_gigs',
@@ -171,17 +162,17 @@ export default {
     },
     payout () {
       if (this.currentGig.pending_payout_value) {
-        return '$' + parseFloat(this.currentGig.pending_payout_value)
+        return '$' + this.currentGig.pending_payout_value
       } else {
-        return '$' + (parseFloat(this.currentGig.total_payout_value.amount) + parseFloat(this.currentGig.curator_payout_value.amount))
+        return '$' + (parseInt(this.currentGig.total_payout_value.split(' ')[0]) + parseInt(this.currentGig.curator_payout_value.split(' ')[0])).toFixed(2)
       }
     },
     paymentInfo () {
       if ((new Date(this.currentGig.cashout_time).getTime()) > (new Date().getTime())) {
         return `Will payout in ${Math.floor((new Date(this.currentGig.cashout_time) - (new Date())) / (1000 * 60 * 60 * 24))} days`
       } else {
-        return `Author Payout: ${'$' + this.currentGig.total_payout_value.amount}
-        Curator Payout: ${'$' + this.currentGig.curator_payout_value.amount}`
+        return `Author Payout: ${'$' + this.currentGig.total_payout_value}
+        Curator Payout: ${'$' + this.currentGig.curator_payout_value}`
       }
     },
     myVote () {
@@ -305,6 +296,7 @@ img {
     height: 30em;
   }
   .detail-action {
+    float: right;
     box-shadow: 0 4px 17px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     background-color: aliceblue;

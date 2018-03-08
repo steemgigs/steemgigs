@@ -70,15 +70,15 @@ export default {
       if (this.gigData.pending_payout_value) {
         return '$' + this.gigData.pending_payout_value
       } else {
-        return '$' + (this.gigData.total_payout_value.amount + this.gigData.curator_payout_value.amount).toFixed(2)
+        return '$' + (parseInt(this.gigData.total_payout_value.split(' ')[0]) + parseInt(this.gigData.curator_payout_value.split(' ')[0])).toFixed(2)
       }
     },
     paymentInfo () {
       if ((new Date(this.gigData.cashout_time).getTime()) > (new Date().getTime())) {
         return `Will payout in ${Math.floor((new Date(this.gigData.cashout_time) - (new Date())) / (1000 * 60 * 60 * 24))} days`
       } else {
-        return `Author Payout: ${'$' + this.gigData.total_payout_value.amount}
-        Curator Payout: ${'$' + this.gigData.curator_payout_value.amount}`
+        return `Author Payout: ${'$' + this.gigData.total_payout_value}
+        Curator Payout: ${'$' + this.gigData.curator_payout_value}`
       }
     },
     myVote () {

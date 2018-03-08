@@ -172,7 +172,7 @@
           <div class="container gigForm">
             <p class="flow-text title">Portfolio</p>
             <div class="input-field col s12 row">
-              <div v-for="(url, index) in newGigData.portfolio" :key="index">
+              <div class="col s12 m4 l3 mb-3" v-for="(image, index) in newGigData.portfolio" :key="image.key">
                 <img-upload :id="index" />
               </div>
               <div class="col s12 m4 l3 mb-3" v-if="newGigData.portfolio.length < 8">
@@ -333,7 +333,7 @@ export default {
         hours: 0,
         days: 0,
         currency: 'STEEM',
-        portfolio: [''],
+        portfolio: [],
         reward: '100% STEEM POWER',
         price: 0,
         liked: false,
@@ -385,7 +385,7 @@ export default {
     },
     morePics () {
       if (this.newGigData.portfolio.length < 8) {
-        this.newGigData.portfolio.push('')
+        this.newGigData.portfolio.push({url: '', key: Math.floor(Math.random() * 1000)})
       }
     },
     search: debounce(function () {
@@ -492,7 +492,7 @@ export default {
       return '#STEEMGIGS: I will ' + this.newGigData.title
     },
     portfolio () {
-      return this.newGigData.portfolio.filter((image) => image)
+      return this.newGigData.portfolio.filter(image => image.url).map(image => image.url)
     },
     descError () {
       if (this.descNext && this.newGigData.description.length < 300) {
@@ -568,9 +568,10 @@ ${this.newGigData.requirements}
     }
   },
   mounted () {
+    this.morePics()
     this.$eventBus.$on('img-uploaded', payload => {
       console.log(payload)
-      this.newGigData.portfolio[payload.index] = payload.url
+      this.newGigData.portfolio[payload.index].url = payload.url
     })
     this.$eventBus.$on('delete-image-url', payload => {
       this.newGigData.portfolio.splice(payload, 1)
