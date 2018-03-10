@@ -10,6 +10,11 @@ body {
       width: 85%;
   }
 }
+@media only screen and (max-width: 1200px) {
+  .show-on-xl-only {
+    display: none;
+  }
+}
 #app {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

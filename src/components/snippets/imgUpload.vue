@@ -162,6 +162,11 @@ export default {
     position: absolute;
     top: -10px;
     right: 5px;
+    transition: all .2s ease-in;
+    &:hover {
+      transform: translateY(-3px);
+      background: red;
+    }
   }
   &:hover {
     i.ion-upload {
