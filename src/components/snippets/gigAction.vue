@@ -7,6 +7,7 @@
     <a v-tooltip="{ content: 'comment', classes: ['tooltip'] }"><i class="icon ion-chatbox-working" aria-hidden="true"></i> {{ comments }}</a>
     <a v-tooltip="{ content: 'resteem', classes: ['tooltip'] }"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
     <span class="right" v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{ payout }}</span>
+    <a v-if="gigData.views" class="indigo-text show-on-xl-only" v-tooltip="'Number of views'"><i class="ion-eye"></i> {{ gigData.views.length +'&nbsp;&nbsp;&nbsp;'}}</a>
     <div class="row pt-3 mb-0" v-if="upvoteActive">
       <div class="col s9">
        <slider-range :min="1" v-model="upvoteRange" />
