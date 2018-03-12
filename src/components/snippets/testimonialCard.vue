@@ -108,7 +108,8 @@ export default {
     }
     .card-content {
         height: 30em;
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
     img.userImage {
       height: 90px;

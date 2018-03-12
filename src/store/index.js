@@ -26,6 +26,52 @@ export default new Vuex.Store({
       untalented: [],
       featured: [],
       testimonials: []
+    },
+    newPosts: {
+      steemgig: {
+        title: '',
+        category: '',
+        subcategory: '',
+        description: '',
+        requirements: '',
+        pricing: '',
+        hours: 0,
+        days: 0,
+        currency: 'STEEM',
+        portfolio: [{url: '', key: 183}],
+        reward: '100% STEEM POWER',
+        price: 0,
+        liked: false,
+        upvoteRange: 100
+      },
+      gigrequest: {
+        title: '',
+        category: '',
+        subcategory: '',
+        description: '',
+        hours: 0,
+        days: 0,
+        currency: 'STEEM',
+        images: [],
+        reward: '100% STEEM POWER',
+        price: 0,
+        liked: false,
+        upvoteRange: 100
+      },
+      untalented: {
+        title: '',
+        description: '',
+        images: [],
+        liked: false,
+        upvoteRange: 100
+      },
+      testimonial: {
+        title: '',
+        description: '',
+        images: [],
+        upvoteRange: 100,
+        liked: false
+      }
     }
   },
   mutations: {
@@ -88,6 +134,70 @@ export default new Vuex.Store({
     },
     SET_UNTALENTED (state, data) {
       state.posts.untalented = data
+    },
+    SET_NEW_STEEMGIG (state, steemgig) {
+      state.newPosts.steemgig = steemgig
+    },
+    SET_NEW_GIGREQUEST (state, gigrequest) {
+      state.newPosts.gigrequest = gigrequest
+    },
+    SET_NEW_UNTALENTED (state, untalented) {
+      state.newPosts.untalented = untalented
+    },
+    SET_NEW_TESTIMONIAL (state, testimonial) {
+      state.newPosts.testimonial = testimonial
+    },
+    RESET_NEW_STEEMGIG (state) {
+      state.newPosts.steemgig = {
+        title: '',
+        category: '',
+        subcategory: '',
+        description: '',
+        requirements: '',
+        pricing: '',
+        hours: 0,
+        days: 0,
+        currency: 'STEEM',
+        portfolio: [{url: '', key: 183}],
+        reward: '100% STEEM POWER',
+        price: 0,
+        liked: false,
+        upvoteRange: 100
+      }
+    },
+    RESET_NEW_GIGREQUEST (state, gigrequest) {
+      state.newPosts.gigrequest = {
+        title: '',
+        category: '',
+        subcategory: '',
+        description: '',
+        hours: 0,
+        days: 0,
+        currency: 'STEEM',
+        images: [],
+        reward: '100% STEEM POWER',
+        price: 0,
+        liked: false,
+        upvoteRange: 100
+      }
+    },
+    RESET_NEW_UNTALENTED (state) {
+      state.newPosts.untalented = {
+        title: '',
+        description: '',
+        images: [],
+        liked: false,
+        upvoteRange: 100
+      }
+    },
+    RESET_NEW_TESTIMONIAL (state) {
+      state.newPosts.testimonial = {
+        title: '',
+        description: '',
+        images: [],
+        upvoteRange: 100,
+        liked: false
+      }
     }
   },
   plugins: [createPersist({
