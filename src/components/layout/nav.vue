@@ -5,7 +5,7 @@
         <router-link to="/" class="brand-logo left"><img src="/static/img/logo.gif" alt="logo"></router-link>
         <ul class="right notIn" v-if="!$store.state.accessToken">
           <li><a href="https://signup.steemit.com" rel="noopener noreferrer" target="_blank">Sign up</a></li>
-          <li><a :href="loginURL">Log in</a></li>
+          <li><a data-target="loginPrompt" class="modal-trigger">Log in</a></li>
         </ul>
         <ul class="right shrink" v-if="$store.state.accessToken">
           <div class="hide-on-med-and-down left">
@@ -43,12 +43,24 @@
       </div>
     </nav>
     <search-box />
+     <div id="loginPrompt" class="modal">
+      <div class="modal-content grey-text text-darken-1 login-modal">
+        <h4>Redirection to SteemConnect V2</h4>
+        <hr class="grey lighten-2">
+        <p class="grey-text text-darken-3">You will be redirected to SteemConnect v2 to authenticate to the Steem blockchain<br/>SteemConnect is developed and maintained by Steemit, Inc. and Busy.org.<br />Steemgigs.org will never access your private keys.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        <a :href="loginURL" class="modal-action modal-close indigo white-text btn">Proceed</a>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import sc2 from '@/services/sc2'
 import SearchBox from '@/components/layout/searchBox'
+import M from 'materialize-css'
 
 export default {
   components: {
@@ -81,13 +93,15 @@ export default {
       return this.profile.profileImage
     },
     wallet () {
-      return this.profile.balance.amount
+      return this.profile.balance
     }
   },
   mounted () {
     this.$eventBus.$on('profile-fetched', () => {
       this.profile = this.$store.state.profile
     })
+    let elem = document.querySelector('.modal')
+    M.Modal.init(elem, {dismissible: true})
   },
   beforeDestroy () {
     this.$eventBus.$off('profile-fetched')
@@ -143,6 +157,11 @@ $blue:#4757b2;
 
 nav a.brand-logo, nav li a, nav a {
   color: $blue;
+}
+.login-modal {
+  p {
+    font-size: 1.2em
+  }
 }
 
 nav {

@@ -1,13 +1,13 @@
 <template>
   <div class="dropform" :style="dropformstyle">
-        <!-- <i class="icon ion-close" @click="closeUploader" /> -->
-        <p v-if="isSaving" class="center center-align">
-          <i class="fa fa-spinner fa-pulse"></i> <br>
-          <span>Uploading your image</span>
-        </p>
-    <form enctype="multipart/form-data" novalidate v-if="isInitial || uploadError">
-    <div>
-      <input type="file" :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*" class="input-file">
+    <i class="closecon ion-close" @click.prevent="closeUploader" />
+    <p v-if="isSaving" class="center center-align">
+      <i class="fa fa-spinner fa-pulse"></i> <br>
+      <span>Uploading your image</span>
+    </p>
+    <form enctype="multipart/form-data" v-if="isInitial || uploadError || isSuccess" novalidate>
+      <div>
+        <input type="file" :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event); fileCount = $event.target.files.length" accept="image/*" class="input-file">
         <p v-if="isInitial">
           Drag your file here to begin<br> or click to browse
         </p>
@@ -19,7 +19,6 @@
     </form>
     <div class="uploaded-image" :style="{ 'background-image': 'url(' + imgUrl + ')' }" v-if="isSuccess">
       <!-- <i class="icon ion-eye" /> -->
-
     </div>
   </div>
 </template>
@@ -36,7 +35,8 @@ export default {
     id: {
       type: Number,
       required: true
-    }
+    },
+    img: String
   },
   data () {
     return {
@@ -44,7 +44,8 @@ export default {
       uploadError: null,
       currentStatus: null,
       uploadFieldName: 'photos',
-      imgUrl: ''
+      imgUrl: '',
+      localUrl: ''
     }
   },
   methods: {
@@ -53,13 +54,17 @@ export default {
       this.currentStatus = STATUS_INITIAL
       this.uploadedFiles = []
       this.uploadError = null
+      if (this.img) {
+        this.imgUrl = this.img
+        this.currentStatus = STATUS_SUCCESS
+      }
     },
     save (formData) {
       // upload data to the server
       this.currentStatus = STATUS_SAVING
-
       Api.imageUpload(formData)
         .then(x => {
+          console.log('img-upload', x.data)
           this.imgUrl = x.data
           this.uploadedFiles = [].concat(x)
           this.currentStatus = STATUS_SUCCESS
@@ -69,12 +74,16 @@ export default {
           })
         })
         .catch(err => {
-          console.log(err)
+          console.log({err})
           this.uploadError = err.response
           this.currentStatus = STATUS_FAILED
         })
     },
-    filesChange (fieldName, fileList) {
+    filesChange (eventt) {
+      let fieldName = eventt.target.name
+      let fileList = eventt.target.files
+      this.localUrl = eventt.target.value
+
       // handle file changes
       const formData = new FormData()
 
@@ -91,9 +100,7 @@ export default {
       this.save(formData)
     },
     closeUploader () {
-      // if (this.imgUrl.length > 0) {
-      //   this.$eventBus.$emit('delete-image-url')
-      // }
+      this.$eventBus.$emit('delete-image-url', this.id)
     }
   },
   computed: {
@@ -118,6 +125,10 @@ export default {
     }
   },
   mounted () {
+    if (this.img) {
+      this.imgUrl = this.img
+      this.currentStatus = STATUS_SUCCESS
+    }
     this.reset()
   }
 }
@@ -149,6 +160,20 @@ export default {
     opacity: 0;
     transition: opacity .2s ease-in-out;
 
+  }
+  i.closecon {
+    background: #ee6464;
+    padding: 1px 6px;
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+    top: -10px;
+    right: 5px;
+    transition: all .2s ease-in;
+    &:hover {
+      transform: translateY(-3px);
+      background: red;
+    }
   }
   &:hover {
     i.ion-upload {

@@ -7,6 +7,7 @@
     <a v-tooltip="{ content: 'comment', classes: ['tooltip'] }"><i class="icon ion-chatbox-working" aria-hidden="true"></i> {{ comments }}</a>
     <a v-tooltip="{ content: 'resteem', classes: ['tooltip'] }"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
     <span class="right" v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{ payout }}</span>
+    <a v-if="gigData.views" class="indigo-text show-on-xl-only" v-tooltip="'Number of views'"><i class="ion-eye"></i> {{ gigData.views.length +'&nbsp;&nbsp;&nbsp;'}}</a>
     <div class="row pt-3 mb-0" v-if="upvoteActive">
       <div class="col s9">
        <slider-range :min="1" v-model="upvoteRange" />
@@ -70,15 +71,15 @@ export default {
       if (this.gigData.pending_payout_value) {
         return '$' + this.gigData.pending_payout_value
       } else {
-        return '$' + (this.gigData.total_payout_value.amount + this.gigData.curator_payout_value.amount).toFixed(2)
+        return '$' + (parseInt(this.gigData.total_payout_value.split(' ')[0]) + parseInt(this.gigData.curator_payout_value.split(' ')[0])).toFixed(2)
       }
     },
     paymentInfo () {
       if ((new Date(this.gigData.cashout_time).getTime()) > (new Date().getTime())) {
         return `Will payout in ${Math.floor((new Date(this.gigData.cashout_time) - (new Date())) / (1000 * 60 * 60 * 24))} days`
       } else {
-        return `Author Payout: ${'$' + this.gigData.total_payout_value.amount}
-        Curator Payout: ${'$' + this.gigData.curator_payout_value.amount}`
+        return `Author Payout: ${'$' + this.gigData.total_payout_value}
+        Curator Payout: ${'$' + this.gigData.curator_payout_value}`
       }
     },
     myVote () {

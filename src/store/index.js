@@ -17,10 +17,6 @@ export default new Vuex.Store({
       location: '',
       name: '',
       profileImage: 'https://via.placeholder.com/100x100',
-      website: '',
-      balance: {
-        amount: ''
-      },
       rep: '',
       steemgigsWitness: ''
     },
@@ -30,6 +26,52 @@ export default new Vuex.Store({
       untalented: [],
       featured: [],
       testimonials: []
+    },
+    newPosts: {
+      steemgig: {
+        title: '',
+        category: '',
+        subcategory: '',
+        description: '',
+        requirements: '',
+        pricing: '',
+        hours: 0,
+        days: 0,
+        currency: 'STEEM',
+        portfolio: [{url: '', key: 183}],
+        reward: '100% STEEM POWER',
+        price: 0,
+        liked: false,
+        upvoteRange: 100
+      },
+      gigrequest: {
+        title: '',
+        category: '',
+        subcategory: '',
+        description: '',
+        hours: 0,
+        days: 0,
+        currency: 'STEEM',
+        images: [],
+        reward: '100% STEEM POWER',
+        price: 0,
+        liked: false,
+        upvoteRange: 100
+      },
+      untalented: {
+        title: '',
+        description: '',
+        images: [],
+        liked: false,
+        upvoteRange: 100
+      },
+      testimonial: {
+        title: '',
+        description: '',
+        images: [],
+        upvoteRange: 100,
+        liked: false
+      }
     }
   },
   mutations: {
@@ -38,17 +80,16 @@ export default new Vuex.Store({
       state.tokenExpires = tokenExpires
       state.username = username
     },
-    SET_PROFILE (state, {about, coverImage, location, name, profilePic, rep, website, walletBal, steemgigsWitness, social}) {
+    SET_PROFILE (state, {social, name, profilePic, about, location, coverPic, rep, balance, steemgigsWitness}) {
       state.profile.about = about
-      state.profile.coverImage = coverImage
+      state.profile.coverImage = coverPic
       state.profile.location = location
       state.profile.name = name
       state.profile.profileImage = profilePic
       state.profile.rep = rep
-      state.profile.website = website
-      state.profile.balance = walletBal
-      state.profile.steemgigsWitness = steemgigsWitness
       state.profile.social = social
+      state.profile.balance = balance
+      state.profile.steemgigsWitness = steemgigsWitness
     },
     SET_lastPage (state, url) {
       state.lastPage = url
@@ -68,10 +109,6 @@ export default new Vuex.Store({
         location: '',
         name: '',
         profileImage: 'https://via.placeholder.com/100x100',
-        website: '',
-        balance: {
-          amount: ''
-        },
         rep: '',
         steemgigsWitness: ''
       }
@@ -97,6 +134,70 @@ export default new Vuex.Store({
     },
     SET_UNTALENTED (state, data) {
       state.posts.untalented = data
+    },
+    SET_NEW_STEEMGIG (state, steemgig) {
+      state.newPosts.steemgig = steemgig
+    },
+    SET_NEW_GIGREQUEST (state, gigrequest) {
+      state.newPosts.gigrequest = gigrequest
+    },
+    SET_NEW_UNTALENTED (state, untalented) {
+      state.newPosts.untalented = untalented
+    },
+    SET_NEW_TESTIMONIAL (state, testimonial) {
+      state.newPosts.testimonial = testimonial
+    },
+    RESET_NEW_STEEMGIG (state) {
+      state.newPosts.steemgig = {
+        title: '',
+        category: '',
+        subcategory: '',
+        description: '',
+        requirements: '',
+        pricing: '',
+        hours: 0,
+        days: 0,
+        currency: 'STEEM',
+        portfolio: [{url: '', key: 183}],
+        reward: '100% STEEM POWER',
+        price: 0,
+        liked: false,
+        upvoteRange: 100
+      }
+    },
+    RESET_NEW_GIGREQUEST (state, gigrequest) {
+      state.newPosts.gigrequest = {
+        title: '',
+        category: '',
+        subcategory: '',
+        description: '',
+        hours: 0,
+        days: 0,
+        currency: 'STEEM',
+        images: [],
+        reward: '100% STEEM POWER',
+        price: 0,
+        liked: false,
+        upvoteRange: 100
+      }
+    },
+    RESET_NEW_UNTALENTED (state) {
+      state.newPosts.untalented = {
+        title: '',
+        description: '',
+        images: [],
+        liked: false,
+        upvoteRange: 100
+      }
+    },
+    RESET_NEW_TESTIMONIAL (state) {
+      state.newPosts.testimonial = {
+        title: '',
+        description: '',
+        images: [],
+        upvoteRange: 100,
+        liked: false
+      }
     }
   },
   plugins: [createPersist({

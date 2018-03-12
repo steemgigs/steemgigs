@@ -26,12 +26,10 @@ export default {
   },
   mounted () {
     let {accessToken, username} = this.$store.state
-    Api.profile(username, accessToken).then(response => {
-      let responseData = response.data
-      console.log('from page', responseData)
-      let {about, coverImage, location, name, profilePic, rep, balance: walletBal, steemgigsWitness, social} = responseData
-      this.$store.commit('SET_PROFILE', {about, coverImage, location, name, profilePic, walletBal, rep, social, steemgigsWitness})
-      this.$eventBus.$emit('profile-fetched', responseData)
+    Api.loggedIn(username, accessToken).then(response => {
+      let responseData = response.data.profile
+      let {social, name, profilePic, about, location, coverPic, rep, balance, steemgigsWitness} = responseData
+      this.$store.commit('SET_PROFILE', {social, name, profilePic, about, location, coverPic, rep, balance, steemgigsWitness})
     })
   }
 }

@@ -4,18 +4,18 @@
       <div class="rotating-card" :class="editMode ? 'flipped' : ''">
         <div class="face">
           <div class="card-panel">
-            <span class="editProfile waves-effect" v-if="$store.state.username === profile.account">
+            <span class="editProfile waves-effect" v-if="$store.state.username === profile.username">
               <i v-if="!editMode" @click="editMode = true" class="icon ion-android-create"></i>
             </span>
             <div class="profilePic">
-              <img :src="profile.profile.profile_image" class="user-pict-img" :alt="profile.account" width="150" height="150">
+              <img :src="profile.profilePic || placeholderImg" class="user-pict-img" :alt="profile.username" width="150" height="150">
             </div>
-            <span class="username"> {{ profile.account + ' (' + repp + ') ' }} </span>
-            <span class="expertise" v-text="profile.profile.about"></span>
+            <span class="username"> {{ profile.username + ' (' + profile.rep + ') ' }} </span>
+            <span class="expertise" v-text="profile.about"></span>
             <span class="ratings">
               <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (No Reviews)
             </span>
-            <p class="location"><i class="icon ion-android-pin"></i> From <span class="right" v-text="profile.location"></span></p>
+            <p class="location"><i class="icon ion-android-pin"></i> From <span class="right" v-text="profile.location || 'Not set'"></span></p>
             <p class="member_since"> <i class="icon ion-android-person"></i> Member since <span class="right" v-text="since"></span></p>
             <p class="member_since"> <i class="icon ion-ios-briefcase"></i> Last delivery <span class="right" v-text="ago"></span></p>
             <p>
@@ -24,7 +24,7 @@
               <span class="right">
                 <div class="switch" v-if="true">
                   <label>
-                    <input checked type="checkbox" disabled v-model="profileEdit.vacation" >
+                    <input :checked="profile.vacation" type="checkbox" disabled >
                     <span class="lever"></span>
                   </label>
                 </div>
@@ -33,29 +33,31 @@
             <hr class="my-4">
             <div class="moreProfileInfo">
               <span class="card-title left-align">Description</span>
-              <p v-text="profile.profile.about"></p>
-              <router-link v-if="!profilepage" :to="'/@' + profile.account">See More <i class="ion-plus-round"></i></router-link>
+              <p v-text="profile.about"></p>
+              <router-link v-if="!profilepage" :to="'/@' + profile.username">See More <i class="ion-plus-round"></i></router-link>
             </div>
           </div>
           <div v-show="!editMode" class="card moreProfileInfo">
             <div class="card-content">
-              <span class="card-title">Description</span>
-              <p v-text="profile.about"></p>
+              <span class="card-title">Links</span>
+              <p class="" v-for="(social, key, index) in profile.social" :key="index" v-text="key + ' - ' + social" />
               <span class="card-title">Languages</span>
               <ul>
-                <li v-for="(language, index) in profile.languages" :key="index">{{language}}</li>
-                <li>English - Fluent</li>
+                <li v-for="(language, index) in profile.languages" :key="index">{{`${language} - Fluent`}}</li>
               </ul>
             </div>
           </div>
           <witness-card v-if="!$store.state.profile.steemgigsWitness"/>
         </div>
         <div class="back card-panel indigo lighten-1 white-text">
-            <i @click="closeEdit" class="icon ion-close"></i>
+          <i @click="closeEdit" class="icon ion-close"></i>
+          <form  enctype="multipart/form-data">
             <label class="profilePic" for="profile_image">
-              <input type="file" accept="image/png,image/jpeg" class="hide" id="profile_image">
-              <img :src="profileEdit.profile_image" class="user-pict-img" :alt="profile.account" width="150" height="150">
+              <input type="file" accept="image/png,image/jpeg" name="photos" :disabled="profileImgStatus === 'uploading'" @change="filesChange($event.target.name, $event.target.files)" class="hide" id="profile_image">
+              <img :src="profileEdit.profilePic" class="user-pict-img" :alt="profile.username" width="150" height="150">
             </label>
+            <i class="fa fa-spinner center center-align fa-pulse" v-if="profileImgStatus === 'uploading'"></i>
+          </form>
             <div class="row">
               <textarea id="about_me" placeholder="about_me" v-model="profileEdit.about" class="materialize-textarea"></textarea>
             </div>
@@ -69,18 +71,16 @@
                 <span class="right" @click="removeLanguage(i)"><i class="ion-close-round"></i></span>
               </li>
             </ul>
-            <div v-for="(social, key, i) in profileEdit.social" :key="i" class="row">
-              <input type="text" :placeholder="capitalize(key)" v-model="profileEdit.social[key]">
+            <!-- <div class="input-field col s12">
+              <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+            </div> -->
+            <div v-for="(social, key, i) in profileEdit.social" :key="i" class="row input-field">
+              <input type="text" :id="'social' + i" v-model="profileEdit.social[key]">
+              <label :class="{active: social.length > 0}" :for="'social' + i">{{capitalize(key)}}</label>
             </div>
-            <!-- <ul class="language-list">
-              <li v-for="(social, i) in socialFeeds" :key="i">
-                <b>{{social.feed}} :</b> {{social.value}}
-                <span class="right" @click="removeSocial(i)"><i class="ion-close-round"></i></span>
-              </li>
-            </ul> -->
             <div class="row">
               <div class="col m5 pl-0">
-                <input v-model="socialFeed" placeholder="Social">
+                <input type="text" v-model="socialFeed" placeholder="Social">
               </div>
               <div class="col m7 pr-0">
                 <input type="text" @keyup.enter="addToSocial" placeholder="Username" v-model="socialName">
@@ -92,7 +92,7 @@
               <span class="right">
                 <div class="switch" v-if="true">
                   <label>
-                    <input type="checkbox" v-model="profileEdit.vacation_mode" >
+                    <input type="checkbox" v-model="profileEdit.vacation" >
                     <span class="lever"></span>
                   </label>
                 </div>
@@ -133,27 +133,23 @@ export default {
   },
   data () {
     return {
-      repp: '',
-      usergigs: [],
-      userRequests: [],
-      profileUsername: '',
-      currentView: 'active_gigs',
       i_speak: '',
       countries: countries.getNames(),
       editMode: false,
       isUpdating: false,
       socialFeed: '',
       socialName: '',
+      profileImgStatus: 'initial',
       profileEdit: {
-        username: this.profile.account,
+        username: this.profile.username,
         expertise: this.profile.expertise || '',
-        profilePic: this.profile.profilePic || '',
+        profilePic: this.profile.profilePic || this.placeholderImg,
         coverPic: this.profile.coverPic || '',
         languages: this.profile.languages || [],
         location: this.profile.location || '',
-        vacation: this.profile.vaction || false,
-        about: this.profile.profile.about || '',
-        profile_image: this.profile.profile.profile_image,
+        vacation: this.profile.vacation,
+        test: false,
+        about: this.profile.about || '',
         gender: this.profile.gender || '',
         social: this.profile.social || {
           facebook: '',
@@ -176,12 +172,14 @@ export default {
       this.socialName = ''
     },
     updateProfile () {
-      let profile = this.profile
+      if (this.isUpdating) return
       this.isUpdating = true
-      profile.languages = this.languages || this.i_speak
+      this.profileEdit.languages = this.profileEdit.languages || [this.i_speak]
       console.log('I got called with', this.profileEdit)
       Api.profileUpdate(this.profileEdit, this.$store.state.accessToken).then((result) => {
         this.isUpdating = false
+        console.log('from profile edit', result.data)
+        this.$eventBus.$emit('profile-updated', result.data)
         this.$notify({
           group: 'foo',
           title: 'Success',
@@ -189,7 +187,6 @@ export default {
           type: 'success'
         })
         this.closeEdit()
-        console.log('update', result)
       }).catch((e) => {
         this.isUpdating = false
         this.$notify({
@@ -200,12 +197,6 @@ export default {
         })
         console.log(e)
       })
-      // sc2.setAccessToken(this.$store.state.accessToken)
-      // sc2.updateUserMetadata(this.profileEdit, (err, res) => {
-      //   this.isUpdating = false
-      //   console.log('res', res)
-      //   console.log('err', err)
-      // })
     },
     closeEdit () {
       this.editMode = false
@@ -221,13 +212,47 @@ export default {
       //   return index !== i
       // })
     },
-    fetchUserRep () {
-      Api.fetchCommentInfo(this.profile.account).then((result) => {
-        this.repp = result.data.rep
-      })
+    save (formData) {
+      this.profileImgStatus = 'uploading'
+      Api.imageUpload(formData)
+        .then(x => {
+          console.log('img-upload', x.data)
+          this.profileEdit.profilePic = x.data
+          this.profileImgStatus = 'success'
+        })
+        .catch(err => {
+          console.log(err)
+          this.uploadError = err.response
+          this.profileImgStatus = 'failed'
+        })
+    },
+    filesChange (fieldName, fileList) {
+      // handle file changes
+      const formData = new FormData()
+
+      if (!fileList.length) return
+      console.log({fieldName, fileList})
+      // append the files to FormData
+      Array
+        .from(Array(fileList.length).keys())
+        .map(x => {
+          formData.append(fieldName, fileList[x], fileList[x].name)
+        })
+
+      // save it
+      this.save(formData)
     }
   },
   computed: {
+    // sociall () {
+    //   let social = this.profile.social
+    //   for (var key in social) {
+    //     if (!social[key]) {
+    //       delete social[key]
+    //     }
+    //   }
+    //   return this.profile.social
+    // },
     since () {
       return moment(this.profile.created).format('MMMM YYYY')
     },
@@ -244,10 +269,6 @@ export default {
         return gig.json_metadata.type === 'steemgigs_request'
       })
     }
-    // social () {
-    //   return [...this.profileEdit.socialArray, ...this.socialFeeds].reduce((a) => {
-    //   })
-    // }
   },
   props: {
     profile: {
@@ -257,9 +278,6 @@ export default {
     profilepage: {
       type: Boolean
     }
-  },
-  mounted () {
-    this.fetchUserRep()
   }
 }
 </script>
@@ -288,6 +306,9 @@ export default {
       }
       .back{
         position: absolute;
+        .profilePic {
+          cursor: pointer;
+        }
         ul.language-list li {
           list-style-type: initial;
           color: #d1d1d1;
@@ -331,7 +352,6 @@ export default {
     }
     position: relative;
     .profilePic {
-      cursor: pointer;
       float: none;
       display: block;
       position: relative;

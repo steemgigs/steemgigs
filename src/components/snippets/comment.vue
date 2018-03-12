@@ -73,11 +73,9 @@ export default {
   },
   methods: {
     async fetchComments () {
-      console.log('Fetching comments')
       try {
         let response = await Api.fetchComments(this.commentFor.author, this.commentFor.permlink)
         this.comments = response.data
-        console.log(this.comments)
       } catch (err) {
         console.log('error retrieving comments: \n error:', this.stringify(err))
       }

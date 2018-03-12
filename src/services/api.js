@@ -4,6 +4,9 @@ export default {
   search (term) {
     return axios.post('/search', { query: { searchText: term } })
   },
+  checkTitleExistence (credentials) {
+    return axios.post('/checktitle', credentials)
+  },
   fetchUserData (username) {
     // return axios.post(`/fetchUserData/`, {username})
     return axios.get(`/profile/${username}`)
@@ -11,9 +14,9 @@ export default {
   fetchUserGigs (username) {
     return axios.get(`/usergigs/${username}`)
   },
-  fetchSinglePost (username, permlink) {
+  fetchSinglePost (username, permlink, viewer) {
     // return axios.post('/fetchSinglePost', {username, permlink})
-    return axios.get(`/steemgig/${username}/${permlink}`)
+    return axios.get(`/steemgig/${username}/${permlink}/${viewer}`)
   },
   fetchComments (username, permlink) {
     return axios.get(`/comments/${username}/${permlink}`)
@@ -88,8 +91,5 @@ export default {
         token: token
       }
     })
-  },
-  fetchCommentInfo (username) {
-    return axios.get(`/userImage/${username}`)
   }
 }

@@ -10,9 +10,15 @@
             <p class="flow-text title">Gig Title</p>
             <div class="input-field col s12">
               <span class="title-before">#STEEMGIGS: I will</span>
-              <textarea @keypress.enter.prevent @keyup.enter="''" v-model="newGigData.title" type="text" placeholder="do this (what you can do well) just the way they want it" row="2" maxlength="90" minlength="5" required>
+              <textarea @keypress.enter.prevent @keyup.enter="''" @input="search" v-model="newGigData.title" type="text" placeholder="do this (what you can do well) just the way they want it" row="2" maxlength="90" minlength="5" required>
               </textarea>
               <p class="word-count right" v-text="wordCount"></p>
+              <div v-if="newGigData.title.length > 5" class="col s12 mb-2">
+                <span class="simple-card">
+                  <span v-if="duplicateTitle" class="green-text">You have already used this <router-link :to="`/@${$store.state.username}/${duplicateTitle.permlink}`" target="_blank">title</router-link>, you can still choose to proceed</span>
+                  <span v-if="!duplicateTitle" class="green-text" v-text="validTitle" />
+                </span>
+              </div>
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
                   <div class="card-content">
@@ -105,7 +111,7 @@
             <p class="flow-text title">Delivery</p>
             <div class="input-field col s12 m3 l3">
               <select class="browser-default my-select category_select" v-model="newGigData.hours">
-                <option value="" disabled selected>Hours</option>
+                <option value="0" disabled selected>Less than an hour</option>
                 <option v-for="(hour, index) in 24" :key="index" :value="hour">{{ hour }} hr(s)</option>
               </select>
             </div>
@@ -160,16 +166,22 @@
           </div>
         </form>
         <form class="card-panel row" v-show="currentSection === 4">
+          <dismissible-notice>
+            <span>Please ensure all images are yours or give credit to source (URL) where required.<br>Remember that your posts appear on the steem blochain and are subject to curation. Please read style guide on right.</span>
+          </dismissible-notice>
           <div class="container gigForm">
             <p class="flow-text title">Portfolio</p>
             <div class="input-field col s12 row">
-              <div class="col s12 m4 l3" v-for="(uploader, index) in totalPics" :key="index">
-                <img-upload :id="index" />
+              <div class="col s12 m4 l3 mb-3" v-for="(image, index) in newGigData.portfolio" :key="image.key">
+                <img-upload :id="index" :img="image.url" />
               </div>
-              <div class="col s12 m4 l3 center center-align" v-if="totalPics < 4">
-                <button @click.prevent="morePics" class="btn-floating indigo addPic">
-                  <i class="icon ion-android-add"></i>
-                </button>
+              <div class="col s12 m4 l3 mb-3" v-if="newGigData.portfolio.length < 8">
+                <div class="add-box center center-align pt-5" @click.prevent="morePics">
+                  <button class="btn-floating indigo">
+                    <i class="icon ion-android-add"></i>
+                  </button><br><br>
+                  <span>Click to add more images</span>
+                </div>
               </div>
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
@@ -223,7 +235,7 @@
               </div>
               <div class="card-image">
                 <carousel :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
-                  <slide v-for="(image, index) in newGigData.portfolio" :key="index">
+                  <slide v-for="(image, index) in portfolio" :key="index">
                     <img :src="image" class="responsive-img" :alt="newGigData.title">
                   </slide>
                 </carousel>
@@ -243,6 +255,7 @@
               </div>
             </div>
             <div v-if="errorr" class="simple-card card-panel">
+              <p v-if="!validTitle" class="red-text mt-1 mb-0" >Title must be at least 5 characters</p>
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
               <p v-if="pricingError" class="red-text mt-1 mb-0" v-text="pricingError" />
               <p v-if="requirementError" class="red-text mt-1 mb-0" v-text="requirementError" />
@@ -275,8 +288,10 @@ import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import { Carousel, Slide } from 'vue-carousel'
+import DismissibleNotice from '@/components/snippets/dismissibleNotice'
 import InputTag from 'vue-input-tag'
 import SliderRange from 'vue-slider-component'
+import debounce from '@/plugins/debounce'
 
 export default {
   components: {
@@ -289,7 +304,8 @@ export default {
     InputTag,
     ImgUpload,
     VueEditor,
-    SliderRange
+    SliderRange,
+    DismissibleNotice
   },
   data () {
     return {
@@ -298,28 +314,16 @@ export default {
       isPosting: false,
       sections: ['Overview', 'Description', 'Pricing', 'Requirements', 'Portfolio', 'Publish'],
       currentSection: 0,
-      totalPics: 1,
       descNext: false,
       reqNext: false,
       priceNext: false,
       portNext: false,
       userTags: [],
-      newGigData: {
-        title: '',
-        category: '',
-        subcategory: '',
-        description: '',
-        requirements: '',
-        pricing: '',
-        hours: 0,
-        days: 0,
-        currency: 'STEEM',
-        portfolio: [],
-        reward: '100% STEEM POWER',
-        price: 0,
-        liked: false,
-        upvoteRange: 100
-      },
+      totalPics: 1,
+      existingTitle: false,
+      checkingTitle: false,
+      duplicateTitle: '',
+      newGigData: this.$store.state.newPosts.steemgig,
       customToolbar: [
         ['bold', 'italic', 'underline'],
         [{'list': 'ordered'}, {'list': 'bullet'}],
@@ -365,14 +369,40 @@ export default {
       this.userTags = entries
     },
     morePics () {
-      if (this.totalPics < 4) this.totalPics++
+      if (this.newGigData.portfolio.length < 8) {
+        this.newGigData.portfolio.push({url: '', key: Math.floor(Math.random() * 1000)})
+      }
+    },
+    search: debounce(function () {
+      this.checkingTitle = true
+      let searchTerm = this.steemedTitle
+      console.log('search term:', searchTerm)
+      Api.checkTitleExistence({username: this.$store.state.username, title: this.steemedTitle}).then(result => {
+        this.checkingTitle = false
+        this.duplicateTitle = result.data
+        console.log(result)
+      }).catch(e => {
+        this.checkingTitle = false
+        this.errorText = 'there was an error with search'
+        console.log('error:', e)
+      })
+    }, 1000),
+    closeSearch (cb) {
+      this.searchTerm = ''
+      this.searchResults = []
+      this.searchActive = false
+      cb()
+    },
+    goto (where) {
+      this.closeSearch(this.$router.push(where))
+      // this.$router.push(where)
     },
     submit () {
       if (!this.errorr) {
+        if (this.isPosting) return
         let that = this
         this.errorText = ''
         this.successText = ''
-        this.isPosting = true
         this.isPosting = true
         let jsonMetadata = {
           app: 'steemgig',
@@ -385,12 +415,12 @@ export default {
           authorPic: this.$store.state.profile.profileImage,
           category: this.slugify(this.newGigData.category),
           subcategory: this.slugify(this.newGigData.subcategory),
-          images: this.newGigData.portfolio,
+          images: this.portfolio,
           type: 'steemgigs_post',
           generated: true
         }
         let textifiedPics = '\n<h2>Portfolio</h2>\n<hr />\n'
-        this.newGigData.portfolio.forEach(url => {
+        this.portfolio.forEach(url => {
           textifiedPics += `<img src="${url}"> <br />`
         })
         let username = this.$store.state.username
@@ -402,40 +432,78 @@ export default {
         let hiddenContainer = this.htmlHide(contentToHide)
         let body = this.previewData + hiddenContainer
         let token = this.$store.state.accessToken
-        let title = '#STEEMGIGS: I will ' + this.newGigData.title
+        let title = this.steemedTitle
+        // if (this.duplicateTitle) {
+        //   let splittedTitle = title.split(' ')
+        //   let lastNumber = parseInt(splittedTitle[splittedTitle.length - 1])
+        //   title = lastNumber ? title + ' ' + lastNumber++ : title + ' 1'
+        // })
+        if (this.duplicateTitle) {
+          let modifiedTitle = this.newGigData.title + Math.floor(Math.random() * 1000)
+          permlink = this.slugify(modifiedTitle)
+          title = '#STEEMGIGS: I will ' + modifiedTitle
+        }
         let liked = this.newGigData.liked
         let upvoteRange = this.newGigData.upvoteRange
         // username, permlink, title, body, jsonMetadata, token
         Api.post({username, permlink, title, body, liked, upvoteRange, jsonMetadata}, token).then((err, res) => {
           console.log('err', err, 'res', res)
           that.isPosting = false
+          this.$notify({
+            group: 'foo',
+            title: 'Success',
+            text: 'Successfully pushed to steem!',
+            type: 'success'
+          })
           that.successText = 'Successfully pushed to steem!'
+          that.$store.commit('RESET_NEW_STEEMGIG')
         }).catch((e) => {
           console.log(e)
           that.isPosting = false
-          that.errorText = 'Error pushing post to steem, you might have used the same title previous time'
+          this.$notify({
+            group: 'foo',
+            title: 'Error',
+            text: 'Error pushing post to steem',
+            type: 'error'
+          })
+          that.errorText = 'Error pushing post to steem'
         })
       }
     }
   },
   computed: {
+    validTitle () {
+      if (this.newGigData.title.length > 5 && this.checkingTitle) {
+        return 'Wait a sec...'
+      } else if (this.newGigData.title.length > 5) {
+        return 'Title is valid, your\'re cool!'
+      } else {
+        return ''
+      }
+    },
+    steemedTitle () {
+      return '#STEEMGIGS: I will ' + this.newGigData.title
+    },
+    portfolio () {
+      return this.newGigData.portfolio.filter(image => image.url).map(image => image.url)
+    },
     descError () {
-      if (this.descNext && this.newGigData.description.length < 100) {
-        return 'Your description should be 100 Characters or more, please read style guide for clarification'
+      if (this.descNext && this.newGigData.description.length < 300) {
+        return 'Your description should be 300 Characters or more, please read style guide for clarification'
       } else {
         return ''
       }
     },
     pricingError () {
-      if (this.priceNext && this.newGigData.pricing.length < 50) {
-        return 'Your pricing description should be 50 Characters or more, please read style guide for clarification'
+      if (this.priceNext && this.newGigData.pricing.length < 100) {
+        return 'Your pricing description should be 100 Characters or more, please read style guide for clarification'
       } else {
         return ''
       }
     },
     requirementError () {
-      if (this.reqNext && this.newGigData.requirements.length < 30) {
-        return 'Your requirments description should be 30 Characters or more, please read style guide for clarification'
+      if (this.reqNext && this.newGigData.requirements.length < 100) {
+        return 'Your requirments description should be 100 Characters or more, please read style guide for clarification'
       } else {
         return ''
       }
@@ -455,7 +523,7 @@ export default {
       }
     },
     errorr () {
-      return Boolean(this.descError || this.requirementError || this.pricingError || this.subcatError || this.portfolioError)
+      return Boolean(this.descError || this.requirementError || this.pricingError || this.subcatError || this.portfolioError || !this.validTitle)
     },
     selectedCategoryIndex () {
       let catIndex = 0
@@ -492,14 +560,24 @@ ${this.newGigData.requirements}
       `
     }
   },
+  watch: {
+    newGigData: {
+      handler (val) { this.$store.commit('SET_NEW_STEEMGIG', val) },
+      deep: true
+    }
+  },
   mounted () {
     this.$eventBus.$on('img-uploaded', payload => {
       console.log(payload)
-      this.newGigData.portfolio[payload.index] = payload.url
+      this.newGigData.portfolio[payload.index].url = payload.url
+    })
+    this.$eventBus.$on('delete-image-url', payload => {
+      this.newGigData.portfolio.splice(payload, 1)
     })
   },
   deforeDestroy () {
     this.$eventBus.$off('img-uploaded')
+    this.$eventBus.$off('delete-image-url')
   }
 }
 </script>
@@ -507,6 +585,18 @@ ${this.newGigData.requirements}
 <style lang="scss" scoped>
 form .input-field {
   position: relative;
+}
+.add-box {
+  box-shadow: 0 1px 1px;
+  background: #f9f9f9;
+  color: dimgray;
+  padding: 10px 10px;
+  height: 200px; /* minimum height */
+  position: relative;
+  cursor: pointer;
+  span {
+    font-size: .9em;
+  }
 }
 select.my-select {
   width: initial !important;
@@ -676,10 +766,5 @@ p.title {
 }
 .push-down {
   margin-top: 4.2em;
-}
-button.addPic {
-  position: absolute;
-  top: 50%;
-  transform: translate(50%, -50%);
 }
 </style>

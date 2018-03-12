@@ -15,9 +15,15 @@
               <p class="flow-text title">Title</p>
               <div class="input-field col s12">
             </div>
-              <textarea @keypress.enter.prevent @keyup.enter="''" v-model="newTestimonial.title" type="text" placeholder="Give a title to this testimonial" row="2" maxlength="90" minlength="5" required>
+              <textarea @keypress.enter.prevent @keyup.enter="''" @input="search" v-model="newTestimonial.title" type="text" placeholder="Give a title to this testimonial" row="2" maxlength="90" minlength="5" required>
               </textarea>
               <p class="word-count right" v-text="wordCount"></p>
+              <div v-if="newTestimonial.title.length > 5" class="col s12 mb-2">
+                <span class="simple-card">
+                  <span v-if="duplicateTitle" class="green-text">You have already used this <router-link :to="`/@${$store.state.username}/${duplicateTitle.permlink}`" target="_blank">title</router-link>, you can still choose to proceed</span>
+                  <span v-if="!duplicateTitle" class="green-text" v-text="validTitle" />
+                </span>
+              </div>
               <div class="tutorial_guide center-align hide-on-small-only">
                 <div class="card">
                   <div class="card-content">
@@ -31,10 +37,8 @@ Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look
             </div>
             <div class="input-field col s12">
               <vue-editor v-model="newTestimonial.description" placeholder="Describe your experience with steemgigs" :upload="uploadConfig"></vue-editor>
-              <div v-if="descError" class="col s12 my-3">
-                <span class="simple-card">
-                  <span class="red-text" v-text="descError" />
-                </span>
+              <div v-if="descError" class="simple-card card-panel">
+                <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
               </div>
               <div class="tutorial_guide hide-on-small-only center-align">
                 <div class="card">
@@ -96,13 +100,14 @@ Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look
                 </div>
               </div>
             </div>
-            <div v-if="descError" class="card-panel">
+            <div v-if="errorr" class="simple-card card-panel">
+              <p v-if="!validTitle" class="red-text mt-1 mb-0" >Title must be at least 5 characters</p>
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
             </div>
           </div>
           <div class="col s12 row">
             <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-            <button :disabled="Boolean(descError)" class="right btn indigo waves-effect" @click.prevent="submit">
+            <button :disabled="Boolean(errorr)" class="right btn indigo waves-effect" @click.prevent="submit">
               <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
               POST #STEEMGIG
             </button>
@@ -125,6 +130,7 @@ import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import { Carousel, Slide } from 'vue-carousel'
+import debounce from '@/plugins/debounce'
 import InputTag from 'vue-input-tag'
 import SliderRange from 'vue-slider-component'
 
@@ -152,14 +158,10 @@ export default {
       totalPics: 1,
       nextPressed: false,
       userTags: [],
+      duplicateTitle: '',
+      checkingTitle: false,
       defaultTags: ['steemgigs', 'steemgigs-testimonial'],
-      newTestimonial: {
-        title: '',
-        description: '',
-        images: [],
-        upvoteRange: 100,
-        liked: false
-      },
+      newTestimonial: this.$store.state.newPosts.testimonial,
       customToolbar: [
         ['bold', 'italic', 'underline'],
         [{'list': 'ordered'}, {'list': 'bullet'}],
@@ -173,6 +175,20 @@ export default {
     }
   },
   methods: {
+    search: debounce(function () {
+      this.checkingTitle = true
+      let searchTerm = this.steemedTitle
+      console.log('search term:', searchTerm)
+      Api.checkTitleExistence({username: this.$store.state.username, title: this.steemedTitle}).then(result => {
+        this.checkingTitle = false
+        this.duplicateTitle = result.data
+        console.log(result)
+      }).catch(e => {
+        this.checkingTitle = false
+        this.errorText = 'there was an error with search'
+        console.log('error:', e)
+      })
+    }, 1000),
     vote () {
       if (!this.newTestimonial.liked) {
         this.newTestimonial.liked = true
@@ -186,7 +202,7 @@ export default {
     },
     nextSection () {
       this.nextPressed = true
-      if (!this.descError && this.currentSection < this.sections.length) this.currentSection++
+      if (this.currentSection < this.sections.length) this.currentSection++
     },
     prevSection () {
       if (this.currentSection > 0) this.currentSection--
@@ -195,7 +211,8 @@ export default {
       this.userTags = entries
     },
     submit () {
-      if (!this.descError) {
+      if (!this.errorr) {
+        if (this.isPosting) return
         let that = this
         this.errorText = ''
         this.successText = ''
@@ -214,10 +231,16 @@ export default {
         }
         let username = this.$store.state.username
         let permlink = this.slugify(this.newTestimonial.title)
-        let body = this.newTestimonial.description + `
+        let steemGigsTag = this.htmlHide(`
   <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
-        `
+        `)
+        let body = this.newTestimonial.description + steemGigsTag
         let title = this.steemedTitle
+        if (this.duplicateTitle) {
+          let modifiedTitle = this.newTestimonial.title + Math.floor(Math.random() * 1000)
+          permlink = this.slugify(modifiedTitle)
+          title = '#STEEMGIGS: I will ' + modifiedTitle
+        }
         let token = this.$store.state.accessToken
         let liked = this.newTestimonial.liked
         let upvoteRange = this.newTestimonial.upvoteRange
@@ -225,15 +248,43 @@ export default {
         Api.post({username, permlink, title, body, jsonMetadata, liked, upvoteRange}, token).then((err, res) => {
           console.log(err, res)
           that.isPosting = false
+          this.$notify({
+            group: 'foo',
+            title: 'Success',
+            text: 'Successfully pushed to steem!',
+            type: 'success'
+          })
           that.successText = 'Successfully pushed to steem!'
+          that.$store.commit('RESET_NEW_TESTIMONIAL')
         }).catch((e) => {
           that.isPosting = false
-          that.errorText = 'Error pushing post to steem, you might have used the same title previous time'
+          this.$notify({
+            group: 'foo',
+            title: 'Error',
+            text: 'Error pushing post to steem.',
+            type: 'error'
+          })
+          that.errorText = 'Error pushing post to steem.'
         })
       }
     }
   },
+  watch: {
+    newTestimonial: {
+      handler (val) { this.$store.commit('SET_NEW_TESTIMONIAL', val) },
+      deep: true
+    }
+  },
   computed: {
+    validTitle () {
+      if (this.newTestimonial.title.length > 5 && this.checkingTitle) {
+        return 'Wait a sec...'
+      } else if (this.newTestimonial.title.length > 5) {
+        return 'Title is valid, your\'re cool!'
+      } else {
+        return ''
+      }
+    },
     voteBtnTitle () {
       if (!this.newTestimonial.liked) {
         return { content: 'Like your post', classes: ['tooltip'] }
@@ -242,11 +293,14 @@ export default {
       }
     },
     descError () {
-      if (this.nextPressed && this.newTestimonial.description.length < 20) {
-        return 'Your description should be 20 Characters or more, please read style guide for clarification'
+      if (this.nextPressed && this.newTestimonial.description.length < 300) {
+        return 'Your description should be 300 Characters or more, please read style guide for clarification'
       } else {
         return ''
       }
+    },
+    errorr () {
+      return this.descError || !this.validTitle
     },
     wordCount () {
       if (this.newTestimonial.title.length > 0) {
