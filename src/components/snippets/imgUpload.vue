@@ -35,7 +35,8 @@ export default {
     id: {
       type: Number,
       required: true
-    }
+    },
+    img: String
   },
   data () {
     return {
@@ -53,11 +54,14 @@ export default {
       this.currentStatus = STATUS_INITIAL
       this.uploadedFiles = []
       this.uploadError = null
+      if (this.img) {
+        this.imgUrl = this.img
+        this.currentStatus = STATUS_SUCCESS
+      }
     },
     save (formData) {
       // upload data to the server
       this.currentStatus = STATUS_SAVING
-      console.log('formData', formData)
       Api.imageUpload(formData)
         .then(x => {
           console.log('img-upload', x.data)
@@ -70,7 +74,7 @@ export default {
           })
         })
         .catch(err => {
-          console.log(err)
+          console.log({err})
           this.uploadError = err.response
           this.currentStatus = STATUS_FAILED
         })
@@ -81,7 +85,6 @@ export default {
       this.localUrl = eventt.target.value
 
       // handle file changes
-      console.log({eventt})
       const formData = new FormData()
 
       if (!fileList.length) return
@@ -122,6 +125,10 @@ export default {
     }
   },
   mounted () {
+    if (this.img) {
+      this.imgUrl = this.img
+      this.currentStatus = STATUS_SUCCESS
+    }
     this.reset()
   }
 }

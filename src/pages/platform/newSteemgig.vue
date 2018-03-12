@@ -15,7 +15,7 @@
               <p class="word-count right" v-text="wordCount"></p>
               <div v-if="newGigData.title.length > 5" class="col s12 mb-2">
                 <span class="simple-card">
-                  <span v-if="duplicateTitle" class="red-text text-lighten-2">You have already used this <router-link :to="`/@${$store.state.username}/${duplicateTitle.permlink}`" target="_blank">title</router-link>, Proceed?</span>
+                  <span v-if="duplicateTitle" class="green-text">You have already used this <router-link :to="`/@${$store.state.username}/${duplicateTitle.permlink}`" target="_blank">title</router-link>, you can still choose to proceed</span>
                   <span v-if="!duplicateTitle" class="green-text" v-text="validTitle" />
                 </span>
               </div>
@@ -111,7 +111,7 @@
             <p class="flow-text title">Delivery</p>
             <div class="input-field col s12 m3 l3">
               <select class="browser-default my-select category_select" v-model="newGigData.hours">
-                <option value="" disabled selected>Hours</option>
+                <option value="0" disabled selected>Less than an hour</option>
                 <option v-for="(hour, index) in 24" :key="index" :value="hour">{{ hour }} hr(s)</option>
               </select>
             </div>
@@ -173,7 +173,7 @@
             <p class="flow-text title">Portfolio</p>
             <div class="input-field col s12 row">
               <div class="col s12 m4 l3 mb-3" v-for="(image, index) in newGigData.portfolio" :key="image.key">
-                <img-upload :id="index" />
+                <img-upload :id="index" :img="image.url" />
               </div>
               <div class="col s12 m4 l3 mb-3" v-if="newGigData.portfolio.length < 8">
                 <div class="add-box center center-align pt-5" @click.prevent="morePics">
@@ -323,22 +323,7 @@ export default {
       existingTitle: false,
       checkingTitle: false,
       duplicateTitle: '',
-      newGigData: {
-        title: '',
-        category: '',
-        subcategory: '',
-        description: '',
-        requirements: '',
-        pricing: '',
-        hours: 0,
-        days: 0,
-        currency: 'STEEM',
-        portfolio: [],
-        reward: '100% STEEM POWER',
-        price: 0,
-        liked: false,
-        upvoteRange: 100
-      },
+      newGigData: this.$store.state.newPosts.steemgig,
       customToolbar: [
         ['bold', 'italic', 'underline'],
         [{'list': 'ordered'}, {'list': 'bullet'}],
@@ -448,8 +433,15 @@ export default {
         let body = this.previewData + hiddenContainer
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
+        // if (this.duplicateTitle) {
+        //   let splittedTitle = title.split(' ')
+        //   let lastNumber = parseInt(splittedTitle[splittedTitle.length - 1])
+        //   title = lastNumber ? title + ' ' + lastNumber++ : title + ' 1'
+        // })
         if (this.duplicateTitle) {
-          title = this.steemedTitle + '2'
+          let modifiedTitle = this.newGigData.title + Math.floor(Math.random() * 1000)
+          permlink = this.slugify(modifiedTitle)
+          title = '#STEEMGIGS: I will ' + modifiedTitle
         }
         let liked = this.newGigData.liked
         let upvoteRange = this.newGigData.upvoteRange
@@ -464,16 +456,17 @@ export default {
             type: 'success'
           })
           that.successText = 'Successfully pushed to steem!'
+          that.$store.commit('RESET_NEW_STEEMGIG')
         }).catch((e) => {
           console.log(e)
           that.isPosting = false
           this.$notify({
             group: 'foo',
             title: 'Error',
-            text: 'Error pushing post to steem, you might have used the same title previous time',
+            text: 'Error pushing post to steem',
             type: 'error'
           })
-          that.errorText = 'Error pushing post to steem, you might have used the same title previous time'
+          that.errorText = 'Error pushing post to steem'
         })
       }
     }
@@ -567,8 +560,13 @@ ${this.newGigData.requirements}
       `
     }
   },
+  watch: {
+    newGigData: {
+      handler (val) { this.$store.commit('SET_NEW_STEEMGIG', val) },
+      deep: true
+    }
+  },
   mounted () {
-    this.morePics()
     this.$eventBus.$on('img-uploaded', payload => {
       console.log(payload)
       this.newGigData.portfolio[payload.index].url = payload.url

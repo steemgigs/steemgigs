@@ -20,7 +20,7 @@
               <p class="word-count right" v-text="wordCount"></p>
               <div v-if="newTestimonial.title.length > 5" class="col s12 mb-2">
                 <span class="simple-card">
-                  <span v-if="duplicateTitle" class="red-text text-lighten-2">You have already used this <router-link :to="`/@${$store.state.username}/${duplicateTitle.permlink}`" target="_blank">title</router-link>, Proceed?</span>
+                  <span v-if="duplicateTitle" class="green-text">You have already used this <router-link :to="`/@${$store.state.username}/${duplicateTitle.permlink}`" target="_blank">title</router-link>, you can still choose to proceed</span>
                   <span v-if="!duplicateTitle" class="green-text" v-text="validTitle" />
                 </span>
               </div>
@@ -161,13 +161,7 @@ export default {
       duplicateTitle: '',
       checkingTitle: false,
       defaultTags: ['steemgigs', 'steemgigs-testimonial'],
-      newTestimonial: {
-        title: '',
-        description: '',
-        images: [],
-        upvoteRange: 100,
-        liked: false
-      },
+      newTestimonial: this.$store.state.newPosts.testimonial,
       customToolbar: [
         ['bold', 'italic', 'underline'],
         [{'list': 'ordered'}, {'list': 'bullet'}],
@@ -243,7 +237,9 @@ export default {
         let body = this.newTestimonial.description + steemGigsTag
         let title = this.steemedTitle
         if (this.duplicateTitle) {
-          title = this.steemedTitle + '2'
+          let modifiedTitle = this.newTestimonial.title + Math.floor(Math.random() * 1000)
+          permlink = this.slugify(modifiedTitle)
+          title = '#STEEMGIGS: I will ' + modifiedTitle
         }
         let token = this.$store.state.accessToken
         let liked = this.newTestimonial.liked
@@ -259,17 +255,24 @@ export default {
             type: 'success'
           })
           that.successText = 'Successfully pushed to steem!'
+          that.$store.commit('RESET_NEW_TESTIMONIAL')
         }).catch((e) => {
           that.isPosting = false
           this.$notify({
             group: 'foo',
             title: 'Error',
-            text: 'Error pushing post to steem, you might have used the same title previous time',
+            text: 'Error pushing post to steem.',
             type: 'error'
           })
-          that.errorText = 'Error pushing post to steem, you might have used the same title previous time'
+          that.errorText = 'Error pushing post to steem.'
         })
       }
+    }
+  },
+  watch: {
+    newTestimonial: {
+      handler (val) { this.$store.commit('SET_NEW_TESTIMONIAL', val) },
+      deep: true
     }
   },
   computed: {

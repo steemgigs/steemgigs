@@ -26,7 +26,7 @@
               <p class="word-count right" v-text="wordCount"></p>
               <div v-if="untalented.title.length > 5" class="col s12 my-3">
                 <span class="simple-card">
-                  <span v-if="duplicateTitle" class="red-text text-lighten-2">You have already used this <router-link :to="`/@${$store.state.username}/${duplicateTitle.permlink}`" target="_blank">title</router-link>, Proceed?</span>
+                  <span v-if="duplicateTitle" class="green-text">You have already used this <router-link :to="`/@${$store.state.username}/${duplicateTitle.permlink}`" target="_blank">title</router-link>, you can still choose to proceed</span>
                   <span v-if="!duplicateTitle" class="green-text" v-text="validTitle" />
                 </span>
               </div>
@@ -173,13 +173,7 @@ export default {
       defaultTags: ['untalented'],
       duplicateTitle: '',
       checkingTitle: false,
-      untalented: {
-        title: '',
-        description: '',
-        images: [],
-        liked: false,
-        upvoteRange: 100
-      },
+      untalented: this.$store.state.newPosts.untalented,
       customToolbar: [
         ['bold', 'italic', 'underline'],
         [{'list': 'ordered'}, {'list': 'bullet'}],
@@ -255,7 +249,9 @@ export default {
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
         if (this.duplicateTitle) {
-          title = this.steemedTitle + '2'
+          let modifiedTitle = this.untalented.title + Math.floor(Math.random() * 1000)
+          permlink = this.slugify(modifiedTitle)
+          title = '#STEEMGIGS: I will ' + modifiedTitle
         }
         let liked = this.untalented.liked
         let upvoteRange = this.untalented.upvoteRange
@@ -269,15 +265,16 @@ export default {
             type: 'success'
           })
           that.successText = 'Successfully pushed to steem!'
+          that.$store.commit('RESET_NEW_UNTALENTED')
         }).catch((e) => {
           that.isPosting = false
           this.$notify({
             group: 'foo',
             title: 'Error',
-            text: 'Error pushing post to steem, you might have used the same title previous time',
+            text: 'Error pushing post to steem.',
             type: 'error'
           })
-          that.errorText = 'Error pushing post to steem, you might have used the same title previous time'
+          that.errorText = 'Error pushing post to steem.'
         })
       }
     }
@@ -324,6 +321,12 @@ export default {
 <hr />
 ${this.untalented.description}
       `
+    }
+  },
+  watch: {
+    untalented: {
+      handler (val) { this.$store.commit('SET_NEW_UNTALENTED', val) },
+      deep: true
     }
   },
   mounted () {
