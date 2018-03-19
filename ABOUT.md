@@ -73,7 +73,8 @@
 <p>We want to create an eventual world, <strong>where each one is a celebrity</strong>, moreso, because he relishes <strong>having testimonial impact on historical history, by helping the next person build their dream.</strong>&nbsp;</p>
 <p>Thus, we will build a freelance marketplace backed by a solid community, where humanity is the brother next to you.</p>
 <p>Eventually, we will just the combined power of SteemGigs to gift humanity with a least one breakthrough product/solution to a real-world challenge.</p>
-<blockquote>We are keen on removing <strong>"all barriers to entry"</strong>, with regards to the freelancing industry, and create a decentralized freelance marketplace where <strong>"everyone has something to offer"</strong>.
+We are keen on removing <strong>"all barriers to entry"</strong>, with regards to the freelancing industry, and create a decentralized freelance marketplace where <strong>"everyone has something to offer"</strong>
+
 
 
 ## Mission
