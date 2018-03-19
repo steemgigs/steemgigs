@@ -59,13 +59,14 @@
 
 
 
-## Project Goals
+# Project Goals
 <html>
 <p>To complete the development of a dynamic user-oriented web interface and online community, that maximizes the full potential and beauty of the steem blockchain, to create the first peer-to-peer freelance marketplace where <strong>"everyone has something to offer".</strong></p>
 <p><br></p>
 
 
-## Vision
+
+# Vision
 <p>Much of our vision revolves around "positive world adjustment" by applying the freelance industry to its fullest use.&nbsp;</p>
 <p>We want to apply the full potential of the steem blockchain and <strong>"its community of reputable great minds",</strong> into making sure that every <strong>noble dream</strong> is brought into reality.</p>
 <p>Now, <strong>"where there are talents; dreams happen".</strong> Thus, people who seek to build their dreams, vision, enterprise, organization, online presence etc should be able to visit <a href="https://steemgigs.org/"><strong>https://steemgigs.org</strong></a> with assurance of getting assistance.</p>
@@ -77,7 +78,8 @@ We are keen on removing <strong>"all barriers to entry"</strong>, with regards t
 
 
 
-## Mission
+
+# Mission
 <p>To bring about a revolution in the freelance industry, by exploring and utilizing the full capability and beauty of blockchain technology and in this case, the steem blockchain. We also seek to add a <strong>"community (reputable) paradigm"</strong> to the freelancing industry.</p>
 <p><em><strong>Here is further insight into our mission:</strong></em></p>
 <ul>
