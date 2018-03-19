@@ -475,10 +475,10 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Untalented-Steemgigs',
-    'description': 'Want to offer a SteemGig but feel you are not an expert yet? The untalented-steemgigs category is for you! 
+    'description': `Want to offer a SteemGig but feel you are not an expert yet? The untalented-steemgigs category is for you! 
                     It allows you to still offer a service, while honing your skills into perfection. 
                     Clients may want to try your service out, even with the knowledge that you aren't an expert, thus, consider providing affordable rates to stir further relationships. 
-                    Stay reputable and sincere and use opportunities as an avenue to evolve into an expert.',
+                    Stay reputable and sincere and use opportunities as an avenue to evolve into an expert.`,
     'subcategories': [
       {
         'name': 'Photoshop editing',
