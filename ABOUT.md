@@ -59,14 +59,17 @@
 
 
 
+
 # Project Goals
 <html>
 <p>To complete the development of a dynamic user-oriented web interface and online community, that maximizes the full potential and beauty of the steem blockchain, to create the first peer-to-peer freelance marketplace where <strong>"everyone has something to offer".</strong></p>
 <p><br></p>
+</html>
 
 
 
 # Vision
+</html>
 <p>Much of our vision revolves around "positive world adjustment" by applying the freelance industry to its fullest use.&nbsp;</p>
 <p>We want to apply the full potential of the steem blockchain and <strong>"its community of reputable great minds",</strong> into making sure that every <strong>noble dream</strong> is brought into reality.</p>
 <p>Now, <strong>"where there are talents; dreams happen".</strong> Thus, people who seek to build their dreams, vision, enterprise, organization, online presence etc should be able to visit <a href="https://steemgigs.org/"><strong>https://steemgigs.org</strong></a> with assurance of getting assistance.</p>
@@ -75,11 +78,12 @@
 <p>Thus, we will build a freelance marketplace backed by a solid community, where humanity is the brother next to you.</p>
 <p>Eventually, we will just the combined power of SteemGigs to gift humanity with a least one breakthrough product/solution to a real-world challenge.</p>
 We are keen on removing <strong>"all barriers to entry"</strong>, with regards to the freelancing industry, and create a decentralized freelance marketplace where <strong>"everyone has something to offer"</strong>
-
+</html>
 
 
 
 # Mission
+</html>
 <p>To bring about a revolution in the freelance industry, by exploring and utilizing the full capability and beauty of blockchain technology and in this case, the steem blockchain. We also seek to add a <strong>"community (reputable) paradigm"</strong> to the freelancing industry.</p>
 <p><em><strong>Here is further insight into our mission:</strong></em></p>
 <ul>
@@ -101,6 +105,8 @@ We are keen on removing <strong>"all barriers to entry"</strong>, with regards t
   <li>To create a hive of the world's most reputable talents.</li>
   <li>To attract the freelance industry, recruiting agencies and powerful organizations to the steem economy and blockchain technology.</li>
   <li>etc</li>
+</html>
+  
 
 
 ## Project Roadmap
