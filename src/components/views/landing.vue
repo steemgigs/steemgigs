@@ -16,11 +16,13 @@
         <p class="mb-5 grey-text">Our existing categories are sure to inspire you</p>
         <div class="row pt-5">
           <div v-for="(category, index) in categories" :key="index" class="col s6 m4 l3">
+          <a :href="category.url">
             <div class="category">
               <i :class="category.icon" class="icon cat-icon"></i>
               <h6 class="cat-title">{{category.title}}</h6>
               <span class="cat-description">{{category.description}}</span>
             </div>
+            </a>
           </div>
         </div>
       </div>
@@ -124,44 +126,53 @@ export default {
     return {
       searchString: '',
       categories: [{
-        title: 'Nature & Tourism',
-        icon: 'ion-compass',
-        description: 'Our talents are reputable great minds'
+        title: 'Fun & Lifestyle',
+        icon: 'ion-android-bicycle',
+        description: 'Our talents are reputable great minds',
+        url: '/categories/fun-lifestyle'
+
       },
       {
         title: 'Graphics & Design',
         icon: 'ion-paintbrush',
-        description: 'Our talents are reputable great minds'
+        description: 'Our talents are reputable great minds',
+        url: '/categories/graphics-design'
       },
       {
         title: 'Digital Marketing',
         icon: 'ion-arrow-graph-up-left',
-        description: 'Our talents are reputable great minds'
+        description: 'Our talents are reputable great minds',
+        url: '/categories/digital-marketing'
       },
       {
         title: 'Writing and translation',
         icon: 'ion-edit',
-        description: 'Our talents are reputable great minds'
+        description: 'Our talents are reputable great minds',
+        url: '/categories/writing-and-translation'
       },
       {
         title: 'Videos and animation',
         icon: 'ion-videocamera',
-        description: 'Our talents are reputable great minds'
+        description: 'Our talents are reputable great minds',
+        url: '/categories/videos-and-animation'
       },
       {
         title: 'Music & Audio',
         icon: 'ion-ios-musical-note',
-        description: 'Our talents are reputable great minds'
+        description: 'Our talents are reputable great minds',
+        url: '/categories/music-audio'
       },
       {
         title: 'Programming & tech',
         icon: 'ion-android-laptop',
-        description: 'Our talents are reputable great minds'
+        description: 'Our talents are reputable great minds',
+        url: '/categories/programming-tech'
       },
       {
         title: 'Business',
         icon: 'ion-stats-bars',
-        description: 'Our talents are reputable great minds'
+        description: 'Our talents are reputable great minds',
+        url: '/categories/business'
       }],
       sliders: [
         {
