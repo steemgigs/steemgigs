@@ -110,6 +110,9 @@ export default {
         height: 30em;
         overflow-y: auto;
         overflow-x: hidden;
+        p img {
+          max-width: 100%;
+        }
     }
     img.userImage {
       height: 90px;
