@@ -102,7 +102,7 @@ SteemGigs is built using the decentralized & open-source "steem" protocol, where
               <div class="col l4 offset-l2 s12">
                 <h5 class="indigo-text">Our categories</h5>
                 <ul>
-                  <li v-for="(category, i) in categories" :key="i"><a class="" href="#!">{{category.title}}</a></li>
+                  <li v-for="(category, i) in categories" :key="i"><a class="" :href="category.url">{{category.title}}</a></li>
                 </ul>
               </div>
             </div>
