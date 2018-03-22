@@ -27,4 +27,4 @@ npm run e2e
 npm test
 ```
 
-For details about the project, check [ABOUT.md](ABOUT.md) and read [CONTRIBUTION.md](CONTRIBUTION.md) for guide on how to contribute to this project.
+For details about the project, check [ABOUT.md](ABOUT.md) and read [CONTRIBUTION.md](CONTRIBUTING.md) for guide on how to contribute to this project.
