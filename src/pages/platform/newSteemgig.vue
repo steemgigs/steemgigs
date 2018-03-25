@@ -292,6 +292,7 @@ import DismissibleNotice from '@/components/snippets/dismissibleNotice'
 import InputTag from 'vue-input-tag'
 import SliderRange from 'vue-slider-component'
 import debounce from '@/plugins/debounce'
+import Util from '@/services/util'
 
 export default {
   components: {
@@ -431,6 +432,12 @@ export default {
         let contentToHide = textifiedPics + steemGigsTag
         let hiddenContainer = this.htmlHide(contentToHide)
         let body = this.previewData + hiddenContainer
+
+        const imagesFromBody = Util.getImagesFromBody(this.previewData)
+        if (imagesFromBody.length) {
+          jsonMetadata.images = jsonMetadata.images.concat(imagesFromBody)
+        }
+
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
         // if (this.duplicateTitle) {
@@ -546,17 +553,17 @@ export default {
       return `
 <h2 class="headline">Description</h2>
 <hr />
-${this.newGigData.description}
+${Util.convertImageUrlToHTML(this.newGigData.description)}
 <h2 class="headline">Pricing</h2>
 <hr />
-${this.newGigData.pricing}
+${Util.convertImageUrlToHTML(this.newGigData.pricing)}
 
 <h5>Price: Starting at ${this.newGigData.price} ${this.newGigData.currency}</h5>
 <h5>Delivery: ${this.newGigData.days} day(s) ${this.newGigData.hours} hour(s)</h5>
 <hr />
 <h2 class="headline">Requirements</h2>
 <hr />
-${this.newGigData.requirements}
+${Util.convertImageUrlToHTML(this.newGigData.requirements)}
       `
     }
   },
