@@ -80,7 +80,7 @@ export default {
       } else return ''
     },
     taskLink () {
-      return '/@' + this.sellerUsername + '/' + this.gigData.permlink
+      return '/steemgigs/@' + this.sellerUsername + '/' + this.gigData.permlink
     },
     price () {
       if (this.gigData.json_metadata) {
