@@ -194,6 +194,12 @@
                 </div>
               </div>
             </div>
+            <div class="row">
+              <p><strong>Consider embedding a short video clip of you, telling potential clients why they should avail of your service. This improves your general reputation even on steemit, make your content richer and more worthy of curation etc. (Optional)</strong></p>
+              <div class="col input-field s6">
+                <input v-model="newGigData.videoUrl" placeholder="Enter Video URL e.g. Youtube, Vimeo" />
+              </div>
+            </div>
             <p class="flow-text title">Reward</p>
             <div class="input-field col s12 m3 l3">
               <select class="browser-default my-select category_select" v-model="newGigData.reward">
@@ -418,7 +424,8 @@ export default {
           subcategory: this.slugify(this.newGigData.subcategory),
           images: this.portfolio,
           type: 'steemgigs_post',
-          generated: true
+          generated: true,
+          videoUrl: this.newGigData.videoUrl
         }
         let textifiedPics = '\n<h2>Portfolio</h2>\n<hr />\n'
         this.portfolio.forEach(url => {
@@ -550,6 +557,8 @@ export default {
       }
     },
     previewData () {
+      const embedVideoUrl = Util.getEmbedVideoUrl(this.newGigData.videoUrl)
+      const iframeVideo = embedVideoUrl ? `<h5 class="headline">Here Is A Video Showing Why You Should Avail Of My Gig!</h5><iframe src="${embedVideoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>` : ''
       return `
 <h2 class="headline">Description</h2>
 <hr />
@@ -564,6 +573,7 @@ ${Util.convertImageUrlToHTML(this.newGigData.pricing)}
 <h2 class="headline">Requirements</h2>
 <hr />
 ${Util.convertImageUrlToHTML(this.newGigData.requirements)}
+${iframeVideo}
       `
     }
   },
