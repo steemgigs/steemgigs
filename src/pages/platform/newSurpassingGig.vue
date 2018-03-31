@@ -45,8 +45,28 @@
               <div class="tutorial_guide center-align">
                 <div class="card">
                   <div class="card-content">
-                    <span class="card-title">Give a detailed description of what you are looking for</span>
-                    <p>How much are you willing to pay for this gig? etc. State these and other information clearly</p>
+                    <span class="card-title">Reminders</span>
+                    <p>1. Be yourself ans as expressive as possible.
+                    The world and generations yet unborn will come here to dig from your knowledge.</p>
+                    <p>2. Every post you write here appears on the decentralized steem blockchain and can earn your rewards.
+                    Make the most of each post.</p>
+                    <p>3. Clients may visit your blogs to ascertain your reputation before availing of your Gigs.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="tutorial_guide center-align push-down-twice">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Want to Create a SteemGig?</span>
+                     <router-link class="btn indigo" to="/create_gig">Click Here</router-link>
+                  </div>
+                </div>
+              </div>
+               <div class="tutorial_guide center-align push-down-thrice">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Support SteemGigs</span>
+                     <router-link class="btn indigo" to="#">Vote us as Witness</router-link>
                   </div>
                 </div>
               </div>
@@ -444,7 +464,7 @@ select.my-select {
   height: 120px;
   width: 100%;
   z-index: 3;
-},
+}
 .sections {
   background: white;
   border-bottom: 1px solid #ccc;
@@ -610,6 +630,12 @@ p {
 }
 .push-down {
   margin-top: 4.2em;
+}
+.push-down-twice {
+  margin-top: 25.2em;
+}
+.push-down-thrice {
+  margin-top: 35.2em;
 }
 button.addPic {
   position: absolute;
