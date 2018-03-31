@@ -64,7 +64,7 @@
           <div class="container gigForm">
             <p class="flow-text title">Describe your STEEMGIG</p>
             <div class="input-field col s12">
-              <vue-editor v-model="newGigData.description" :upload="uploadConfig"></vue-editor>
+              <vue-editor useCustomImageHandler @imageAdded="handleImageAdded" v-model="newGigData.description" :upload="uploadConfig"></vue-editor>
               <div v-if="descError" class="col s12 my-3">
                 <span class="simple-card">
                   <span class="red-text" v-text="descError" />
@@ -90,7 +90,7 @@
           <div class="container gigForm">
             <p class="flow-text title">Pricing</p>
             <div class="input-field col s12">
-              <vue-editor v-model="newGigData.pricing" :upload="uploadConfig"></vue-editor>
+              <vue-editor useCustomImageHandler @imageAdded="handleImageAdded" v-model="newGigData.pricing" :upload="uploadConfig"></vue-editor>
               <div v-if="pricingError" class="col s12 my-3">
                 <span class="simple-card">
                   <span class="red-text" v-text="pricingError" />
@@ -143,7 +143,7 @@
           <div class="container gigForm">
             <p class="flow-text title">Requirements</p>
             <div class="input-field col s12">
-              <vue-editor v-model="newGigData.requirements" :upload="uploadConfig"></vue-editor>
+              <vue-editor useCustomImageHandler @imageAdded="handleImageAdded" v-model="newGigData.requirements" :upload="uploadConfig"></vue-editor>
               <div v-if="requirementError" class="col s12 my-3">
                 <span class="simple-card">
                   <span class="red-text" v-text="requirementError" />
@@ -280,6 +280,7 @@
 </template>
 
 <script>
+import axios from '@/plugins/axios'
 import Api from '@/services/api'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
@@ -343,6 +344,30 @@ export default {
       } else {
         this.newGigData.liked = false
       }
+    },
+    handleImageAdded (file, Editor, cursorLocation) {
+      const CLIENT_ID = '993793b1d8d3e2e'
+      var formData = new FormData()
+      formData.append('image', file)
+
+      axios({
+        url: 'https://api.imgur.com/3/image',
+        method: 'POST',
+        headers: {
+          'Authorization': 'Client-ID ' + CLIENT_ID
+        },
+        data: formData
+      })
+        .then((result) => {
+          console.log(result)
+          let url = result.data.data.link
+          Editor.insertEmbed(cursorLocation, 'image', url)
+          // this.portfolioImages.push(url)
+          // this.newGigRequest.portfolio = this.portfolioImages
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     switchTo (index) {
       if (index === 5) {
