@@ -297,7 +297,6 @@ export default {
         }
         let liked = this.newGigRequest.liked
         let upvoteRange = this.newGigRequest.upvoteRange
-
         Api.post({username, permlink, title, body, jsonMetadata, liked, upvoteRange}, token).then((err, res) => {
           console.log(err, res)
           that.isPosting = false
