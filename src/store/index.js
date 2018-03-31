@@ -25,6 +25,7 @@ export default new Vuex.Store({
       gigrequests: [],
       untalented: [],
       featured: [],
+      surpassinggoogle: [],
       testimonials: []
     },
     newPosts: {
@@ -45,6 +46,20 @@ export default new Vuex.Store({
         upvoteRange: 100
       },
       gigrequest: {
+        title: '',
+        category: '',
+        subcategory: '',
+        description: '',
+        hours: 0,
+        days: 0,
+        currency: 'STEEM',
+        images: [],
+        reward: '100% STEEM POWER',
+        price: 0,
+        liked: false,
+        upvoteRange: 100
+      },
+      surpassinggoogle: {
         title: '',
         category: '',
         subcategory: '',
@@ -117,6 +132,7 @@ export default new Vuex.Store({
         gigrequests: [],
         untalented: [],
         featured: [],
+        surpassinggoogle: [],
         testimonials: []
       }
     },
@@ -135,6 +151,9 @@ export default new Vuex.Store({
     SET_UNTALENTED (state, data) {
       state.posts.untalented = data
     },
+    SET_SURPASSINGGOOGLE (state, data) {
+      state.posts.surpassinggoogle = data
+    },
     SET_NEW_STEEMGIG (state, steemgig) {
       state.newPosts.steemgig = steemgig
     },
@@ -146,6 +165,9 @@ export default new Vuex.Store({
     },
     SET_NEW_TESTIMONIAL (state, testimonial) {
       state.newPosts.testimonial = testimonial
+    },
+    SET_NEW_SURPASSINGGOOGLE (state, surpassinggoogle) {
+      state.newPosts.surpassinggoogle = surpassinggoogle
     },
     RESET_NEW_STEEMGIG (state) {
       state.newPosts.steemgig = {
@@ -166,6 +188,22 @@ export default new Vuex.Store({
       }
     },
     RESET_NEW_GIGREQUEST (state, gigrequest) {
+      state.newPosts.gigrequest = {
+        title: '',
+        category: '',
+        subcategory: '',
+        description: '',
+        hours: 0,
+        days: 0,
+        currency: 'STEEM',
+        images: [],
+        reward: '100% STEEM POWER',
+        price: 0,
+        liked: false,
+        upvoteRange: 100
+      }
+    },
+    RESET_NEW_SURPASSINGGOOGLE (state, surpassinggoogle) {
       state.newPosts.gigrequest = {
         title: '',
         category: '',
