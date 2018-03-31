@@ -4,15 +4,16 @@
     <div class="container">
       <div class="col s12 m8 l9 row details">
           <div class="col s12 pagedescription">
-            <p>This is a very important segment of SteemGigs. On SteemGigs, "everyone has something to offer". "Everyone" will eventually become a "dream-builder" (SteemGigger), building their dreams and those of others. To accomplish this, we create a bank, for "deposits & withdrawals" of all the bits & bytes that we will ever need to build any dream (however limitless).
+            <h4 class="center">SurpassingGoogle</h4>
+            <p class="center">This is a very important segment of SteemGigs. On SteemGigs, "everyone has something to offer". "Everyone" will eventually become a "dream-builder" (SteemGigger), building their dreams and those of others. To accomplish this, we create a bank, for "deposits & withdrawals" of all the bits & bytes that we will ever need to build any dream (however limitless).
 We will vault all this knowledge in our bank, in the form of unadulterated excerpts from the brains, lives, experiences etc of "reputable great minds", sepcific to every niche, field, industry, expertise etc.
-"By means of your incessant contributions, we will surpass Google (attain limitlessness), reshaping the worldwide web with the freshness of our awesomeness". @surpassinggoogle</p>
+"By means of your incessant contributions, we will surpass Google (attain limitlessness), reshaping the worldwide web with the freshness of our awesomeness".<b>@surpassinggoogle</b></p>
           </div>
           <div class="cardcontainer">
             <div class="col s2 m2 19 catCard" v-for="(cat,index) in category" :key="index">
-            <router-link :to="'surpassinggoogle/' + slugify(cat.name)">{{ capitalize(cat.name) }}</router-link>
+            <center><router-link class="links" :to="'surpassinggoogle/' + slugify(cat.name)">{{ capitalize(cat.name) }}</router-link>
              <br />
-              <p>{{cat.description}}</p>
+              <p>{{cat.description}}</p></center>
             </div>
            </div>
       </div>
@@ -36,7 +37,6 @@ export default {
   components: {
     Page,
     CatNav,
-    'cat-card': SurpassCard,
     Carousel,
     Slide,
     VueEditor,
@@ -255,9 +255,14 @@ export default {
     margin-top: 100px;
 
   }
+  .links {
+    text-decoration: underline;
+    font-size: large;
+    font-weight: bold;
+  }
   .catCard {
     display: inline-block;
-    height: 300px;
+    height: 350px;
     width: auto;
     background-color: white;
     margin: 10px;
