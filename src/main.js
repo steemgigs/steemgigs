@@ -254,6 +254,61 @@ Vue.prototype.categories = [
     ]
   },
   {
+    'name': 'SurpassingGoogle',
+    'description': '',
+    'subcategories': [
+      {
+        'name': 'how-to',
+        'description': 'Teach us step by step, in your own perspective "how to". Make sure it is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary'
+      },
+      {
+        'name': 'DIY',
+        'description': 'Do you have some DIY knowledge on a specific skill, craft or expertise? Why not create a post about it right now! Don\'t let this knowledge stay redundant. The world needs to hear it!'
+
+      },
+      {
+        'name': 'TIL(Today I Learned)',
+        'description': '"Don\'t let today emptily slip by!" Did you learn something today; anything? Can you explain it bit by bit using your own perspective? Share it with us, for the sake of "everyone".'
+      },
+      {
+        'name': 'terry says',
+        'description': 'Are you mentor-like? Have you climbed that ladder? Have you attained "breakthrough success" in a particular field, niche, expertise or industry? Kindly, tell you us about. "The world seeks this very knowledge!"'
+      },
+      {
+        'name': 'teardrops',
+        'description': 'Have you attained breakthrough in a specific niche, field or industry? Was it back-breaking? Did you pull through? Did you retire? Did you tire out? Share your teardrops (moments) with us, related to a specific niche, field or industry. This will inspire others and direct potential helpers you way.'
+      },
+      {
+        'name': 'resolution',
+        'description': '"Dreams are buildable but aren\'t that buildable in a day". @surpassinggoogle You will need to start with today, with a tiny but very specific resolution e.g "Today, i resolve to learn module 20 of Photoshop".Share your resolution with us now and tell us when you meet it or fail to meet it.'
+      },
+      {
+        'name': 'steem secrets',
+        'description': 'Have you considered intergrating "steem" (even if only in your mind\'s eye) into every field, niche or industry? Why not try it now, using your next SteemGigs post? "You just may create the next use-case for steem". Try it now!'
+      },
+      {
+        'name': 'motivation & inspiration',
+        'description': 'Yes, there is general "motivation" and there is general "inspiration". However, do you know how to create "specialized motivation or inspiration", related to a specific niche,field, expertise, industry etc? Why not share that with us or at least try to .'
+      },
+      {
+        'name': 'tutorials',
+        'description': 'On SteemGigs, there is room for "everyone" but not "everyone" is an expert yet. However, we want "everyone" to become a dream-builder (SteemGigger). Thus, kindly share '
+      },
+      {
+        'name': 'un(dis)talented',
+        'description': 'If we eliminate bum, average or smart; "we are genius". @surpassinggoogle Do you have limited confidence yet want to express yourself freely about any niche, field, expertise or industry etc? Relegate "reservations" when you are on SteemGigs. Just speak!'
+      },
+      {
+        'name': 'life',
+        'description': 'Many times, when it comes to attaining "real greatness", the only thing that was missing was "unadulterated INTEL from the school of life". @surpassinggoogle Share with us "life" knowledge, related to a specific field, niche, industry or expertise.'
+      },
+      {
+        'name': 'rare intel',
+        'description': 'Do you know something that isn\'t very common knowledge? Has it stayed redundant in your head? Kindly share it with us, for the sake of everyone. You just may reveal the ever-missing piece of someone\'s puzzle.'
+      }
+    ]
+  },
+  {
     'name': 'Music & Audio',
     'description': '',
     'subcategories': [
@@ -475,10 +530,10 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Untalented-Steemgigs',
-    'description': 'Want to offer a SteemGig but feel you are not an expert yet? The untalented-steemgigs category is for you! 
+    'description': `Want to offer a SteemGig but feel you are not an expert yet? The untalented-steemgigs category is for you! 
                     It allows you to still offer a service, while honing your skills into perfection. 
                     Clients may want to try your service out, even with the knowledge that you aren't an expert, thus, consider providing affordable rates to stir further relationships. 
-                    Stay reputable and sincere and use opportunities as an avenue to evolve into an expert.',
+                    Stay reputable and sincere and use opportunities as an avenue to evolve into an expert.`,
     'subcategories': [
       {
         'name': 'Photoshop editing',

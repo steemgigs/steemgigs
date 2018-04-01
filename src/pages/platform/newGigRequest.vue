@@ -177,6 +177,7 @@ import { Carousel, Slide } from 'vue-carousel'
 import SliderRange from 'vue-slider-component'
 import debounce from '@/plugins/debounce'
 import InputTag from 'vue-input-tag'
+import Util from '@/services/util'
 
 export default {
   components: {
@@ -297,7 +298,10 @@ export default {
         }
         let liked = this.newGigRequest.liked
         let upvoteRange = this.newGigRequest.upvoteRange
-
+        const imagesFromBody = Util.getImagesFromBody(this.previewData)
+        if (imagesFromBody.length) {
+          jsonMetadata['images'] = imagesFromBody
+        }
         Api.post({username, permlink, title, body, jsonMetadata, liked, upvoteRange}, token).then((err, res) => {
           console.log(err, res)
           that.isPosting = false
@@ -377,7 +381,7 @@ export default {
     previewData () {
       return `<h2 class="headline">Description</h2>
 <hr />
-${this.newGigRequest.description}
+${Util.convertImageUrlToHTML(this.newGigRequest.description)}
 
 <h5>Maximum Budget: ${this.newGigRequest.price} ${this.newGigRequest.currency}</h5>
 
