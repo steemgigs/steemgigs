@@ -98,6 +98,11 @@ export default [
     component: GigDetail
   },
   {
+    path: '/steemgigs/@:username/:task',
+    name: 'STEEMGIGS | Task Detail',
+    component: GigDetail
+  },
+  {
     path: '*',
     name: 'Not Found | bad Link',
     component: Index

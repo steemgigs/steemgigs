@@ -194,6 +194,12 @@
                 </div>
               </div>
             </div>
+            <div class="row">
+              <p><strong>Consider embedding a short video clip of you, telling potential clients why they should avail of your service. This improves your general reputation even on steemit, make your content richer and more worthy of curation etc. (Optional)</strong></p>
+              <div class="col input-field s6">
+                <input v-model="newGigData.videoUrl" placeholder="Enter Video URL e.g. Youtube, Vimeo" />
+              </div>
+            </div>
             <p class="flow-text title">Reward</p>
             <div class="input-field col s12 m3 l3">
               <select class="browser-default my-select category_select" v-model="newGigData.reward">
@@ -293,6 +299,7 @@ import DismissibleNotice from '@/components/snippets/dismissibleNotice'
 import InputTag from 'vue-input-tag'
 import SliderRange from 'vue-slider-component'
 import debounce from '@/plugins/debounce'
+import Util from '@/services/util'
 
 export default {
   components: {
@@ -442,7 +449,8 @@ export default {
           subcategory: this.slugify(this.newGigData.subcategory),
           images: this.portfolio,
           type: 'steemgigs_post',
-          generated: true
+          generated: true,
+          videoUrl: this.newGigData.videoUrl
         }
         let textifiedPics = '\n<h2>Portfolio</h2>\n<hr />\n'
         this.portfolio.forEach(url => {
@@ -456,6 +464,12 @@ export default {
         let contentToHide = textifiedPics + steemGigsTag
         let hiddenContainer = this.htmlHide(contentToHide)
         let body = this.previewData + hiddenContainer
+
+        const imagesFromBody = Util.getImagesFromBody(this.previewData)
+        if (imagesFromBody.length) {
+          jsonMetadata.images = jsonMetadata.images.concat(imagesFromBody)
+        }
+
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
         // if (this.duplicateTitle) {
@@ -568,20 +582,23 @@ export default {
       }
     },
     previewData () {
+      const embedVideoUrl = Util.getEmbedVideoUrl(this.newGigData.videoUrl)
+      const iframeVideo = embedVideoUrl ? `<h5 class="headline">Here Is A Video Showing Why You Should Avail Of My Gig!</h5><iframe src="${embedVideoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>` : ''
       return `
 <h2 class="headline">Description</h2>
 <hr />
-${this.newGigData.description}
+${Util.convertImageUrlToHTML(this.newGigData.description)}
 <h2 class="headline">Pricing</h2>
 <hr />
-${this.newGigData.pricing}
+${Util.convertImageUrlToHTML(this.newGigData.pricing)}
 
 <h5>Price: Starting at ${this.newGigData.price} ${this.newGigData.currency}</h5>
 <h5>Delivery: ${this.newGigData.days} day(s) ${this.newGigData.hours} hour(s)</h5>
 <hr />
 <h2 class="headline">Requirements</h2>
 <hr />
-${this.newGigData.requirements}
+${Util.convertImageUrlToHTML(this.newGigData.requirements)}
+${iframeVideo}
       `
     }
   },

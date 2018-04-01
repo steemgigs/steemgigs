@@ -29,6 +29,11 @@ a {
   color: #3f51b5;
   cursor: pointer;
 }
+p {
+  &.ql-align-center {
+    text-align: center;
+  }
+}
 .hide-on-steemgigs {
   display: none !important;
 }

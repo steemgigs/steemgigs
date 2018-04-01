@@ -17,7 +17,7 @@
       <div class="card-content">
         <img v-if="imgUrl || sellerImg" :src="sellerImg" alt="" class="sellerPic">
         <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername"> {{sellerUsername + ' (' + sellerRep + ') '}} </router-link>
-        <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" tag="p" v-text="title" />
+        <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" v-text="title" />
         <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
         <p class="price">
           <span v-if="price">
@@ -81,7 +81,7 @@ export default {
       } else return ''
     },
     taskLink () {
-      return '/@' + this.sellerUsername + '/' + this.gigData.permlink
+      return '/steemgigs/@' + this.sellerUsername + '/' + this.gigData.permlink
     },
     price () {
       if (this.gigData.json_metadata) {

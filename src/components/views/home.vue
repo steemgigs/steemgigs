@@ -340,9 +340,9 @@ export default {
 
 <style lang="scss">
 $blue: #4757b2;
-.card.gig .card-image {
+// .card.gig .card-image {
   // height: 10em !important;
-}
+// }
 .steemgigs_ads {
   box-sizing: border-box;
   padding: 0;
@@ -442,6 +442,11 @@ section {
       }
       .task {
         font-weight: 600;
+      }
+      a {
+        &.task {
+          color: black;
+        }
       }
       .price {
         margin-top: 0.5em;
