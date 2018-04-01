@@ -12,6 +12,8 @@ import Profile from '@/pages/platform/profile'
 import GigDetail from '@/pages/platform/gigDetail'
 import Categories from '@/pages/platform/category'
 import SubCategories from '@/pages/platform/subcategory'
+import SurpassingGoogle from '@/pages/platform/surpassinggoogle'
+import NewSurpassingGig from '@/pages/platform/newSurpassingGig'
 
 export default [
   {
@@ -61,6 +63,11 @@ export default [
     component: NewSteemGig
   },
   {
+    path: '/surpassinggoogle/:subcategory',
+    name: 'STEEMGIGS | Create Surpassing Google Segment',
+    component: NewSurpassingGig
+  },
+  {
     path: '/steemgigs_request',
     name: 'STEEMGIGS | Post Gig Request',
     component: NewGigRequest
@@ -69,6 +76,11 @@ export default [
     path: '/create_testimonial',
     name: 'STEEMGIGS | Post A Testimonial',
     component: NewTestimonial
+  },
+  {
+    path: '/surpassing-google',
+    name: 'STEEMGIGS | SurpassingGoogle',
+    component: SurpassingGoogle
   },
   {
     path: '/untalented_editor',

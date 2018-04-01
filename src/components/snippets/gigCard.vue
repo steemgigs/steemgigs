@@ -23,6 +23,7 @@
           <span v-if="price">
             <span v-if="type === 'steemgigs'">{{ 'Starting At ' + price + ' ' + currency }}</span>
             <span v-if="type === 'gigRequest'">{{ 'Max Budget: ' + price + ' ' + currency }}</span>
+            <span v-if="type === 'surpassinggoogle'">{{ 'Price: ' + 'FREE' }}</span>
           </span>
           <span v-if="!price">FREE</span>
         </p>

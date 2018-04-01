@@ -199,6 +199,38 @@
           <router-link class="btn indigo" to="/testimonials" tag="button">View More</router-link>
         </div>
       </section>
+       <!--Surpassing Google Segment-->
+          <section id="surpassinggooglerequest" class="row">
+        <div class="col s12">
+          <h4 class="left">#surpassinggoogle (The Knowledge Bank of SteemGigs)</h4>
+          <span class="right" style="margin-top: 1.5em;">
+            <select class="browser-default">
+              <option value="" disabled selected>Sort By</option>
+              <option value="tranding">Trending</option>
+              <option value="new">New</option>
+              <option value="active">Active</option>
+              <option value="hot">Hot</option>
+              <option value="promoted">Promoted</option>
+            </select>
+          </span>
+        </div>
+        <div v-if="steemgigs.length < 1" class="col s12 center-align center">
+          <plane v-if="!surpassinggoogleFetched" size="100" />
+          <div v-if="surpassinggoogleFetched">
+            <p class="flow-text grey-text">Be the first to post a gig, click button below</p>
+            <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+          </div>
+          <br><br>
+          <br><br>
+        </div>
+        <div class="col s12 m6 l3" v-for="(gig, index) in surpassinggoogle" :key="index">
+          <gig-card type="surpassingGoogle" :gigData="gig" />
+        </div>
+        <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
+          <router-link class="btn indigo" to="/categories/surpassinggoogle" tag="button">View More</router-link>
+        </div>
+      </section>
+      <!--End Surpassing Google segment-->
     </div>
   </div>
 </template>
@@ -206,6 +238,7 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel'
 import {Plane} from 'vue-loading-spinner'
+import Api from '@/services/api'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
 import TestimonialCard from '@/components/snippets/testimonialCard'
@@ -233,6 +266,7 @@ export default {
       successText: '',
       isPosting: false,
       featuredFetched: false,
+      surpassinggoogleFetched: false,
       postsFetched: false,
       gigrequestsFetched: false,
       testimonialsFetched: false,
@@ -245,6 +279,9 @@ export default {
   methods: {
     getTags (entries) {
       this.userTags = entries
+    },
+    gettry () {
+      console.log(Api.fetchSurpassingGoogle)
     }
   },
   computed: {
@@ -260,8 +297,14 @@ export default {
     featured () {
       return this.$store.state.posts.featured
     },
+    surpassinggoogle () {
+      return this.$store.state.posts.surpassinggoogle
+    },
     testimonials () {
       return this.$store.state.posts.testimonials
+    },
+    tryonly () {
+      return Api.fetchTestimonials
     }
   },
   mounted () {
@@ -274,6 +317,9 @@ export default {
     this.$eventBus.$on('gigrequests-fetched', payload => {
       this.gigrequestsFetched = true
     })
+    this.$eventBus.$on('surpassinggoogle-fetched', payload => {
+      this.surpassingoogleFetched = true
+    })
     this.$eventBus.$on('testimonials-fetched', payload => {
       this.testimonialsFetched = true
     })
@@ -285,6 +331,7 @@ export default {
     this.$eventBus.$off('featured-fetched')
     this.$eventBus.$off('posts-fetched')
     this.$eventBus.$off('gigrequests-fetched')
+    this.$eventBus.$off('surpassinggoogle-fetched')
     this.$eventBus.$off('testimonials-fetched')
     this.$eventBus.$off('untalented-fetched')
   }
