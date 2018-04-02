@@ -44,6 +44,14 @@ export default {
       this.$eventBus.$emit('featured-fetched', err)
       console.log('error:', err)
     })
+    Api.fetchSurpassingGoogle().then(response => {
+      let fetched = response.data
+      this.$store.commit('SET_SURPASSINGGOOGLE', fetched)
+      this.$eventBus.$emit('surpassinggoogle-fetched', fetched)
+    }).catch(err => {
+      this.$eventBus.$emit('featured-fetched', err)
+      console.log('error:', err)
+    })
     Api.fetchTestimonials().then(response => {
       let fetched = response.data
       this.$store.commit('SET_TESTIMONIALS', fetched)

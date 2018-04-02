@@ -27,4 +27,4 @@ npm run e2e
 npm test
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+For details about the project, check [ABOUT.md](ABOUT.md) and read [CONTRIBUTION.md](CONTRIBUTING.md) for guide on how to contribute to this project.

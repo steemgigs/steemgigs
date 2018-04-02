@@ -45,6 +45,9 @@ export default {
   fetchFeatured () {
     return axios.get('/featured')
   },
+  fetchSurpassingGoogle () {
+    return axios.get('/steemgigs/steemgigs_surpassinggoogle/')
+  },
   fetchCatPosts (category) {
     return axios.get(`/steembycat/${category}`)
   },

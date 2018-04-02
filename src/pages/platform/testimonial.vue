@@ -133,6 +133,7 @@ import { Carousel, Slide } from 'vue-carousel'
 import debounce from '@/plugins/debounce'
 import InputTag from 'vue-input-tag'
 import SliderRange from 'vue-slider-component'
+import Util from '@/services/util'
 
 export default {
   components: {
@@ -244,6 +245,12 @@ export default {
         let token = this.$store.state.accessToken
         let liked = this.newTestimonial.liked
         let upvoteRange = this.newTestimonial.upvoteRange
+
+        const imagesFromBody = Util.getImagesFromBody(this.previewData)
+        if (imagesFromBody.length) {
+          jsonMetadata['images'] = imagesFromBody
+        }
+
         // username, permlink, title, body, jsonMetadata, token
         Api.post({username, permlink, title, body, jsonMetadata, liked, upvoteRange}, token).then((err, res) => {
           console.log(err, res)
@@ -314,7 +321,7 @@ export default {
     previewData () {
       return `<h2 class="headline">Description</h2>
 <hr />
-${this.newTestimonial.description}
+${Util.convertImageUrlToHTML(this.newTestimonial.description)}
       `
     }
   },
