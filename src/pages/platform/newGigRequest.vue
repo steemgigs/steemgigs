@@ -53,7 +53,7 @@
                 <div class="input-field col s12 m6 l4">
                   <select class="browser-default my-select category_select" @change="refreshSubCategory" v-model="newGigRequest.category">
                     <option value="" disabled selected>Select Category</option>
-                    <option v-for="(category, index) in categories" :key="index" :value="category.name" v-text="category.name"></option>
+                    <option v-if="category.name != 'SurpassingGoogle'" v-for="(category, index) in categories" :key="index" :value="category.name" v-text="category.name"></option>
                   </select>
                 </div>
                 <div class="input-field col s12 m6 l4" v-show="newGigRequest.category">
