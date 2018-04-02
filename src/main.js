@@ -259,52 +259,158 @@ Vue.prototype.categories = [
     'subcategories': [
       {
         'name': 'how-to',
-        'description': 'Teach us step by step, in your own perspective "how to". Make sure it is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary'
+        'description': 'Teach us step by step, in your own perspective "how to". Make sure it is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary',
+        'content': `<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Little Background: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Tell us what specific niche you will be covering in this post, why you choose to discuss it and where or how you gathered your knowledge or expertise etc</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>How-To: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Teach us step by step, in your own perspective <strong>"how-to" </strong>do this or that.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">(Make sure it is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary.)</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Conclusion: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can tell us how this knowledge has benefited you and how it can benefit your readers. Ask thought-provoking questions. Intimate them on the likely topic for your next article, so that they can return. If you have resourced your knowledge from a study of the internet; add additional references in the form of (source URLs) and direct your readers to these sources to read more.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Give credit to source (URL) for images, where required!</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can easily find free-to-re-use images on PIXABAY</p>`
       },
       {
         'name': 'DIY',
-        'description': 'Do you have some DIY knowledge on a specific skill, craft or expertise? Why not create a post about it right now! Don\'t let this knowledge stay redundant. The world needs to hear it!'
-
+        'description': 'Do you have some DIY knowledge on a specific skill, craft or expertise? Why not create a post about it right now! Don\'t let this knowledge stay redundant. The world needs to hear it!',
+        'content': `<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Little Background: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Tell us what specific niche you will be covering in this post, why you choose to discuss it and where or how you gathered your knowledge or expertise etc.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>DIY: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Teach us step by step, in your own perspective "what we will be making today".</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">(Make sure it is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary.)</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Conclusion: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can tell us how this knowledge has benefited you and how it can benefit your readers. Ask thought-provoking questions. Intimate them on the likely topic for your next article, so that they can return. If you have resourced your knowledge from a study of the internet; add additional references in the form of (source URLs) and direct your readers to these sources to read more.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Give credit to source (URL) for images, where required!</p>
+<p style="margin-bottom: 10.0pt; line-height: 115%; text-autospace: none;">You can easily find free-to-re-use images on PIXABAY</p>`
       },
       {
         'name': 'TIL(Today I Learned)',
-        'description': '"Don\'t let today emptily slip by!" Did you learn something today; anything? Can you explain it bit by bit using your own perspective? Share it with us, for the sake of "everyone".'
+        'description': '"Don\'t let today emptily slip by!" Did you learn something today; anything? Can you explain it bit by bit using your own perspective? Share it with us, for the sake of "everyone".',
+        'content': `<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Little Background: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Tell us what specific niche you will be covering in this post, why you choose to discuss it and where or how you gathered your knowledge or expertise etc.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>TIL: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Teach us step by step, in your own perspective "what you have learned today".</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">(Make sure it is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary.)</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Conclusion: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can tell us how this knowledge has benefited you and how it can benefit your readers. Ask thought-provoking questions. Intimate them on the likely topic for your next article, so that they can return. If you have resourced your knowledge from a study of the internet; add additional references in the form of (source URLs) and direct your readers to these sources to read more.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Give credit to source (URL) for images, where required!</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can easily find free-to-re-use images on PIXABAY</p>`
       },
       {
         'name': 'terry says',
-        'description': 'Are you mentor-like? Have you climbed that ladder? Have you attained "breakthrough success" in a particular field, niche, expertise or industry? Kindly, tell you us about. "The world seeks this very knowledge!"'
+        'description': 'Are you mentor-like? Have you climbed that ladder? Have you attained "breakthrough success" in a particular field, niche, expertise or industry? Kindly, tell you us about. "The world seeks this very knowledge!"',
+        'content': `<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Little Background: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Tell us what specific niche you will be covering in this post, why you choose to discuss it and where or how you gathered your knowledge or expertise etc.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Terry Says: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Yes; you aren't Ted or Terry but may be experienced, mentor-like or simply know how bring about breakthrough. Please share your knowledge with us.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">(Make sure it is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary.)</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Conclusion: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can tell us how this knowledge has benefited you and how it can benefit your readers. Ask thought-provoking questions. Intimate them on the likely topic for your next article, so that they can return. If you have resourced your knowledge from a study of the internet; add additional references in the form of (source URLs) and direct your readers to these sources to read more.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Give credit to source (URL) for images, where required!</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can easily find free-to-re-use images on PIXABAY</p>`
       },
       {
         'name': 'teardrops',
-        'description': 'Have you attained breakthrough in a specific niche, field or industry? Was it back-breaking? Did you pull through? Did you retire? Did you tire out? Share your teardrops (moments) with us, related to a specific niche, field or industry. This will inspire others and direct potential helpers you way.'
+        'description': 'Have you attained breakthrough in a specific niche, field or industry? Was it back-breaking? Did you pull through? Did you retire? Did you tire out? Share your teardrops (moments) with us, related to a specific niche, field or industry. This will inspire others and direct potential helpers you way.',
+        'content': `<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Little Background: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Tell us what specific niche you will be covering in this post, why you choose to discuss it and where or how you gathered your knowledge or expertise etc.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Teardrops: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Tell us expressively about your "teardrops" moments.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">(Make sure your post is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary.)</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Conclusion: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can tell us how this knowledge has benefited you and how it can benefit your readers. Ask thought-provoking questions. Intimate them on the likely topic for your next article, so that they can return. If you have resourced your knowledge from a study of the internet; add additional references in the form of (source URLs) and direct your readers to these sources to read more.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Give credit to source (URL) for images, where required!</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can easily find free-to-re-use images on PIXABAY</p>`
       },
       {
         'name': 'resolution',
-        'description': '"Dreams are buildable but aren\'t that buildable in a day". @surpassinggoogle You will need to start with today, with a tiny but very specific resolution e.g "Today, i resolve to learn module 20 of Photoshop".Share your resolution with us now and tell us when you meet it or fail to meet it.'
+        'description': '"Dreams are buildable but aren\'t that buildable in a day". @surpassinggoogle You will need to start with today, with a tiny but very specific resolution e.g "Today, i resolve to learn module 20 of Photoshop".Share your resolution with us now and tell us when you meet it or fail to meet it.',
+        'content': `<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Little Background: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Tell us what specific niche you will be covering in this post, why you choose to discuss it and where or how you gathered your knowledge or expertise etc</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Resolutions: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Make a resolution today. "Meet it or fail to meet it"; either way, tell us about it!</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">(Make sure it is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary.)</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Conclusion: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can tell us how this knowledge has benefited you and how it can benefit your readers. Ask thought-provoking questions. Intimate them on the likely topic for your next article, so that they can return. If you have resourced your knowledge from a study of the internet; add additional references in the form of (source URLs) and direct your readers to these sources to read more.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Give credit to source (URL) for images, where required!</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can easily find free-to-re-use images on PIXABAY</p>`
       },
       {
         'name': 'steem secrets',
-        'description': 'Have you considered intergrating "steem" (even if only in your mind\'s eye) into every field, niche or industry? Why not try it now, using your next SteemGigs post? "You just may create the next use-case for steem". Try it now!'
+        'description': 'Have you considered intergrating "steem" (even if only in your mind\'s eye) into every field, niche or industry? Why not try it now, using your next SteemGigs post? "You just may create the next use-case for steem". Try it now!',
+        'content': `<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Little Background: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Tell us what specific niche you will be covering in this post, why you choose to discuss it and where or how you gathered your knowledge or expertise etc.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Steem Secrets: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Have you tried integrating "steem" technology into a specific niche or industry? You just may create the next use-case for steem. Use this post to try it.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">(Make sure your post is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary.)</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Conclusion: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can tell us how this knowledge has benefited you and how it can benefit your readers. Ask thought-provoking questions. Intimate them on the likely topic for your next article, so that they can return. If you have resourced your knowledge from a study of the internet; add additional references in the form of (source URLs) and direct your readers to these sources to read more.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Give credit to source (URL) for images, where required!</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can easily find free-to-re-use images on PIXABAY</p>`
       },
       {
         'name': 'motivation & inspiration',
-        'description': 'Yes, there is general "motivation" and there is general "inspiration". However, do you know how to create "specialized motivation or inspiration", related to a specific niche,field, expertise, industry etc? Why not share that with us or at least try to .'
+        'description': 'Yes, there is general "motivation" and there is general "inspiration". However, do you know how to create "specialized motivation or inspiration", related to a specific niche,field, expertise, industry etc? Why not share that with us or at least try to .',
+        'content': `<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Little Background: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Tell us what specific niche you will be covering in this post, why you choose to discuss it and where or how you gathered your knowledge or expertise etc</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Motivation &amp; Inspiration: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Create a heartfelt post to inspire and motivate someone now!</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">(Make sure it is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary.)</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Conclusion: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can tell us how this knowledge has benefited you and how it can benefit your readers. Ask thought-provoking questions. Intimate them on the likely topic for your next article, so that they can return. If you have resourced your knowledge from a study of the internet; add additional references in the form of (source URLs) and direct your readers to these sources to read more.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Give credit to source (URL) for images, where required!</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can easily find free-to-re-use images on PIXABAY</p>`
       },
       {
         'name': 'tutorials',
-        'description': 'On SteemGigs, there is room for "everyone" but not "everyone" is an expert yet. However, we want "everyone" to become a dream-builder (SteemGigger). Thus, kindly share '
+        'description': 'On SteemGigs, there is room for "everyone" but not "everyone" is an expert yet. However, we want "everyone" to become a dream-builder (SteemGigger). Thus, kindly share ',
+        'content': `<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Little Background: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Tell us what specific niche you will be covering in this post, why you choose to discuss it and where or how you gathered your knowledge or expertise etc</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Tutorials: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Document a tutorial step by step using your perspective.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">(Make sure it is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary.)</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Conclusion: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can tell us how this knowledge has benefited you and how it can benefit your readers. Ask thought-provoking questions. Intimate them on the likely topic for your next article, so that they can return. If you have resourced your knowledge from a study of the internet; add additional references in the form of (source URLs) and direct your readers to these sources to read more.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Give credit to source (URL) for images, where required!</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can easily find free-to-re-use images on PIXABAY</p>`
       },
       {
         'name': 'un(dis)talented',
-        'description': 'If we eliminate bum, average or smart; "we are genius". @surpassinggoogle Do you have limited confidence yet want to express yourself freely about any niche, field, expertise or industry etc? Relegate "reservations" when you are on SteemGigs. Just speak!'
+        'description': 'If we eliminate bum, average or smart; "we are genius". @surpassinggoogle Do you have limited confidence yet want to express yourself freely about any niche, field, expertise or industry etc? Relegate "reservations" when you are on SteemGigs. Just speak!',
+        'content': `<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Little Background: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Tell us what specific niche you will be covering in this post, why you choose to discuss it and where or how you gathered your knowledge or expertise etc</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Un(dis)talented: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">On SteemGigs, "everyone is genius". So relegate "reservations" and express yourself freely: "flaws allowed".</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">(Make sure your post is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary.)</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Conclusion: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can tell us how this knowledge has benefited you and how it can benefit your readers. Ask thought-provoking questions. Intimate them on the likely topic for your next article, so that they can return. If you have resourced your knowledge from a study of the internet; add additional references in the form of (source URLs) and direct your readers to these sources to read more.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Give credit to source (URL) for images, where required!</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Calibri',sans-serif;">You can easily find free-to-re-use images on PIXABAY</span></p>`
       },
       {
         'name': 'life',
-        'description': 'Many times, when it comes to attaining "real greatness", the only thing that was missing was "unadulterated INTEL from the school of life". @surpassinggoogle Share with us "life" knowledge, related to a specific field, niche, industry or expertise.'
+        'description': 'Many times, when it comes to attaining "real greatness", the only thing that was missing was "unadulterated INTEL from the school of life". @surpassinggoogle Share with us "life" knowledge, related to a specific field, niche, industry or expertise.',
+        'content': `<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Little Background: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Tell us what specific niche you will be covering in this post, why you choose to discuss it and where or how you gathered your knowledge or expertise etc.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Life: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Did "life" happen in your pursuit of excellence? How did you react? Kindly tell us all about it. (Make sure it is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary.)</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Conclusion: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can tell us how this knowledge has benefited you and how it can benefit your readers. Ask thought-provoking questions. Intimate them on the likely topic for your next article, so that they can return. If you have resourced your knowledge from a study of the internet; add additional references in the form of (source URLs) and direct your readers to these sources to read more.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Give credit to source (URL) for images, where required!</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Calibri',sans-serif;">You can easily find free-to-re-use images on PIXABAY</span></p>`
       },
       {
         'name': 'rare intel',
-        'description': 'Do you know something that isn\'t very common knowledge? Has it stayed redundant in your head? Kindly share it with us, for the sake of everyone. You just may reveal the ever-missing piece of someone\'s puzzle.'
+        'description': 'Do you know something that isn\'t very common knowledge? Has it stayed redundant in your head? Kindly share it with us, for the sake of everyone. You just may reveal the ever-missing piece of someone\'s puzzle.',
+        'content': `<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Little Background: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Tell us what specific niche you will be covering in this post, why you choose to discuss it and where or how you gathered your knowledge or expertise etc</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Rare INTEL: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Do you know some uncommon or scarce INTEL? Why not share it with us freely.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">(Make sure it is specific to the category and sub-category you will be selecting later. Remember to insert images and videos where necessary.)</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;"><strong>Conclusion: </strong></p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can tell us how this knowledge has benefited you and how it can benefit your readers. Ask thought-provoking questions. Intimate them on the likely topic for your next article, so that they can return. If you have resourced your knowledge from a study of the internet; add additional references in the form of (source URLs) and direct your readers to these sources to read more.</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">Give credit to source (URL) for images, where required!</p>
+<p style="margin-bottom: 10.0pt; line-height: normal; text-autospace: none;">You can easily find free-to-re-use images on PIXABAY</p>`
       }
     ]
   },
