@@ -39,6 +39,9 @@ export default {
   fetchUntalented () {
     return axios.get('/steemgigs/steemgigs_untalented/')
   },
+  fetchSurpassingGoogle () {
+    return axios.get('/steemgigs/steemgigs_surpassinggoogle/')
+  },
   fetchFeatured () {
     return axios.get('/featured')
   },
