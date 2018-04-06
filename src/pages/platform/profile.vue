@@ -14,6 +14,7 @@
       <ul class="tabs">
         <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">ACTIVE STEEMGIGS</a></li>
         <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'gig_request'}" @click="changeView('gig_request')">CUSTOM REQUESTS</a></li>
+        <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'gig_contribution'}" @click="changeView('gig_contribution')">CONTRIBUTIONS</a></li>
       </ul>
       <div v-if="currentView === 'active_gigs'" class="activeGigs">
         <div v-if="loading">
@@ -44,6 +45,22 @@
           </div>
         </div>
         <div class="col s12 m6 l4" v-for="(gig, index) in gigrequests" :key="index">
+          <gig-card :gigData="gig" meantFor="profile" />
+        </div>
+      </div>
+      <div v-if="currentView === 'gig_contribution'">
+        <div v-if="loading">
+          <div class="col s12 m6 l4">
+            <loading-placeholder class="card-panel" />
+          </div>
+          <div class="col s12 m6 l4">
+            <loading-placeholder class="card-panel" />
+          </div>
+          <div class="col s12 m6 l4">
+            <loading-placeholder class="card-panel" />
+          </div>
+        </div>
+        <div class="col s12 m6 l4" v-for="(gig, index) in contributions" :key="index">
           <gig-card :gigData="gig" meantFor="profile" />
         </div>
       </div>
@@ -109,6 +126,11 @@ export default {
     gigrequests () {
       return this.usergigs.filter((gig) => {
         return gig.json_metadata.type === 'steemgigs_request'
+      })
+    },
+    contributions () {
+      return this.usergigs.filter((gig) => {
+        return gig.json_metadata.type === 'steemgigs_surpassinggoogle'
       })
     }
   },
