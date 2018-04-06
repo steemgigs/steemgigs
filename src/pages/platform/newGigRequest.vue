@@ -32,7 +32,7 @@
               </div>
             </div>
             <div class="input-field col s12">
-              <vue-editor v-model="newGigRequest.description" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
+              <vue-editor useCustomImageHandler @imageAdded="handleImageAdded" v-model="newGigRequest.description" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
               <div v-if="descError" class="col s12 my-3">
                 <span class="simple-card">
                   <span class="red-text" v-text="descError" />
@@ -166,6 +166,7 @@
 
 <script>
 import Api from '@/services/api'
+import axios from '@/plugins/axios'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import ImgUpload from '@/components/snippets/imgUpload'
@@ -247,6 +248,30 @@ export default {
     nextSection () {
       this.nextPressed = true
       if (this.currentSection < this.sections.length) this.currentSection++
+    },
+    handleImageAdded (file, Editor, cursorLocation) {
+      const CLIENT_ID = '993793b1d8d3e2e'
+      var formData = new FormData()
+      formData.append('image', file)
+
+      axios({
+        url: 'https://api.imgur.com/3/image',
+        method: 'POST',
+        headers: {
+          'Authorization': 'Client-ID ' + CLIENT_ID
+        },
+        data: formData
+      })
+        .then((result) => {
+          console.log(result)
+          let url = result.data.data.link
+          Editor.insertEmbed(cursorLocation, 'image', url)
+          // this.portfolioImages.push(url)
+          // this.newGigRequest.portfolio = this.portfolioImages
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     prevSection () {
       if (this.currentSection > 0) this.currentSection--
@@ -381,8 +406,7 @@ export default {
     previewData () {
       return `<h2 class="headline">Description</h2>
 <hr />
-${Util.convertImageUrlToHTML(this.newGigRequest.description)}
-
+${this.newGigRequest.description}
 <h5>Maximum Budget: ${this.newGigRequest.price} ${this.newGigRequest.currency}</h5>
 
 <h5>Delivery: ${this.newGigRequest.days} day(s) ${this.newGigRequest.hours} hour(s)</h5>
