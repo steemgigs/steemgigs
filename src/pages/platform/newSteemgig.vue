@@ -587,17 +587,17 @@ export default {
       return `
 <h2 class="headline">Description</h2>
 <hr />
-${Util.convertImageUrlToHTML(this.newGigData.description)}
-<h2 class="headline">Pricing</h2>
+${this.newGigData.description}
+<h2 class="headline">Pricing</h2> 
 <hr />
-${Util.convertImageUrlToHTML(this.newGigData.pricing)}
+${this.newGigData.pricing}
 
 <h5>Price: Starting at ${this.newGigData.price} ${this.newGigData.currency}</h5>
 <h5>Delivery: ${this.newGigData.days} day(s) ${this.newGigData.hours} hour(s)</h5>
 <hr />
 <h2 class="headline">Requirements</h2>
 <hr />
-${Util.convertImageUrlToHTML(this.newGigData.requirements)}
+${this.newGigData.requirements}
 ${iframeVideo}
       `
     }
