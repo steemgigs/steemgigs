@@ -76,7 +76,7 @@
           <br><br>
           <br><br>
         </div>
-        <div class="col s12 m6 l3" v-for="(gig, index) in steemgigs" :key="index">
+        <div class="col s12 m6 l3"  v-for="(gig, index) in steemgigs.slice(0,8)" :key="index">
           <gig-card :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
@@ -130,7 +130,7 @@
           <br><br>
           <br><br>
         </div>
-        <div class="col s12 m6 l3" v-for="(gig, index) in featured" :key="index">
+        <div class="col s12 m6 l3" v-for="(gig, index) in featured.slice(0,8)" :key="index">
           <!-- <gig-card :gigData="gig" /> -->
         </div>
         <div class="col s12 center-align py-3">
@@ -162,7 +162,7 @@
           <br><br>
           <br><br>
         </div>
-        <div class="col s12 m6 l3" v-for="(gig, index) in gigrequests" :key="index">
+        <div class="col s12 m6 l3" v-for="(gig, index) in gigrequests.slice(0,8)" :key="index">
           <gig-card type="gigRequest" :gigData="gig" />
         </div>
         <div v-if="gigrequests.length > 0" class="col s12 center-align py-3">
@@ -192,7 +192,7 @@
           <br><br>
           <br><br>
         </div>
-        <div class="col s12 m6 l3" v-for="(testimonial, index) in testimonials" :key="index">
+        <div class="col s12 m6 l3" v-for="(testimonial, index) in testimonials.slice(0,8)" :key="index">
           <testimonial-card :testimonial="testimonial" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
@@ -223,7 +223,7 @@
           <br><br>
           <br><br>
         </div>
-        <div class="col s12 m6 l3" v-for="(gig, index) in surpassinggoogle" :key="index">
+        <div class="col s12 m6 l3" v-for="(gig, index) in surpassinggoogle.slice(0,8)" :key="index">
           <gig-card type="surpassingGoogle" :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
@@ -340,9 +340,6 @@ export default {
 
 <style lang="scss">
 $blue: #4757b2;
-// .card.gig .card-image {
-  // height: 10em !important;
-// }
 .steemgigs_ads {
   box-sizing: border-box;
   padding: 0;

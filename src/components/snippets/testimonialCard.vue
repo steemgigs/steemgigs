@@ -10,8 +10,8 @@
           <router-link class="username" :to="username">{{`${username} (${userRep})`}}</router-link>
         </div>
         <router-link class="grey-text text-darken-3" :to="username + '/' + permlink">
-          <div v-html="body" />
-        </router-link>
+        </router-link>  
+           <router-link class="btn indigo bottom" :to="username + '/' + permlink">View Full Testimonial</router-link> 
       </div>
     </div>
     <gig-action :gigData="testimonial" />
@@ -107,9 +107,8 @@ export default {
       box-shadow: 0 3px 30px rgba(0, 0, 0, 0.25);
     }
     .card-content {
-        height: 30em;
-        overflow-y: auto;
-        overflow-x: hidden;
+        position:relative;
+        height: 350px;
         p img {
           max-width: 100%;
         }
@@ -136,6 +135,13 @@ export default {
       font-size: 1.1rem;
       color: #494646;
       margin: 20px auto;
+    }
+    .bottom {
+      font-size: 13px;
+      position: absolute;
+      bottom:20px;
+      left: 20px;
+      right: 20px;
     }
   }
 </style>

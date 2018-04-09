@@ -36,7 +36,7 @@
               </div>
             </div>
             <div class="input-field col s12">
-              <vue-editor   useCustomImageHandler @imageAdded="handleImageAdded" v-model="getSubCategoryName.content" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
+              <vue-editor   useCustomImageHandler @imageAdded="handleImageAdded" v-model="newGigRequest.description" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
               <div v-if="descError" class="col s12 my-3">
                 <span class="simple-card">
                   <span class="red-text" v-text="descError" />
@@ -77,7 +77,7 @@
                 <div class="input-field col s12 m6 l4">
                   <select class="browser-default my-select category_select" @change="refreshSubCategory" v-model="newGigRequest.category">
                     <option value="" disabled selected>Select Category</option>
-                    <option v-if="category.name != 'SurpassingGoogle'" v-for="(category, index) in validCategories" :key="index" :value="category.name" v-text="category.name"></option>
+                    <option v-for="(category, index) in validCategories" :key="index" :value="category.name" v-text="category.name"></option>
                   </select>
                 </div>
                 <div class="input-field col s12 m6 l4" v-show="newGigRequest.category">
@@ -385,8 +385,8 @@ export default {
       })
     },
     descError () {
-      if (this.nextPressed && this.newGigRequest.description.length < 300) {
-        return 'Your description should be 300 Characters or more, please read style guide for clarification'
+      if (this.nextPressed && this.newGigRequest.description.length < 1000) {
+        return 'Your description should be 1000 Characters or more, please read style guide for clarification'
       } else {
         return ''
       }
