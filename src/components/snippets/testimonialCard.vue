@@ -10,8 +10,8 @@
           <router-link class="username" :to="username">{{`${username} (${userRep})`}}</router-link>
         </div>
         <router-link class="grey-text text-darken-3" :to="username + '/' + permlink">
-        </router-link>  
-           <router-link class="btn indigo bottom" :to="username + '/' + permlink">View Full Testimonial</router-link> 
+        </router-link>
+           <router-link class="btn indigo bottom" :to="username + '/' + permlink">View Full Testimonial</router-link>
       </div>
     </div>
     <gig-action :gigData="testimonial" />
