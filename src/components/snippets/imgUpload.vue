@@ -24,7 +24,8 @@
 </template>
 
 <script>
-import Api from '@/services/api'
+// import Api from '@/services/api'
+import axios from '@/plugins/axios'
 const STATUS_INITIAL = 0
 const STATUS_SAVING = 1
 const STATUS_SUCCESS = 2
@@ -61,16 +62,24 @@ export default {
     },
     save (formData) {
       // upload data to the server
+      const CLIENT_ID = '993793b1d8d3e2e'
+      // formData.append('image', this.file)
       this.currentStatus = STATUS_SAVING
-      Api.imageUpload(formData)
+      axios({
+        url: 'https://api.imgur.com/3/image',
+        method: 'POST',
+        headers: {
+          'Authorization': 'Client-ID ' + CLIENT_ID
+        },
+        data: formData
+      })
         .then(x => {
-          console.log('img-upload', x.data)
-          this.imgUrl = x.data
+          this.imgUrl = x.data.data.link
           this.uploadedFiles = [].concat(x)
           this.currentStatus = STATUS_SUCCESS
           this.$eventBus.$emit('img-uploaded', {
             index: this.id,
-            url: x.data
+            url: x.data.data.link
           })
         })
         .catch(err => {
@@ -80,20 +89,17 @@ export default {
         })
     },
     filesChange (eventt) {
-      let fieldName = eventt.target.name
+      // let fieldName = eventt.target.name
       let fileList = eventt.target.files
       this.localUrl = eventt.target.value
-
       // handle file changes
       const formData = new FormData()
-
       if (!fileList.length) return
-
       // append the files to FormData
       Array
         .from(Array(fileList.length).keys())
         .map(x => {
-          formData.append(fieldName, fileList[x], fileList[x].name)
+          formData.append('image', fileList[x])
         })
 
       // save it
