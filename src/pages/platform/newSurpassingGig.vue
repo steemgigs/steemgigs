@@ -36,7 +36,7 @@
               </div>
             </div>
             <div class="input-field col s12">
-              <vue-editor   useCustomImageHandler @imageAdded="handleImageAdded" v-model="getSubCategoryName.content" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
+              <vue-editor   useCustomImageHandler @imageAdded="handleImageAdded" v-model="newGigRequest.description" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
               <div v-if="descError" class="col s12 my-3">
                 <span class="simple-card">
                   <span class="red-text" v-text="descError" />
@@ -379,7 +379,7 @@ export default {
     },
     validCategories () {
       return this.categories.filter(function (c) {
-        if (c.name !== 'surpassing google') {
+        if (c.name !== 'SurpassingGoogle') {
           return c.name
         }
       })
