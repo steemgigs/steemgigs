@@ -418,7 +418,7 @@ export default {
       return '#STEEMGIGS: ' + this.newGigRequest.title
     },
     defaultTags () {
-      return ['steemgigs', 'surpassinggoogle', this.slugify(this.$route.params.subcategory), this.slugify(this.newGigRequest.category), this.slugify(this.newGigRequest.subcategory)]
+      return ['surpassinggoogle', 'steemgigs', this.slugify(this.$route.params.subcategory), this.slugify(this.newGigRequest.category), this.slugify(this.newGigRequest.subcategory)]
     },
     previewData () {
       return `<h2 class="headline">Description</h2>
