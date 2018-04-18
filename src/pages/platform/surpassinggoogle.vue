@@ -9,13 +9,17 @@
 We will vault all this knowledge in our bank, in the form of unadulterated excerpts from the brains, lives, experiences etc of "reputable great minds", sepcific to every niche, field, industry, expertise etc.
 "By means of your incessant contributions, we will surpass Google (attain limitlessness), reshaping the worldwide web with the freshness of our awesomeness".<b>@surpassinggoogle</b></p>
           </div>
-          <div class="cardcontainer">
-            <div class="col s2 m2 19 catCard" v-for="(cat,index) in category" :key="index">
-            <center><router-link class="links" :to="'surpassinggoogle/' + slugify(cat.name)">{{ capitalize(cat.name) }}</router-link>
-             <br />
-              <p>{{cat.description}}</p></center>
+          <div class="col s12 m4 l3" v-for="(cat,index) in category" :key="index">
+            <div class="card catCard hoverable">
+              <div class="card-content">
+                <span class="card-title center"><router-link class="links" :to="'surpassinggoogle/' + slugify(cat.name)">{{ capitalize(cat.name) }}</router-link></span>
+                <p>{{cat.description}}</p>
+              </div>
+              <div class="card-action">
+                <router-link class="btn btn-block indigo" :to="'surpassinggoogle/' + slugify(cat.name)">Submit a Post</router-link>
+              </div>
             </div>
-           </div>
+          </div>
       </div>
     </div>
   </page>
@@ -268,12 +272,18 @@ export default {
     margin: 10px;
   }
   .cardcontainer {
-    padding-left: 10%;
+    padding-left: 0%;
   }
   .menu {
     height: 50px;
     a,.link,a *{
       cursor: pointer;
+    }
+  }
+  .catCard {
+    margin-bottom: 1.5rem;
+    .card-content {
+      min-height: 19rem;
     }
   }
 </style>

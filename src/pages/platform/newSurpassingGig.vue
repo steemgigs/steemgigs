@@ -421,12 +421,8 @@ export default {
       return ['surpassinggoogle', 'steemgigs', this.slugify(this.$route.params.subcategory), this.slugify(this.newGigRequest.category), this.slugify(this.newGigRequest.subcategory)]
     },
     previewData () {
-      return `<h2 class="headline">Description</h2>
-<hr />
+      return `
 ${this.newGigRequest.description}
-
-<h5>Price: FREE</h5>
-
       `
     }
   },
