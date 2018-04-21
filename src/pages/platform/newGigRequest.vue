@@ -319,7 +319,7 @@ export default {
         if (this.duplicateTitle) {
           let modifiedTitle = this.newGigRequest.title + Math.floor(Math.random() * 1000)
           permlink = this.slugify(modifiedTitle)
-          title = '#STEEMGIGS: I will ' + modifiedTitle
+          title = '#STEEMGIGS: I will ' + modifiedTitle.replace('#STEEMGIGS:', ' ')
         }
         let liked = this.newGigRequest.liked
         let upvoteRange = this.newGigRequest.upvoteRange
