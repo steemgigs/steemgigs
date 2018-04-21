@@ -259,7 +259,7 @@ export default {
           console.log(result)
           let url = result.data.data.link
           Editor.insertEmbed(cursorLocation, 'image', url)
-          // this.portfolioImages.push(url)
+          this.portfolioImages.push(url)
           // this.newGigRequest.portfolio = this.portfolioImages
         })
         .catch((err) => {
