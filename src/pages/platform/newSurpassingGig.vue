@@ -314,16 +314,17 @@ export default {
         }
         let username = this.$store.state.username
         let permlink = this.slugify(this.newGigRequest.title)
+        let steemLink = this.htmlHide(`Visit <a href="https://steemgigs.org">https://steemgigs.org</a> now, to use it for free<br  />`)
         let steemGigsTag = this.htmlHide(`
   <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
         `)
-        let body = this.previewData + steemGigsTag
+        let body = this.previewData + steemLink + steemGigsTag
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
         if (this.duplicateTitle) {
           let modifiedTitle = this.newGigRequest.title + Math.floor(Math.random() * 1000)
           permlink = this.slugify(modifiedTitle)
-          title = '#STEEMGIGS: ' + modifiedTitle.replace('#STEEMGIGS:', ' ') // this will prevent title for not showing on the gigcard due to duplicated '#STEEMGIGS:' string
+          title = '#STEEMGIGS: ' + '(' + this.getSubCategoryName.name + ') ' + modifiedTitle.replace('#STEEMGIGS:', ' ') // this will prevent title for not showing on the gigcard due to duplicated '#STEEMGIGS:' string
         }
         let liked = this.newGigRequest.liked
         let upvoteRange = this.newGigRequest.upvoteRange
@@ -415,7 +416,7 @@ export default {
       }
     },
     steemedTitle () {
-      return '#STEEMGIGS: ' + this.newGigRequest.title
+      return '#STEEMGIGS: ' + '(' + this.getSubCategoryName.name + ') ' + this.newGigRequest.title
     },
     defaultTags () {
       return ['surpassinggoogle', 'steemgigs', this.slugify(this.$route.params.subcategory), this.slugify(this.newGigRequest.category), this.slugify(this.newGigRequest.subcategory)]
