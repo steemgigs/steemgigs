@@ -324,7 +324,7 @@ export default {
         if (this.duplicateTitle) {
           let modifiedTitle = this.newGigRequest.title + Math.floor(Math.random() * 1000)
           permlink = this.slugify(modifiedTitle)
-          title = '#STEEMGIGS: ' + '(' + this.getSubCategoryName.name + ') ' + modifiedTitle.replace('#STEEMGIGS:', ' ') // this will prevent title for not showing on the gigcard due to duplicated '#STEEMGIGS:' string
+          title = '#STEEMGIGS: ' + '(' + this.getSubCategoryName.name + ') — ' + modifiedTitle.replace('#STEEMGIGS:', ' ') // this will prevent title for not showing on the gigcard due to duplicated '#STEEMGIGS:' string
         }
         let liked = this.newGigRequest.liked
         let upvoteRange = this.newGigRequest.upvoteRange
@@ -416,7 +416,7 @@ export default {
       }
     },
     steemedTitle () {
-      return '#STEEMGIGS: ' + '(' + this.getSubCategoryName.name + ') ' + this.newGigRequest.title
+      return '#STEEMGIGS: ' + '(' + this.getSubCategoryName.name + ') — ' + this.newGigRequest.title
     },
     defaultTags () {
       return ['surpassinggoogle', 'steemgigs', this.slugify(this.$route.params.subcategory), this.slugify(this.newGigRequest.category), this.slugify(this.newGigRequest.subcategory)]
