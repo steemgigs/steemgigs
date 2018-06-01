@@ -28,3 +28,5 @@ npm test
 ```
 
 For details about the project, check [ABOUT.md](ABOUT.md) and read [CONTRIBUTION.md](CONTRIBUTING.md) for guide on how to contribute to this project.
+
+[![Open Source Helpers](https://www.codetriage.com/steemgigs/steemgigs/badges/users.svg)](https://www.codetriage.com/steemgigs/steemgigs)
