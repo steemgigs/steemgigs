@@ -27,7 +27,7 @@
     "serve-static": "^1.13.2",
     "simplemde": "^1.11.2",
     "steem": "^0.6.7",
-    "steemconnect": "0.0.35",
+    "steemconnect": "^2.0.1",
     "v-tooltip": "^2.0.0-rc.30",
     "vue": "^2.5.2",
     "vue-analytics": "^5.9.1",
