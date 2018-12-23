@@ -6,16 +6,17 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs --fix",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "start": "npm run build && node server"
   },
   "dependencies": {
     "axios": "^0.17.1",
     "country-list": "^1.1.0",
+    "express": "^4.16.4",
     "highlightjs": "^9.10.0",
     "markdown-it-editor": "^1.1.4",
     "marked": "^0.3.12",
@@ -23,6 +24,7 @@
     "materialize-css": "^1.0.0-alpha.3",
     "moment": "^2.20.1",
     "sc2-sdk": "^1.0.2",
+    "serve-static": "^1.13.2",
     "simplemde": "^1.11.2",
     "steem": "^0.6.7",
     "steemconnect": "0.0.35",
