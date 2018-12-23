@@ -17,6 +17,7 @@
     "axios": "^0.17.1",
     "country-list": "^1.1.0",
     "express": "^4.16.4",
+    "express-force-https": "^1.0.0",
     "highlightjs": "^9.10.0",
     "markdown-it-editor": "^1.1.4",
     "marked": "^0.3.12",
