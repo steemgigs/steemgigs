@@ -22,7 +22,7 @@
             <li>
               <el-dropdown>
                 <span class="el-dropdown-link">
-                    <el-button type="primary" size="medium">Create</el-button>
+                    <el-button type="primary" class="primary" size="medium">Create</el-button>
                 </span>
                 <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item><router-link to="/create_gig">Gig</router-link></el-dropdown-item>
@@ -159,7 +159,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$blue:#4757b2;
+$blue:#6361D0;
 
 .navbar-fixed {
   margin-bottom: -1.5em;
@@ -215,7 +215,7 @@ nav {
         cursor: pointer;
         transition: color .3s ease;
         &:hover {
-          color: #4757b2;
+          color: #6361D0;
         }
       }
     }
@@ -239,7 +239,7 @@ nav {
               content: ' ';
               height: 2px;
               width: 0%;
-              background: #4757b2;
+              background: #6361D0;
               display: inline-block;
               position: absolute;
               left: 0;
@@ -267,7 +267,7 @@ nav {
             }
             img.profile_pic {
               border-radius: 50%;
-              border: 1px solid #4757b2;
+              border: 1px solid #6361D0;
               width: 2.7em;
               height: 2.7em;
               margin-top: 7px;

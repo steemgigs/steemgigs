@@ -265,7 +265,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  $blue: #4757b2;
+  $blue: #6361D0;
 .comment {
   position: relative;
   padding-left: 65px;

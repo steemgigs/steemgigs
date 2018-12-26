@@ -304,7 +304,7 @@ export default {
 </script>
 
 <style lang="scss">
-$blue: #4757b2;
+$blue: #6361D0;
 .steemgigs_ads {
   box-sizing: border-box;
   padding: 0;

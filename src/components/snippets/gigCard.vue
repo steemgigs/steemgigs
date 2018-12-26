@@ -111,7 +111,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$blue: #4757b2;
+$blue: #6361D0;
 .card.gig {
   box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
@@ -135,7 +135,7 @@ $blue: #4757b2;
   .card-content {
     .sellerPic {
       border-radius: 50%;
-      border: 1px solid #4757b2;
+      border: 1px solid #6361D0;
       width: 2.1em;
       height: 2.1em;
       display: inline-block;
@@ -170,11 +170,11 @@ $blue: #4757b2;
     .user-rep {
     background: 0;
     padding: 2px 10px;
-    color: #3f51b5;
+    color: #6361D0;
     border-radius: 5px;
     font-weight: bold;
     font-size: 13px;
-    border: 1px solid #3f51b5;
+    border: 1px solid #6361D0;
   }
 
   .seller-details {

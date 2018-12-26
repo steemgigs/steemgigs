@@ -187,7 +187,7 @@ export default {
 </script>
 
 <style lang="scss">
-$blue: #4757b2;
+$blue: #6361D0;
   a.upvote-btn {
     display: inline-block;
     padding: 0px 4px;
@@ -214,7 +214,7 @@ $blue: #4757b2;
     min-height: 11em;
     .sellerPic {
       border-radius: 50%;
-      border: 1px solid #4757b2;
+      border: 1px solid #6361D0;
       width: 2.1em;
       height: 2.1em;
       margin-top: 0px;
