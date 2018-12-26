@@ -15,8 +15,7 @@
         </router-link>
       </div>
       <div class="card-content">
-        <img v-if="imgUrl || sellerImg" :src="sellerImg" alt="" class="sellerPic">
-       <div class="seller-details"> <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername"> {{sellerUsername}} <span class="user-rep">{{ sellerRep }}</span> </router-link></div>
+       <div class="seller-details"> <img v-if="imgUrl || sellerImg" :src="sellerImg" alt="" class="sellerPic"> <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername"> {{sellerUsername}}</router-link><span class="user-rep">{{ sellerRep }}</span></div>
         <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" v-text="title" />
         <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
         <p class="price">
@@ -134,26 +133,17 @@ $blue: #4757b2;
     overflow: hidden;
   }
   .card-content {
-    padding: 3em 1em 1em;
-    position: relative;
     .sellerPic {
       border-radius: 50%;
       border: 1px solid #4757b2;
       width: 2.1em;
       height: 2.1em;
-      margin-top: 0px;
-      margin-left: 0em;
       display: inline-block;
-      position: absolute;
-      top: 1em;
     }
     .sellerName {
-      position: absolute;
-      left: 3.5em;
       color: black;
-      margin: 0.2em 0;
+      margin: 0 0.5rem;
       transition: all ease-in .3s;
-      top: 1em;
       &:hover {
         text-decoration: underline;
       }
@@ -177,8 +167,22 @@ $blue: #4757b2;
     border-bottom-right-radius: 10px;
   }
 
-  .seller-details {
-        margin-top: 10px;
+    .user-rep {
+    background: 0;
+    padding: 2px 10px;
+    color: #3f51b5;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid #3f51b5;
   }
+
+  .seller-details {
+    margin: 0.5em 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
 }
 </style>

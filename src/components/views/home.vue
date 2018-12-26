@@ -392,8 +392,6 @@ section {
         display: inline-block;
       }
       .sellerName {
-        position: absolute;
-        left: 4.5em;
         color: black;
         margin-top: 0.5em;
         transition: all ease-in .3s;

@@ -208,12 +208,9 @@ $blue: #4757b2;
 .card.gig {
   cursor: pointer;
   .card-image {
-    position: relative;
     min-height: 10em;
   }
   .card-content {
-    padding: 3em 1em 1em;
-    position: relative;
     min-height: 11em;
     .sellerPic {
       border-radius: 50%;
@@ -223,8 +220,6 @@ $blue: #4757b2;
       margin-top: 0px;
       margin-left: 0em;
       display: inline-block;
-      position: absolute;
-      top: 1em;
     }
     .task {
       font-weight: 600;
