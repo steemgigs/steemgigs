@@ -16,7 +16,7 @@
       </div>
       <div class="card-content">
         <img v-if="imgUrl || sellerImg" :src="sellerImg" alt="" class="sellerPic">
-        <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername"> {{sellerUsername + ' (' + sellerRep + ') '}} </router-link>
+       <div class="seller-details"> <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername"> {{sellerUsername}} <span class="user-rep">{{ sellerRep }}</span> </router-link></div>
         <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" v-text="title" />
         <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
         <p class="price">
@@ -115,7 +115,7 @@ export default {
 $blue: #4757b2;
 .card.gig {
   box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
+  border-radius: 10px;
   transition: all .2s ease-in;
   &:hover {
     box-shadow: 0 3px 30px rgba(0, 0, 0, 0.25);
@@ -126,9 +126,11 @@ $blue: #4757b2;
     object-fit: cover;
     max-height: 10em;
     overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
   .card-cont {
-    height: 23em;
+    height: 20em;
     overflow: hidden;
   }
   .card-content {
@@ -149,7 +151,7 @@ $blue: #4757b2;
       position: absolute;
       left: 3.5em;
       color: black;
-      margin-top: 0.2em;
+      margin: 0.2em 0;
       transition: all ease-in .3s;
       top: 1em;
       &:hover {
@@ -171,6 +173,12 @@ $blue: #4757b2;
       margin-right: 10px;
       cursor: pointer;
     }
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .seller-details {
+        margin-top: 10px;
   }
 }
 </style>

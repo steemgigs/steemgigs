@@ -379,7 +379,6 @@ $blue: #4757b2;
   }
 }
 section {
-  padding: 0 2em 0 1em;
   .card {
     .card-content {
       padding: 1em;
