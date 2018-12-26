@@ -20,7 +20,17 @@
               <router-link to="/cart" ><i class="icon ion-bag x2"></i></router-link>
             </li>
             <li>
-              <router-link class="btn indigo white-text" to="/create_gig"><i class="icon left ion-plus-round"></i>Create</router-link>
+              <el-dropdown>
+                <span class="el-dropdown-link">
+                    <el-button type="primary" size="medium">Create</el-button>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item><router-link to="/create_gig">Gig</router-link></el-dropdown-item>
+                <el-dropdown-item><router-link to="/steemgigs_request">Custom Request</router-link></el-dropdown-item>
+                <el-dropdown-item><router-link to="/create_testimonial">Testimonial</router-link></el-dropdown-item>
+                <el-dropdown-item><router-link to="/untalented_editor">Untalented</router-link></el-dropdown-item>
+                </el-dropdown-menu>
+                </el-dropdown>
             </li>
           </div>
           <li>
