@@ -80,6 +80,7 @@ export default {
   top: 41px;
   position: fixed;
   width: 100%;
+  font-size: 14px;
   z-index: 2;
   li.main-li {
     display: inline-block;
