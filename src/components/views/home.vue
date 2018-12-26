@@ -379,7 +379,6 @@ $blue: #4757b2;
   }
 }
 section {
-  padding: 0 2em 0 1em;
   .card {
     .card-content {
       padding: 1em;
@@ -393,8 +392,6 @@ section {
         display: inline-block;
       }
       .sellerName {
-        position: absolute;
-        left: 4.5em;
         color: black;
         margin-top: 0.5em;
         transition: all ease-in .3s;
