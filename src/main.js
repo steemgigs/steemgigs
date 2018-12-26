@@ -9,8 +9,12 @@ import Notifications from 'vue-notification'
 import VTooltip from 'v-tooltip'
 import VueContentPlaceholders from 'vue-content-placeholders'
 import Vuex from 'vuex'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
 require('./assets/steemgigs.scss')
+
+Vue.use(ElementUI)
 
 Vue.prototype.categories = [
   {
