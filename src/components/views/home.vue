@@ -45,7 +45,7 @@
           <gig-card :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-          <router-link class="btn indigo" to="/steemgigs" tag="button">View More</router-link>
+          <el-button class="secondary" type="secondary"><router-link to="/steemgigs">View More</router-link></el-button>
         </div>
       </section>
       <!-- <section id="untalented" class="row">
@@ -90,7 +90,7 @@
           <plane v-if="!featuredFetched" size="100" />
           <div v-if="featuredFetched">
             <p class="flow-text grey-text">Post a fantastic STEEMGIG, it stands a chance of being featured here</p>
-            <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+            <el-button class="secondary" type="secondary"> <router-link to="/create_gig">Create Gig</router-link></el-button>
           </div>
           <br><br>
           <br><br>
@@ -99,9 +99,9 @@
           <!-- <gig-card :gigData="gig" /> -->
         </div>
         <div class="col s12 center-align py-3">
-          <button @click="moreFeatured" v-if="featured.length > 0" class="btn indigo">View More
+           <el-button class="secondary" type="secondary" @click="moreFeatured" v-if="featured.length > 0">View More
             <i v-if="fetchingFeatured" class="fa fa-spinner fa-pulse"></i>
-          </button>
+          </el-button>
         </div>
       </section>
       <section id="gigrequests" class="row">
@@ -122,7 +122,7 @@
           <plane v-if="!gigrequestsFetched" size="100" />
           <div v-if="gigrequestsFetched" class="center center-align">
             <p class="flow-text grey-text">Can&rsquo;t find what you&rsquo;re Seeking?<br>You can post Custom requests and we&rsquo;ll lovingly look for reputable great minds to handle it</p>
-            <router-link to="/steemgigs_request" tag="button" class="btn btn-large indigo">Post custom request</router-link>
+             <el-button class="secondary" type="secondary"><router-link to="/steemgigs_request">Post custom request</router-link></el-button>
           </div>
           <br><br>
           <br><br>
@@ -131,7 +131,7 @@
           <gig-card type="gigRequest" :gigData="gig" />
         </div>
         <div v-if="gigrequests.length > 0" class="col s12 center-align py-3">
-          <router-link class="btn indigo" to="/requested_gigs" tag="button">View More</router-link>
+           <el-button class="secondary" type="secondary"><router-link to="/requested_gigs">View More</router-link></el-button>
         </div>
       </section>
       <section id="testimonials" class="row">
@@ -161,7 +161,7 @@
           <testimonial-card :testimonial="testimonial" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-          <router-link class="btn indigo" to="/testimonials" tag="button">View More</router-link>
+           <el-button class="secondary" type="secondary"><router-link to="/testimonials">View More</router-link></el-button>
         </div>
       </section>
        <!--Surpassing Google Segment-->
@@ -183,7 +183,7 @@
           <plane v-if="!surpassinggoogleFetched" size="100" />
           <div v-if="surpassinggoogleFetched">
             <p class="flow-text grey-text">Be the first to post a gig, click button below</p>
-            <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+             <el-button class="secondary" type="secondary"><router-link to="/create_gig">Create Gig</router-link></el-button>
           </div>
           <br><br>
           <br><br>
@@ -192,7 +192,7 @@
           <gig-card type="surpassingGoogle" :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-          <router-link class="btn indigo" to="/categories/surpassinggoogle" tag="button">View More</router-link>
+           <el-button class="secondary" type="secondary"><router-link to="/categories/surpassinggoogle">View More</router-link></el-button>
         </div>
       </section>
       <!--End Surpassing Google segment-->

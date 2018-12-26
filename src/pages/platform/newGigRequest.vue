@@ -110,7 +110,7 @@
                 <input-tag limit="2" class="editable" placeholder="add tags" @update:tags="getTags" :tags="userTags" />
               </div>
               <div class="col s12 row">
-                  <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
+                  <el-button type="primary" class="right primary waves-effect" @click.prevent="nextSection">Next</el-button>
               </div>
             </div>
           </div>
@@ -150,11 +150,11 @@
             </div>
           </div>
           <div class="col s12 row">
-            <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-            <button :disabled="Boolean(errorr)" class="right btn indigo waves-effect" @click.prevent="submit">
+            <el-button type="secondary" @click.prevent="prevSection" class="secondary waves-effect">Back</el-button>
+            <el-button :disabled="Boolean(errorr)" type="primary" class="right waves-effect primary" @click.prevent="submit">
               <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
               POST #STEEMGIG
-            </button>
+            </el-button>
             <p class="red-text" v-if="errorText">Error: {{ errorText }}</p>
             <p class="indigo-text" v-if="successText">{{ successText }}</p>
           </div>

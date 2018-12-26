@@ -30,7 +30,7 @@
       <div class="row right-align">
         <div class="col s12 pt-2">
           <button @click.prevent="commentMode = false" class="btn indigo lighten-2 waves-effect">Cancel</button>
-          <button class="btn indigo waves-effect" @click="postComment"><i class="fa fa-spinner fa-pulse" v-if="isPosting"></i> Post</button>
+          <el-button type="primary" class="primary waves-effect" @click="postComment"><i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>Post</el-button>
         </div>
       </div>
     </div>
