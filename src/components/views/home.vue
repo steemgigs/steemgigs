@@ -1,42 +1,7 @@
 <template>
   <div class="home__view row">
     <cat-nav />
-    <div class="col s12 m4 l2 hide-on-med-and-down steemgigs_ads">
-      <div class="card center center-align request">
-        <div class="card-content">
-          <p>Can&rsquo;t find what you&rsquo;re Seeking?<br>You can post "Custom Requests" and we&rsquo;ll lovingly look for reputable great minds to handle it</p>
-          <router-link to="/steemgigs_request" tag="button" class="btn btn-block indigo">Post custom request</router-link>
-        </div>
-      </div>
-      <div class="card searches">
-        <div class="card-content">
-          <span class="card-title red-text">Popular Searches</span>
-          <ul>
-            <li><a>#Steemgigs</a></li>
-            <li><a>#javascript</a></li>
-            <li><a>#illustration</a></li>
-            <li><a>#Design</a></li>
-            <li><a>#logo</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="card center center-align request">
-        <div class="card-content">
-          <p>Earn some rewards by telling us about your successful "SteemGigs Experience"</p><p> (For both SteemGiggers &amp; Clients)</p>
-          <router-link to="/create_testimonial" tag="button" class="btn btn-block indigo">Post a testimonial</router-link>
-        </div>
-      </div>
-      <div class="card center center-align request">
-        <div class="card-content">
-          <!-- <p>New to steemgigs and not sure what to do?</p> -->
-          <p>Do you want to write just the perfect steemit post?</p>
-          <p>We have a specialized editor that makes this possible!</p>
-          <router-link to="/untalented_editor" tag="button" class="btn btn-block indigo">Untalented Editor</router-link>
-        </div>
-      </div>
-      <witness-card v-if="!$store.state.profile.steemgigsWitness"/>
-    </div>
-    <div class="col s12 m8 l10">
+    <div class="col s12 m12 l12">
       <carousel id="home_ad_slider" :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
         <slide>
           <img src="/static/img/boy_slide.png" class="responsive-img" alt="">
