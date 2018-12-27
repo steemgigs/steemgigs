@@ -93,8 +93,6 @@
             <h5>Post a fantastic STEEMGIG, it stands a chance of being featured here</h5>
             <el-button class="secondary" type="secondary"> <router-link to="/create_gig">Create Gig</router-link></el-button>
           </div>
-          <br><br>
-          <br><br>
         </div>
         <div class="col s12 m6 l3" v-for="(gig, index) in featured.slice(0,8)" :key="index">
           <!-- <gig-card :gigData="gig" /> -->
