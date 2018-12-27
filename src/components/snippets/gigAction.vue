@@ -232,7 +232,7 @@ $blue: #6361D0;
   .card-action {
     padding: 1em;
     a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
-      color: $blue;
+      color: #9e9e9e;
       margin-right: 10px;
       cursor: pointer;
     }

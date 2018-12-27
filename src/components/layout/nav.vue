@@ -7,7 +7,7 @@
           <li><a href="https://signup.steemit.com" rel="noopener noreferrer" target="_blank">Sign up</a></li>
           <li><a data-target="loginPrompt" class="modal-trigger">Log in</a></li>
         </ul>
-        <ul class="right shrink" v-if="$store.state.accessToken">
+        <ul class="right shrink nav-options-wrapper" v-if="$store.state.accessToken">
           <div class="hide-on-med-and-down left">
             <li><a href="#" @click="openSearch" class="search-icon"><i class="ion-ios-search-strong x2"></i></a></li>
             <li>
@@ -41,10 +41,10 @@
               </el-dropdown>
             </li>
           </div>
-          <li>
+          <li class="profile-list">
             <el-dropdown>
               <span class="el-dropdown-link">
-               <a><img class="profile_pic" :src="profileImg" alt=""></a>
+               <a class="profile-link"><img class="profile_pic" :src="profileImg" alt=""></a>
                  </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>
@@ -287,13 +287,8 @@ export default {
               }
               img.profile_pic {
                 border-radius: 50%;
-                border: 1px solid #6361D0;
                 width: 2.7em;
                 height: 2.7em;
-                margin-top: 7px;
-                // background: grey;
-                margin-left: -0.5em;
-                display: inline-block;
               }
             }
             ul {
@@ -331,11 +326,23 @@ export default {
       }
     }
   }
-
   @media only screen and (min-width: 601px) {
     nav,
     nav .nav-wrapper i,
     nav a.sidenav-trigger,
     nav a.sidenav-trigger i {}
+  }
+    .profile-link {
+    display: flex;
+  }
+
+  .nav-options-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .profile-list {
+    display: flex;
   }
 </style>

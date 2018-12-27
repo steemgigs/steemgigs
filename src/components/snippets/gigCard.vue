@@ -136,21 +136,22 @@ $blue: #6361D0;
     .sellerPic {
       border-radius: 50%;
       border: 1px solid #6361D0;
-      width: 25px;
-      height: 25px;
+      width: 35px;
+      height: 35px;
       display: inline-block;
     }
     .sellerName {
       color: black;
       margin: 0 0.5rem;
       transition: all ease-in .3s;
-      font-size: 13px;
+      font-size: 14px;
+      font-weight: bold;
       &:hover {
         text-decoration: underline;
       }
     }
     .task {
-      font-size: 13px;
+      font-size: 14px;
       color: black;
     }
     .price {
@@ -171,9 +172,9 @@ $blue: #6361D0;
   }
 
     .user-rep {
-    background: 0;
-    padding: 2px 10px;
-    color: #6361D0;
+      background: #6361D0;
+    padding: 2px 6px;
+    color: white;
     border-radius: 5px;
     font-weight: bold;
     font-size: 13px;
