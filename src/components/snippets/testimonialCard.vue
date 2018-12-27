@@ -5,13 +5,13 @@
       <img :src="userImg" class="userImage" alt="">
       </router-link>
       <div class="content">
-        <h3>{{subject}}</h3>
-        <div class="my-2">
+        <span class="title">{{subject}}</span>
+        <div class="testimonial-details">
           <router-link class="username" :to="username">{{`${username} (${userRep})`}}</router-link>
         </div>
         <router-link class="grey-text text-darken-3" :to="username + '/' + permlink">
         </router-link>
-            <el-button class="secondary" type="secondary"><router-link :to="username + '/' + permlink">View Full Testimonial</router-link></el-button>
+            <el-button class="secondary" type="secondary"><router-link :to="username + '/' + permlink">View Testimonial</router-link></el-button>
       </div>
     </div>
     <gig-action :gigData="testimonial" />
@@ -47,7 +47,7 @@ export default {
       return '@' + this.testimonial.author
     },
     userImg () {
-      return this.testimonial.json_metadata.authorPic
+      return `https://steemitimages.com/u/${this.testimonial.author}/avatar`
     },
     userRep () {
       return this.testimonial.rep
@@ -101,31 +101,31 @@ export default {
 <style lang="scss" scoped>
   .testimonial-card {
     box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
-    border-radius: 5px;
+    border-radius: 10px;
     transition: all .2s ease-in;
     &:hover {
       box-shadow: 0 3px 30px rgba(0, 0, 0, 0.15);
     }
     .card-content {
-        position:relative;
-        height: 350px;
+    height: 215px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
         p img {
           max-width: 100%;
         }
     }
     img.userImage {
-      height: 90px;
-      width: 90px;
+      height: 50px;
+      width: 50px;
       border-radius: 50%;
       margin: auto;
       cursor: pointer;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
     }
-    h3 {
-      font-size: 1.4rem;
-      color: #cfcfcf;
-      margin: 7px auto;
-
+    .title {
+         font-size: 13px;
+         color: black;
+         font-weight: bold;
     }
     .username {
       color: rgb(120, 79, 149);
@@ -142,6 +142,10 @@ export default {
       bottom:20px;
       left: 20px;
       right: 20px;
+    }
+
+    .testimonial-details {
+      margin: 5px 0;
     }
   }
 </style>
