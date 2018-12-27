@@ -369,4 +369,36 @@ img {
       opacity: 0.6;
     }
   }
+  .gig-detail .post-container h1, h2, h3, h4, h5 {
+  margin: 15px 0;
+}
+
+.gig-detail .post-container h1 {
+  font-size: 2em;
+}
+
+.gig-detail .post-container h2 {
+  font-size: 1.5em;
+}
+
+.gig-detail .post-container h3 {
+  font-size: 1.25em;
+}
+
+.gig-detail .post-container h4 {
+  font-size: 1em;
+}
+
+.gig-detail .post-container h5 {
+  color: 0.9em;
+}
+
+.gig-detail .post-container p {
+  font-size: 14px;
+}
+
+.gig-detail .post-container span {
+  font-size: 14px;
+}
+
 </style>
