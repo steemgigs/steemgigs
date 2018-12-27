@@ -348,6 +348,7 @@ $blue: #6361D0;
     background: #ccc;
     width: 100%;
     object-fit: cover;
+
   }
   .caption {
     position: absolute;
