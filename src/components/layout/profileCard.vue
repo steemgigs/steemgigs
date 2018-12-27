@@ -31,13 +31,13 @@
               </span>
             </p>
             <hr class="my-4">
-            <div class="moreProfileInfo">
+            <div>
               <span class="card-title left-align">Description</span>
               <p v-text="profile.about"></p>
               <router-link v-if="!profilepage" :to="'/@' + profile.username">See More <i class="ion-plus-round"></i></router-link>
             </div>
           </div>
-          <div v-show="!editMode" class="card moreProfileInfo">
+          <div v-show="!editMode" class="moreProfileInfo">
             <div class="card-content">
               <span class="card-title">Links</span>
               <p class="" v-for="(social, key, index) in profile.social" :key="index" v-text="key + ' - ' + social" />
@@ -400,6 +400,11 @@ export default {
     }
   }
   .moreProfileInfo {
+    background: white;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
     .card-title {
       font-size: 1.2em;
       font-weight: 600;
