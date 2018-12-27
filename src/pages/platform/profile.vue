@@ -1,6 +1,7 @@
 <template>
   <page :pageClasses="['profile__view', 'row']">
     <cat-nav />
+    <el-main>
     <div class="col s12 m4 l3">
         <div v-if="!profileFetched" class="card-panel">
           <content-placeholders>
@@ -65,6 +66,7 @@
         </div>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 
