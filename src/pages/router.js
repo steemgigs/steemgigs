@@ -14,6 +14,7 @@ import Categories from '@/pages/platform/category'
 import SubCategories from '@/pages/platform/subcategory'
 import SurpassingGoogle from '@/pages/platform/surpassinggoogle'
 import NewSurpassingGig from '@/pages/platform/newSurpassingGig'
+import Search from '@/pages/platform/search'
 
 export default [
   {
@@ -30,6 +31,11 @@ export default [
     path: '/categories/:category/:subcategory',
     name: 'STEEMGIGS | Subcategories',
     component: SubCategories
+  },
+  {
+    path: '/search/:query/',
+    name: 'STEEMGIGS | Search',
+    component: Search
   },
   // TODO: Finish this
   {
