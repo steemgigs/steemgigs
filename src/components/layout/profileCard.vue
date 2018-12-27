@@ -46,6 +46,7 @@
               <span class="card-title">Languages</span>
               <ul>
                 <li v-for="(language, index) in profile.languages" :key="index">{{`${language} - Fluent`}}</li>
+                <li class="not-avail" v-if='profile.languages.length === 0'>No Languages Provided</li>
               </ul>
             </div>
           </div>
@@ -433,6 +434,10 @@ export default {
     .social-link {
       display: block;
 
+    }
+
+    .not-avail {
+      font-size: 14px;
     }
   }
 </style>
