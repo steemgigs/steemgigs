@@ -13,9 +13,9 @@
     </div>
     <div class="col s12 m8 l9 row">
       <ul class="tabs">
-        <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">ACTIVE STEEMGIGS</a></li>
-        <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'gig_request'}" @click="changeView('gig_request')">CUSTOM REQUESTS</a></li>
-        <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'gig_contribution'}" @click="changeView('gig_contribution')">CONTRIBUTIONS</a></li>
+        <li class="tab col s4"><a :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">Active SteemGigs</a></li>
+        <li class="tab col s4"><a :class="{active: currentView === 'gig_request'}" @click="changeView('gig_request')">Custom Requests</a></li>
+        <li class="tab col s4"><a :class="{active: currentView === 'gig_contribution'}" @click="changeView('gig_contribution')">Contributions</a></li>
       </ul>
       <div v-if="currentView === 'active_gigs'" class="activeGigs">
         <div v-if="loading">
@@ -29,9 +29,10 @@
             <loading-placeholder class="card-panel" />
           </div>
         </div>
-        <div class="col s12 m6 l4" v-for="(gig, index) in steemgigs" :key="index">
+        <div v-if="steemgigs.length !== 0" class="col s12 m6 l4" v-for="(gig, index) in steemgigs" :key="index">
           <gig-card :gigData="gig" meantFor="profile" />
         </div>
+        <div v-else >Nothing to show</div>
       </div>
       <div v-if="currentView === 'gig_request'">
         <div v-if="loading">
@@ -162,10 +163,11 @@ export default {
     float: left;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+    background: 0;
     a {
-      color: rgb(63, 78, 188);
+      color: darkgray;
       font-weight: 600;
-      font-size: 1.1em;
+      font-size: 14px;
       cursor: pointer;
       transition: all ease-in-out .3s;
       &:hover {
