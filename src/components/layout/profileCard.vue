@@ -40,7 +40,9 @@
           <div v-show="!editMode" class="moreProfileInfo">
             <div class="card-content">
               <span class="card-title">Links</span>
-              <p class="" v-for="(social, key, index) in profile.social" :key="index" v-text="key + ' - ' + social" />
+              <p class="social-link" v-for="(social, key, index) in profile.social" :key="index">
+                <span class="site-label">{{ key }}:</span><span class="site-link"> {{ social || 'Link not provided' }}</span>
+                </p>
               <span class="card-title">Languages</span>
               <ul>
                 <li v-for="(language, index) in profile.languages" :key="index">{{`${language} - Fluent`}}</li>
@@ -302,6 +304,9 @@ export default {
     opacity: 1 !important;
   }
   .owner {
+    .profile-card span {
+       text-align: center;
+    }
     .rotating-card{
       position: relative;
       min-height: 850px;
@@ -370,7 +375,6 @@ export default {
     }
     span {
       display: block;
-      text-align: center;
       &.username {
         font-weight: 600;
       }
@@ -421,6 +425,14 @@ export default {
     ul {
       margin-top: 0;
     }
- 
+    .site-label {
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    .social-link {
+      display: block;
+
+    }
   }
 </style>
