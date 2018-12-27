@@ -402,7 +402,7 @@ export default {
   .moreProfileInfo {
     background: white;
     padding: 20px;
-    margin: 15px 0;
+    margin: 20px 0;
     border-radius: 10px;
     box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
     .card-title {

@@ -8,7 +8,7 @@
           <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">DETAILS</a></li>
           <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'inactive_gigs'}" @click="changeView('inactive_gigs')">REVIEWS</a></li>
         </ul>
-        <div class="col s12">
+        <div>
           <div class="post-container">
             <div v-if="contentLoaded" class="card-content">
               <h3>{{ title }}</h3>
@@ -150,7 +150,7 @@ export default {
       }
     },
     adjustedBody () {
-      return this.currentGig.body.replace(/<[^\/>][^>]*><\/[^>]+>/igm, '')
+      return this.currentGig.body.replace(/<[^/>][^>]*><\/[^>]+>/igm, '')
     },
     sellerUsername () {
       return this.currentGig.author
@@ -367,9 +367,6 @@ img {
   .headline {
     background: 0;
   }
-
-hr { background-color: red; height: 1px; border: 0; }
-
   .inactiveGigs {
     .card {
       opacity: 0.6;

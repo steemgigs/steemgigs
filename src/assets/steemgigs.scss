@@ -27,7 +27,7 @@ body {
 }
 
 .el-main {
-  padding: 10px 20px;
+  padding: 20px 20px;
 }
 
 h1, h2, h3, h4, h5 {
@@ -51,7 +51,8 @@ h4 {
 }
 
 h5 {
-  font-size: 1em;
+  font-size: 0.9em;
+  font-weight: bold;
 }
 
 p {
@@ -299,6 +300,10 @@ input[type=text]:not(.browser-default) {
   h2 {
     font-size: 2.5rem;
   }
+}
+
+hr {
+  border: 1px solid whitesmoke;
 }
 
 // p {
