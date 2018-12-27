@@ -129,7 +129,7 @@ h1 {
   fonth-weight: 700;
 }
 .subcats {
-  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
   background-color: white;
   &>ul {
@@ -143,7 +143,7 @@ h1 {
         &:hover {
           background-color: #4b5ab9;
           color: white;
-          box-shadow: 0 6px 13px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
           padding: 7px 35px;
         }
       }

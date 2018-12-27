@@ -113,11 +113,11 @@ export default {
 <style lang="scss" scoped>
 $blue: #6361D0;
 .card.gig {
-  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
   transition: all .2s ease-in;
   &:hover {
-    box-shadow: 0 3px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 3px 30px rgba(0, 0, 0, 0.15);
   }
   cursor: pointer;
   .card-image {
