@@ -136,24 +136,27 @@ $blue: #6361D0;
     .sellerPic {
       border-radius: 50%;
       border: 1px solid #6361D0;
-      width: 2.1em;
-      height: 2.1em;
+      width: 25px;
+      height: 25px;
       display: inline-block;
     }
     .sellerName {
       color: black;
       margin: 0 0.5rem;
       transition: all ease-in .3s;
+      font-size: 13px;
       &:hover {
         text-decoration: underline;
       }
     }
     .task {
-      font-weight: 600;
+      font-size: 13px;
+      color: black;
     }
     .price {
       margin-top: 0.5em;
       font-weight: 500;
+      font-size: 13px;
     }
   }
   .card-action {
