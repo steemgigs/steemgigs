@@ -1,7 +1,8 @@
 <template>
+    <el-container>
   <div id="app">
     <nav-bar />
-    <router-view/>
+   <router-view/>
     <notifications group="foo" position="top left" />
     <div v-show="$store.state.accessToken" class="fixed-action-btn hide-on-large-only">
       <a class="btn-floating btn indigo">
@@ -33,6 +34,7 @@
       </li>
     </ul>
   </div>
+</el-container>
 </template>
 
 <script>

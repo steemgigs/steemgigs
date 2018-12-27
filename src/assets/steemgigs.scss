@@ -23,7 +23,25 @@ body {
   min-height: calc(100vh);
   [class*="__view"] {
     padding-top: 4em;
+    width: 100vw;
   }
+}
+
+h1 {
+  font-size: 2.5em;
+}
+h2 {
+  font-size: 2.2em;
+}
+h3 {
+  font-size: 2em;
+}
+h4 {
+  font-size: 1.8em;
+}
+
+h5 {
+  font-size: 1em;
 }
 
 // Primary button styling
@@ -34,7 +52,7 @@ body {
 }
 
 a {
-  color: #6361D0;
+  color: #3f51b5;
   cursor: pointer;
 }
 p {
@@ -261,7 +279,7 @@ input[type=text]:not(.browser-default) {
     background: #5C6BC0 !important;
   }
   #middle .plane {
-    background: #6361D0 !important;
+    background: #3F51B5 !important;
   }
   #bottom .plane {
     background: #5C6BC0 !important;
