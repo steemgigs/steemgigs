@@ -24,14 +24,15 @@
             <div class="card-content">
               <loading-placeholder v-if="!contentLoaded" />
               <div v-html="adjustedBody"></div>
-              <div class="menu row my-2">
+              <div>
                 <div v-if="contentLoaded" class="detail-action">
-                  <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
+                  <div><a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
                   <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
                     <i class="fa fa-spinner fa-pulse"></i>
                   </a>&nbsp;&nbsp;
                   <a v-if="currentGig.views" class="indigo-text" v-tooltip="'Number of views'"><i class="ion-eye"></i> {{ currentGig.views.length +'&nbsp;&nbsp;&nbsp;'}}</a>
-                  <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{payout}}</span>&nbsp; | &nbsp; <a @click="commentMode = !commentMode" class="reply">Reply</a>
+                  <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{payout}}</span></div>
+                  <a @click="commentMode = !commentMode" class="reply"><el-button type="secondary" class="secondary">Reply</el-button></a>
                   <div class="vote-slider py-3" v-if="upvoteActive">
                     <div class="col s9">
                       <slider-range :min="1" v-model="upvoteRange" />
@@ -311,14 +312,10 @@ img {
    border-radius: 10px;
   }
   .detail-action {
-    float: right;
-    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    background-color: aliceblue;
-    padding: 10px;
-    .reply {
-      color: #4d5db6
-    }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
   .vote-slider {
     max-width: 300px;
