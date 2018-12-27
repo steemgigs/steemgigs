@@ -77,7 +77,7 @@ export default {
   background: white;
   box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
   width: 100%;
-  font-size: 13px;
+  font-size: 14px;
   z-index: 2;
   margin-top: 0;
   margin-bottom: 0;
