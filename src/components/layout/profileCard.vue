@@ -34,7 +34,7 @@
             <div>
               <span class="card-title left-align">Description</span>
               <p v-text="profile.about"></p>
-              <router-link v-if="!profilepage" :to="'/@' + profile.username">See More <i class="ion-plus-round"></i></router-link>
+              <router-link v-if="!profilepage" :to="'/@' + profile.username"><el-button class="secondary explore-profile" type="secondary">Explore Profile</el-button></router-link>
             </div>
           </div>
           <div v-show="!editMode" class="moreProfileInfo">
@@ -439,5 +439,14 @@ export default {
     .not-avail {
       font-size: 14px;
     }
+  }
+
+  .explore-profile {
+    display: block;
+    margin: auto;
+  }
+
+  .expertise {
+    margin: 10px;
   }
 </style>
