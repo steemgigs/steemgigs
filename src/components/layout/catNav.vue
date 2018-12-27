@@ -85,6 +85,7 @@ export default {
   li.main-li {
     display: inline-block;
     position: relative;
+    z-index: 100000;
     a {
       padding: 11.5px 0.5em;
       line-height: 40px;
