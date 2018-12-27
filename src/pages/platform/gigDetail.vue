@@ -1,19 +1,20 @@
 <template>
   <page :pageClasses="['profile__view', 'row']">
     <cat-nav />
+    <el-main>
     <div class="container gig-detail">
       <div class="col s12 m8 l9 row">
         <ul class="tabs hide">
           <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">DETAILS</a></li>
           <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'inactive_gigs'}" @click="changeView('inactive_gigs')">REVIEWS</a></li>
         </ul>
-        <div class="col s12">
-          <div class="card">
+        <div>
+          <div class="post-container">
             <div v-if="contentLoaded" class="card-content">
-              <span class="card-title">{{ title }}</span>
+              <h3>{{ title }}</h3>
                 <p v-if="currentGig.json_metadata.category"><router-link :to="'/categories/' + currentGig.json_metadata.category">{{ currentGig.json_metadata.category }}</router-link> / <router-link :to="'/categories/' + currentGig.json_metadata.category + '/' + currentGig.json_metadata.subcategory">{{ currentGig.json_metadata.subcategory }}</router-link></p>
             </div>
-            <div class="card-image z-depth-1">
+            <div class="card-image">
               <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
                 <slide v-for="(image, index) in portfolio" :key="index">
                   <img :src="image" :alt="currentGig.title">
@@ -22,15 +23,16 @@
             </div>
             <div class="card-content">
               <loading-placeholder v-if="!contentLoaded" />
-              <div v-html="currentGig.body"></div>
-              <div class="menu row my-2">
+              <div v-html="adjustedBody"></div>
+              <div>
                 <div v-if="contentLoaded" class="detail-action">
-                  <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
+                  <div><a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
                   <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
                     <i class="fa fa-spinner fa-pulse"></i>
                   </a>&nbsp;&nbsp;
                   <a v-if="currentGig.views" class="indigo-text" v-tooltip="'Number of views'"><i class="ion-eye"></i> {{ currentGig.views.length +'&nbsp;&nbsp;&nbsp;'}}</a>
-                  <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{payout}}</span>&nbsp; | &nbsp; <a @click="commentMode = !commentMode" class="reply">Reply</a>
+                  <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{payout}}</span></div>
+                  <a @click="commentMode = !commentMode" class="reply"><el-button type="secondary" class="secondary">Reply</el-button></a>
                   <div class="vote-slider py-3" v-if="upvoteActive">
                     <div class="col s9">
                       <slider-range :min="1" v-model="upvoteRange" />
@@ -46,18 +48,20 @@
                   </div>
                 </div>
               </div>
-              <div v-if="commentMode">
-                <vue-editor :editorToolbar="[]" v-model="myComment" placeholder="Type comment here, you can drag and drop images" ></vue-editor>
+            </div>
+          </div>
+         <div class="comment-panel">
+           <div v-if="commentMode">
+                <vue-editor :editorToolbar="[]" v-model="myComment" class="comment-box" placeholder="Type comment here, you can drag and drop images" ></vue-editor>
                 <div class="row right-align">
                   <div class="col s12 pt-2">
-                    <button @click.prevent="commentMode = false" class="btn indigo lighten-2 waves-effect">Cancel</button>
-                    <button class="btn indigo waves-effect" @click="postComment"><i class="fa fa-spinner fa-pulse" v-if="isPosting"></i> Post</button>
+                    <el-button type="secondary" @click.prevent="commentMode = false" class="secondary waves-effect">Cancel</el-button>
+                    <el-button type="primary" class="primary waves-effect" @click="postComment"><i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>Post</el-button>
                   </div>
                 </div>
               </div>
               <v-comment v-for="(comment, index) in comments" :thisComment="comment" :key="index" />
-            </div>
-          </div>
+         </div>
         </div>
       </div>
        <div class="col s12 m4 l3">
@@ -70,6 +74,7 @@
         <profile-card v-if="profileLoaded" :profilepage="false" :profile="profile"></profile-card>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 
@@ -146,6 +151,9 @@ export default {
       } else {
         return []
       }
+    },
+    adjustedBody () {
+      return this.currentGig.body.replace(/<[^/>][^>]*><\/[^>]+>/igm, '')
     },
     sellerUsername () {
       return this.currentGig.author
@@ -292,18 +300,22 @@ export default {
 img {
   max-width: 100% !important;
 }
+.post-container {
+  background: white;
+  padding: 20px;
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
   .card-image img {
-    height: 30em;
+   width: 100%;
+   border-radius: 10px;
   }
   .detail-action {
-    float: right;
-    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    background-color: aliceblue;
-    padding: 10px;
-    .reply {
-      color: #4d5db6
-    }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
   .vote-slider {
     max-width: 300px;
@@ -316,10 +328,6 @@ img {
     a,.link,a *{
       cursor: pointer;
     }
-  }
-  .card-title {
-    font-size: 1.7em;
-    font-weight: 600;
   }
   .tabs {
     width: 100%;
@@ -351,9 +359,61 @@ img {
       }
     }
   }
+
+  .headline {
+    background: 0;
+  }
   .inactiveGigs {
     .card {
       opacity: 0.6;
     }
   }
+
+  // Post specific header & text styling, overrides steemgigs.scss
+
+  .gig-detail .post-container h1, h2, h3, h4, h5 {
+  margin: 15px 0;
+}
+
+.gig-detail .post-container h1 {
+  font-size: 2em;
+}
+
+.gig-detail .post-container h2 {
+  font-size: 1.5em;
+}
+
+.gig-detail .post-container h3 {
+  font-size: 1.25em;
+}
+
+.gig-detail .post-container h4 {
+  font-size: 1em;
+}
+
+.gig-detail .post-container h5 {
+  color: 0.9em;
+}
+
+.gig-detail .post-container p {
+  font-size: 14px;
+}
+
+.gig-detail .post-container span {
+  font-size: 14px;
+}
+
+.comment-panel {
+  margin-top: 20px;
+}
+
+.comment-box {
+  background: white;
+  border-radius: 10px;
+}
+
+.ql-toolbar.ql-snow {
+  border: 0 !important;
+}
+
 </style>
