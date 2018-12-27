@@ -161,10 +161,6 @@ export default {
 <style lang="scss" scoped>
 $blue:#6361D0;
 
-.navbar-fixed {
-  margin-bottom: -1.5em;
-}
-
 nav a.brand-logo, nav li a, nav a {
   color: $blue;
 }
@@ -225,7 +221,7 @@ nav {
   }
   .nav-wrapper {
     &.container {
-      min-width: 90%;
+      min-width: calc(100% - 60px);
       a.brand-logo img {
         height: 1em;
         margin-top: 13px;
@@ -313,8 +309,6 @@ nav {
 
 @media only screen and (min-width: 601px) {
   nav, nav .nav-wrapper i, nav a.sidenav-trigger, nav a.sidenav-trigger i {
-    height: 56px;
-    line-height: 56px;
   }
 }
 </style>
