@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div >
     <div class="owner">
       <div class="rotating-card" :class="editMode ? 'flipped' : ''">
         <div class="face">
-          <div class="card-panel">
+          <div class="profile-card">
             <span class="editProfile waves-effect" v-if="$store.state.username === profile.username">
               <i v-if="!editMode" @click="editMode = true" class="icon ion-android-create"></i>
             </span>
@@ -286,6 +286,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+   .profile-card {
+      border-radius: 10px;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
+    }
+
   select.my-select {
     width: 100% !important;
     pointer-events: initial !important;
@@ -353,38 +361,12 @@ export default {
         }
       }
     }
-    position: relative;
-    .profilePic {
-      float: none;
+    .user-pict-img {
+      height: 75px;
+      width: 75px;
+      border-radius: 50%;
+      margin: auto;
       display: block;
-      position: relative;
-      margin: 0 auto 15px;
-      border-radius: 0;
-      overflow: visible;
-      box-sizing: border-box;
-      width: 150px;
-      height: 150px;
-      &::before {
-        background: rgba(0,0,0,.65);
-        content: "\F030";
-        font: 30px/150px FontAwesome;
-        color: #fff;
-        border-radius: 50%;
-        position: absolute;
-        z-index: 3;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        opacity: 0;
-        text-align: center;
-      }
-      img.user-pict-img {
-        border-radius: 50%;
-        width: 150px;
-        height: 150px;
-        display: block;
-      }
     }
     span {
       display: block;
@@ -434,5 +416,6 @@ export default {
     ul {
       margin-top: 0;
     }
+ 
   }
 </style>
