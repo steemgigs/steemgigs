@@ -34,15 +34,19 @@
             </li>
           </div>
           <li>
-            <a><img class="profile_pic" :src="profileImg" alt=""></a>
-            <ul class="white z-depth-1">
-              <li><router-link class="waves-effect" :to="'/@' + $store.state.username"> {{ $store.state.username + ' (' + repp + ') ' }} </router-link></li>
-              <li><router-link class="waves-effect" to="/wallet">Wallet - {{ wallet }}</router-link></li>
-              <li><router-link class="waves-effect" to="/settings">Settings</router-link></li>
-              <li><router-link class="waves-effect red-text" to="/invite">Invite friends</router-link></li>
-              <li><a class="waves-effect" href="https://discord.gg/CGuPyyT" target="_blank">Help</a></li>
-              <li><a @click.prevent="logout()">logout</a></li>
-            </ul>
+           <el-dropdown> 
+              <span class="el-dropdown-link">
+             <a><img class="profile_pic" :src="profileImg" alt=""></a>
+               </span>
+               <el-dropdown-menu slot="dropdown">
+             <el-dropdown-item><router-link class="waves-effect" :to="'/@' + $store.state.username"> {{ $store.state.username + ' (' + repp + ') ' }} </router-link></el-dropdown-item>
+            <el-dropdown-item><router-link class="waves-effect" to="/wallet">Wallet - {{ wallet }}</router-link></el-dropdown-item>
+           <el-dropdown-item><router-link class="waves-effect" to="/settings">Settings</router-link></el-dropdown-item>
+             <el-dropdown-item><router-link class="waves-effect red-text" to="/invite">Invite friends</router-link></el-dropdown-item>
+             <el-dropdown-item><a class="waves-effect" href="https://discord.gg/CGuPyyT" target="_blank">Help</a></el-dropdown-item>
+              <el-dropdown-item><a @click.prevent="logout()">Log Out</a></el-dropdown-item>
+               </el-dropdown-menu>
+           </el-dropdown>
           </li>
           <li class="hide-on-large-only">
             <a href="#" data-target="mobile-demo" class="sidenav-trigger mx-0">
