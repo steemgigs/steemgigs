@@ -35,7 +35,7 @@
           <gig-card :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-          <el-button class="secondary" type="secondary"><router-link to="/steemgigs">View More</router-link></el-button>
+          <el-button class="secondary" type="secondary"><router-link to="/steemgigs">Explore Gigs</router-link></el-button>
         </div>
       </section>
       <!-- <section id="untalented" class="row">
@@ -119,7 +119,7 @@
           <gig-card type="gigRequest" :gigData="gig" />
         </div>
         <div v-if="gigrequests.length > 0" class="col s12 center-align py-3">
-           <el-button class="secondary" type="secondary"><router-link to="/requested_gigs">View More</router-link></el-button>
+           <el-button class="secondary" type="secondary"><router-link to="/requested_gigs">Explore Gig Requests</router-link></el-button>
         </div>
       </section>
       <section id="testimonials" class="row">
@@ -149,7 +149,7 @@
           <testimonial-card :testimonial="testimonial" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-           <el-button class="secondary" type="secondary"><router-link to="/testimonials">View More</router-link></el-button>
+           <el-button class="secondary" type="secondary"><router-link to="/testimonials">Explore Testimonials</router-link></el-button>
         </div>
       </section>
        <!--Surpassing Google Segment-->
@@ -180,7 +180,7 @@
           <gig-card type="surpassingGoogle" :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-           <el-button class="secondary" type="secondary"><router-link to="/categories/surpassinggoogle">View More</router-link></el-button>
+           <el-button class="secondary" type="secondary"><router-link to="/categories/surpassinggoogle">Explore SurpassingGoogle</router-link></el-button>
         </div>
       </section>
       <!--End Surpassing Google segment-->
