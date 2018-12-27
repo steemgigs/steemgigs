@@ -47,7 +47,7 @@ export default {
       return '@' + this.testimonial.author
     },
     userImg () {
-      return this.testimonial.json_metadata.authorPic
+      return `https://steemitimages.com/u/${this.testimonial.author}/avatar`
     },
     userRep () {
       return this.testimonial.rep
