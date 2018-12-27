@@ -11,7 +11,7 @@
         </div>
         <router-link class="grey-text text-darken-3" :to="username + '/' + permlink">
         </router-link>
-           <router-link class="btn indigo bottom" :to="username + '/' + permlink">View Full Testimonial</router-link>
+            <el-button class="secondary" type="secondary"><router-link :to="username + '/' + permlink">View Full Testimonial</router-link></el-button>
       </div>
     </div>
     <gig-action :gigData="testimonial" />
@@ -100,11 +100,11 @@ export default {
 
 <style lang="scss" scoped>
   .testimonial-card {
-    box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
     transition: all .2s ease-in;
     &:hover {
-      box-shadow: 0 3px 30px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 3px 30px rgba(0, 0, 0, 0.15);
     }
     .card-content {
         position:relative;

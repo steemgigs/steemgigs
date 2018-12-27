@@ -8,7 +8,7 @@
           <gig-card type="gigRequest" :gigData="gig" />
         </div>
         <div v-if="gigs.length <= 0" class="center center-align">
-          <p class="flow-text grey-text">Can&rsquo;t find what you&rsquo;re looking Seeking?<br>You can post Custom request and we&rsquo;ll lovingly look for reputable great minds to handle it</p>
+          <h5>Can&rsquo;t find what you&rsquo;re looking Seeking?<br>You can post Custom request and we&rsquo;ll lovingly look for reputable great minds to handle it</h5>
           <router-link to="/steemgigs_request" tag="button" class="btn btn-large indigo">Post custom request</router-link>
         </div>
       </div>

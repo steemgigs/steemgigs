@@ -75,12 +75,13 @@ export default {
 <style lang="scss" scoped>
 .subnav {
   background: white;
-  border-bottom: 1px solid #ccc;
-  border-top: 1px solid #f8f8f8;
-  top: 41px;
-  position: fixed;
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
   width: 100%;
+  font-size: 13px;
   z-index: 2;
+  margin-top: 0;
+  margin-bottom: 0;
+  border-top: 1px solid whitesmoke;
   li.main-li {
     display: inline-block;
     position: relative;

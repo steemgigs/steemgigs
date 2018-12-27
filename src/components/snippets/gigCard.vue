@@ -96,7 +96,7 @@ export default {
       return this.gigData.author
     },
     sellerImg () {
-      return this.gigData.json_metadata.authorPic
+      return `https://steemitimages.com/u/${this.gigData.author}/avatar`
     },
     sellerRep () {
       return this.gigData.rep
@@ -111,13 +111,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$blue: #4757b2;
+$blue: #6361D0;
 .card.gig {
-  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
   transition: all .2s ease-in;
   &:hover {
-    box-shadow: 0 3px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 3px 30px rgba(0, 0, 0, 0.15);
   }
   cursor: pointer;
   .card-image {
@@ -135,25 +135,28 @@ $blue: #4757b2;
   .card-content {
     .sellerPic {
       border-radius: 50%;
-      border: 1px solid #4757b2;
-      width: 2.1em;
-      height: 2.1em;
+      border: 1px solid #6361D0;
+      width: 25px;
+      height: 25px;
       display: inline-block;
     }
     .sellerName {
       color: black;
       margin: 0 0.5rem;
       transition: all ease-in .3s;
+      font-size: 13px;
       &:hover {
         text-decoration: underline;
       }
     }
     .task {
-      font-weight: 600;
+      font-size: 13px;
+      color: black;
     }
     .price {
       margin-top: 0.5em;
       font-weight: 500;
+      font-size: 13px;
     }
   }
   .card-action {
@@ -170,11 +173,11 @@ $blue: #4757b2;
     .user-rep {
     background: 0;
     padding: 2px 10px;
-    color: #3f51b5;
+    color: #6361D0;
     border-radius: 5px;
     font-weight: bold;
     font-size: 13px;
-    border: 1px solid #3f51b5;
+    border: 1px solid #6361D0;
   }
 
   .seller-details {

@@ -1,26 +1,27 @@
 <template>
   <div class="home__view row">
     <cat-nav />
+    <el-main>
     <div class="col s12 m12 l12">
       <carousel id="home_ad_slider" :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
         <slide>
           <img src="/static/img/boy_slide.png" class="responsive-img" alt="">
           <div class="caption">
-            <h2>Want to build a dream?</h2>
-            <p class="flow-text">Find out now!</p>
+            <h3>Want to build a dream?</h3>
+            <h5>Find out now!</h5>
           </div>
         </slide>
         <slide>
           <img src="/static/img/working.png" class="responsive-img" alt="">
           <div class="caption">
-            <h2>Want to build a dream?</h2>
-            <p class="flow-text">Find out now!</p>
+             <h3>Want to build a dream?</h3>
+            <h5>Find out now!</h5>
           </div>
         </slide>
       </carousel>
       <section id="steemgigs" class="row">
-        <div class="col s12">
-          <h4 class="left">#STEEMGIGS</h4>
+        <div class="col s12 header-row">
+          <h3 class="left">Gigs</h3>
           <span class="right" style="margin-top: 1.5em;">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
@@ -35,7 +36,7 @@
         <div v-if="steemgigs.length < 1" class="col s12 center-align center">
           <plane v-if="!postsFetched" size="100" />
           <div v-if="postsFetched">
-            <p class="flow-text grey-text">Be the first to post a gig, click button below</p>
+            <h5>Be the first to post a gig, click button below</h5>
             <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
           </div>
           <br><br>
@@ -45,7 +46,7 @@
           <gig-card :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-          <router-link class="btn indigo" to="/steemgigs" tag="button">View More</router-link>
+          <el-button class="secondary" type="secondary"><router-link to="/steemgigs">View More</router-link></el-button>
         </div>
       </section>
       <!-- <section id="untalented" class="row">
@@ -73,8 +74,8 @@
         </div>
       </section> -->
       <section id="featured" class="row">
-        <div class="col s12">
-          <h5 class="left">#FEATURED</h5>
+        <div class="col s12 header-row">
+          <h3 class="left">Featured</h3>
           <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
@@ -89,24 +90,22 @@
         <div v-if="featured.length < 1" class="col s12 center-align center">
           <plane v-if="!featuredFetched" size="100" />
           <div v-if="featuredFetched">
-            <p class="flow-text grey-text">Post a fantastic STEEMGIG, it stands a chance of being featured here</p>
-            <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+            <h5>Post a fantastic STEEMGIG, it stands a chance of being featured here</h5>
+            <el-button class="secondary" type="secondary"> <router-link to="/create_gig">Create Gig</router-link></el-button>
           </div>
-          <br><br>
-          <br><br>
         </div>
         <div class="col s12 m6 l3" v-for="(gig, index) in featured.slice(0,8)" :key="index">
           <!-- <gig-card :gigData="gig" /> -->
         </div>
         <div class="col s12 center-align py-3">
-          <button @click="moreFeatured" v-if="featured.length > 0" class="btn indigo">View More
+           <el-button class="secondary" type="secondary" @click="moreFeatured" v-if="featured.length > 0">View More
             <i v-if="fetchingFeatured" class="fa fa-spinner fa-pulse"></i>
-          </button>
+          </el-button>
         </div>
       </section>
       <section id="gigrequests" class="row">
-        <div class="col s12">
-          <h5 class="left">#GIGREQUESTS</h5>
+        <div class="col s12 header-row">
+          <h3 class="left">Gig Requests</h3>
           <span class="right" style="margin-top: 1.5em;">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
@@ -121,8 +120,8 @@
         <div v-if="gigrequests.length < 1" class="col s12 center-align center">
           <plane v-if="!gigrequestsFetched" size="100" />
           <div v-if="gigrequestsFetched" class="center center-align">
-            <p class="flow-text grey-text">Can&rsquo;t find what you&rsquo;re Seeking?<br>You can post Custom requests and we&rsquo;ll lovingly look for reputable great minds to handle it</p>
-            <router-link to="/steemgigs_request" tag="button" class="btn btn-large indigo">Post custom request</router-link>
+            <h5>Can&rsquo;t find what you&rsquo;re Seeking?<br>You can post Custom requests and we&rsquo;ll lovingly look for reputable great minds to handle it</h5>
+             <el-button class="secondary" type="secondary"><router-link to="/steemgigs_request">Post custom request</router-link></el-button>
           </div>
           <br><br>
           <br><br>
@@ -131,12 +130,12 @@
           <gig-card type="gigRequest" :gigData="gig" />
         </div>
         <div v-if="gigrequests.length > 0" class="col s12 center-align py-3">
-          <router-link class="btn indigo" to="/requested_gigs" tag="button">View More</router-link>
+           <el-button class="secondary" type="secondary"><router-link to="/requested_gigs">View More</router-link></el-button>
         </div>
       </section>
       <section id="testimonials" class="row">
-        <div class="col s12">
-          <h5 class="left">#TESTIMONIALS</h5>
+        <div class="col s12 header-row">
+          <h3 class="left">Testimonials</h3>
           <span class="right" style="margin-top: 1.5em;">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
@@ -151,7 +150,7 @@
         <div v-if="testimonials.length < 1" class="col s12 center-align center">
           <plane v-if="!testimonialsFetched" size="100" />
           <div v-if="testimonialsFetched" class="center center-align">
-            <p class="flow-text grey-text">Be the first to tell how much you love steemgigs</p>
+            <h5>Be the first to tell how much you love SteemGigs</h5>
             <router-link to="/create_testimonial" tag="button" class="btn indigo">Post a testimonial</router-link>
           </div>
           <br><br>
@@ -161,13 +160,13 @@
           <testimonial-card :testimonial="testimonial" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-          <router-link class="btn indigo" to="/testimonials" tag="button">View More</router-link>
+           <el-button class="secondary" type="secondary"><router-link to="/testimonials">View More</router-link></el-button>
         </div>
       </section>
        <!--Surpassing Google Segment-->
           <section id="surpassinggooglerequest" class="row">
         <div class="col s12">
-          <h4 class="left">#surpassinggoogle (The Knowledge Bank of SteemGigs)</h4>
+          <h3 class="left">SurpassingGoogle (The Knowledge Bank of SteemGigs)</h3>
           <span class="right" style="margin-top: 1.5em;">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
@@ -182,8 +181,8 @@
         <div v-if="steemgigs.length < 1" class="col s12 center-align center">
           <plane v-if="!surpassinggoogleFetched" size="100" />
           <div v-if="surpassinggoogleFetched">
-            <p class="flow-text grey-text">Be the first to post a gig, click button below</p>
-            <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+            <h5>Be the first to post a gig, click button below</h5>
+             <el-button class="secondary" type="secondary"><router-link to="/create_gig">Create Gig</router-link></el-button>
           </div>
           <br><br>
           <br><br>
@@ -192,11 +191,12 @@
           <gig-card type="surpassingGoogle" :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-          <router-link class="btn indigo" to="/categories/surpassinggoogle" tag="button">View More</router-link>
+           <el-button class="secondary" type="secondary"><router-link to="/categories/surpassinggoogle">View More</router-link></el-button>
         </div>
       </section>
       <!--End Surpassing Google segment-->
     </div>
+    </el-main>
   </div>
 </template>
 
@@ -304,7 +304,7 @@ export default {
 </script>
 
 <style lang="scss">
-$blue: #4757b2;
+$blue: #6361D0;
 .steemgigs_ads {
   box-sizing: border-box;
   padding: 0;
@@ -421,5 +421,18 @@ section {
       }
     }
   }
+
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.browser-default {
+  min-width: 150px;
+}
 }
 </style>

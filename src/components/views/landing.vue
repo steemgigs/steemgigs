@@ -363,13 +363,13 @@ export default {
       }
     }
     .trio {
-      background: linear-gradient(to bottom right,#4757b2,#393953);
+      background: linear-gradient(to bottom right,#6361D0,#393953);
       h4 {
         font-weight: 600;
       }
     }
     .sm-banner {
-      background: linear-gradient(to bottom right,#4757b2,#393953);
+      background: linear-gradient(to bottom right,#6361D0,#393953);
       padding: 50px;
       h3 {
         font-size: 2.5rem;
@@ -379,7 +379,7 @@ export default {
     .page-footer {
       background-color: #eee;
       a, p {
-        color: #3f51b5;
+        color: #6361D0;
       }
     }
   }
