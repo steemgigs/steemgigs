@@ -402,6 +402,7 @@ section {
     }
     .card-action {
       padding: 1em;
+      border-radius: 0 0 10px 10px !important;
       a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
         color: $blue;
         margin-right: 10px;
