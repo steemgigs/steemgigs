@@ -432,5 +432,9 @@ section {
     padding-top: 15px !important;
     padding-bottom: 15px !important;
 }
+
+.browser-default {
+  min-width: 150px;
+}
 }
 </style>
