@@ -32,8 +32,6 @@
             </p>
             <hr class="my-4">
             <div>
-              <span class="card-title left-align">Description</span>
-              <p v-text="profile.about"></p>
               <router-link v-if="!profilepage" :to="'/@' + profile.username"><el-button class="secondary explore-profile" type="secondary">Explore Profile</el-button></router-link>
             </div>
           </div>
