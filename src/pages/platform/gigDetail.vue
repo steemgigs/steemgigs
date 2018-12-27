@@ -47,18 +47,20 @@
                   </div>
                 </div>
               </div>
-              <div v-if="commentMode">
-                <vue-editor :editorToolbar="[]" v-model="myComment" placeholder="Type comment here, you can drag and drop images" ></vue-editor>
+            </div>
+          </div>
+         <div class="comment-panel">
+           <div v-if="commentMode">
+                <vue-editor :editorToolbar="[]" v-model="myComment" class="comment-box" placeholder="Type comment here, you can drag and drop images" ></vue-editor>
                 <div class="row right-align">
                   <div class="col s12 pt-2">
-                    <button @click.prevent="commentMode = false" class="btn indigo lighten-2 waves-effect">Cancel</button>
-                    <button class="btn indigo waves-effect" @click="postComment"><i class="fa fa-spinner fa-pulse" v-if="isPosting"></i> Post</button>
+                    <el-button type="secondary" @click.prevent="commentMode = false" class="secondary waves-effect">Cancel</el-button>
+                    <el-button type="primary" class="primary waves-effect" @click="postComment"><i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>Post</el-button>
                   </div>
                 </div>
               </div>
               <v-comment v-for="(comment, index) in comments" :thisComment="comment" :key="index" />
-            </div>
-          </div>
+         </div>
         </div>
       </div>
        <div class="col s12 m4 l3">
@@ -369,6 +371,9 @@ img {
       opacity: 0.6;
     }
   }
+
+  // Post specific header & text styling, overrides steemgigs.scss
+
   .gig-detail .post-container h1, h2, h3, h4, h5 {
   margin: 15px 0;
 }
@@ -399,6 +404,19 @@ img {
 
 .gig-detail .post-container span {
   font-size: 14px;
+}
+
+.comment-panel {
+  margin-top: 20px;
+}
+
+.comment-box {
+  background: white;
+  border-radius: 10px;
+}
+
+.ql-toolbar.ql-snow {
+  border: 0 !important;
 }
 
 </style>
