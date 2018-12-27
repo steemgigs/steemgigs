@@ -11,7 +11,7 @@
       <section id="steemgigs" class="row">
         <div class="col s12 header-row">
           <h3 class="left">Gigs</h3>
-          <span class="right" style="margin-top: 1.5em;">
+          <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
               <option value="tranding">Trending</option>
@@ -95,7 +95,7 @@
       <section id="gigrequests" class="row">
         <div class="col s12 header-row">
           <h3 class="left">Gig Requests</h3>
-          <span class="right" style="margin-top: 1.5em;">
+          <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
               <option value="tranding">Trending</option>
@@ -125,7 +125,7 @@
       <section id="testimonials" class="row">
         <div class="col s12 header-row">
           <h3 class="left">Testimonials</h3>
-          <span class="right" style="margin-top: 1.5em;">
+          <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
               <option value="tranding">Trending</option>
@@ -156,7 +156,7 @@
           <section id="surpassinggooglerequest" class="row">
         <div class="col s12">
           <h3 class="left">SurpassingGoogle (The Knowledge Bank of SteemGigs)</h3>
-          <span class="right" style="margin-top: 1.5em;">
+          <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
               <option value="tranding">Trending</option>
