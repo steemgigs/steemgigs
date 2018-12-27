@@ -129,22 +129,20 @@ h1 {
   fonth-weight: 700;
 }
 .subcats {
-  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
-  border-radius: 5px;
-  background-color: white;
   &>ul {
     &>li {
       a {
-        color: gray;
-        font-size: 1.15rem;
+        color: black;
+        font-size: 14px;
         display: block;
         padding: 7px 25px;
         transition: all .3s ease;
         &:hover {
-          background-color: #4b5ab9;
+          background-color: #6361D0;
           color: white;
-          box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
           padding: 7px 35px;
+          border-radius: 5px;
+          font-weight: bold;
         }
       }
     }
