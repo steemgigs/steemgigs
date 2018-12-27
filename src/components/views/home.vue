@@ -416,8 +416,12 @@ section {
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
-    padding-top: 15px !important;
+    padding-top: 15px;
     padding-bottom: 15px !important;
+}
+
+.header-row:first-child {
+  padding-top: 0;
 }
 
 .browser-default {

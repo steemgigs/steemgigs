@@ -162,6 +162,10 @@ export default {
         transform: translateX(0);
 
     }
+
+    .subcats ul {
+      margin: 0;
+    }
   }
 }
 </style>
