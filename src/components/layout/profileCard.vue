@@ -8,7 +8,7 @@
               <i v-if="!editMode" @click="editMode = true" class="icon ion-android-create"></i>
             </span>
             <div class="profilePic">
-              <img :src="profile.profilePic || placeholderImg" class="user-pict-img" :alt="profile.username" width="150" height="150">
+              <img :src="profileImage || placeholderImg" class="user-pict-img" :alt="profile.username" width="150" height="150">
             </div>
             <span class="username"> {{ profile.username + ' (' + profile.rep + ') ' }} </span>
             <span class="expertise" v-text="profile.about"></span>
@@ -255,6 +255,9 @@ export default {
     // },
     since () {
       return moment(this.profile.created).format('MMMM YYYY')
+    },
+    profileImage () {
+      return `https://steemitimages.com/u/${this.profile.username}/avatar`
     },
     ago () {
       return moment(this.profile.last_post).fromNow()

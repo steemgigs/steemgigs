@@ -96,7 +96,7 @@ export default {
       return this.gigData.author
     },
     sellerImg () {
-      return this.gigData.json_metadata.authorPic
+      return `https://steemitimages.com/u/${this.gigData.author}/avatar`
     },
     sellerRep () {
       return this.gigData.rep
