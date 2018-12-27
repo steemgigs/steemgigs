@@ -1,6 +1,7 @@
 <template>
   <page :pageClasses="['profile__view', 'row']">
     <cat-nav />
+    <el-main>
     <div class="container gig-detail">
       <div class="col s12 m8 l9 row">
         <ul class="tabs hide">
@@ -8,12 +9,12 @@
           <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'inactive_gigs'}" @click="changeView('inactive_gigs')">REVIEWS</a></li>
         </ul>
         <div class="col s12">
-          <div class="card">
+          <div class="post-container">
             <div v-if="contentLoaded" class="card-content">
-              <span class="card-title">{{ title }}</span>
+              <h3>{{ title }}</h3>
                 <p v-if="currentGig.json_metadata.category"><router-link :to="'/categories/' + currentGig.json_metadata.category">{{ currentGig.json_metadata.category }}</router-link> / <router-link :to="'/categories/' + currentGig.json_metadata.category + '/' + currentGig.json_metadata.subcategory">{{ currentGig.json_metadata.subcategory }}</router-link></p>
             </div>
-            <div class="card-image z-depth-1">
+            <div class="card-image">
               <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
                 <slide v-for="(image, index) in portfolio" :key="index">
                   <img :src="image" :alt="currentGig.title">
@@ -70,6 +71,7 @@
         <profile-card v-if="profileLoaded" :profilepage="false" :profile="profile"></profile-card>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 
@@ -292,6 +294,17 @@ export default {
 img {
   max-width: 100% !important;
 }
+.post-container {
+  background: white;
+  padding: 20px;
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.card-image {
+  border: 1px solid whitesmoke;
+  border-radius: 10px;
+}
   .card-image img {
     height: 30em;
   }
@@ -316,10 +329,6 @@ img {
     a,.link,a *{
       cursor: pointer;
     }
-  }
-  .card-title {
-    font-size: 1.7em;
-    font-weight: 600;
   }
   .tabs {
     width: 100%;
@@ -351,6 +360,13 @@ img {
       }
     }
   }
+
+  .headline {
+    background: 0;
+  }
+
+hr { background-color: red; height: 1px; border: 0; }
+
   .inactiveGigs {
     .card {
       opacity: 0.6;
