@@ -23,7 +23,7 @@
             </div>
             <div class="card-content">
               <loading-placeholder v-if="!contentLoaded" />
-              <div v-html="currentGig.body"></div>
+              <div v-html="adjustedBody"></div>
               <div class="menu row my-2">
                 <div v-if="contentLoaded" class="detail-action">
                   <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
@@ -148,6 +148,9 @@ export default {
       } else {
         return []
       }
+    },
+    adjustedBody () {
+      return this.currentGig.body.replace(/<[^\/>][^>]*><\/[^>]+>/igm, '')
     },
     sellerUsername () {
       return this.currentGig.author
