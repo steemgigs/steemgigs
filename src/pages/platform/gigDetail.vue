@@ -385,6 +385,8 @@ img {
 
 .gig-detail .post-container h3 {
   font-size: 1.25em;
+  margin-top: 0;
+
 }
 
 .gig-detail .post-container h4 {

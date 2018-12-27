@@ -15,7 +15,7 @@
         </router-link>
       </div>
       <div class="card-content">
-       <div class="seller-details"> <img v-if="imgUrl || sellerImg" :src="sellerImg" alt="" class="sellerPic"> <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername"> {{sellerUsername}}</router-link><span class="user-rep">{{ sellerRep }}</span></div>
+       <div class="seller-details"> <img v-if="imgUrl || sellerImg" :src="sellerImg" alt="" class="sellerPic"> <router-link class="sellerName" :to="'/@' + sellerUsername"> {{ sellerUsername }}</router-link><span class="user-rep">{{ sellerRep }}</span></div>
         <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" v-text="title" />
         <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
         <p class="price">
