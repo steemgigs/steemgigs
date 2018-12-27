@@ -304,12 +304,9 @@ img {
   border-radius: 10px;
 }
 
-.card-image {
-  border: 1px solid whitesmoke;
-  border-radius: 10px;
-}
   .card-image img {
-    height: 30em;
+   width: 100%;
+   border-radius: 10px;
   }
   .detail-action {
     float: right;
