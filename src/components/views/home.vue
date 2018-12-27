@@ -1,28 +1,17 @@
 <template>
   <div class="home__view row">
     <cat-nav />
-    <el-main>
-    <div class="col s12 m12 l12">
-      <carousel id="home_ad_slider" :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
+          <carousel id="home_ad_slider" :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
         <slide>
-          <img src="/static/img/boy_slide.png" class="responsive-img" alt="">
-          <div class="caption">
-            <h3>Want to build a dream?</h3>
-            <h5>Find out now!</h5>
-          </div>
-        </slide>
-        <slide>
-          <img src="/static/img/working.png" class="responsive-img" alt="">
-          <div class="caption">
-             <h3>Want to build a dream?</h3>
-            <h5>Find out now!</h5>
-          </div>
+          <img src="/static/img/share.png" class="responsive-img" alt="">
         </slide>
       </carousel>
+    <el-main>
+    <div class="col s12 m12 l12">
       <section id="steemgigs" class="row">
         <div class="col s12 header-row">
           <h3 class="left">Gigs</h3>
-          <span class="right" style="margin-top: 1.5em;">
+          <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
               <option value="tranding">Trending</option>
@@ -106,7 +95,7 @@
       <section id="gigrequests" class="row">
         <div class="col s12 header-row">
           <h3 class="left">Gig Requests</h3>
-          <span class="right" style="margin-top: 1.5em;">
+          <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
               <option value="tranding">Trending</option>
@@ -136,7 +125,7 @@
       <section id="testimonials" class="row">
         <div class="col s12 header-row">
           <h3 class="left">Testimonials</h3>
-          <span class="right" style="margin-top: 1.5em;">
+          <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
               <option value="tranding">Trending</option>
@@ -167,7 +156,7 @@
           <section id="surpassinggooglerequest" class="row">
         <div class="col s12">
           <h3 class="left">SurpassingGoogle (The Knowledge Bank of SteemGigs)</h3>
-          <span class="right" style="margin-top: 1.5em;">
+          <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
               <option value="tranding">Trending</option>
@@ -359,8 +348,7 @@ $blue: #6361D0;
     background: #ccc;
     width: 100%;
     object-fit: cover;
-    margin-top: 0.5em;
-    filter: brightness(0.75);
+
   }
   .caption {
     position: absolute;
