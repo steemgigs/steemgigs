@@ -136,7 +136,6 @@ export default {
   beforeDestroy () {
     this.$eventBus.$off('profile-fetched')
   }
- 
 }
 </script>
 
