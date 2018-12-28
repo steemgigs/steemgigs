@@ -8,9 +8,15 @@
         </div>
       </div>
       <!-- Search Results -->
-      <div v-else class="col s12 m6 l3" v-for="(gig, index) in searchResults" :key="index">
+      <div v-else-if="searchResults.length !== 0" class="col s12 m6 l3" v-for="(gig, index) in searchResults" :key="index">
         <gig-card :gigData="gig" />
       </div>
+      <!-- No Results to Show -->
+      <div v-else class="col s12 m12 l12 center-align row">
+        <h3>No Results to Show</h3>
+        <h5>We couldn't find anything for that, why not try another search or alternatively check out some more gigs</h5>
+        <router-link to="/steemgigs"><el-button type="secondary" class="secondary">Explore Gigs</el-button></router-link>
+        </div>
     </el-main>
   </page>
 </template>
