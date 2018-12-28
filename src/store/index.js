@@ -11,6 +11,7 @@ export default new Vuex.Store({
     username: '',
     lastPageTried: '',
     lastPage: '',
+    searchTerm: '',
     profile: {
       about: '',
       coverImage: '',
@@ -236,6 +237,14 @@ export default new Vuex.Store({
         upvoteRange: 100,
         liked: false
       }
+    },
+    setSearchTerm (state, term) {
+      state.searchTerm = term
+    }
+  },
+  getters: {
+    searchTerm: state => {
+      return state.searchTerm
     }
   },
   plugins: [createPersist({
