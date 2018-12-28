@@ -1,7 +1,14 @@
 <template>
   <page :pageClasses="['search__view', 'row']">
     <el-main>
-      <div class="col s12 m6 l3" v-for="(gig, index) in searchResults" :key="index">
+      <!-- Loading Placeholder - Consistent with categories.vue -->
+      <div v-if="isSearching">
+        <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
+          <loading-placeholder />
+        </div>
+      </div>
+      <!-- Search Results -->
+      <div v-else class="col s12 m6 l3" v-for="(gig, index) in searchResults" :key="index">
         <gig-card :gigData="gig" />
       </div>
     </el-main>
@@ -12,6 +19,7 @@
 import Api from '@/services/api'
 import GigCard from '@/components/snippets/gigCard'
 import Page from '@/components/page'
+import LoadingPlaceholder from '@/components/widgets/gigLoading'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -19,12 +27,14 @@ export default {
   data: function () {
     return {
       isSearching: '',
-      searchResults: null
+      searchResults: null,
+      loadingPlaceholderCount: 4
     }
   },
   components: {
     GigCard,
-    Page
+    Page,
+    LoadingPlaceholder
   },
   mounted () {
     // Set the search term from query to allow a user to navigate directly to the search page
