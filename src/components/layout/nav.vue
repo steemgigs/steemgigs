@@ -1,6 +1,6 @@
 <template>
   <div class="navbar-fixed">
-    <nav class="white" :class="searchActive ? 'search-active': ''">
+    <nav class="white">
       <div class="nav-wrapper container">
         <router-link to="/" class="brand-logo left"><img src="/static/img/logo.gif" alt="logo"></router-link>
         <ul class="right notIn" v-if="!$store.state.accessToken">
@@ -9,7 +9,6 @@
         </ul>
         <ul class="right shrink nav-options-wrapper" v-if="$store.state.accessToken">
           <div class="hide-on-med-and-down left">
-            <li><a href="#" @click="openSearch" class="search-icon"><i class="ion-ios-search-strong x2"></i></a></li>
             <li>
               <router-link to="/message"><i class="icon ion-android-chat x2"></i></router-link>
             </li>
@@ -72,7 +71,6 @@
         </ul>
       </div>
     </nav>
-    <search-box />
     <div id="loginPrompt" class="modal">
       <div class="modal-content grey-text text-darken-1 login-modal">
         <h4>Redirection to SteemConnect V2</h4>
@@ -89,31 +87,23 @@
 
 <script>
 import sc2 from '@/services/sc2'
-import SearchBox from '@/components/layout/searchBox'
 import M from 'materialize-css'
 
 export default {
   components: {
-    SearchBox
+
   },
   data () {
     return {
       user: '',
       metadata: '',
-      searchActive: false,
-      searchResults: [],
-      currentSearchPage: 1,
       searchTerm: '',
       isAuth: false,
       loginURL: sc2.getLoginURL(),
-      isSearching: false,
       profile: this.$store.state.profile
     }
   },
   methods: {
-    openSearch () {
-      this.$eventBus.$emit('open-search')
-    }
   },
   computed: {
     repp () {
@@ -138,45 +128,7 @@ export default {
   beforeDestroy () {
     this.$eventBus.$off('profile-fetched')
   }
-  // methods: {
-  //   search: debounce(function () {
-  //     this.isSearching = true
-  //     let searchTerm = this.searchTerm
-  //     console.log('searc term:', searchTerm)
-  //     Api.search(searchTerm).then(result => {
-  //       this.isSearching = false
-  //       this.searchResults = result.data
-  //       console.log(this.searchResults)
-  //     }).catch(e => {
-  //       this.isSearching = false
-  //       this.errorText = 'there was an error with search'
-  //       console.log('error:', e)
-  //     })
-  //   }, 1000),
-  //   closeSearch (cb) {
-  //     this.searchTerm = ''
-  //     this.searchResults = []
-  //     cb()
-  //   },
-  //   goto (where) {
-  //     this.closeSearch(this.$router.push(where))
-  //     // this.$router.push(where)
-  //   }
-  // },
-  // computed: {
-  //   currentResults () {
-  //     let perpage = 0
-  //     this.searchResults.length > 50 ? perpage = 20 : perpage = 10
-  //     let start = ((this.currentSearchPage - 1) * perpage) + 1
-  //     let end = this.currentSearchPage * perpage
-  //     console.log('start:', start, 'end:', end, 'of =>', this.searchResults.length)
-  //     if (end >= this.searchResults.length) {
-  //       let feed = this.searchResults.slice((start - 1), (end - 1))
-  //       console.log('feed:', feed)
-  //       return feed
-  //     }
-  //   }
-  // }
+ 
 }
 </script>
 
@@ -197,52 +149,6 @@ export default {
   nav {
     box-shadow: 0 0;
     border-bottom: 0px solid #e9e7e7;
-    .search-icon {
-      position: absolute;
-      right: 0;
-    }
-    .search-panel {
-      // width: 0;
-      // overflow: hidden;
-      // transition: all .7s ease-in;
-      // border-radius: 50px;
-      // border: none;
-      // background: rgb(238, 238, 238);
-      // display: inline-block;
-      // transform: translateY(-2.3px);
-      &:focus {
-        outline: 0 solid;
-        border: 1px solid rgb(203, 135, 252);
-      }
-    }
-    &.search-active {
-      .search-panel {
-        width: 300px;
-        padding: 7px 15px;
-      }
-      .search-dropdown {
-        display: block !important;
-        margin-top: 58px;
-        margin-left: 50px;
-        color: #333;
-        background: #eeeeef;
-        text-align: center;
-        padding: 2px 25px;
-        border-radius: 3px;
-        box-shadow: 0 3px 9px rgba(223, 223, 223, 0.2);
-        li {
-          float: none;
-          cursor: pointer;
-          transition: color .3s ease;
-          &:hover {
-            color: #6361D0;
-          }
-        }
-      }
-      // .shrink {
-      //   width: 0;
-      // }
-    }
     .nav-wrapper {
       &.container {
         min-width: calc(100% - 60px);
