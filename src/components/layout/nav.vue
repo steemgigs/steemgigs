@@ -10,6 +10,9 @@
         <ul class="right shrink nav-options-wrapper" v-if="$store.state.accessToken">
           <div class="hide-on-med-and-down left">
             <li>
+              <el-input prefix-icon="el-icon-search" @keydown.enter.native="initSearch" size="medium" type="text" placeholder="Search SteemGigs" v-model="searchTerm" />
+            </li>
+            <li>
               <router-link to="/message"><i class="icon ion-android-chat x2"></i></router-link>
             </li>
             <li>
@@ -104,6 +107,11 @@ export default {
     }
   },
   methods: {
+    initSearch () {
+      this.$store.commit('setSearchTerm', this.searchTerm)
+      this.$router.push(`/search/${this.searchTerm}`)
+      this.searchTerm = ''
+    }
   },
   computed: {
     repp () {
