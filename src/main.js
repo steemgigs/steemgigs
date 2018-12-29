@@ -501,7 +501,7 @@ Vue.prototype.categories = [
         'description': ''
       },
       {
-        'name': 'databses',
+        'name': 'databases',
         'description': ''
       },
       {
