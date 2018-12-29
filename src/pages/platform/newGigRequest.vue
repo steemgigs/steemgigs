@@ -8,8 +8,8 @@
           <dismissible-notice>
       <span>Oh you didn't find your gig! Post a custom request below</span>
     </dismissible-notice>
-      <div class="col s12 m7 l9 row" >
-        <form class="card-panel row" v-if="currentSection === 0">
+      <div class="col s12 m7 l9 row editor-container" >
+        <form v-if="currentSection === 0">
           <div class="container gigForm">
             <div class="mx-2">
               <p class="flow-text title">Custom Request</p>

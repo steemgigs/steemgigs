@@ -14,8 +14,8 @@
       You can also use this editor if you're a new steemian to startup your steemit journey (#introduceyourself) as this editor will create a flow that you can follow closely for your posts to appear enviable on steemit.
       Posts created on this editor will only appear on https://busy.org and https://steemit.com for now and will not appear on https://steemgigs.org yet</span>
       </dismissible-notice>
-      <div class="col s12 m7 l9 row" >
-        <form class="card-panel row" v-if="currentSection === 0">
+      <div class="col s12 m7 l9 row editor-container">
+        <form v-if="currentSection === 0">
           <div class="container gigForm">
             <div class="mx-2">
               <p class="flow-text title">Post Title</p>

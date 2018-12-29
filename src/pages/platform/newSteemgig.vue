@@ -5,8 +5,8 @@
     </ul>
     <el-main>
     <div class="container" @keypress.tab="nextSection">
-      <div class="col s12 m7 l9 row">
-        <form class="card-panel row" v-if="currentSection === 0">
+      <div class="col s12 m7 l9 row editor-container">
+        <form v-if="currentSection === 0">
           <div class="container gigForm">
             <p class="flow-text title">Gig Title</p>
             <div class="input-field col s12">
