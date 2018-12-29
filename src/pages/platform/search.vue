@@ -1,5 +1,6 @@
 <template>
   <page :pageClasses="['search__view', 'row']">
+    <cat-nav />
     <el-main>
       <!-- Loading Placeholder - Consistent with categories.vue -->
       <div v-if="isSearching">
@@ -26,6 +27,7 @@ import Api from '@/services/api'
 import GigCard from '@/components/snippets/gigCard'
 import Page from '@/components/page'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
+import CatNav from '@/components/layout/catNav'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -40,7 +42,8 @@ export default {
   components: {
     GigCard,
     Page,
-    LoadingPlaceholder
+    LoadingPlaceholder,
+    CatNav
   },
   mounted () {
     // Set the search term from query to allow a user to navigate directly to the search page

@@ -11,61 +11,67 @@
         </div>
       <profile-card v-if="profileFetched" :profilepage="true" :profile="profile"></profile-card>
     </div>
+    <!-- Tab Selection -->
     <div class="col s12 m8 l9 row">
       <ul class="tabs">
         <li class="tab col s4"><a :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">Active SteemGigs</a></li>
         <li class="tab col s4"><a :class="{active: currentView === 'gig_request'}" @click="changeView('gig_request')">Custom Requests</a></li>
         <li class="tab col s4"><a :class="{active: currentView === 'gig_contribution'}" @click="changeView('gig_contribution')">Contributions</a></li>
       </ul>
+      <!-- Tab 1 -->
       <div v-if="currentView === 'active_gigs'" class="activeGigs">
+        <!-- Loading Placeholder -->
         <div v-if="loading">
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
+          <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
+          <loading-placeholder class="card-panel" />
         </div>
-        <div v-if="steemgigs.length !== 0" class="col s12 m6 l4" v-for="(gig, index) in steemgigs" :key="index">
+        </div>
+        <!-- Tab Data -->
+        <div v-else-if="steemgigs.length !== 0" class="col s12 m6 l4" v-for="(gig, index) in steemgigs" :key="index">
           <gig-card :gigData="gig" meantFor="profile" />
         </div>
-        <div v-else >Nothing to show</div>
+        <!-- No Results Returned -->
+       <div v-else class="col s12 center-align noShow">
+          <h3>No SteemGigs to Show</h3>
+          <h5>There are currently no active SteemGigs to display</h5>
+        </div>
       </div>
-      <div v-if="currentView === 'gig_request'">
+       <!-- Tab 2 -->
+      <div v-show="currentView === 'gig_request'">
+         <!-- Loading Placeholder -->
         <div v-if="loading">
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
+          <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
+          <loading-placeholder class="card-panel" />
           </div>
         </div>
-        <div class="col s12 m6 l4" v-for="(gig, index) in gigrequests" :key="index">
+        <!-- Tab Data -->
+        <div v-else-if="gigrequests.length !== 0" class="col s12 m6 l4" v-for="(gig, index) in gigrequests" :key="index">
           <gig-card :gigData="gig" meantFor="profile" />
         </div>
-      </div>
-      <div v-if="currentView === 'gig_contribution'">
+        <!-- No Results Returned -->
+        <div v-else class="col s12 center-align noShow">
+          <h3>No Gig Requests to Show</h3>
+          <h5>There are currently no active gig requests to display</h5>
+        </div>
+        </div>
+       <!-- Tab 3 -->
+      <div v-show="currentView === 'gig_contribution'">
+        <!-- Loading Placeholder -->
         <div v-if="loading">
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
+          <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
+          <loading-placeholder class="card-panel" />
           </div>
         </div>
-        <div class="col s12 m6 l4" v-for="(gig, index) in contributions" :key="index">
+        <!-- Tab Data -->
+        <div v-else-if="contributions.length !== 0" class="col s12 m6 l4" v-for="(gig, index) in contributions" :key="index">
           <gig-card :gigData="gig" meantFor="profile" />
         </div>
-      </div>
+        <!-- No Results Returned -->
+        <div v-else class="col s12 center-align noShow">
+          <h3>No Contributions to Show</h3>
+          <h5>There are currently no active contributions to display</h5>
+        </div>
+        </div>
     </div>
     </el-main>
   </page>
@@ -98,7 +104,8 @@ export default {
       usergigs: [],
       userRequests: [],
       currentView: 'active_gigs',
-      loading: true
+      loading: true,
+      loadingPlaceholderCount: 3
     }
   },
   beforeCreate () {
@@ -193,5 +200,9 @@ export default {
     .card {
       opacity: 0.6;
     }
+  }
+
+  .noShow {
+    margin-top: 20px;
   }
 </style>

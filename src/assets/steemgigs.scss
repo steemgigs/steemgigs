@@ -1956,8 +1956,13 @@ hr {
     margin-bottom: auto !important;
   }
 }
-
-  
 .VueCarousel-pagination {
   display: none !important;
+}
+
+.el-dropdown-menu__item a {
+  width: 100%;
+  display: block;
+  padding: 0;
+  margin: 0;
 }

@@ -92,7 +92,7 @@ export default {
     position: fixed;
     bottom: 0;
     z-index: 2000;
-    right: 45px;
+    right: 75px;
     .feedback-panel {
       .close {
         position: absolute;
