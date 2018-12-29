@@ -117,7 +117,7 @@ export default {
       opacity: 1;
       visibility: visible;
       border-radius: 10px;
-      margin-top: 5px;
+      margin-top: 1px;
       background: #fff;
       display: -webkit-box;
       display: -ms-flexbox;
