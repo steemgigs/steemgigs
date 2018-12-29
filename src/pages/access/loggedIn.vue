@@ -1,7 +1,7 @@
 <template>
   <div class="center">
-    <h1><br>You are logged in.</h1>
-    <p class="flow-text">Redirecting...</p>
+    <h3><br>You are logged in.</h3>
+    <h5>Redirecting...</h5>
   </div>
 </template>
 

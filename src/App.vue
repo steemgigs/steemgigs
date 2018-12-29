@@ -1,7 +1,8 @@
 <template>
+    <el-container>
   <div id="app">
     <nav-bar />
-    <router-view/>
+   <router-view/>
     <notifications group="foo" position="top left" />
     <div v-show="$store.state.accessToken" class="fixed-action-btn hide-on-large-only">
       <a class="btn-floating btn indigo">
@@ -33,6 +34,7 @@
       </li>
     </ul>
   </div>
+</el-container>
 </template>
 
 <script>
@@ -71,15 +73,16 @@ export default {
 </script>
 
 <style lang="scss">
+
   ul.sidenav > li
   {
     .go-to {
-      color: #4b5ab9;
+      color: #6361D0;
       margin-left: 4rem;
     }
     &.active {
       .collapsible-header {
-        background-color: #4b5ab9;
+        background-color: #6361D0;
         color: white;
         box-shadow: 0 6px 13px rgba(0, 0, 0, 0.2);
         overflow: scroll;

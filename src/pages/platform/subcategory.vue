@@ -1,10 +1,11 @@
 <template>
   <page :pageClasses="['categories__view', 'row']">
     <cat-nav />
+    <el-main>
     <div class="col s12 center-align row">
-      <h1 class="grey-text darken-1">
-            <router-link class="grey-text text-lighten-1" :to="'/categories/' + slugify(categoryDetails.name)">{{ capitalize(categoryDetails.name) }}</router-link> > <span class="grey-text text-darken-2">{{categoryDetails.subcategory}}</span></h1>
-      <p class="flow-text">{{ categoryDetails.description }}</p>
+      <h3 class="grey-text darken-1">
+            <router-link class="grey-text text-lighten-1" :to="'/categories/' + slugify(categoryDetails.name)">{{ capitalize(categoryDetails.name) }}</router-link> > <span class="grey-text text-darken-2">{{categoryDetails.subcategory}}</span></h3>
+      <h5>{{ categoryDetails.description }}</h5>
       <div v-if="loading">
         <div class="col s12 m6 l3">
           <loading-placeholder />
@@ -29,6 +30,7 @@
         </div>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 

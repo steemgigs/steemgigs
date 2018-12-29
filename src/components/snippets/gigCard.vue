@@ -15,8 +15,7 @@
         </router-link>
       </div>
       <div class="card-content">
-        <img v-if="imgUrl || sellerImg" :src="sellerImg" alt="" class="sellerPic">
-        <router-link v-if="meantFor === 'results'" class="sellerName" :to="'/@' + sellerUsername"> {{sellerUsername + ' (' + sellerRep + ') '}} </router-link>
+       <div class="seller-details"> <img v-if="imgUrl || sellerImg" :src="sellerImg" alt="" class="sellerPic"> <router-link class="sellerName" :to="'/@' + sellerUsername"> {{ sellerUsername }}</router-link><span v-if="sellerRep" class="user-rep">{{ sellerRep }}</span></div>
         <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" v-text="title" />
         <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
         <p class="price">
@@ -97,14 +96,16 @@ export default {
       return this.gigData.author
     },
     sellerImg () {
-      return this.gigData.json_metadata.authorPic
+      return `https://steemitimages.com/u/${this.gigData.author}/avatar`
     },
     sellerRep () {
       return this.gigData.rep
     },
     portfolio () {
-      if (this.gigData.json_metadata.images) {
-        return this.gigData.json_metadata.images
+      if ('json_metadata' in this.gigData) {
+        if (this.gigData.json_metadata.images) {
+          return this.gigData.json_metadata.images
+        } else return []
       } else return []
     }
   }
@@ -112,13 +113,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$blue: #4757b2;
+$blue: #6361D0;
 .card.gig {
-  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
   transition: all .2s ease-in;
   &:hover {
-    box-shadow: 0 3px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 3px 30px rgba(0, 0, 0, 0.15);
   }
   cursor: pointer;
   .card-image {
@@ -126,42 +127,39 @@ $blue: #4757b2;
     object-fit: cover;
     max-height: 10em;
     overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
   .card-cont {
-    height: 23em;
+    height: 20em;
     overflow: hidden;
   }
   .card-content {
-    padding: 3em 1em 1em;
-    position: relative;
     .sellerPic {
       border-radius: 50%;
-      border: 1px solid #4757b2;
-      width: 2.1em;
-      height: 2.1em;
-      margin-top: 0px;
-      margin-left: 0em;
+      border: 1px solid #6361D0;
+      width: 35px;
+      height: 35px;
       display: inline-block;
-      position: absolute;
-      top: 1em;
     }
     .sellerName {
-      position: absolute;
-      left: 3.5em;
       color: black;
-      margin-top: 0.2em;
+      margin: 0 0.5rem;
       transition: all ease-in .3s;
-      top: 1em;
+      font-size: 14px;
+      font-weight: bold;
       &:hover {
         text-decoration: underline;
       }
     }
     .task {
-      font-weight: 600;
+      font-size: 14px;
+      color: black;
     }
     .price {
       margin-top: 0.5em;
       font-weight: 500;
+      font-size: 13px;
     }
   }
   .card-action {
@@ -171,6 +169,26 @@ $blue: #4757b2;
       margin-right: 10px;
       cursor: pointer;
     }
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
   }
+
+    .user-rep {
+      background: #6361D0;
+    padding: 2px 6px;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid #6361D0;
+  }
+
+  .seller-details {
+    margin: 0.5em 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
 }
 </style>

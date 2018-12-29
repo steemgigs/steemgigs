@@ -30,7 +30,7 @@
       <div class="row right-align">
         <div class="col s12 pt-2">
           <button @click.prevent="commentMode = false" class="btn indigo lighten-2 waves-effect">Cancel</button>
-          <button class="btn indigo waves-effect" @click="postComment"><i class="fa fa-spinner fa-pulse" v-if="isPosting"></i> Post</button>
+          <el-button type="primary" class="primary waves-effect" @click="postComment"><i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>Post</el-button>
         </div>
       </div>
     </div>
@@ -199,7 +199,7 @@ export default {
       return this.commentFor.author
     },
     sellerImg () {
-      return this.commentFor.userImg
+      return `https://steemitimages.com/u/${this.commentFor.author}/avatar`
     },
     sellerRep () {
       return this.commentFor.rep
@@ -265,7 +265,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  $blue: #4757b2;
+  $blue: #6361D0;
 .comment {
   position: relative;
   padding-left: 65px;

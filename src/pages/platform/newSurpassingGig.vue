@@ -11,7 +11,7 @@
     </dismissible-notice>
     <div class="container" @keypress.tab="nextSection">
       <div class="col s12 m7 l9 row" >
-        <form class="card-panel row" v-if="currentSection === 0">
+        <form class=" row" v-if="currentSection === 0">
           <div class="container gigForm">
             <div class="mx-2">
               <p class="flow-text title">{{capitalize(getSubCategoryName.name)}}</p>
@@ -138,7 +138,7 @@
                 </div>
               </div>
             </div>
-            <div v-if="errorr" class="simple-card card-panel">
+            <div v-if="errorr" class="simple-card ">
               <p v-if="!validTitle" class="red-text mt-1 mb-0" v-text="'Title must be more than 5 characters'" />
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
               <p v-if="subcatError" class="red-text mt-1 mb-0" v-text="subcatError" />
@@ -466,7 +466,7 @@ select.my-select {
   background: white;
   border-bottom: 1px solid #ccc;
   border-top: 1px solid #f8f8f8;
-  top: 150px;
+  top: 50px;
   position: fixed;
   width: 100%;
   z-index: 2;
@@ -495,14 +495,14 @@ select.my-select {
       box-sizing: border-box;
       transition: all ease-in-out .3s;
       &.active, &:hover {
-        color: black;
+        color: #6361D0;
         font-weight: 500;
       }
       &::after, &.active::after {
         content: ' ';
         height: 2px;
         width: 0%;
-        background: black;
+        background: #6361D0;
         display: inline-block;
         position: absolute;
         left: 0;

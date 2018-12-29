@@ -1,14 +1,15 @@
 <template>
   <page :pageClasses="['post_new_steemgig__view', 'row']">
-    <dismissible-notice>
-      <span>The steemgigs testimonial editor can be used by both steemgigan and steemian client over the course of a successful transaction and will appear as full blown blog posts both on steemgigs.org and steemit for potential rewards. Both parties can earn additional rewards from writing steemgigs testimonials as not only does it increase the reputation of both parties but it creates values as post, creates transparency and promotes steem in the search engine and also as a blockchain where "where everyone is a reputable/talented brother"</span>
-    </dismissible-notice>
     <ul class="sections hide-on-med-and-down center">
       <li v-for="(section, index) in sections" :key="index"><a v-text="section" :class="{active: index === currentSection}" @click="switchTo(index)"></a></li>
     </ul>
+    <el-main>
     <div class="container" @keypress.tab="nextSection">
-      <div class="col s12 m7 l9 row" >
-        <form class="card-panel row" v-if="currentSection === 0">
+      <dismissible-notice>
+      <span>The steemgigs testimonial editor can be used by both steemgigan and steemian client over the course of a successful transaction and will appear as full blown blog posts both on steemgigs.org and steemit for potential rewards. Both parties can earn additional rewards from writing steemgigs testimonials as not only does it increase the reputation of both parties but it creates values as post, creates transparency and promotes steem in the search engine and also as a blockchain where "where everyone is a reputable/talented brother"</span>
+      </dismissible-notice>
+      <div class="col s12 m7 l9 row editor-container" >
+        <form v-if="currentSection === 0">
           <div class="container gigForm">
             <!-- <p class="sub-title">Oh you didn't find your gig! Post a custom request below</p> -->
             <div class="mx-2">
@@ -37,7 +38,7 @@ Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look
             </div>
             <div class="input-field col s12">
               <vue-editor v-model="newTestimonial.description" placeholder="Describe your experience with steemgigs" :upload="uploadConfig"></vue-editor>
-              <div v-if="descError" class="simple-card card-panel">
+              <div v-if="descError" class="simple-card ">
                 <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
               </div>
               <div class="tutorial_guide hide-on-small-only center-align">
@@ -70,7 +71,7 @@ Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look
             </div>
           </div>
           <div class="col s12 row">
-              <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
+              <el-button class="right waves-effect" @click.prevent="nextSection">Next</el-button>
           </div>
         </form>
         <div class="row" v-if="currentSection === 1">
@@ -100,23 +101,24 @@ Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look
                 </div>
               </div>
             </div>
-            <div v-if="errorr" class="simple-card card-panel">
+            <div v-if="errorr" class="simple-card ">
               <p v-if="!validTitle" class="red-text mt-1 mb-0" >Title must be at least 5 characters</p>
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
             </div>
           </div>
           <div class="col s12 row">
-            <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-            <button :disabled="Boolean(errorr)" class="right btn indigo waves-effect" @click.prevent="submit">
+            <el-button type="secondary" @click.prevent="prevSection" class="secondary waves-effect">Back</el-button>
+            <el-button :disabled="Boolean(errorr)"  type="primary" class="right primary waves-effect" @click.prevent="submit">
               <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
               POST #STEEMGIG
-            </button>
+            </el-button>
             <p class="red-text" v-if="errorText">Error: {{ errorText }}</p>
             <p class="indigo-text" v-if="successText">{{ successText }}</p>
           </div>
         </div>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 
@@ -353,7 +355,7 @@ select.my-select {
   background: white;
   border-bottom: 1px solid #ccc;
   border-top: 1px solid #f8f8f8;
-  top: 41px;
+  top: 50px;
   position: fixed;
   width: 100%;
   z-index: 2;
@@ -382,14 +384,14 @@ select.my-select {
       box-sizing: border-box;
       transition: all ease-in-out .3s;
       &.active, &:hover {
-        color: black;
+        color: #6361D0;
         font-weight: 500;
       }
       &::after, &.active::after {
         content: ' ';
         height: 2px;
         width: 0%;
-        background: black;
+        background: #6361D0;
         display: inline-block;
         position: absolute;
         left: 0;

@@ -1,76 +1,30 @@
 <template>
   <div class="home__view row">
     <cat-nav />
-    <div class="col s12 m4 l2 hide-on-med-and-down steemgigs_ads">
-      <div class="card center center-align request">
-        <div class="card-content">
-          <p>Can&rsquo;t find what you&rsquo;re Seeking?<br>You can post "Custom Requests" and we&rsquo;ll lovingly look for reputable great minds to handle it</p>
-          <router-link to="/steemgigs_request" tag="button" class="btn btn-block indigo">Post custom request</router-link>
-        </div>
-      </div>
-      <div class="card searches">
-        <div class="card-content">
-          <span class="card-title red-text">Popular Searches</span>
-          <ul>
-            <li><a>#Steemgigs</a></li>
-            <li><a>#javascript</a></li>
-            <li><a>#illustration</a></li>
-            <li><a>#Design</a></li>
-            <li><a>#logo</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="card center center-align request">
-        <div class="card-content">
-          <p>Earn some rewards by telling us about your successful "SteemGigs Experience"</p><p> (For both SteemGiggers &amp; Clients)</p>
-          <router-link to="/create_testimonial" tag="button" class="btn btn-block indigo">Post a testimonial</router-link>
-        </div>
-      </div>
-      <div class="card center center-align request">
-        <div class="card-content">
-          <!-- <p>New to steemgigs and not sure what to do?</p> -->
-          <p>Do you want to write just the perfect steemit post?</p>
-          <p>We have a specialized editor that makes this possible!</p>
-          <router-link to="/untalented_editor" tag="button" class="btn btn-block indigo">Untalented Editor</router-link>
-        </div>
-      </div>
-      <witness-card v-if="!$store.state.profile.steemgigsWitness"/>
-    </div>
-    <div class="col s12 m8 l10">
-      <carousel id="home_ad_slider" :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
+          <carousel id="home_ad_slider" :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
         <slide>
-          <img src="/static/img/boy_slide.png" class="responsive-img" alt="">
-          <div class="caption">
-            <h2>Want to build a dream?</h2>
-            <p class="flow-text">Find out now!</p>
-          </div>
-        </slide>
-        <slide>
-          <img src="/static/img/working.png" class="responsive-img" alt="">
-          <div class="caption">
-            <h2>Want to build a dream?</h2>
-            <p class="flow-text">Find out now!</p>
-          </div>
+          <img src="/static/img/share.png" class="responsive-img" alt="">
         </slide>
       </carousel>
+    <el-main>
+    <div class="col s12 m12 l12">
+      <!-- Gigs -->
       <section id="steemgigs" class="row">
-        <div class="col s12">
-          <h4 class="left">#STEEMGIGS</h4>
-          <span class="right" style="margin-top: 1.5em;">
-            <select class="browser-default">
-              <option value="" disabled selected>Sort By</option>
-              <option value="tranding">Trending</option>
-              <option value="new">New</option>
-              <option value="active">Active</option>
-              <option value="hot">Hot</option>
-              <option value="promoted">Promoted</option>
-            </select>
+        <div class="col s12 header-row">
+         <div>
+            <h3>SteemGigs</h3>
+          <span class="header-desc">See what the SteemGigs community has to offer</span>
+          </div>
+          <span class="right">
+            <el-select v-model="viewOptionSelection.steemGigs" placeholder="Sort By" class="browser-default">
+              <el-option v-for="(option, index) in viewOptions" :key="index" class="feed-option" :value="option">{{ option }}</el-option>
+            </el-select>
           </span>
         </div>
         <div v-if="steemgigs.length < 1" class="col s12 center-align center">
           <plane v-if="!postsFetched" size="100" />
           <div v-if="postsFetched">
-            <p class="flow-text grey-text">Be the first to post a gig, click button below</p>
+            <h5>Be the first to post a gig, click button below</h5>
             <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
           </div>
           <br><br>
@@ -80,7 +34,7 @@
           <gig-card :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-          <router-link class="btn indigo" to="/steemgigs" tag="button">View More</router-link>
+          <el-button class="secondary" type="secondary"><router-link to="/steemgigs">Explore Gigs</router-link></el-button>
         </div>
       </section>
       <!-- <section id="untalented" class="row">
@@ -108,85 +62,79 @@
         </div>
       </section> -->
       <section id="featured" class="row">
-        <div class="col s12">
-          <h5 class="left">#FEATURED</h5>
+        <div class="col s12 header-row">
+          <div>
+            <h3>Featured</h3>
+          <span class="header-desc">Post a fantastic STEEMGIG, it stands a chance of being featured here</span>
+          </div>
           <span class="right">
-            <select class="browser-default">
-              <option value="" disabled selected>Sort By</option>
-              <option value="tranding">Trending</option>
-              <option value="new">New</option>
-              <option value="active">Active</option>
-              <option value="hot">Hot</option>
-              <option value="promoted">Promoted</option>
-            </select>
+            <el-select  v-model="viewOptionSelection.featured" placeholder="Sort By" class="browser-default">
+              <el-option v-for="(option, index) in viewOptions" :key="index" class="feed-option" :value="option">{{ option }}</el-option>
+            </el-select>
           </span>
         </div>
         <div v-if="featured.length < 1" class="col s12 center-align center">
           <plane v-if="!featuredFetched" size="100" />
           <div v-if="featuredFetched">
-            <p class="flow-text grey-text">Post a fantastic STEEMGIG, it stands a chance of being featured here</p>
-            <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+            <h5>Create a SteemGig today!</h5>
+            <el-button class="secondary" type="secondary"> <router-link to="/create_gig">Create Gig</router-link></el-button>
           </div>
-          <br><br>
-          <br><br>
         </div>
         <div class="col s12 m6 l3" v-for="(gig, index) in featured.slice(0,8)" :key="index">
           <!-- <gig-card :gigData="gig" /> -->
         </div>
         <div class="col s12 center-align py-3">
-          <button @click="moreFeatured" v-if="featured.length > 0" class="btn indigo">View More
+           <el-button class="secondary" type="secondary" @click="moreFeatured" v-if="featured.length > 0">View More
             <i v-if="fetchingFeatured" class="fa fa-spinner fa-pulse"></i>
-          </button>
+          </el-button>
         </div>
       </section>
+
+      <!-- Gig Requests -->
       <section id="gigrequests" class="row">
-        <div class="col s12">
-          <h5 class="left">#GIGREQUESTS</h5>
-          <span class="right" style="margin-top: 1.5em;">
-            <select class="browser-default">
-              <option value="" disabled selected>Sort By</option>
-              <option value="tranding">Trending</option>
-              <option value="new">New</option>
-              <option value="active">Active</option>
-              <option value="hot">Hot</option>
-              <option value="promoted">Promoted</option>
-            </select>
+        <div class="col s12 header-row">
+          <div>
+            <h3>SteemGig Requests</h3>
+          <span class="header-desc">Gig requests provided by our community</span>
+          </div>
+          <span class="right">
+            <el-select v-model="viewOptionSelection.requests" placeholder="Sort By" class="browser-default">
+              <el-option v-for="(option, index) in viewOptions" :key="index" class="feed-option" :value="option">{{ option }}</el-option>
+            </el-select>
           </span>
         </div>
         <div v-if="gigrequests.length < 1" class="col s12 center-align center">
           <plane v-if="!gigrequestsFetched" size="100" />
           <div v-if="gigrequestsFetched" class="center center-align">
-            <p class="flow-text grey-text">Can&rsquo;t find what you&rsquo;re Seeking?<br>You can post Custom requests and we&rsquo;ll lovingly look for reputable great minds to handle it</p>
-            <router-link to="/steemgigs_request" tag="button" class="btn btn-large indigo">Post custom request</router-link>
+            <h5>Can&rsquo;t find what you&rsquo;re Seeking?<br>You can post Custom requests and we&rsquo;ll lovingly look for reputable great minds to handle it</h5>
+             <el-button class="secondary" type="secondary"><router-link to="/steemgigs_request">Post custom request</router-link></el-button>
           </div>
-          <br><br>
-          <br><br>
         </div>
         <div class="col s12 m6 l3" v-for="(gig, index) in gigrequests.slice(0,8)" :key="index">
           <gig-card type="gigRequest" :gigData="gig" />
         </div>
         <div v-if="gigrequests.length > 0" class="col s12 center-align py-3">
-          <router-link class="btn indigo" to="/requested_gigs" tag="button">View More</router-link>
+           <el-button class="secondary" type="secondary"><router-link to="/requested_gigs">Explore Gig Requests</router-link></el-button>
         </div>
       </section>
+
+      <!-- Testimonials -->
       <section id="testimonials" class="row">
-        <div class="col s12">
-          <h5 class="left">#TESTIMONIALS</h5>
-          <span class="right" style="margin-top: 1.5em;">
-            <select class="browser-default">
-              <option value="" disabled selected>Sort By</option>
-              <option value="tranding">Trending</option>
-              <option value="new">New</option>
-              <option value="active">Active</option>
-              <option value="hot">Hot</option>
-              <option value="promoted">Promoted</option>
-            </select>
+        <div class="col s12 header-row">
+          <div>
+            <h3>Testimonials</h3>
+          <span class="header-desc">SteemGigs success stories written by our users</span>
+          </div>
+          <span class="right">
+            <el-select v-model="viewOptionSelection.testimonials" placeholder="Sort By" class="browser-default">
+              <el-option v-for="(option, index) in viewOptions" :key="index" class="feed-option" :value="option">{{ option }}</el-option>
+            </el-select>
           </span>
         </div>
         <div v-if="testimonials.length < 1" class="col s12 center-align center">
           <plane v-if="!testimonialsFetched" size="100" />
           <div v-if="testimonialsFetched" class="center center-align">
-            <p class="flow-text grey-text">Be the first to tell how much you love steemgigs</p>
+            <h5>Be the first to tell how much you love SteemGigs</h5>
             <router-link to="/create_testimonial" tag="button" class="btn indigo">Post a testimonial</router-link>
           </div>
           <br><br>
@@ -196,29 +144,27 @@
           <testimonial-card :testimonial="testimonial" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-          <router-link class="btn indigo" to="/testimonials" tag="button">View More</router-link>
+           <el-button class="secondary" type="secondary"><router-link to="/testimonials">Explore Testimonials</router-link></el-button>
         </div>
       </section>
        <!--Surpassing Google Segment-->
           <section id="surpassinggooglerequest" class="row">
         <div class="col s12">
-          <h4 class="left">#surpassinggoogle (The Knowledge Bank of SteemGigs)</h4>
-          <span class="right" style="margin-top: 1.5em;">
-            <select class="browser-default">
-              <option value="" disabled selected>Sort By</option>
-              <option value="tranding">Trending</option>
-              <option value="new">New</option>
-              <option value="active">Active</option>
-              <option value="hot">Hot</option>
-              <option value="promoted">Promoted</option>
-            </select>
+          <div>
+            <h3>SurpassingGoogle</h3>
+          <span class="header-desc">The Knowledge Bank of SteemGigs</span>
+          </div>
+          <span class="right">
+            <el-select v-model="viewOptionSelection.surpassingGoogle" placeholder="Sort By" class="browser-default">
+              <el-option v-for="(option, index) in viewOptions" :key="index" class="feed-option" :value="option">{{ option }}</el-option>
+            </el-select>
           </span>
         </div>
         <div v-if="steemgigs.length < 1" class="col s12 center-align center">
           <plane v-if="!surpassinggoogleFetched" size="100" />
           <div v-if="surpassinggoogleFetched">
-            <p class="flow-text grey-text">Be the first to post a gig, click button below</p>
-            <router-link to="/create_gig" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+            <h5>Be the first to post a gig, click button below</h5>
+             <el-button class="secondary" type="secondary"><router-link to="/create_gig">Create Gig</router-link></el-button>
           </div>
           <br><br>
           <br><br>
@@ -227,11 +173,12 @@
           <gig-card type="surpassingGoogle" :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-          <router-link class="btn indigo" to="/categories/surpassinggoogle" tag="button">View More</router-link>
+           <el-button class="secondary" type="secondary"><router-link to="/categories/surpassinggoogle">Explore SurpassingGoogle</router-link></el-button>
         </div>
       </section>
       <!--End Surpassing Google segment-->
     </div>
+    </el-main>
   </div>
 </template>
 
@@ -273,7 +220,15 @@ export default {
       untalentedFetched: false,
       fetchingSteemgigs: false,
       fetchingFeatured: false,
-      fetchingTestimonials: false
+      fetchingTestimonials: false,
+      viewOptions: ['trending', 'new', 'active', 'active', 'hot', 'promoted'],
+      viewOptionSelection: {
+        steemGigs: '',
+        requests: '',
+        testimonials: '',
+        featured: '',
+        surpassingGoogle: ''
+      }
     }
   },
   methods: {
@@ -339,7 +294,7 @@ export default {
 </script>
 
 <style lang="scss">
-$blue: #4757b2;
+$blue: #6361D0;
 .steemgigs_ads {
   box-sizing: border-box;
   padding: 0;
@@ -394,8 +349,7 @@ $blue: #4757b2;
     background: #ccc;
     width: 100%;
     object-fit: cover;
-    margin-top: 0.5em;
-    filter: brightness(0.75);
+
   }
   .caption {
     position: absolute;
@@ -414,7 +368,6 @@ $blue: #4757b2;
   }
 }
 section {
-  padding: 0 2em 0 1em;
   .card {
     .card-content {
       padding: 1em;
@@ -428,8 +381,6 @@ section {
         display: inline-block;
       }
       .sellerName {
-        position: absolute;
-        left: 4.5em;
         color: black;
         margin-top: 0.5em;
         transition: all ease-in .3s;
@@ -452,6 +403,7 @@ section {
     }
     .card-action {
       padding: 1em;
+      border-radius: 0 0 10px 10px !important;
       a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
         color: $blue;
         margin-right: 10px;
@@ -459,5 +411,26 @@ section {
       }
     }
   }
+
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px !important;
+}
+
+.header-row:first-child {
+  padding-top: 0;
+}
+
+.browser-default {
+  min-width: 150px;
+}
+}
+
+.feed-option {
+  text-transform: capitalize;
 }
 </style>

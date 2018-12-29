@@ -3,12 +3,13 @@
     <ul class="sections hide-on-med-and-down center">
       <li v-for="(section, index) in sections" :key="index"><a v-text="section" :class="{active: index === currentSection}" @click="switchTo(index)"></a></li>
     </ul>
-    <dismissible-notice>
+    <el-main>
+    <div class="container" @keypress.tab="nextSection">
+          <dismissible-notice>
       <span>Oh you didn't find your gig! Post a custom request below</span>
     </dismissible-notice>
-    <div class="container" @keypress.tab="nextSection">
-      <div class="col s12 m7 l9 row" >
-        <form class="card-panel row" v-if="currentSection === 0">
+      <div class="col s12 m7 l9 row editor-container" >
+        <form v-if="currentSection === 0">
           <div class="container gigForm">
             <div class="mx-2">
               <p class="flow-text title">Custom Request</p>
@@ -110,7 +111,7 @@
                 <input-tag limit="2" class="editable" placeholder="add tags" @update:tags="getTags" :tags="userTags" />
               </div>
               <div class="col s12 row">
-                  <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
+                  <el-button type="primary" class="right primary waves-effect" @click.prevent="nextSection">Next</el-button>
               </div>
             </div>
           </div>
@@ -143,24 +144,25 @@
                 </div>
               </div>
             </div>
-            <div v-if="errorr" class="simple-card card-panel">
+            <div v-if="errorr" class="simple-card">
               <p v-if="!validTitle" class="red-text mt-1 mb-0" v-text="'Title must be more than 5 characters'" />
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
               <p v-if="subcatError" class="red-text mt-1 mb-0" v-text="subcatError" />
             </div>
           </div>
           <div class="col s12 row">
-            <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-            <button :disabled="Boolean(errorr)" class="right btn indigo waves-effect" @click.prevent="submit">
+            <el-button type="secondary" @click.prevent="prevSection" class="secondary waves-effect">Back</el-button>
+            <el-button :disabled="Boolean(errorr)" type="primary" class="right waves-effect primary" @click.prevent="submit">
               <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
               POST #STEEMGIG
-            </button>
+            </el-button>
             <p class="red-text" v-if="errorText">Error: {{ errorText }}</p>
             <p class="indigo-text" v-if="successText">{{ successText }}</p>
           </div>
         </div>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 
@@ -441,7 +443,7 @@ select.my-select {
   background: white;
   border-bottom: 1px solid #ccc;
   border-top: 1px solid #f8f8f8;
-  top: 41px;
+  top: 50px;
   position: fixed;
   width: 100%;
   z-index: 2;
@@ -470,14 +472,14 @@ select.my-select {
       box-sizing: border-box;
       transition: all ease-in-out .3s;
       &.active, &:hover {
-        color: black;
+        color: #6361D0;
         font-weight: 500;
       }
       &::after, &.active::after {
         content: ' ';
         height: 2px;
         width: 0%;
-        background: black;
+        background: #6361D0;
         display: inline-block;
         position: absolute;
         left: 0;
@@ -540,9 +542,9 @@ p {
   .title-before {
     position: absolute;
     color: #757575;
-    top: 0.9px;
-    left: 0.6em;
-    font-size: 28px;
+    top: 2.9px;
+    left: 0.75em;
+    font-size: 25.5px;
   }
   textarea {
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;

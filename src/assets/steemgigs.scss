@@ -1,9 +1,7 @@
-
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-$codeBG: #eee;
+$codeBG: whitesmoke;
 body {
   overflow-x: hidden;
-  background: #eee;
+  background: whitesmoke;
 }
 @media only screen and (min-width: 993px) {
   .container {
@@ -16,15 +14,75 @@ body {
   }
 }
 #app {
-  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #eee;
+  background: whitesmoke;;
   min-height: calc(100vh);
   [class*="__view"] {
-    padding-top: 4em;
+    width: 100vw;
   }
 }
+
+.el-main {
+  padding: 20px 20px;
+}
+
+// Temp Fixes for layout issues with fixed nav
+
+.VueCarousel-wrapper {
+  padding-top: 40px;
+}
+
+.categories__view .el-main, .search__view .el-main {
+  padding: 70px 20px;
+}
+
+.search__view .el-main {
+  padding: 70px 20px;
+}
+
+.profile__view .el-main {
+  padding: 70px 20px;
+}
+
+h1, h2, h4, h5 {
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+h2 {
+  font-size: 2.2em;
+}
+h3 {
+  font-weight: bold;
+  color: #6361D0;
+  font-size: 1.5em;
+  margin: 0;
+
+}
+h4 {
+  font-size: 1.2em;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+p {
+  font-size: 14px;
+}
+
+
+// Primary button styling
+
+.primary {
+  background: #6361D0;
+  border: 1px solid #6361D0;
+}
+
 a {
   color: #3f51b5;
   cursor: pointer;
@@ -75,12 +133,8 @@ p {
     max-width: 100%;
   }
   h2.headline {    
-    font-size: 2.5rem;
-    background: #eee;
-    padding: .2em 1em .2em .2em;
-    margin-bottom: -.1em;
-    color: #000;
-    border-bottom: 1px solid #dbdbdb;
+    font-size: 1rem;
+    font-weight: bold;
   }
 }
 strong {
@@ -231,10 +285,6 @@ img {
   border: 1px solid rgb(63, 81, 181) !important;
   padding: 3px 1em !important;
 }
-input[type=text]:not(.browser-default) {
-  width: auto;
-  height: 100%
-}
 .back {
   .vue-input-tag-wrapper {
     min-height: 2.45em;
@@ -263,6 +313,14 @@ input[type=text]:not(.browser-default) {
   h2 {
     font-size: 2.5rem;
   }
+}
+
+.el-input__icon {
+  font-size: initial !important
+}
+
+hr {
+  border: 1px solid whitesmoke;
 }
 
 // p {
@@ -408,11 +466,6 @@ input[type=text]:not(.browser-default) {
 .mx-2 {
   margin-right: 0.5rem !important;
   margin-left: 0.5rem !important;
-}
-
-.my-2 {
-  margin-top: 0.5rem !important;
-  margin-bottom: 0.5rem !important;
 }
 
 .m-3 {
@@ -622,7 +675,6 @@ input[type=text]:not(.browser-default) {
 
 .py-3 {
   padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
 }
 
 .p-4 {
@@ -1922,8 +1974,25 @@ input[type=text]:not(.browser-default) {
     margin-bottom: auto !important;
   }
 }
-
-  
 .VueCarousel-pagination {
   display: none !important;
+}
+
+.el-dropdown-menu__item a {
+  width: 100%;
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.editor-container {
+  background: white;
+  padding: 20px;
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.editor-container .card {
+  box-shadow: none !important;
 }

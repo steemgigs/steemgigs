@@ -1,6 +1,6 @@
  <template>
   <div class="feedback">
-    <div class="feedback-btn indigo" @click="feedbackActive = true" v-if="!feedbackActive"><span class="emoji">😃</span><span class="hide-on-med-and-down feedbackk"> Feedback</span></div>
+    <div class="feedback-btn indigo" @click="feedbackActive = true" v-if="!feedbackActive"><span class="emoji">😃</span><span class="hide-on-med-and-down feedbackk"> Submit Feedback</span></div>
     <div v-if="feedbackActive" class="feedback-panel center-align pt-2" @mouseover="feedbackHoverText = ' '">
       <span class="close indigo white-text z-depth-2" @click="closeFeedback"><i class="ion-close"></i></span>
       <p v-if="mode === 'initial'" class="title">How would you rate your SteemGigs experience?</p>
@@ -90,9 +90,9 @@ export default {
 <style lang="scss" scoped>
   .feedback {
     position: fixed;
-    top: 50%;
+    bottom: 0;
     z-index: 2000;
-    transform: translateY(-50%);
+    right: 75px;
     .feedback-panel {
       .close {
         position: absolute;
@@ -170,25 +170,19 @@ export default {
       box-shadow: 0 6px 100px 0 rgba(0,0,0,.35);
       background: white;
       position: relative;
-      right: 35px;
+      right: 55px;
       border-radius: 4px;
       width: 350px;
       backface-visibility: hidden;
     }
-    right: -35px;
     .feedback-btn {
-      span.emoji {
-        font-size: 1.3em
-      }
-      span.feedbackk {
-        margin-left: 20px;
-      }
-      transform: rotate(-90deg);
       color: white;
-      padding: 10px;
+      padding: 10px 15px;
       box-shadow: 0 2px 12px rgba(0,0,0,.1);
-      border-radius: 2px 2px 0 0;
+      border-radius: 10px 10px 0 0;
       transition: all .2s ease-in;
+      font-size: 14px;
+      font-weight: bold;
       cursor: pointer;
       &:hover {
         box-shadow: 0 0 35px 2px rgba(0,0,0,.24);

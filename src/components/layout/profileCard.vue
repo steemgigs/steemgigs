@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div >
     <div class="owner">
       <div class="rotating-card" :class="editMode ? 'flipped' : ''">
         <div class="face">
-          <div class="card-panel">
+          <div class="profile-card">
             <span class="editProfile waves-effect" v-if="$store.state.username === profile.username">
               <i v-if="!editMode" @click="editMode = true" class="icon ion-android-create"></i>
             </span>
             <div class="profilePic">
-              <img :src="profile.profilePic || placeholderImg" class="user-pict-img" :alt="profile.username" width="150" height="150">
+              <img :src="profileImage || placeholderImg" class="user-pict-img" :alt="profile.username" width="150" height="150">
             </div>
             <span class="username"> {{ profile.username + ' (' + profile.rep + ') ' }} </span>
             <span class="expertise" v-text="profile.about"></span>
@@ -31,19 +31,20 @@
               </span>
             </p>
             <hr class="my-4">
-            <div class="moreProfileInfo">
-              <span class="card-title left-align">Description</span>
-              <p v-text="profile.about"></p>
-              <router-link v-if="!profilepage" :to="'/@' + profile.username">See More <i class="ion-plus-round"></i></router-link>
+            <div>
+              <router-link v-if="!profilepage" :to="'/@' + profile.username"><el-button class="secondary explore-profile" type="secondary">Explore Profile</el-button></router-link>
             </div>
           </div>
-          <div v-show="!editMode" class="card moreProfileInfo">
+          <div v-show="!editMode" class="moreProfileInfo">
             <div class="card-content">
               <span class="card-title">Links</span>
-              <p class="" v-for="(social, key, index) in profile.social" :key="index" v-text="key + ' - ' + social" />
+              <p class="social-link" v-for="(social, key, index) in profile.social" :key="index">
+                <span class="site-label">{{ key }}:</span><span class="site-link"> {{ social || 'Link not provided' }}</span>
+                </p>
               <span class="card-title">Languages</span>
               <ul>
                 <li v-for="(language, index) in profile.languages" :key="index">{{`${language} - Fluent`}}</li>
+                <li class="not-avail" v-if='profile.languages.length === 0'>No Languages Provided</li>
               </ul>
             </div>
           </div>
@@ -256,6 +257,9 @@ export default {
     since () {
       return moment(this.profile.created).format('MMMM YYYY')
     },
+    profileImage () {
+      return `https://steemitimages.com/u/${this.profile.username}/avatar`
+    },
     ago () {
       return moment(this.profile.last_post).fromNow()
     },
@@ -283,6 +287,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+   .profile-card {
+      border-radius: 10px;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
+    }
+
   select.my-select {
     width: 100% !important;
     pointer-events: initial !important;
@@ -291,6 +303,9 @@ export default {
     opacity: 1 !important;
   }
   .owner {
+    .profile-card span {
+       text-align: center;
+    }
     .rotating-card{
       position: relative;
       min-height: 850px;
@@ -350,42 +365,15 @@ export default {
         }
       }
     }
-    position: relative;
-    .profilePic {
-      float: none;
+    .user-pict-img {
+      height: 75px;
+      width: 75px;
+      border-radius: 50%;
+      margin: auto;
       display: block;
-      position: relative;
-      margin: 0 auto 15px;
-      border-radius: 0;
-      overflow: visible;
-      box-sizing: border-box;
-      width: 150px;
-      height: 150px;
-      &::before {
-        background: rgba(0,0,0,.65);
-        content: "\F030";
-        font: 30px/150px FontAwesome;
-        color: #fff;
-        border-radius: 50%;
-        position: absolute;
-        z-index: 3;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        opacity: 0;
-        text-align: center;
-      }
-      img.user-pict-img {
-        border-radius: 50%;
-        width: 150px;
-        height: 150px;
-        display: block;
-      }
     }
     span {
       display: block;
-      text-align: center;
       &.username {
         font-weight: 600;
       }
@@ -415,6 +403,11 @@ export default {
     }
   }
   .moreProfileInfo {
+    background: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
     .card-title {
       font-size: 1.2em;
       font-weight: 600;
@@ -431,5 +424,27 @@ export default {
     ul {
       margin-top: 0;
     }
+    .site-label {
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    .social-link {
+      display: block;
+
+    }
+
+    .not-avail {
+      font-size: 14px;
+    }
+  }
+
+  .explore-profile {
+    display: block;
+    margin: auto;
+  }
+
+  .expertise {
+    margin: 10px;
   }
 </style>

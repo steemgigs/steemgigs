@@ -2,7 +2,7 @@
   <ul class="subnav center center-align hide-on-med-and-down">
     <li class="main-li" v-for="(category, index) in categories" :key="index">
       <router-link :to="'/categories/' + slugify(category.name)">{{ capitalize(category.name) }}</router-link>
-      <div class="dropdown white z-depth-1 drop">
+      <div class="dropdown white drop">
         <ul>
           <li v-for="(subcategory, subIndex) in half1(category.subcategories)" :key="subIndex">
             <router-link :to="'/categories/' + slugify(category.name) + '/' + slugify(subcategory.name)">{{ capitalize(subcategory.name) }}</router-link>
@@ -75,12 +75,14 @@ export default {
 <style lang="scss" scoped>
 .subnav {
   background: white;
-  border-bottom: 1px solid #ccc;
-  border-top: 1px solid #f8f8f8;
-  top: 41px;
-  position: fixed;
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
   width: 100%;
+  font-size: 14px;
   z-index: 2;
+  margin-top: 0;
+  margin-bottom: 0;
+  border-top: 1px solid whitesmoke;
+  position: fixed;
   li.main-li {
     display: inline-block;
     position: relative;
@@ -99,12 +101,13 @@ export default {
         content: ' ';
         height: 2px;
         width: 0%;
-        background: black;
+        background: #3f50c6;
         display: inline-block;
         position: absolute;
         left: 0;
         bottom: 0;
         transition: all ease-in-out .3s;
+        box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
       }
     }
     .dropdown {
@@ -114,25 +117,20 @@ export default {
       width: auto;
       opacity: 1;
       visibility: visible;
-      // display: block;
-      // z-index: 1;
-      // max-width: 30em;
-      // width: fit-content;
-      // text-align: left;
-      // position: fixed;
+      border-radius: 10px;
+      margin-top: 1px;
       background: #fff;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
       position: absolute;
-      z-index: 1;
+      z-index: 20;
       top: 100%;
       left: 50%;
       right: auto;
       vertical-align: baseline;
       border: 1px #e5e5e5 solid;
       transform: translateX(-50%);
-      // box-shadow: 0 1px 3px #dddddd;
       padding: 0 0;
       -webkit-transition: opacity .1s;
       transition: opacity .1s;
@@ -164,6 +162,10 @@ export default {
         left: 0;
         transform: translateX(0);
 
+    }
+
+    .subcats ul {
+      margin: 0;
     }
   }
 }

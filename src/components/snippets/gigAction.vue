@@ -187,7 +187,7 @@ export default {
 </script>
 
 <style lang="scss">
-$blue: #4757b2;
+$blue: #6361D0;
   a.upvote-btn {
     display: inline-block;
     padding: 0px 4px;
@@ -208,23 +208,18 @@ $blue: #4757b2;
 .card.gig {
   cursor: pointer;
   .card-image {
-    position: relative;
     min-height: 10em;
   }
   .card-content {
-    padding: 3em 1em 1em;
-    position: relative;
     min-height: 11em;
     .sellerPic {
       border-radius: 50%;
-      border: 1px solid #4757b2;
+      border: 1px solid #6361D0;
       width: 2.1em;
       height: 2.1em;
       margin-top: 0px;
       margin-left: 0em;
       display: inline-block;
-      position: absolute;
-      top: 1em;
     }
     .task {
       font-weight: 600;
@@ -237,7 +232,7 @@ $blue: #4757b2;
   .card-action {
     padding: 1em;
     a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
-      color: $blue;
+      color: #9e9e9e;
       margin-right: 10px;
       cursor: pointer;
     }

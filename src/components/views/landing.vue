@@ -6,7 +6,7 @@
       <p>Do the "dreaming"; leave the "building" to us.</p>
       <div class="input-container row">
         <input type="text" @keyup.enter="openSearch" v-model="searchString" class="browser-default my-input">
-        <button @click.stop="openSearch" class="btn-large white-text light-blue darken-4">Search</button>
+       <button @click.stop="search()" class="btn-large white-text light-blue darken-4">Search</button>
       </div>
       <p class="link">Hi Beautiful, <a href="#">see for yourself</a></p>
     </div>
@@ -259,14 +259,15 @@ export default {
     }
   },
   methods: {
-    openSearch () {
-      this.$eventBus.$emit('open-search', this.searchString)
+    search () {
+      this.$router.push(`search/${this.searchString}`)
     }
   }
 }
 </script>
 <style lang="scss">
   .landing {
+    width: 100vw;
     a {
       color: #01579b;
     }
@@ -363,13 +364,13 @@ export default {
       }
     }
     .trio {
-      background: linear-gradient(to bottom right,#4757b2,#393953);
+      background: linear-gradient(to bottom right,#6361D0,#393953);
       h4 {
         font-weight: 600;
       }
     }
     .sm-banner {
-      background: linear-gradient(to bottom right,#4757b2,#393953);
+      background: linear-gradient(to bottom right,#6361D0,#393953);
       padding: 50px;
       h3 {
         font-size: 2.5rem;
@@ -379,7 +380,7 @@ export default {
     .page-footer {
       background-color: #eee;
       a, p {
-        color: #3f51b5;
+        color: #6361D0;
       }
     }
   }

@@ -9,8 +9,12 @@ import Notifications from 'vue-notification'
 import VTooltip from 'v-tooltip'
 import VueContentPlaceholders from 'vue-content-placeholders'
 import Vuex from 'vuex'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
 require('./assets/steemgigs.scss')
+
+Vue.use(ElementUI)
 
 Vue.prototype.categories = [
   {
@@ -255,7 +259,7 @@ Vue.prototype.categories = [
   },
   {
     'name': 'SurpassingGoogle',
-    'description': '',
+    'description': 'The Knowledge Bank of SteemGigs',
     'subcategories': [
       {
         'name': 'how-to',
@@ -416,7 +420,7 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Music & Audio',
-    'description': '',
+    'description': 'The muscial talent SteemGigs has to offer',
     'subcategories': [
       {
         'name': 'voice over',
@@ -454,7 +458,7 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Programming & tech',
-    'description': '',
+    'description': 'Want to build something great? SteemGigs have you covered!',
     'subcategories': [
       {
         'name': 'wordpress',
@@ -497,7 +501,7 @@ Vue.prototype.categories = [
         'description': ''
       },
       {
-        'name': 'databses',
+        'name': 'databases',
         'description': ''
       },
       {
@@ -566,7 +570,7 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Fun & Lifestyle',
-    'description': '',
+    'description': 'Find the SteemGig to make your life better',
     'subcategories': [
       {
         'name': 'online lessons',
@@ -757,7 +761,7 @@ Vue.prototype.categories = [
   },
   {
     'name': 'Steem & Steemit',
-    'description': '',
+    'description': 'Need a blog written? Want to improve the quality of your posts? This is the place for you',
     'subcategories': [
       {
         'name': 'Steem projects',

@@ -1,10 +1,11 @@
 <template>
   <page :pageClasses="['categories__view', 'row']">
     <cat-nav />
+    <el-main>
     <div class="col s12 m8 l9 right center-align row">
-      <h1>{{ categoryDetails.name}}</h1>
+      <h3>{{ categoryDetails.name}}</h3>
       <span v-if="categoryDetails.name == 'SurpassingGoogle'">(The Knowledge-Bank of SteemGigs)</span>
-      <p class="flow-text">{{ categoryDetails.description }}</p>
+      <h5>{{ categoryDetails.description }}</h5>
       <div v-if="loading">
         <div class="col s12 m6 l4">
           <loading-placeholder />
@@ -21,7 +22,7 @@
           <gig-card :gigData="gig" />
         </div>
         <div v-if="catgigs.length <= 0">
-          <p class="flow-text grey-text">There are no posts yet in this category. Be the first to post in the <span class="grey-text text-darken-2">{{categoryDetails.name}}</span> category</p>
+          <h5>There are no posts yet in this category. Be the first to post in the <span class="grey-text text-darken-2">{{categoryDetails.name}}</span> category</h5>
           <router-link :to="this.$route.params.category == 'surpassinggoogle' ? '/surpassing-google' : '/create_gig'" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
         </div>
       </div>
@@ -53,6 +54,7 @@
        <router-link class="btn indigo" to="/surpassing-google" tag="button">Click Here</router-link>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 
@@ -129,22 +131,20 @@ h1 {
   fonth-weight: 700;
 }
 .subcats {
-  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
-  background-color: white;
   &>ul {
     &>li {
       a {
-        color: gray;
-        font-size: 1.15rem;
+        color: black;
+        font-size: 14px;
         display: block;
         padding: 7px 25px;
         transition: all .3s ease;
         &:hover {
-          background-color: #4b5ab9;
+          background-color: #6361D0;
           color: white;
-          box-shadow: 0 6px 13px rgba(0, 0, 0, 0.2);
           padding: 7px 35px;
+          border-radius: 5px;
+          font-weight: bold;
         }
       }
     }
