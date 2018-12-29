@@ -38,7 +38,7 @@ Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look
             </div>
             <div class="input-field col s12">
               <vue-editor v-model="newTestimonial.description" placeholder="Describe your experience with steemgigs" :upload="uploadConfig"></vue-editor>
-              <div v-if="descError" class="simple-card card-panel">
+              <div v-if="descError" class="simple-card ">
                 <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
               </div>
               <div class="tutorial_guide hide-on-small-only center-align">
@@ -101,7 +101,7 @@ Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look
                 </div>
               </div>
             </div>
-            <div v-if="errorr" class="simple-card card-panel">
+            <div v-if="errorr" class="simple-card ">
               <p v-if="!validTitle" class="red-text mt-1 mb-0" >Title must be at least 5 characters</p>
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
             </div>

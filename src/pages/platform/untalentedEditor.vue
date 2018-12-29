@@ -112,7 +112,7 @@
                 </div>
               </div>
             </div>
-            <div v-if="errorr" class="simple-card card-panel">
+            <div v-if="errorr" class="simple-card ">
               <p v-if="!validTitle" class="red-text mt-1 mb-0" >Title must be at least 5 characters</p>
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
             </div>

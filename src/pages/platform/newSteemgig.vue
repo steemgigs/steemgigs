@@ -61,7 +61,7 @@
             </div>
           </div>
         </form>
-        <form class="card-panel row" v-if="currentSection === 1">
+        <form class=" row" v-if="currentSection === 1">
           <div class="container gigForm">
             <p class="flow-text title">Describe your STEEMGIG</p>
             <div class="input-field col s12">
@@ -87,7 +87,7 @@
             </div>
           </div>
         </form>
-        <form class="card-panel row" v-if="currentSection === 2">
+        <form class=" row" v-if="currentSection === 2">
           <div class="container gigForm">
             <p class="flow-text title">Pricing</p>
             <div class="input-field col s12">
@@ -140,7 +140,7 @@
             </div>
           </div>
         </form>
-        <form class="card-panel row" v-if="currentSection === 3">
+        <form class=" row" v-if="currentSection === 3">
           <div class="container gigForm">
             <p class="flow-text title">Requirements</p>
             <div class="input-field col s12">
@@ -166,7 +166,7 @@
             </div>
           </div>
         </form>
-        <form class="card-panel row" v-show="currentSection === 4">
+        <form class=" row" v-show="currentSection === 4">
           <dismissible-notice>
             <span>Please ensure all images are yours or give credit to source (URL) where required.<br>Remember that your posts appear on the steem blochain and are subject to curation. Please read style guide on right.</span>
           </dismissible-notice>
@@ -261,7 +261,7 @@
                 </div>
               </div>
             </div>
-            <div v-if="errorr" class="simple-card card-panel">
+            <div v-if="errorr" class="simple-card ">
               <p v-if="!validTitle" class="red-text mt-1 mb-0" >Title must be at least 5 characters</p>
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
               <p v-if="pricingError" class="red-text mt-1 mb-0" v-text="pricingError" />

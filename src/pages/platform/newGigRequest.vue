@@ -144,7 +144,7 @@
                 </div>
               </div>
             </div>
-            <div v-if="errorr" class="simple-card card-panel">
+            <div v-if="errorr" class="simple-card">
               <p v-if="!validTitle" class="red-text mt-1 mb-0" v-text="'Title must be more than 5 characters'" />
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
               <p v-if="subcatError" class="red-text mt-1 mb-0" v-text="subcatError" />
