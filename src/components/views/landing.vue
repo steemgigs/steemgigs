@@ -267,6 +267,7 @@ export default {
 </script>
 <style lang="scss">
   .landing {
+    width: 100vw;
     a {
       color: #01579b;
     }
