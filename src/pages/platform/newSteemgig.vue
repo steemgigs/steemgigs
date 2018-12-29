@@ -47,7 +47,7 @@
                 <input-tag limit="2" class="editable" placeholder="add tags" @update:tags="getTags" :tags="userTags" />
               </div>
               <div class="form-navs">
-                <button @click.prevent="nextSection" class="right btn indigo waves-effect">Save and Proceed</button>
+                <el-button type="primary" @click.prevent="nextSection" class="primary right waves-effect">Save and Proceed</el-button>
               </div>
               <div class="tutorial_guide guide-2 hide-on-small-only">
                 <div class="card">
@@ -82,8 +82,8 @@
               </div>
             </div>
             <div class="col s12 row">
-                <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-                <button class="right btn indigo waves-effect" @click.prevent="descNext = true; nextSection()">Save and Proceed</button>
+                <el-button class="secondary waves-effect" type="secondary" @click.prevent="prevSection">Back</el-button>
+                <el-button class="primary right waves-effect" type="primary" @click.prevent="descNext = true; nextSection()">Save and Proceed</el-button>
             </div>
           </div>
         </form>
@@ -135,8 +135,8 @@
               <input type="number" v-model="newGigData.price" class="price" placeholder="price">
             </div>
             <div class="col s12 row" style="margin-top: 3em;">
-                <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-                <button class="right btn indigo waves-effect" @click.prevent="priceNext = true; nextSection()">Save and Proceed</button>
+                <el-button class="secondary waves-effect" type="secondary"  @click.prevent="prevSection">Back</el-button>
+                <el-button class="primary right waves-effect" type="primary" @click.prevent="priceNext = true; nextSection()">Save and Proceed</el-button>
             </div>
           </div>
         </form>
@@ -161,8 +161,8 @@
               </div>
             </div>
             <div class="col s12 row">
-                <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-                <button class="right btn indigo waves-effect" @click.prevent="reqNext = true; nextSection()">Save and Proceed</button>
+                <el-button type="secondary" @click.prevent="prevSection" class="secondary waves-effect">Back</el-button>
+                <el-button type="primary"  class="primary right waves-effect" @click.prevent="reqNext = true; nextSection()">Save and Proceed</el-button>
             </div>
           </div>
         </form>
@@ -228,8 +228,8 @@
               </span>
             </div>
             <div class="col s12 row">
-                <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-                <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
+                <el-button type="secondary" @click.prevent="prevSection" class="secondary waves-effect">Back</el-button>
+                <el-button type="primary" class="right primary waves-effect" @click.prevent="nextSection">Save and Proceed</el-button>
             </div>
           </div>
         </form>
@@ -272,11 +272,11 @@
 
           </div>
           <div class="col s12 row">
-            <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-            <button :disabled="errorr" class="right btn indigo waves-effect" @click.prevent="submit">
+            <el-button type="secondary"  @click.prevent="prevSection" class="secondary waves-effect">Back</el-button>
+            <el-button type="primary"  :disabled="errorr" class="right primary waves-effect" @click.prevent="submit">
               <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
               POST #STEEMGIG
-            </button>
+            </el-button>
             <p class="red-text" v-if="errorText">Error: {{ errorText }}</p>
             <p class="indigo-text" v-if="successText">{{ successText }}</p>
           </div>
@@ -777,11 +777,6 @@ p.title {
 .form-navs {
   display: block;
   margin-top: 5em;
-  button {
-    line-height: 3px;
-    text-transform: initial;
-    font-weight: 500;
-  }
 }
 .tutorial_guide {
   position: absolute;
