@@ -199,7 +199,7 @@ export default {
       return this.commentFor.author
     },
     sellerImg () {
-      return this.commentFor.userImg
+      return `https://steemitimages.com/u/${this.commentFor.author}/avatar`
     },
     sellerRep () {
       return this.commentFor.rep
