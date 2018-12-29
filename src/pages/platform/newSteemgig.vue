@@ -196,7 +196,7 @@
               </div>
             </div>
             <div class="row">
-              <p><strong>Consider embedding a short video clip of you, telling potential clients why they should avail of your service. This improves your general reputation even on steemit, make your content richer and more worthy of curation etc. (Optional)</strong></p>
+              <p>Consider embedding a short video clip of you, telling potential clients why they should avail of your service. This improves your general reputation even on steemit, make your content richer and more worthy of curation etc. (Optional)</p>
               <div class="col input-field s6">
                 <input v-model="newGigData.videoUrl" placeholder="Enter Video URL e.g. Youtube, Vimeo" />
               </div>
