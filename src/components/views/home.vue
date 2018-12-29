@@ -17,14 +17,9 @@
           <span class="header-desc">See what the SteemGigs community has to offer</span>
           </div>
           <span class="right">
-            <select class="browser-default">
-              <option value="" disabled selected>Sort By</option>
-              <option value="tranding">Trending</option>
-              <option value="new">New</option>
-              <option value="active">Active</option>
-              <option value="hot">Hot</option>
-              <option value="promoted">Promoted</option>
-            </select>
+            <el-select placeholder="Sort By" class="browser-default">
+              <el-option v-for="(option, index) in viewOptions" :key="index" class="feed-option" :value="option">{{ option }}</el-option>
+            </el-select>
           </span>
         </div>
         <div v-if="steemgigs.length < 1" class="col s12 center-align center">
@@ -74,14 +69,9 @@
           <span class="header-desc">Post a fantastic STEEMGIG, it stands a chance of being featured here</span>
           </div>
           <span class="right">
-            <select class="browser-default">
-              <option value="" disabled selected>Sort By</option>
-              <option value="tranding">Trending</option>
-              <option value="new">New</option>
-              <option value="active">Active</option>
-              <option value="hot">Hot</option>
-              <option value="promoted">Promoted</option>
-            </select>
+            <el-select placeholder="Sort By" class="browser-default">
+              <el-option v-for="(option, index) in viewOptions" :key="index" class="feed-option" :value="option">{{ option }}</el-option>
+            </el-select>
           </span>
         </div>
         <div v-if="featured.length < 1" class="col s12 center-align center">
@@ -109,14 +99,9 @@
           <span class="header-desc">Gig requests provided by our community</span>
           </div>
           <span class="right">
-            <select class="browser-default">
-              <option value="" disabled selected>Sort By</option>
-              <option value="tranding">Trending</option>
-              <option value="new">New</option>
-              <option value="active">Active</option>
-              <option value="hot">Hot</option>
-              <option value="promoted">Promoted</option>
-            </select>
+            <el-select placeholder="Sort By" class="browser-default">
+              <el-option v-for="(option, index) in viewOptions" :key="index" class="feed-option" :value="option">{{ option }}</el-option>
+            </el-select>
           </span>
         </div>
         <div v-if="gigrequests.length < 1" class="col s12 center-align center">
@@ -142,14 +127,9 @@
           <span class="header-desc">SteemGigs success stories written by our users</span>
           </div>
           <span class="right">
-            <select class="browser-default">
-              <option value="" disabled selected>Sort By</option>
-              <option value="tranding">Trending</option>
-              <option value="new">New</option>
-              <option value="active">Active</option>
-              <option value="hot">Hot</option>
-              <option value="promoted">Promoted</option>
-            </select>
+            <el-select placeholder="Sort By" class="browser-default">
+              <el-option v-for="(option, index) in viewOptions" :key="index" class="feed-option" :value="option">{{ option }}</el-option>
+            </el-select>
           </span>
         </div>
         <div v-if="testimonials.length < 1" class="col s12 center-align center">
@@ -176,14 +156,9 @@
           <span class="header-desc">The Knowledge Bank of SteemGigs</span>
           </div>
           <span class="right">
-            <select class="browser-default">
-              <option value="" disabled selected>Sort By</option>
-              <option value="tranding">Trending</option>
-              <option value="new">New</option>
-              <option value="active">Active</option>
-              <option value="hot">Hot</option>
-              <option value="promoted">Promoted</option>
-            </select>
+            <el-select placeholder="Sort By" class="browser-default">
+              <el-option v-for="(option, index) in viewOptions" :key="index" class="feed-option" :value="option">{{ option }}</el-option>
+            </el-select>
           </span>
         </div>
         <div v-if="steemgigs.length < 1" class="col s12 center-align center">
@@ -246,7 +221,8 @@ export default {
       untalentedFetched: false,
       fetchingSteemgigs: false,
       fetchingFeatured: false,
-      fetchingTestimonials: false
+      fetchingTestimonials: false,
+      viewOptions: ['trending', 'new', 'active', 'active', 'hot', 'promoted']
     }
   },
   methods: {
@@ -446,5 +422,9 @@ section {
 .browser-default {
   min-width: 150px;
 }
+}
+
+.feed-option {
+  text-transform: capitalize;
 }
 </style>
