@@ -472,14 +472,14 @@ select.my-select {
       box-sizing: border-box;
       transition: all ease-in-out .3s;
       &.active, &:hover {
-        color: black;
+        color: #6361D0;
         font-weight: 500;
       }
       &::after, &.active::after {
         content: ' ';
         height: 2px;
         width: 0%;
-        background: black;
+        background: #6361D0;
         display: inline-block;
         position: absolute;
         left: 0;
