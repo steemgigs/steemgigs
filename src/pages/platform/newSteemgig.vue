@@ -3,9 +3,10 @@
     <ul class="sections hide-on-med-and-down center">
       <li v-for="(section, index) in sections" :key="index"><a v-text="section" :class="{active: index === currentSection}" @click="switchTo(index)"></a></li>
     </ul>
+    <el-main>
     <div class="container" @keypress.tab="nextSection">
-      <div class="col s12 m7 l9 row">
-        <form class="card-panel row" v-if="currentSection === 0">
+      <div class="col s12 m7 l9 row editor-container">
+        <form v-if="currentSection === 0">
           <div class="container gigForm">
             <p class="flow-text title">Gig Title</p>
             <div class="input-field col s12">
@@ -46,7 +47,7 @@
                 <input-tag limit="2" class="editable" placeholder="add tags" @update:tags="getTags" :tags="userTags" />
               </div>
               <div class="form-navs">
-                <button @click.prevent="nextSection" class="right btn indigo waves-effect">Save and Proceed</button>
+                <el-button type="primary" @click.prevent="nextSection" class="primary right waves-effect">Save and Proceed</el-button>
               </div>
               <div class="tutorial_guide guide-2 hide-on-small-only">
                 <div class="card">
@@ -60,7 +61,7 @@
             </div>
           </div>
         </form>
-        <form class="card-panel row" v-if="currentSection === 1">
+        <form class=" row" v-if="currentSection === 1">
           <div class="container gigForm">
             <p class="flow-text title">Describe your STEEMGIG</p>
             <div class="input-field col s12">
@@ -81,12 +82,12 @@
               </div>
             </div>
             <div class="col s12 row">
-                <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-                <button class="right btn indigo waves-effect" @click.prevent="descNext = true; nextSection()">Save and Proceed</button>
+                <el-button class="secondary waves-effect" type="secondary" @click.prevent="prevSection">Back</el-button>
+                <el-button class="primary right waves-effect" type="primary" @click.prevent="descNext = true; nextSection()">Save and Proceed</el-button>
             </div>
           </div>
         </form>
-        <form class="card-panel row" v-if="currentSection === 2">
+        <form class=" row" v-if="currentSection === 2">
           <div class="container gigForm">
             <p class="flow-text title">Pricing</p>
             <div class="input-field col s12">
@@ -134,12 +135,12 @@
               <input type="number" v-model="newGigData.price" class="price" placeholder="price">
             </div>
             <div class="col s12 row" style="margin-top: 3em;">
-                <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-                <button class="right btn indigo waves-effect" @click.prevent="priceNext = true; nextSection()">Save and Proceed</button>
+                <el-button class="secondary waves-effect" type="secondary"  @click.prevent="prevSection">Back</el-button>
+                <el-button class="primary right waves-effect" type="primary" @click.prevent="priceNext = true; nextSection()">Save and Proceed</el-button>
             </div>
           </div>
         </form>
-        <form class="card-panel row" v-if="currentSection === 3">
+        <form class=" row" v-if="currentSection === 3">
           <div class="container gigForm">
             <p class="flow-text title">Requirements</p>
             <div class="input-field col s12">
@@ -160,12 +161,12 @@
               </div>
             </div>
             <div class="col s12 row">
-                <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-                <button class="right btn indigo waves-effect" @click.prevent="reqNext = true; nextSection()">Save and Proceed</button>
+                <el-button type="secondary" @click.prevent="prevSection" class="secondary waves-effect">Back</el-button>
+                <el-button type="primary"  class="primary right waves-effect" @click.prevent="reqNext = true; nextSection()">Save and Proceed</el-button>
             </div>
           </div>
         </form>
-        <form class="card-panel row" v-show="currentSection === 4">
+        <form class=" row" v-show="currentSection === 4">
           <dismissible-notice>
             <span>Please ensure all images are yours or give credit to source (URL) where required.<br>Remember that your posts appear on the steem blochain and are subject to curation. Please read style guide on right.</span>
           </dismissible-notice>
@@ -195,7 +196,7 @@
               </div>
             </div>
             <div class="row">
-              <p><strong>Consider embedding a short video clip of you, telling potential clients why they should avail of your service. This improves your general reputation even on steemit, make your content richer and more worthy of curation etc. (Optional)</strong></p>
+              <p>Consider embedding a short video clip of you, telling potential clients why they should avail of your service. This improves your general reputation even on steemit, make your content richer and more worthy of curation etc. (Optional)</p>
               <div class="col input-field s6">
                 <input v-model="newGigData.videoUrl" placeholder="Enter Video URL e.g. Youtube, Vimeo" />
               </div>
@@ -227,8 +228,8 @@
               </span>
             </div>
             <div class="col s12 row">
-                <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-                <button class="right btn indigo waves-effect" @click.prevent="nextSection">Save and Proceed</button>
+                <el-button type="secondary" @click.prevent="prevSection" class="secondary waves-effect">Back</el-button>
+                <el-button type="primary" class="right primary waves-effect" @click.prevent="nextSection">Save and Proceed</el-button>
             </div>
           </div>
         </form>
@@ -260,7 +261,7 @@
                 </div>
               </div>
             </div>
-            <div v-if="errorr" class="simple-card card-panel">
+            <div v-if="errorr" class="simple-card ">
               <p v-if="!validTitle" class="red-text mt-1 mb-0" >Title must be at least 5 characters</p>
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
               <p v-if="pricingError" class="red-text mt-1 mb-0" v-text="pricingError" />
@@ -271,17 +272,18 @@
 
           </div>
           <div class="col s12 row">
-            <button @click.prevent="prevSection" class="btn indigo accent-2 waves-effect">back</button>
-            <button :disabled="errorr" class="right btn indigo waves-effect" @click.prevent="submit">
+            <el-button type="secondary"  @click.prevent="prevSection" class="secondary waves-effect">Back</el-button>
+            <el-button type="primary"  :disabled="errorr" class="right primary waves-effect" @click.prevent="submit">
               <i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>
               POST #STEEMGIG
-            </button>
+            </el-button>
             <p class="red-text" v-if="errorText">Error: {{ errorText }}</p>
             <p class="indigo-text" v-if="successText">{{ successText }}</p>
           </div>
         </div>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 
@@ -652,7 +654,7 @@ select.my-select {
   background: white;
   border-bottom: 1px solid #ccc;
   border-top: 1px solid #f8f8f8;
-  top: 41px;
+  top: 50px;
   position: fixed;
   width: 100%;
   z-index: 2;
@@ -681,14 +683,14 @@ select.my-select {
       box-sizing: border-box;
       transition: all ease-in-out .3s;
       &.active, &:hover {
-        color: black;
+        color: #6361D0;
         font-weight: 500;
       }
       &::after, &.active::after {
         content: ' ';
         height: 2px;
         width: 0%;
-        background: black;
+        background: #6361D0;
         display: inline-block;
         position: absolute;
         left: 0;
@@ -775,11 +777,6 @@ p.title {
 .form-navs {
   display: block;
   margin-top: 5em;
-  button {
-    line-height: 3px;
-    text-transform: initial;
-    font-weight: 500;
-  }
 }
 .tutorial_guide {
   position: absolute;

@@ -27,6 +27,25 @@ body {
 .el-main {
   padding: 20px 20px;
 }
+
+// Temp Fixes for layout issues with fixed nav
+
+.VueCarousel-wrapper {
+  padding-top: 40px;
+}
+
+.categories__view .el-main, .search__view .el-main {
+  padding: 70px 20px;
+}
+
+.search__view .el-main {
+  padding: 70px 20px;
+}
+
+.profile__view .el-main {
+  padding: 70px 20px;
+}
+
 h1, h2, h4, h5 {
   margin-bottom: 15px;
 }
@@ -1965,4 +1984,16 @@ hr {
   display: block;
   padding: 0;
   margin: 0;
+}
+
+.editor-container {
+  background: white;
+  padding: 20px;
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.editor-container .card {
+  box-shadow: none !important;
 }

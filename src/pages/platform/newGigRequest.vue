@@ -3,12 +3,13 @@
     <ul class="sections hide-on-med-and-down center">
       <li v-for="(section, index) in sections" :key="index"><a v-text="section" :class="{active: index === currentSection}" @click="switchTo(index)"></a></li>
     </ul>
-    <dismissible-notice>
+    <el-main>
+    <div class="container" @keypress.tab="nextSection">
+          <dismissible-notice>
       <span>Oh you didn't find your gig! Post a custom request below</span>
     </dismissible-notice>
-    <div class="container" @keypress.tab="nextSection">
-      <div class="col s12 m7 l9 row" >
-        <form class="card-panel row" v-if="currentSection === 0">
+      <div class="col s12 m7 l9 row editor-container" >
+        <form v-if="currentSection === 0">
           <div class="container gigForm">
             <div class="mx-2">
               <p class="flow-text title">Custom Request</p>
@@ -143,7 +144,7 @@
                 </div>
               </div>
             </div>
-            <div v-if="errorr" class="simple-card card-panel">
+            <div v-if="errorr" class="simple-card">
               <p v-if="!validTitle" class="red-text mt-1 mb-0" v-text="'Title must be more than 5 characters'" />
               <p v-if="descError" class="red-text mt-1 mb-0" v-text="descError" />
               <p v-if="subcatError" class="red-text mt-1 mb-0" v-text="subcatError" />
@@ -161,6 +162,7 @@
         </div>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 
@@ -441,7 +443,7 @@ select.my-select {
   background: white;
   border-bottom: 1px solid #ccc;
   border-top: 1px solid #f8f8f8;
-  top: 41px;
+  top: 50px;
   position: fixed;
   width: 100%;
   z-index: 2;
@@ -470,14 +472,14 @@ select.my-select {
       box-sizing: border-box;
       transition: all ease-in-out .3s;
       &.active, &:hover {
-        color: black;
+        color: #6361D0;
         font-weight: 500;
       }
       &::after, &.active::after {
         content: ' ';
         height: 2px;
         width: 0%;
-        background: black;
+        background: #6361D0;
         display: inline-block;
         position: absolute;
         left: 0;
@@ -540,9 +542,9 @@ p {
   .title-before {
     position: absolute;
     color: #757575;
-    top: 0.9px;
-    left: 0.6em;
-    font-size: 28px;
+    top: 2.9px;
+    left: 0.75em;
+    font-size: 25.5px;
   }
   textarea {
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
