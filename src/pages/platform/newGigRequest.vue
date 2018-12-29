@@ -443,7 +443,7 @@ select.my-select {
   background: white;
   border-bottom: 1px solid #ccc;
   border-top: 1px solid #f8f8f8;
-  top: 41px;
+  top: 50px;
   position: fixed;
   width: 100%;
   z-index: 2;
@@ -542,9 +542,9 @@ p {
   .title-before {
     position: absolute;
     color: #757575;
-    top: 0.9px;
-    left: 0.6em;
-    font-size: 28px;
+    top: 2.9px;
+    left: 0.75em;
+    font-size: 25.5px;
   }
   textarea {
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
