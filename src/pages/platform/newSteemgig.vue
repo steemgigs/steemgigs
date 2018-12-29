@@ -3,6 +3,7 @@
     <ul class="sections hide-on-med-and-down center">
       <li v-for="(section, index) in sections" :key="index"><a v-text="section" :class="{active: index === currentSection}" @click="switchTo(index)"></a></li>
     </ul>
+    <el-main>
     <div class="container" @keypress.tab="nextSection">
       <div class="col s12 m7 l9 row">
         <form class="card-panel row" v-if="currentSection === 0">
@@ -282,6 +283,7 @@
         </div>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 

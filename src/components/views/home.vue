@@ -8,7 +8,6 @@
       </carousel>
     <el-main>
     <div class="col s12 m12 l12">
-
       <!-- Gigs -->
       <section id="steemgigs" class="row">
         <div class="col s12 header-row">

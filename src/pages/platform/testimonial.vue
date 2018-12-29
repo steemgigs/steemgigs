@@ -1,12 +1,13 @@
 <template>
   <page :pageClasses="['post_new_steemgig__view', 'row']">
-    <dismissible-notice>
-      <span>The steemgigs testimonial editor can be used by both steemgigan and steemian client over the course of a successful transaction and will appear as full blown blog posts both on steemgigs.org and steemit for potential rewards. Both parties can earn additional rewards from writing steemgigs testimonials as not only does it increase the reputation of both parties but it creates values as post, creates transparency and promotes steem in the search engine and also as a blockchain where "where everyone is a reputable/talented brother"</span>
-    </dismissible-notice>
     <ul class="sections hide-on-med-and-down center">
       <li v-for="(section, index) in sections" :key="index"><a v-text="section" :class="{active: index === currentSection}" @click="switchTo(index)"></a></li>
     </ul>
+    <el-main>
     <div class="container" @keypress.tab="nextSection">
+      <dismissible-notice>
+      <span>The steemgigs testimonial editor can be used by both steemgigan and steemian client over the course of a successful transaction and will appear as full blown blog posts both on steemgigs.org and steemit for potential rewards. Both parties can earn additional rewards from writing steemgigs testimonials as not only does it increase the reputation of both parties but it creates values as post, creates transparency and promotes steem in the search engine and also as a blockchain where "where everyone is a reputable/talented brother"</span>
+      </dismissible-notice>
       <div class="col s12 m7 l9 row" >
         <form class="card-panel row" v-if="currentSection === 0">
           <div class="container gigForm">
@@ -117,6 +118,7 @@ Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look
         </div>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 

@@ -3,10 +3,11 @@
     <ul class="sections hide-on-med-and-down center">
       <li v-for="(section, index) in sections" :key="index"><a v-text="section" :class="{active: index === currentSection}" @click="switchTo(index)"></a></li>
     </ul>
-    <dismissible-notice>
+    <el-main>
+    <div class="container" @keypress.tab="nextSection">
+          <dismissible-notice>
       <span>Oh you didn't find your gig! Post a custom request below</span>
     </dismissible-notice>
-    <div class="container" @keypress.tab="nextSection">
       <div class="col s12 m7 l9 row" >
         <form class="card-panel row" v-if="currentSection === 0">
           <div class="container gigForm">
@@ -161,6 +162,7 @@
         </div>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 
