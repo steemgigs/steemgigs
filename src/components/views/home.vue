@@ -8,9 +8,14 @@
       </carousel>
     <el-main>
     <div class="col s12 m12 l12">
+
+      <!-- Gigs -->
       <section id="steemgigs" class="row">
         <div class="col s12 header-row">
-          <h3 class="left">Gigs</h3>
+         <div>
+            <h3>SteemGigs</h3>
+          <span class="header-desc">See what the SteemGigs community has to offer</span>
+          </div>
           <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
@@ -64,7 +69,10 @@
       </section> -->
       <section id="featured" class="row">
         <div class="col s12 header-row">
-          <h3 class="left">Featured</h3>
+          <div>
+            <h3>Featured</h3>
+          <span class="header-desc">Post a fantastic STEEMGIG, it stands a chance of being featured here</span>
+          </div>
           <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
@@ -79,7 +87,7 @@
         <div v-if="featured.length < 1" class="col s12 center-align center">
           <plane v-if="!featuredFetched" size="100" />
           <div v-if="featuredFetched">
-            <h5>Post a fantastic STEEMGIG, it stands a chance of being featured here</h5>
+            <h5>Create a SteemGig today!</h5>
             <el-button class="secondary" type="secondary"> <router-link to="/create_gig">Create Gig</router-link></el-button>
           </div>
         </div>
@@ -92,9 +100,14 @@
           </el-button>
         </div>
       </section>
+
+      <!-- Gig Requests -->
       <section id="gigrequests" class="row">
         <div class="col s12 header-row">
-          <h3 class="left">Gig Requests</h3>
+          <div>
+            <h3>SteemGig Requests</h3>
+          <span class="header-desc">Gig requests provided by our community</span>
+          </div>
           <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
@@ -112,8 +125,6 @@
             <h5>Can&rsquo;t find what you&rsquo;re Seeking?<br>You can post Custom requests and we&rsquo;ll lovingly look for reputable great minds to handle it</h5>
              <el-button class="secondary" type="secondary"><router-link to="/steemgigs_request">Post custom request</router-link></el-button>
           </div>
-          <br><br>
-          <br><br>
         </div>
         <div class="col s12 m6 l3" v-for="(gig, index) in gigrequests.slice(0,8)" :key="index">
           <gig-card type="gigRequest" :gigData="gig" />
@@ -122,9 +133,14 @@
            <el-button class="secondary" type="secondary"><router-link to="/requested_gigs">Explore Gig Requests</router-link></el-button>
         </div>
       </section>
+
+      <!-- Testimonials -->
       <section id="testimonials" class="row">
         <div class="col s12 header-row">
-          <h3 class="left">Testimonials</h3>
+          <div>
+            <h3>Testimonials</h3>
+          <span class="header-desc">SteemGigs success stories written by our users</span>
+          </div>
           <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
@@ -155,7 +171,10 @@
        <!--Surpassing Google Segment-->
           <section id="surpassinggooglerequest" class="row">
         <div class="col s12">
-          <h3 class="left">SurpassingGoogle (The Knowledge Bank of SteemGigs)</h3>
+          <div>
+            <h3>SurpassingGoogle</h3>
+          <span class="header-desc">The Knowledge Bank of SteemGigs</span>
+          </div>
           <span class="right">
             <select class="browser-default">
               <option value="" disabled selected>Sort By</option>
