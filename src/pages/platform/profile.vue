@@ -11,57 +11,49 @@
         </div>
       <profile-card v-if="profileFetched" :profilepage="true" :profile="profile"></profile-card>
     </div>
+    <!-- Tab Selection -->
     <div class="col s12 m8 l9 row">
       <ul class="tabs">
         <li class="tab col s4"><a :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">Active SteemGigs</a></li>
         <li class="tab col s4"><a :class="{active: currentView === 'gig_request'}" @click="changeView('gig_request')">Custom Requests</a></li>
         <li class="tab col s4"><a :class="{active: currentView === 'gig_contribution'}" @click="changeView('gig_contribution')">Contributions</a></li>
       </ul>
+      <!-- Tab 1 -->
       <div v-if="currentView === 'active_gigs'" class="activeGigs">
+        <!-- Loading Placeholder -->
         <div v-if="loading">
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
+          <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
+          <loading-placeholder class="card-panel" />
         </div>
+        </div>
+        <!-- Tab Data -->
         <div v-if="steemgigs.length !== 0" class="col s12 m6 l4" v-for="(gig, index) in steemgigs" :key="index">
           <gig-card :gigData="gig" meantFor="profile" />
         </div>
         <div v-else >Nothing to show</div>
       </div>
+       <!-- Tab 2 -->
       <div v-if="currentView === 'gig_request'">
+         <!-- Loading Placeholder -->
         <div v-if="loading">
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
+          <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
+          <loading-placeholder class="card-panel" />
           </div>
         </div>
+        <!-- Tab Data -->
         <div class="col s12 m6 l4" v-for="(gig, index) in gigrequests" :key="index">
           <gig-card :gigData="gig" meantFor="profile" />
         </div>
       </div>
+       <!-- Tab 3 -->
       <div v-if="currentView === 'gig_contribution'">
+        <!-- Loading Placeholder -->
         <div v-if="loading">
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
-          </div>
-          <div class="col s12 m6 l4">
-            <loading-placeholder class="card-panel" />
+          <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
+          <loading-placeholder class="card-panel" />
           </div>
         </div>
+        <!-- Tab Data -->
         <div class="col s12 m6 l4" v-for="(gig, index) in contributions" :key="index">
           <gig-card :gigData="gig" meantFor="profile" />
         </div>
@@ -98,7 +90,8 @@ export default {
       usergigs: [],
       userRequests: [],
       currentView: 'active_gigs',
-      loading: true
+      loading: true,
+      loadingPlaceholderCount: 3
     }
   },
   beforeCreate () {
