@@ -1,10 +1,8 @@
 const express = require('express')
 const path = require('path')
-const secure = require('express-force-https')
 
 app = express()
 
-// app.use(secure)
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use('/static', express.static(path.join(__dirname, 'dist')))
 
