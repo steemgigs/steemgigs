@@ -24,7 +24,7 @@
             <li>
               <el-dropdown>
                 <span class="el-dropdown-link">
-                      <el-button type="primary" class="primary" size="medium">Create</el-button>
+                  <el-button type="primary" class="primary" size="medium">Create</el-button>
                   </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item>
