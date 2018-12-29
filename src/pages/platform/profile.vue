@@ -27,13 +27,17 @@
         </div>
         </div>
         <!-- Tab Data -->
-        <div v-if="steemgigs.length !== 0" class="col s12 m6 l4" v-for="(gig, index) in steemgigs" :key="index">
+        <div v-else-if="steemgigs.length !== 0" class="col s12 m6 l4" v-for="(gig, index) in steemgigs" :key="index">
           <gig-card :gigData="gig" meantFor="profile" />
         </div>
-        <div v-else >Nothing to show</div>
+        <!-- No Results Returned -->
+       <div v-else class="col s12 center-align noShow">
+          <h3>No SteemGigs to Show</h3>
+          <h5>There are currently no active SteemGigs to display</h5>
+        </div>
       </div>
        <!-- Tab 2 -->
-      <div v-if="currentView === 'gig_request'">
+      <div v-show="currentView === 'gig_request'">
          <!-- Loading Placeholder -->
         <div v-if="loading">
           <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
@@ -41,12 +45,17 @@
           </div>
         </div>
         <!-- Tab Data -->
-        <div class="col s12 m6 l4" v-for="(gig, index) in gigrequests" :key="index">
+        <div v-else-if="gigrequests.length !== 0" class="col s12 m6 l4" v-for="(gig, index) in gigrequests" :key="index">
           <gig-card :gigData="gig" meantFor="profile" />
         </div>
-      </div>
+        <!-- No Results Returned -->
+        <div v-else class="col s12 center-align noShow">
+          <h3>No Gig Requests to Show</h3>
+          <h5>There are currently no active gig requests to display</h5>
+        </div>
+        </div>
        <!-- Tab 3 -->
-      <div v-if="currentView === 'gig_contribution'">
+      <div v-show="currentView === 'gig_contribution'">
         <!-- Loading Placeholder -->
         <div v-if="loading">
           <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
@@ -54,10 +63,15 @@
           </div>
         </div>
         <!-- Tab Data -->
-        <div class="col s12 m6 l4" v-for="(gig, index) in contributions" :key="index">
+        <div v-else-if="contributions.length !== 0" class="col s12 m6 l4" v-for="(gig, index) in contributions" :key="index">
           <gig-card :gigData="gig" meantFor="profile" />
         </div>
-      </div>
+        <!-- No Results Returned -->
+        <div v-else class="col s12 center-align noShow">
+          <h3>No Contributions to Show</h3>
+          <h5>There are currently no active contributions to display</h5>
+        </div>
+        </div>
     </div>
     </el-main>
   </page>
@@ -186,5 +200,9 @@ export default {
     .card {
       opacity: 0.6;
     }
+  }
+
+  .noShow {
+    margin-top: 20px;
   }
 </style>
