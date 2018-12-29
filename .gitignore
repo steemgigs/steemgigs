@@ -7,6 +7,7 @@ yarn-error.log*
 /test/e2e/reports/
 selenium-debug.log
 package-lock.json
+dist
 
 **/*mynote.txt
 
@@ -17,8 +18,4 @@ package-lock.json
 *.ntvs*
 *.njsproj
 *.sln
-<<<<<<< HEAD
 build
-=======
-build
->>>>>>> 5a9a1b41412a338404c720ce963dd4eeeeb690c0
