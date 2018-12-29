@@ -365,7 +365,7 @@ select.my-select {
   background: white;
   border-bottom: 1px solid #ccc;
   border-top: 1px solid #f8f8f8;
-  top: 41px;
+  top: 50px;
   position: fixed;
   width: 100%;
   z-index: 2;
