@@ -1,9 +1,10 @@
 <template>
   <page :pageClasses="['categories__view', 'row']">
     <cat-nav />
+    <el-main>
     <div class="col s12 center-align row">
-      <h1 class="grey-text darken-1">
-      <router-link to="/" class="btn-floating waves-effect waves-light mr-2 z-depth-0 lighten-1 indigo"><i class="ion-home"></i></router-link> Steem Gigs</h1>
+      <h3>Steem Gigs</h3>
+      <h5>See what the SteemGigs community has to offer</h5>
       <div>
         <div v-if="gigs.length > 0" class="col s12 m6 l3 left-align" v-for="(gig, index) in gigs" :key="index">
           <gig-card type="gigRequest" :gigData="gig" />
@@ -14,6 +15,7 @@
         </div>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 
