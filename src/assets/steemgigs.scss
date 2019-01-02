@@ -1053,7 +1053,15 @@ hr {
   }
 }
 
+@media (max-width: 768px) {
+
+.el-main {
+  padding: 30px 20px;
+}
+}
+
 @media (min-width: 768px) {
+
   .m-md-0 {
     margin: 0 !important;
   }
