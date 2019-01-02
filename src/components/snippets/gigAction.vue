@@ -148,7 +148,6 @@ export default {
       try {
         sc2.setAccessToken(this.$store.state.accessToken)
         sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, parseInt(this.upvoteRange) * 100, (res) => {
-          this.voting = false
           this.upvoteActive = false
           this.gigData.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
           this.$notify({
@@ -162,26 +161,30 @@ export default {
           title: 'Error',
           message: `There was an error voting on your post. Error details - ${err}`
         })
+        this.voting = false
       }
     },
     downvote () {
       this.unvoting = true
-      sc2.setAccessToken(this.$store.state.accessToken)
-      sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, 0, (err, res) => {
-        this.unvoting = false
-        console.log(err, res)
-        if (!err) {
+      alert('unvoting')
+      try {
+        sc2.setAccessToken(this.$store.state.accessToken)
+        sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, 0, (res) => {
+          this.unvoting = false
           this.gigData.active_votes = this.gigData.active_votes.filter((x) => x.voter !== this.$store.state.username)
-          console.log(res)
-        } else {
           this.$notify({
-            group: 'foo',
-            title: 'Error unvoting',
-            text: 'You have exceeded maximum vote toggles for this post',
-            type: 'error'
+            title: 'Success',
+            message: 'You have unvoted this post successfully',
+            type: 'success'
           })
-        }
-      })
+        })
+      } catch (err) {
+        this.$notify.error({
+          title: 'Error',
+          message: `There was an error voting on your post. Error details - ${err}`
+        })
+        this.unvoting = false
+      }
     }
   }
 }
