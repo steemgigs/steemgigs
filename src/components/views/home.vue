@@ -77,7 +77,7 @@
           <plane v-if="!featuredFetched" size="100" />
           <div v-if="featuredFetched">
             <h5>Create a SteemGig today!</h5>
-            <el-button class="secondary" type="secondary"> <router-link to="/create_gig">Create Gig</router-link></el-button>
+            <el-button class="secondary" type="secondary"> <a target="_blank" href="https://discord.gg/wWrnSXK">Create Featured Gig</a></el-button>
           </div>
         </div>
         <div class="col s12 m6 l3" v-for="(gig, index) in featured.slice(0,8)" :key="index">
