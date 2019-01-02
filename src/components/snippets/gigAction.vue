@@ -224,9 +224,6 @@ $blue: #6361D0;
       margin-left: 0em;
       display: inline-block;
     }
-    .task {
-      font-weight: 600;
-    }
     .price {
       margin-top: 0.5em;
       font-weight: 500;
