@@ -2,7 +2,7 @@
   <page :pageClasses="['categories__view', 'row']">
     <cat-nav />
     <el-main>
-    <div class="col s12 m8 l9 right center-align row">
+    <div class="col s12 m12 l9 right center-align row">
       <h3>{{ categoryDetails.name}}</h3>
       <span v-if="categoryDetails.name == 'SurpassingGoogle'">(The Knowledge-Bank of SteemGigs)</span>
       <h5>{{ categoryDetails.description }}</h5>
