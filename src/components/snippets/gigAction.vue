@@ -166,7 +166,6 @@ export default {
     },
     downvote () {
       this.unvoting = true
-      alert('unvoting')
       try {
         sc2.setAccessToken(this.$store.state.accessToken)
         sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, 0, (res) => {
