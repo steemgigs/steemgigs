@@ -15,6 +15,12 @@ import SubCategories from '@/pages/platform/subcategory'
 import SurpassingGoogle from '@/pages/platform/surpassinggoogle'
 import NewSurpassingGig from '@/pages/platform/newSurpassingGig'
 import Search from '@/pages/platform/search'
+import Wallet from '@/pages/platform/wallet'
+import Settings from '@/pages/platform/settings'
+import Invite from '@/pages/platform/invite'
+import Message from '@/pages/platform/message'
+import Basket from '@/pages/platform/basket'
+import Dashboard from '@/pages/platform/dashboard'
 
 export default [
   {
@@ -102,6 +108,36 @@ export default [
     path: '/@:username/:task',
     name: 'STEEMGIGS | Task Detail',
     component: GigDetail
+  },
+  {
+    path: '/cart',
+    name: 'STEEMGIGS | Basket',
+    component: Basket
+  },
+  {
+    path: '/wallet',
+    name: 'STEEMGIGS | Wallet',
+    component: Wallet
+  },
+  {
+    path: '/dashboard',
+    name: 'STEEMGIGS | Dashboard',
+    component: Dashboard
+  },
+  {
+    path: '/settings',
+    name: 'STEEMGIGS | Settings',
+    component: Settings
+  },
+  {
+    path: '/invite',
+    name: 'STEEMGIGS | Invite',
+    component: Invite
+  },
+  {
+    path: '/message',
+    name: 'STEEMGIGS | Messages',
+    component: Message
   },
   {
     path: '/steemgigs/@:username/:task',

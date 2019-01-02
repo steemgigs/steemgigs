@@ -19,9 +19,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: whitesmoke;;
   min-height: calc(100vh);
-  [class*="__view"] {
-    width: 100vw;
-  }
+  width: 100vw;
 }
 
 .el-main {
