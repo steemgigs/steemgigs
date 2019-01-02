@@ -82,7 +82,6 @@ export default {
   margin-top: 0;
   margin-bottom: 0;
   border-top: 1px solid whitesmoke;
-  position: fixed;
   li.main-li {
     display: inline-block;
     position: relative;

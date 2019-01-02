@@ -337,7 +337,6 @@ img {
     margin-bottom: 0.5em;
     a {
       color: rgb(63, 78, 188);
-      font-weight: 600;
       font-size: 1.1em;
       cursor: pointer;
       transition: all ease-in-out .3s;
