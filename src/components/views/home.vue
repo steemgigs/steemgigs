@@ -30,7 +30,7 @@
           <br><br>
           <br><br>
         </div>
-        <div class="col s12 m6 l3"  v-for="(gig, index) in steemgigs.slice(0,8)" :key="index">
+        <div class="col s12 m6 l3"  v-if="gig.author" v-for="(gig, index) in steemgigs.slice(0,8)" :key="index">
           <gig-card :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
