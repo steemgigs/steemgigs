@@ -2,7 +2,7 @@
 import sc2 from 'steemconnect'
 
 const sc = sc2.Initialize({
-  baseURL: 'https://v2.steemconnect.com',
+  baseURL: 'https://steemconnect.com',
   app: 'steemgigs.app',
   // app: 'steemgig.app',
   callbackURL: 'https://steemgigs.org/complete',
