@@ -1,12 +1,13 @@
 <template>
   <div class="home__view row">
     <cat-nav />
-          <carousel id="home_ad_slider" :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
-        <slide>
-          <img src="/static/img/share.png" class="responsive-img" alt="">
-        </slide>
-      </carousel>
+
     <el-main>
+          <carousel id="home_ad_slider" :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
+      <slide>
+        <img src="/static/img/share.png" class="responsive-img" alt="">
+      </slide>
+      </carousel>
     <div class="col s12 m12 l12">
       <!-- Gigs -->
       <section id="steemgigs" class="row">
@@ -344,12 +345,14 @@ $blue: #6361D0;
   }
 }
 #home_ad_slider {
+    padding: 0 10px;
+    margin-bottom: 20px;
   img {
-    height: 233px;
+    height: 215px;
     background: #ccc;
     width: 100%;
     object-fit: cover;
-
+    border-radius: 10px;
   }
   .caption {
     position: absolute;
@@ -432,5 +435,9 @@ section {
 
 .feed-option {
   text-transform: capitalize;
+}
+
+.VueCarousel-wrapper {
+  border-radius: 10px;
 }
 </style>

@@ -1,6 +1,6 @@
 $codeBG: whitesmoke;
 body {
-  overflow-x: hidden;
+  overflow: hidden;
   background: whitesmoke;
 }
 @media only screen and (min-width: 993px) {
@@ -25,25 +25,9 @@ body {
 }
 
 .el-main {
-  padding: 20px 20px;
-}
-
-// Temp Fixes for layout issues with fixed nav
-
-#home_ad_slider {
-  padding-top: 40px;
-}
-
-.categories__view .el-main, .search__view .el-main {
-  padding: 70px 20px;
-}
-
-.search__view .el-main {
-  padding: 70px 20px;
-}
-
-.profile__view .el-main {
-  padding: 70px 20px;
+  padding: 30px 20px;
+  overflow: auto;
+  height: calc(100vh - 35px);
 }
 
 h1, h2, h4, h5 {
