@@ -254,10 +254,6 @@ export default {
     height: 200px;
     background-color: white;
   }
-  .details {
-    margin-top: 40px;
-
-  }
   .links {
     text-decoration: underline;
     font-size: large;
