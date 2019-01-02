@@ -34,7 +34,7 @@
           <gig-card :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-          <el-button class="secondary" type="secondary"><router-link to="/steemgigs">Explore Gigs</router-link></el-button>
+         <router-link to="/steemgigs"><el-button class="secondary" type="secondary">Explore Gigs</el-button></router-link>
         </div>
       </section>
       <!-- <section id="untalented" class="row">
@@ -77,7 +77,7 @@
           <plane v-if="!featuredFetched" size="100" />
           <div v-if="featuredFetched">
             <h5>Create a SteemGig today!</h5>
-            <el-button class="secondary" type="secondary"> <a target="_blank" href="https://discord.gg/wWrnSXK">Create Featured Gig</a></el-button>
+             <a target="_blank" href="https://discord.gg/wWrnSXK"><el-button class="secondary" type="secondary">Create Featured Gig</el-button></a>
           </div>
         </div>
         <div class="col s12 m6 l3" v-for="(gig, index) in featured.slice(0,8)" :key="index">
@@ -164,7 +164,7 @@
           <plane v-if="!surpassinggoogleFetched" size="100" />
           <div v-if="surpassinggoogleFetched">
             <h5>Be the first to post a gig, click button below</h5>
-             <el-button class="secondary" type="secondary"><router-link to="/create_gig">Create Gig</router-link></el-button>
+             <router-link to="/create_gig"><el-button class="secondary" type="secondary">Create Gig</el-button></router-link>
           </div>
           <br><br>
           <br><br>
@@ -173,7 +173,7 @@
           <gig-card type="surpassingGoogle" :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-           <el-button class="secondary" type="secondary"><router-link to="/categories/surpassinggoogle">Explore SurpassingGoogle</router-link></el-button>
+           <router-link to="/categories/surpassinggoogle"><el-button class="secondary" type="secondary">Explore SurpassingGoogle</el-button></router-link>
         </div>
       </section>
       <!--End Surpassing Google segment-->
