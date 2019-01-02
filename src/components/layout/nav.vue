@@ -39,6 +39,9 @@
                   <el-dropdown-item>
                     <router-link to="/untalented_editor">Untalented</router-link>
                   </el-dropdown-item>
+                  <el-dropdown-item>
+                    <router-link to="/surpassing-google">SurpassingGoogle</router-link>
+                  </el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </li>

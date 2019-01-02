@@ -2,7 +2,7 @@
   <page :pageClasses="['categories__view', 'row']">
     <cat-nav />
     <el-main>
-    <div class="col s12 m8 l9 right center-align row">
+    <div class="col s12 m12 l9 right center-align row">
       <h3>{{ categoryDetails.name}}</h3>
       <span v-if="categoryDetails.name == 'SurpassingGoogle'">(The Knowledge-Bank of SteemGigs)</span>
       <h5>{{ categoryDetails.description }}</h5>
@@ -37,7 +37,7 @@
           </li>
         </ul>
       </div>
-      <div class="subcats py-2 margin-top left-panel" v-if="categoryDetails.name == 'SurpassingGoogle'">
+      <!-- <div class="subcats py-2 margin-top left-panel" v-if="categoryDetails.name == 'SurpassingGoogle'">
        <b>Reminder:</b><p>You can curate, upvote and comment right here on SteemGigs. Please make sure to support our authors as increase your knowledge-base</p>
        <p>Would you want to deposit some of your knowledge with us, for the sake of  everyone?</p>
         <router-link class="btn indigo" to="/" tag="button">Click Here</router-link>
@@ -52,7 +52,7 @@
        <p>Contribute, Learn, Earn, Curate, Engage, Motivate and Draw Inspiration.</p>
        <p>"Don't Let today emptily slip by". Let's  all become SteemGiggers (Dream-Builders).</p>
        <router-link class="btn indigo" to="/surpassing-google" tag="button">Click Here</router-link>
-      </div>
+      </div> -->
     </div>
     </el-main>
   </page>
