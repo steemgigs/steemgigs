@@ -1,27 +1,29 @@
 <template>
   <page :pageClasses="['', '']">
     <cat-nav />
+    <el-main>
     <div class="container">
-      <div class="col s12 m8 l9 row details">
-          <div class="col s12 pagedescription">
-            <h4 class="center">SurpassingGoogle</h4>
-            <p class="center">This is a very important segment of SteemGigs. On SteemGigs, "everyone has something to offer". "Everyone" will eventually become a "dream-builder" (SteemGigger), building their dreams and those of others. To accomplish this, we create a bank, for "deposits & withdrawals" of all the bits & bytes that we will ever need to build any dream (however limitless).
+      <div class="col s12 row details">
+          <div class="col s12">
+            <h3 class="center">SurpassingGoogle</h3>
+            <h5 class="center">This is a very important segment of SteemGigs. On SteemGigs, "everyone has something to offer". "Everyone" will eventually become a "dream-builder" (SteemGigger), building their dreams and those of others. To accomplish this, we create a bank, for "deposits & withdrawals" of all the bits & bytes that we will ever need to build any dream (however limitless).
 We will vault all this knowledge in our bank, in the form of unadulterated excerpts from the brains, lives, experiences etc of "reputable great minds", sepcific to every niche, field, industry, expertise etc.
-"By means of your incessant contributions, we will surpass Google (attain limitlessness), reshaping the worldwide web with the freshness of our awesomeness".<b>@surpassinggoogle</b></p>
+"By means of your incessant contributions, we will surpass Google (attain limitlessness), reshaping the worldwide web with the freshness of our awesomeness".<b>@surpassinggoogle</b></h5>
           </div>
           <div class="col s12 m4 l3" v-for="(cat,index) in category" :key="index">
-            <div class="card catCard hoverable">
+            <div class="surpassing-card">
               <div class="card-content">
                 <span class="card-title center"><router-link class="links" :to="'surpassinggoogle/' + slugify(cat.name)">{{ capitalize(cat.name) }}</router-link></span>
                 <p>{{cat.description}}</p>
               </div>
-              <div class="card-action">
-                <router-link class="btn btn-block indigo" :to="'surpassinggoogle/' + slugify(cat.name)">Submit a Post</router-link>
-              </div>
+              <el-button class="surpass-card-button secondary" type="secondary">
+                <router-link :to="'surpassinggoogle/' + slugify(cat.name)">Submit a Post</router-link>
+              </el-button>
             </div>
           </div>
       </div>
     </div>
+    </el-main>
   </page>
 </template>
 
@@ -247,17 +249,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .container {
-    min-width: 90%;
-  }
   .pagedescription {
     width: 100%;
     height: 200px;
     background-color: white;
-  }
-  .details {
-    margin-top: 100px;
-
   }
   .links {
     text-decoration: underline;
@@ -285,5 +280,23 @@ export default {
     .card-content {
       min-height: 19rem;
     }
+  }
+
+  .surpassing-card {
+    box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    text-align: center;
+    background: white;
+    padding: 20px;
+    min-height: 350px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .surpass-card-button {
+    display: block;
+    margin: 0 auto;
   }
 </style>

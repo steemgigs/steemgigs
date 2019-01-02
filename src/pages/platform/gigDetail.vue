@@ -15,7 +15,7 @@
                 <p v-if="currentGig.json_metadata.category"><router-link :to="'/categories/' + currentGig.json_metadata.category">{{ currentGig.json_metadata.category }}</router-link> / <router-link :to="'/categories/' + currentGig.json_metadata.category + '/' + currentGig.json_metadata.subcategory">{{ currentGig.json_metadata.subcategory }}</router-link></p>
             </div>
             <div class="card-image">
-              <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
+              <carousel id="gig-image" v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
                 <slide v-for="(image, index) in portfolio" :key="index">
                   <img :src="image" :alt="currentGig.title">
                 </slide>
@@ -310,6 +310,7 @@ img {
   .card-image img {
    width: 100%;
    border-radius: 10px;
+   max-height: 350px;
   }
   .detail-action {
     display: flex;
@@ -336,7 +337,6 @@ img {
     margin-bottom: 0.5em;
     a {
       color: rgb(63, 78, 188);
-      font-weight: 600;
       font-size: 1.1em;
       cursor: pointer;
       transition: all ease-in-out .3s;
@@ -416,6 +416,12 @@ img {
 
 .ql-toolbar.ql-snow {
   border: 0 !important;
+}
+
+#gig-image {
+  width: 75%;
+  display: block;
+  margin: auto;
 }
 
 </style>

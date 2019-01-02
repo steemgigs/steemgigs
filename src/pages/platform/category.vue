@@ -2,9 +2,8 @@
   <page :pageClasses="['categories__view', 'row']">
     <cat-nav />
     <el-main>
-    <div class="col s12 m8 l9 right center-align row">
+    <div class="col s12 m12 l9 right center-align row">
       <h3>{{ categoryDetails.name}}</h3>
-      <span v-if="categoryDetails.name == 'SurpassingGoogle'">(The Knowledge-Bank of SteemGigs)</span>
       <h5>{{ categoryDetails.description }}</h5>
       <div v-if="loading">
         <div class="col s12 m6 l4">
@@ -18,12 +17,12 @@
         </div>
       </div>
       <div v-if="!loading">
-        <div v-if="catgigs.length > 0" class="col s12 m6 l4 mt-3 left-align" v-for="(gig, index) in catgigs" :key="index">
+        <div v-if="gig.author && catgigs.length > 0" class="col s12 m6 l4 mt-3 left-align" v-for="(gig, index) in catgigs" :key="index">
           <gig-card :gigData="gig" />
         </div>
         <div v-if="catgigs.length <= 0">
           <h5>There are no posts yet in this category. Be the first to post in the <span class="grey-text text-darken-2">{{categoryDetails.name}}</span> category</h5>
-          <router-link :to="this.$route.params.category == 'surpassinggoogle' ? '/surpassing-google' : '/create_gig'" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+          <router-link :to="this.$route.params.category == 'surpassinggoogle' ? '/surpassing-google' : '/create_gig'"><el-button class="secondary" type="secondary">Create</el-button></router-link>
         </div>
       </div>
     </div>
@@ -37,7 +36,7 @@
           </li>
         </ul>
       </div>
-      <div class="subcats py-2 margin-top left-panel" v-if="categoryDetails.name == 'SurpassingGoogle'">
+      <!-- <div class="subcats py-2 margin-top left-panel" v-if="categoryDetails.name == 'SurpassingGoogle'">
        <b>Reminder:</b><p>You can curate, upvote and comment right here on SteemGigs. Please make sure to support our authors as increase your knowledge-base</p>
        <p>Would you want to deposit some of your knowledge with us, for the sake of  everyone?</p>
         <router-link class="btn indigo" to="/" tag="button">Click Here</router-link>
@@ -52,7 +51,7 @@
        <p>Contribute, Learn, Earn, Curate, Engage, Motivate and Draw Inspiration.</p>
        <p>"Don't Let today emptily slip by". Let's  all become SteemGiggers (Dream-Builders).</p>
        <router-link class="btn indigo" to="/surpassing-google" tag="button">Click Here</router-link>
-      </div>
+      </div> -->
     </div>
     </el-main>
   </page>

@@ -1,6 +1,6 @@
 $codeBG: whitesmoke;
 body {
-  overflow-x: hidden;
+  overflow: hidden;
   background: whitesmoke;
 }
 @media only screen and (min-width: 993px) {
@@ -19,31 +19,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: whitesmoke;;
   min-height: calc(100vh);
-  [class*="__view"] {
-    width: 100vw;
-  }
+  width: 100vw;
 }
 
 .el-main {
-  padding: 20px 20px;
-}
-
-// Temp Fixes for layout issues with fixed nav
-
-.VueCarousel-wrapper {
-  padding-top: 40px;
-}
-
-.categories__view .el-main, .search__view .el-main {
-  padding: 70px 20px;
-}
-
-.search__view .el-main {
-  padding: 70px 20px;
-}
-
-.profile__view .el-main {
-  padding: 70px 20px;
+  padding: 30px 90px;
+  overflow: auto;
+  height: calc(100vh - 105px);
 }
 
 h1, h2, h4, h5 {
@@ -1069,7 +1051,15 @@ hr {
   }
 }
 
+@media (max-width: 768px) {
+
+.el-main {
+  padding: 30px 20px;
+}
+}
+
 @media (min-width: 768px) {
+
   .m-md-0 {
     margin: 0 !important;
   }

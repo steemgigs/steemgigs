@@ -5,7 +5,6 @@ import App from './App'
 import router from './router'
 import store from './store'
 import mixins from '@/plugins/mixins'
-import Notifications from 'vue-notification'
 import VTooltip from 'v-tooltip'
 import VueContentPlaceholders from 'vue-content-placeholders'
 import Vuex from 'vuex'
@@ -805,7 +804,6 @@ Vue.config.productionTip = false
 Vue.prototype.$eventBus = new Vue()
 Vue.use(Vuex)
 Vue.mixin(mixins)
-Vue.use(Notifications)
 Vue.use(VTooltip)
 Vue.use(VueContentPlaceholders)
 

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 <template>
   <div class="card-action">
     <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
@@ -144,43 +145,45 @@ export default {
     },
     upvote () {
       this.voting = true
-      console.log('upvoting')
-      sc2.setAccessToken(this.$store.state.accessToken)
-      sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, parseInt(this.upvoteRange) * 100, (err, res) => {
-        this.voting = false
-        if (!err) {
-          // this.fetchThisComment()
+      try {
+        sc2.setAccessToken(this.$store.state.accessToken)
+        sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, parseInt(this.upvoteRange) * 100, (res) => {
           this.upvoteActive = false
           this.gigData.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
-          console.log(res)
-        } else {
           this.$notify({
-            group: 'foo',
-            title: 'Error voting',
-            text: 'You have exceeded maximum vote toggles for this post',
-            type: 'error'
+            title: 'Success',
+            message: 'Your vote has been cast successfully',
+            type: 'success'
           })
-        }
-      })
+        })
+      } catch (err) {
+        this.$notify.error({
+          title: 'Error',
+          message: `There was an error voting on your post. Error details - ${err}`
+        })
+        this.voting = false
+      }
     },
     downvote () {
       this.unvoting = true
-      sc2.setAccessToken(this.$store.state.accessToken)
-      sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, 0, (err, res) => {
-        this.unvoting = false
-        console.log(err, res)
-        if (!err) {
+      try {
+        sc2.setAccessToken(this.$store.state.accessToken)
+        sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, 0, (res) => {
+          this.unvoting = false
           this.gigData.active_votes = this.gigData.active_votes.filter((x) => x.voter !== this.$store.state.username)
-          console.log(res)
-        } else {
           this.$notify({
-            group: 'foo',
-            title: 'Error unvoting',
-            text: 'You have exceeded maximum vote toggles for this post',
-            type: 'error'
+            title: 'Success',
+            message: 'You have unvoted this post successfully',
+            type: 'success'
           })
-        }
-      })
+        })
+      } catch (err) {
+        this.$notify.error({
+          title: 'Error',
+          message: `There was an error voting on your post. Error details - ${err}`
+        })
+        this.unvoting = false
+      }
     }
   }
 }
@@ -220,9 +223,6 @@ $blue: #6361D0;
       margin-top: 0px;
       margin-left: 0em;
       display: inline-block;
-    }
-    .task {
-      font-weight: 600;
     }
     .price {
       margin-top: 0.5em;

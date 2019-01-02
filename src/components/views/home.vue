@@ -1,12 +1,13 @@
 <template>
   <div class="home__view row">
     <cat-nav />
-          <carousel id="home_ad_slider" :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
-        <slide>
-          <img src="/static/img/share.png" class="responsive-img" alt="">
-        </slide>
-      </carousel>
+
     <el-main>
+          <carousel id="home_ad_slider" :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
+      <slide>
+        <img src="/static/img/share.png" class="responsive-img" alt="">
+      </slide>
+      </carousel>
     <div class="col s12 m12 l12">
       <!-- Gigs -->
       <section id="steemgigs" class="row">
@@ -30,11 +31,11 @@
           <br><br>
           <br><br>
         </div>
-        <div class="col s12 m6 l3"  v-for="(gig, index) in steemgigs.slice(0,8)" :key="index">
+        <div class="col s12 m4 l3"  v-if="gig.author" v-for="(gig, index) in steemgigs.slice(0,8)" :key="index">
           <gig-card :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-          <el-button class="secondary" type="secondary"><router-link to="/steemgigs">Explore Gigs</router-link></el-button>
+         <router-link to="/steemgigs"><el-button class="secondary" type="secondary">Explore Gigs</el-button></router-link>
         </div>
       </section>
       <!-- <section id="untalented" class="row">
@@ -77,7 +78,7 @@
           <plane v-if="!featuredFetched" size="100" />
           <div v-if="featuredFetched">
             <h5>Create a SteemGig today!</h5>
-            <el-button class="secondary" type="secondary"> <router-link to="/create_gig">Create Gig</router-link></el-button>
+             <a target="_blank" href="https://discord.gg/wWrnSXK"><el-button class="secondary" type="secondary">Create Featured Gig</el-button></a>
           </div>
         </div>
         <div class="col s12 m6 l3" v-for="(gig, index) in featured.slice(0,8)" :key="index">
@@ -164,7 +165,7 @@
           <plane v-if="!surpassinggoogleFetched" size="100" />
           <div v-if="surpassinggoogleFetched">
             <h5>Be the first to post a gig, click button below</h5>
-             <el-button class="secondary" type="secondary"><router-link to="/create_gig">Create Gig</router-link></el-button>
+             <router-link to="/create_gig"><el-button class="secondary" type="secondary">Create Gig</el-button></router-link>
           </div>
           <br><br>
           <br><br>
@@ -173,7 +174,7 @@
           <gig-card type="surpassingGoogle" :gigData="gig" />
         </div>
         <div v-if="testimonials.length > 0" class="col s12 center-align py-3">
-           <el-button class="secondary" type="secondary"><router-link to="/categories/surpassinggoogle">Explore SurpassingGoogle</router-link></el-button>
+           <router-link to="/categories/surpassinggoogle"><el-button class="secondary" type="secondary">Explore SurpassingGoogle</el-button></router-link>
         </div>
       </section>
       <!--End Surpassing Google segment-->
@@ -344,12 +345,14 @@ $blue: #6361D0;
   }
 }
 #home_ad_slider {
+    padding: 0 10px;
+    margin-bottom: 20px;
   img {
-    height: 233px;
+    height: 215px;
     background: #ccc;
     width: 100%;
     object-fit: cover;
-
+    border-radius: 10px;
   }
   .caption {
     position: absolute;
@@ -387,9 +390,6 @@ section {
         &:hover {
           text-decoration: underline;
         }
-      }
-      .task {
-        font-weight: 600;
       }
       a {
         &.task {
@@ -432,5 +432,9 @@ section {
 
 .feed-option {
   text-transform: capitalize;
+}
+
+.VueCarousel-wrapper {
+  border-radius: 10px;
 }
 </style>

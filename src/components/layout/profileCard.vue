@@ -305,6 +305,7 @@ export default {
   .owner {
     .profile-card span {
        text-align: center;
+       word-break: break-word;
     }
     .rotating-card{
       position: relative;

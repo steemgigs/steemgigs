@@ -146,20 +146,21 @@ $blue: #6361D0;
       color: black;
       margin: 0 0.5rem;
       transition: all ease-in .3s;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: bold;
       &:hover {
         text-decoration: underline;
       }
     }
     .task {
-      font-size: 14px;
+      font-size: 13px;
       color: black;
     }
     .price {
       margin-top: 0.5em;
       font-weight: 500;
       font-size: 13px;
+      font-style: italic;
     }
   }
   .card-action {
