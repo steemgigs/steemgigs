@@ -4,7 +4,6 @@
     <el-main>
     <div class="col s12 m12 l9 right center-align row">
       <h3>{{ categoryDetails.name}}</h3>
-      <span v-if="categoryDetails.name == 'SurpassingGoogle'">(The Knowledge-Bank of SteemGigs)</span>
       <h5>{{ categoryDetails.description }}</h5>
       <div v-if="loading">
         <div class="col s12 m6 l4">
@@ -23,7 +22,7 @@
         </div>
         <div v-if="catgigs.length <= 0">
           <h5>There are no posts yet in this category. Be the first to post in the <span class="grey-text text-darken-2">{{categoryDetails.name}}</span> category</h5>
-          <router-link :to="this.$route.params.category == 'surpassinggoogle' ? '/surpassing-google' : '/create_gig'" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
+          <router-link :to="this.$route.params.category == 'surpassinggoogle' ? '/surpassing-google' : '/create_gig'"><el-button class="secondary" type="secondary">Create</el-button></router-link>
         </div>
       </div>
     </div>
