@@ -77,12 +77,14 @@
               <el-form-item label="Pricing" prop="pricing">
                 <vue-editor useCustomImageHandler @imageAdded="handleImageAdded" v-model="newGigData.pricing" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
               </el-form-item>
-              <!-- Pricing Requirements -->
+              </el-collapse-item>
+              <!-- Requirements -->
+              <el-collapse-item title="Requirements" name="2">
               <el-form-item label="Requirements" prop="requirements">
                 <vue-editor useCustomImageHandler @imageAdded="handleImageAdded" v-model="newGigData.requirements" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
               </el-form-item>
             </el-collapse-item>
-            <el-collapse-item title="Delivery" name="1">
+            <el-collapse-item title="Delivery" name="3">
               <!-- Delivery Date -->
               <el-row :gutter="15">
                 <!-- Days -->
@@ -106,7 +108,7 @@
               </el-row>
             </el-collapse-item>
             <!-- Portfolio -->
-            <el-collapse-item title="Porfolio" name="2">
+            <el-collapse-item title="Porfolio" name="4">
               <el-row :gutter="15">
                 <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                   <div class="col s12 m4 l3 mb-3" v-for="(image, index) in newGigData.portfolio" :key="image.key">
