@@ -4,7 +4,7 @@
       <h3>Create new {{capitalize(getSubCategoryName.name)}}</h3>
       <h5 v-text="getSubCategoryName.description" />
       <div class="form-container">
-        <el-form :model="newGigRequest" :rules="testimonialRules" ref="newGigRequest" label-position="top">
+        <el-form :model="newGigRequest" :rules="surpassingRules" ref="newGigRequest" label-position="top">
           <!--  Title -->
           <el-form-item label="Title" prop="title">
             <el-input v-model="newGigRequest.title"></el-input>
@@ -44,8 +44,8 @@
           </el-form-item>
           <!-- Form Submission -->
           <el-form-item>
-            <el-button type="primary" @click="submitForm('newTestimonial')">Create</el-button>
-            <el-button @click="resetForm('newTestimonial')">Reset</el-button>
+            <el-button type="primary" @click="submitForm('newGigRequest')">Create</el-button>
+            <el-button @click="resetForm('newGigRequest')">Reset</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -92,6 +92,22 @@ export default {
         price: 0,
         liked: false,
         upvoteRange: 100
+      },
+      surpassingRules: {
+        title: [
+          { required: true, message: 'Please enter a post title', trigger: 'blur' },
+          { min: 5, message: 'Your title should be at least 5 characters', trigger: 'blur' }
+        ],
+        description: [
+          { required: true, message: 'Please enter a post description', trigger: 'blur' },
+          { min: 300, message: 'Your description should be 300 Characters or more, please read style guide for clarification', trigger: 'blur' }
+        ],
+        category: [
+          { required: true, message: 'Please enter a category', trigger: 'blur' }
+        ],
+        subCategory: [
+          { required: true, message: 'Please enter a subcategory', trigger: 'blur' }
+        ]
       },
       customToolbar: [
         ['bold', 'italic', 'underline'],
