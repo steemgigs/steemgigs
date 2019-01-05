@@ -172,14 +172,10 @@ import axios from '@/plugins/axios'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import ImgUpload from '@/components/snippets/imgUpload'
-import DismissibleNotice from '@/components/snippets/dismissibleNotice'
 import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
-import { Carousel, Slide } from 'vue-carousel'
-import SliderRange from 'vue-slider-component'
 import debounce from '@/plugins/debounce'
-import InputTag from 'vue-input-tag'
 import Util from '@/services/util'
 
 export default {
@@ -188,13 +184,8 @@ export default {
     CatNav,
     MarkdownEditor,
     VueMarkdown,
-    Carousel,
-    Slide,
     ImgUpload,
-    VueEditor,
-    InputTag,
-    DismissibleNotice,
-    SliderRange
+    VueEditor
   },
   data () {
     return {
@@ -222,35 +213,6 @@ export default {
     }
   },
   methods: {
-    search: debounce(function () {
-      this.checkingTitle = true
-      let searchTerm = this.steemedTitle
-      console.log('search term:', searchTerm)
-      Api.checkTitleExistence({username: this.$store.state.username, title: this.steemedTitle}).then(result => {
-        this.checkingTitle = false
-        this.duplicateTitle = result.data
-        console.log(result)
-      }).catch(e => {
-        this.checkingTitle = false
-        this.errorText = 'there was an error with search'
-        console.log('error:', e)
-      })
-    }, 1000),
-    vote () {
-      if (!this.newGigRequest.liked) {
-        this.newGigRequest.liked = true
-      } else {
-        this.newGigRequest.liked = false
-      }
-    },
-    switchTo (index) {
-      this.nextPressed = true
-      this.currentSection = index
-    },
-    nextSection () {
-      this.nextPressed = true
-      if (this.currentSection < this.sections.length) this.currentSection++
-    },
     handleImageAdded (file, Editor, cursorLocation) {
       const CLIENT_ID = '993793b1d8d3e2e'
       var formData = new FormData()
@@ -283,9 +245,6 @@ export default {
     },
     morePics () {
       if (this.totalPics < 4) this.totalPics++
-    },
-    getTags (entries) {
-      this.userTags = entries
     },
     submit () {
       if (!this.errorr) {
@@ -353,39 +312,7 @@ export default {
       }
     }
   },
-  watch: {
-    newGigRequest: {
-      handler (val) { this.$store.commit('SET_NEW_GIGREQUEST', val) },
-      deep: true
-    }
-  },
   computed: {
-    validTitle () {
-      if (this.newGigRequest.title.length > 5 && this.checkingTitle) {
-        return 'Wait a sec...'
-      } else if (this.newGigRequest.title.length > 5) {
-        return 'Title is valid, your\'re cool!'
-      } else {
-        return ''
-      }
-    },
-    descError () {
-      if (this.nextPressed && this.newGigRequest.description.length < 300) {
-        return 'Your description should be 300 Characters or more, please read style guide for clarification'
-      } else {
-        return ''
-      }
-    },
-    subcatError () {
-      if (!this.newGigRequest.subcategory) {
-        return 'You must select a category/subcategory'
-      } else {
-        return ''
-      }
-    },
-    errorr () {
-      return this.descError || this.subcatError || !this.validTitle
-    },
     selectedCategoryIndex () {
       let catIndex = 0
       this.categories.forEach((category, index) => {
@@ -428,186 +355,5 @@ ${this.newGigRequest.description}
 </script>
 
 <style lang="scss" scoped>
-form .input-field {
-  position: relative;
-}
-select.my-select {
-  width: initial !important;
-  pointer-events: initial !important;
-  height: 2.5em !important;
-  min-width: 10em;
-  position: static;
-  opacity: 1 !important;
-}
-.sections {
-  background: white;
-  border-bottom: 1px solid #ccc;
-  border-top: 1px solid #f8f8f8;
-  top: 50px;
-  position: fixed;
-  width: 100%;
-  z-index: 2;
-  li {
-    &:not(:first-child) {
-      &>a::before {
-        font-family: "Ionicons";
-        content: "\f125";
-        position: absolute;
-        left: -0.5em;
-      }
-    }
-    display: inline-block;
-    position: relative;
-    &:first-child>a::before {
-      content: ''
-    }
-    a {
-      padding: 15.5px 1em;
-      line-height: 50px;
-      font-weight: 500;
-      color: #757575;
-      cursor: pointer;
-      margin-left: 1em;
-      position: relative;
-      box-sizing: border-box;
-      transition: all ease-in-out .3s;
-      &.active, &:hover {
-        color: #6361D0;
-        font-weight: 500;
-      }
-      &::after, &.active::after {
-        content: ' ';
-        height: 2px;
-        width: 0%;
-        background: #6361D0;
-        display: inline-block;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        transition: all ease-in-out .3s;
-      }
-      &:hover::after, &.active::after {
-        width: 100%;
-      }
-      &.active::after {
-        height: 1px;
-      }
-      &:hover::after {
-        height: 2px;
-      }
-    }
-  }
-}
-.container {
-  min-width: 95%;
-  padding-top: 1.5em;
-  &>.col>.card {
-    // padding: 1em;
-    padding-bottom: 40px;
-  }
-}
-// .input-field>label:not(.label-icon).active {
-//     -webkit-transform: translateY(-14px) scale(0.8);
-//     transform: translateY(-14px) translateX(-38px) scale(1);
-//     -webkit-transform-origin: 0 0;
-//     transform-origin: 0 0;
-//     color: black;
-// }
-.input-field {
-  margin-bottom: 1em;
-}
-p {
-  &.title {
-    color: #757575;
-    margin-bottom: 0;
-    margin-top: 0
-  }
-  &.sub-title {
-    margin-left: 2rem;
-    color: rgb(119, 85, 143);
-  }
-}
-.select-wrapper {
-  position: relative;
-  outline: 0px solid;
-  border: 1px solid #BDBDBD;
-  margin-left: -0.5em;
-  padding-left: 5px;
-  input.select-dropdown {
-    margin-bottom: 0;
-  }
-}
-.gigForm {
-  position: relative;
-  .title-before {
-    position: absolute;
-    color: #757575;
-    top: 2.9px;
-    left: 0.75em;
-    font-size: 25.5px;
-  }
-  textarea {
-    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    line-height: 41.5px;
-    font-size: 28px;
-    padding: 10px;
-    min-height: 3.5em;
-    resize: none;
-    color: #757575;
-    overflow-y: auto;
-    border: 2px solid #bdbdbd5e;
-    box-sizing: border-box;
-    border-radius: 4px;
-    &:focus {
-      border: 2px solid #9FA8DA;
-      outline: 0px solid;
-    }
-  }
-}
-.word-count {
-  margin-top: 0;
-}
-.form-navs {
-  display: block;
-  margin-top: 5em;
-  button {
-    line-height: 3px;
-    text-transform: initial;
-    font-weight: 500;
-  }
-}
-.tutorial_guide {
-  position: absolute;
-  right: -28vw;
-  width: 23.5vw;
-  top: 0em;
-  &::before {
-    content: ' ';
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid #FFFFFC;
-    position: absolute;
-    left: -10px;
-    top: 45%;
-    z-index: 3;
-    box-shadow: 0px 0px 0px black;
-  }
-  .card-content {
-    p {
-      display: list-item;
-      margin-left: 1em;
-    }
-  }
-}
-.push-down {
-  margin-top: 4.2em;
-}
-button.addPic {
-  position: absolute;
-  top: 50%;
-  transform: translate(50%, -50%);
-}
+
 </style>
