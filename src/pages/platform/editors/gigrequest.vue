@@ -4,7 +4,7 @@
       <h3>Create new gig request</h3>
       <h5>Not an expert yet? No worries! On SteemGigs, you can hone your expertise while offering a service. Select this editor to do just so.</h5>
       <div class="form-container">
-        <el-form :model="newTestimonial" :rules="testimonialRules" ref="newTestimonial" label-position="top">
+        <el-form :model="newGigRequest" :rules="requestRules" ref="newTestimonial" label-position="top">
           <!--  Title -->
           <el-form-item label="Title" prop="title">
             <el-input v-model="newGigRequest.title"></el-input>
@@ -155,6 +155,22 @@ export default {
         name: 'file',
         accept: 'image/jpg,image/jpeg,image/png',
         url: this.$imgUploadURL
+      },
+      requestRules: {
+        title: [
+          { required: true, message: 'Please enter a post title', trigger: 'blur' },
+          { min: 5, message: 'Your title should be at least 5 characters', trigger: 'blur' }
+        ],
+        description: [
+          { required: true, message: 'Please enter a post description', trigger: 'blur' },
+          { min: 300, message: 'Your description should be 300 Characters or more, please read style guide for clarification', trigger: 'blur' }
+        ],
+        category: [
+          { required: true, message: 'Please enter a category', trigger: 'blur' }
+        ],
+        subCategory: [
+          { required: true, message: 'Please enter a subcategory', trigger: 'blur' }
+        ]
       }
     }
   },
