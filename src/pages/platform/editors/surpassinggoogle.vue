@@ -6,9 +6,6 @@
     <ul class="sections hide-on-med-and-down center">
       <li v-for="(section, index) in sections" :key="index"><a v-text="section.replace('-title', capitalize(getSubCategoryName.name))" :class="{active: index === currentSection}" @click="switchTo(index)"></a></li>
     </ul>
-    <dismissible-notice>
-      <span>Oh you didn't find your gig! Post a custom request below</span>
-    </dismissible-notice>
     <div class="container" @keypress.tab="nextSection">
       <div class="col s12 m7 l9 row" >
         <form class=" row" v-if="currentSection === 0">
@@ -41,34 +38,6 @@
                 <span class="simple-card">
                   <span class="red-text" v-text="descError" />
                 </span>
-              </div>
-              <div class="tutorial_guide center-align">
-                <div class="card">
-                  <div class="card-content">
-                    <span class="card-title">Reminders</span>
-                    <p>1. Be yourself ans as expressive as possible.
-                    The world and generations yet unborn will come here to dig from your knowledge.</p>
-                    <p>2. Every post you write here appears on the decentralized steem blockchain and can earn your rewards.
-                    Make the most of each post.</p>
-                    <p>3. Clients may visit your blogs to ascertain your reputation before availing of your Gigs.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="tutorial_guide center-align push-down-twice">
-                <div class="card">
-                  <div class="card-content">
-                    <span class="card-title">Want to Create a SteemGig?</span>
-                     <router-link class="btn indigo" to="/create_gig">Click Here</router-link>
-                  </div>
-                </div>
-              </div>
-               <div class="tutorial_guide center-align push-down-thrice">
-                <div class="card">
-                  <div class="card-content">
-                    <span class="card-title">Support SteemGigs</span>
-                     <router-link class="btn indigo" to="#">Vote us as Witness</router-link>
-                  </div>
-                </div>
               </div>
             </div>
             <div class="mx-2">
@@ -117,25 +86,8 @@
                 <span class="card-title"> {{ steemedTitle }}</span>
                 <p><span>{{ this.newGigRequest.category }}</span> / <span>{{ this.newGigRequest.subcategory }}</span></p>
               </div>
-              <!-- <div class="card-image">
-                <carousel :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
-                  <slide v-for="(image, index) in newGigRequest.portfolio" :key="index">
-                    <img :src="image" class="responsive-img" :alt="newGigRequest.title">
-                  </slide>
-                </carousel>
-              </div> -->
               <div class="card-content pt-0">
                 <vue-markdown :source="previewData" />
-              </div>
-            </div>
-            <div class="tutorial_guide hide-on-small-only">
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title">How Nice?</span>
-                  <p class="mt-1">Take a look at your Steemgigs Post to see if you have made errors</p>
-                  <p class="mt-1">If error free, hit "publish", else, correct errors</p>
-                  <p class="mt-1">Note: Your post will also appear on the Steem Blockchain</p>
-                </div>
               </div>
             </div>
             <div v-if="errorr" class="simple-card ">
@@ -162,19 +114,13 @@
 <script>
 import axios from '@/plugins/axios'
 import Api from '@/services/api'
-// import sc2 from '@/services/sc2'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import ImgUpload from '@/components/snippets/imgUpload'
-import DismissibleNotice from '@/components/snippets/dismissibleNotice'
 import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
-// import Steem from 'steem'
 import { Carousel, Slide } from 'vue-carousel'
-import SliderRange from 'vue-slider-component'
-import debounce from '@/plugins/debounce'
-import InputTag from 'vue-input-tag'
 
 export default {
   components: {
@@ -185,25 +131,13 @@ export default {
     Carousel,
     Slide,
     ImgUpload,
-    VueEditor,
-    InputTag,
-    DismissibleNotice,
-    SliderRange
+    VueEditor
   },
   data () {
     return {
-      successText: '',
-      errorText: '',
-      isPosting: false,
-      sections: ['Create a -title (POST)', 'Publish'],
-      currentSection: 0,
       totalPics: 1,
       portfolioImages: [],
       PageDescription: '',
-      userTags: [],
-      nextPressed: false,
-      duplicateTitle: '',
-      checkingTitle: false,
       newGigRequest: this.$store.state.newPosts.surpassinggoogle,
       customToolbar: [
         ['bold', 'italic', 'underline'],
@@ -218,30 +152,6 @@ export default {
     }
   },
   methods: {
-    search: debounce(function () {
-      this.checkingTitle = true
-      let searchTerm = this.steemedTitle
-      console.log('search term:', searchTerm)
-      Api.checkTitleExistence({username: this.$store.state.username, title: this.steemedTitle}).then(result => {
-        this.checkingTitle = false
-        this.duplicateTitle = result.data
-        console.log(result)
-      }).catch(e => {
-        this.checkingTitle = false
-        this.errorText = 'there was an error with search'
-        console.log('error:', e)
-      })
-    }, 1000),
-    tryoutput () {
-      console.log(this.$route.params.subcategory)
-    },
-    vote () {
-      if (!this.newGigRequest.liked) {
-        this.newGigRequest.liked = true
-      } else {
-        this.newGigRequest.liked = false
-      }
-    },
     handleImageAdded (file, Editor, cursorLocation) {
       const CLIENT_ID = '993793b1d8d3e2e'
       var formData = new FormData()
@@ -265,17 +175,6 @@ export default {
         .catch((err) => {
           console.log(err)
         })
-    },
-    switchTo (index) {
-      this.nextPressed = true
-      this.currentSection = index
-    },
-    nextSection () {
-      this.nextPressed = true
-      if (this.currentSection < this.sections.length) this.currentSection++
-    },
-    prevSection () {
-      if (this.currentSection > 0) this.currentSection--
     },
     refreshSubCategory () {
       this.newGigRequest.subcategory = ''
@@ -353,22 +252,7 @@ export default {
       }
     }
   },
-  watch: {
-    newGigRequest: {
-      handler (val) { this.$store.commit('SET_NEW_SURPASSINGGOOGLE', val) },
-      deep: true
-    }
-  },
   computed: {
-    validTitle () {
-      if (this.newGigRequest.title.length > 5 && this.checkingTitle) {
-        return 'Wait a sec...'
-      } else if (this.newGigRequest.title.length > 5) {
-        return 'Title is valid, your\'re cool!'
-      } else {
-        return ''
-      }
-    },
     getSubCategoryName () {
       var PageName = ''
       this.categories[4].subcategories.forEach((sub, index) => {
@@ -377,30 +261,6 @@ export default {
         }
       })
       return PageName
-    },
-    validCategories () {
-      return this.categories.filter(function (c) {
-        if (c.name !== 'SurpassingGoogle') {
-          return c.name
-        }
-      })
-    },
-    descError () {
-      if (this.nextPressed && this.newGigRequest.description.length < 1000) {
-        return 'Your description should be 1000 Characters or more, please read style guide for clarification'
-      } else {
-        return ''
-      }
-    },
-    subcatError () {
-      if (!this.newGigRequest.subcategory) {
-        return 'You must select a category/subcategory'
-      } else {
-        return ''
-      }
-    },
-    errorr () {
-      return this.descError || this.subcatError || !this.validTitle
     },
     selectedCategoryIndex () {
       let catIndex = 0
@@ -440,203 +300,5 @@ ${this.newGigRequest.description}
 </script>
 
 <style lang="scss" scoped>
-form .input-field {
-  position: relative;
-}
-select.my-select {
-  width: initial !important;
-  pointer-events: initial !important;
-  height: 2.5em !important;
-  min-width: 10em;
-  position: static;
-  opacity: 1 !important;
-}
-.description-section
-{
-  background: white;
-  border-bottom: 1px solid #ccc;
-  border-top: 1px solid #f8f8f8;
-  top: 50px;
-  position: fixed;
-  height: 120px;
-  width: 100%;
-  z-index: 3;
-}
-.sections {
-  background: white;
-  border-bottom: 1px solid #ccc;
-  border-top: 1px solid #f8f8f8;
-  top: 50px;
-  position: fixed;
-  width: 100%;
-  z-index: 2;
-  li {
-    &:not(:first-child) {
-      &>a::before {
-        font-family: "Ionicons";
-        content: "\f125";
-        position: absolute;
-        left: -0.5em;
-      }
-    }
-    display: inline-block;
-    position: relative;
-    &:first-child>a::before {
-      content: ''
-    }
-    a {
-      padding: 15.5px 1em;
-      line-height: 50px;
-      font-weight: 500;
-      color: #757575;
-      cursor: pointer;
-      margin-left: 1em;
-      position: relative;
-      box-sizing: border-box;
-      transition: all ease-in-out .3s;
-      &.active, &:hover {
-        color: #6361D0;
-        font-weight: 500;
-      }
-      &::after, &.active::after {
-        content: ' ';
-        height: 2px;
-        width: 0%;
-        background: #6361D0;
-        display: inline-block;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        transition: all ease-in-out .3s;
-      }
-      &:hover::after, &.active::after {
-        width: 100%;
-      }
-      &.active::after {
-        height: 1px;
-      }
-      &:hover::after {
-        height: 2px;
-      }
-    }
-  }
-}
-.container {
-  min-width: 95%;
-  padding-top: 1.5em;
-  &>.col>.card {
-    // padding: 1em;
-    padding-bottom: 40px;
-  }
-}
-// .input-field>label:not(.label-icon).active {
-//     -webkit-transform: translateY(-14px) scale(0.8);
-//     transform: translateY(-14px) translateX(-38px) scale(1);
-//     -webkit-transform-origin: 0 0;
-//     transform-origin: 0 0;
-//     color: black;
-// }
-.input-field {
-  margin-bottom: 1em;
-}
-p {
-  &.title {
-    color: #757575;
-    margin-bottom: 0;
-    margin-top: 0
-  }
-  &.sub-title {
-    margin-left: 2rem;
-    color: rgb(119, 85, 143);
-  }
-}
-.select-wrapper {
-  position: relative;
-  outline: 0px solid;
-  border: 1px solid #BDBDBD;
-  margin-left: -0.5em;
-  padding-left: 5px;
-  input.select-dropdown {
-    margin-bottom: 0;
-  }
-}
-.gigForm {
-  position: relative;
-  .title-before {
-    position: absolute;
-    color: #757575;
-    top: 0.9px;
-    left: 0.6em;
-    font-size: 28px;
-  }
-  textarea {
-    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    line-height: 41.5px;
-    font-size: 28px;
-    padding: 10px;
-    min-height: 3.5em;
-    resize: none;
-    color: #757575;
-    overflow-y: auto;
-    border: 2px solid #bdbdbd5e;
-    box-sizing: border-box;
-    border-radius: 4px;
-    &:focus {
-      border: 2px solid #9FA8DA;
-      outline: 0px solid;
-    }
-  }
-}
-.word-count {
-  margin-top: 0;
-}
-.form-navs {
-  display: block;
-  margin-top: 5em;
-  button {
-    line-height: 3px;
-    text-transform: initial;
-    font-weight: 500;
-  }
-}
-.tutorial_guide {
-  position: absolute;
-  right: -28vw;
-  width: 23.5vw;
-  top: 0em;
-  &::before {
-    content: ' ';
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid #FFFFFC;
-    position: absolute;
-    left: -10px;
-    top: 45%;
-    z-index: 3;
-    box-shadow: 0px 0px 0px black;
-  }
-  .card-content {
-    p {
-      display: list-item;
-      margin-left: 1em;
-    }
-  }
-}
-.push-down {
-  margin-top: 4.2em;
-}
-.push-down-twice {
-  margin-top: 25.2em;
-}
-.push-down-thrice {
-  margin-top: 35.2em;
-}
-button.addPic {
-  position: absolute;
-  top: 50%;
-  transform: translate(50%, -50%);
-}
+
 </style>
