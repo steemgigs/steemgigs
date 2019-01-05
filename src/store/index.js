@@ -46,20 +46,6 @@ export default new Vuex.Store({
         liked: false,
         upvoteRange: 100
       },
-      gigrequest: {
-        title: '',
-        category: '',
-        subcategory: '',
-        description: '',
-        hours: 0,
-        days: 0,
-        currency: 'STEEM',
-        images: [],
-        reward: '100% STEEM POWER',
-        price: 0,
-        liked: false,
-        upvoteRange: 100
-      },
       surpassinggoogle: {
         title: '',
         category: '',
@@ -73,7 +59,7 @@ export default new Vuex.Store({
         price: 0,
         liked: false,
         upvoteRange: 100
-      },
+      }
     }
   },
   mutations: {
