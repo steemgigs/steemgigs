@@ -13,19 +13,17 @@
           <el-row :gutter="15">
             <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
               <el-form-item label="Category" prop="category">
-                <select class="browser-default my-select category_select" @change="refreshSubCategory" v-model="newGigData.category">
-                        <option value="" disabled selected>Select Category</option>
-                        <option v-if="category.name != 'SurpassingGoogle'" v-for="(category, index) in categories" :key="index" :value="category.name" v-text="category.name"></option>
-                      </select>
+                  <el-select @change="refreshSubCategory" v-model="newGigData.category" clearable placeholder="Select Category">
+                    <el-option v-if="category.name != 'SurpassingGoogle'" v-for="(category, index) in categories" :key="index" :value="category.name" :label="category.name" />
+                  </el-select>
               </el-form-item>
             </el-col>
             <!-- Sub Category -->
             <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-              <el-form-item label="Sub Category" prop="subCategory">
-                <select :disabled='this.newGigData.category.length === 0' class="my-select browser-default subCategory_select" v-model="newGigData.subcategory">
-                        <option value="" disabled selected>Select Subcategory</option>
-                        <option v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory.name" v-text="subcategory.name"></option>
-                      </select>
+              <el-form-item  label="Sub Category" prop="subCategory">
+                <el-select :disabled='this.newGigData.category.length === 0' v-model="newGigData.subcategory" placeholder="Select Sub Category">
+                  <el-option  v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory.name" :label="subcategory.name"/>
+                </el-select>
               </el-form-item>
             </el-col>
           </el-row>
@@ -35,11 +33,11 @@
           </el-form-item>
           <!-- Post Reward Type -->
           <el-form-item label="Reward" prop="reward">
-            <select class="browser-default my-select category_select" v-model="newGigData.reward">
-                  <option>100% STEEM POWER</option>
-                  <option>50% SBD 50% SP</option>
-                  <option>Declined</option>
-                </select>
+            <el-select class="browser-default my-select category_select" v-model="newGigData.reward">
+                  <el-option value="100% STEEM POWER" label="100% STEEM POWER" />
+                  <el-option value="50% SBD/50% SP" label="50% SBD/50% SP" />
+                  <el-option value="Declined" label="Declined" />
+                </el-select>
           </el-form-item>
           <!-- Tags -->
           <el-form-item label="Tags" prop="tags">
@@ -63,14 +61,15 @@
                 </el-col>
                 <!-- Currency -->
                 <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-                  <el-form-item label="Currency" prop="currency">
-                    <select class="browser-default my-select category_select" v-model="newGigData.currency">
-                    <option value="" disabled selected>currency</option>
-                    <option>STEEM</option>
-                    <option>SBD</option>
-                    <option>SP</option>
-                </select>
-                  </el-form-item>
+                  <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+                <el-form-item label="Currency" prop="currency">
+                  <el-select v-model="newGigData.currency" placeholder="Select Currency">
+                    <el-option value="STEEM">STEEM</el-option>
+                    <el-option value="SBD">SBD</el-option>
+                    <el-option value="SP" >SP</el-option>
+                  </el-select>
+                </el-form-item>
+              </el-col>
                 </el-col>
               </el-row>
               <!-- Pricing Description -->
@@ -85,27 +84,27 @@
               </el-form-item>
             </el-collapse-item>
             <el-collapse-item title="Delivery" name="3">
-              <!-- Delivery Date -->
-              <el-row :gutter="15">
-                <!-- Days -->
-                <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-                  <el-form-item label="Delivery Date (Days)" prop="days">
-                    <select class="browser-default my-select category_select" v-model="newGigData.days">
-                <option value="0">Less than a day</option>
-                <option v-for="(day, index) in 30" :key="index" :value="day">{{ day }} day(s)</option>
-              </select>
-                  </el-form-item>
-                </el-col>
-                <!-- Hours -->
-                <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-                  <el-form-item label="Delivery Date (Hours)" prop="hours">
-                    <select class="browser-default my-select category_select" v-model="newGigData.hours">
-                  <option value="0">Less than an Hour</option>
-                  <option v-for="(hour, index) in 24" :key="index" :value="hour">{{ hour }} hours(s)</option>
-                </select>
-                  </el-form-item>
-                </el-col>
-              </el-row>
+               <!-- Delivery Date -->
+          <el-row :gutter="15">
+          <!-- Days -->
+          <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+          <el-form-item label="Delivery Date (Days)" prop="days">
+            <el-select  v-model="newGigData.days">
+              <el-option value="0" selected>Less than a day</el-option>
+              <el-option v-for="(day, index) in 30" :key="index" :value="day">{{ day }} day(s)</el-option>
+            </el-select>
+            </el-form-item>
+            </el-col>
+            <!-- Hours -->
+            <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+            <el-form-item label="Delivery Date (Hours)" prop="hours">
+              <el-select v-model="newGigData.hours">
+                <el-option selected value="0">Less than an Hour</el-option>
+                <el-option v-for="(hour, index) in 24" :key="index" :value="hour"></el-option>
+              </el-select>
+          </el-form-item>
+          </el-col>
+          </el-row>
             </el-collapse-item>
             <!-- Portfolio -->
             <el-collapse-item title="Porfolio" name="4">
