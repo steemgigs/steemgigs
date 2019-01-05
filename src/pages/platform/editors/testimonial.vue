@@ -2,7 +2,7 @@
   <page :pageClasses="['post_new_steemgig__view', 'row']">
     <el-main>
       <h3>Create new Testimonial</h3>
-      <h5>Not an expert yet? No worries! On SteemGigs, you can hone your expertise while offering a service. Select this editor to do just so.</h5>
+      <h5>Share your overall SteemGigs experience with us. So, why not record your service progress & updates, successful deliveries, shout-outs, payments etc using this editor.</h5>
       <div class="form-container">
         <el-form :model="newTestimonial" :rules="testimonialRules" ref="newTestimonial" label-position="top">
           <!--  Title -->
@@ -15,16 +15,18 @@
           </el-form-item>
           <!-- Tags -->
           <el-form-item label="Tags" prop="tags">
+            <div class="tags-container">
             <!-- Fixed Tags -->
             <el-tag v-for="(tag, index) in defaultTags" :key="index">{{ tag }}</el-tag>
             <!-- Dynamic Tags -->
             <el-tag v-for="(userTag, index) in userTags" :key="index" closable> {{ userTag }} </el-tag>
-            <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="mini" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm"/>
+            <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm"/>
             <el-button v-else-if="userTags.length < 5 - defaultTags.length" class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+            </div>
           </el-form-item>
           <!-- Form Submission -->
           <el-form-item>
-            <el-button type="primary" @click="submitForm('newTestimonial')">Create</el-button>
+            <el-button class="primary" type="primary" @click="submitForm('newTestimonial')">Create</el-button>
             <el-button @click="resetForm('newTestimonial')">Reset</el-button>
           </el-form-item>
         </el-form>
@@ -195,10 +197,3 @@ ${Util.convertImageUrlToHTML(this.newTestimonial.description)}
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.form-container {
-  background: white;
-  padding: 20px;
-}
-</style>

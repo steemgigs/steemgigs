@@ -13,19 +13,17 @@
           <el-row :gutter="15">
             <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
               <el-form-item label="Category" prop="category">
-                <select class="browser-default my-select category_select" @change="refreshSubCategory" v-model="newGigRequest.category">
-                  <option value="" disabled selected>Select Category</option>
-                  <option v-if="category.name != 'SurpassingGoogle'" v-for="(category, index) in categories" :key="index" :value="category.name" v-text="category.name"></option>
-                  </select>
+                  <el-select @change="refreshSubCategory" v-model="newGigRequest.category" clearable placeholder="Select Category">
+                    <el-option v-if="category.name != 'SurpassingGoogle'" v-for="(category, index) in categories" :key="index" :value="category.name" :label="category.name" />
+                  </el-select>
               </el-form-item>
             </el-col>
             <!-- Sub Category -->
             <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-              <el-form-item label="Sub Category" prop="subCategory">
-                <select :disabled='this.newGigRequest.category.length === 0' class="my-select browser-default subCategory_select" v-model="newGigRequest.subcategory">
-                  <option value="" disabled selected>Select Subcategory</option>
-                  <option v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory.name" v-text="subcategory.name"></option>
-                  </select>
+              <el-form-item  label="Sub Category" prop="subCategory">
+                <el-select :disabled='this.newGigRequest.category.length === 0' v-model="newGigRequest.subcategory" placeholder="Select Sub Category">
+                  <el-option  v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory.name" :label="subcategory.name"/>
+                </el-select>
               </el-form-item>
             </el-col>
           </el-row>
@@ -35,16 +33,18 @@
           </el-form-item>
           <!-- Tags -->
           <el-form-item label="Tags" prop="tags">
+            <div class="tags-container">
             <!-- Fixed Tags -->
             <el-tag v-for="(tag, index) in defaultTags" :key="index">{{ tag }}</el-tag>
             <!-- Dynamic Tags -->
             <el-tag v-for="(userTag, index) in userTags" :key="index" closable> {{ userTag }} </el-tag>
-            <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="mini" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm" />
+            <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm" />
             <el-button v-else-if="userTags.length < 5 - defaultTags.length" class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+            </div>
           </el-form-item>
           <!-- Form Submission -->
           <el-form-item>
-            <el-button type="primary" @click="submitForm('newGigRequest')">Create</el-button>
+            <el-button class="primary" type="primary" @click="submitForm('newGigRequest')">Create</el-button>
             <el-button @click="resetForm('newGigRequest')">Reset</el-button>
           </el-form-item>
         </el-form>
@@ -286,10 +286,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  .form-container {
-    background: white;
-    padding: 20px;
-  }
-</style>
