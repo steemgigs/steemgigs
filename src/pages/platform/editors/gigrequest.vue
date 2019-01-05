@@ -26,8 +26,8 @@
           </el-col>
           <!-- Sub Category -->
           <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-          <el-form-item :disabled='category' label="Sub Category" prop="subCategory">
-            <select class="my-select browser-default subCategory_select" v-model="newGigRequest.subcategory">
+          <el-form-item  label="Sub Category" prop="subCategory">
+            <select :disabled='this.newGigRequest.category.length === 0' class="my-select browser-default subCategory_select" v-model="newGigRequest.subcategory">
                       <option value="" disabled selected>Select Subcategory</option>
                       <option v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory.name" v-text="subcategory.name"></option>
                     </select>
