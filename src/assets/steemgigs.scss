@@ -1992,6 +1992,8 @@ hr {
 .form-container {
   background: white;
   padding: 20px;
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
 }
 .el-collapse-item__header {
   color: black;
@@ -2014,7 +2016,6 @@ hr {
 .el-tag {
   margin-right: 10px;
 }
-
 
 .button-new-tag {
   margin-left: 0px;
