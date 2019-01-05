@@ -1993,11 +1993,6 @@ hr {
   background: white;
   padding: 20px;
 }
-
-.el-tag {
-  margin-right: 7.5px;
-}
-
 .el-collapse-item__header {
   color: black;
   font-weight: bold;
@@ -2010,6 +2005,28 @@ hr {
 
 .el-select {
   width: 100%;
+}
+
+.tags-container {
+  display: inline-flex;
+}
+
+.el-tag {
+  margin-right: 10px;
+}
+
+
+.button-new-tag {
+  margin-left: 0px;
+  height: 32px;
+  line-height: 30px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.input-new-tag {
+  margin: -3.5px 0 0 0;
+  padding: 0;
 }
 
 // Markdown Editor Overrides
