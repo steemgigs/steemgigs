@@ -1,5 +1,12 @@
 var form = {
 
+  data () {
+    return {
+      inputValue: '',
+      inputVisible: false,
+      userTags: []
+    }
+  },
   methods: {
 
   // Form Reset

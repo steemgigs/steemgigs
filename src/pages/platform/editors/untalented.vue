@@ -62,9 +62,6 @@ export default {
         images: []
       },
       defaultTags: ['untalented'],
-      userTags: [],
-      inputValue: '',
-      inputVisible: false,
       sections: ['Create a steemit post', 'Publish'],
       customToolbar: [
         ['bold', 'italic', 'underline'],
