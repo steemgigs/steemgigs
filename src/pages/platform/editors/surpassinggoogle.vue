@@ -286,10 +286,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  .form-container {
-    background: white;
-    padding: 20px;
-  }
-</style>

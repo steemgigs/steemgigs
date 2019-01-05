@@ -195,10 +195,3 @@ ${Util.convertImageUrlToHTML(this.newTestimonial.description)}
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.form-container {
-  background: white;
-  padding: 20px;
-}
-</style>
