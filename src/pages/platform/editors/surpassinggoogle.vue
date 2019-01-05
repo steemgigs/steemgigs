@@ -244,7 +244,14 @@ export default {
       return '#STEEMGIGS: ' + '(' + this.getSubCategoryName.name + ') — ' + this.newGigRequest.title
     },
     defaultTags () {
-      return ['surpassinggoogle', 'steemgigs', this.slugify(this.$route.params.subcategory), this.slugify(this.newGigRequest.category), this.slugify(this.newGigRequest.subcategory)]
+      let tags = ['steemgigs', 'surpassinggoogle', this.slugify(this.$route.params.subcategory)]
+      if (this.newGigRequest.category) {
+        tags.push(this.newGigRequest.category)
+      }
+      if (this.newGigRequest.subcategory) {
+        tags.push(this.newGigRequest.subcategory)
+      }
+      return tags
     },
     previewData () {
       return `
