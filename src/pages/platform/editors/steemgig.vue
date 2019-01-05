@@ -221,8 +221,6 @@ export default {
           console.log(result)
           let url = result.data.data.link
           Editor.insertEmbed(cursorLocation, 'image', url)
-          // this.portfolioImages.push(url)
-          // this.newGigRequest.portfolio = this.portfolioImages
         })
         .catch((err) => {
           console.log(err)
@@ -346,7 +344,14 @@ export default {
       return catIndex
     },
     defaultTags () {
-      return ['steemgigs', this.slugify(this.newGigData.category), this.slugify(this.newGigData.subcategory)]
+      let tags = ['steemgigs']
+      if (this.newGigData.category) {
+        tags.push(this.newGigData.category)
+      }
+      if (this.newGigData.subcategory) {
+        tags.push(this.newGigData.subcategory)
+      }
+      return tags
     },
     wordCount () {
       if (this.newGigData.title.length > 0) {
