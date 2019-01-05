@@ -26,7 +26,7 @@
           </el-form-item>
           <!-- Form Submission -->
           <el-form-item>
-            <el-button type="primary" @click="submitForm('untalented')">Create</el-button>
+            <el-button class="primary" type="primary" @click="submitForm('untalented')">Create</el-button>
             <el-button @click="resetForm('untalented')">Reset</el-button>
           </el-form-item>
         </el-form>

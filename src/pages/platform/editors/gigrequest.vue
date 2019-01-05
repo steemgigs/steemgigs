@@ -85,8 +85,8 @@
           </el-form-item>
           <!-- Form Submission -->
           <el-form-item>
-            <el-button type="primary" @click="submitForm('newTestimonial')">Create</el-button>
-            <el-button @click="resetForm('newTestimonial')">Reset</el-button>
+            <el-button type="primary" class="primary" @click="submitForm('newTestimonial')">Create</el-button>
+            <el-button @click="resetForm('newTestimonial')"">Reset</el-button>
           </el-form-item>
         </el-form>
       </div>
