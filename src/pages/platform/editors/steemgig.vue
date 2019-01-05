@@ -209,8 +209,7 @@ export default {
         requirements: [
           { required: true, message: 'Please enter a requirements description', trigger: 'blur' },
           { min: 100, message: 'Your description should be 100 Characters or more, please read style guide for clarification', trigger: 'blur' }
-        ],
-
+        ]
       },
       customToolbar: [
         ['bold', 'italic', 'underline'],
@@ -308,11 +307,6 @@ export default {
 
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
-        // if (this.duplicateTitle) {
-        //   let splittedTitle = title.split(' ')
-        //   let lastNumber = parseInt(splittedTitle[splittedTitle.length - 1])
-        //   title = lastNumber ? title + ' ' + lastNumber++ : title + ' 1'
-        // })
         if (this.duplicateTitle) {
           let modifiedTitle = this.newGigData.title + Math.floor(Math.random() * 1000)
           permlink = this.slugify(modifiedTitle)
@@ -320,7 +314,6 @@ export default {
         }
         let liked = this.newGigData.liked
         let upvoteRange = this.newGigData.upvoteRange
-        // username, permlink, title, body, jsonMetadata, token
         Api.post({
           username,
           permlink,
