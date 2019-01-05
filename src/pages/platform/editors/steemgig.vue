@@ -4,7 +4,7 @@
       <h3>Create Gig</h3>
       <h5>Not an expert yet? No worries! On SteemGigs, you can hone your expertise while offering a service. Select this editor to do just so.</h5>
       <div class="form-container">
-        <el-form :model="newGigData" :rules="testimonialRules" ref="newGigData" label-position="top">
+        <el-form :model="newGigData" :rules="gigRules" ref="newGigData" label-position="top">
           <!--  Title -->
           <el-form-item label="Title" prop="title">
             <el-input v-model="newGigData.title"></el-input>
@@ -33,7 +33,7 @@
           <el-form-item label="Description" prop="description">
             <vue-editor useCustomImageHandler @imageAdded="handleImageAdded" v-model="newGigData.description" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
           </el-form-item>
-
+          <!-- Post Reward Type -->
           <el-form-item label="Reward" prop="reward">
             <select class="browser-default my-select category_select" v-model="newGigData.reward">
                   <option>100% STEEM POWER</option>
@@ -128,11 +128,10 @@
               </el-form-item>
             </el-collapse-item>
           </el-collapse>
-
           <!-- Form Submission -->
           <el-form-item>
-            <el-button type="primary" @click="submitForm('newTestimonial')">Create</el-button>
-            <el-button @click="resetForm('newTestimonial')">Reset</el-button>
+            <el-button type="primary" @click="submitForm('newGigData')">Create</el-button>
+            <el-button @click="resetForm('newGigData')">Reset</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -186,6 +185,31 @@ export default {
         price: 0,
         liked: false,
         upvoteRange: 100
+      },
+      gigRules: {
+        title: [
+          { required: true, message: 'Please enter a post title', trigger: 'blur' },
+          { min: 5, message: 'Your title should be at least 5 characters', trigger: 'blur' }
+        ],
+        description: [
+          { required: true, message: 'Please enter a post description', trigger: 'blur' },
+          { min: 300, message: 'Your description should be 300 Characters or more, please read style guide for clarification', trigger: 'blur' }
+        ],
+        category: [
+          { required: true, message: 'Please enter a category', trigger: 'blur' }
+        ],
+        subCategory: [
+          { required: true, message: 'Please enter a subcategory', trigger: 'blur' }
+        ],
+        pricing: [
+          { required: true, message: 'Please enter a pricing description', trigger: 'blur' },
+          { min: 100, message: 'Your description should be 100 Characters or more, please read style guide for clarification', trigger: 'blur' }
+        ],
+        requirements: [
+          { required: true, message: 'Please enter a requirements description', trigger: 'blur' },
+          { min: 100, message: 'Your description should be 100 Characters or more, please read style guide for clarification', trigger: 'blur' }
+        ],
+
       },
       customToolbar: [
         ['bold', 'italic', 'underline'],
