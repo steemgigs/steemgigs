@@ -1,8 +1,5 @@
 <template>
   <page :pageClasses="['new_steemgig__view', 'row']">
-    <ul class="sections hide-on-med-and-down center">
-      <li v-for="(section, index) in sections" :key="index"><a v-text="section" :class="{active: index === currentSection}" @click="switchTo(index)"></a></li>
-    </ul>
     <el-main>
     <div class="container" @keypress.tab="nextSection">
       <div class="col s12 m7 l9 row editor-container">
@@ -296,11 +293,6 @@ import ImgUpload from '@/components/snippets/imgUpload'
 import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
-import { Carousel, Slide } from 'vue-carousel'
-import DismissibleNotice from '@/components/snippets/dismissibleNotice'
-import InputTag from 'vue-input-tag'
-import SliderRange from 'vue-slider-component'
-import debounce from '@/plugins/debounce'
 import Util from '@/services/util'
 
 export default {
@@ -309,30 +301,14 @@ export default {
     CatNav,
     MarkdownEditor,
     VueMarkdown,
-    Carousel,
-    Slide,
-    InputTag,
     ImgUpload,
-    VueEditor,
-    SliderRange,
-    DismissibleNotice
+    VueEditor
   },
   data () {
     return {
-      successText: '',
-      errorText: '',
       isPosting: false,
       sections: ['Overview', 'Description', 'Pricing', 'Requirements', 'Portfolio', 'Publish'],
-      currentSection: 0,
-      descNext: false,
-      reqNext: false,
-      priceNext: false,
-      portNext: false,
-      userTags: [],
       totalPics: 1,
-      existingTitle: false,
-      checkingTitle: false,
-      duplicateTitle: '',
       newGigData: this.$store.state.newPosts.steemgig,
       customToolbar: [
         ['bold', 'italic', 'underline'],
@@ -347,13 +323,6 @@ export default {
     }
   },
   methods: {
-    vote () {
-      if (!this.newGigData.liked) {
-        this.newGigData.liked = true
-      } else {
-        this.newGigData.liked = false
-      }
-    },
     handleImageAdded (file, Editor, cursorLocation) {
       const CLIENT_ID = '993793b1d8d3e2e'
       var formData = new FormData()
@@ -378,24 +347,6 @@ export default {
           console.log(err)
         })
     },
-    switchTo (index) {
-      if (index === 5) {
-        this.descNext = this.priceNext = this.reqNext = this.portNext = true
-      } else if (this.currentSection >= 3) {
-        this.reqNext = true
-      } else if (this.currentSection >= 2) {
-        this.priceNext = true
-      } else if (this.currentSection >= 1) {
-        this.descNext = true
-      }
-      this.currentSection = index
-    },
-    nextSection () {
-      if (this.currentSection < this.sections.length) this.currentSection++
-    },
-    prevSection () {
-      if (this.currentSection > 0) this.currentSection--
-    },
     refreshSubCategory () {
       this.newGigData.subcategory = ''
     },
@@ -406,30 +357,6 @@ export default {
       if (this.newGigData.portfolio.length < 8) {
         this.newGigData.portfolio.push({url: '', key: Math.floor(Math.random() * 1000)})
       }
-    },
-    search: debounce(function () {
-      this.checkingTitle = true
-      let searchTerm = this.steemedTitle
-      console.log('search term:', searchTerm)
-      Api.checkTitleExistence({username: this.$store.state.username, title: this.steemedTitle}).then(result => {
-        this.checkingTitle = false
-        this.duplicateTitle = result.data
-        console.log(result)
-      }).catch(e => {
-        this.checkingTitle = false
-        this.errorText = 'there was an error with search'
-        console.log('error:', e)
-      })
-    }, 1000),
-    closeSearch (cb) {
-      this.searchTerm = ''
-      this.searchResults = []
-      this.searchActive = false
-      cb()
-    },
-    goto (where) {
-      this.closeSearch(this.$router.push(where))
-      // this.$router.push(where)
     },
     submit () {
       if (!this.errorr) {
@@ -513,58 +440,11 @@ export default {
     }
   },
   computed: {
-    validTitle () {
-      if (this.newGigData.title.length > 5 && this.checkingTitle) {
-        return 'Wait a sec...'
-      } else if (this.newGigData.title.length > 5) {
-        return 'Title is valid, your\'re cool!'
-      } else {
-        return ''
-      }
-    },
     steemedTitle () {
       return '#STEEMGIGS: I will ' + this.newGigData.title
     },
     portfolio () {
       return this.newGigData.portfolio.filter(image => image.url).map(image => image.url)
-    },
-    descError () {
-      if (this.descNext && this.newGigData.description.length < 300) {
-        return 'Your description should be 300 Characters or more, please read style guide for clarification'
-      } else {
-        return ''
-      }
-    },
-    pricingError () {
-      if (this.priceNext && this.newGigData.pricing.length < 100) {
-        return 'Your pricing description should be 100 Characters or more, please read style guide for clarification'
-      } else {
-        return ''
-      }
-    },
-    requirementError () {
-      if (this.reqNext && this.newGigData.requirements.length < 100) {
-        return 'Your requirments description should be 100 Characters or more, please read style guide for clarification'
-      } else {
-        return ''
-      }
-    },
-    subcatError () {
-      if (this.descNext && !this.newGigData.subcategory) {
-        return 'You must select a category/subcategory'
-      } else {
-        return ''
-      }
-    },
-    portfolioError () {
-      if (this.portNext && this.newGigData.portfolio.length < 1) {
-        return 'You must add at least one image to your portfolio'
-      } else {
-        return ''
-      }
-    },
-    errorr () {
-      return Boolean(this.descError || this.requirementError || this.pricingError || this.subcatError || this.portfolioError || !this.validTitle)
     },
     selectedCategoryIndex () {
       let catIndex = 0
@@ -627,183 +507,5 @@ ${iframeVideo}
 </script>
 
 <style lang="scss" scoped>
-form .input-field {
-  position: relative;
-}
-.add-box {
-  box-shadow: 0 1px 1px;
-  background: #f9f9f9;
-  color: dimgray;
-  padding: 10px 10px;
-  height: 200px; /* minimum height */
-  position: relative;
-  cursor: pointer;
-  span {
-    font-size: .9em;
-  }
-}
-select.my-select {
-  width: initial !important;
-  pointer-events: initial !important;
-  height: 2.5em !important;
-  min-width: 10em;
-  position: static;
-  opacity: 1 !important;
-}
-.sections {
-  background: white;
-  border-bottom: 1px solid #ccc;
-  border-top: 1px solid #f8f8f8;
-  top: 50px;
-  position: fixed;
-  width: 100%;
-  z-index: 2;
-  li {
-    &:not(:first-child) {
-      &>a::before {
-        font-family: "Ionicons";
-        content: "\f125";
-        position: absolute;
-        left: -0.5em;
-      }
-    }
-    display: inline-block;
-    position: relative;
-    &:first-child>a::before {
-      content: ''
-    }
-    a {
-      padding: 15.5px 1em;
-      line-height: 50px;
-      font-weight: 500;
-      color: #757575;
-      cursor: pointer;
-      margin-left: 1em;
-      position: relative;
-      box-sizing: border-box;
-      transition: all ease-in-out .3s;
-      &.active, &:hover {
-        color: #6361D0;
-        font-weight: 500;
-      }
-      &::after, &.active::after {
-        content: ' ';
-        height: 2px;
-        width: 0%;
-        background: #6361D0;
-        display: inline-block;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        transition: all ease-in-out .3s;
-      }
-      &:hover::after, &.active::after {
-        width: 100%;
-      }
-      &.active::after {
-        height: 1px;
-      }
-      &:hover::after {
-        height: 2px;
-      }
-    }
-  }
-}
-.container {
-  min-width: 95%;
-  padding-top: 1.5em;
-  &>.col>.card {
-    // padding: 1em;
-    padding-bottom: 40px;
-  }
-}
-// .input-field>label:not(.label-icon).active {
-//     -webkit-transform: translateY(-14px) scale(0.8);
-//     transform: translateY(-14px) translateX(-38px) scale(1);
-//     -webkit-transform-origin: 0 0;
-//     transform-origin: 0 0;
-//     color: black;
-// }
-.input-field {
-  margin-bottom: 1em;
-}
-p.title {
-  margin-left: 0.5em;
-  margin-bottom: 0;
-  margin-top: 0
-}
-.select-wrapper {
-  position: relative;
-  outline: 0px solid;
-  border: 1px solid #BDBDBD;
-  margin-left: -0.5em;
-  padding-left: 5px;
-  input.select-dropdown {
-    margin-bottom: 0;
-  }
-}
-.gigForm {
-  position: relative;
-  .title-before {
-    position: absolute;
-    color: #757575;
-    top: 0.9px;
-    left: 0.6em;
-    font-size: 28px;
-  }
-  textarea {
-    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    line-height: 41.5px;
-    text-indent: 7.8em;
-    font-size: 28px;
-    padding: 0px 6px;
-    min-height: 4.7em;
-    resize: none;
-    color: #757575;
-    overflow-y: auto;
-    border: 2px solid #bdbdbd5e;
-    box-sizing: border-box;
-    border-radius: 4px;
-    &:focus {
-      border: 2px solid #9FA8DA;
-      outline: 0px solid;
-    }
-  }
-}
-.word-count {
-  margin-top: 0;
-}
-.form-navs {
-  display: block;
-  margin-top: 5em;
-}
-.tutorial_guide {
-  position: absolute;
-  right: -28vw;
-  width: 23.5vw;
-  top: 0em;
-  &::before {
-    content: ' ';
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid #FFFFFC;
-    position: absolute;
-    left: -10px;
-    top: 20%;
-    z-index: 3;
-    box-shadow: 0px 0px 0px black;
-  }
-  .card-content {
-    p {
-      display: list-item;
-      margin-left: 1em;
-    }
-  }
-}
-.push-down {
-  margin-top: 4.2em;
-}
+
 </style>
