@@ -106,6 +106,7 @@ import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import form from '@/mixins/form.js'
+import Util from '@/services/util'
 
 export default {
   mixins: [form],
