@@ -51,7 +51,7 @@
             <el-button v-else-if="userTags.length < 5 - defaultTags.length" class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
           </el-form-item>
           <!-- Accordian Start -->
-          <el-collapse v-model="activeName" accordion>
+          <el-collapse v-model="activeNames">
             <el-collapse-item title="Pricing" name="1">
               <!-- Pricing -->
               <el-row :gutter="15">
@@ -166,9 +166,8 @@ export default {
   data () {
     return {
       isPosting: false,
-      sections: ['Overview', 'Description', 'Pricing', 'Requirements', 'Portfolio', 'Publish'],
       totalPics: 1,
-      activeName: '0',
+      activeNames: ['0'],
       newGigData: {
         title: '',
         category: '',
