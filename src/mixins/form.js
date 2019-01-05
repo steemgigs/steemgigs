@@ -9,7 +9,22 @@ var form = {
   },
   methods: {
 
-  // Form Reset
+    // Form Submission
+
+    submitForm (formName) {
+      this.$refs[formName].validate((valid, err) => {
+        if (valid) {
+          this.submit()
+        } else {
+          this.$notify.error({
+            title: 'Error',
+            message: 'Please check the form, there appears to be an issue with the information you provided'
+          })
+        }
+      })
+    },
+
+    // Form Reset
 
     resetForm (formName) {
       this.$refs[formName].resetFields()
