@@ -20,6 +20,11 @@ var form = {
             title: 'Error',
             message: 'Please check the form, there appears to be an issue with the information you provided'
           })
+
+          // In the event that the validation fails in newGigData all sections should be opened so a user can easily view the issue
+          if (formName === 'newGigData') {
+            this.activeNames = ['1', '2', '3', '4', '5']
+          }
         }
       })
     },
