@@ -28,26 +28,9 @@ export default new Vuex.Store({
       featured: [],
       surpassinggoogle: [],
       testimonials: []
-    },
-    newPosts: {
-      steemgig: {
-        title: '',
-        category: '',
-        subcategory: '',
-        description: '',
-        requirements: '',
-        pricing: '',
-        hours: 0,
-        days: 0,
-        currency: 'STEEM',
-        portfolio: [{url: '', key: 183}],
-        reward: '100% STEEM POWER',
-        price: 0,
-        liked: false,
-        upvoteRange: 100
-      },
-      surpassinggoogle: {
-        title: '',
+    },  
+    surpassinggoogle: {
+         title: '',
         category: '',
         subcategory: '',
         description: '',
@@ -60,7 +43,6 @@ export default new Vuex.Store({
         liked: false,
         upvoteRange: 100
       }
-    }
   },
   mutations: {
     SET_USER (state, {accessToken, tokenExpires, username}) {
