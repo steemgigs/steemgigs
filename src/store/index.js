@@ -74,13 +74,6 @@ export default new Vuex.Store({
         liked: false,
         upvoteRange: 100
       },
-      untalented: {
-        title: '',
-        description: '',
-        images: [],
-        liked: false,
-        upvoteRange: 100
-      },
       testimonial: {
         title: '',
         description: '',
