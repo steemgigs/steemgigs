@@ -105,9 +105,10 @@ import ImgUpload from '@/components/snippets/imgUpload'
 import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
-import Util from '@/services/util'
+import form from '@/mixins/form.js'
 
 export default {
+  mixins: [form],
   components: {
     Page,
     CatNav,
@@ -124,7 +125,6 @@ export default {
       sections: ['Post a Gig request', 'Publish'],
       currentSection: 0,
       totalPics: 1,
-      userTags: [],
       nextPressed: false,
       duplicateTitle: '',
       checkingTitle: false,
@@ -295,7 +295,14 @@ export default {
       return '#STEEMGIGS: ' + this.newGigRequest.title
     },
     defaultTags () {
-      return ['steemgigs', this.slugify(this.newGigRequest.category), this.slugify(this.newGigRequest.subcategory)]
+      let tags = ['steemgigs']
+      if (this.newGigRequest.category) {
+        tags.push(this.newGigRequest.category)
+      }
+      if (this.newGigRequest.subcategory) {
+        tags.push(this.newGigRequest.subcategory)
+      }
+      return tags
     },
     previewData () {
       return `<h2 class="headline">Description</h2>
