@@ -2,7 +2,7 @@
   <page :pageClasses="['post_new_steemgig__view', 'row']">
     <el-main>
       <h3>Create new Testimonial</h3>
-      <h5>Not an expert yet? No worries! On SteemGigs, you can hone your expertise while offering a service. Select this editor to do just so.</h5>
+      <h5>Share your overall SteemGigs experience with us. So, why not record your service progress & updates, successful deliveries, shout-outs, payments etc using this editor.</h5>
       <div class="form-container">
         <el-form :model="newTestimonial" :rules="testimonialRules" ref="newTestimonial" label-position="top">
           <!--  Title -->

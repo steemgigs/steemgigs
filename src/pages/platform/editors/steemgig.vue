@@ -2,7 +2,7 @@
   <page :pageClasses="['new_steemgig__view', 'row']">
     <el-main>
       <h3>Create Gig</h3>
-      <h5>Not an expert yet? No worries! On SteemGigs, you can hone your expertise while offering a service. Select this editor to do just so.</h5>
+      <h5>Offer a service (related to your expertise, talents/un(dis)talents, experience etc) in exchange for Steem, SBD, Steem Power or for free.</h5>
       <div class="form-container">
         <el-form :model="newGigData" :rules="gigRules" ref="newGigData" label-position="top">
           <!--  Title -->

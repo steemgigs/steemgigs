@@ -2,7 +2,7 @@
   <page :pageClasses="['post_new_steemgig__view', 'row']">
     <el-main>
       <h3>Create new Untalented</h3>
-      <h5>Not an expert yet? No worries! On SteemGigs, you can hone your expertise while offering a service. Select this editor to do just so.</h5>
+      <h5>Not an expert yet? No worries! On SteemGigs, you can hone your expertise while offering a service.</h5>
       <div class="form-container">
         <el-form :model="untalented" :rules="untalentedRules" ref="untalented" label-position="top">
           <!--  Title -->
