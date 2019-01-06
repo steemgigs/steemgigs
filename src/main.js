@@ -10,6 +10,8 @@ import VueContentPlaceholders from 'vue-content-placeholders'
 import Vuex from 'vuex'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import VueYouTubeEmbed from 'vue-youtube-embed'
+import SocialSharing from 'vue-social-sharing'
 
 require('./assets/steemgigs.scss')
 
@@ -806,6 +808,8 @@ Vue.use(Vuex)
 Vue.mixin(mixins)
 Vue.use(VTooltip)
 Vue.use(VueContentPlaceholders)
+Vue.use(VueYouTubeEmbed)
+Vue.use(SocialSharing)
 
 /* eslint-disable no-new */
 new Vue({

@@ -11,6 +11,7 @@ export default new Vuex.Store({
     username: '',
     lastPageTried: '',
     lastPage: '',
+    isLoading: false,
     searchTerm: '',
     profile: {
       about: '',
@@ -28,69 +29,12 @@ export default new Vuex.Store({
       featured: [],
       surpassinggoogle: [],
       testimonials: []
-    },
-    newPosts: {
-      steemgig: {
-        title: '',
-        category: '',
-        subcategory: '',
-        description: '',
-        requirements: '',
-        pricing: '',
-        hours: 0,
-        days: 0,
-        currency: 'STEEM',
-        portfolio: [{url: '', key: 183}],
-        reward: '100% STEEM POWER',
-        price: 0,
-        liked: false,
-        upvoteRange: 100
-      },
-      gigrequest: {
-        title: '',
-        category: '',
-        subcategory: '',
-        description: '',
-        hours: 0,
-        days: 0,
-        currency: 'STEEM',
-        images: [],
-        reward: '100% STEEM POWER',
-        price: 0,
-        liked: false,
-        upvoteRange: 100
-      },
-      surpassinggoogle: {
-        title: '',
-        category: '',
-        subcategory: '',
-        description: '',
-        hours: 0,
-        days: 0,
-        currency: 'STEEM',
-        images: [],
-        reward: '100% STEEM POWER',
-        price: 0,
-        liked: false,
-        upvoteRange: 100
-      },
-      untalented: {
-        title: '',
-        description: '',
-        images: [],
-        liked: false,
-        upvoteRange: 100
-      },
-      testimonial: {
-        title: '',
-        description: '',
-        images: [],
-        upvoteRange: 100,
-        liked: false
-      }
     }
   },
   mutations: {
+    setLoading: function (state, setting) {
+      state.isLoading = setting
+    },
     SET_USER (state, {accessToken, tokenExpires, username}) {
       state.accessToken = accessToken
       state.tokenExpires = tokenExpires

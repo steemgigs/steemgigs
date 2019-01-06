@@ -3,7 +3,7 @@
     <cat-nav />
     <el-main>
     <div class="container gig-detail">
-      <div class="col s12 m8 l9 row">
+      <div class="col s12 m8 l8 row">
         <ul class="tabs hide">
           <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">DETAILS</a></li>
           <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'inactive_gigs'}" @click="changeView('inactive_gigs')">REVIEWS</a></li>
@@ -50,6 +50,7 @@
               </div>
             </div>
           </div>
+          <share-options :title="title" :tags="tags.slice(0,3)" />
          <div class="comment-panel">
            <div v-if="commentMode">
                 <vue-editor :editorToolbar="[]" v-model="myComment" class="comment-box" placeholder="Type comment here, you can drag and drop images" ></vue-editor>
@@ -64,7 +65,7 @@
          </div>
         </div>
       </div>
-       <div class="col s12 m4 l3">
+       <div class="col s12 m4 l4">
         <div v-if="!profileLoaded" class="card-panel">
           <content-placeholders>
             <content-placeholders-img />
@@ -90,7 +91,8 @@ import { Carousel, Slide } from 'vue-carousel'
 import SliderRange from 'vue-slider-component'
 import ProfileCard from '@/components/layout/profileCard'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
-// import steem from 'steem'
+import shareOptions from '@/components/snippets/share-options'
+
 export default {
   components: {
     Page,
@@ -102,7 +104,8 @@ export default {
     VComment,
     SliderRange,
     LoadingPlaceholder,
-    ProfileCard
+    ProfileCard,
+    shareOptions
   },
   data () {
     return {
@@ -147,7 +150,7 @@ export default {
     },
     portfolio () {
       if (this.currentGig.json_metadata.images) {
-        return this.currentGig.json_metadata.images
+        return this.currentGig.json_metadata.images.filter(Boolean)
       } else {
         return []
       }
@@ -207,6 +210,9 @@ export default {
       } else {
         return { content: 'upvote', classes: ['tooltip'] }
       }
+    },
+    tags () {
+      return this.currentGig.json_metadata.tags
     }
   },
   methods: {
@@ -258,7 +264,6 @@ export default {
       sc2.vote(this.$store.state.username, this.currentGig.author, this.currentGig.permlink, parseInt(this.upvoteRange) * 100, (err, res) => {
         this.voting = false
         if (!err) {
-          // this.fetchThisComment()
           this.upvoteActive = false
           this.currentGig.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
           console.log(res)

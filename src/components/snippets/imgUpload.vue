@@ -63,7 +63,6 @@ export default {
     save (formData) {
       // upload data to the server
       const CLIENT_ID = '993793b1d8d3e2e'
-      // formData.append('image', this.file)
       this.currentStatus = STATUS_SAVING
       axios({
         url: 'https://api.imgur.com/3/image',
@@ -89,7 +88,6 @@ export default {
         })
     },
     filesChange (eventt) {
-      // let fieldName = eventt.target.name
       let fileList = eventt.target.files
       this.localUrl = eventt.target.value
       // handle file changes

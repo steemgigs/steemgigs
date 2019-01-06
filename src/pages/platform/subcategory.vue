@@ -25,9 +25,8 @@
           <gig-card :gigData="gig" />
         </div>
         <div v-if="catgigs.length <= 0">
-          <p class="flow-text grey-text">There are no posts yet in this category. Be the first to post in the <span class="grey-text text-darken-2">{{categoryDetails.name}}</span> category</p>
-          <router-link :to="this.$route.params.category == 'surpassinggoogle' ? '/surpassinggoogle/'+ this.$route.params.subcategory : '/create_gig'" tag="button" class="btn-large indigo btn-floating waves-effect waves-light"><i class="icon ion-android-add"></i></router-link>
-        </div>
+          <h5>There are no posts yet in this category. Be the first to post in the <span class="grey-text text-darken-2">{{categoryDetails.name}}</span> category</h5>
+          <router-link :to="this.$route.params.category == 'surpassinggoogle' ? '/surpassing-google' : '/create_gig'"><el-button class="secondary" type="secondary">Create</el-button></router-link>        </div>
       </div>
     </div>
     </el-main>

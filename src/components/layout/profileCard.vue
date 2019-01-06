@@ -17,7 +17,7 @@
             </span>
             <p class="location"><i class="icon ion-android-pin"></i> From <span class="right" v-text="profile.location || 'Not set'"></span></p>
             <p class="member_since"> <i class="icon ion-android-person"></i> Member since <span class="right" v-text="since"></span></p>
-            <p class="member_since"> <i class="icon ion-ios-briefcase"></i> Last delivery <span class="right" v-text="ago"></span></p>
+            <p class="member_since"> <i class="icon ion-ios-briefcase"></i> Last delivery <span class="right">N/A</span></p>
             <p>
               <i class="icon ion-android-plane"></i>
               Vacation mode
@@ -432,7 +432,7 @@ export default {
 
     .social-link {
       display: block;
-
+      word-break: break-word;
     }
 
     .not-avail {

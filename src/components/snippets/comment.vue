@@ -4,7 +4,7 @@
     <p>
       <router-link class="username" :to="'/@' + commentFor.author" v-text="commentFor.author"></router-link><span>&nbsp;({{sellerRep}})</span><span class="how-long">&nbsp;&nbsp; {{timeAgo}}</span>
     </p>
-    <p class="post" v-html="commentFor.body"></p>
+    <vue-markdown>{{commentFor.body}}</vue-markdown>
     <div  v-if="commentFor.allow_replies" class="menu mb-2">
       <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
       <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
@@ -26,11 +26,11 @@
       </div>
     </div>
     <div v-if="commentMode">
-      <textarea rows="20" v-model="myComment" placeholder="Type your comment here, you can drag and drop images" ></textarea>
+      <textarea class="comment-box" rows="45" v-model="myComment" placeholder="Type your comment here, you can drag and drop images" ></textarea>
       <div class="row right-align">
         <div class="col s12 pt-2">
-          <button @click.prevent="commentMode = false" class="btn indigo lighten-2 waves-effect">Cancel</button>
-          <el-button type="primary" class="primary waves-effect" @click="postComment"><i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>Post</el-button>
+          <el-button type="secondary" @click.prevent="commentMode = false" class="secondary">Cancel</el-button>
+          <el-button type="primary" class="primary" @click="postComment"><i class="fa fa-spinner fa-pulse" v-if="isPosting"></i>Reply</el-button>
         </div>
       </div>
     </div>
@@ -42,12 +42,14 @@ import { VueEditor } from 'vue2-editor'
 import SliderRange from 'vue-slider-component'
 import Api from '@/services/api'
 import sc2 from '@/services/sc2'
+import VueMarkdown from 'vue-markdown'
 
 export default {
   name: 'v-comment',
   components: {
     VueEditor,
-    SliderRange
+    SliderRange,
+    VueMarkdown
   },
   data () {
     return {
@@ -115,7 +117,6 @@ export default {
       sc2.vote(this.$store.state.username, this.commentFor.author, this.commentFor.permlink, parseInt(this.upvoteRange) * 100, (err, res) => {
         this.voting = false
         if (!err) {
-          // this.fetchThisComment()
           this.upvoteActive = false
           this.commentFor.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
           console.log(res)
@@ -321,5 +322,14 @@ export default {
   .ql-editor {
     min-height: 80px;
   }
+}
+
+.comment-box {
+  background: white !important;
+  border: 1px solid whitesmoke;
+  padding: 10px;
+  border-radius: 10px;
+  height: 100px;
+  margin-top: 10px;
 }
 </style>

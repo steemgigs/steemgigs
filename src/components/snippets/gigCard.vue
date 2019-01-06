@@ -104,7 +104,7 @@ export default {
     portfolio () {
       if ('json_metadata' in this.gigData) {
         if (this.gigData.json_metadata.images) {
-          return this.gigData.json_metadata.images
+          return this.gigData.json_metadata.images.filter(Boolean)
         } else return []
       } else return []
     }
@@ -155,6 +155,11 @@ $blue: #6361D0;
     .task {
       font-size: 13px;
       color: black;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+
     }
     .price {
       margin-top: 0.5em;

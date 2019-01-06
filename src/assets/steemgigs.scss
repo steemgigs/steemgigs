@@ -1986,3 +1986,80 @@ hr {
 .editor-container .card {
   box-shadow: none !important;
 }
+
+// Form Styling
+
+.form-container {
+  background: white;
+  padding: 20px;
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+.el-collapse-item__header {
+  color: black;
+  font-size: 15px
+}
+
+.el-collapse-item__header i {
+  margin-right: 10px;
+  color: #3F51B5;
+  font-size: 20px;
+}
+
+
+.el-collapse {
+  margin-bottom: 15px;
+}
+
+.el-select {
+  width: 100%;
+}
+
+.tags-container {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.el-tag {
+  margin-right: 10px;
+  border: 1px solid rgba(98, 94, 211, 0.29);
+  color: #625ed3;
+  background-color: rgba(98, 94, 211, 0.14);
+  margin-bottom: 10px;
+}
+
+.button-new-tag {
+  margin-left: 0px;
+  height: 32px;
+  line-height: 30px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.input-new-tag {
+  margin: -3.5px 0 0 0;
+  padding: 0;
+}
+
+.el-tag .el-icon-close {
+  color: #625ed3;
+}
+
+.el-tag .el-icon-close:hover {
+  background: #625ed3;
+}
+
+// Markdown Editor Overrides
+
+.ql-toolbar.ql-snow {
+  border-color: #dcdfe6 !important;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.ql-container.ql-snow {
+  border-color: #dcdfe6 !important;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

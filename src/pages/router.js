@@ -1,19 +1,14 @@
 import Index from '@/pages/index'
 import LoggedIn from '@/pages/access/loggedIn'
-import NewSteemGig from '@/pages/platform/newSteemgig'
-import NewGigRequest from '@/pages/platform/newGigRequest'
-import NewTestimonial from '@/pages/platform/testimonial'
 import Steemgigs from '@/pages/platform/steemgigs'
 import Testimonials from '@/pages/platform/testimonials'
 import GigRequests from '@/pages/platform/gigRequests'
 import featured from '@/pages/platform/featured'
-import UntalentedEditor from '@/pages/platform/untalentedEditor'
 import Profile from '@/pages/platform/profile'
 import GigDetail from '@/pages/platform/gigDetail'
 import Categories from '@/pages/platform/category'
 import SubCategories from '@/pages/platform/subcategory'
 import SurpassingGoogle from '@/pages/platform/surpassinggoogle'
-import NewSurpassingGig from '@/pages/platform/newSurpassingGig'
 import Search from '@/pages/platform/search'
 import Wallet from '@/pages/platform/wallet'
 import Settings from '@/pages/platform/settings'
@@ -21,6 +16,14 @@ import Invite from '@/pages/platform/invite'
 import Message from '@/pages/platform/message'
 import Basket from '@/pages/platform/basket'
 import Dashboard from '@/pages/platform/dashboard'
+
+// Editors
+
+import NewSteemGig from '@/pages/platform/editors/steemgig'
+import NewGigRequest from '@/pages/platform/editors/gigrequest'
+import NewTestimonial from '@/pages/platform/editors/testimonial'
+import NewSurpassingGig from '@/pages/platform/editors/surpassinggoogle'
+import UntalentedEditor from '@/pages/platform/editors/untalented'
 
 export default [
   {
@@ -43,7 +46,6 @@ export default [
     name: 'STEEMGIGS | Search',
     component: Search
   },
-  // TODO: Finish this
   {
     path: '/complete',
     name: 'STEEMGIGS | Logged in',
