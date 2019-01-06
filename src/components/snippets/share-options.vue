@@ -20,7 +20,7 @@
             </network>
             <network network="weibo">
                 <i class="fa fa-weibo"></i>
-            </network> 
+            </network>
             <network network="whatsapp">
                 <i class="fa fa-fw fa-whatsapp"></i>
             </network>
