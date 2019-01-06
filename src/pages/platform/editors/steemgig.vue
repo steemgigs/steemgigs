@@ -311,13 +311,13 @@ export default {
           generated: true,
           videoUrl: this.newGigData.videoUrl
         }
-        let textifiedPics = '\n<h2>Portfolio</h2>\n<hr />\n'
+        let textifiedPics = '\n<h2>Portfolio</h2>\n<hr/>\n'
         this.portfolio.forEach(url => {
-          textifiedPics += `<img src="${url}"> <br />`
+          textifiedPics += `<img src="${url}"><br/>`
         })
         let username = this.$store.state.username
         let permlink = this.slugify(this.newGigData.title)
-        let steemGigsTag = `<i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>`
+        let steemGigsTag = `<i>This post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>`
         let contentToHide = textifiedPics + steemGigsTag
         let hiddenContainer = this.htmlHide(contentToHide)
         let body = this.previewData + hiddenContainer
@@ -394,22 +394,7 @@ export default {
     previewData () {
       const embedVideoUrl = Util.getEmbedVideoUrl(this.newGigData.videoUrl)
       const iframeVideo = embedVideoUrl ? `<h5 class="headline">Here Is A Video Showing Why You Should Avail Of My Gig!</h5><iframe src="${embedVideoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>` : ''
-      return `
-  <h2 class="headline">Description</h2>
-  <hr />
-  ${this.newGigData.description}
-  <h2 class="headline">Pricing</h2> 
-  <hr />
-  ${this.newGigData.pricing}
-  
-  <h5>Price: Starting at ${this.newGigData.price} ${this.newGigData.currency}</h5>
-  <h5>Delivery: ${this.newGigData.days} day(s) ${this.newGigData.hours} hour(s)</h5>
-  <hr />
-  <h2 class="headline">Requirements</h2>
-  <hr />
-  ${this.newGigData.requirements}
-  ${iframeVideo}
-        `
+      return `<h2 class="headline">Description</h2><hr />${this.newGigData.description}<h2 class="headline">Pricing</h2> <hr />${this.newGigData.pricing}<h5>Price: Starting at ${this.newGigData.price} ${this.newGigData.currency}</h5><h5>Delivery: ${this.newGigData.days} day(s) ${this.newGigData.hours} hour(s)</h5><h2 class="headline">Requirements</h2><hr />${this.newGigData.requirements}${iframeVideo}`
     }
   },
   watch: {
