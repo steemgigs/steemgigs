@@ -2847,6 +2847,11 @@ estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1, estraverse@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
 
+estree-walker@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-0.5.2.tgz#d3850be7529c9580d815600b53126515e146dd39"
+  integrity sha512-XpCnW/AE10ws/kDAs37cngSkvgIR8aN3G0MS85m7dUpuK2EREo9VJ00uvw6Dg/hXEpfsE1I1TvJOJr+Z+TL+ig==
+
 esutils@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
@@ -6950,6 +6955,21 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
+rollup-plugin-json@^2.1.0:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-json/-/rollup-plugin-json-2.3.1.tgz#9759d27f33dcd2c896de18b6235df162b88edd77"
+  integrity sha512-alQQQVPo2z9pl6LSK8QqyDlWwCH5KeE8YxgQv7fa/SeTxz+gQe36jBjcha7hQW68MrVh9Ms71EQaMZDAG3w2yw==
+  dependencies:
+    rollup-pluginutils "^2.0.1"
+
+rollup-pluginutils@^2.0.1:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.3.3.tgz#3aad9b1eb3e7fe8262820818840bf091e5ae6794"
+  integrity sha512-2XZwja7b6P5q4RZ5FhyX1+f46xi1Z3qBKigLRZ6VTZjwbN0K1IFGMlwm06Uu0Emcre2Z63l77nq/pzn+KxIEoA==
+  dependencies:
+    estree-walker "^0.5.2"
+    micromatch "^2.3.11"
+
 rsvp@^3.3.3:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
@@ -8110,6 +8130,13 @@ vue-content-placeholders@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/vue-content-placeholders/-/vue-content-placeholders-0.2.1.tgz#5876bda4577c80ff6d396fb33b2dbbf8b8cc140f"
 
+vue-element-loading@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/vue-element-loading/-/vue-element-loading-1.0.5.tgz#6c7a6904875de3026572f76dc660075b805a782e"
+  integrity sha512-lL+lvvI1sZ2nPsDIWXdhXujNjqX4Vlzy4nDQzZE0y39hmtbvA7qaw5at/ru+AKGGalAeBTbmwoU8WCbDbbNHbA==
+  dependencies:
+    vue "^2.5.11"
+
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
@@ -8201,10 +8228,6 @@ vue-markdown@^2.2.4:
     markdown-it-task-lists "^2.0.1"
     markdown-it-toc-and-anchor "^4.1.2"
 
-vue-notification@^1.3.4:
-  version "1.3.14"
-  resolved "https://registry.yarnpkg.com/vue-notification/-/vue-notification-1.3.14.tgz#6717f9127bb34ed1e95d93644359421659680515"
-
 vue-resize@^0.4.3:
   version "0.4.5"
   resolved "https://registry.yarnpkg.com/vue-resize/-/vue-resize-0.4.5.tgz#4777a23042e3c05620d9cbda01c0b3cc5e32dcea"
@@ -8222,6 +8245,13 @@ vue-router@^3.0.1:
 vue-slider-component@^2.5.3:
   version "2.8.3"
   resolved "https://registry.yarnpkg.com/vue-slider-component/-/vue-slider-component-2.8.3.tgz#149bbed03f70327e341f648e2489ff122c85b1b4"
+
+vue-social-sharing@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/vue-social-sharing/-/vue-social-sharing-2.3.3.tgz#8d23e50923c71e0ae24188108c21836934cf5670"
+  integrity sha1-jSPlCSPHHgriQYgQjCGDaTTPVnA=
+  dependencies:
+    rollup-plugin-json "^2.1.0"
 
 vue-style-loader@^3.0.0, vue-style-loader@^3.0.1:
   version "3.1.2"
@@ -8241,6 +8271,11 @@ vue-template-es2015-compiler@^1.5.3, vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
+vue-youtube-embed@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/vue-youtube-embed/-/vue-youtube-embed-2.2.1.tgz#a3be445d2c8e647be2608c90993d5e8791107207"
+  integrity sha512-XNV6X5QAVU/w2JUwvvBf+6LdV6WF/bsacPo/qCJ0TLkn5YI7Yk0dxWTQAyBW/v97e/EsqgLygkW/qi074jtAHA==
+
 vue2-editor@^2.4.2:
   version "2.6.6"
   resolved "https://registry.yarnpkg.com/vue2-editor/-/vue2-editor-2.6.6.tgz#567f7c2aabdd10d465756da7aebf568ee34ebbc5"
@@ -8248,7 +8283,7 @@ vue2-editor@^2.4.2:
     lodash.merge "^4.6.0"
     quill "^1.3.6"
 
-vue@^2.2.1, vue@^2.3.3, vue@^2.5.13, vue@^2.5.17, vue@^2.5.2:
+vue@^2.2.1, vue@^2.3.3, vue@^2.5.11, vue@^2.5.13, vue@^2.5.17, vue@^2.5.2:
   version "2.5.21"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.21.tgz#3d33dcd03bb813912ce894a8303ab553699c4a85"
 
