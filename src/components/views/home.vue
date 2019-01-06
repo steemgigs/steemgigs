@@ -244,9 +244,6 @@ export default {
     steemgigs () {
       return this.$store.state.posts.steemgigs
     },
-    // untalented () {
-    //   return this.$store.state.posts.untalented
-    // },
     gigrequests () {
       return this.$store.state.posts.gigrequests
     },

@@ -140,7 +140,6 @@ export default {
           authorPic: this.$store.state.profile.profileImage,
           type: 'steemgigs_testimonial',
           deleted: false,
-          // images: this.newTestimonial.portfolio,
           generated: true
         }
         let username = this.$store.state.username
@@ -208,8 +207,6 @@ ${Util.convertImageUrlToHTML(this.newTestimonial.description)}
   },
   mounted () {
     this.$eventBus.$on('img-uploaded', payload => {
-    //   console.log(payload)
-    //   this.newTestimonial.portfolio[payload.index] = payload.url
     })
   },
   deforeDestroy () {

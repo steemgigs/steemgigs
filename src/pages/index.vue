@@ -17,9 +17,6 @@ export default {
     LandingPage
   },
   beforeCreate () {
-    // steem.api.setOptions({
-    //   url: 'wss://steemd.privex.io'
-    // })
     Api.fetchPosts().then(response => {
       let fetched = response.data
       this.$store.commit('SET_STEEMGIGS', {fetched})

@@ -91,9 +91,6 @@ export default {
       }
     }
   }
-  // .collapsible-header {
-  //   display: initial;
-  // }
   .go-to {
     align-self: flex-end
   }

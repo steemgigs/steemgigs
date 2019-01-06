@@ -115,7 +115,6 @@ export default {
       sc2.vote(this.$store.state.username, this.commentFor.author, this.commentFor.permlink, parseInt(this.upvoteRange) * 100, (err, res) => {
         this.voting = false
         if (!err) {
-          // this.fetchThisComment()
           this.upvoteActive = false
           this.commentFor.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
           console.log(res)

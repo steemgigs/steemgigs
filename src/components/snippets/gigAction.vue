@@ -29,7 +29,6 @@
 </template>
 
 <script>
-// import Api from '@/services/api'
 import sc2 from '@/services/sc2'
 import SliderRange from 'vue-slider-component'
 export default {
@@ -124,11 +123,9 @@ export default {
       sc2.setAccessToken(this.$store.state.accessToken)
       sc2.reblog(this.$store.state.username, this.gigData.author, this.gigData.permlink, (err, res) => {
         if (!err) {
-          // this.fetchThisComment()
           this.resteem = true
           this.resteeming = true
           this.rsspinning = false
-          // this.gigData.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
           console.log(res)
         } else {
           this.resteeming = true

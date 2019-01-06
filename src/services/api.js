@@ -8,7 +8,6 @@ export default {
     return axios.post('/checktitle', credentials)
   },
   fetchUserData (username) {
-    // return axios.post(`/fetchUserData/`, {username})
     return axios.get(`/profile/${username}`)
   },
   fetchUserGigs (username) {

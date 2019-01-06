@@ -144,10 +144,6 @@ export default {
           width: max-content;
         }
       }
-
-      ul:first-of-type {
-        // margin-right: 15px;
-      }
     }
 
     &:last-child:hover .dropdown {

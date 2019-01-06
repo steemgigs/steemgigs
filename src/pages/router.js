@@ -46,7 +46,6 @@ export default [
     name: 'STEEMGIGS | Search',
     component: Search
   },
-  // TODO: Finish this
   {
     path: '/complete',
     name: 'STEEMGIGS | Logged in',
