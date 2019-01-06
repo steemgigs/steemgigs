@@ -232,20 +232,17 @@ export default {
           console.log(err, res)
           that.isPosting = false
           this.$notify({
-            group: 'foo',
             title: 'Success',
-            text: 'Successfully pushed to steem!',
+            message: 'Your post was successful',
             type: 'success'
           })
           that.successText = 'Successfully pushed to steem!'
           that.$store.commit('RESET_NEW_SURPASSINGGOOGLE')
         }).catch((e) => {
           that.isPosting = false
-          this.$notify({
-            group: 'foo',
+          this.$notify.error({
             title: 'Error',
-            text: 'Error pushing post to steem.',
-            type: 'error'
+            message: `Sorry, there seems to have been an error. Error Details - ${e}`
           })
           that.errorText = 'Error pushing post to steem.'
         })
