@@ -128,7 +128,7 @@
                 </el-col>
               </el-row>
               <p>Consider embedding a short video clip of you, telling potential clients why they should avail of your service. This improves your general reputation even on steemit, make your content richer and more worthy of curation etc. (Optional)</p>
-              <el-form-item label="Video URL" prop="title">
+              <el-form-item label="Video URL" prop="videoURL">
                 <el-input v-model="newGigData.videoUrl"></el-input>
               </el-form-item>
             </el-collapse-item>
