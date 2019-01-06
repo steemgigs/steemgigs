@@ -3,6 +3,8 @@
     <el-main>
       <h3>Create new gig request</h3>
       <h5>If you can't find the exact gig that you seek, you may want to do a custom request.</h5>
+       <el-row :gutter="15">
+      <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
       <div class="form-container">
         <el-form :model="newGigRequest" :rules="requestRules" ref="newTestimonial" label-position="top">
           <!--  Title -->
@@ -86,10 +88,15 @@
           <!-- Form Submission -->
           <el-form-item>
             <el-button type="primary" class="primary" @click="submitForm('newTestimonial')">Create</el-button>
-            <el-button @click="resetForm('newTestimonial')"">Reset</el-button>
+            <el-button @click="resetForm('newTestimonial')">Reset</el-button>
           </el-form-item>
         </el-form>
       </div>
+    </el-col>
+      <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+        <guide :header="guide.header" :subHeader="guide.subheader" :itemList="guide.items" :videoId="guide.video"></guide>
+      </el-col>
+      </el-row>
     </el-main>
   </page>
 </template>
@@ -106,6 +113,7 @@ import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import form from '@/mixins/form.js'
 import Util from '@/services/util'
+import guide from '@/components/snippets/guide-box'
 
 export default {
   mixins: [form],
@@ -115,7 +123,8 @@ export default {
     MarkdownEditor,
     VueMarkdown,
     ImgUpload,
-    VueEditor
+    VueEditor,
+    guide
   },
   data () {
     return {
@@ -155,6 +164,16 @@ export default {
         name: 'file',
         accept: 'image/jpg,image/jpeg,image/png',
         url: this.$imgUploadURL
+      },
+      guide: {
+        header: 'Find the skills you need',
+        subheader: 'Can\'t find what you\'re looking for? Submit a request to find the perfect talent',
+        video: 'xeLYLA6C2AE',
+        items: [
+          'Make your Title Short, Simple and Clear to understand',
+          'Give a detailed description of what you are looking for',
+          'How much are you willing to pay for this gig? etc. State these and other information clearly'
+        ]
       },
       requestRules: {
         title: [

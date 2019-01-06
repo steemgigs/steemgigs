@@ -3,6 +3,8 @@
     <el-main>
       <h3>Create new Untalented</h3>
       <h5>Not an expert yet? No worries! On SteemGigs, you can hone your expertise while offering a service.</h5>
+      <el-row :gutter="15">
+      <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
       <div class="form-container">
         <el-form :model="untalented" :rules="untalentedRules" ref="untalented" label-position="top">
           <!--  Title -->
@@ -31,6 +33,11 @@
           </el-form-item>
         </el-form>
       </div>
+    </el-col>
+      <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+        <guide :header="guide.header" :subHeader="guide.subheader" :itemList="guide.items" :videoId="guide.video"></guide>
+      </el-col>
+      </el-row>
     </el-main>
   </page>
 </template>
@@ -45,6 +52,7 @@ import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import Util from '@/services/util'
 import form from '@/mixins/form.js'
+import guide from '@/components/snippets/guide-box'
 
 export default {
   mixins: [form],
@@ -54,7 +62,8 @@ export default {
     VueMarkdown,
     ImgUpload,
     VueEditor,
-    DismissibleNotice
+    DismissibleNotice,
+    guide
   },
   data () {
     return {
@@ -74,6 +83,20 @@ export default {
         name: 'file',
         accept: 'image/jpg,image/jpeg,image/png',
         url: this.$imgUploadURL
+      },
+      guide: {
+        header: 'Create the perfect blog',
+        subheader: 'This editor can be used by any steemian and to create posts in any genre or tag.',
+        video: 'xeLYLA6C2AE',
+        items: [
+          'Make your title short and simple to understand',
+          'Give us a preface of what your post is about to be about.',
+          'If you are using resources from the internet, digest it first, then tell us about it, using your own words.',
+          'Be expressive. Relegate reservations. Flaws allowed (The more pictures, words etc, the more exciting).',
+          'To conclude, ask us questions. Make us think. Aim to truly touch us with your beauty.',
+          'You have an audience in the search engines as well, so aim to touch them too.',
+          'Make sure to state source URL of every image resourced online. No loss, if you always give credit.'
+        ]
       },
       untalentedRules: {
         title: [

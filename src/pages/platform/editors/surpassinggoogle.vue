@@ -3,6 +3,8 @@
     <el-main>
       <h3>Create new {{capitalize(getSubCategoryName.name)}}</h3>
       <h5 v-text="getSubCategoryName.description" />
+       <el-row :gutter="15">
+      <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
       <div class="form-container">
         <el-form :model="newGigRequest" :rules="surpassingRules" ref="newGigRequest" label-position="top">
           <!--  Title -->
@@ -49,6 +51,11 @@
           </el-form-item>
         </el-form>
       </div>
+    </el-col>
+      <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+        <guide :header="guide.header" :subHeader="guide.subheader" :itemList="guide.items" :videoId="guide.video"></guide>
+      </el-col>
+      </el-row>
     </el-main>
   </page>
 </template>
@@ -63,6 +70,7 @@ import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import form from '@/mixins/form.js'
+import guide from '@/components/snippets/guide-box'
 
 export default {
   mixins: [form],
@@ -72,7 +80,8 @@ export default {
     MarkdownEditor,
     VueMarkdown,
     ImgUpload,
-    VueEditor
+    VueEditor,
+    guide
   },
   data () {
     return {
@@ -92,6 +101,17 @@ export default {
         price: 0,
         liked: false,
         upvoteRange: 100
+      },
+      guide: {
+        header: 'Share your knowledge',
+        subheader: 'Everyone has something to offer',
+        video: 'xeLYLA6C2AE',
+        items: [
+          'Make your title concise simple to understand and specific to a particular niche, industry , field, expertise etc.',
+          'Be yourself ans as expressive as possible. The world and generations yet unborn will come here to dig from your knowledge.',
+          'Every post you write here appears on the decentralized steem blockchain and can earn your rewards. Make the most of each post.',
+          'Clients may visit your blogs to ascertain your reputation before availing of your Gigs.'
+        ]
       },
       surpassingRules: {
         title: [
