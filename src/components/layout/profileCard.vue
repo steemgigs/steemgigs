@@ -432,7 +432,7 @@ export default {
 
     .social-link {
       display: block;
-
+      word-break: break-word;
     }
 
     .not-avail {
