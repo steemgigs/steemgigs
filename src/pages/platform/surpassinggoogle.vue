@@ -10,10 +10,10 @@
 We will vault all this knowledge in our bank, in the form of unadulterated excerpts from the brains, lives, experiences etc of "reputable great minds", sepcific to every niche, field, industry, expertise etc.
 "By means of your incessant contributions, we will surpass Google (attain limitlessness), reshaping the worldwide web with the freshness of our awesomeness".<b>@surpassinggoogle</b></h5>
           </div>
-          <div class="col s12 m4 l3" v-for="(cat,index) in category" :key="index">
+          <div class="col s12 m6 l4" v-for="(cat,index) in category" :key="index">
             <div class="surpassing-card">
               <div class="card-content">
-                <span class="card-title center"><router-link class="links" :to="'surpassinggoogle/' + slugify(cat.name)">{{ capitalize(cat.name) }}</router-link></span>
+                <h3>{{ capitalize(cat.name) }}</h3>
                 <p>{{cat.description}}</p>
               </div>
               <router-link :to="'surpassinggoogle/' + slugify(cat.name)"><el-button class="surpass-card-button secondary" type="secondary">Submit a Post</el-button></router-link>
@@ -284,7 +284,7 @@ export default {
     text-align: center;
     background: white;
     padding: 20px;
-    min-height: 350px;
+    min-height: 325px;
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
