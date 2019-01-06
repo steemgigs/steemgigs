@@ -289,6 +289,7 @@ export default {
       }
     },
     submit () {
+      this.$store.commit('setLoading', true)
       if (!this.errorr) {
         if (this.isPosting) return
         let that = this
@@ -340,17 +341,16 @@ export default {
           jsonMetadata
         }, token).then((err, res) => {
           console.log('err', err, 'res', res)
-          that.isPosting = false
           this.$notify({
             title: 'Success',
             message: 'Your post was successful',
             type: 'success'
           })
-          that.successText = 'Successfully pushed to steem!'
-          that.$store.commit('RESET_NEW_STEEMGIG')
+          this.$store.commit('setLoading', false)
+          // Push user to post upon success
+          this.$router.push(`/steemgigs/@${username}/${permlink}`)
         }).catch((e) => {
-          console.log(e)
-          that.isPosting = false
+          this.$store.commit('setLoading', false)
           this.$notify.error({
             title: 'Error',
             message: `Sorry, there seems to have been an error. Error Details - ${e}`

@@ -2,7 +2,8 @@
     <el-container>
   <div id="app">
     <nav-bar />
-   <router-view/>
+      <ElementLoading :active="this.$store.state.isLoading" spinner="spinner" color="#FF1480" :is-full-screen="true" />
+   <router-view />
     <div v-show="$store.state.accessToken" class="fixed-action-btn hide-on-large-only">
       <a class="btn-floating btn indigo">
         <i class="ion-plus-round"></i>
@@ -40,11 +41,14 @@
 import NavBar from '@/components/layout/nav'
 import FeedBack from '@/components/layout/feedback'
 import M from 'materialize-css'
+import ElementLoading from 'vue-element-loading'
+
 export default {
   name: 'App',
   components: {
     NavBar,
-    FeedBack
+    FeedBack,
+    ElementLoading
   },
   data () {
     return {
@@ -52,6 +56,7 @@ export default {
     }
   },
   mounted () {
+    this.$store.commit('setLoading', false)
     let elem = document.querySelector('.fixed-action-btn')
     M.FloatingActionButton.init(elem, {
       direction: 'top',
