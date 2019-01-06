@@ -147,11 +147,6 @@ export default {
         let steemGigsTag = this.htmlHide(`<i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>`)
         let body = this.newTestimonial.description + steemGigsTag
         let title = this.steemedTitle
-        if (this.duplicateTitle) {
-          let modifiedTitle = this.newTestimonial.title + Math.floor(Math.random() * 1000)
-          permlink = this.slugify(modifiedTitle)
-          title = '#STEEMGIGS: I will ' + modifiedTitle
-        }
         let token = this.$store.state.accessToken
         let liked = this.newTestimonial.liked
         let upvoteRange = this.newTestimonial.upvoteRange

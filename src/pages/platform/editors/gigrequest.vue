@@ -135,7 +135,6 @@ export default {
       currentSection: 0,
       totalPics: 1,
       nextPressed: false,
-      duplicateTitle: '',
       checkingTitle: false,
       newGigRequest: {
         title: '',
@@ -266,11 +265,6 @@ export default {
         let body = this.previewData + steemGigsTag
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
-        if (this.duplicateTitle) {
-          let modifiedTitle = this.newGigRequest.title + Math.floor(Math.random() * 1000)
-          permlink = this.slugify(modifiedTitle)
-          title = '#STEEMGIGS: I will ' + modifiedTitle.replace('#STEEMGIGS:', ' ')
-        }
         let liked = this.newGigRequest.liked
         let upvoteRange = this.newGigRequest.upvoteRange
         const imagesFromBody = Util.getImagesFromBody(this.previewData)

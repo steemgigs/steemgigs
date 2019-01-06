@@ -322,16 +322,11 @@ export default {
         let hiddenContainer = this.htmlHide(contentToHide)
         let body = this.previewData + hiddenContainer
         let token = this.$store.state.accessToken
-        let title = this.newGigData.title
+        let title = this.steemedTitle
 
         const imagesFromBody = Util.getImagesFromBody(this.previewData)
         if (imagesFromBody.length) {
           jsonMetadata.images = jsonMetadata.images.concat(imagesFromBody)
-        }
-        if (this.duplicateTitle) {
-          let modifiedTitle = this.newGigData.title + Math.floor(Math.random() * 1000)
-          permlink = this.slugify(modifiedTitle)
-          title = '#STEEMGIGS: I will ' + modifiedTitle
         }
         let liked = this.newGigData.liked
         let upvoteRange = this.newGigData.upvoteRange
@@ -366,6 +361,9 @@ export default {
     }
   },
   computed: {
+    steemedTitle () {
+      return '#STEEMGIGS: ' + this.newGigData.title
+    },
     portfolio () {
       return this.newGigData.portfolio.filter(image => image.url).map(image => image.url)
     },

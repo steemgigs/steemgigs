@@ -211,11 +211,6 @@ export default {
         let body = this.previewData + steemLink + steemGigsTag
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
-        if (this.duplicateTitle) {
-          let modifiedTitle = this.newGigRequest.title + Math.floor(Math.random() * 1000)
-          permlink = this.slugify(modifiedTitle)
-          title = '#STEEMGIGS: ' + '(' + this.getSubCategoryName.name + ') — ' + modifiedTitle.replace('#STEEMGIGS:', ' ') // this will prevent title for not showing on the gigcard due to duplicated '#STEEMGIGS:' string
-        }
         let liked = this.newGigRequest.liked
         let upvoteRange = this.newGigRequest.upvoteRange
         Api.post({

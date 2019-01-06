@@ -146,11 +146,6 @@ export default {
         let body = this.previewData + steemGigsTag
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
-        if (this.duplicateTitle) {
-          let modifiedTitle = this.untalented.title + Math.floor(Math.random() * 1000)
-          permlink = this.slugify(modifiedTitle)
-          title = '#STEEMGIGS: I will ' + modifiedTitle
-        }
         let liked = this.untalented.liked
         let upvoteRange = this.untalented.upvoteRange
 
