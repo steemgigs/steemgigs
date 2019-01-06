@@ -4,7 +4,7 @@
       <h3>Create new gig request</h3>
       <h5>If you can't find the exact gig that you seek, you may want to do a custom request.</h5>
        <el-row :gutter="15">
-      <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
+      <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
       <div class="form-container">
         <el-form :model="newGigRequest" :rules="requestRules" ref="newTestimonial" label-position="top">
           <!--  Title -->
@@ -27,7 +27,7 @@
           </el-col>
           <!-- Sub Category -->
             <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-              <el-form-item  label="Sub Category" prop="subCategory">
+              <el-form-item  label="Sub Category" prop="subcategory">
                 <el-select :disabled='this.newGigRequest.category.length === 0' v-model="newGigRequest.subcategory" placeholder="Select Sub Category">
                   <el-option  v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory.name" :label="subcategory.name"/>
                 </el-select>
@@ -78,11 +78,11 @@
           <el-form-item label="Tags" prop="tags">
           <div class="tags-container">
             <!-- Fixed Tags -->
-            <el-tag v-for="(tag, index) in defaultTags" :key="index">{{ tag }}</el-tag>
+            <el-tag v-for="(tag) in defaultTags" :key="tag">{{ tag }}</el-tag>
             <!-- Dynamic Tags -->
-            <el-tag v-for="(userTag, index) in userTags" :key="index" closable> {{ userTag }} </el-tag>
+            <el-tag v-for="(userTag) in userTags" :key="userTag" closable @close="handleClose(userTag)"> {{ userTag }} </el-tag>
             <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm"/>
-            <el-button v-else-if="userTags.length < 5 - defaultTags.length" class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+            <el-button v-else-if="userTags.length !== 2" class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
           </div>
           </el-form-item>
           <!-- Form Submission -->
@@ -135,7 +135,6 @@ export default {
       currentSection: 0,
       totalPics: 1,
       nextPressed: false,
-      duplicateTitle: '',
       checkingTitle: false,
       newGigRequest: {
         title: '',
@@ -187,7 +186,7 @@ export default {
         category: [
           { required: true, message: 'Please enter a category', trigger: 'blur' }
         ],
-        subCategory: [
+        subcategory: [
           { required: true, message: 'Please enter a subcategory', trigger: 'blur' }
         ]
       }
@@ -239,6 +238,7 @@ export default {
       if (this.totalPics < 4) this.totalPics++
     },
     submit () {
+      this.$store.commit('setLoading', true)
       if (!this.errorr) {
         if (this.isPosting) return
         let that = this
@@ -262,17 +262,10 @@ export default {
         }
         let username = this.$store.state.username
         let permlink = this.slugify(this.newGigRequest.title)
-        let steemGigsTag = this.htmlHide(`
-    <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
-          `)
+        let steemGigsTag = this.htmlHide(`<i>This post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>`)
         let body = this.previewData + steemGigsTag
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
-        if (this.duplicateTitle) {
-          let modifiedTitle = this.newGigRequest.title + Math.floor(Math.random() * 1000)
-          permlink = this.slugify(modifiedTitle)
-          title = '#STEEMGIGS: I will ' + modifiedTitle.replace('#STEEMGIGS:', ' ')
-        }
         let liked = this.newGigRequest.liked
         let upvoteRange = this.newGigRequest.upvoteRange
         const imagesFromBody = Util.getImagesFromBody(this.previewData)
@@ -291,22 +284,20 @@ export default {
           console.log(err, res)
           that.isPosting = false
           this.$notify({
-            group: 'foo',
             title: 'Success',
-            text: 'Successfully pushed to steem!',
+            message: 'Your post was successful',
             type: 'success'
           })
-          that.successText = 'Successfully pushed to steem!'
-          that.$store.commit('RESET_NEW_GIGREQUEST')
+          this.$store.commit('setLoading', false)
+          // Push user to post upon success
+          this.$router.push(`/steemgigs/@${username}/${permlink}`)
         }).catch((e) => {
           that.isPosting = false
-          this.$notify({
-            group: 'foo',
+          this.$notify.error({
             title: 'Error',
-            text: 'Error pushing post to steem.',
-            type: 'error'
+            message: `Sorry, there seems to have been an error. Error Details - ${e}`
           })
-          that.errorText = 'Error pushing post to steem.'
+          this.$store.commit('setLoading', false)
         })
       }
     }
@@ -338,13 +329,7 @@ export default {
       return tags
     },
     previewData () {
-      return `<h2 class="headline">Description</h2>
-  <hr />
-  ${this.newGigRequest.description}
-  <h5>Maximum Budget: ${this.newGigRequest.price} ${this.newGigRequest.currency}</h5>
-  
-  <h5>Delivery: ${this.newGigRequest.days} day(s) ${this.newGigRequest.hours} hour(s)</h5>
-        `
+      return `<h2 class="headline">Description</h2><hr />${this.newGigRequest.description}<h5>Maximum Budget: ${this.newGigRequest.price} ${this.newGigRequest.currency}</h5><h5>Delivery: ${this.newGigRequest.days} day(s) ${this.newGigRequest.hours} hour(s)</h5>`
     }
   },
   mounted () {

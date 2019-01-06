@@ -11,6 +11,7 @@ export default new Vuex.Store({
     username: '',
     lastPageTried: '',
     lastPage: '',
+    isLoading: false,
     searchTerm: '',
     profile: {
       about: '',
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setLoading: function (state, setting) {
+      state.isLoading = setting
+    },
     SET_USER (state, {accessToken, tokenExpires, username}) {
       state.accessToken = accessToken
       state.tokenExpires = tokenExpires

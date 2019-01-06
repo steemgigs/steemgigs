@@ -104,7 +104,7 @@ export default {
     portfolio () {
       if ('json_metadata' in this.gigData) {
         if (this.gigData.json_metadata.images) {
-          return this.gigData.json_metadata.images
+          return this.gigData.json_metadata.images.filter(Boolean)
         } else return []
       } else return []
     }

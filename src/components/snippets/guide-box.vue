@@ -2,7 +2,7 @@
 <div class="guide-container">
     <h3> {{ header }} </h3>
     <h5> {{ subHeader }} </h5>
-    <youtube :video-id="videoId" player-width="auto" player-height="auto"></youtube>
+    <youtube :video-id="videoId" player-width="100%" player-height="auto"></youtube>
     <ul class="guide-items">
         <span class="guide-item" v-for="(item, index) in itemList" :key="index"> - {{ item }}</span>
     </ul>

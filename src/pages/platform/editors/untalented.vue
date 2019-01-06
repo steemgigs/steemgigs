@@ -4,7 +4,7 @@
       <h3>Create new Untalented</h3>
       <h5>Not an expert yet? No worries! On SteemGigs, you can hone your expertise while offering a service.</h5>
       <el-row :gutter="15">
-      <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
+      <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
       <div class="form-container">
         <el-form :model="untalented" :rules="untalentedRules" ref="untalented" label-position="top">
           <!--  Title -->
@@ -19,9 +19,9 @@
           <el-form-item label="Tags" prop="tags">
             <div class="tags-container">
             <!-- Fixed Tags -->
-            <el-tag v-for="(tag, index) in defaultTags" :key="index">{{ tag }}</el-tag>
+            <el-tag v-for="(tag) in defaultTags" :key="tag">{{ tag }}</el-tag>
             <!-- Dynamic Tags -->
-            <el-tag v-for="(userTag, index) in userTags" :key="index" closable> {{ userTag }} </el-tag>
+            <el-tag v-for="(userTag) in userTags" :key="userTag" closable @close="handleClose(userTag)"> {{ userTag }} </el-tag>
             <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm"/>
             <el-button v-else-if="userTags.length < 5 - defaultTags.length" class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
             </div>
@@ -124,6 +124,7 @@ export default {
       })
     },
     submit () {
+      this.$store.commit('setLoading', true)
       if (!this.errorr) {
         if (this.isPosting) return
         let that = this
@@ -142,17 +143,10 @@ export default {
         }
         let username = this.$store.state.username
         let permlink = this.slugify(this.untalented.title)
-        let steemGigsTag = this.htmlHide(`
-  <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
-        `)
+        let steemGigsTag = this.htmlHide(`<i>This post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>`)
         let body = this.previewData + steemGigsTag
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
-        if (this.duplicateTitle) {
-          let modifiedTitle = this.untalented.title + Math.floor(Math.random() * 1000)
-          permlink = this.slugify(modifiedTitle)
-          title = '#STEEMGIGS: I will ' + modifiedTitle
-        }
         let liked = this.untalented.liked
         let upvoteRange = this.untalented.upvoteRange
 
@@ -165,22 +159,20 @@ export default {
           console.log(err, res)
           that.isPosting = false
           this.$notify({
-            group: 'foo',
             title: 'Success',
-            text: 'Successfully pushed to steem!',
+            message: 'Your post was successful',
             type: 'success'
           })
-          that.successText = 'Successfully pushed to steem!'
-          that.$store.commit('RESET_NEW_UNTALENTED')
+          this.$store.commit('setLoading', false)
+          // Push user to post upon success
+          this.$router.push(`/steemgigs/@${username}/${permlink}`)
         }).catch((e) => {
           that.isPosting = false
-          this.$notify({
-            group: 'foo',
+          this.$notify.error({
             title: 'Error',
-            text: 'Error pushing post to steem.',
-            type: 'error'
+            message: `Sorry, there seems to have been an error. Error Details - ${e}`
           })
-          that.errorText = 'Error pushing post to steem.'
+          this.$store.commit('setLoading', false)
         })
       }
     }
@@ -197,10 +189,7 @@ export default {
       return this.untalented.title
     },
     previewData () {
-      return `<h2 class="headline">Description</h2>
-<hr />
-${Util.convertImageUrlToHTML(this.untalented.description)}
-      `
+      return `<h2 class="headline">Description</h2><hr />${Util.convertImageUrlToHTML(this.untalented.description)}`
     }
   },
   mounted () {

@@ -4,7 +4,7 @@
       <h3>Create Gig</h3>
       <h5>Offer a service (related to your expertise, talents/un(dis)talents, experience etc) in exchange for Steem, SBD, Steem Power or for free.</h5>
        <el-row :gutter="15">
-      <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
+      <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
       <div class="form-container">
         <el-form :model="newGigData" :rules="gigRules" ref="newGigData" label-position="top">
           <!--  Title -->
@@ -22,7 +22,7 @@
             </el-col>
             <!-- Sub Category -->
             <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-              <el-form-item  label="Sub Category" prop="subCategory">
+              <el-form-item  label="Sub Category" prop="subcategory">
                 <el-select :disabled='this.newGigData.category.length === 0' v-model="newGigData.subcategory" placeholder="Select Sub Category">
                   <el-option  v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory.name" :label="subcategory.name"/>
                 </el-select>
@@ -45,16 +45,17 @@
           <el-form-item label="Tags" prop="tags">
             <div class="tags-container">
             <!-- Fixed Tags -->
-            <el-tag v-for="(tag, index) in defaultTags" :key="index">{{ tag }}</el-tag>
+            <el-tag v-for="(tag) in defaultTags" :key="tag">{{ tag }}</el-tag>
             <!-- Dynamic Tags -->
-            <el-tag v-for="(userTag, index) in userTags" :key="index" closable> {{ userTag }} </el-tag>
-            <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm" />
-            <el-button v-else-if="userTags.length < 5 - defaultTags.length" class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+            <el-tag v-for="(userTag) in userTags" :key="userTag" closable  @close="handleClose(userTag)" > {{ userTag }} </el-tag>
+            <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm"/>
+            <el-button v-else-if="userTags.length !== 2" class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
           </div>
           </el-form-item>
           <!-- Accordian Start -->
           <el-collapse v-model="activeNames">
             <el-collapse-item title="Pricing" name="1">
+               <template slot="title"><i class="ion-cash"></i>Pricing</template>
               <!-- Pricing -->
               <el-row :gutter="15">
                 <!-- Price -->
@@ -83,11 +84,13 @@
               </el-collapse-item>
               <!-- Requirements -->
               <el-collapse-item title="Requirements" name="2">
+                <template slot="title"><i class="ion-briefcase"></i>Requirements</template>
               <el-form-item label="Requirements" prop="requirements">
                 <vue-editor useCustomImageHandler @imageAdded="handleImageAdded" v-model="newGigData.requirements" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
               </el-form-item>
             </el-collapse-item>
             <el-collapse-item title="Delivery" name="3">
+              <template slot="title"><i class="ion-clock"></i>Delivery</template>
                <!-- Delivery Date -->
           <el-row :gutter="15">
           <!-- Days -->
@@ -112,6 +115,7 @@
             </el-collapse-item>
             <!-- Portfolio -->
             <el-collapse-item title="Porfolio" name="4">
+              <template slot="title"><i class="ion-images"></i>Portfolio</template>
               <el-row :gutter="15">
                 <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                   <div class="col s12 m4 l3 mb-3" v-for="(image, index) in newGigData.portfolio" :key="image.key">
@@ -128,7 +132,7 @@
                 </el-col>
               </el-row>
               <p>Consider embedding a short video clip of you, telling potential clients why they should avail of your service. This improves your general reputation even on steemit, make your content richer and more worthy of curation etc. (Optional)</p>
-              <el-form-item label="Video URL" prop="title">
+              <el-form-item label="Video URL" prop="videoURL">
                 <el-input v-model="newGigData.videoUrl"></el-input>
               </el-form-item>
             </el-collapse-item>
@@ -223,7 +227,7 @@ export default {
         category: [
           { required: true, message: 'Please enter a category', trigger: 'blur' }
         ],
-        subCategory: [
+        subcategory: [
           { required: true, message: 'Please enter a subcategory', trigger: 'blur' }
         ],
         pricing: [
@@ -289,6 +293,7 @@ export default {
       }
     },
     submit () {
+      this.$store.commit('setLoading', true)
       if (!this.errorr) {
         if (this.isPosting) return
         let that = this
@@ -311,30 +316,22 @@ export default {
           generated: true,
           videoUrl: this.newGigData.videoUrl
         }
-        let textifiedPics = '\n<h2>Portfolio</h2>\n<hr />\n'
+        let textifiedPics = '\n<h2>Portfolio</h2>\n<hr/>\n'
         this.portfolio.forEach(url => {
-          textifiedPics += `<img src="${url}"> <br />`
+          textifiedPics += `<img src="${url}"><br/>`
         })
         let username = this.$store.state.username
         let permlink = this.slugify(this.newGigData.title)
-        let steemGigsTag = `
-    <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
-          `
+        let steemGigsTag = `<i>This post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>`
         let contentToHide = textifiedPics + steemGigsTag
         let hiddenContainer = this.htmlHide(contentToHide)
         let body = this.previewData + hiddenContainer
+        let token = this.$store.state.accessToken
+        let title = this.steemedTitle
 
         const imagesFromBody = Util.getImagesFromBody(this.previewData)
         if (imagesFromBody.length) {
           jsonMetadata.images = jsonMetadata.images.concat(imagesFromBody)
-        }
-
-        let token = this.$store.state.accessToken
-        let title = this.steemedTitle
-        if (this.duplicateTitle) {
-          let modifiedTitle = this.newGigData.title + Math.floor(Math.random() * 1000)
-          permlink = this.slugify(modifiedTitle)
-          title = '#STEEMGIGS: I will ' + modifiedTitle
         }
         let liked = this.newGigData.liked
         let upvoteRange = this.newGigData.upvoteRange
@@ -348,23 +345,19 @@ export default {
           jsonMetadata
         }, token).then((err, res) => {
           console.log('err', err, 'res', res)
-          that.isPosting = false
           this.$notify({
-            group: 'foo',
             title: 'Success',
-            text: 'Successfully pushed to steem!',
+            message: 'Your post was successful',
             type: 'success'
           })
-          that.successText = 'Successfully pushed to steem!'
-          that.$store.commit('RESET_NEW_STEEMGIG')
+          this.$store.commit('setLoading', false)
+          // Push user to post upon success
+          this.$router.push(`/steemgigs/@${username}/${permlink}`)
         }).catch((e) => {
-          console.log(e)
-          that.isPosting = false
-          this.$notify({
-            group: 'foo',
+          this.$store.commit('setLoading', false)
+          this.$notify.error({
             title: 'Error',
-            text: 'Error pushing post to steem',
-            type: 'error'
+            message: `Sorry, there seems to have been an error. Error Details - ${e}`
           })
           that.errorText = 'Error pushing post to steem'
         })
@@ -373,7 +366,7 @@ export default {
   },
   computed: {
     steemedTitle () {
-      return '#STEEMGIGS: I will ' + this.newGigData.title
+      return '#STEEMGIGS: ' + this.newGigData.title
     },
     portfolio () {
       return this.newGigData.portfolio.filter(image => image.url).map(image => image.url)
@@ -405,22 +398,7 @@ export default {
     previewData () {
       const embedVideoUrl = Util.getEmbedVideoUrl(this.newGigData.videoUrl)
       const iframeVideo = embedVideoUrl ? `<h5 class="headline">Here Is A Video Showing Why You Should Avail Of My Gig!</h5><iframe src="${embedVideoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>` : ''
-      return `
-  <h2 class="headline">Description</h2>
-  <hr />
-  ${this.newGigData.description}
-  <h2 class="headline">Pricing</h2> 
-  <hr />
-  ${this.newGigData.pricing}
-  
-  <h5>Price: Starting at ${this.newGigData.price} ${this.newGigData.currency}</h5>
-  <h5>Delivery: ${this.newGigData.days} day(s) ${this.newGigData.hours} hour(s)</h5>
-  <hr />
-  <h2 class="headline">Requirements</h2>
-  <hr />
-  ${this.newGigData.requirements}
-  ${iframeVideo}
-        `
+      return `<h2 class="headline">Description</h2><hr />${this.newGigData.description}<h2 class="headline">Pricing</h2> <hr />${this.newGigData.pricing}<h5>Price: Starting at ${this.newGigData.price} ${this.newGigData.currency}</h5><h5>Delivery: ${this.newGigData.days} day(s) ${this.newGigData.hours} hour(s)</h5><h2 class="headline">Requirements</h2><hr />${this.newGigData.requirements}${iframeVideo}`
     }
   },
   watch: {
