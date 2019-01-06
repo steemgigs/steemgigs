@@ -224,7 +224,6 @@ export default {
           let url = result.data.data.link
           Editor.insertEmbed(cursorLocation, 'image', url)
           this.portfolioImages.push(url)
-          // this.newGigRequest.portfolio = this.portfolioImages
         })
         .catch((err) => {
           console.log(err)
@@ -259,7 +258,6 @@ export default {
           subcategory: this.slugify(this.newGigRequest.subcategory),
           type: 'steemgigs_request',
           deleted: true,
-          // images: this.newGigRequest.portfolio,
           generated: true
         }
         let username = this.$store.state.username

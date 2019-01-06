@@ -139,7 +139,6 @@ export default {
           authorPic: this.$store.state.profile.profileImage,
           type: 'steemgigs_untalented',
           deleted: false
-          // images: this.untalented.portfolio,
         }
         let username = this.$store.state.username
         let permlink = this.slugify(this.untalented.title)

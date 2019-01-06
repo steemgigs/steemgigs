@@ -10,7 +10,7 @@
       <i class="fa fa-spinner fa-pulse"></i>
     </a>
     <a v-if="resteeming" v-tooltip="{ content: 'resteem', classes: ['tooltip'] }" :class="!resteem ? 'grey-text' : 'indigo-text'" @click="reblog"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
-    <span class="right" v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{ payout }}</span>
+    <span class="right" v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">${{ payout.toString().slice(0, 4) }}</span>
     <a v-if="gigData.views" class="indigo-text show-on-xl-only" v-tooltip="'Number of views'"><i class="ion-eye"></i> {{ gigData.views.length +'&nbsp;&nbsp;&nbsp;'}}</a>
     <div class="row pt-3 mb-0" v-if="upvoteActive">
       <div class="col s9">
@@ -29,9 +29,10 @@
 </template>
 
 <script>
-// import Api from '@/services/api'
 import sc2 from '@/services/sc2'
 import SliderRange from 'vue-slider-component'
+import moment from 'moment'
+
 export default {
   components: {
     SliderRange
@@ -76,11 +77,15 @@ export default {
     upvotes () {
       return this.genuineVoters.length
     },
-    payout () {
-      if (this.gigData.pending_payout_value) {
-        return '$' + this.gigData.pending_payout_value
+    payout: function () {
+      let postCreationDate = moment(this.gigData.created)._d
+      let currentDate = moment()._d
+      let timesince = moment(currentDate).diff(postCreationDate, 'minutes')
+      // If post is greater than 7 days
+      if (timesince > 10080) {
+        return parseFloat(this.gigData.curator_payout_value) + parseFloat(this.gigData.total_payout_value)
       } else {
-        return '$' + (parseInt(this.gigData.total_payout_value.split(' ')[0]) + parseInt(this.gigData.curator_payout_value.split(' ')[0])).toFixed(2)
+        return this.gigData.pending_payout_value
       }
     },
     paymentInfo () {
@@ -124,11 +129,9 @@ export default {
       sc2.setAccessToken(this.$store.state.accessToken)
       sc2.reblog(this.$store.state.username, this.gigData.author, this.gigData.permlink, (err, res) => {
         if (!err) {
-          // this.fetchThisComment()
           this.resteem = true
           this.resteeming = true
           this.rsspinning = false
-          // this.gigData.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
           console.log(res)
         } else {
           this.resteeming = true

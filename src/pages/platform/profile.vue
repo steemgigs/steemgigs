@@ -85,7 +85,6 @@ import GigCard from '@/components/snippets/gigCard'
 import ProfileCard from '@/components/layout/profileCard'
 import RotatingCard from '@/components/snippets/rotatingCard'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
-// import steem from 'steem'
 
 export default {
   components: {
@@ -123,9 +122,6 @@ export default {
     }).catch(err => {
       console.log('error retrieving user gigs: \n error:', this.stringify(err))
     })
-    // steem.api.lookupAccountNames(this.$route.params.username, (err, result) => {
-    //   console.log('via steemjs::', err, result)
-    // })
   },
   computed: {
     steemgigs () {

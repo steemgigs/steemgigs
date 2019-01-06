@@ -21,7 +21,6 @@ export default {
     padding-right: 60px;
     line-height: 1.6;
     color: #848484;
-    // max-width: 900px;
     margin: 20px 10px 0 10px;
     font-size: 1rem;
     i.ion-close {

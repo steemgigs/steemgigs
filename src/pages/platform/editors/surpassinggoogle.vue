@@ -164,7 +164,6 @@ export default {
           let url = result.data.data.link
           Editor.insertEmbed(cursorLocation, 'image', url)
           this.portfolioImages.push(url)
-          // this.newGigRequest.portfolio = this.portfolioImages
         })
         .catch((err) => {
           console.log(err)
@@ -221,7 +220,6 @@ export default {
         }
         let liked = this.newGigRequest.liked
         let upvoteRange = this.newGigRequest.upvoteRange
-        // sc2.setAccessToken(this.$store.state.accessToken)
         Api.post({
           username,
           permlink,

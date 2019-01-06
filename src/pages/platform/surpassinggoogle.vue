@@ -38,7 +38,6 @@ import { Carousel, Slide } from 'vue-carousel'
 import SliderRange from 'vue-slider-component'
 import ProfileCard from '@/components/layout/profileCard'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
-// import steem from 'steem'
 export default {
   components: {
     Page,
@@ -210,7 +209,6 @@ export default {
       sc2.vote(this.$store.state.username, this.currentGig.author, this.currentGig.permlink, parseInt(this.upvoteRange) * 100, (err, res) => {
         this.voting = false
         if (!err) {
-          // this.fetchThisComment()
           this.upvoteActive = false
           this.currentGig.active_votes.push({voter: this.$store.state.username, weight: parseInt(this.upvoteRange)})
           console.log(res)

@@ -3,7 +3,6 @@
   <div id="app">
     <nav-bar />
    <router-view/>
-    <notifications group="foo" position="top left" />
     <div v-show="$store.state.accessToken" class="fixed-action-btn hide-on-large-only">
       <a class="btn-floating btn indigo">
         <i class="ion-plus-round"></i>
@@ -92,9 +91,6 @@ export default {
       }
     }
   }
-  // .collapsible-header {
-  //   display: initial;
-  // }
   .go-to {
     align-self: flex-end
   }
