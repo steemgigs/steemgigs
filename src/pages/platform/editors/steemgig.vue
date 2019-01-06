@@ -317,9 +317,7 @@ export default {
         })
         let username = this.$store.state.username
         let permlink = this.slugify(this.newGigData.title)
-        let steemGigsTag = `
-    <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
-          `
+        let steemGigsTag = `<i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>`
         let contentToHide = textifiedPics + steemGigsTag
         let hiddenContainer = this.htmlHide(contentToHide)
         let body = this.previewData + hiddenContainer

@@ -262,9 +262,7 @@ export default {
         }
         let username = this.$store.state.username
         let permlink = this.slugify(this.newGigRequest.title)
-        let steemGigsTag = this.htmlHide(`
-    <i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>
-          `)
+        let steemGigsTag = this.htmlHide(`<i>this post was made on <a href="https://steemgigs.org/@${username}/${permlink}">STEEMGIGS Where everyone has something to offer</a></i>`)
         let body = this.previewData + steemGigsTag
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
