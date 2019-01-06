@@ -3,6 +3,8 @@
     <el-main>
       <h3>Create new {{capitalize(getSubCategoryName.name)}}</h3>
       <h5 v-text="getSubCategoryName.description" />
+       <el-row :gutter="15">
+      <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
       <div class="form-container">
         <el-form :model="newGigRequest" :rules="surpassingRules" ref="newGigRequest" label-position="top">
           <!--  Title -->
@@ -49,6 +51,11 @@
           </el-form-item>
         </el-form>
       </div>
+    </el-col>
+      <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+        <guide :header="guide.header" :subHeader="guide.subheader" :itemList="guide.items" :videoId="guide.video"></guide>
+      </el-col>
+      </el-row>
     </el-main>
   </page>
 </template>
@@ -63,6 +70,7 @@ import { MarkdownEditor } from 'markdown-it-editor'
 import VueMarkdown from 'vue-markdown'
 import { VueEditor } from 'vue2-editor'
 import form from '@/mixins/form.js'
+import guide from '@/components/snippets/guide-box'
 
 export default {
   mixins: [form],
@@ -72,7 +80,8 @@ export default {
     MarkdownEditor,
     VueMarkdown,
     ImgUpload,
-    VueEditor
+    VueEditor,
+    guide
   },
   data () {
     return {
@@ -92,6 +101,17 @@ export default {
         price: 0,
         liked: false,
         upvoteRange: 100
+      },
+      guide: {
+        header: 'Tell us what you love',
+        subheader: 'Have you had a great experience with Steem Gigs? Share it with the world!',
+        video: 'xeLYLA6C2AE',
+        items: [
+          'For Clients Were you delighted with the service of the SteemGigger who rendered your service? Tell us! Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look to support it and it appears on the steem blockchain as well',
+          'Give a detailed description about what your GIG was about',
+          'You can document "the process" e.g if it is a logo, you can decide to put samples in your post for further transparency',
+          'You can explain your general experiences with clients e.g "was payment prompt"; "was communication easy"; "would you love future relationships" etc'
+        ]
       },
       surpassingRules: {
         title: [
