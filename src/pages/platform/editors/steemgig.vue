@@ -199,7 +199,7 @@ export default {
       },
       guide: {
         header: 'Create the perfect Steem Gig',
-        subheader: 'Share your talents with the world',
+        subheader: 'Share your talent/un(dis)talents with the world',
         video: 'xeLYLA6C2AE',
         items: [
           'Make your title short, describing exactly what service(s) you offer as this is the likeliest way to boost viewership, potential & eventual sales',
