@@ -268,6 +268,8 @@ export default {
 <style lang="scss">
   .landing {
     width: 100vw;
+    overflow: auto;
+    height: calc(100vh - 20px);
     a {
       color: #01579b;
     }
