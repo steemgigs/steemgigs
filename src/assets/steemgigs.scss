@@ -2022,6 +2022,9 @@ hr {
 
 .el-tag {
   margin-right: 10px;
+  border: 1px solid rgba(98, 94, 211, 0.29);
+  color: #625ed3;
+  background-color: rgba(98, 94, 211, 0.14);
 }
 
 .button-new-tag {
@@ -2035,6 +2038,14 @@ hr {
 .input-new-tag {
   margin: -3.5px 0 0 0;
   padding: 0;
+}
+
+.el-tag .el-icon-close {
+  color: #625ed3;
+}
+
+.el-tag .el-icon-close:hover {
+  background: #625ed3;
 }
 
 // Markdown Editor Overrides
