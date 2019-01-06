@@ -187,7 +187,7 @@ export default {
         category: [
           { required: true, message: 'Please enter a category', trigger: 'blur' }
         ],
-        subCategory: [
+        subcategory: [
           { required: true, message: 'Please enter a subcategory', trigger: 'blur' }
         ]
       }
