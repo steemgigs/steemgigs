@@ -16,9 +16,7 @@ We will vault all this knowledge in our bank, in the form of unadulterated excer
                 <span class="card-title center"><router-link class="links" :to="'surpassinggoogle/' + slugify(cat.name)">{{ capitalize(cat.name) }}</router-link></span>
                 <p>{{cat.description}}</p>
               </div>
-              <el-button class="surpass-card-button secondary" type="secondary">
-                <router-link :to="'surpassinggoogle/' + slugify(cat.name)">Submit a Post</router-link>
-              </el-button>
+              <router-link :to="'surpassinggoogle/' + slugify(cat.name)"><el-button class="surpass-card-button secondary" type="secondary">Submit a Post</el-button></router-link>
             </div>
           </div>
       </div>
