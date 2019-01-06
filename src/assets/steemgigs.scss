@@ -2018,6 +2018,7 @@ hr {
 
 .tags-container {
   display: inline-flex;
+  flex-wrap: wrap;
 }
 
 .el-tag {
@@ -2025,6 +2026,7 @@ hr {
   border: 1px solid rgba(98, 94, 211, 0.29);
   color: #625ed3;
   background-color: rgba(98, 94, 211, 0.14);
+  margin-bottom: 10px;
 }
 
 .button-new-tag {
