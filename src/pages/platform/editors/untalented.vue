@@ -124,6 +124,7 @@ export default {
       })
     },
     submit () {
+      this.$store.commit('setLoading', true)
       if (!this.errorr) {
         if (this.isPosting) return
         let that = this
@@ -162,15 +163,16 @@ export default {
             message: 'Your post was successful',
             type: 'success'
           })
-          that.successText = 'Successfully pushed to steem!'
-          that.$store.commit('RESET_NEW_UNTALENTED')
+          this.$store.commit('setLoading', false)
+          // Push user to post upon success
+          this.$router.push(`/steemgigs/@${username}/${permlink}`)
         }).catch((e) => {
           that.isPosting = false
           this.$notify.error({
             title: 'Error',
             message: `Sorry, there seems to have been an error. Error Details - ${e}`
           })
-          that.errorText = 'Error pushing post to steem.'
+          this.$store.commit('setLoading', false)
         })
       }
     }
