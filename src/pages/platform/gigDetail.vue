@@ -150,7 +150,7 @@ export default {
     },
     portfolio () {
       if (this.currentGig.json_metadata.images) {
-        return this.currentGig.json_metadata.images
+        return this.currentGig.json_metadata.images.filter(Boolean)
       } else {
         return []
       }
