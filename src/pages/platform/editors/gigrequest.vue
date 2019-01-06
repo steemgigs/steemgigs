@@ -123,7 +123,7 @@ export default {
     MarkdownEditor,
     VueMarkdown,
     ImgUpload,
-    VueEditor, 
+    VueEditor,
     guide
   },
   data () {
@@ -166,14 +166,13 @@ export default {
         url: this.$imgUploadURL
       },
       guide: {
-        header: 'Tell us what you love',
-        subheader: 'Have you had a great experience with Steem Gigs? Share it with the world!',
+        header: 'Find the skills you need',
+        subheader: 'Can\'t find what you\'re looking for? Submit a request to find the perfect talent',
         video: 'xeLYLA6C2AE',
         items: [
-          'For Clients Were you delighted with the service of the SteemGigger who rendered your service? Tell us! Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look to support it and it appears on the steem blockchain as well',
-          'Give a detailed description about what your GIG was about',
-          'You can document "the process" e.g if it is a logo, you can decide to put samples in your post for further transparency',
-          'You can explain your general experiences with clients e.g "was payment prompt"; "was communication easy"; "would you love future relationships" etc'
+          'Make your Title Short, Simple and Clear to understand',
+          'Give a detailed description of what you are looking for',
+          'How much are you willing to pay for this gig? etc. State these and other information clearly'
         ]
       },
       requestRules: {

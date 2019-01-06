@@ -85,14 +85,17 @@ export default {
         url: this.$imgUploadURL
       },
       guide: {
-        header: 'Tell us what you love',
-        subheader: 'Have you had a great experience with Steem Gigs? Share it with the world!',
+        header: 'Create the perfect blog',
+        subheader: 'This editor can be used by any steemian and to create posts in any genre or tag.',
         video: 'xeLYLA6C2AE',
         items: [
-          'For Clients Were you delighted with the service of the SteemGigger who rendered your service? Tell us! Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look to support it and it appears on the steem blockchain as well',
-          'Give a detailed description about what your GIG was about',
-          'You can document "the process" e.g if it is a logo, you can decide to put samples in your post for further transparency',
-          'You can explain your general experiences with clients e.g "was payment prompt"; "was communication easy"; "would you love future relationships" etc'
+          'Make your title short and simple to understand',
+          'Give us a preface of what your post is about to be about.',
+          'If you are using resources from the internet, digest it first, then tell us about it, using your own words.',
+          'Be expressive. Relegate reservations. Flaws allowed (The more pictures, words etc, the more exciting).',
+          'To conclude, ask us questions. Make us think. Aim to truly touch us with your beauty.',
+          'You have an audience in the search engines as well, so aim to touch them too.',
+          'Make sure to state source URL of every image resourced online. No loss, if you always give credit.'
         ]
       },
       untalentedRules: {

@@ -103,14 +103,14 @@ export default {
         upvoteRange: 100
       },
       guide: {
-        header: 'Tell us what you love',
-        subheader: 'Have you had a great experience with Steem Gigs? Share it with the world!',
+        header: 'Share your knowledge',
+        subheader: 'Everyone has something to offer',
         video: 'xeLYLA6C2AE',
         items: [
-          'For Clients Were you delighted with the service of the SteemGigger who rendered your service? Tell us! Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look to support it and it appears on the steem blockchain as well',
-          'Give a detailed description about what your GIG was about',
-          'You can document "the process" e.g if it is a logo, you can decide to put samples in your post for further transparency',
-          'You can explain your general experiences with clients e.g "was payment prompt"; "was communication easy"; "would you love future relationships" etc'
+          'Make your title concise simple to understand and specific to a particular niche, industry , field, expertise etc.',
+          'Be yourself ans as expressive as possible. The world and generations yet unborn will come here to dig from your knowledge.',
+          'Every post you write here appears on the decentralized steem blockchain and can earn your rewards. Make the most of each post.',
+          'Clients may visit your blogs to ascertain your reputation before availing of your Gigs.'
         ]
       },
       surpassingRules: {
