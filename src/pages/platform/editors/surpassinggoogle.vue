@@ -38,10 +38,6 @@
             <div class="tags-container">
             <!-- Fixed Tags -->
             <el-tag v-for="(tag) in defaultTags" :key="tag">{{ tag }}</el-tag>
-            <!-- Dynamic Tags -->
-            <el-tag v-for="(userTag) in userTags" :key="userTag" closable @close="handleClose(userTag)"> {{ userTag }} </el-tag>
-            <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm" />
-            <el-button v-else-if="userTags.length < 5 - defaultTags.length" class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
             </div>
           </el-form-item>
           <!-- Form Submission -->
