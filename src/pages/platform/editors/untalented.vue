@@ -4,7 +4,7 @@
       <h3>Create new Untalented</h3>
       <h5>Not an expert yet? No worries! On SteemGigs, you can hone your expertise while offering a service.</h5>
       <el-row :gutter="15">
-      <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
+      <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
       <div class="form-container">
         <el-form :model="untalented" :rules="untalentedRules" ref="untalented" label-position="top">
           <!--  Title -->

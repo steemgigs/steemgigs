@@ -4,7 +4,7 @@
        <h3>Create new Testimonial</h3>
       <h5>Share your overall SteemGigs experience with us. So, why not record your service progress & updates, successful deliveries, shout-outs, payments etc using this editor.</h5>
       <el-row :gutter="15">
-      <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
+      <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
       <div class="form-container">
         <el-form :model="newTestimonial" :rules="testimonialRules" ref="newTestimonial" label-position="top">
           <!--  Title -->

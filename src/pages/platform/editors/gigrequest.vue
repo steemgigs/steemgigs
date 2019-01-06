@@ -4,7 +4,7 @@
       <h3>Create new gig request</h3>
       <h5>If you can't find the exact gig that you seek, you may want to do a custom request.</h5>
        <el-row :gutter="15">
-      <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
+      <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
       <div class="form-container">
         <el-form :model="newGigRequest" :rules="requestRules" ref="newTestimonial" label-position="top">
           <!--  Title -->

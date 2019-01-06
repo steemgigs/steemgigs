@@ -4,7 +4,7 @@
       <h3>Create new {{capitalize(getSubCategoryName.name)}}</h3>
       <h5 v-text="getSubCategoryName.description" />
        <el-row :gutter="15">
-      <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
+      <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
       <div class="form-container">
         <el-form :model="newGigRequest" :rules="surpassingRules" ref="newGigRequest" label-position="top">
           <!--  Title -->

@@ -4,7 +4,7 @@
       <h3>Create Gig</h3>
       <h5>Offer a service (related to your expertise, talents/un(dis)talents, experience etc) in exchange for Steem, SBD, Steem Power or for free.</h5>
        <el-row :gutter="15">
-      <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
+      <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
       <div class="form-container">
         <el-form :model="newGigData" :rules="gigRules" ref="newGigData" label-position="top">
           <!--  Title -->
