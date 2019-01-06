@@ -50,6 +50,7 @@
               </div>
             </div>
           </div>
+          <share-options :title="title" :tags="tags.slice(0,3)" />
          <div class="comment-panel">
            <div v-if="commentMode">
                 <vue-editor :editorToolbar="[]" v-model="myComment" class="comment-box" placeholder="Type comment here, you can drag and drop images" ></vue-editor>
@@ -90,6 +91,8 @@ import { Carousel, Slide } from 'vue-carousel'
 import SliderRange from 'vue-slider-component'
 import ProfileCard from '@/components/layout/profileCard'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
+import shareOptions from '@/components/snippets/share-options'
+
 export default {
   components: {
     Page,
@@ -101,7 +104,8 @@ export default {
     VComment,
     SliderRange,
     LoadingPlaceholder,
-    ProfileCard
+    ProfileCard,
+    shareOptions
   },
   data () {
     return {
@@ -206,6 +210,9 @@ export default {
       } else {
         return { content: 'upvote', classes: ['tooltip'] }
       }
+    },
+    tags () {
+      return this.currentGig.json_metadata.tags
     }
   },
   methods: {
