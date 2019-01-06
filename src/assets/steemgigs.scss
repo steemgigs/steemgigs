@@ -1997,9 +1997,15 @@ hr {
 }
 .el-collapse-item__header {
   color: black;
-  font-weight: bold;
-  font-size: 14px;
+  font-size: 15px
 }
+
+.el-collapse-item__header i {
+  margin-right: 10px;
+  color: #3F51B5;
+  font-size: 20px;
+}
+
 
 .el-collapse {
   margin-bottom: 15px;

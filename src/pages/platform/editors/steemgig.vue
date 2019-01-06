@@ -55,6 +55,7 @@
           <!-- Accordian Start -->
           <el-collapse v-model="activeNames">
             <el-collapse-item title="Pricing" name="1">
+               <template slot="title"><i class="ion-cash"></i>Pricing</template>
               <!-- Pricing -->
               <el-row :gutter="15">
                 <!-- Price -->
@@ -83,11 +84,13 @@
               </el-collapse-item>
               <!-- Requirements -->
               <el-collapse-item title="Requirements" name="2">
+                <template slot="title"><i class="ion-briefcase"></i>Requirements</template>
               <el-form-item label="Requirements" prop="requirements">
                 <vue-editor useCustomImageHandler @imageAdded="handleImageAdded" v-model="newGigData.requirements" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
               </el-form-item>
             </el-collapse-item>
             <el-collapse-item title="Delivery" name="3">
+              <template slot="title"><i class="ion-clock"></i>Delivery</template>
                <!-- Delivery Date -->
           <el-row :gutter="15">
           <!-- Days -->
@@ -112,6 +115,7 @@
             </el-collapse-item>
             <!-- Portfolio -->
             <el-collapse-item title="Porfolio" name="4">
+              <template slot="title"><i class="ion-images"></i>Portfolio</template>
               <el-row :gutter="15">
                 <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                   <div class="col s12 m4 l3 mb-3" v-for="(image, index) in newGigData.portfolio" :key="image.key">
