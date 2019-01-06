@@ -22,7 +22,7 @@
             </el-col>
             <!-- Sub Category -->
             <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-              <el-form-item  label="Sub Category" prop="subCategory">
+              <el-form-item  label="Sub Category" prop="subcategory">
                 <el-select :disabled='this.newGigData.category.length === 0' v-model="newGigData.subcategory" placeholder="Select Sub Category">
                   <el-option  v-for="(subcategory, index) in categories[selectedCategoryIndex].subcategories" :key="index" :value="subcategory.name" :label="subcategory.name"/>
                 </el-select>
