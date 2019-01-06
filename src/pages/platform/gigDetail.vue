@@ -3,7 +3,7 @@
     <cat-nav />
     <el-main>
     <div class="container gig-detail">
-      <div class="col s12 m8 l9 row">
+      <div class="col s12 m8 l8 row">
         <ul class="tabs hide">
           <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">DETAILS</a></li>
           <li class="tab col s3"><a class="waves-effect" :class="{active: currentView === 'inactive_gigs'}" @click="changeView('inactive_gigs')">REVIEWS</a></li>
@@ -65,7 +65,7 @@
          </div>
         </div>
       </div>
-       <div class="col s12 m4 l3">
+       <div class="col s12 m4 l4">
         <div v-if="!profileLoaded" class="card-panel">
           <content-placeholders>
             <content-placeholders-img />
