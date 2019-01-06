@@ -3,7 +3,7 @@
     <el-main>
        <h3>Create new Testimonial</h3>
       <h5>Share your overall SteemGigs experience with us. So, why not record your service progress & updates, successful deliveries, shout-outs, payments etc using this editor.</h5>
-      <el-row :gutter="10">
+      <el-row :gutter="15">
       <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
       <div class="form-container">
         <el-form :model="newTestimonial" :rules="testimonialRules" ref="newTestimonial" label-position="top">
@@ -35,7 +35,7 @@
       </div>
       </el-col>
       <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
-        <guide :header="guide.header" :subHeader="guide.subheader" :itemList="guide.items"></guide>
+        <guide :header="guide.header" :subHeader="guide.subheader" :itemList="guide.items" :videoId="guide.video"></guide>
       </el-col>
       </el-row>
     </el-main>
@@ -79,17 +79,14 @@ export default {
         liked: false
       },
       guide: {
-        header: 'Hello World',
-        subheader: 'Goodbye',
+        header: 'Tell us what you love',
+        subheader: 'Have you had a great experience with Steem Gigs? Share it with the world!',
+        video: 'xeLYLA6C2AE',
         items: [
-          'Make your title short, describing exactly what service(s) you offer as this is the likeliest way to boost viewership, potential & eventual sales',
-          'Select the most accurately describing category and subcategory',
-          'Choose the best follow up tags',
-          'Be as expressive as possible as this is your chance to tell postential clients and steemians what you offer, why you gig is special and why they should give you opportunities etc.',
-          'Give your PACKAGE an appealing name.',
-          'Tell us if you are willing to do revisions. If so, "how many revisions?"; "will it cost extra?" etc',
-          'Are there aspects of your GIG that you are will to offering lovingly for free etc?',
-          'Tell them if your "requirements" are optional or compulsory.'
+          'For Clients Were you delighted with the service of the SteemGigger who rendered your service? Tell us! Note: You can earn steem rewards by writing a SteemGIG testimonial as it we look to support it and it appears on the steem blockchain as well',
+          'Give a detailed description about what your GIG was about',
+          'You can document "the process" e.g if it is a logo, you can decide to put samples in your post for further transparency',
+          'You can explain your general experiences with clients e.g "was payment prompt"; "was communication easy"; "would you love future relationships" etc'
         ]
       },
       testimonialRules: {
