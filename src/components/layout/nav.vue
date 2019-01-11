@@ -27,21 +27,36 @@
                 <span class="el-dropdown-link">
                   <el-button type="primary" class="primary" size="medium">Create</el-button>
                   </span>
-                <el-dropdown-menu slot="dropdown">
+                <el-dropdown-menu class="creation-dropdown" slot="dropdown">
                   <el-dropdown-item>
                     <router-link to="/create_gig">Gig</router-link>
+                    <el-tooltip :content="tips.gig" placement="bottom">
+                     <i class="el-icon-question create-tip"></i>
+                    </el-tooltip>
                   </el-dropdown-item>
                   <el-dropdown-item>
                     <router-link to="/steemgigs_request">Custom Request</router-link>
+                    <el-tooltip :content="tips.custom" placement="bottom">
+                     <i class="el-icon-question create-tip"></i>
+                    </el-tooltip>
                   </el-dropdown-item>
                   <el-dropdown-item>
                     <router-link to="/create_testimonial">Testimonial</router-link>
+                    <el-tooltip :content="tips.testimonial" placement="bottom">
+                      <i class="el-icon-question create-tip"></i>
+                    </el-tooltip>
                   </el-dropdown-item>
                   <el-dropdown-item>
                     <router-link to="/untalented_editor">Untalented</router-link>
+                    <el-tooltip :content="tips.untalented" placement="bottom">
+                      <i class="el-icon-question create-tip"></i>
+                    </el-tooltip>
                   </el-dropdown-item>
                   <el-dropdown-item>
                     <router-link to="/surpassing-google">SurpassingGoogle</router-link>
+                    <el-tooltip :content="tips.surpassingGoogle" placement="bottom">
+                      <i class="el-icon-question create-tip"></i>
+                    </el-tooltip>
                   </el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
@@ -107,7 +122,14 @@ export default {
       searchTerm: '',
       isAuth: false,
       loginURL: sc2.getLoginURL(),
-      profile: this.$store.state.profile
+      profile: this.$store.state.profile,
+      tips: {
+        gig: 'Offer a service (related to your expertise, talents/un(dis)talents, experience etc) in exchange for Steem, SBD, Steem Power or for free.',
+        untalented: 'Not an expert yet? No worries! On SteemGigs, you can hone your expertise while offering a service. Select this editor to do just so.',
+        surpassingGoogle: 'Select this editor to contribute knowledge (based on your experience), specific to a niche, field, industry, expertise etc to our knowledge-bank.',
+        testimonial: 'Share your overall SteemGigs experience with us. So, why not record your service progress & updates, successful deliveries, shout-outs, payments etc using this editor.',
+        custom: 'If you can\'t find the exact gig that you seek, you may want to do a custom request. Try this editor.'
+      }
     }
   },
   methods: {
@@ -261,5 +283,16 @@ export default {
 
   .profile-list {
     display: flex;
+  }
+
+  .creation-dropdown li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .create-tip {
+    margin-left: 20px;
+    font-size: 15px;
   }
 </style>
