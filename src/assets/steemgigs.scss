@@ -207,15 +207,8 @@ img {
   .back{
     ul.language-list li {
       list-style-type: initial;
-      color: #d1d1d1;
       margin-left: 21px;
       font-size: .93rem;
-    }
-    input[type=text] {
-      color: white;
-    }
-    textarea, label:not(.active) {
-      color: rgb(225, 225, 225);
     }
     i.add-lang-icon, i.ion-close {
       transform: translateY(-35px);
