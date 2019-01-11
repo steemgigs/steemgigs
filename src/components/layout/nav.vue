@@ -21,8 +21,9 @@
             <li>
               <router-link to="/cart"><i class="icon ion-bag x2"></i></router-link>
             </li>
+            <!-- Create option menu -->
             <li>
-              <el-dropdown>
+              <el-dropdown trigger="click">
                 <span class="el-dropdown-link">
                   <el-button type="primary" class="primary" size="medium">Create</el-button>
                   </span>
