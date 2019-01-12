@@ -2,53 +2,50 @@ import axios from '@/plugins/axios'
 
 export default {
   search (term) {
-    return axios.post('/search', { query: { searchText: term } })
-  },
-  checkTitleExistence (credentials) {
-    return axios.post('/checktitle', credentials)
+    return axios.post('search/search_posts', { query: { searchText: term } })
   },
   fetchUserData (username) {
-    return axios.get(`/profile/${username}`)
+    return axios.get(`profile/profile/${username}`)
   },
   fetchUserGigs (username) {
-    return axios.get(`/usergigs/${username}`)
+    return axios.get(`posts/usergigs/${username}`)
   },
   fetchSinglePost (username, permlink, viewer) {
     // return axios.post('/fetchSinglePost', {username, permlink})
-    return axios.get(`/steemgig/${username}/${permlink}/${viewer}`)
+    return axios.get(`posts/steemgig/${username}/${permlink}/${viewer}`)
   },
   fetchComments (username, permlink) {
-    return axios.get(`/comments/${username}/${permlink}`)
+    return axios.get(`posts/comments/${username}/${permlink}`)
   },
   fetchSingleComment (username, permlink) {
-    return axios.get(`/comment/${username}/${permlink}`)
+    return axios.get(`posts/comment/${username}/${permlink}`)
   },
   imageUpload (formdata) {
-    return axios.post('/imgUpload', formdata)
+    return axios.post('images/imgUpload', formdata)
   },
   fetchPosts () {
-    return axios.get('/steemgigs/steemgigs_post/')
+    return axios.get('posts/steemgigs/steemgigs_post/')
   },
   fetchGigRequests () {
-    return axios.get('/steemgigs/steemgigs_request/')
+    return axios.get('posts/steemgigs/steemgigs_request/')
   },
   fetchTestimonials () {
-    return axios.get('/steemgigs/steemgigs_testimonial/')
+    return axios.get('/posts/steemgigs/steemgigs_testimonial/')
   },
   fetchUntalented () {
-    return axios.get('/steemgigs/steemgigs_untalented/')
+    return axios.get('posts/steemgigs/steemgigs_untalented/')
   },
   fetchSurpassingGoogle () {
-    return axios.get('/steemgigs/steemgigs_surpassinggoogle/')
+    return axios.get('posts/steemgigs/steemgigs_surpassinggoogle/')
   },
   fetchFeatured () {
-    return axios.get('/featured')
+    return axios.get('posts/featured')
   },
   fetchCatPosts (category) {
-    return axios.get(`/steembycat/${category}`)
+    return axios.get(`posts/steembycat/${category}`)
   },
   fetchSubCatPosts (subcategory) {
-    return axios.get(`/steembysubcat/${subcategory}`)
+    return axios.get(`posts/steembysubcat/${subcategory}`)
   },
   morePosts () {
     return axios.get('/moreposts')
@@ -61,34 +58,34 @@ export default {
   },
   //  new routes
   loggedIn (username, token) {
-    return axios.post('/loggedIn', {username}, {
+    return axios.post('profile/loggedIn', {username}, {
       headers: {token}
     })
   },
   profile (username, token) {
-    return axios.post('/profile', {username}, {
+    return axios.post('profile/profile', {username}, {
       headers: {token}
     })
   },
   post (credentials, token) {
-    return axios.post('/post', credentials, {
+    return axios.post('posts/post', credentials, {
       headers: {
         token: token
       }
     })
   },
   profileUpdate (credentials, token) {
-    return axios.post('/editProfile', credentials, {
+    return axios.post('profile/editProfile', credentials, {
       headers: {
         token: token
       }
     })
   },
   sendFeedback (credentials) {
-    return axios.post('/feedback', credentials)
+    return axios.post('feedback/feedback', credentials)
   },
   comment (credentials, token) {
-    return axios.post('/comment', credentials, {
+    return axios.post('posts/comment', credentials, {
       headers: {
         token: token
       }
