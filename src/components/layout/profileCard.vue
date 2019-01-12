@@ -50,8 +50,12 @@
           </div>
           <witness-card v-if="!$store.state.profile.steemgigsWitness"/>
         </div>
-        <div class="back card-panel indigo lighten-1 white-text">
+        <!-- Edit Profile -->
+        <div class="back edit-card-container">
           <i @click="closeEdit" class="icon ion-close"></i>
+          <!-- User Profile Page -->
+          <el-form :model="profileEdit" :rules="profileRules" ref="profileEdit" label-width="120px" class="demo-ruleForm" label-position="top" @submit.native.prevent @keydown.enter.native.prevent="submitForm">
+          <!-- Profile Image -->
           <form  enctype="multipart/form-data">
             <label class="profilePic" for="profile_image">
               <input type="file" accept="image/png,image/jpeg" name="photos" :disabled="profileImgStatus === 'uploading'" @change="filesChange($event.target.name, $event.target.files)" class="hide" id="profile_image">
@@ -59,61 +63,60 @@
             </label>
             <i class="fa fa-spinner center center-align fa-pulse" v-if="profileImgStatus === 'uploading'"></i>
           </form>
-            <div class="row">
-              <textarea id="about_me" placeholder="about_me" v-model="profileEdit.about" class="materialize-textarea"></textarea>
-            </div>
-            <div class="row">
-              <input type="text" @keyup.enter="addToSpeakArray" placeholder="I speak (Languages)" v-model="i_speak">
-              <i @click="addToSpeakArray" class="ion-plus add-lang-icon right"></i>
-            </div>
-            <ul class="language-list">
+          <!-- About -->
+          <el-form-item label="About" prop="name">
+              <el-input type="textarea" v-model="profileEdit.about" placeholder="Enter About"></el-input>
+          </el-form-item>
+          <!-- Languages -->
+          <el-form-item label="Languages" prop="name">
+              <el-input type="text" @keyup.enter="addToSpeakArray" v-model="i_speak" placeholder="Enter Language"></el-input>
+          </el-form-item>
+          <!-- Language Spoken List -->
+          <ul class="language-list">
               <li v-for="(spoken, i) in profileEdit.languages" :key="i">
                 {{spoken}}
                 <span class="right" @click="removeLanguage(i)"><i class="ion-close-round"></i></span>
               </li>
             </ul>
-            <!-- <div class="input-field col s12">
-              <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-            </div> -->
-            <div v-for="(social, key, i) in profileEdit.social" :key="i" class="row input-field">
-              <input type="text" :id="'social' + i" v-model="profileEdit.social[key]">
-              <label :class="{active: social.length > 0}" :for="'social' + i">{{capitalize(key)}}</label>
-            </div>
-            <div class="row">
-              <div class="col m5 pl-0">
-                <input type="text" v-model="socialFeed" placeholder="Social">
-              </div>
-              <div class="col m7 pr-0">
-                <input type="text" @keyup.enter="addToSocial" placeholder="Username" v-model="socialName">
-                <i @click="addToSocial" class="ion-plus add-lang-icon right"></i>
-              </div>
-            </div>
-            <p>
-              I'm on vacation <i class="icon ion-android-plane"></i>
-              <span class="right">
-                <div class="switch" v-if="true">
-                  <label>
-                    <input type="checkbox" v-model="profileEdit.vacation" >
-                    <span class="lever"></span>
-                  </label>
-                </div>
-              </span>
-            </p>
-            <div class="row">
-              <select class="validate browser-default my-select" v-model="profileEdit.gender">
-                <option selected value="" disabled>Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="unknown">Will rather not tell</option>
-              </select>
-            </div>
-            <div class="row">
-              <select class="validate browser-default my-select" v-model="profileEdit.location">
-                <option selected value="" disabled>I am from</option>
-                <option v-for="(country, index) in countries" :key="index" :value="country">{{ country }}</option>
-              </select>
-            </div>
-            <button @click.prevent="updateProfile" class="btn-floating grey  right lighten-3"><i v-if="!isUpdating" class="ion-checkmark-round indigo-text"></i><i class="fa fa-spinner indigo-text fa-pulse" v-if="isUpdating"></i></button>
+            <!-- Social Links -->
+            <el-form-item v-for="(social, key, i) in profileEdit.social" :key="i" :label="capitalize(key)">
+              <el-input type="text" :id="'social' + i" v-model="profileEdit.social[key]" placeholder="Enter Username`"/>
+            </el-form-item>
+            <!-- Additional Social Links -->
+            <el-row :gutter="15">
+            <!-- Platform -->
+            <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+             <el-form-item label="Platform">
+               <el-input type="text" v-model="socialFeed" placeholder="Enter Platform" />
+             </el-form-item>
+            </el-col>
+             <!-- Username -->
+             <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+             <el-form-item label="Username">
+               <el-input type="text" @keyup.enter="addToSocial" placeholder="Enter Username" v-model="socialName" />
+             </el-form-item>
+             </el-col>
+            </el-row>
+            <!-- Vacaction Mode -->
+            <el-form-item label="Vacation Mode">
+              <el-switch v-model="profileEdit.vacation" active-text="Active" inactive-text="Inactive"></el-switch>
+            </el-form-item>
+            <!-- Gender -->
+            <el-form-item label="Gender">
+              <el-select v-model="profileEdit.gender" placeholder="Select Gender">
+                <el-option value="male">Male</el-option>
+                <el-option value="female">Female</el-option>
+                <el-option value="unknown">Rather not say</el-option>
+              </el-select>
+            </el-form-item>
+            <!-- Location -->
+            <el-form-item label="Location">
+              <el-select v-model="profileEdit.location" placeholder="Select Location">
+                <el-option v-for="(country, index) in countries" :key="index" :value="country">{{ country }}</el-option>
+              </el-select>
+            </el-form-item>
+        </el-form>
+            <el-button type="primary" @click.prevent="updateProfile" class="primary">Save Profile</el-button>
         </div>
       </div>
     </div>
@@ -327,7 +330,6 @@ export default {
         }
         ul.language-list li {
           list-style-type: initial;
-          color: #d1d1d1;
           margin-left: 21px;
           font-size: .93rem;
           i.ion-close-round {
@@ -339,7 +341,6 @@ export default {
           }
         }
         input[type=text] {
-          color: white;
           width: 100%;
           height: 3rem
         }
@@ -447,5 +448,14 @@ export default {
 
   .expertise {
     margin: 10px;
+  }
+
+  .edit-card-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
+    color: black;
+    width: 100%;
   }
 </style>
