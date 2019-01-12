@@ -98,8 +98,8 @@
              </el-col>
             </el-row>
             <!-- Vacaction Mode -->
-            <el-form-item label="Vacation Mode" prop="name">
-              <el-switch v-model="profileEdit.vacation" active-color="#13ce66" inactive-color="#ff4949" active-text="Active" inactive-text="Inactive"></el-switch>
+            <el-form-item label="Vacation Mode">
+              <el-switch v-model="profileEdit.vacation" active-text="Active" inactive-text="Inactive"></el-switch>
             </el-form-item>
             <!-- Gender -->
             <el-form-item label="Gender">
