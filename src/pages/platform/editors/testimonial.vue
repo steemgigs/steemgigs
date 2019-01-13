@@ -124,7 +124,7 @@ export default {
         }
       })
     },
-    submit () {
+    async submit () {
       this.$store.commit('setLoading', true)
       if (!this.errorr) {
         if (this.isPosting) return
@@ -157,26 +157,33 @@ export default {
           jsonMetadata['images'] = imagesFromBody
         }
 
+        try {
         // username, permlink, title, body, jsonMetadata, token
-        Api.post({username, permlink, title, body, jsonMetadata, liked, upvoteRange}, token).then((err, res) => {
-          console.log(err, res)
-          that.isPosting = false
+          let result = await Api.post({
+            username,
+            permlink,
+            title,
+            body,
+            jsonMetadata,
+            liked,
+            upvoteRange
+          }, token)
           this.$notify({
             title: 'Success',
             message: 'Your post was successful',
             type: 'success'
           })
           this.$store.commit('setLoading', false)
-          // Push user to post upon success
-          this.$router.push(`/@${username}/${permlink}`)
-        }).catch((e) => {
+          // Push user to post upon success, the permlink must be set from the API because it can be changed in the API if it's a duplicated permlink
+          this.$router.push(`/@${username}/${result.data.permlink}`)
+        } catch (err) {
           that.isPosting = false
           this.$notify.error({
             title: 'Error',
-            message: `Sorry, there seems to have been an error. Error Details - ${e}`
+            message: `Sorry, there seems to have been an error. Error Details - ${err}`
           })
           this.$store.commit('setLoading', false)
-        })
+        }
       }
     }
   },
