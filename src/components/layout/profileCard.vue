@@ -10,7 +10,13 @@
             <div class="profilePic">
               <img :src="profileImage || placeholderImg" class="user-pict-img" :alt="profile.username" width="150" height="150">
             </div>
-            <span class="username"> {{ profile.username + ' (' + profile.rep + ') ' }}</span>
+            <span class="username"> {{ profile.username + ' (' + profile.rep + ') '}}
+              <el-tooltip effect="dark" content="Certifed Ulogger" placement="bottom">
+                <span v-if="profile.certifiedUloggerStatus">
+                  <img class="ulogger-img" src="/static/img/certified_ulog.png"/>
+                </span>
+              </el-tooltip>
+            </span>
             <span class="expertise" v-text="profile.about"></span>
             <span class="ratings">
               <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (No Reviews)
@@ -382,6 +388,10 @@ export default {
       display: block;
       &.username {
         font-weight: 600;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 10px;
       }
       &.editProfile {
         cursor: pointer;
@@ -471,5 +481,10 @@ export default {
 
   .button-row button {
     margin-bottom: 10px;
+  }
+
+  .ulogger-img {
+    height: 20px;
+    margin-left: 5px;
   }
 </style>
