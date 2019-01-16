@@ -10,7 +10,13 @@
             <div class="profilePic">
               <img :src="profileImage || placeholderImg" class="user-pict-img" :alt="profile.username" width="150" height="150">
             </div>
-            <span class="username"> {{ profile.username + ' (' + profile.rep + ') ' }} </span>
+            <span class="username"> {{ profile.username + ' (' + profile.rep + ') '}}
+              <el-tooltip effect="dark" content="Certifed Ulogger" placement="bottom">
+                <span v-if="profile.certifiedUloggerStatus">
+                  <img class="ulogger-img" src="/static/img/certified_ulog.png"/>
+                </span>
+              </el-tooltip>
+            </span>
             <span class="expertise" v-text="profile.about"></span>
             <span class="ratings">
               <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (No Reviews)
@@ -31,7 +37,18 @@
               </span>
             </p>
             <hr class="my-4">
-            <div>
+            <div class="button-row">
+              <!-- Delegation Buttons only shown if a user is a certified ulogger -->
+              <el-dropdown v-if="profile.certifiedUloggerStatus">
+                <el-button type="secondary">Delegate<i class="el-icon-arrow-down el-icon--right"></i></el-button>
+                <el-dropdown-menu slot="dropdown">
+                  <a :href="delgationURL + profile.username + '&vesting_shares=10%20SP'" target="_blank"><el-dropdown-item>10SP</el-dropdown-item></a>
+                  <a :href="delgationURL + profile.username + '&vesting_shares=20%20SP'" target="_blank"><el-dropdown-item>20SP</el-dropdown-item></a>
+                  <a :href="delgationURL + profile.username + '&vesting_shares=50%20SP'" target="_blank"><el-dropdown-item>50SP</el-dropdown-item></a>
+                  <a :href="delgationURL + profile.username + '&vesting_shares=100%20SP'" target="_blank"><el-dropdown-item>100SP</el-dropdown-item></a>
+                  <a :href="customDelegationURL + profile.username" target="_blank"><el-dropdown-item>Custom</el-dropdown-item></a>
+                  </el-dropdown-menu>
+                </el-dropdown>
               <router-link v-if="!profilepage" :to="'/@' + profile.username"><el-button class="secondary explore-profile" type="secondary">Explore Profile</el-button></router-link>
             </div>
           </div>
@@ -138,6 +155,8 @@ export default {
   data () {
     return {
       i_speak: '',
+      delgationURL: 'https://steemconnect.com/sign/delegateVestingShares?delegatee=',
+      customDelegationURL: 'https://steembottracker.com/delegation.html?delegatee=',
       countries: countries.getNames(),
       editMode: false,
       isUpdating: false,
@@ -248,15 +267,6 @@ export default {
     }
   },
   computed: {
-    // sociall () {
-    //   let social = this.profile.social
-    //   for (var key in social) {
-    //     if (!social[key]) {
-    //       delete social[key]
-    //     }
-    //   }
-    //   return this.profile.social
-    // },
     since () {
       return moment(this.profile.created).format('MMMM YYYY')
     },
@@ -378,6 +388,10 @@ export default {
       display: block;
       &.username {
         font-weight: 600;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 10px;
       }
       &.editProfile {
         cursor: pointer;
@@ -457,5 +471,20 @@ export default {
     box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
     color: black;
     width: 100%;
+  }
+  .button-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .button-row button {
+    margin-bottom: 10px;
+  }
+
+  .ulogger-img {
+    height: 20px;
+    margin-left: 5px;
   }
 </style>
