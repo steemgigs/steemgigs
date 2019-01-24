@@ -87,7 +87,7 @@ export default {
           'For Clients: You can decide to discuss in a post, your overall experience on Steemgigs, including suggestions, feedback, dispute etc',
           'For SteemGigger: You can document 'the process' in a post e.g if it is a logo, you can decide to put progress-samples in your post for further transparency',
           'For SteemGigger: You can explain your general experiences with clients e.g 'was payment prompt; 'was communication easy'; 'would you love future relationships' etc',
-          'Notice: Note: You can earn steem rewards by writing a SteemGig-testimonial as it appears as post on the steem blockchain, subject to curation by our community',
+          'Notice: Note: You can earn steem rewards by writing a SteemGig-testimonial as it appears as post on the steem blockchain, subject to curation by our community'
         ]
       },
       testimonialRules: {
