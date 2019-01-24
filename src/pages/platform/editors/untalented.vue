@@ -1,7 +1,7 @@
 <template>
   <page :pageClasses="['post_new_steemgig__view', 'row']">
     <el-main>
-      <h3>Create new Untalented</h3>
+      <h3>Create A New #untalented Post</h3>
       <h5>Not an expert yet? No worries! On SteemGigs, you can hone your expertise while offering a service.</h5>
       <el-row :gutter="15">
       <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
@@ -85,17 +85,17 @@ export default {
         url: this.$imgUploadURL
       },
       guide: {
-        header: 'Create the perfect blog',
-        subheader: 'This editor can be used by any steemian and to create posts in any genre or tag.',
+        header: 'Create A Great Un(dis)talented Post',
+        subheader: 'This editor can be used by any steemian to create posts in any genre or tag.',
         video: 'xeLYLA6C2AE',
         items: [
           'Make your title short and simple to understand',
-          'Give us a preface of what your post is about to be about.',
+          'Give us a preface of what your post will entail.',
           'If you are using resources from the internet, digest it first, then tell us about it, using your own words.',
           'Be expressive. Relegate reservations. Flaws allowed (The more pictures, words etc, the more exciting).',
-          'To conclude, ask us questions. Make us think. Aim to truly touch us with your beauty.',
+          'To conclude your post, ask us questions, make us think, aim to truly touch us with your beauty.',
           'You have an audience in the search engines as well, so aim to touch them too.',
-          'Make sure to state source URL of every image resourced online. No loss, if you always give credit.'
+          'Make sure to state the source-URL of every image that you have resourced online. No loss, if you always give credit.'
         ]
       },
       untalentedRules: {
