@@ -96,7 +96,7 @@
         <div class="col s12 header-row">
           <div>
             <h3>SteemGig Requests</h3>
-          <span class="header-desc">Gig requests provided by our community</span>
+          <span class="header-desc">Custom requests as provided by our community.</span>
           </div>
           <span class="right">
             <el-select v-model="viewOptionSelection.requests" placeholder="Sort By" class="browser-default">
@@ -124,7 +124,7 @@
         <div class="col s12 header-row">
           <div>
             <h3>Testimonials</h3>
-          <span class="header-desc">SteemGigs success stories written by our users</span>
+          <span class="header-desc">SteemGigs success-stories written by our users</span>
           </div>
           <span class="right">
             <el-select v-model="viewOptionSelection.testimonials" placeholder="Sort By" class="browser-default">
@@ -153,7 +153,7 @@
         <div class="col s12">
           <div>
             <h3>SurpassingGoogle</h3>
-          <span class="header-desc">The Knowledge Bank of SteemGigs</span>
+          <span class="header-desc">The Knowledge-Bank of SteemGigs</span>
           </div>
           <span class="right">
             <el-select v-model="viewOptionSelection.surpassingGoogle" placeholder="Sort By" class="browser-default">
