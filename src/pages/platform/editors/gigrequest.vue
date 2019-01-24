@@ -169,9 +169,10 @@ export default {
         subheader: 'Can\'t find what you\'re looking for? Submit a request to find the perfect talent',
         video: 'xeLYLA6C2AE',
         items: [
-          'Make your Title Short, Simple and Clear to understand',
+          'Make your title short, simple and clear to understand',
           'Give a detailed description of what you are looking for',
-          'How much are you willing to pay for this gig? etc. State these and other information clearly'
+          'How much are you willing to pay for this gig?',
+          'How fast do you want the service delivered?'
         ]
       },
       requestRules: {
