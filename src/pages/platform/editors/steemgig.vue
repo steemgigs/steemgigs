@@ -207,12 +207,12 @@ export default {
         video: 'xeLYLA6C2AE',
         items: [
           'Make your title short, describing exactly what service(s) you offer as this is the likeliest way to boost viewership, potential & eventual sales',
-          'Select the most accurately describing category and subcategory',
-          'Choose the best follow up tags',
-          'Be as expressive as possible as this is your chance to tell postential clients and steemians what you offer, why you gig is special and why they should give you opportunities etc.',
+          'Select the most accurately-describing category and subcategory',
+          'Choose the best follow-up tags',
+          'Be as expressive as possible as this is your chance to tell postential clients and steemians what you offer, why your gig is special and why they should give you opportunities etc.',
           'Describe what will be contained in your package for each price.',
-          'Are there aspects of your GIG that you are will to offering lovingly for free etc?',
-          'Tell them if your "requirements" are optional or compulsory.'
+          'Are there aspects of your GIG that you are will to offering lovingly 'for free'?',
+          'Tell clients whether your 'requirements' are optional or compulsory.'
         ]
       },
       gigRules: {
