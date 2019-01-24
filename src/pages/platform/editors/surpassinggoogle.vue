@@ -99,14 +99,14 @@ export default {
         upvoteRange: 100
       },
       guide: {
-        header: 'Share your knowledge',
+        header: 'Share Your Knowledge',
         subheader: 'Everyone has something to offer',
         video: 'xeLYLA6C2AE',
         items: [
-          'Make your title concise simple to understand and specific to a particular niche, industry , field, expertise etc.',
-          'Be yourself ans as expressive as possible. The world and generations yet unborn will come here to dig from your knowledge.',
-          'Every post you write here appears on the decentralized steem blockchain and can earn your rewards. Make the most of each post.',
-          'Clients may visit your blogs to ascertain your reputation before availing of your Gigs.'
+          'Make your title concise simple to understand and specific to a particular niche, industry, field, expertise etc.',
+          'Be yourself and as expressive as possible. The world and generations yet unborn will come here to dig from your knowledge.',
+          'Every post you write here appears on the decentralized steem blockchain and can earn you rewards. Make the most of each post.',
+          'Clients may visit your blogs to ascertain your reputation, before availing of your Gigs.'
         ]
       },
       surpassingRules: {
