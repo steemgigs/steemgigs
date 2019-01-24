@@ -34,8 +34,8 @@
           <p>You have successfully connected to SteemGigs, the first freelancing services marketplace &amp; social network on a decentralized steem blockchain with the power of Fiverr, Upwork &amp; Freelancer combined.
           We will passionately &amp; proactively help you bring your innovation, dreams, vision, enterprise etc into full-blown life.</p>
           <p>
-          On SteemGigs, 'everyone has something to offer'!<br>
-          So, do you want to offer a service in exchange for Steem/Steem Dollars/Steem Power or are you in need of someone to help you accomplish a service e.g build a dream?
+          On SteemGigs, 'everyone has something to offer'!
+          <br>So, do you want to offer a service in exchange for Steem/Steem Dollars/Steem Power or are you in need of someone to help you accomplish a service e.g build a dream?
           We have you covered. </p>
         </div>
         <div class="col m4">
@@ -97,7 +97,7 @@
               <div class="col l6 s12">
                 <h5 class="indigo-text">SteemGigs</h5>
                 <p class="">SteemGigs incentivizes you to build your dreams, by rewarding SteemGiggers for passionately striving to assist you. <br>
-SteemGigs is built using the decentralized & open-source 'steem blockchain protocol', where every transaction is public. This, eliminates the need for third-party merchants &amp; incentivizing talents/un(dis)talents who assist you to stay 'reputable', Besides, as a result of the steem blockchain, you can more convenient &amp; direct options when paying for GIGs. <br> Imagine paying for your next GIG using a simple 'upvote' or 'like' action.</p>
+SteemGigs is built using the decentralized &amp; open-source 'steem blockchain protocol', where every transaction is public. This, eliminates the need for third-party merchants &amp; incentivizing talents/un(dis)talents who assist you to stay 'reputable', Besides, as a result of the steem blockchain, you can more convenient &amp; direct options when paying for GIGs. <br> Imagine paying for your next GIG using a simple 'upvote' or 'like' action.</p>
               </div>
               <div class="col l4 offset-l2 s12">
                 <h5 class="indigo-text">Our categories</h5>
