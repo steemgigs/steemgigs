@@ -165,7 +165,7 @@ export default {
         url: this.$imgUploadURL
       },
       guide: {
-        header: 'Find the skills you need',
+        header: 'Find The Exact Skill That You Need',
         subheader: 'Can\'t find what you\'re looking for? Submit a request to find the perfect talent',
         video: 'xeLYLA6C2AE',
         items: [
