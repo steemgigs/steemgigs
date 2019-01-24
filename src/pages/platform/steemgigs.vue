@@ -3,7 +3,7 @@
     <cat-nav />
     <el-main>
     <div class="col s12 center-align row">
-      <h3>Steem Gigs</h3>
+      <h3>SteemGigs</h3>
       <h5>See what the SteemGigs community has to offer</h5>
       <div>
         <div v-if="gigs.length > 0" class="col s12 m6 l3 left-align" v-for="(gig, index) in gigs" :key="index">
