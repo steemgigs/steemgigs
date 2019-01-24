@@ -1,7 +1,7 @@
 <template>
   <page :pageClasses="['new_steemgig__view', 'row']">
     <el-main>
-      <h3>Create Gig</h3>
+      <h3>Create A Gig</h3>
       <h5>Offer a service (related to your expertise, talents/un(dis)talents, experience etc) in exchange for Steem, SBD, Steem Power or for free.</h5>
        <el-row :gutter="15">
       <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
@@ -202,7 +202,7 @@ export default {
         upvoteRange: 100
       },
       guide: {
-        header: 'Create the perfect Steem Gig',
+        header: 'Create The Perfect SteemGig',
         subheader: 'Share your talent/un(dis)talents with the world',
         video: 'xeLYLA6C2AE',
         items: [
