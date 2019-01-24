@@ -6,9 +6,9 @@
       <div class="col s12 row details">
           <div class="col s12">
             <h3 class="center">SurpassingGoogle</h3>
-            <h5 class="center">This is a very important segment of SteemGigs. On SteemGigs, "everyone has something to offer". "Everyone" will eventually become a "dream-builder" (SteemGigger), building their dreams and those of others. To accomplish this, we create a bank, for "deposits & withdrawals" of all the bits & bytes that we will ever need to build any dream (however limitless).
-We will vault all this knowledge in our bank, in the form of unadulterated excerpts from the brains, lives, experiences etc of "reputable great minds", sepcific to every niche, field, industry, expertise etc.
-"By means of your incessant contributions, we will surpass Google (attain limitlessness), reshaping the worldwide web with the freshness of our awesomeness".<b>@surpassinggoogle</b></h5>
+            <h5 class="center">This is a very important segment of SteemGigs. On SteemGigs, "everyone has something to offer". Everyone participant of our ecosystem will eventually become a 'dream-builder' (SteemGigger), building their dreams and those of others. To accomplish this, we have created a bank, for 'deposits & withdrawals' of all the bits & bytes that one will ever need to build any noble dream (however limitless). <br>
+We will vault all this knowledge in our bank, in the form of unadulterated excerpts from the brains, lives, experiences etc of 'reputable great minds', specific to every niche, field, industry, expertise etc.
+<i>By means of your incessant contributions, we will surpass Google (attain limitlessness), reshaping the worldwide web with the freshness of our awesomeness</i>.<b>@surpassinggoogle</b></h5>
           </div>
           <div class="col s12 m6 l4" v-for="(cat,index) in category" :key="index">
             <div class="surpassing-card">
