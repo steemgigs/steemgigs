@@ -2,7 +2,7 @@
   <page :pageClasses="['post_new_steemgig__view', 'row']">
     <el-main>
        <h3>Create A New Testimonial</h3>
-      <h5>Share your overall SteemGigs-experience with us. Why not record your service progress & updates, successful deliveries, shout-outs, successful payments etc using this editor.</h5>
+      <h5>Share your overall SteemGigs-experience with us. Why not record your service progress &amp; updates, successful deliveries, shout-outs, successful payments etc using this editor.</h5>
       <el-row :gutter="15">
       <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
       <div class="form-container">
