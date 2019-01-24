@@ -1,7 +1,7 @@
 <template>
   <page :pageClasses="['post_new_steemgig__view', 'row']">
     <el-main>
-      <h3>Create new gig request</h3>
+      <h3>Create Custom Request</h3>
       <h5>If you can't find the exact gig that you seek, you may want to do a custom request.</h5>
        <el-row :gutter="15">
       <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
