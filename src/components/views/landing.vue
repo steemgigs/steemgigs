@@ -2,8 +2,8 @@
   <div class="landing white">
     <div class="main center-align grey-text z-depth-3 text-lighten-4">
       <img class="bg" src="static/img/black-expert.jpeg" alt="">
-      <h1>Everyone has something to offer</h1>
-      <p>Do the "dreaming"; leave the "building" to us.</p>
+      <h1>Everyone Has Something To Offer</h1>
+      <p>Do the dreaming; leave 'the building' to us.</p>
       <div class="input-container row">
         <input type="text" @keyup.enter="openSearch" v-model="searchString" class="browser-default my-input">
        <button @click.stop="search()" class="btn-large white-text light-blue darken-4">Search</button>
@@ -30,13 +30,13 @@
     <section class="sm-banner">
       <div class="row">
         <div class="col m8 grey-text text-lighten-2">
-          <h3>We made Steem Gigs for you</h3>
-          <p>You have successfully connected to SteemGigs, the first freelancing social network on a decentralized steem blockchain with the power of Fiverr, Upwork &amp; Freelancer combined.
+          <h3>We Made SteemGigs Just For You</h3>
+          <p>You have successfully connected to SteemGigs, the first freelancing services marketplace &amp; social network on a decentralized steem blockchain with the power of Fiverr, Upwork &amp; Freelancer combined.
           We will passionately &amp; proactively help you bring your innovation, dreams, vision, enterprise etc into full-blown life.</p>
           <p>
-          In our space, "everyone has something to offer"!<br>
-          So do you want to offer a service in exchange for Steem/Steem Dollars/Steem Power or are you in need of someone to help you accomplish a service e.g build a dream?
-          We will gladly help! </p>
+          On SteemGigs, 'everyone has something to offer'!<br>
+          So, do you want to offer a service in exchange for Steem/Steem Dollars/Steem Power or are you in need of someone to help you accomplish a service e.g build a dream?
+          We have you covered. </p>
         </div>
         <div class="col m4">
           <img class="responsive-img z-depth-5" src="/static/img/agreement.jpeg" alt="">
@@ -45,11 +45,11 @@
     </section>
     <section class="reviews center blue-grey lighten-5 py-5">
       <h2 class="mb-1">Take the first step</h2>
-      <p class="mb-5 grey-text">Whatever your dreams are, here's a few places to get started</p>
+      <p class="mb-5 grey-text">Whatever your dreams are, here are a few places to get you started:</p>
       <!-- <div class="container">
         <div class="row">
           <div class="col m5 white">
-            <p class="title">Steem Gigs is awesome</p>
+            <p class="title">SteemGigs is awesome</p>
           </div>
           <div class="col m7"></div>
         </div>
@@ -70,15 +70,15 @@
         <div class="row">
           <div class="col m4">
             <h4 class="mb-1 grey-text text-lighten-2">Your Dream</h4>
-            <p class="mb-5 grey-text">Put us to testimonial good use. Simply dream BIG, then tell us what you want. <br>On SteemGigs, "everyone has something to offer".</p>
+            <p class="mb-5 grey-text">Put us to testimonial good use. Simply dream BIG, then tell us what you want. <br>On SteemGigs, 'everyone has something to offer'.</p>
           </div>
           <div class="col m4">
             <h4 class="mb-1 grey-text text-lighten-2">Your Specifications</h4>
-            <p class="mb-5 grey-text">It's your dream, so we will passionately follow your lead. <br>On SteemGigs, "every talent is also a reputable great mind".</p>
+            <p class="mb-5 grey-text">It's your dream, so we will passionately follow your lead. <br>On SteemGigs, 'every talent/un(dis)talent is also a reputable great mind'.</p>
           </div>
           <div class="col m4">
             <h4 class="mb-1 grey-text text-lighten-2">Our Passion</h4>
-            <p class="mb-5 grey-text">In an ecosystem where "everyone has something to offer", dreams can equal reality. <br>Bringing your dreams into reality is our passion, for if "going to the moon" happened, your dreams are attainable.</p>
+            <p class="mb-5 grey-text">In an ecosystem where 'everyone has something to offer', dreams can equal reality. <br>Bringing your dreams into reality is our passion, for if 'going to the moon' happened, your dreams are attainable.</p>
           </div>
         </div>
       </div>
@@ -96,8 +96,8 @@
             <div class="row">
               <div class="col l6 s12">
                 <h5 class="indigo-text">SteemGigs</h5>
-                <p class="">SteemGigs incentivizes you to build your dreams by rewarding SteemGiggers for passionate striving to assist you.
-SteemGigs is built using the decentralized & open-source "steem" protocol, where every transaction is public, thus, eliminating the need for third party merchants, incentivizing the need for talents to stay "reputable" and giving you more optiions when it comes to paying for GIGs. Imagine paying for your next GIG using a simple "upvote" or "like" action.</p>
+                <p class="">SteemGigs incentivizes you to build your dreams, by rewarding SteemGiggers for passionate striving to assist you.
+SteemGigs is built using the decentralized & open-source 'steem blockchain protocol', where every transaction is public. This, eliminates the need for third-party merchants &amp; incentivizing talents/un(dis)talents who assist you to stay 'reputable', Besides, as a result of the steem blockchain, you can more convenient &amp; direct options when paying for GIGs. <br> Imagine paying for your next GIG using a simple 'upvote' or 'like' action.</p>
               </div>
               <div class="col l4 offset-l2 s12">
                 <h5 class="indigo-text">Our categories</h5>
