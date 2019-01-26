@@ -234,11 +234,10 @@ export default {
       this.currentView = view
     },
     async fetchComments () {
-      console.log('Fetching comments')
+      this.comments = ''
       try {
         let response = await Api.fetchComments(this.currentGig.author, this.currentGig.permlink)
         this.comments = response.data
-        console.log(this.comments)
       } catch (err) {
         console.log('error retrieving comments: \n error:', this.stringify(err))
       }
@@ -250,6 +249,7 @@ export default {
         this.commentMode = false
         this.comments = result.data
         this.myComment = ''
+        this.fetchComments()
       }).catch((e) => {
         this.isPosting = false
         console.log(e)
