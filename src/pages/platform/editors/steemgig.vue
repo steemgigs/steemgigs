@@ -211,8 +211,8 @@ export default {
           'Choose the best follow-up tags',
           'Be as expressive as possible as this is your chance to tell postential clients and steemians what you offer, why your gig is special and why they should give you opportunities etc.',
           'Describe what will be contained in your package for each price.',
-          'Are there aspects of your GIG that you are will to offering lovingly 'for free'?',
-          'Tell clients whether your 'requirements' are optional or compulsory.'
+          'Are there aspects of your GIG that you are will to offering lovingly \'for free\'?',
+          'Tell clients whether your \'requirements\' are optional or compulsory.'
         ]
       },
       gigRules: {
