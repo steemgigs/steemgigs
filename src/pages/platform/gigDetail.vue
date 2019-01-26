@@ -31,7 +31,7 @@
                     <i class="fa fa-spinner fa-pulse"></i>
                   </a>&nbsp;&nbsp;
                   <a v-if="currentGig.views" class="indigo-text" v-tooltip="'Number of views'"><i class="ion-eye"></i> {{ currentGig.views.length +'&nbsp;&nbsp;&nbsp;'}}</a>
-                  <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">{{payout}}</span></div>
+                  <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">${{ payout.toString().slice(0, 4) }}</span></div>
                   <a @click="commentMode = !commentMode" class="reply"><el-button type="secondary" class="secondary">Reply</el-button></a>
                   <div class="vote-slider py-3" v-if="upvoteActive">
                     <div class="col s9">
@@ -92,6 +92,7 @@ import SliderRange from 'vue-slider-component'
 import ProfileCard from '@/components/layout/profileCard'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
 import shareOptions from '@/components/snippets/share-options'
+import moment from 'moment'
 
 export default {
   components: {
@@ -172,10 +173,14 @@ export default {
       return this.genuineVoters.length
     },
     payout () {
-      if (this.currentGig.pending_payout_value) {
-        return '$' + this.currentGig.pending_payout_value
+      let postCreationDate = moment(this.currentGig.created)._d
+      let currentDate = moment()._d
+      let timesince = moment(currentDate).diff(postCreationDate, 'minutes')
+      // If post is greater than 7 days
+      if (timesince > 10080) {
+        return parseFloat(this.currentGig.curator_payout_value) + parseFloat(this.currentGig.total_payout_value)
       } else {
-        return '$' + (parseInt(this.currentGig.total_payout_value.split(' ')[0]) + parseInt(this.currentGig.curator_payout_value.split(' ')[0])).toFixed(2)
+        return this.currentGig.pending_payout_value
       }
     },
     paymentInfo () {
