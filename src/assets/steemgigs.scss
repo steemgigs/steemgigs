@@ -68,6 +68,7 @@ p {
 a {
   color: #3f51b5;
   cursor: pointer;
+  word-break: break-all;
 }
 p {
   &.ql-align-center {

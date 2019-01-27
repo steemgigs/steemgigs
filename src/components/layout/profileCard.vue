@@ -204,19 +204,16 @@ export default {
         console.log('from profile edit', result.data)
         this.$eventBus.$emit('profile-updated', result.data)
         this.$notify({
-          group: 'foo',
           title: 'Success',
-          text: 'Profile update successful',
+          message: 'Profile Successfully Updated',
           type: 'success'
         })
         this.closeEdit()
       }).catch((e) => {
         this.isUpdating = false
-        this.$notify({
-          group: 'foo',
+        this.$notify.error({
           title: 'Error',
-          text: 'Could not update profile, please try again',
-          type: 'error'
+          message: `There was an error updating your profile - Err Details: ${e}`
         })
         console.log(e)
       })

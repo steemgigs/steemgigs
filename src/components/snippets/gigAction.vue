@@ -132,16 +132,18 @@ export default {
           this.resteem = true
           this.resteeming = true
           this.rsspinning = false
-          console.log(res)
+          this.$notify({
+            title: 'Success',
+            message: 'Post Resteem Successfully',
+            type: 'success'
+          })
         } else {
           this.resteeming = true
           this.resteem = false
           this.rsspinning = false
-          this.$notify({
-            group: 'foo',
-            title: 'Error Resteeming',
-            text: 'Error occurs while resteeming',
-            type: 'error'
+          this.$notify.error({
+            title: 'Error',
+            message: 'There was an error resteeming that post.'
           })
         }
       })

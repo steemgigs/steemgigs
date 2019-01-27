@@ -273,7 +273,7 @@ export default {
         if (imagesFromBody.length) {
           jsonMetadata['images'] = imagesFromBody
         }
-      try {
+        try {
         // username, permlink, title, body, jsonMetadata, token
           let result = await Api.post({
             username,
