@@ -74,6 +74,14 @@
                 </el-form-item>
               </el-col>
           </el-row>
+           <!-- Post Reward Type -->
+          <el-form-item label="Reward" prop="payoutType">
+            <el-select class="browser-default my-select category_select" v-model="newGigRequest.payoutType">
+                  <el-option value="100%" label="100% STEEM POWER" />
+                  <el-option value="50/50" label="50% SBD/50% SP" />
+                  <el-option value="0" label="Declined" />
+                </el-select>
+          </el-form-item>
             <!-- Tags -->
           <el-form-item label="Tags" prop="tags">
           <div class="tags-container">
@@ -145,10 +153,10 @@ export default {
         days: 0,
         currency: 'STEEM',
         images: [],
-        reward: '100% STEEM POWER',
         price: 0,
         liked: false,
-        upvoteRange: 100
+        upvoteRange: 100,
+        payoutType: '50/50'
       },
       customToolbar: [
         ['bold', 'italic', 'underline'],
@@ -268,6 +276,7 @@ export default {
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
         let liked = this.newGigRequest.liked
+        let payoutType = this.newGigRequest.payoutType
         let upvoteRange = this.newGigRequest.upvoteRange
         const imagesFromBody = Util.getImagesFromBody(this.previewData)
         if (imagesFromBody.length) {
@@ -282,7 +291,8 @@ export default {
             body,
             jsonMetadata,
             liked,
-            upvoteRange
+            upvoteRange,
+            payoutType
           }, token)
           this.$notify({
             title: 'Success',
