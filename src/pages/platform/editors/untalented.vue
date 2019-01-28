@@ -205,7 +205,7 @@ export default {
       }
     },
     steemedTitle () {
-      return this.untalented.title
+      return this.editorPrefix + ' ' + this.untalented.title
     },
     previewData () {
       return `<h2 class="headline">Description</h2><hr />${Util.convertImageUrlToHTML(this.untalented.description)}`

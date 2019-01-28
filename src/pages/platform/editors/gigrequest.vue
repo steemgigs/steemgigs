@@ -136,7 +136,7 @@ export default {
   },
   data () {
     return {
-      editorPrefix: '#STEEMGIGS: I Need..',
+      editorPrefix: '#STEEMGIGS: I need..',
       successText: '',
       errorText: '',
       isPosting: false,
@@ -327,7 +327,7 @@ export default {
       }
     },
     steemedTitle () {
-      return '#STEEMGIGS: ' + this.newGigRequest.title
+      return this.editorPrefix.slice(0, -2) + ' ' + this.newGigRequest.title
     },
     defaultTags () {
       let tags = ['steemgigs']

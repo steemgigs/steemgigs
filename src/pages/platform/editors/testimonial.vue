@@ -208,7 +208,7 @@ export default {
       }
     },
     steemedTitle () {
-      return '#STEEMGIGS: ' + this.newTestimonial.title
+      return this.editorPrefix + ' ' + this.newTestimonial.title
     },
     previewData () {
       return `<h2 class="headline">Description</h2><hr />${Util.convertImageUrlToHTML(this.newTestimonial.description)}`

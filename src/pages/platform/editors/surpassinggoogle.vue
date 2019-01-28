@@ -275,7 +275,7 @@ export default {
       }
     },
     steemedTitle () {
-      return '#STEEMGIGS: ' + '(' + this.getSubCategoryName.name + ') — ' + this.newGigRequest.title
+      return this.editorPrefix + ' ' + this.newGigRequest.title
     },
     defaultTags () {
       let tags = ['steemgigs', 'surpassinggoogle', this.slugify(this.$route.params.subcategory)]
