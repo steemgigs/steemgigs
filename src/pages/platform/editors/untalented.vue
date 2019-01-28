@@ -9,7 +9,7 @@
         <el-form :model="untalented" :rules="untalentedRules" ref="untalented" label-position="top">
           <!--  Title -->
           <el-form-item label="Title" prop="title">
-            <el-input v-model="untalented.title"></el-input>
+            <el-input v-model="untalented.title"><template slot="prepend">{{ editorPrefix }}</template></el-input>
           </el-form-item>
           <!-- Body -->
           <el-form-item label="Description" prop="description">
@@ -75,6 +75,7 @@ export default {
   },
   data () {
     return {
+      editorPrefix: '#STEEMGIGS (Un(talented):',
       untalented: {
         title: '',
         description: '',
@@ -204,7 +205,7 @@ export default {
       }
     },
     steemedTitle () {
-      return this.untalented.title
+      return this.editorPrefix + ' ' + this.untalented.title
     },
     previewData () {
       return `<h2 class="headline">Description</h2><hr />${Util.convertImageUrlToHTML(this.untalented.description)}`

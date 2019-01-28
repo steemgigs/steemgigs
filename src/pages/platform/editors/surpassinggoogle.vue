@@ -9,7 +9,7 @@
         <el-form :model="newGigRequest" :rules="surpassingRules" ref="newGigRequest" label-position="top">
           <!--  Title -->
           <el-form-item label="Title" prop="title">
-            <el-input v-model="newGigRequest.title"></el-input>
+            <el-input v-model="newGigRequest.title"><template slot="prepend">{{ editorPrefix }}</template></el-input>
           </el-form-item>
           <!-- Category -->
           <el-row :gutter="15">
@@ -104,7 +104,7 @@ export default {
         price: 0,
         liked: false,
         upvoteRange: 100,
-        payoutType: '50/50',
+        payoutType: '50/50'
       },
       guide: {
         header: 'Share Your Knowledge',
@@ -259,6 +259,9 @@ export default {
       })
       return PageName
     },
+    editorPrefix () {
+      return `#STEEMGIGS (${this.getSubCategoryName.name}):`
+    },
     selectedCategoryIndex () {
       let catIndex = 0
       this.categories.forEach((category, index) => {
@@ -272,7 +275,7 @@ export default {
       }
     },
     steemedTitle () {
-      return '#STEEMGIGS: ' + '(' + this.getSubCategoryName.name + ') — ' + this.newGigRequest.title
+      return this.editorPrefix + ' ' + this.newGigRequest.title
     },
     defaultTags () {
       let tags = ['steemgigs', 'surpassinggoogle', this.slugify(this.$route.params.subcategory)]

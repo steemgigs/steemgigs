@@ -9,7 +9,7 @@
         <el-form :model="newGigData" :rules="gigRules" ref="newGigData" label-position="top">
           <!--  Title -->
           <el-form-item label="Title" prop="title">
-            <el-input v-model="newGigData.title"></el-input>
+            <el-input v-model="newGigData.title"><template slot="prepend">{{ editorPrefix }}</template></el-input>
           </el-form-item>
           <!-- Category -->
           <el-row :gutter="15">
@@ -179,6 +179,7 @@ export default {
   },
   data () {
     return {
+      editorPrefix: '#STEEMGIGS: I will..',
       isPosting: false,
       totalPics: 1,
       activeNames: ['0'],
@@ -368,7 +369,7 @@ export default {
   },
   computed: {
     steemedTitle () {
-      return '#STEEMGIGS: ' + this.newGigData.title
+      return this.editorPrefix.slice(0, -2) + ' ' + this.newGigData.title
     },
     portfolio () {
       return this.newGigData.portfolio.filter(image => image.url).map(image => image.url)
