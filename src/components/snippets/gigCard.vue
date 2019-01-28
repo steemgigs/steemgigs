@@ -127,8 +127,7 @@ $blue: #6361D0;
     object-fit: cover;
     max-height: 10em;
     overflow: hidden;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    padding: 10px;
   }
   .card-cont {
     height: 20em;
