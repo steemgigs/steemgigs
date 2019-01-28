@@ -9,11 +9,19 @@
         <el-form :model="newTestimonial" :rules="testimonialRules" ref="newTestimonial" label-position="top">
           <!--  Title -->
           <el-form-item label="Title" prop="title">
-            <el-input v-model="newTestimonial.title"></el-input>
+            <el-input v-model="newTestimonial.title"><template slot="prepend">{{ editorPrefix }}</template></el-input>
           </el-form-item>
           <!-- Body -->
           <el-form-item label="Description" prop="description">
             <vue-editor v-model="newTestimonial.description" placeholder="Type your post here" :upload="uploadConfig" />
+          </el-form-item>
+          <!-- Payout Type -->
+          <el-form-item label="Reward" prop="payoutType">
+            <el-select class="browser-default my-select category_select" v-model="newTestimonial.payoutType">
+                  <el-option value="100%" label="100% STEEM POWER" />
+                  <el-option value="50/50" label="50% SBD/50% SP" />
+                  <el-option value="0" label="Declined" />
+                </el-select>
           </el-form-item>
           <!-- Tags -->
           <el-form-item label="Tags" prop="tags">
@@ -67,6 +75,7 @@ export default {
   },
   data () {
     return {
+      editorPrefix: '#STEEMGIGS (Testimonials):',
       sections: ['Post a Testimonial', 'Publish'],
       totalPics: 1,
       nextPressed: false,
@@ -76,7 +85,8 @@ export default {
         description: '',
         images: [],
         upvoteRange: 100,
-        liked: false
+        liked: false,
+        payoutType: '50/50'
       },
       guide: {
         header: 'Tell Us Everything',
@@ -152,6 +162,7 @@ export default {
         let token = this.$store.state.accessToken
         let liked = this.newTestimonial.liked
         let upvoteRange = this.newTestimonial.upvoteRange
+        let payoutType = this.newTestimonial.payoutType
 
         const imagesFromBody = Util.getImagesFromBody(this.previewData)
         if (imagesFromBody.length) {
@@ -167,7 +178,8 @@ export default {
             body,
             jsonMetadata,
             liked,
-            upvoteRange
+            upvoteRange,
+            payoutType
           }, token)
           this.$notify({
             title: 'Success',
@@ -196,7 +208,7 @@ export default {
       }
     },
     steemedTitle () {
-      return '#STEEMGIGS: ' + this.newTestimonial.title
+      return this.editorPrefix + ' ' + this.newTestimonial.title
     },
     previewData () {
       return `<h2 class="headline">Description</h2><hr />${Util.convertImageUrlToHTML(this.newTestimonial.description)}`

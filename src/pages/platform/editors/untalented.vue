@@ -9,11 +9,19 @@
         <el-form :model="untalented" :rules="untalentedRules" ref="untalented" label-position="top">
           <!--  Title -->
           <el-form-item label="Title" prop="title">
-            <el-input v-model="untalented.title"></el-input>
+            <el-input v-model="untalented.title"><template slot="prepend">{{ editorPrefix }}</template></el-input>
           </el-form-item>
           <!-- Body -->
           <el-form-item label="Description" prop="description">
             <vue-editor v-model="untalented.description" placeholder="Type your post here" :upload="uploadConfig" />
+          </el-form-item>
+          <!-- Payout Type -->
+          <el-form-item label="Reward" prop="payoutType">
+            <el-select class="browser-default my-select category_select" v-model="untalented.payoutType">
+                  <el-option value="100%" label="100% STEEM POWER" />
+                  <el-option value="50/50" label="50% SBD/50% SP" />
+                  <el-option value="0" label="Declined" />
+                </el-select>
           </el-form-item>
           <!-- Tags -->
           <el-form-item label="Tags" prop="tags">
@@ -67,10 +75,12 @@ export default {
   },
   data () {
     return {
+      editorPrefix: '#STEEMGIGS (Un(talented):',
       untalented: {
         title: '',
         description: '',
-        images: []
+        images: [],
+        payoutType: '50/50'
       },
       defaultTags: ['untalented'],
       sections: ['Create a steemit post', 'Publish'],
@@ -149,6 +159,7 @@ export default {
         let title = this.steemedTitle
         let liked = this.untalented.liked
         let upvoteRange = this.untalented.upvoteRange
+        let payoutType = this.untalented.payoutType
 
         const imagesFromBody = Util.getImagesFromBody(this.previewData)
         if (imagesFromBody.length) {
@@ -164,7 +175,8 @@ export default {
             body,
             jsonMetadata,
             liked,
-            upvoteRange
+            upvoteRange,
+            payoutType
           }, token)
           this.$notify({
             title: 'Success',
@@ -193,7 +205,7 @@ export default {
       }
     },
     steemedTitle () {
-      return this.untalented.title
+      return this.editorPrefix + ' ' + this.untalented.title
     },
     previewData () {
       return `<h2 class="headline">Description</h2><hr />${Util.convertImageUrlToHTML(this.untalented.description)}`

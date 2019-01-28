@@ -97,7 +97,7 @@
               <div class="col l6 s12">
                 <h5 class="indigo-text">SteemGigs</h5>
                 <p class="">SteemGigs incentivizes you to build your dreams, by rewarding SteemGiggers for passionately striving to assist you.
-                <br>SteemGigs is built using the decentralized &amp; open-source 'steem blockchain protocol', where every transaction is public. This, eliminates the need for third-party merchants &amp; incentivizing talents/un(dis)talents who assist you to stay 'reputable', Besides, as a result of the steem blockchain, you can more convenient &amp; direct options when paying for GIGs. 
+                <br>SteemGigs is built using the decentralized &amp; open-source 'steem blockchain protocol', where every transaction is public. This, eliminates the need for third-party merchants &amp; incentivizing talents/un(dis)talents who assist you to stay 'reputable', Besides, as a result of the steem blockchain, you can more convenient &amp; direct options when paying for GIGs.
                 <br>Imagine paying for your next GIG using a simple 'upvote' or 'like' action.</p>
               </div>
               <div class="col l4 offset-l2 s12">
