@@ -34,11 +34,11 @@
             <vue-editor useCustomImageHandler @imageAdded="handleImageAdded" v-model="newGigData.description" placeholder="Enter a detailed description for the gig" :upload="uploadConfig"></vue-editor>
           </el-form-item>
           <!-- Post Reward Type -->
-          <el-form-item label="Reward" prop="reward">
-            <el-select class="browser-default my-select category_select" v-model="newGigData.reward">
-                  <el-option value="100% STEEM POWER" label="100% STEEM POWER" />
-                  <el-option value="50% SBD/50% SP" label="50% SBD/50% SP" />
-                  <el-option value="Declined" label="Declined" />
+          <el-form-item label="Reward" prop="payoutType">
+            <el-select class="browser-default my-select category_select" v-model="newGigData.payoutType">
+                  <el-option value="100%" label="100% STEEM POWER" />
+                  <el-option value="50/50" label="50% SBD/50% SP" />
+                  <el-option value="0" label="Declined" />
                 </el-select>
           </el-form-item>
           <!-- Tags -->
@@ -196,7 +196,7 @@ export default {
           url: '',
           key: 183
         }],
-        reward: '100% STEEM POWER',
+        payoutType: '50/50',
         price: 0,
         liked: false,
         upvoteRange: 100
@@ -328,6 +328,7 @@ export default {
         let body = this.previewData + hiddenContainer
         let token = this.$store.state.accessToken
         let title = this.steemedTitle
+        let payoutType = this.newGigData.payoutType
 
         const imagesFromBody = Util.getImagesFromBody(this.previewData)
         if (imagesFromBody.length) {
@@ -344,7 +345,8 @@ export default {
             body,
             jsonMetadata,
             liked,
-            upvoteRange
+            upvoteRange,
+            payoutType
           }, token)
           this.$notify({
             title: 'Success',
