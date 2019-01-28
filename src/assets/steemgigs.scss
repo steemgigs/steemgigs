@@ -2057,3 +2057,11 @@ hr {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
+.card .card-image img {
+  height: 100%;
+  height: -moz-available;          /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  height: fill-available;
+  border-radius: 5px;
+  }
