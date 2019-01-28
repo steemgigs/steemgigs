@@ -9,7 +9,7 @@
         <el-form :model="newTestimonial" :rules="testimonialRules" ref="newTestimonial" label-position="top">
           <!--  Title -->
           <el-form-item label="Title" prop="title">
-            <el-input v-model="newTestimonial.title"></el-input>
+            <el-input v-model="newTestimonial.title"><template slot="prepend">{{ editorPrefix }}</template></el-input>
           </el-form-item>
           <!-- Body -->
           <el-form-item label="Description" prop="description">
@@ -75,6 +75,7 @@ export default {
   },
   data () {
     return {
+      editorPrefix: '#STEEMGIGS (Testimonials):',
       sections: ['Post a Testimonial', 'Publish'],
       totalPics: 1,
       nextPressed: false,
