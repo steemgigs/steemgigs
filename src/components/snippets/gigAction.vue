@@ -32,8 +32,10 @@
 import sc2 from '@/services/sc2'
 import SliderRange from 'vue-slider-component'
 import moment from 'moment'
+import userStatus from '@/mixins/status.js'
 
 export default {
+  mixins: [userStatus],
   components: {
     SliderRange
   },
@@ -116,10 +118,12 @@ export default {
   },
   methods: {
     vote () {
-      if (this.upvoted) {
-        this.downvote()
-      } else {
-        this.upvoteActive = !this.upvoteActive
+      if (this.userLoggedIn()) {
+        if (this.upvoted) {
+          this.downvote()
+        } else {
+          this.upvoteActive = !this.upvoteActive
+        }
       }
     },
     reblog () {
@@ -168,27 +172,27 @@ export default {
         })
         this.voting = false
       }
-    },
-    downvote () {
-      this.unvoting = true
-      try {
-        sc2.setAccessToken(this.$store.state.accessToken)
-        sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, 0, (res) => {
-          this.unvoting = false
-          this.gigData.active_votes = this.gigData.active_votes.filter((x) => x.voter !== this.$store.state.username)
-          this.$notify({
-            title: 'Success',
-            message: 'You have unvoted this post successfully',
-            type: 'success'
-          })
-        })
-      } catch (err) {
-        this.$notify.error({
-          title: 'Error',
-          message: `There was an error voting on your post. Error details - ${err}`
-        })
+    }
+  },
+  downvote () {
+    this.unvoting = true
+    try {
+      sc2.setAccessToken(this.$store.state.accessToken)
+      sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, 0, (res) => {
         this.unvoting = false
-      }
+        this.gigData.active_votes = this.gigData.active_votes.filter((x) => x.voter !== this.$store.state.username)
+        this.$notify({
+          title: 'Success',
+          message: 'You have unvoted this post successfully',
+          type: 'success'
+        })
+      })
+    } catch (err) {
+      this.$notify.error({
+        title: 'Error',
+        message: `There was an error voting on your post. Error details - ${err}`
+      })
+      this.unvoting = false
     }
   }
 }
