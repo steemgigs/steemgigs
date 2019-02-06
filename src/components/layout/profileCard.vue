@@ -56,7 +56,7 @@
             <div class="card-content">
               <span class="card-title">Links</span>
               <p class="social-link" v-for="(social, key, index) in profile.social" :key="index">
-                <span class="site-label">{{ key }}:</span><span class="site-link"> {{ social || 'Link not provided' }}</span>
+                <span class="site-label">{{ key }}:</span><span class="site-link" v-html="(social.match(/^(http|https):/)) ? `<a target='_blank' href='${social}'>${social}</a>` : social || 'Link not provided'"/>
                 </p>
               <span class="card-title">Languages</span>
               <ul>
