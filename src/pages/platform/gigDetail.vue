@@ -32,7 +32,7 @@
                   </a>&nbsp;&nbsp;
                   <a v-if="currentGig.views" class="indigo-text" v-tooltip="'Number of views'"><i class="ion-eye"></i> {{ currentGig.views.length +'&nbsp;&nbsp;&nbsp;'}}</a>
                   <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">${{ payout.toString().slice(0, 4) }}</span></div>
-                  <a @click="commentMode = !commentMode" class="reply"><el-button type="secondary" class="secondary">Reply</el-button></a>
+                  <a @click="launchComment()" class="reply"><el-button type="secondary" class="secondary">Reply</el-button></a>
                   <div class="vote-slider py-3" v-if="upvoteActive">
                     <div class="col s9">
                       <slider-range :min="1" v-model="upvoteRange" />
@@ -93,8 +93,10 @@ import ProfileCard from '@/components/layout/profileCard'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
 import shareOptions from '@/components/snippets/share-options'
 import moment from 'moment'
+import userStatus from '@/mixins/status.js'
 
 export default {
+  mixins: [userStatus],
   components: {
     Page,
     CatNav,
@@ -221,6 +223,11 @@ export default {
     }
   },
   methods: {
+    launchComment () {
+      if (this.userLoggedIn()) {
+        this.commentMode = true
+      }
+    },
     async fetchUserInfo (username) {
       try {
         let response = await Api.fetchUserData(username)

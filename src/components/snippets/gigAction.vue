@@ -32,8 +32,10 @@
 import sc2 from '@/services/sc2'
 import SliderRange from 'vue-slider-component'
 import moment from 'moment'
+import userStatus from '@/mixins/status.js'
 
 export default {
+  mixins: [userStatus],
   components: {
     SliderRange
   },
@@ -116,37 +118,41 @@ export default {
   },
   methods: {
     vote () {
-      if (this.upvoted) {
-        this.downvote()
-      } else {
-        this.upvoteActive = !this.upvoteActive
+      if (this.userLoggedIn()) {
+        if (this.upvoted) {
+          this.downvote()
+        } else {
+          this.upvoteActive = !this.upvoteActive
+        }
       }
     },
     reblog () {
-      this.rsspinning = true
-      this.resteeming = false
-      this.resteem = false
-      sc2.setAccessToken(this.$store.state.accessToken)
-      sc2.reblog(this.$store.state.username, this.gigData.author, this.gigData.permlink, (err, res) => {
-        if (!err) {
-          this.resteem = true
-          this.resteeming = true
-          this.rsspinning = false
-          this.$notify({
-            title: 'Success',
-            message: 'Post Resteem Successfully',
-            type: 'success'
-          })
-        } else {
-          this.resteeming = true
-          this.resteem = false
-          this.rsspinning = false
-          this.$notify.error({
-            title: 'Error',
-            message: 'There was an error resteeming that post.'
-          })
-        }
-      })
+      if (this.userLoggedIn()) {
+        this.rsspinning = true
+        this.resteeming = false
+        this.resteem = false
+        sc2.setAccessToken(this.$store.state.accessToken)
+        sc2.reblog(this.$store.state.username, this.gigData.author, this.gigData.permlink, (err, res) => {
+          if (!err) {
+            this.resteem = true
+            this.resteeming = true
+            this.rsspinning = false
+            this.$notify({
+              title: 'Success',
+              message: 'Post Resteem Successfully',
+              type: 'success'
+            })
+          } else {
+            this.resteeming = true
+            this.resteem = false
+            this.rsspinning = false
+            this.$notify.error({
+              title: 'Error',
+              message: 'There was an error resteeming that post.'
+            })
+          }
+        })
+      }
     },
     upvote () {
       this.voting = true
@@ -168,27 +174,27 @@ export default {
         })
         this.voting = false
       }
-    },
-    downvote () {
-      this.unvoting = true
-      try {
-        sc2.setAccessToken(this.$store.state.accessToken)
-        sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, 0, (res) => {
-          this.unvoting = false
-          this.gigData.active_votes = this.gigData.active_votes.filter((x) => x.voter !== this.$store.state.username)
-          this.$notify({
-            title: 'Success',
-            message: 'You have unvoted this post successfully',
-            type: 'success'
-          })
-        })
-      } catch (err) {
-        this.$notify.error({
-          title: 'Error',
-          message: `There was an error voting on your post. Error details - ${err}`
-        })
+    }
+  },
+  downvote () {
+    this.unvoting = true
+    try {
+      sc2.setAccessToken(this.$store.state.accessToken)
+      sc2.vote(this.$store.state.username, this.gigData.author, this.gigData.permlink, 0, (res) => {
         this.unvoting = false
-      }
+        this.gigData.active_votes = this.gigData.active_votes.filter((x) => x.voter !== this.$store.state.username)
+        this.$notify({
+          title: 'Success',
+          message: 'You have unvoted this post successfully',
+          type: 'success'
+        })
+      })
+    } catch (err) {
+      this.$notify.error({
+        title: 'Error',
+        message: `There was an error voting on your post. Error details - ${err}`
+      })
+      this.unvoting = false
     }
   }
 }

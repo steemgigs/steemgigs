@@ -6,7 +6,7 @@
       </div>
       <div class="card-image">
         <router-link :to="taskLink">
-          <img v-if="portfolio.length < 1" :src="taskPicture || '/static/img/banner.jpeg'" :alt="task">
+          <img v-if="portfolio.length < 1" :src="taskPicture || '/static/img/placeholder.png'" :alt="task">
           <carousel v-if="portfolio.length > 0" :navigationEnabled="false" :autoplay="true" :perPage="1">
             <slide v-for="(image, i) in portfolio" :key="i">
               <img :src="image" class="responsive-img" :alt="task">

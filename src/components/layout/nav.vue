@@ -10,7 +10,7 @@
         <ul class="right shrink nav-options-wrapper" v-if="$store.state.accessToken">
           <div class="hide-on-med-and-down left">
             <li>
-              <el-input prefix-icon="el-icon-search" @keydown.enter.native="initSearch" size="medium" type="text" placeholder="Search SteemGigs" v-model="searchTerm" />
+              <el-input prefix-icon="el-icon-search" spellcheck="true" @keydown.enter.native="initSearch" size="medium" type="text" placeholder="Search SteemGigs" v-model="searchTerm" />
             </li>
             <li>
               <router-link to="/message"><i class="icon ion-android-chat x2"></i></router-link>
