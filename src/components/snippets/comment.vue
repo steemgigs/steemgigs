@@ -43,9 +43,11 @@ import SliderRange from 'vue-slider-component'
 import Api from '@/services/api'
 import sc2 from '@/services/sc2'
 import VueMarkdown from 'vue-markdown'
+import form from '@/mixins/form.js'
 
 export default {
   name: 'v-comment',
+  mixins: [form],
   components: {
     VueEditor,
     SliderRange,
@@ -257,11 +259,21 @@ export default {
     }
   },
   watch: {
+    'myComment': {
+      handler: function () {
+        this.saveDraft(this.commentFor.author + '/' + this.commentFor.permlink, this.myComment)
+      }
+    }
   },
   mounted () {
     this.fetchComments()
     console.log(this.getTimeAgo())
     setInterval(() => { this.getTimeAgo() }, 10000)
+    // Get draft from local storage using mixin
+    const draft = this.getDrafts(this.commentFor.author + '/' + this.commentFor.permlink)
+    if (draft) {
+      this.myComment = draft
+    }
   }
 }
 </script>
