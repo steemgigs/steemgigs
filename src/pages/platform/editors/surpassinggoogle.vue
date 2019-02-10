@@ -291,7 +291,20 @@ export default {
       return `${this.newGigRequest.description}`
     }
   },
+  watch: {
+    'newGigRequest': {
+      handler: function () {
+        this.saveDraft('surpassinggoogle-' + this.getSubCategoryName.name, this.newGigRequest)
+      },
+      deep: true
+    }
+  },
   mounted () {
+    // Get draft from local storage using mixin
+    const draft = this.getDrafts('surpassinggoogle-' + this.getSubCategoryName.name)
+    if (draft) {
+      this.newGigRequest = draft
+    }
     this.$eventBus.$on('img-uploaded', payload => {
       console.log(payload)
       this.newGigRequest.portfolio[payload.index] = payload.url
