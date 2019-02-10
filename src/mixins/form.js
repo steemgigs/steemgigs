@@ -64,6 +64,9 @@ var form = {
       } else {
         return ''
       }
+    },
+    deleteDraft (type) {
+      localStorage.removeItem(type)
     }
   }
 }
