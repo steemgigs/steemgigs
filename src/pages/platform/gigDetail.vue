@@ -23,7 +23,7 @@
             </div>
             <div class="card-content">
               <loading-placeholder v-if="!contentLoaded" />
-              <div v-html="adjustedBody"></div>
+              <markdown :postbody="adjustedBody"/>
               <div>
                 <div v-if="contentLoaded" class="detail-action">
                   <div>
@@ -100,6 +100,7 @@ import SliderRange from 'vue-slider-component'
 import ProfileCard from '@/components/layout/profileCard'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
 import shareOptions from '@/components/snippets/share-options'
+import markdown from '@/components/snippets/markdown'
 import moment from 'moment'
 import userStatus from '@/mixins/status.js'
 import form from '@/mixins/form.js'
@@ -118,7 +119,8 @@ export default {
     SliderRange,
     LoadingPlaceholder,
     ProfileCard,
-    shareOptions
+    shareOptions,
+    markdown
   },
   data () {
     return {
@@ -180,7 +182,9 @@ export default {
       }
     },
     adjustedBody () {
-      return this.currentGig.body.replace(/<[^/>][^>]*><\/[^>]+>/igm, '')
+      return this.currentGig.body
+        .replace(/<[^/>][^>]*><\/[^>]+>/igm, '')
+        .replace(/[^(](http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/igm, function (match) { return '<img src="' + match + '"></img>' })
     },
     sellerUsername () {
       return this.currentGig.author

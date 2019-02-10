@@ -4,7 +4,7 @@
     <p>
       <router-link class="username" :to="'/@' + commentFor.author" v-text="commentFor.author"></router-link><span>&nbsp;({{sellerRep}})</span><span class="how-long">&nbsp;&nbsp; {{timeAgo}}</span>
     </p>
-    <vue-markdown>{{commentFor.body}}</vue-markdown>
+    <markdown :postbody="adjustedBody" />
     <div  v-if="commentFor.allow_replies" class="menu mb-2">
       <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
       <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
@@ -42,8 +42,8 @@ import { VueEditor } from 'vue2-editor'
 import SliderRange from 'vue-slider-component'
 import Api from '@/services/api'
 import sc2 from '@/services/sc2'
-import VueMarkdown from 'vue-markdown'
 import form from '@/mixins/form.js'
+import markdown from '@/components/snippets/markdown'
 
 export default {
   name: 'v-comment',
@@ -51,7 +51,7 @@ export default {
   components: {
     VueEditor,
     SliderRange,
-    VueMarkdown
+    markdown
   },
   data () {
     return {
@@ -199,6 +199,10 @@ export default {
     }
   },
   computed: {
+    adjustedBody () {
+      return this.commentFor.body
+        .replace(/[^(](http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|svg|webp|jpeg)/igm, function (match) { return '<img src="' + match + '"></img>' })
+    },
     sellerUsername () {
       return this.commentFor.author
     },
