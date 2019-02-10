@@ -17,6 +17,7 @@ import Message from '@/pages/platform/message'
 import Basket from '@/pages/platform/basket'
 import Dashboard from '@/pages/platform/dashboard'
 import faqs from '@/pages/platform/faqs'
+import privacy from '@/pages/platform/privacy-policy'
 
 // Editors
 
@@ -46,6 +47,11 @@ export default [
     path: '/faqs',
     name: 'STEEMGIGS | Frequently Asked Questions',
     component: faqs
+  },
+  {
+    path: '/privacy',
+    name: 'STEEMGIGS | Privacy Policy',
+    component: privacy
   },
   {
     path: '/search/:query/',
