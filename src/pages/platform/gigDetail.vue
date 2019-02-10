@@ -11,7 +11,7 @@
         <div>
           <div class="post-container">
             <div v-if="contentLoaded" class="card-content">
-              <h3>{{ title }}</h3>
+              <h3>{{ currentGig.title }}</h3>
                 <p v-if="currentGig.json_metadata.category"><router-link :to="'/categories/' + currentGig.json_metadata.category">{{ currentGig.json_metadata.category }}</router-link> / <router-link :to="'/categories/' + currentGig.json_metadata.category + '/' + currentGig.json_metadata.subcategory">{{ currentGig.json_metadata.subcategory }}</router-link></p>
             </div>
             <div class="card-image">
@@ -160,9 +160,6 @@ export default {
     })
   },
   computed: {
-    title () {
-      return this.desteemgify(this.currentGig.title)
-    },
     portfolio () {
       if (this.currentGig.json_metadata.images) {
         return this.currentGig.json_metadata.images.filter(Boolean)
