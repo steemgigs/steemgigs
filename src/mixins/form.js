@@ -54,6 +54,19 @@ var form = {
       }
       this.inputVisible = false
       this.inputValue = ''
+    },
+    saveDraft (type, data) {
+      window.localStorage.setItem(type, JSON.stringify(data))
+    },
+    getDrafts (type) {
+      if (window.localStorage.getItem(type)) {
+        return JSON.parse(window.localStorage.getItem(type))
+      } else {
+        return ''
+      }
+    },
+    deleteDraft (type) {
+      localStorage.removeItem(type)
     }
   }
 }

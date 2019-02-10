@@ -355,6 +355,7 @@ export default {
             type: 'success'
           })
           this.$store.commit('setLoading', false)
+          this.removeDraft('gig')
           // Push user to post upon success, the permlink must be set from the API because it can be changed in the API if it's a duplicated permlink
           this.$router.push(`/steemgigs/@${username}/${result.data.permlink}`)
         } catch (err) {
@@ -405,14 +406,19 @@ export default {
     }
   },
   watch: {
-    newGigData: {
-      handler (val) {
-        this.$store.commit('SET_NEW_STEEMGIG', val)
+    'newGigData': {
+      handler: function () {
+        this.saveDraft('gig', this.newGigData)
       },
       deep: true
     }
   },
   mounted () {
+    // Get draft from local storage using mixin
+    const draft = this.getDrafts('gig')
+    if (draft) {
+      this.newGigData = draft
+    }
     this.$eventBus.$on('img-uploaded', payload => {
       console.log(payload)
       this.newGigData.portfolio[payload.index].url = payload.url

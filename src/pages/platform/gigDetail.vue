@@ -94,9 +94,10 @@ import LoadingPlaceholder from '@/components/widgets/gigLoading'
 import shareOptions from '@/components/snippets/share-options'
 import moment from 'moment'
 import userStatus from '@/mixins/status.js'
+import form from '@/mixins/form.js'
 
 export default {
-  mixins: [userStatus],
+  mixins: [userStatus, form],
   components: {
     Page,
     CatNav,
@@ -136,6 +137,13 @@ export default {
       isPosting: false
     }
   },
+  watch: {
+    'myComment': {
+      handler: function () {
+        this.saveDraft(this.currentGig.author + '/' + this.currentGig.permlink, this.myComment)
+      }
+    }
+  },
   mounted () {
     let {username, task} = this.$route.params
     this.fetchUserInfo(username)
@@ -143,6 +151,10 @@ export default {
       this.currentGig = response.data
       this.fetchComments()
       this.contentLoaded = true
+      const draft = this.getDrafts(this.currentGig.author + '/' + this.currentGig.permlink)
+      if (draft) {
+        this.myComment = draft
+      }
     }).catch(err => {
       console.log(err)
     })
@@ -257,6 +269,7 @@ export default {
         this.comments = result.data
         this.myComment = ''
         this.fetchComments()
+        this.removeDraft(this.currentGig.author + '/' + this.currentGig.permlink)
       }).catch((e) => {
         this.isPosting = false
         console.log(e)
