@@ -8184,6 +8184,11 @@ vue-jest@^1.0.2:
     tsconfig "^7.0.0"
     vue-template-es2015-compiler "^1.5.3"
 
+vue-line-clamp@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/vue-line-clamp/-/vue-line-clamp-1.3.2.tgz#004b6399d9093c1955d961fd50d0ba122aad6330"
+  integrity sha512-SuZlRDBKsTlMOSLsJsceJPM7Sd2wcaKayyMEsf65b33chuK1zgTIU1RqlbAXSxO2R+FOQV5rYHLiAopdwVjroQ==
+
 vue-loader@^13.3.0:
   version "13.7.3"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-13.7.3.tgz#e07440f78230a639d00ada4da7b96d0e9d62037f"
