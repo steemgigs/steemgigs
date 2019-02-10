@@ -22,7 +22,7 @@
     "express-force-https": "^1.0.0",
     "highlightjs": "^9.10.0",
     "markdown-it-editor": "^1.1.4",
-    "marked": "^0.3.12",
+    "marked": "^0.3.19",
     "material-icons": "^0.1.0",
     "materialize-css": "^1.0.0-alpha.3",
     "moment": "^2.20.1",
