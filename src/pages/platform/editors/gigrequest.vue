@@ -343,7 +343,20 @@ export default {
       return `<h2 class="headline">Description</h2><hr />${this.newGigRequest.description}<h5>Maximum Budget: ${this.newGigRequest.price} ${this.newGigRequest.currency}</h5><h5>Delivery: ${this.newGigRequest.days} day(s) ${this.newGigRequest.hours} hour(s)</h5>`
     }
   },
+  watch: {
+    'newGigRequest': {
+      handler: function () {
+        this.saveDraft('gigrequest', this.newGigRequest)
+      },
+      deep: true
+    }
+  },
   mounted () {
+    // Get draft from local storage using mixin
+    const draft = this.getDrafts('gigrequest')
+    if (draft) {
+      this.newGigRequest = draft
+    }
     this.$eventBus.$on('img-uploaded', payload => {
       console.log(payload)
       this.newGigRequest.portfolio[payload.index] = payload.url
