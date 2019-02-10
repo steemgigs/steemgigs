@@ -211,7 +211,20 @@ export default {
       return `<h2 class="headline">Description</h2><hr />${Util.convertImageUrlToHTML(this.untalented.description)}`
     }
   },
+  watch: {
+    'untalented': {
+      handler: function () {
+        this.saveDraft('untalented', this.untalented)
+      },
+      deep: true
+    }
+  },
   mounted () {
+    // Get draft from local storage using mixin
+    const draft = this.getDrafts('untalented')
+    if (draft) {
+      this.untalented = draft
+    }
     this.$eventBus.$on('img-uploaded', payload => {
       console.log(payload)
       this.untalented.portfolio[payload.index] = payload.url
