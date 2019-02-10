@@ -16,6 +16,7 @@ import Invite from '@/pages/platform/invite'
 import Message from '@/pages/platform/message'
 import Basket from '@/pages/platform/basket'
 import Dashboard from '@/pages/platform/dashboard'
+import faqs from '@/pages/platform/faqs'
 
 // Editors
 
@@ -40,6 +41,11 @@ export default [
     path: '/categories/:category/:subcategory',
     name: 'STEEMGIGS | Subcategories',
     component: SubCategories
+  },
+  {
+    path: '/faqs',
+    name: 'STEEMGIGS | Frequently Asked Questions',
+    component: faqs
   },
   {
     path: '/search/:query/',
