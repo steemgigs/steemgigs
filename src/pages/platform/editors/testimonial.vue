@@ -120,6 +120,14 @@ export default {
       }
     }
   },
+  watch: {
+    'newTestimonial': {
+      handler: function () {
+        this.saveDraft('testimonial', this.newTestimonial)
+      },
+      deep: true
+    }
+  },
   methods: {
     submitForm (formName) {
       this.$refs[formName].validate((valid, err) => {
@@ -213,6 +221,11 @@ export default {
     }
   },
   mounted () {
+    // Get draft from local storage using mixin
+    const draft = this.getDrafts('testimonial')
+    if (draft) {
+      this.newTestimonial = draft
+    }
     this.$eventBus.$on('img-uploaded', payload => {
     })
   },
