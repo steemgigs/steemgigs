@@ -9,7 +9,7 @@
     <a v-if="rsspinning" v-tooltip="{content: 'please wait'}">
       <i class="fa fa-spinner fa-pulse"></i>
     </a>
-    <a v-if="resteeming" v-tooltip="{ content: 'resteem', classes: ['tooltip'] }" :class="!resteem ? 'grey-text' : 'indigo-text'" @click="reblog"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
+    <a v-if="resteeming && this.gigData.author !== this.$store.state.username" v-tooltip="{ content: 'resteem', classes: ['tooltip'] }" :class="!resteem ? 'grey-text' : 'indigo-text'" @click="reblog"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
     <span class="right" v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">${{ payout.toString().slice(0, 4) }}</span>
     <a v-if="gigData.views" class="indigo-text show-on-xl-only" v-tooltip="'Number of views'"><i class="ion-eye"></i> {{ gigData.views.length +'&nbsp;&nbsp;&nbsp;'}}</a>
     <div class="row pt-3 mb-0" v-if="upvoteActive">
