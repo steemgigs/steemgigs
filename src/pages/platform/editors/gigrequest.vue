@@ -301,6 +301,7 @@ export default {
             type: 'success'
           })
           this.$store.commit('setLoading', false)
+          this.removeDraft('gigrequest')
           // Push user to post upon success, the permlink must be set from the API because it can be changed in the API if it's a duplicated permlink
           this.$router.push(`/steemgigs/@${username}/${result.data.permlink}`)
         } catch (err) {

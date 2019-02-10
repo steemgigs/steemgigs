@@ -269,6 +269,7 @@ export default {
         this.comments = result.data
         this.myComment = ''
         this.fetchComments()
+        this.removeDraft(this.currentGig.author + '/' + this.currentGig.permlink)
       }).catch((e) => {
         this.isPosting = false
         console.log(e)

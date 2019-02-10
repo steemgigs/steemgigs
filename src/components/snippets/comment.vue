@@ -100,6 +100,7 @@ export default {
         this.commentMode = false
         this.comments = result.data
         this.myComment = ''
+        this.removeDraft(this.commentFor.author + '/' + this.commentFor.permlink)
       }).catch((e) => {
         this.isPosting = false
         console.log(e)
