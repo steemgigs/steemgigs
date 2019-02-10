@@ -158,7 +158,7 @@ $blue: #6361D0;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-
+      word-break: break-word;
     }
     .price {
       margin-top: 0.5em;
