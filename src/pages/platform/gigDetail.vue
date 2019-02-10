@@ -182,7 +182,9 @@ export default {
       }
     },
     adjustedBody () {
-      return this.currentGig.body.replace(/<[^/>][^>]*><\/[^>]+>/igm, '')
+      return this.currentGig.body
+        .replace(/<[^/>][^>]*><\/[^>]+>/igm, '')
+        .replace(/[^(](http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/igm, function (match) { return '<img src="' + match + '"></img>' })
     },
     sellerUsername () {
       return this.currentGig.author
