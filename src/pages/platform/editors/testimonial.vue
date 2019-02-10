@@ -84,8 +84,6 @@ export default {
         title: '',
         description: '',
         images: [],
-        upvoteRange: 100,
-        liked: false,
         payoutType: '50/50'
       },
       guide: {
