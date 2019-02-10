@@ -26,13 +26,21 @@
               <div v-html="adjustedBody"></div>
               <div>
                 <div v-if="contentLoaded" class="detail-action">
-                  <div><a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
-                  <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
+                  <div>
+                    <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
+                    <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
                     <i class="fa fa-spinner fa-pulse"></i>
                   </a>&nbsp;&nbsp;
                   <a v-if="currentGig.views" class="indigo-text" v-tooltip="'Number of views'"><i class="ion-eye"></i> {{ currentGig.views.length +'&nbsp;&nbsp;&nbsp;'}}</a>
-                  <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">${{ payout.toString().slice(0, 4) }}</span></div>
-                  <a @click="launchComment()" class="reply"><el-button type="secondary" class="secondary">Reply</el-button></a>
+                  <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">${{ payout.toString().slice(0, 4) }}</span>
+                  <a v-if="rsspinning" v-tooltip="{content: 'please wait'}">
+                     <i class="fa fa-spinner fa-pulse"></i>
+                     </a>&nbsp;&nbsp;
+                     <a v-if="resteeming && this.currentGig.author !== this.$store.state.username" v-tooltip="{ content: 'resteem', classes: ['tooltip'] }" :class="!resteem ? 'grey-text' : 'indigo-text'" @click="reblog(currentGig)"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
+                  </div>
+                  <a @click="launchComment()" class="reply">
+                    <el-button type="secondary" class="secondary">Reply</el-button>
+                    </a>
                   <div class="vote-slider py-3" v-if="upvoteActive">
                     <div class="col s9">
                       <slider-range :min="1" v-model="upvoteRange" />
@@ -95,9 +103,10 @@ import shareOptions from '@/components/snippets/share-options'
 import moment from 'moment'
 import userStatus from '@/mixins/status.js'
 import form from '@/mixins/form.js'
+import actions from '@/mixins/actions.js'
 
 export default {
-  mixins: [userStatus, form],
+  mixins: [userStatus, form, actions],
   components: {
     Page,
     CatNav,
@@ -134,7 +143,10 @@ export default {
       taskPicture: '',
       upvoteActive: false,
       upvoteRange: 100,
-      isPosting: false
+      isPosting: false,
+      rsspinning: false,
+      resteem: false,
+      resteeming: true
     }
   },
   watch: {
