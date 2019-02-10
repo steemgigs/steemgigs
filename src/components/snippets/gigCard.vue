@@ -16,8 +16,8 @@
       </div>
       <div class="card-content">
        <div class="seller-details"> <img v-if="imgUrl || sellerImg" :src="sellerImg" alt="" class="sellerPic"> <router-link class="sellerName" :to="'/@' + sellerUsername"> {{ sellerUsername }}</router-link><span v-if="sellerRep" class="user-rep">{{ sellerRep }}</span></div>
-        <router-link v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" v-text="title" />
-        <p v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
+        <router-link v-line-clamp:20="2" v-if="meantFor !== 'gigDetails'" class="task" :to="taskLink" v-text="title" />
+        <p  v-if="meantFor === 'gigDetails'" class="task" v-html="taskDetails"></p>
         <p class="price">
           <span v-if="price">
             <span v-if="type === 'steemgigs'">{{ 'Starting At ' + price + ' ' + currency }}</span>
@@ -155,9 +155,6 @@ $blue: #6361D0;
       font-size: 13px;
       color: black;
       overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
       word-break: break-word;
     }
     .price {
