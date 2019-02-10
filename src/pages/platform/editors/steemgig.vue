@@ -405,14 +405,19 @@ export default {
     }
   },
   watch: {
-    newGigData: {
-      handler (val) {
-        this.$store.commit('SET_NEW_STEEMGIG', val)
+    'newGigData': {
+      handler: function () {
+        this.saveDraft('gig', this.newGigData)
       },
       deep: true
     }
   },
   mounted () {
+    // Get draft from local storage using mixin
+    const draft = this.getDrafts('gig')
+    if (draft) {
+      this.newGigData = draft
+    }
     this.$eventBus.$on('img-uploaded', payload => {
       console.log(payload)
       this.newGigData.portfolio[payload.index].url = payload.url
