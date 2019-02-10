@@ -65,7 +65,7 @@ var form = {
         return ''
       }
     },
-    deleteDraft (type) {
+    removeDraft (type) {
       localStorage.removeItem(type)
     }
   }
