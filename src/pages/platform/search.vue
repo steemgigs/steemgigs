@@ -9,8 +9,10 @@
         </div>
       </div>
       <!-- Search Results -->
-      <div v-else-if="searchResults.length !== 0" class="col s12 m6 l3" v-for="(gig, index) in searchResults" :key="index">
+      <div v-else-if="searchResults.length !== 0" class="search-results-container">
+      <div class="col s12 m6 l3" v-for="(gig, index) in searchResults" :key="index">
         <gig-card :gigData="gig" />
+      </div>
       </div>
       <!-- No Results to Show -->
       <div v-else class="col s12 m12 l12 center-align row">
@@ -36,7 +38,18 @@ export default {
     return {
       isSearching: '',
       searchResults: null,
-      loadingPlaceholderCount: 4
+      loadingPlaceholderCount: 4,
+      searchOptions: {
+        type: 'steemgigs_post',
+        category: 'digital-marketing',
+        subcategory: 'social-media-marketing',
+        currency: 'STEEM',
+        minPrice: '0',
+        maxPrice: '0',
+        pageNumber: 1,
+        order: 'priceLow',
+        limit: 5
+      }
     }
   },
   components: {
@@ -60,8 +73,19 @@ export default {
     async search () {
       this.isSearching = true
       try {
-        await Api.search(this.searchTerm).then(result => {
-          this.searchResults = result.data
+        let searchQuery = {
+          'searchText': this.searchTerm,
+          'type': this.searchOptions.type,
+          'currency': this.searchOptions.currency,
+          'minPrice': this.searchOptions.minPrice,
+          'maxPrice': this.searchOptions.maxPrice,
+          'pageNumber': this.searchOptions.pageNumber,
+          'order': this.searchOptions.order,
+          'limit': this.searchOptions.limit
+        }
+        await Api.search(searchQuery).then(result => {
+          console.log(result)
+          this.searchResults = result.data.results
           this.isSearching = false
         })
       } catch (err) {
