@@ -6,6 +6,7 @@
           <!--  Currency -->
           <el-form-item label="Currency">
               <el-select v-model="searchOptions.currency" placeholder="Select Currency">
+                  <el-option label="Any" value="Any"></el-option>
                   <el-option label="STEEM" value="STEEM"></el-option>
                   <el-option label="SBD" value="SBD"></el-option>
               </el-select>
@@ -43,9 +44,9 @@ export default {
     return {
       searchOptions: {
         type: 'steemgigs_post',
-        category: 'digital-marketing',
-        subcategory: 'social-media-marketing',
-        currency: 'STEEM',
+        category: 'graphics-design',
+        subcategory: 'logo-design',
+        currency: 'Any',
         minPrice: '',
         maxPrice: '',
         limit: 8
@@ -62,7 +63,6 @@ export default {
       this.isSearching = true
       try {
         let searchQuery = {
-          'searchText': this.searchTerm,
           'type': this.searchOptions.type,
           'currency': this.searchOptions.currency,
           'minPrice': this.searchOptions.minPrice || '0',
