@@ -171,6 +171,7 @@ export default {
 
     .price-item .el-form-item__content {
         display: flex;
+        flex-wrap: wrap;
     }
 
     .price-join {

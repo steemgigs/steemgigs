@@ -3,10 +3,10 @@
     <cat-nav />
     <el-main class="search-page">
       <el-row :gutter="15">
-      <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="0" :sm="6" :md="6" :lg="5" :xl="5">
         <SearchPanel @resultsFound='populateResults' :selectedOrder='selectedOrder' :currentPage='currentPage' />
       </el-col>
-      <el-col :xs="18" :sm="18" :md="18" :lg="18" :xl="18">
+      <el-col :xs="24" :sm="18" :md="18" :lg="19" :xl="19">
       <!-- Loading Placeholder - Consistent with categories.vue -->
       <div v-if="isSearching">
         <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
@@ -19,7 +19,7 @@
           <h3>Your Results</h3>
           <SortBar @adjustedSort='updateSort' :sortMethod='selectedOrder'/>
         </div>
-        <div class="col s12 m6 l4" v-for="(gig, index) in searchResults" :key="index">
+        <div class="col s12 m6 l3" v-for="(gig, index) in searchResults" :key="index">
           <gig-card :gigData="gig" />
         </div>
         <el-pagination class="search-pagination" background layout="prev, pager, next" :current-page.sync="currentPage" :page-count="pageCount"></el-pagination>
