@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     async search () {
-      this.isSearching = true
+      this.$store.commit('setSearchStatus', true)
       try {
         let searchQuery = {
           'searchText': this.searchTerm,
@@ -89,6 +89,7 @@ export default {
           'limit': this.searchOptions.limit
         }
         await Api.search(searchQuery).then(result => {
+          this.$store.commit('setSearchStatus', false)
           this.$emit('resultsFound', {
             searchResults: result.data.results,
             pageCount: result.data.pages

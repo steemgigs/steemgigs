@@ -52,7 +52,6 @@ export default {
   name: 'search',
   data: function () {
     return {
-      isSearching: false,
       searchResults: {},
       loadingPlaceholderCount: 4,
       pageCount: 1,
@@ -79,7 +78,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'searchTerm'
+      'searchTerm',
+      'isSearching'
     ])
   }
 }
