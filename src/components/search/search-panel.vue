@@ -172,7 +172,6 @@ export default {
 
     .price-item .el-form-item__content {
         display: flex;
-        flex-wrap: wrap;
     }
 
     .price-join {
@@ -185,5 +184,10 @@ export default {
 
     .el-pager .active {
         background: #6361D0 !important;
+    }
+    @media screen and (max-width: 1000px) {
+        .price-item .el-form-item__content {
+        flex-wrap: wrap;
+    }
     }
 </style>

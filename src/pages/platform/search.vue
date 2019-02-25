@@ -3,10 +3,10 @@
     <cat-nav />
     <el-main class="search-page">
       <el-row :gutter="15">
-      <el-col :xs="0" :sm="6" :md="6" :lg="5" :xl="5">
+      <el-col :xs="0" :sm="8" :md="6" :lg="5" :xl="5">
         <SearchPanel @resultsFound='populateResults' :selectedOrder='selectedOrder' :currentPage='currentPage' />
       </el-col>
-      <el-col :xs="24" :sm="18" :md="18" :lg="19" :xl="19">
+      <el-col :xs="24" :sm="16" :md="18" :lg="19" :xl="19">
       <!-- Loading Placeholder - Consistent with categories.vue -->
       <div v-if="isSearching">
         <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
