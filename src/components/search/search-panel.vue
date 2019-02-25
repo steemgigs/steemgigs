@@ -11,6 +11,20 @@
                   <el-option label="SBD" value="SBD"></el-option>
               </el-select>
           </el-form-item>
+          <!--  Category -->
+          <el-form-item label="Category">
+              <el-select v-model="searchOptions.category" placeholder="Select Category">
+                  <el-option label="Any" value="Any"></el-option>
+                  <el-option v-for="(category, index) in categories" :key="index" :label="capitalize(category.name)" :value="category.name"></el-option>
+              </el-select>
+          </el-form-item>
+          <!--  Subcategory -->
+          <el-form-item v-if="selectedCategory.name" label="Sub Category">
+              <el-select v-model="searchOptions.subcategory" placeholder="Select Sub Category">
+                  <el-option label="Any" value="Any"></el-option>
+                  <el-option v-for="(subcategory, subIndex) in selectedCategory.subcategories" :key="subIndex" :label="capitalize(subcategory.name)" :value="subcategory.name"></el-option>
+              </el-select>
+          </el-form-item>
           <!--  Price -->
           <el-form-item class="price-item" label="Price">
             <el-input v-model="searchOptions.minPrice" :disabled='freeGigsOnly'>
@@ -44,8 +58,8 @@ export default {
     return {
       searchOptions: {
         type: 'steemgigs_post',
-        category: 'graphics-design',
-        subcategory: 'logo-design',
+        category: 'Any',
+        subcategory: '',
         currency: 'Any',
         minPrice: '',
         maxPrice: '',
@@ -63,7 +77,10 @@ export default {
       this.isSearching = true
       try {
         let searchQuery = {
+          'searchText': this.searchTerm,
           'type': this.searchOptions.type,
+          'category': this.adjustedCategory,
+          'subcategory': this.adjustedSubCategory,
           'currency': this.searchOptions.currency,
           'minPrice': this.searchOptions.minPrice || '0',
           'maxPrice': this.searchOptions.maxPrice || '0',
@@ -89,7 +106,30 @@ export default {
   computed: {
     ...mapGetters([
       'searchTerm'
-    ])
+    ]),
+    selectedCategory () {
+      if (this.searchOptions.category && this.searchOptions.category.toLowerCase() !== 'any') {
+        return this.categories.find(categories => categories.name === this.searchOptions.category)
+      } else {
+        return {}
+      }
+    },
+    adjustedCategory () {
+    // Categories stored by default don't match the DB, therefore must remove special chars and replace whiespace with a single -
+      const adjustedCategory = this.searchOptions.category
+        .toLowerCase()
+        .replace(/[^a-zA-Z\s]/g, '')
+        .replace(/\s+/g, '-')
+      return adjustedCategory
+    },
+    adjustedSubCategory () {
+    // Subcategories stored by default don't match the DB, therefore must remove special chars and replace whiespace with a single -
+      const adjustedSubCategory = this.searchOptions.subcategory
+        .toLowerCase()
+        .replace(/[^a-zA-Z\s]/g, '')
+        .replace(/\s+/g, '-')
+      return adjustedSubCategory
+    }
   },
   watch: {
     // When the store is updated, the search should take place. This is watched to allow multiple searchs when not changing route
@@ -107,6 +147,9 @@ export default {
         this.searchOptions.minPrice = ''
         this.searchOptions.maxPrice = ''
       }
+    },
+    adjustedCategory: function () {
+      this.searchOptions.subcategory = ''
     }
   }
 }
