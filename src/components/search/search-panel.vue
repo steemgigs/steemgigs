@@ -8,15 +8,17 @@
               <el-select v-model="searchOptions.currency" placeholder="Select Currency">
                   <el-option label="STEEM" value="STEEM"></el-option>
                   <el-option label="SBD" value="SBD"></el-option>
-            </el-select>
+              </el-select>
           </el-form-item>
           <!--  Min Price -->
-          <el-form-item label="Min Price">
-            <el-input v-model="searchOptions.minPrice"></el-input>
-          </el-form-item>
-          <!--  Max Price -->
-          <el-form-item label="Max Price">
-            <el-input v-model="searchOptions.maxPrice"></el-input>
+          <el-form-item class="price-item" label="Price">
+            <el-input v-model="searchOptions.minPrice">
+                <template slot="prepend">$</template>
+            </el-input>
+            <span class='price-join'>to</span>
+            <el-input v-model="searchOptions.maxPrice">
+                <template slot="prepend">$</template>
+            </el-input>
           </el-form-item>
         </el-form>
     </div>
@@ -39,7 +41,7 @@ export default {
         subcategory: 'social-media-marketing',
         currency: 'STEEM',
         minPrice: '0',
-        maxPrice: '0',
+        maxPrice: '100000',
         limit: 8
       },
       pageCount: 0
@@ -104,5 +106,18 @@ export default {
         -webkit-box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
         box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
         border-radius: 10px;
+    }
+
+    .search-panel label {
+        padding: 0 !important;
+        line-height: 30px !important;
+    }
+
+    .price-item .el-form-item__content {
+        display: flex;
+    }
+
+    .price-join {
+        padding: 0 10px;
     }
 </style>
