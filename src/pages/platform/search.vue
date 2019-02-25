@@ -16,7 +16,7 @@
       <!-- Search Results -->
       <div v-else-if="searchResults.length !== 0" class="search-results-container">
         <div class="search-header">
-          <h3>Your Results</h3>
+          <h3>Search Results for "{{this.searchTerm}}"</h3>
           <SortBar @adjustedSort='updateSort' :sortMethod='selectedOrder'/>
         </div>
         <div class="col s12 m6 l3" v-for="(gig, index) in searchResults" :key="index">
@@ -46,12 +46,13 @@ import LoadingPlaceholder from '@/components/widgets/gigLoading'
 import SearchPanel from '@/components/search/search-panel'
 import SortBar from '@/components/search/sort-bar'
 import CatNav from '@/components/layout/catNav'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'search',
   data: function () {
     return {
-      isSearching: '',
+      isSearching: false,
       searchResults: {},
       loadingPlaceholderCount: 4,
       pageCount: 1,
@@ -75,6 +76,11 @@ export default {
     updateSort: function (sortData) {
       this.selectedOrder = sortData.sortMethod
     }
+  },
+  computed: {
+    ...mapGetters([
+      'searchTerm'
+    ])
   }
 }
 </script>
