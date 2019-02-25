@@ -10,16 +10,22 @@
                   <el-option label="SBD" value="SBD"></el-option>
               </el-select>
           </el-form-item>
-          <!--  Min Price -->
+          <!--  Price -->
           <el-form-item class="price-item" label="Price">
-            <el-input v-model="searchOptions.minPrice">
+            <el-input v-model="searchOptions.minPrice" :disabled='freeGigsOnly'>
                 <template slot="prepend">$</template>
             </el-input>
             <span class='price-join'>to</span>
-            <el-input v-model="searchOptions.maxPrice">
+            <el-input v-model="searchOptions.maxPrice" :disabled='freeGigsOnly'>
                 <template slot="prepend">$</template>
             </el-input>
           </el-form-item>
+          <el-form-item>
+          <el-checkbox v-model="freeGigsOnly">Show only FREE gigs</el-checkbox>
+          </el-form-item>
+            <el-form-item>
+                <el-button type="primary" class="primary" @click="search">Search</el-button>
+            </el-form-item>
         </el-form>
     </div>
 </template>
@@ -40,10 +46,11 @@ export default {
         category: 'digital-marketing',
         subcategory: 'social-media-marketing',
         currency: 'STEEM',
-        minPrice: '0',
-        maxPrice: '100000',
+        minPrice: '',
+        maxPrice: '',
         limit: 8
       },
+      freeGigsOnly: false,
       pageCount: 0
     }
   },
@@ -58,8 +65,8 @@ export default {
           'searchText': this.searchTerm,
           'type': this.searchOptions.type,
           'currency': this.searchOptions.currency,
-          'minPrice': this.searchOptions.minPrice,
-          'maxPrice': this.searchOptions.maxPrice,
+          'minPrice': this.searchOptions.minPrice || '0',
+          'maxPrice': this.searchOptions.maxPrice || '0',
           'pageNumber': this.currentPage,
           'order': this.selectedOrder,
           'limit': this.searchOptions.limit
@@ -94,6 +101,12 @@ export default {
     },
     selectedOrder: function () {
       this.search()
+    },
+    freeGigsOnly: function () {
+      if (this.freeGigsOnly === true) {
+        this.searchOptions.minPrice = ''
+        this.searchOptions.maxPrice = ''
+      }
     }
   }
 }
