@@ -61,20 +61,22 @@
                 <!-- Price -->
                 <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                   <el-form-item label="Price" prop="price">
-                    <el-input v-model="newGigData.price"></el-input>
+                    <el-input :disabled="isFree" v-model="newGigData.price"></el-input>
                   </el-form-item>
                 </el-col>
                 <!-- Currency -->
                 <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-                  <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                 <el-form-item label="Currency" prop="currency">
-                  <el-select v-model="newGigData.currency" placeholder="Select Currency">
+                  <el-select :disabled="isFree" v-model="newGigData.currency" placeholder="Select Currency">
                     <el-option value="STEEM">STEEM</el-option>
                     <el-option value="SBD">SBD</el-option>
                     <el-option value="SP" >SP</el-option>
                   </el-select>
                 </el-form-item>
-              </el-col>
+                </el-col>
+                <!-- Is Free -->
+                <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+                <el-checkbox v-model="isFree">This Steem gig is free</el-checkbox>
                 </el-col>
               </el-row>
               <!-- Pricing Description -->
@@ -183,6 +185,7 @@ export default {
       isPosting: false,
       totalPics: 1,
       activeNames: ['0'],
+      isFree: false,
       newGigData: {
         title: '',
         category: '',
@@ -411,6 +414,12 @@ export default {
         this.saveDraft('gig', this.newGigData)
       },
       deep: true
+    },
+    'isFree': {
+      handler: function () {
+        this.newGigData.currency = 'STEEM'
+        this.newGigData.price = 0
+      }
     }
   },
   mounted () {
