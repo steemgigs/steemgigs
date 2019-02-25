@@ -1,7 +1,12 @@
 <template>
   <page :pageClasses="['search__view', 'row']">
     <cat-nav />
-    <el-main>
+    <el-main class="search-page">
+      <el-row :gutter="15">
+      <el-col :xs="0" :sm="8" :md="6" :lg="5" :xl="5">
+        <SearchPanel @resultsFound='populateResults' :selectedOrder='selectedOrder' :currentPage='currentPage' />
+      </el-col>
+      <el-col :xs="24" :sm="16" :md="18" :lg="19" :xl="19">
       <!-- Loading Placeholder - Consistent with categories.vue -->
       <div v-if="isSearching">
         <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
@@ -9,24 +14,37 @@
         </div>
       </div>
       <!-- Search Results -->
-      <div v-else-if="searchResults.length !== 0" class="col s12 m6 l3" v-for="(gig, index) in searchResults" :key="index">
-        <gig-card :gigData="gig" />
+      <div v-else-if="searchResults.length !== 0" class="search-results-container">
+        <div class="search-header">
+          <h3>Search Results for "{{this.searchTerm}}"</h3>
+          <SortBar @adjustedSort='updateSort' :sortMethod='selectedOrder'/>
+        </div>
+        <div class="col s12 m6 l3" v-for="(gig, index) in searchResults" :key="index">
+          <gig-card :gigData="gig" />
+        </div>
+        <el-pagination class="search-pagination" background layout="prev, pager, next" :current-page.sync="currentPage" :page-count="pageCount"></el-pagination>
       </div>
       <!-- No Results to Show -->
       <div v-else class="col s12 m12 l12 center-align row">
         <h3>No Results to Show</h3>
         <h5>We couldn't find anything for that, why not try another search or alternatively check out some more gigs</h5>
-        <router-link to="/steemgigs"><el-button type="secondary" class="secondary">Explore Gigs</el-button></router-link>
-        </div>
+        <router-link to="/steemgigs">
+          <el-button type="secondary" class="secondary">Explore Gigs</el-button>
+        </router-link>
+      </div>
+      </el-col>
+      </el-row>
     </el-main>
   </page>
 </template>
 
 <script>
-import Api from '@/services/api'
+
 import GigCard from '@/components/snippets/gigCard'
 import Page from '@/components/page'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
+import SearchPanel from '@/components/search/search-panel'
+import SortBar from '@/components/search/sort-bar'
 import CatNav from '@/components/layout/catNav'
 import { mapGetters } from 'vuex'
 
@@ -34,54 +52,59 @@ export default {
   name: 'search',
   data: function () {
     return {
-      isSearching: '',
-      searchResults: null,
-      loadingPlaceholderCount: 4
+      searchResults: {},
+      loadingPlaceholderCount: 4,
+      pageCount: 1,
+      currentPage: 1,
+      selectedOrder: 'newest'
     }
   },
   components: {
     GigCard,
     Page,
     LoadingPlaceholder,
-    CatNav
+    CatNav,
+    SearchPanel,
+    SortBar
   },
-  mounted () {
-    // Set the search term from query to allow a user to navigate directly to the search page
-    this.$store.commit('setSearchTerm', this.$route.params.query)
-    // Search onload
-    this.search()
+  methods: {
+    populateResults: function (results) {
+      this.searchResults = results.searchResults
+      this.pageCount = results.pageCount
+    },
+    updateSort: function (sortData) {
+      this.selectedOrder = sortData.sortMethod
+    }
   },
   computed: {
     ...mapGetters([
-      'searchTerm'
+      'searchTerm',
+      'isSearching'
     ])
-  },
-  methods: {
-    async search () {
-      this.isSearching = true
-      try {
-        await Api.search(this.searchTerm).then(result => {
-          this.searchResults = result.data
-          this.isSearching = false
-        })
-      } catch (err) {
-        // Send error toast notification upon error
-        this.$notify.error({
-          title: 'Error',
-          message: `Sorry, there seems to have been an error. Error Details - ${err}`
-        })
-      }
-    }
-  },
-  watch: {
-    // When the store is updated, the search should take place. This is watched to allow multiple searchs when not changing route
-    searchTerm: function () {
-      this.search()
-    }
   }
 }
 </script>
 
 <style>
+
+.search-page {
+  padding: 30px 30px;
+}
+
+.search-pagination {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  padding: 10px;
+}
+
+.search-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 10px 10px 10px;
+  align-items: center;
+}
 
 </style>

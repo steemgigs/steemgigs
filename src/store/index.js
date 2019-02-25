@@ -29,9 +29,13 @@ export default new Vuex.Store({
       featured: [],
       surpassinggoogle: [],
       testimonials: []
-    }
+    },
+    isSearching: false
   },
   mutations: {
+    setSearchStatus: function (state, status) {
+      state.isSearching = status
+    },
     setLoading: function (state, setting) {
       state.isLoading = setting
     },
@@ -189,6 +193,9 @@ export default new Vuex.Store({
   getters: {
     searchTerm: state => {
       return state.searchTerm
+    },
+    isSearching: state => {
+      return state.isSearching
     }
   },
   plugins: [createPersist({
