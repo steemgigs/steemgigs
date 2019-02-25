@@ -1,6 +1,6 @@
 <template>
     <div class="search-panel">
-        <h3>Filter your results</h3>
+        <h3 class="header">Refine Results</h3>
         <h5>Use the options below to filter your results.</h5>
         <el-form :model="searchOptions" ref="searchOptions" label-position="top">
           <!--  Currency -->
@@ -176,5 +176,13 @@ export default {
 
     .price-join {
         padding: 0 10px;
+    }
+
+    .search-panel .header {
+        font-size: 16px;
+    }
+
+    .el-pager .active {
+        background: #6361D0 !important;
     }
 </style>
