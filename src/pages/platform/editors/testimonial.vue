@@ -84,8 +84,6 @@ export default {
         title: '',
         description: '',
         images: [],
-        upvoteRange: 100,
-        liked: false,
         payoutType: '50/50'
       },
       guide: {
@@ -120,6 +118,14 @@ export default {
         accept: 'image/jpg,image/jpeg,image/png',
         url: this.$imgUploadURL
       }
+    }
+  },
+  watch: {
+    'newTestimonial': {
+      handler: function () {
+        this.saveDraft('testimonial', this.newTestimonial)
+      },
+      deep: true
     }
   },
   methods: {
@@ -187,6 +193,7 @@ export default {
             type: 'success'
           })
           this.$store.commit('setLoading', false)
+          this.removeDraft('testimonial')
           // Push user to post upon success, the permlink must be set from the API because it can be changed in the API if it's a duplicated permlink
           this.$router.push(`/@${username}/${result.data.permlink}`)
         } catch (err) {
@@ -215,6 +222,11 @@ export default {
     }
   },
   mounted () {
+    // Get draft from local storage using mixin
+    const draft = this.getDrafts('testimonial')
+    if (draft) {
+      this.newTestimonial = draft
+    }
     this.$eventBus.$on('img-uploaded', payload => {
     })
   },

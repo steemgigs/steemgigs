@@ -9,7 +9,7 @@
     <a v-if="rsspinning" v-tooltip="{content: 'please wait'}">
       <i class="fa fa-spinner fa-pulse"></i>
     </a>
-    <a v-if="resteeming" v-tooltip="{ content: 'resteem', classes: ['tooltip'] }" :class="!resteem ? 'grey-text' : 'indigo-text'" @click="reblog"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
+    <a v-if="resteeming && this.gigData.author !== this.$store.state.username" v-tooltip="{ content: 'resteem', classes: ['tooltip'] }" :class="!resteem ? 'grey-text' : 'indigo-text'" @click="reblog(gigData)"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
     <span class="right" v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">${{ payout.toString().slice(0, 4) }}</span>
     <a v-if="gigData.views" class="indigo-text show-on-xl-only" v-tooltip="'Number of views'"><i class="ion-eye"></i> {{ gigData.views.length +'&nbsp;&nbsp;&nbsp;'}}</a>
     <div class="row pt-3 mb-0" v-if="upvoteActive">
@@ -33,9 +33,10 @@ import sc2 from '@/services/sc2'
 import SliderRange from 'vue-slider-component'
 import moment from 'moment'
 import userStatus from '@/mixins/status.js'
+import actions from '@/mixins/actions.js'
 
 export default {
-  mixins: [userStatus],
+  mixins: [userStatus, actions],
   components: {
     SliderRange
   },
@@ -124,34 +125,6 @@ export default {
         } else {
           this.upvoteActive = !this.upvoteActive
         }
-      }
-    },
-    reblog () {
-      if (this.userLoggedIn()) {
-        this.rsspinning = true
-        this.resteeming = false
-        this.resteem = false
-        sc2.setAccessToken(this.$store.state.accessToken)
-        sc2.reblog(this.$store.state.username, this.gigData.author, this.gigData.permlink, (err, res) => {
-          if (!err) {
-            this.resteem = true
-            this.resteeming = true
-            this.rsspinning = false
-            this.$notify({
-              title: 'Success',
-              message: 'Post Resteem Successfully',
-              type: 'success'
-            })
-          } else {
-            this.resteeming = true
-            this.resteem = false
-            this.rsspinning = false
-            this.$notify.error({
-              title: 'Error',
-              message: 'There was an error resteeming that post.'
-            })
-          }
-        })
       }
     },
     upvote () {
