@@ -7,16 +7,6 @@ export default {
     stringify (obj) {
       return JSON.stringify(obj, null, 2)
     },
-    debounce: function (callback, wait, context = this) {
-      let timeout = null
-      let callbackArgs = null
-      const later = () => callback.apply(context, callbackArgs)
-      return function () {
-        callbackArgs = arguments
-        clearTimeout(timeout)
-        timeout = setTimeout(later, wait)
-      }
-    },
     rep (value) {
       let rep = Math.log10(value)
       if (isNaN(rep)) rep = 0
