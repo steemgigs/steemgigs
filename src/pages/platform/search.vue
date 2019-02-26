@@ -19,7 +19,7 @@
           <h3>Search Results for "{{this.searchTerm}}"</h3>
           <SortBar @adjustedSort='updateSort' :sortMethod='selectedOrder'/>
         </div>
-        <div class="col s12 m6 l3" v-for="(gig, index) in searchResults" :key="index">
+        <div class="col s12 m6 l3" v-for="(gig, index) in sortedResults" :key="index">
           <gig-card :gigData="gig" />
         </div>
         <el-pagination class="search-pagination" background layout="prev, pager, next" :current-page.sync="currentPage" :page-count="pageCount"></el-pagination>
@@ -52,7 +52,7 @@ export default {
   name: 'search',
   data: function () {
     return {
-      searchResults: {},
+      searchResults: [],
       loadingPlaceholderCount: 4,
       pageCount: 1,
       currentPage: 1,
@@ -74,13 +74,29 @@ export default {
     },
     updateSort: function (sortData) {
       this.selectedOrder = sortData.sortMethod
-    }
+    },
   },
   computed: {
     ...mapGetters([
       'searchTerm',
       'isSearching'
-    ])
+    ]),
+    // Add client side sorting using lodash to ensure posts are sorted the same way as provided from API
+    sortedResults: function () {
+      let order = ''
+      let sortType = ''
+      if (this.selectedOrder === 'newest' || this.selectedOrder === 'price_high') {
+        order = 'desc'
+      } else {
+        order = 'asc'
+      }
+      if (this.selectedOrder === 'price_low' || this.selectedOrder === 'price_high') {
+        sortType = 'price'
+      } else {
+        sortType = '_id'
+      }
+      return _.orderBy(this.searchResults, sortType, order)
+    }
   }
 }
 </script>
