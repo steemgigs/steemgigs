@@ -11,7 +11,7 @@
         <div>
           <div class="post-container">
             <div v-if="contentLoaded" class="card-content">
-              <h3>{{ title }}</h3>
+              <h3>{{ currentGig.title }}</h3>
                 <p v-if="currentGig.json_metadata.category"><router-link :to="'/categories/' + currentGig.json_metadata.category">{{ currentGig.json_metadata.category }}</router-link> / <router-link :to="'/categories/' + currentGig.json_metadata.category + '/' + currentGig.json_metadata.subcategory">{{ currentGig.json_metadata.subcategory }}</router-link></p>
             </div>
             <div class="card-image">
@@ -23,16 +23,24 @@
             </div>
             <div class="card-content">
               <loading-placeholder v-if="!contentLoaded" />
-              <div v-html="adjustedBody"></div>
+              <markdown :postbody="adjustedBody"/>
               <div>
                 <div v-if="contentLoaded" class="detail-action">
-                  <div><a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
-                  <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
+                  <div>
+                    <a v-if="!unvoting" :class="!upvoted ? 'grey-text' : 'indigo-text'" @click="vote" v-tooltip="voteBtnTitle"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ upvotes }}</a>
+                    <a v-if="unvoting" v-tooltip="{content: 'please wait'}">
                     <i class="fa fa-spinner fa-pulse"></i>
                   </a>&nbsp;&nbsp;
                   <a v-if="currentGig.views" class="indigo-text" v-tooltip="'Number of views'"><i class="ion-eye"></i> {{ currentGig.views.length +'&nbsp;&nbsp;&nbsp;'}}</a>
-                  <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">${{ payout.toString().slice(0, 4) }}</span></div>
-                  <a @click="launchComment()" class="reply"><el-button type="secondary" class="secondary">Reply</el-button></a>
+                  <span v-tooltip="{ content: paymentInfo, classes: ['tooltip'] }">${{ payout.toString().slice(0, 4) }}</span>
+                  <a v-if="rsspinning" v-tooltip="{content: 'please wait'}">
+                     <i class="fa fa-spinner fa-pulse"></i>
+                     </a>&nbsp;&nbsp;
+                     <a v-if="resteeming && this.currentGig.author !== this.$store.state.username" v-tooltip="{ content: 'resteem', classes: ['tooltip'] }" :class="!resteem ? 'grey-text' : 'indigo-text'" @click="reblog(currentGig)"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
+                  </div>
+                  <a @click="launchComment()" class="reply">
+                    <el-button type="secondary" class="secondary">Reply</el-button>
+                    </a>
                   <div class="vote-slider py-3" v-if="upvoteActive">
                     <div class="col s9">
                       <slider-range :min="1" v-model="upvoteRange" />
@@ -92,11 +100,14 @@ import SliderRange from 'vue-slider-component'
 import ProfileCard from '@/components/layout/profileCard'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
 import shareOptions from '@/components/snippets/share-options'
+import markdown from '@/components/snippets/markdown'
 import moment from 'moment'
 import userStatus from '@/mixins/status.js'
+import form from '@/mixins/form.js'
+import actions from '@/mixins/actions.js'
 
 export default {
-  mixins: [userStatus],
+  mixins: [userStatus, form, actions],
   components: {
     Page,
     CatNav,
@@ -108,7 +119,8 @@ export default {
     SliderRange,
     LoadingPlaceholder,
     ProfileCard,
-    shareOptions
+    shareOptions,
+    markdown
   },
   data () {
     return {
@@ -133,7 +145,17 @@ export default {
       taskPicture: '',
       upvoteActive: false,
       upvoteRange: 100,
-      isPosting: false
+      isPosting: false,
+      rsspinning: false,
+      resteem: false,
+      resteeming: true
+    }
+  },
+  watch: {
+    'myComment': {
+      handler: function () {
+        this.saveDraft(this.currentGig.author + '/' + this.currentGig.permlink, this.myComment)
+      }
     }
   },
   mounted () {
@@ -143,14 +165,15 @@ export default {
       this.currentGig = response.data
       this.fetchComments()
       this.contentLoaded = true
+      const draft = this.getDrafts(this.currentGig.author + '/' + this.currentGig.permlink)
+      if (draft) {
+        this.myComment = draft
+      }
     }).catch(err => {
       console.log(err)
     })
   },
   computed: {
-    title () {
-      return this.desteemgify(this.currentGig.title)
-    },
     portfolio () {
       if (this.currentGig.json_metadata.images) {
         return this.currentGig.json_metadata.images.filter(Boolean)
@@ -159,7 +182,9 @@ export default {
       }
     },
     adjustedBody () {
-      return this.currentGig.body.replace(/<[^/>][^>]*><\/[^>]+>/igm, '')
+      return this.currentGig.body
+        .replace(/<[^/>][^>]*><\/[^>]+>/igm, '')
+        .replace(/[^(](http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/igm, function (match) { return '<img src="' + match + '"></img>' })
     },
     sellerUsername () {
       return this.currentGig.author
@@ -257,6 +282,7 @@ export default {
         this.comments = result.data
         this.myComment = ''
         this.fetchComments()
+        this.removeDraft(this.currentGig.author + '/' + this.currentGig.permlink)
       }).catch((e) => {
         this.isPosting = false
         console.log(e)

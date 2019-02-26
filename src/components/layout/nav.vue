@@ -80,7 +80,13 @@
                 <el-dropdown-item>
                   <router-link class="waves-effect red-text" to="/invite">Invite friends</router-link>
                 </el-dropdown-item>
-                <el-dropdown-item><a class="waves-effect" href="https://discord.gg/wWrnSXK" target="_blank">Help</a></el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link class="waves-effect" to="/faqs">Frequently Asked Questions</router-link>
+                </el-dropdown-item>
+                <el-dropdown-item><a class="waves-effect" href="https://discord.gg/wWrnSXK" target="_blank">Join our Discord</a></el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link class="waves-effect" to="/privacy">Privacy Policy</router-link>
+                </el-dropdown-item>
                 <el-dropdown-item><a @click.prevent="logout()">Log Out</a></el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
