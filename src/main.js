@@ -13,11 +13,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VueYouTubeEmbed from 'vue-youtube-embed'
 import SocialSharing from 'vue-social-sharing'
 import lineClamp from 'vue-line-clamp'
+import VueLodash from 'vue-lodash'
 
 require('./assets/steemgigs.scss')
 
 Vue.use(ElementUI)
 Vue.use(lineClamp, {importCss: true})
+Vue.use(VueLodash)
 
 Vue.prototype.categories = [
   {

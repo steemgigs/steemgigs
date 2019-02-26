@@ -42,6 +42,7 @@
     "vue-input-tag": "^1.0.0",
     "vue-line-clamp": "^1.3.2",
     "vue-loading-spinner": "^1.0.11",
+    "vue-lodash": "^2.0.0",
     "vue-markdown": "^2.2.4",
     "vue-router": "^3.0.1",
     "vue-slider-component": "^2.5.3",
