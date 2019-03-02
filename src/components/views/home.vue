@@ -13,17 +13,17 @@
       <categoryPreview post_type="steemgigs_post" header="SteemGigs" description="See what the SteemGigs community has to offer" />
       </el-row>
       <!-- Gigs Requests -->
-        <el-row :gutter="15">
+      <el-row :gutter="15">
       <categoryPreview post_type="steemgigs_request" header="SteemGig Requests" description="Custom requests as provided by our community."></categoryPreview>
-       </el-row>
+      </el-row>
        <!-- Testimonial -->
        <el-row :gutter="15">
       <categoryPreview post_type="steemgigs_testimonial" header="Testimonials" description="SteemGigs success-stories written by our users"></categoryPreview>
-       </el-row>
+      </el-row>
       <!-- SurpassingGoogle -->
       <el-row :gutter="15">
       <categoryPreview post_type="steemgigs_surpassinggoogle" header="SurpassingGoogle" description="The Knowledge-Bank of SteemGigs"></categoryPreview>
-       </el-row>
+      </el-row>
     </el-main>
   </div>
 </template>
