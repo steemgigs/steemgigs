@@ -33,22 +33,14 @@ import { Carousel, Slide } from 'vue-carousel'
 import {Plane} from 'vue-loading-spinner'
 import Api from '@/services/api'
 import CatNav from '@/components/layout/catNav'
-import GigCard from '@/components/snippets/gigCard'
 import CategoryPreview from '@/components/snippets/category-preview'
-import TestimonialCard from '@/components/snippets/testimonialCard'
-import WitnessCard from '@/components/snippets/witnessCard'
-import InputTag from 'vue-input-tag'
 
 export default {
   components: {
     Plane,
     CatNav,
-    GigCard,
     Carousel,
     Slide,
-    InputTag,
-    TestimonialCard,
-    WitnessCard,
     CategoryPreview
   },
   data () {
@@ -59,24 +51,7 @@ export default {
       userTags: [],
       errorText: '',
       successText: '',
-      isPosting: false,
-      featuredFetched: false,
-      surpassinggoogleFetched: false,
-      postsFetched: false,
-      gigrequestsFetched: false,
-      testimonialsFetched: false,
-      untalentedFetched: false,
-      fetchingSteemgigs: false,
-      fetchingFeatured: false,
-      fetchingTestimonials: false,
-      viewOptions: ['trending', 'new', 'active', 'active', 'hot', 'promoted'],
-      viewOptionSelection: {
-        steemGigs: '',
-        requests: '',
-        testimonials: '',
-        featured: '',
-        surpassingGoogle: ''
-      }
+      isPosting: false
     }
   },
   methods: {
@@ -86,54 +61,6 @@ export default {
     gettry () {
       console.log(Api.fetchSurpassingGoogle)
     }
-  },
-  computed: {
-    steemgigs () {
-      return this.$store.state.posts.steemgigs
-    },
-    gigrequests () {
-      return this.$store.state.posts.gigrequests
-    },
-    featured () {
-      return this.$store.state.posts.featured
-    },
-    surpassinggoogle () {
-      return this.$store.state.posts.surpassinggoogle
-    },
-    testimonials () {
-      return this.$store.state.posts.testimonials
-    },
-    tryonly () {
-      return Api.fetchTestimonials
-    }
-  },
-  mounted () {
-    this.$eventBus.$on('featured-fetched', payload => {
-      this.featuredFetched = true
-    })
-    this.$eventBus.$on('posts-fetched', payload => {
-      this.postsFetched = true
-    })
-    this.$eventBus.$on('gigrequests-fetched', payload => {
-      this.gigrequestsFetched = true
-    })
-    this.$eventBus.$on('surpassinggoogle-fetched', payload => {
-      this.surpassingoogleFetched = true
-    })
-    this.$eventBus.$on('testimonials-fetched', payload => {
-      this.testimonialsFetched = true
-    })
-    this.$eventBus.$on('untalented-fetched', payload => {
-      this.untalentedFetched = true
-    })
-  },
-  beforeDestroy () {
-    this.$eventBus.$off('featured-fetched')
-    this.$eventBus.$off('posts-fetched')
-    this.$eventBus.$off('gigrequests-fetched')
-    this.$eventBus.$off('surpassinggoogle-fetched')
-    this.$eventBus.$off('testimonials-fetched')
-    this.$eventBus.$off('untalented-fetched')
   }
 }
 </script>
