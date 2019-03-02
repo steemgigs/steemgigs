@@ -47,9 +47,11 @@ import SearchPanel from '@/components/search/search-panel'
 import SortBar from '@/components/search/sort-bar'
 import CatNav from '@/components/layout/catNav'
 import { mapGetters } from 'vuex'
+import sort from '@/mixins/sort.js'
 
 export default {
   name: 'search',
+  mixins: [sort],
   data: function () {
     return {
       searchResults: [],
@@ -81,22 +83,7 @@ export default {
       'searchTerm',
       'isSearching'
     ]),
-    // Add client side sorting using lodash to ensure posts are sorted the same way as provided from API
-    sortedResults: function () {
-      let order = ''
-      let sortType = ''
-      if (this.selectedOrder === 'newest' || this.selectedOrder === 'price_high') {
-        order = 'desc'
-      } else {
-        order = 'asc'
-      }
-      if (this.selectedOrder === 'price_low' || this.selectedOrder === 'price_high') {
-        sortType = 'price'
-      } else {
-        sortType = '_id'
-      }
-      return _.orderBy(this.searchResults, sortType, order)
-    }
+
   }
 }
 </script>
