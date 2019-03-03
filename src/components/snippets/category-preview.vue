@@ -1,5 +1,5 @@
 <template>
-    <div class="category-preview">
+    <div class="category-preview" >
         <div class="category-header">
           <div>
             <h3> {{ header }}</h3>
@@ -7,10 +7,12 @@
             </div>
              <SortBar class="sort-bar" @adjustedSort='updateSort' :optionsType="optionsType" :sortMethod='selectedOrder'/>
         </div>
+        <div class="post-preview-wrapper" v-loading="isLoading">
         <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6" v-for="(post, index) in sortedResults" :key="index">
             <gig-card :gigData="post" v-if="post_type !== 'steemgigs_testimonial'" />
             <testimonial-card v-else :testimonial="post" />
         </el-col>
+        </div>
     </div>
 </template>
 
@@ -32,7 +34,8 @@ export default {
   data () {
     return {
       selectedOrder: 'newest',
-      searchResults: []
+      searchResults: [],
+      isLoading: false
     }
   },
   props: {
@@ -42,6 +45,7 @@ export default {
   },
   methods: {
     async loadPosts () {
+      this.isLoading = true
       try {
         const searchQuery = {
           'type': this.post_type,
@@ -59,6 +63,7 @@ export default {
           message: `Sorry, there seems to have been an error. Error Details - ${err}`
         })
       }
+      this.isLoading = false
     },
     updateSort: function (sortData) {
       this.selectedOrder = sortData.sortMethod
@@ -92,5 +97,9 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 7px
+}
+
+.post-preview-wrapper {
+  min-height: 335px;
 }
 </style>
