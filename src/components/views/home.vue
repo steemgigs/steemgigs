@@ -18,7 +18,7 @@
       </el-row>
        <!-- Testimonial -->
        <el-row :gutter="15">
-      <categoryPreview post_type="steemgigs_testimonial" header="Testimonials" description="SteemGigs success-stories written by our users"></categoryPreview>
+         <categoryPreview post_type="steemgigs_testimonial" header="Testimonials" description="SteemGigs success-stories written by our users"></categoryPreview>
       </el-row>
       <!-- SurpassingGoogle -->
       <el-row :gutter="15">

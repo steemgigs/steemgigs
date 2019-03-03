@@ -10,26 +10,11 @@
 
 export default {
   props: {
-    sortMethod: String
+    sortMethod: String,
+    optionsType: String
   },
   data () {
-    return {
-      options: [{
-        value: 'newest',
-        label: 'Newest'
-      }, {
-        value: 'oldest',
-        label: 'Oldest'
-      }, {
-        value: 'price_low',
-        label: 'Lowest Priced'
-      },
-      {
-        value: 'price_high',
-        label: 'Highest Priced'
-      }
-      ]
-    }
+    return {}
   },
   methods: {
     // Emit an event when the sort method has changed within the component for parent to use in UI
@@ -37,6 +22,30 @@ export default {
       this.$emit('adjustedSort', {
         sortMethod: this.sortMethod
       })
+    }
+  },
+  computed: {
+    options: function () {
+      let options = [{
+        value: 'newest',
+        label: 'Newest'
+      }, {
+        value: 'oldest',
+        label: 'Oldest'
+      }
+      ]
+
+      if (this.optionsType !== 'basic') {
+        options.push({
+          value: 'price_low',
+          label: 'Lowest Priced'
+        },
+        {
+          value: 'price_high',
+          label: 'Highest Priced'
+        })
+      }
+      return options
     }
   }
 }

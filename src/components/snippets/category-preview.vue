@@ -5,7 +5,7 @@
             <h3> {{ header }}</h3>
             <span class="header-desc"> {{ description }}</span>
             </div>
-             <SortBar class="sort-bar" @adjustedSort='updateSort' :sortMethod='selectedOrder'/>
+             <SortBar class="sort-bar" @adjustedSort='updateSort' :optionsType="optionsType" :sortMethod='selectedOrder'/>
         </div>
         <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6" v-for="(post, index) in sortedResults" :key="index">
             <gig-card :gigData="post" v-if="post_type !== 'steemgigs_testimonial'" />
@@ -66,6 +66,16 @@ export default {
   },
   mounted () {
     this.loadPosts()
+  },
+  computed: {
+    optionsType: function () {
+      switch (this.post_type) {
+        case 'steemgigs_post':
+          return 'all'
+        default:
+          return 'basic'
+      }
+    }
   },
   watch: {
     selectedOrder: function () {
