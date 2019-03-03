@@ -7,17 +7,25 @@
             </div>
              <SortBar class="sort-bar" @adjustedSort='updateSort' :optionsType="optionsType" :sortMethod='selectedOrder'/>
         </div>
-        <div class="post-preview-wrapper" v-loading="isLoading">
+        <!-- If there are posts available to be shown, show posts -->
+        <div class="post-preview-wrapper" v-loading="isLoading" v-if="searchResults.length !== 0">
         <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6" v-for="(post, index) in sortedResults" :key="index">
             <gig-card :gigData="post" v-if="post_type !== 'steemgigs_testimonial'" />
             <testimonial-card v-else :testimonial="post" />
         </el-col>
         <el-row class="preview-footer">
            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-        <router-link :to="linkDetails.routerLink"><el-button class="secondary" type="secondary"> Explore {{ linkDetails.buttonText }}</el-button></router-link>
+        <router-link :to="linkDetails.moreLinkDetails.routerLink"><el-button class="secondary" type="secondary"> Explore {{ linkDetails.moreLinkDetails.buttonText }}</el-button></router-link>
         </el-col>
         </el-row>
         </div>
+        <!-- Else show a placeholder card -->
+        <el-row class="preview-footer">
+           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+             <p>Were weren't able to find any results in this category, why not use the button below to create your own</p>
+              <router-link :to="linkDetails.editorLink.routerLink"><el-button class="secondary" type="secondary"> Create {{ linkDetails.editorLink.buttonText }}</el-button></router-link>
+        </el-col>
+        </el-row>
     </div>
 </template>
 
@@ -88,25 +96,42 @@ export default {
     },
     linkDetails: function () {
       let linkDetails = {
-        buttonText: '',
-        routerLink: ''
+        moreLinkDetails: {
+          buttonText: '',
+          routerLink: ''
+        },
+        editorLink: {
+          buttonText: '',
+          routerLink: ''
+        }
       }
+
+      // Set both the link for exploring more posts within a particular category as well as buttons a links in no result scenario
+
       switch (this.post_type) {
         case 'steemgigs_post':
-          linkDetails.buttonText = 'Gigs'
-          linkDetails.routerLink = 'steemgigs'
+          linkDetails.moreLinkDetails.buttonText = 'Gigs'
+          linkDetails.moreLinkDetails.routerLink = 'steemgigs'
+          linkDetails.editorLink.buttonText = 'Gig'
+          linkDetails.editorLink.routerLink = 'create_gig'
           break
         case 'steemgigs_testimonial':
-          linkDetails.buttonText = 'Testimonials'
-          linkDetails.routerLink = 'testimonials'
+          linkDetails.moreLinkDetails.buttonText = 'Testimonials'
+          linkDetails.moreLinkDetails.routerLink = 'testimonials'
+          linkDetails.editorLink.buttonText = 'Testimonial'
+          linkDetails.editorLink.routerLink = 'create_testimonial'
           break
         case 'steemgigs_surpassinggoogle':
-          linkDetails.buttonText = 'SurpassingGoogle'
-          linkDetails.routerLink = 'categories/surpassinggoogle'
+          linkDetails.moreLinkDetails.buttonText = 'SurpassingGoogle'
+          linkDetails.moreLinkDetails.routerLink = 'categories/surpassinggoogle'
+          linkDetails.editorLink.buttonText = 'SurpassingGoogle'
+          linkDetails.editorLink.routerLink = 'surpassing-google'
           break
         case 'steemgigs_request':
-          linkDetails.buttonText = 'SteemGigs Requests'
-          linkDetails.routerLink = 'requested_gigs'
+          linkDetails.moreLinkDetails.buttonText = 'SteemGigs Requests'
+          linkDetails.moreLinkDetails.routerLink = 'requested_gigs'
+          linkDetails.editorLink.buttonText = 'Request'
+          linkDetails.editorLink.routerLink = 'steemgigs_request'
           break
       }
       return linkDetails
