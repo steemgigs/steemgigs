@@ -12,6 +12,11 @@
             <gig-card :gigData="post" v-if="post_type !== 'steemgigs_testimonial'" />
             <testimonial-card v-else :testimonial="post" />
         </el-col>
+        <el-row class="preview-footer">
+           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+        <router-link :to="linkDetails.routerLink"><el-button class="secondary" type="secondary"> Explore {{ linkDetails.buttonText }}</el-button></router-link>
+        </el-col>
+        </el-row>
         </div>
     </div>
 </template>
@@ -80,6 +85,31 @@ export default {
         default:
           return 'basic'
       }
+    },
+    linkDetails: function () {
+      let linkDetails = {
+        buttonText: '',
+        routerLink: ''
+      }
+      switch (this.post_type) {
+        case 'steemgigs_post':
+          linkDetails.buttonText = 'Gigs'
+          linkDetails.routerLink = 'steemgigs'
+          break
+        case 'steemgigs_testimonial':
+          linkDetails.buttonText = 'Testimonials'
+          linkDetails.routerLink = 'testimonials'
+          break
+        case 'steemgigs_surpassinggoogle':
+          linkDetails.buttonText = 'SurpassingGoogle'
+          linkDetails.routerLink = 'categories/surpassinggoogle'
+          break
+        case 'steemgigs_request':
+          linkDetails.buttonText = 'SteemGigs Requests'
+          linkDetails.routerLink = 'requested_gigs'
+          break
+      }
+      return linkDetails
     }
   },
   watch: {
@@ -101,5 +131,10 @@ export default {
 
 .post-preview-wrapper {
   min-height: 335px;
+}
+
+.preview-footer {
+  display: block;
+  text-align: center;
 }
 </style>
