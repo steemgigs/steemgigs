@@ -20,7 +20,7 @@
         </el-row>
         </div>
         <!-- Else show a placeholder card -->
-        <el-row class="preview-footer">
+        <el-row class="preview-footer" v-else>
            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
              <p>Were weren't able to find any results in this category, why not use the button below to create your own</p>
               <router-link :to="linkDetails.editorLink.routerLink"><el-button class="secondary" type="secondary"> Create {{ linkDetails.editorLink.buttonText }}</el-button></router-link>
