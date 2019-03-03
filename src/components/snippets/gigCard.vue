@@ -118,6 +118,7 @@ $blue: #6361D0;
   box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
   transition: all .2s ease-in;
+  z-index: 1000;
   &:hover {
     box-shadow: 0 3px 30px rgba(0, 0, 0, 0.15);
   }
