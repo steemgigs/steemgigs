@@ -116,7 +116,6 @@ $blue: #6361D0;
   }
 }
 #home_ad_slider {
-    padding: 0 10px;
     margin-bottom: 20px;
   img {
     height: 215px;
