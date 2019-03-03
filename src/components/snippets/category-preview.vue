@@ -49,13 +49,6 @@ export default {
           'order': this.selectedOrder,
           'limit': 4
         }
-        // Remove price for testimonial posts
-        if (this.post_type !== 'steemgigs_testimonial') {
-          Object.assign(searchQuery, {
-            'maxPrice': '0',
-            'minPrice': '0'
-          })
-        }
         await Api.search(searchQuery).then(result => {
           this.searchResults = result.data.results
         })
