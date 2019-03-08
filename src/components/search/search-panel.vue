@@ -27,11 +27,11 @@
           </el-form-item>
           <!--  Price -->
           <el-form-item class="price-item" label="Price">
-            <el-input v-model="searchOptions.minPrice" :disabled='freeGigsOnly'>
+            <el-input placeholder="Minimum Price" v-model="searchOptions.minPrice" :disabled='freeGigsOnly'>
                 <template slot="prepend">$</template>
             </el-input>
             <span class='price-join'>to</span>
-            <el-input v-model="searchOptions.maxPrice" :disabled='freeGigsOnly'>
+            <el-input placeholder="Maxiumum Price" v-model="searchOptions.maxPrice" :disabled='freeGigsOnly'>
                 <template slot="prepend">$</template>
             </el-input>
           </el-form-item>
@@ -168,14 +168,6 @@ export default {
     .search-panel label {
         padding: 0 !important;
         line-height: 30px !important;
-    }
-
-    .price-item .el-form-item__content {
-        display: flex;
-    }
-
-    .price-join {
-        padding: 0 10px;
     }
 
     .search-panel .header {

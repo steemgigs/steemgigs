@@ -19,9 +19,9 @@
           <h3>Search Results for "{{this.searchTerm}}"</h3>
           <SortBar @adjustedSort='updateSort' :sortMethod='selectedOrder'/>
         </div>
-        <div class="col s12 m6 l3" v-for="(gig, index) in sortedResults" :key="index">
+        <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="3" v-for="(gig, index) in sortedResults" :key="index">
           <gig-card :gigData="gig" />
-        </div>
+        </el-col>
         <el-pagination class="search-pagination" background layout="prev, pager, next" :current-page.sync="currentPage" :page-count="pageCount"></el-pagination>
       </div>
       <!-- No Results to Show -->
