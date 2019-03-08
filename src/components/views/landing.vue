@@ -1,8 +1,7 @@
 <template>
-  <div>
+  <div class="landing">
     <!-- Hero Section with Search -->
-    <section>
-      <el-main>
+    <section class='hero-landing'>
         <el-row :gutter="15">
           <el-col class="hero-text fill-height flex-col" :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
             <h1>Do The 'Dreaming', Leave 'The Building' To Us</h1>
@@ -15,11 +14,9 @@
             <img src="/static/img/landing_1.svg" alt="">
           </el-col>
         </el-row>
-      </el-main>
     </section>
     <!-- Things you can do on SteemGigs -->
-    <section>
-      <el-main>
+    <section class="about-landing">
         <el-row :gutter="15">
           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
             <h2>Things you can do on SteemGigs</h2>
@@ -33,21 +30,17 @@
             <p>{{ item.description }}</p>
           </el-col>
         </el-row>
-      </el-main>
     </section>
     <!-- Video Section -->
-    <section>
-      <el-main>
+    <section class="video-landing">
         <el-row :gutter="15">
           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
             <youtube video-id="ECZeGSHPWZI" player-width="100%" player-height="auto"></youtube>
           </el-col>
         </el-row>
-      </el-main>
     </section>
     <!-- Stand out section -->
-    <section>
-      <el-main>
+    <section class="stand-landing">
         <el-row :gutter="15">
           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
             <h2>How We Stand Out</h2>
@@ -65,11 +58,9 @@
             <p>{{ item.description }}</p>
           </el-col>
         </el-row>
-      </el-main>
     </section>
     <!-- Core Aspects of SteemGigs -->
-    <section>
-      <el-main>
+    <section class="core-landing">
         <el-row :gutter="15">
           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
             <h2>Core Aspects of SteemGigs</h2>
@@ -78,11 +69,9 @@
             </p>
           </el-col>
         </el-row>
-      </el-main>
     </section>
     <!-- Explore Marketplace -->
-    <section>
-      <el-main>
+    <section class="explore-landing">
         <el-row :gutter="15">
           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
             <h3>Explore our SteemGigs marketplace</h3>
@@ -95,11 +84,9 @@
             <h5>{{ item.title }}</h5>
           </el-col>
         </el-row>
-      </el-main>
     </section>
     <!-- Get Started Grey -->
-    <section>
-      <el-main>
+    <section class="get-started-grey">
         <el-row :gutter="15">
           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
             <h3>All your freelance service needs and more</h3>
@@ -107,14 +94,12 @@
             <el-button type="primary" class="primary">Explore SteemGigs</el-button>
           </el-col>
         </el-row>
-      </el-main>
     </section>
     <!-- SurpassingGoogle -->
-    <section>
-      <el-main>
+    <section class="surpassing-landing">
         <el-row :gutter="15">
           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-            <span>SurpassingGoogle</span>
+            <span class="surpassing-header">SurpassingGoogle</span>
             <span>The knowledge-bank of SteemGigs</span>
             <p>Everyone participant of our ecosystem will eventually become a 'dream-builder' (SteemGigger), building their dreams and those of others. To accomplish this, we have created a bank, for 'deposits & withdrawals' of all the bits & bytes that one
               will ever need to build any noble dream (however limitless). We will vault all this knowledge in our bank, in the form of unadulterated excerpts from the brains, lives, experiences of 'reputable great minds', specific to every niche, field,
@@ -126,11 +111,9 @@
             </div>
           </el-col>
         </el-row>
-      </el-main>
     </section>
     <!-- Quote Section -->
-    <section>
-      <el-main>
+    <section class="quote-landing">
         <el-row :gutter="15">
           <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
             <youtube video-id="ECZeGSHPWZI" player-width="100%" player-height="auto"></youtube>
@@ -140,15 +123,13 @@
             <span>@tobias-g</span>
           </el-col>
         </el-row>
-      </el-main>
     </section>
     <!-- BroPro Section -->
-    <section>
-      <el-main>
+    <section class="bropro-landing">
         <el-row :gutter="15">
           <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
             <span>TRY STEEMGIGS</span>
-            <span>BROPRO</span>
+            <span class="bropro-header">BROPRO</span>
             <p>Talent is generic. A 'brother talent'? Now, that's great. Find that ever missing peice of the puzzle with broPRO.</p>
             <el-button type="secondary">Coming Soon</el-button>
           </el-col>
@@ -156,11 +137,9 @@
             <img src="" alt="BroPro Image">
           </el-col>
         </el-row>
-      </el-main>
     </section>
     <!-- Get Started Purple Section -->
-    <section>
-      <el-main>
+    <section class="get-started-purple">
         <el-row :gutter="15">
           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
             <h3>Help someone build a dream today, offer a freelance service</h3>
@@ -168,11 +147,9 @@
             <el-button>Explore SteemGigs</el-button>
           </el-col>
         </el-row>
-      </el-main>
     </section>
     <!-- Tutorials Section -->
-    <section>
-      <el-main>
+    <section class="tutorial-landing">
         <el-row :gutter="15">
           <el-row :gutter="15">
             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
@@ -182,7 +159,6 @@
             </el-col>
           </el-row>
         </el-row>
-      </el-main>
     </section>
   </div>
 </template>
@@ -296,14 +272,54 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script|Roboto+Slab|Roboto:500|Ubuntu:300');
   .landing {
     background-color: white;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
   }
 
   h1 {
     font-size: 42px;
     font-weight: bold;
     margin: 0;
+  }
+
+  h2 {
+    color: #181566;
+  }
+
+  h3 {
+
+  }
+
+  h4 {
+
+  }
+
+  h5 {
+
+  }
+
+  p {
+    font-family: 'Ubuntu', sans-serif;
+  }
+
+  .surpassing-header {
+    font-family: 'Dancing Script', cursive;
+    color: #6361D0;
+    display: block;
+    font-size: 40px;
+  }
+
+  .bropro-header {
+    font-family: 'Roboto Slab', serif;
+    display: flex;
+    font-size: 40px;
+    color: #6361D0;
   }
 
   .fill-height {
@@ -315,6 +331,14 @@ export default {
     height: fill-available;
   }
 
+  .landing section {
+    padding: 50px 150px;
+  }
+
+  .landing img {
+    object-fit: initial;
+  }
+
   .flex-col {
     display: flex;
     flex-direction: column;
@@ -324,4 +348,45 @@ export default {
   .hero-text {}
 
   .hero-img {}
+
+  .hero-landing {
+    background-color: white;
+  }
+
+  .about-landing {
+    background-color: #F8F8F8;
+    text-align: center;
+  }
+
+  .video-landing {
+    background: linear-gradient(0deg, white 50%,#F8F8F8 50%);
+  }
+
+  .stand-landing {
+
+  }
+
+  .core-landing {
+    background-color: #F8F8F8;
+  }
+
+  .get-started-grey {
+    background-color: #F8F8F8;
+    text-align: center;
+  }
+
+  .quote-landing {
+    background-color: #F8F8F8;
+  }
+
+  .get-started-purple {
+    background-color: #6361D0;
+    color: white;
+    text-align: center;
+  }
+
+  .tutorial-landing {
+        text-align: center;
+  }
+
 </style>
