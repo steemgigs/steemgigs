@@ -362,19 +362,8 @@ export default {
     background-color: #F8F8F8;
   }
 
-  .get-started-grey {
-    background-color: #F8F8F8;
-    text-align: center;
-  }
-
   .quote-landing {
     background-color: #F8F8F8;
-  }
-
-  .get-started-purple {
-    background-color: #6361D0;
-    color: white;
-    text-align: center;
   }
 
   .tutorial-landing {
@@ -394,7 +383,7 @@ export default {
 
 .video-landing {
     background: linear-gradient(0deg, white 50%,#F8F8F8 50%);
-    padding: 0;
+    padding: 0 !important;
     .video-col {
       display: flex;
       justify-content: center;
@@ -469,6 +458,26 @@ export default {
     font-size: 80px;
     color: #6361D0;
   }
+  }
+
+  // Get Started grey section within landing
+
+  .get-started-grey {
+  background-color: #f7f7f7;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  text-align: center;
+  }
+
+  // Get Started Purple section within landing
+
+    .get-started-purple {
+    background-color: #6361d0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.09'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    color: white;
+    text-align: center;
+    h3 {
+      color: white !important;
+    }
   }
 
   // Shared
