@@ -2,7 +2,7 @@
   <div class="landing">
     <!-- Hero Section with Search -->
     <section class='hero-landing'>
-      <el-row :gutter="15">
+      <el-row :gutter="50">
         <el-col class="hero-text fill-height flex-col" :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
           <h1>Do The 'Dreaming', Leave 'The Building' To Us</h1>
           <p>Freelance services for your business, by reputable like-minds.</p>
@@ -117,19 +117,20 @@
     </section>
     <!-- Quote Section -->
     <section class="quote-landing">
-      <el-row :gutter="15">
+      <el-row :gutter="50">
         <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
           <youtube class="sg-video" video-id="N0WleFfFUtU" player-width="100%" player-height="335"></youtube>
         </el-col>
         <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum</p>
-          <span>@tobias-g</span>
+          <img class="quote-mark" src="/static/img/landing/quote-mark.svg" alt="quote-mark">
+          <p class="quote-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum</p>
+          <span class="quote-sig">@tobias-g</span>
         </el-col>
       </el-row>
     </section>
     <!-- BroPro Section -->
     <section class="bropro-landing">
-      <el-row :gutter="15">
+      <el-row :gutter="50">
         <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
           <span class="bropro-subtitle">Try SteemGigs</span>
           <span class="bropro-header">BROPRO</span>
@@ -332,10 +333,6 @@ export default {
     justify-content: center;
   }
 
-  .hero-text {}
-
-  .hero-img {}
-
   .hero-landing {
     background-color: white;
   }
@@ -348,10 +345,6 @@ export default {
   .stand-landing {}
 
   .core-landing {
-    background-color: #F8F8F8;
-  }
-
-  .quote-landing {
     background-color: #F8F8F8;
   }
 
@@ -399,6 +392,24 @@ export default {
           font-size: 18px;
         }
       }
+    }
+  }
+
+  // Quote section within landing page
+
+.quote-landing {
+    background-color: #F8F8F8;
+    .el-row {
+      display: flex;
+      align-items: center;
+    }
+    .quote-mark {
+      height: 35px;
+    }
+    .quote-sig {
+      font-family: 'Dancing Script', cursive;
+      font-size: 25px;
+      font-weight: bold;
     }
   }
 
