@@ -34,8 +34,8 @@
     <!-- Video Section -->
     <section class="video-landing">
         <el-row :gutter="15">
-          <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-            <youtube video-id="xeLYLA6C2AE" player-width="100%" player-height="auto"></youtube>
+          <el-col class="video-col" :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+            <youtube class="sg-video" video-id="xeLYLA6C2AE" player-width="100%" player-height="335"></youtube>
           </el-col>
         </el-row>
     </section>
@@ -119,7 +119,7 @@
     <section class="quote-landing">
         <el-row :gutter="15">
           <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
-            <youtube video-id="N0WleFfFUtU" player-width="100%" player-height="auto"></youtube>
+            <youtube class="sg-video" video-id="N0WleFfFUtU" player-width="100%" player-height="335"></youtube>
           </el-col>
           <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum</p>
@@ -354,10 +354,6 @@ export default {
     text-align: center;
   }
 
-  .video-landing {
-    background: linear-gradient(0deg, white 50%,#F8F8F8 50%);
-  }
-
   .stand-landing {
 
   }
@@ -391,6 +387,20 @@ export default {
     min-height: 500px;
     img {
       width: 100%;
+    }
+  }
+
+  // Video Section within landing
+
+.video-landing {
+    background: linear-gradient(0deg, white 50%,#F8F8F8 50%);
+    padding: 0;
+    .video-col {
+      display: flex;
+      justify-content: center;
+    }
+    .sg-video {
+      width: 50%;
     }
   }
 
@@ -459,5 +469,14 @@ export default {
     font-size: 80px;
     color: #6361D0;
   }
+  }
+
+  // Shared
+
+  .sg-video {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 3px 3px #bfbfbf0f;
   }
 </style>
