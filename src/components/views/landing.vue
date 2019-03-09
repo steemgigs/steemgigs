@@ -81,8 +81,8 @@
             <p>Are you ready to build your dream? Get inspired by exploring our various categories</p>
           </el-col>
         </el-row>
-        <el-row :gutter="15">
-          <el-col v-for="(item, index) in exploreItems" :key="index" :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+        <el-row class="explore-item-row" :gutter="15">
+          <el-col class="explore-item" v-for="(item, index) in exploreItems" :key="index" :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
             <img :src="item.image" alt="Explore Image">
             <h5>{{ item.title }}</h5>
           </el-col>
@@ -391,6 +391,7 @@ export default {
   .tutorial-landing {
         text-align: center;
   }
+
   // About section within landing page
 
   .about-item {
@@ -420,6 +421,27 @@ export default {
         font-size: 18px;
       }
     }
+  }
+}
+
+// Explore section within SteemGigs
+
+.explore-landing {
+  text-align: center;
+  .explore-item-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 300px;
+    align-items: center;
+  .explore-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h5 {
+      margin-top: 10px;
+    }
+  }
   }
 }
 
