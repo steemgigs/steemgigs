@@ -435,6 +435,10 @@ export default {
   .bropro-landing {
     display: flex;
     align-items: center;
+    .el-row {
+          display: flex;
+    align-items: center;
+    }
     .bropro-subtitle {
       text-transform: uppercase;
       font-weight: bold;
