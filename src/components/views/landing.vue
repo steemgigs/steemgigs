@@ -53,8 +53,11 @@
           </el-col>
         </el-row>
         <el-row :gutter="15">
-          <el-col v-for="(item, index) in standItems" :key="index" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-            <h4>{{ item.title }}</h4>
+          <el-col class="stand-item" v-for="(item, index) in standItems" :key="index" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+            <div class="stand-item-header">
+              <i class="el-icon-check"></i>
+              <h4>{{ item.title }}</h4>
+            </div>
             <p>{{ item.description }}</p>
           </el-col>
         </el-row>
@@ -396,6 +399,29 @@ export default {
       width: 100%;
     }
   }
+
+  // Stand out section within landing
+
+  .stand-landing {
+    .stand-item {
+      min-height: 100px;
+      p {
+        margin-left: 30px;
+      }
+    .stand-item-header{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      color: #181566;
+      i {
+        margin-right: 10px;
+        color: #6361D0;
+        font-weight: bold;
+        font-size: 18px;
+      }
+    }
+  }
+}
 
   // Bropro section within landing page
 
