@@ -11,7 +11,7 @@
             </el-input>
           </el-col>
           <el-col class="hero-img fill-height flex-col" :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
-            <img src="/static/img/landing_1.svg" alt="">
+            <img src="/static/img/landing/landing_1.svg" alt="">
           </el-col>
         </el-row>
     </section>
@@ -24,7 +24,7 @@
           </el-col>
         </el-row>
         <el-row :gutter="15">
-          <el-col v-for="(item, index) in aboutItems" :key="index" :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+          <el-col class="about-item" v-for="(item, index) in aboutItems" :key="index" :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
             <img :src="item.image" alt="Do Image">
             <h3>{{ item.title }}</h3>
             <p>{{ item.description }}</p>
@@ -134,7 +134,7 @@
             <el-button type="secondary">Coming Soon</el-button>
           </el-col>
           <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
-            <img src="" alt="BroPro Image">
+            <img src="/static/img/landing/bropro.svg" alt="BroPro Image">
           </el-col>
         </el-row>
     </section>
@@ -170,27 +170,27 @@ export default {
     return {
       searchString: '',
       aboutItems: [{
-        image: '',
+        image: '/static/img/landing/create_gig.svg',
         title: 'Create A Gig',
         description: 'Whether you an expert or non-expert, you can offer a service in exchange for STEEM, STEEM Dollars, Steem Power or ‘for free’. SteemGigs has an un(dis)talented paradigm. This means that on SteemGigs, everyone has something to offer. '
       },
       {
-        image: '',
+        image: '/static/img/landing/locate.svg',
         title: 'Locate A Gig',
         description: 'We maintain a repository of gigs (services) offered by ‘a community of reputable great minds’. We have a vibrant community, heartily seeking to help you ‘build your dream’. We don’t only offer you talents; we offer you a like-mind, a SteemGigger, a dream-builder, a brother. Visit https://steemgigs.org, to locate that special someone. '
       },
       {
-        image: '',
+        image: '/static/img/landing/custom.svg',
         title: 'Create A Custom Request Or Microtask',
         description: '“Do the dreaming, leave ‘the building’ to us”. Where you can’t find the ‘exact gig’ that fits your need, you can create a ‘custom request’ or ‘a microtask request’ and we will actively seek out reputable great minds from our community who can help. '
       },
       {
-        image: '',
+        image: '/static/img/landing/create.svg',
         title: 'Create Content',
         description: 'On STEEMGIGS, content is queen. A core aspect of SteemGigs is our knowledge-bank, a repository of niche-based information borne out of experience. We welcome content-contributions for our users. This content ranks in the search engines and is published to the steem blockchain, before a large community.'
       },
       {
-        image: '',
+        image: '/static/img/landing/curate.svg',
         title: 'Curate And Interact',
         description: 'On SteemGigs, everyone has something to offer. You can also visit SteemGigs for the sole reason of interacting with its community. One way of doing so is by curating content. This means that you can find posts to read, like (upvote), leave comments on etc right there on https://steemgigs.org '
       }
@@ -222,42 +222,42 @@ export default {
       ],
       exploreItems: [{
         title: 'Fun & Lifestyle',
-        image: '',
+        image: '/static/img/landing/fun.svg',
         link: ''
       },
       {
         title: 'Graphics & Design',
-        image: '',
+        image: '/static/img/landing/design.svg',
         link: ''
       },
       {
         title: 'Videos & Animation',
-        image: '',
+        image: '/static/img/landing/video.svg',
         link: ''
       },
       {
         title: 'Music',
-        image: '',
+        image: '/static/img/landing/music.svg',
         link: ''
       },
       {
         title: 'Business',
-        image: '',
+        image: '/static/img/landing/business.svg',
         link: ''
       },
       {
         title: 'Digital Marketing',
-        image: '',
+        image: '/static/img/landing/trend.svg',
         link: ''
       },
       {
         title: 'Writing & Translation',
-        image: '',
+        image: '/static/img/landing/writing.svg',
         link: ''
       },
       {
         title: 'Programming & Tech',
-        image: '',
+        image: '/static/img/landing/programming.svg',
         link: ''
       }
       ]
@@ -388,5 +388,20 @@ export default {
   .tutorial-landing {
         text-align: center;
   }
+  // About section within landing page
 
+  .about-item {
+    min-height: 500px;
+    img {
+      width: 100%;
+    }
+  }
+
+  // Bropro section within landing page
+
+  .bropro-landing {
+    img {
+      width: 100%;
+    }
+  }
 </style>
