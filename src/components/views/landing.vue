@@ -72,6 +72,8 @@
           </p>
         </el-col>
       </el-row>
+      <el-row :gutter="15">
+      </el-row>
     </section>
     <!-- Explore Marketplace -->
     <section class="explore-landing">
@@ -264,6 +266,33 @@ export default {
         image: '/static/img/landing/programming.svg',
         link: ''
       }
+      ],
+      coreItems: [
+        {
+          image: '/static/img/landing/dream.jpg',
+          title: 'Be A Dream Builder',
+          description: 'Sell and offer your freelance services to the community'
+        },
+        {
+          image: '/static/img/landing/dream2.jpg',
+          title: 'Build a dream',
+          description: 'Avail of a gig, else, create a custom request'
+        },
+        {
+          image: '/static/img/landing/reach.jpg',
+          title: 'Contribute knowledge to our knowledge bank',
+          description: 'Becoming A Dream Builder'
+        },
+        {
+          image: '/static/img/landing/praise.jpg',
+          title: 'A dream builder is reputable',
+          description: 'Did your freelancer treat you amazingly, tell the world'
+        },
+        {
+          image: '/static/img/landing/inspire.jpg',
+          title: 'Inspire reputable dream builders',
+          description: 'Seek out avenues to inspire SteemGiggers'
+        }
       ]
     }
   },
