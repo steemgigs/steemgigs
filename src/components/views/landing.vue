@@ -19,7 +19,7 @@
     <section class="about-landing">
       <el-row :gutter="25">
         <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-          <h2>Things you can do on SteemGigs</h2>
+          <h3>Things you can do on SteemGigs</h3>
           <p>Explore what is available on our platform below</p>
         </el-col>
       </el-row>
@@ -326,8 +326,11 @@ export default {
   .about-landing {
     background-color: #F8F8F8;
     text-align: center;
+    h4, h2, h3 {
+          margin: 0;
+        }
     .about-item {
-      min-height: 375px;
+      min-height: 380px;
       img {
         width: 65%;
         min-width: 200px;
@@ -356,7 +359,7 @@ export default {
   // Stand out section within landing
   .stand-landing {
     .stand-item {
-      min-height: 100px;
+      min-height: 105px;
       p {
         margin-left: 30px;
       }
@@ -365,6 +368,9 @@ export default {
         flex-direction: row;
         align-items: center;
         color: #181566;
+        h4 {
+          margin: 0;
+        }
         i {
           margin-right: 10px;
           color: #6361D0;
