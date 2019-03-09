@@ -131,10 +131,10 @@
     <section class="bropro-landing">
         <el-row :gutter="15">
           <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
-            <span>TRY STEEMGIGS</span>
+            <span class="bropro-subtitle">Try SteemGigs</span>
             <span class="bropro-header">BROPRO</span>
             <p>Talent is generic. A 'brother talent'? Now, that's great. Find that ever missing peice of the puzzle with broPRO.</p>
-            <el-button type="secondary">Coming Soon</el-button>
+            <el-button disabled="true" type="secondary">Coming Soon</el-button>
           </el-col>
           <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
             <img src="/static/img/landing/bropro.svg" alt="BroPro Image">
@@ -318,13 +318,6 @@ export default {
     font-size: 40px;
   }
 
-  .bropro-header {
-    font-family: 'Roboto Slab', serif;
-    display: flex;
-    font-size: 40px;
-    color: #6361D0;
-  }
-
   .fill-height {
     height: 100%;
     height: -moz-available;
@@ -448,8 +441,23 @@ export default {
   // Bropro section within landing page
 
   .bropro-landing {
+    display: flex;
+    align-items: center;
+    .bropro-subtitle {
+      text-transform: uppercase;
+      font-weight: bold;
+      color: #181566;
+      margin-bottom: -25px;
+      display: block;
+    }
     img {
       width: 100%;
     }
+    .bropro-header {
+    font-family: 'Roboto Slab', serif;
+    display: flex;
+    font-size: 80px;
+    color: #6361D0;
+  }
   }
 </style>
