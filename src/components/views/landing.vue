@@ -17,7 +17,7 @@
     </section>
     <!-- Things you can do on SteemGigs -->
     <section class="about-landing">
-      <el-row :gutter="15">
+      <el-row :gutter="25">
         <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
           <h2>Things you can do on SteemGigs</h2>
           <p>Explore what is available on our platform below</p>
@@ -354,9 +354,10 @@ export default {
 
   // About section within landing page
   .about-item {
-    min-height: 500px;
+    min-height: 375px;
     img {
-      width: 100%;
+      width: 65%;
+      min-width: 200px;
     }
   }
 
