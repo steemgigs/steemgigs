@@ -2,7 +2,7 @@
   <div class="landing">
     <!-- Hero Section with Search -->
     <section class='hero-landing'>
-      <el-row :gutter="50">
+      <el-row :gutter="75">
         <el-col class="hero-text fill-height flex-col" :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
           <h1>Do The 'Dreaming', Leave 'The Building' To Us</h1>
           <p>Freelance services for your business, by reputable like-minds.</p>
@@ -26,7 +26,7 @@
       <el-row :gutter="15">
         <el-col class="about-item" v-for="(item, index) in aboutItems" :key="index" :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
           <img :src="item.image" alt="Do Image">
-          <h3>{{ item.title }}</h3>
+          <h4>{{ item.title }}</h4>
           <p>{{ item.description }}</p>
         </el-col>
       </el-row>
@@ -43,7 +43,7 @@
     <section class="stand-landing">
       <el-row :gutter="15">
         <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-          <h2>How We Stand Out</h2>
+          <h3>How We Stand Out</h3>
           <p>You have successfully reached STEEMGIGS, a revolutionary freelance services marketplace & social network connected to a decentralized steem blockchain, with the power of Fiverr, Upwork & Freelancer combined. SteemGigs removes all barriers to entry
             in relation to 'building a dream', by implementing an 'untalented & community paradigm', in association with a token economy.
           </p>
@@ -66,7 +66,7 @@
     <section class="core-landing">
       <el-row :gutter="15">
         <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-          <h2>Core Aspects of SteemGigs</h2>
+          <h3>Core Aspects of SteemGigs</h3>
           <p>You have successfully reached STEEMGIGS, a revolutionary freelance services marketplace & social network connected to a decentralized steem blockchain, with the power of Fiverr, Upwork & Freelancer combined. SteemGigs removes all barriers to entry
             in relation to 'building a dream', by implementing an 'untalented & community paradigm', in association with a token economy.
           </p>
@@ -159,7 +159,7 @@
       <el-row :gutter="15">
         <el-row :gutter="15">
           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-            <h2>Tutorials</h2>
+            <h3>Tutorials</h3>
             <p>You have successfully reached STEEMGIGS, a revolutionary freelance services marketplace & social network connected to a decentralized steem blockchain, with the power of Fiverr, Upwork & Freelancer combined.
             </p>
           </el-col>
@@ -267,32 +267,31 @@ export default {
         link: ''
       }
       ],
-      coreItems: [
-        {
-          image: '/static/img/landing/dream.jpg',
-          title: 'Be A Dream Builder',
-          description: 'Sell and offer your freelance services to the community'
-        },
-        {
-          image: '/static/img/landing/dream2.jpg',
-          title: 'Build a dream',
-          description: 'Avail of a gig, else, create a custom request'
-        },
-        {
-          image: '/static/img/landing/reach.jpg',
-          title: 'Contribute knowledge to our knowledge bank',
-          description: 'Becoming A Dream Builder'
-        },
-        {
-          image: '/static/img/landing/praise.jpg',
-          title: 'A dream builder is reputable',
-          description: 'Did your freelancer treat you amazingly, tell the world'
-        },
-        {
-          image: '/static/img/landing/inspire.jpg',
-          title: 'Inspire reputable dream builders',
-          description: 'Seek out avenues to inspire SteemGiggers'
-        }
+      coreItems: [{
+        image: '/static/img/landing/dream.jpg',
+        title: 'Be A Dream Builder',
+        description: 'Sell and offer your freelance services to the community'
+      },
+      {
+        image: '/static/img/landing/dream2.jpg',
+        title: 'Build a dream',
+        description: 'Avail of a gig, else, create a custom request'
+      },
+      {
+        image: '/static/img/landing/reach.jpg',
+        title: 'Contribute knowledge to our knowledge bank',
+        description: 'Becoming A Dream Builder'
+      },
+      {
+        image: '/static/img/landing/praise.jpg',
+        title: 'A dream builder is reputable',
+        description: 'Did your freelancer treat you amazingly, tell the world'
+      },
+      {
+        image: '/static/img/landing/inspire.jpg',
+        title: 'Inspire reputable dream builders',
+        description: 'Seek out avenues to inspire SteemGiggers'
+      }
       ]
     }
   },
@@ -305,89 +304,40 @@ export default {
 </script>
 
 <style lang="scss">
-  @import url('https://fonts.googleapis.com/css?family=Dancing+Script|Roboto+Slab|Roboto:500|Ubuntu:300');
   .landing {
     background-color: white;
+    section {
+      padding: 50px 150px;
+    }
+    img {
+      object-fit: initial;
+    }
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5 {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-  }
-
-  h1 {
-    font-size: 42px;
-    font-weight: bold;
-    margin: 0;
-  }
-
-  h2 {
-    color: #181566;
-  }
-
-  h3 {}
-
-  h4 {}
-
-  h5 {}
-
-  p {
-    font-family: 'Ubuntu', sans-serif;
-  }
-
-  .fill-height {
-    height: 100%;
-    height: -moz-available;
-    /* WebKit-based browsers will ignore this. */
-    height: -webkit-fill-available;
-    /* Mozilla-based browsers will ignore this. */
-    height: fill-available;
-  }
-
-  .landing section {
-    padding: 50px 150px;
-  }
-
-  .landing img {
-    object-fit: initial;
-  }
-
-  .flex-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
+  // Hero section within landing page
   .hero-landing {
     background-color: white;
-  }
-
-  .about-landing {
-    background-color: #F8F8F8;
-    text-align: center;
-  }
-
-  .stand-landing {}
-
-  .core-landing {
-    background-color: #F8F8F8;
-  }
-
-  .tutorial-landing {
-    text-align: center;
+    h1 {
+      color: #6361D0;
+    }
   }
 
   // About section within landing page
-  .about-item {
-    min-height: 375px;
-    img {
-      width: 65%;
-      min-width: 200px;
+  .about-landing {
+    background-color: #F8F8F8;
+    text-align: center;
+    .about-item {
+      min-height: 375px;
+      img {
+        width: 65%;
+        min-width: 200px;
+      }
     }
+  }
+
+  // Core section within landing page
+  .core-landing {
+    background-color: #F8F8F8;
   }
 
   // Video Section within landing
@@ -426,8 +376,7 @@ export default {
   }
 
   // Quote section within landing page
-
-.quote-landing {
+  .quote-landing {
     background-color: #F8F8F8;
     .el-row {
       display: flex;
@@ -518,11 +467,31 @@ export default {
     }
   }
 
+  // Tutorial section within landing page
+  .tutorial-landing {
+    text-align: center;
+  }
+
   // Shared
   .sg-video {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 3px 3px #bfbfbf0f;
+  }
+
+  .fill-height {
+    height: 100%;
+    height: -moz-available;
+    /* WebKit-based browsers will ignore this. */
+    height: -webkit-fill-available;
+    /* Mozilla-based browsers will ignore this. */
+    height: fill-available;
+  }
+
+  .flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 </style>
