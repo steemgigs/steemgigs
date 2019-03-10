@@ -24,6 +24,17 @@
                 </ul>
             </el-col>
         </el-row>
+        <el-row>
+          <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+            <ul>
+              <li class="social-links" v-for="(item, index) in socialLinks" :key="index">
+                <a target="_blank" class="link" :href="item.link">
+                  <img :src="item.icon" alt="Social Icon">
+                  </a>
+              </li>
+            </ul>
+          </el-col>
+        </el-row>
     </el-footer>
 </template>
 
@@ -85,6 +96,24 @@ export default {
         title: 'Business',
         link: '/categories/business'
       }
+      ],
+      socialLinks: [
+        {
+          icon: '/static/img/social/twitter.svg',
+          link: 'https://twitter.com/@steemgigs'
+        },
+        {
+          icon: '/static/img/social/discord.svg',
+          link: ' https://discord.gg/wWrnSXK'
+        },
+        {
+          icon: '/static/img/social/facebook.svg',
+          link: 'https://www.facebook.com/profile.php?id=1418278338268953'
+        },
+        {
+          icon: '/static/img/social/steem.svg',
+          link: 'https://ulogs.org/@steemgigs'
+        }
       ]
     }
   }
@@ -105,6 +134,18 @@ export default {
             columns: 2;
             -webkit-columns: 2;
             -moz-columns: 2;
+        }
+        .social-links {
+          display: inline-flex;
+          flex-direction: row;
+          .link {
+            height: 20px;
+            margin-right: 20px;
+            color: white;
+            img {
+              height: inherit;
+            }
+          }
         }
     }
       @media only screen and (max-width: 600px) {
