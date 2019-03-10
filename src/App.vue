@@ -1,7 +1,7 @@
 <template>
     <el-container>
   <div id="app">
-    <nav-bar />
+    <nav-bar @launchSignUp="showSignUp = true" @launchSignIn="showSignIn = true"/>
       <ElementLoading :active="this.$store.state.isLoading" spinner="spinner" color="#FF1480" :is-full-screen="true" />
    <router-view />
     <div v-show="$store.state.accessToken" class="fixed-action-btn hide-on-large-only">
@@ -23,6 +23,8 @@
         </li>
       </ul>
     </div>
+    <signin :show="showSignIn" @launchSignUp="showSignUp = true, showSignIn = false" @closeSignIn="showSignIn = false" />
+    <signup :show="showSignUp"  @closeSignUp="showSignUp = false"/>
     <feed-back></feed-back>
     <ul class="sidenav collapsible" id="mobile-demo">
       <li v-for="(category, index) in categories" :key="index">
@@ -42,17 +44,23 @@ import NavBar from '@/components/layout/nav'
 import FeedBack from '@/components/layout/feedback'
 import M from 'materialize-css'
 import ElementLoading from 'vue-element-loading'
+import signup from '@/components/sign-up/sign-up.vue'
+import signin from '@/components/sign-in/sign-in.vue'
 
 export default {
   name: 'App',
   components: {
     NavBar,
     FeedBack,
-    ElementLoading
+    ElementLoading,
+    signup,
+    signin
   },
   data () {
     return {
-      navInstance: ''
+      navInstance: '',
+      showSignUp: false,
+      showSignIn: false
     }
   },
   mounted () {

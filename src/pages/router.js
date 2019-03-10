@@ -158,6 +158,12 @@ export default [
     name: 'STEEMGIGS | Task Detail',
     component: GigDetail
   },
+  { path: '/updates',
+    beforeEnter () { location.href = 'https://ulogs.org/@steemgigs' }
+  },
+  { path: '/events',
+    beforeEnter () { location.href = 'https://t.me/teardrops_smt' }
+  },
   {
     path: '*',
     name: 'Not Found | bad Link',
