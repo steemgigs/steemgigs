@@ -172,7 +172,7 @@
     <section class="tutorial-landing">
       <el-row :gutter="15">
         <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-          <h3>Tutorials</h3>
+          <h3>Tutorials (Coming Soon)</h3>
           <p>You have successfully reached STEEMGIGS, a revolutionary freelance services marketplace & social network connected to a decentralized steem blockchain, with the power of Fiverr, Upwork & Freelancer combined.
           </p>
         </el-col>
@@ -314,8 +314,8 @@ export default {
       },
       {
         image: '/static/img/landing/reach.jpg',
-        title: 'Contribute knowledge to our knowledge bank',
-        description: 'Becoming A Dream Builder'
+        title: 'Become a Dream Builder',
+        description: 'Contribute knowledge to our knowledge bank, or read from it'
       },
       {
         image: '/static/img/landing/praise.jpg',
