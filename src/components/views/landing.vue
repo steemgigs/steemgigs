@@ -79,7 +79,7 @@
             <div>
               <h5>{{ item.title }}</h5>
               <p> {{ item.description }}</p>
-              <router-link to="/steemgigs">
+              <router-link to="/surpassing-google">
                 <el-button type="secondary">Explore SteemGigs</el-button>
               </router-link>
             </div>
@@ -120,13 +120,13 @@
         <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
           <span class="surpassing-header">SurpassingGoogle</span>
           <span>The knowledge-bank of SteemGigs</span>
-          <p>Everyone participant of our ecosystem will eventually become a 'dream-builder' (SteemGigger), building their dreams and those of others. To accomplish this, we have created a bank, for 'deposits & withdrawals' of all the bits & bytes that one
+          <p>Every participant of our ecosystem will eventually become a 'dream-builder' (SteemGigger), building their dreams and those of others. To accomplish this, we have created a bank, for 'deposits & withdrawals' of all the bits & bytes that one
             will ever need to build any noble dream (however limitless). We will vault all this knowledge in our bank, in the form of unadulterated excerpts from the brains, lives, experiences of 'reputable great minds', specific to every niche, field,
             industry, expertise etc. By means of your incessant contributions, we will surpass Google (attain limitlessness), reshaping the worldwide web with the freshness of our awesomeness.
           </p>
           <div>
-            <el-button type="primary" class="primary">Read the Knowledge Bank</el-button>
-            <el-button type="secondary">Publish to the Knowledge Bank</el-button>
+             <router-link to="/surpassinggoogle"><el-button type="primary" class="primary">Read the Knowledge Bank</el-button></router-link>
+             <router-link to="/surpassing-google"><el-button type="secondary">Publish to the Knowledge Bank</el-button></router-link>
           </div>
         </el-col>
       </el-row>
@@ -367,7 +367,7 @@ export default {
   .landing {
     background-color: white;
     section {
-      padding: 50px 150px;
+      padding: 50px 100px;
     }
     img {
       object-fit: initial;

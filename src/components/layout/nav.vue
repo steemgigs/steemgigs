@@ -5,7 +5,7 @@
         <router-link to="/" class="brand-logo left"><img src="/static/img/logo.gif" alt="logo"></router-link>
         <ul class="right notIn" v-if="!$store.state.accessToken">
           <li><span class="sign-up-option" @click="showSignUp = true">Sign up</span></li>
-          <li><el-button type="primary" class="primary" @click="showSignIn = true">Launch SteemGigs</el-button></li>
+          <li><el-button type="primary" class="primary" @click="showSignIn = true">Sign In</el-button></li>
         </ul>
         <ul class="right shrink nav-options-wrapper" v-if="$store.state.accessToken">
           <div class="hide-on-med-and-down left">
@@ -184,7 +184,7 @@ export default {
     border-bottom: 0px solid #e9e7e7;
     .nav-wrapper {
       &.container {
-        min-width: calc(100% - 60px);
+        min-width: calc(100% - 180px);
         a.brand-logo img {
           height: 1em;
           margin-top: 13px;
