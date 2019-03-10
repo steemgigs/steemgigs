@@ -1,261 +1,357 @@
 <template>
-  <div class="landing white">
-    <div class="main center-align grey-text z-depth-3 text-lighten-4">
-      <img class="bg" src="static/img/black-expert.jpeg" alt="">
-      <h1>Everyone Has Something To Offer</h1>
-      <p>Do the dreaming; leave 'the building' to us.</p>
-      <div class="input-container row">
-        <input type="text" @keyup.enter="openSearch" v-model="searchString" class="browser-default my-input">
-       <button @click.stop="search()" class="btn-large white-text light-blue darken-4">Search</button>
-      </div>
-      <p class="link">Hi Beautiful, <a href="#">see for yourself</a></p>
-    </div>
-    <section class="center cat-showcase py-5">
-      <div class="container">
-        <h2 class="mb-1">Explore SteemGigs</h2>
-        <p class="mb-5 grey-text">Our existing categories are sure to inspire you</p>
-        <div class="row pt-5">
-          <div v-for="(category, index) in categories" :key="index" class="col s6 m4 l3">
-          <a :href="category.url">
-            <div class="category">
-              <i :class="category.icon" class="icon cat-icon"></i>
-              <h6 class="cat-title">{{category.title}}</h6>
-              <span class="cat-description">{{category.description}}</span>
-            </div>
-            </a>
-          </div>
-        </div>
-      </div>
+  <div class="landing">
+    <!-- Hero Section with Search -->
+    <section class='hero-landing'>
+      <el-row gutter="0">
+        <el-col class="hero-text fill-height flex-col" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+          <h1>Do The 'Dreaming', Leave 'The Building' To Us</h1>
+          <p>Freelance services for your business, by reputable like-minds.</p>
+          <el-input v-model="searchString" placeholder="Search SteemGigs" @keyup.native.enter="search">
+            <el-button class="primary" type="primary" slot="append" @click="search()">Search</el-button>
+          </el-input>
+        </el-col>
+        <el-col class="hero-img fill-height flex-col" :xs="0" :sm="0" :md="12" :lg="12" :xl="12">
+          <img src="/static/img/landing/landing_1.svg" alt="">
+        </el-col>
+      </el-row>
     </section>
-    <section class="sm-banner">
-      <div class="row">
-        <div class="col m8 grey-text text-lighten-2">
-          <h3>We Made SteemGigs Just For You</h3>
-          <p>You have successfully connected to SteemGigs, the first freelancing services marketplace &amp; social network on a decentralized steem blockchain with the power of Fiverr, Upwork &amp; Freelancer combined.
-          We will passionately &amp; proactively help you bring your innovation, dreams, vision, enterprise etc into full-blown life.</p>
-          <p>
-          On SteemGigs, 'everyone has something to offer'!
-          <br>So, do you want to offer a service in exchange for Steem/Steem Dollars/Steem Power or are you in need of someone to help you accomplish a service e.g build a dream?
-          We have you covered. </p>
-        </div>
-        <div class="col m4">
-          <img class="responsive-img z-depth-5" src="/static/img/agreement.jpeg" alt="">
-        </div>
-      </div>
+    <!-- Things you can do on SteemGigs -->
+    <section class="about-landing">
+      <el-row :gutter="25">
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+          <h3>Things you can do on SteemGigs</h3>
+          <p>Explore what is available on our platform below</p>
+        </el-col>
+      </el-row>
+      <el-row :gutter="15">
+        <el-col class="about-item" v-for="(item, index) in aboutItems" :key="index" :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+          <img :src="item.image" alt="Do Image">
+          <h4>{{ item.title }}</h4>
+          <p>{{ item.description }}</p>
+        </el-col>
+      </el-row>
     </section>
-    <section class="reviews center blue-grey lighten-5 py-5">
-      <h2 class="mb-1">Take the first step</h2>
-      <p class="mb-5 grey-text">Whatever your dreams are, here are a few places to get you started:</p>
-      <!-- <div class="container">
-        <div class="row">
-          <div class="col m5 white">
-            <p class="title">SteemGigs is awesome</p>
+    <!-- Video Section -->
+    <section class="video-landing">
+      <el-row :gutter="15">
+        <el-col class="video-col" :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+          <youtube class="sg-video" video-id="xeLYLA6C2AE" player-width="100%" player-height="335"></youtube>
+        </el-col>
+      </el-row>
+    </section>
+    <!-- Stand out section -->
+    <section class="stand-landing">
+      <el-row :gutter="15">
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+          <h3>How We Stand Out</h3>
+          <p>You have successfully reached STEEMGIGS, a revolutionary freelance services marketplace & social network connected to a decentralized steem blockchain, with the power of Fiverr, Upwork & Freelancer combined. SteemGigs removes all barriers to entry
+            in relation to 'building a dream', by implementing an 'untalented & community paradigm', in association with a token economy.
+          </p>
+          <p>Whether it is an innovation, vision, enterprise or business and it is yours, we consider it 'a dream' and it is about 'your dream' for us. As a result, we will go beyond just getting you the right freelance services. We want to play an active
+            role in historical history as part of your noble dream.
+          </p>
+        </el-col>
+      </el-row>
+      <el-row :gutter="15">
+        <el-col class="stand-item" v-for="(item, index) in standItems" :key="index" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+          <div class="stand-item-header">
+            <i class="el-icon-check"></i>
+            <h4>{{ item.title }}</h4>
           </div>
-          <div class="col m7"></div>
-        </div>
-      </div> -->
-      <div class="slide-container">
-        <carousel class="m-md-5" :autoplay="true" navigationNextLabel="<i class='navicon indigo-text ion-chevron-right'></i>" navigationPrevLabel="<i class='navicon indigo-text ion-chevron-left'></i>" :navigationEnabled="true" :perPage="1" :perPageCustom="[[768, 3], [1024, 4]]">
-          <slide v-for="(slider, i) in sliders" :key="i">
-            <div class="slide mx-3 my-5 px-3 left-align" :style="{'background': 'linear-gradient(150deg, #1c1c1ce0, transparent), url('+ slider.url +') no-repeat center', 'background-size': 'cover' }">
-              <h5 class="head">{{slider.header}}</h5>
-              <p>{{slider.small}}</p>
+          <p>{{ item.description }}</p>
+        </el-col>
+      </el-row>
+    </section>
+    <!-- Core Aspects of SteemGigs -->
+    <section class="core-landing">
+      <el-row :gutter="15">
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+          <h3>Core Aspects of SteemGigs</h3>
+          <p>You have successfully reached STEEMGIGS, a revolutionary freelance services marketplace & social network connected to a decentralized steem blockchain, with the power of Fiverr, Upwork & Freelancer combined. SteemGigs removes all barriers to entry
+            in relation to 'building a dream', by implementing an 'untalented & community paradigm', in association with a token economy.
+          </p>
+        </el-col>
+      </el-row>
+      <el-row :gutter="15">
+        <carousel :dots="false" :loop="true" :drag="false" :responsive="{0:{items:1,nav:false},800:{items:2,nav:false},1200:{items:4,nav:false}}">
+          <div class="core-card" v-for="(item, index) in coreItems" :key="index">
+            <img :src="item.image" alt="Core Image">
+            <div>
+              <h5>{{ item.title }}</h5>
+              <p> {{ item.description }}</p>
+              <router-link to="/surpassing-google">
+                <el-button type="secondary">Explore SteemGigs</el-button>
+              </router-link>
             </div>
-          </slide>
+          </div>
         </carousel>
-      </div>
+      </el-row>
     </section>
-    <section class="trio py-5">
-      <div class="container center py-5">
-        <div class="row">
-          <div class="col m4">
-            <h4 class="mb-1 grey-text text-lighten-2">Your Dream</h4>
-            <p class="mb-5 grey-text">Put us to testimonial good use. Simply dream BIG, then tell us what you want. <br>On SteemGigs, 'everyone has something to offer'.</p>
-          </div>
-          <div class="col m4">
-            <h4 class="mb-1 grey-text text-lighten-2">Your Specifications</h4>
-            <p class="mb-5 grey-text">It's your dream, so we will passionately follow your lead. <br>On SteemGigs, 'every talent/un(dis)talent is also a reputable great mind'.</p>
-          </div>
-          <div class="col m4">
-            <h4 class="mb-1 grey-text text-lighten-2">Our Passion</h4>
-            <p class="mb-5 grey-text">In an ecosystem where 'everyone has something to offer', dreams can equal reality. <br>Bringing your dreams into reality is our passion, for if 'going to the moon' happened, your dreams are attainable.</p>
-          </div>
-        </div>
-      </div>
+    <!-- Explore Marketplace -->
+    <section class="explore-landing">
+      <el-row :gutter="15">
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+          <h3>Explore our SteemGigs marketplace</h3>
+          <p>Are you ready to build your dream? Get inspired by exploring our various categories</p>
+        </el-col>
+      </el-row>
+      <el-row class="explore-item-row" :gutter="15">
+        <el-col class="explore-item" v-for="(item, index) in exploreItems" :key="index" :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
+          <router-link :to="item.link">
+            <img :src="item.image" alt="Explore Image">
+            <h5>{{ item.title }}</h5>
+          </router-link>
+        </el-col>
+      </el-row>
     </section>
-    <section class="py-5 blue-grey lighten-5">
-      <div class="container">
-        <div class="row hide">
-          <div class="col m5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia corrupti, est ea beatae unde temporibus reprehenderit, quos magni deserunt praesentium dolorem similique accusantium, odio architecto eveniet molestias eius id perferendis.</div>
-          <div class="col m7"></div>
-        </div>
-      </div>
+    <!-- Get Started Grey -->
+    <section class="get-started-grey">
+      <el-row :gutter="15">
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+          <h3>All your freelance service needs and more</h3>
+          <p>Whether you’re a freelancer, need a freelancer or want to be a freelancer, we have you covered.</p>
+          <router-link to="/steemgigs"><el-button type="primary" class="primary">Explore SteemGigs</el-button></router-link>
+        </el-col>
+      </el-row>
     </section>
-    <footer class="page-footer z-depth-2">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="indigo-text">SteemGigs</h5>
-                <p class="">SteemGigs incentivizes you to build your dreams, by rewarding SteemGiggers for passionately striving to assist you.
-                <br>SteemGigs is built using the decentralized &amp; open-source 'steem blockchain protocol', where every transaction is public. This, eliminates the need for third-party merchants &amp; incentivizing talents/un(dis)talents who assist you to stay 'reputable', Besides, as a result of the steem blockchain, you can more convenient &amp; direct options when paying for GIGs.
-                <br>Imagine paying for your next GIG using a simple 'upvote' or 'like' action.</p>
+    <!-- SurpassingGoogle -->
+    <section class="surpassing-landing">
+      <el-row :gutter="15">
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+          <span class="surpassing-header">SurpassingGoogle</span>
+          <span>The knowledge-bank of SteemGigs</span>
+          <p>Every participant of our ecosystem will eventually become a 'dream-builder' (SteemGigger), building their dreams and those of others. To accomplish this, we have created a bank, for 'deposits & withdrawals' of all the bits & bytes that one
+            will ever need to build any noble dream (however limitless). We will vault all this knowledge in our bank, in the form of unadulterated excerpts from the brains, lives, experiences of 'reputable great minds', specific to every niche, field,
+            industry, expertise etc. By means of your incessant contributions, we will surpass Google (attain limitlessness), reshaping the worldwide web with the freshness of our awesomeness.
+          </p>
+          <div>
+             <router-link to="/categories/surpassinggoogle"><el-button type="primary" class="primary">Read the Knowledge Bank</el-button></router-link>
+             <router-link to="/surpassing-google"><el-button type="secondary">Publish to the Knowledge Bank</el-button></router-link>
+          </div>
+        </el-col>
+      </el-row>
+    </section>
+    <!-- Quote Section -->
+    <section class="quote-landing">
+      <el-row :gutter="50 ">
+        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+          <youtube class="sg-video" video-id="N0WleFfFUtU" player-width="100%" player-height="335"></youtube>
+        </el-col>
+        <el-col class="quote-column" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+          <img class="quote-mark" src="/static/img/landing/quote-mark.svg" alt="quote-mark">
+          <p class="quote-text">"Your noble dream is a SteemGig away"</p>
+          <router-link to="/@eastmeal"><span class="quote-sig">@eastmeal</span></router-link>
+        </el-col>
+      </el-row>
+    </section>
+    <!-- BroPro Section -->
+    <section class="bropro-landing">
+      <el-row :gutter="50">
+        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+          <span class="bropro-subtitle">Try SteemGigs</span>
+          <span class="bropro-header">BROPRO</span>
+          <p>Talent is generic. A 'brother talent'? Now, that's great. Find that ever missing peice of the puzzle with broPRO.</p>
+          <el-button disabled="true" type="secondary">Coming Soon</el-button>
+        </el-col>
+        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+          <img src="/static/img/landing/bropro.svg" alt="BroPro Image">
+        </el-col>
+      </el-row>
+    </section>
+    <!-- Get Started Purple Section -->
+    <section class="get-started-purple">
+      <el-row :gutter="15">
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+          <h3>Help someone build a dream today, offer a freelance service</h3>
+          <p>Need inspiration? Check to see if there is an open custom request or micro task. SteemGigs is for everyone. </p>
+          <router-link to="/steemgigs"><el-button>Explore SteemGigs</el-button></router-link>
+        </el-col>
+      </el-row>
+    </section>
+    <!-- Tutorials Section -->
+    <section class="tutorial-landing">
+      <el-row :gutter="15">
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+          <h3>Tutorials (Coming Soon)</h3>
+          <p>You have successfully reached STEEMGIGS, a revolutionary freelance services marketplace & social network connected to a decentralized steem blockchain, with the power of Fiverr, Upwork & Freelancer combined.
+          </p>
+        </el-col>
+      </el-row>
+      <el-row :gutter="15">
+        <carousel :dots="false" :loop="true" :drag="false" :responsive="{0:{items:1,nav:false},800:{items:2,nav:false},1200:{items:4,nav:false}}">
+          <div @click="alert('Tutorials Coming Soon')" class="tutorial-card" v-for="(item, index) in tutorialPlaceholders" :key="index">
+            <img :src="item.image" alt="Tutorial Image">
+            <div class="tutorial-details">
+              <h4> {{ item.title }}</h4>
+              <div class="author-row">
+                <img :src="'https://steemitimages.com/u/' + item.author + '/avatar'" alt="Author Image">
+                <span> {{ item.author }}</span>
               </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="indigo-text">Our categories</h5>
-                <ul>
-                  <li v-for="(category, i) in categories" :key="i"><a class="" :href="category.url">{{category.title}}</a></li>
-                </ul>
-              </div>
+              <p> {{ item.description }}</p>
             </div>
           </div>
-          <div class="footer-copyright">
-            <div class="container indigo-text">
-            &copy; {{new Date().getFullYear()}} STEEMGIGS
-            </div>
-          </div>
-        </footer>
+        </carousel>
+      </el-row>
+    </section>
+    <sgfooter />
   </div>
 </template>
+
 <script>
-import { Carousel, Slide } from 'vue-carousel'
+import sgfooter from '@/components/layout/footer'
+import carousel from 'vue-owl-carousel'
+
 export default {
+  name: 'landing-page',
   components: {
-    Carousel,
-    Slide
+    sgfooter,
+    carousel
   },
   data () {
     return {
       searchString: '',
-      categories: [{
+      aboutItems: [{
+        image: '/static/img/landing/create_gig.svg',
+        title: 'Create A Gig',
+        description: 'Whether you an expert or non-expert, you can offer a service in exchange for STEEM, STEEM Dollars, Steem Power or ‘for free’. SteemGigs has an un(dis)talented paradigm. This means that on SteemGigs, everyone has something to offer. '
+      },
+      {
+        image: '/static/img/landing/locate.svg',
+        title: 'Locate A Gig',
+        description: 'We maintain a repository of gigs (services) offered by ‘a community of reputable great minds’. We have a vibrant community, heartily seeking to help you ‘build your dream’. We don’t only offer you talents; we offer you a like-mind, a SteemGigger, a dream-builder, a brother. Visit https://steemgigs.org, to locate that special someone. '
+      },
+      {
+        image: '/static/img/landing/custom.svg',
+        title: 'Create A Custom Request Or Microtask',
+        description: '“Do the dreaming, leave ‘the building’ to us”. Where you can’t find the ‘exact gig’ that fits your need, you can create a ‘custom request’ or ‘a microtask request’ and we will actively seek out reputable great minds from our community who can help. '
+      },
+      {
+        image: '/static/img/landing/create.svg',
+        title: 'Create Content',
+        description: 'On STEEMGIGS, content is queen. A core aspect of SteemGigs is our knowledge-bank, a repository of niche-based information borne out of experience. We welcome content-contributions for our users. This content ranks in the search engines and is published to the steem blockchain, before a large community.'
+      },
+      {
+        image: '/static/img/landing/curate.svg',
+        title: 'Curate And Interact',
+        description: 'On SteemGigs, everyone has something to offer. You can also visit SteemGigs for the sole reason of interacting with its community. One way of doing so is by curating content. This means that you can find posts to read, like (upvote), leave comments on etc right there on https://steemgigs.org '
+      }
+      ],
+      standItems: [{
+        title: 'Token Economy',
+        description: 'We have a token economy that allows users to earn for their content, in addition to ‘services rendered’. (This applies to both clients and freelancers). '
+      },
+      {
+        title: 'Harvest unbelievable talent',
+        description: 'If you are a client, you get more than a freelancer. You get a like-mind, a reputable great mind, a dream-builder and brother.'
+      },
+      {
+        title: 'No Censorship',
+        description: 'No third-parties merchants and its associated fees & no censorship. (meaning your gigs can’t be deleted). '
+      },
+      {
+        title: 'Invest & Earn',
+        description: 'You can have a stake in the company by virtue of the teardrops SMT.'
+      },
+      {
+        title: 'Knowledge',
+        description: 'We have a knowledge-bank, that maintains a repository of expert-knowledge, borne out of real-life experiences.'
+      },
+      {
+        title: 'Certified Users',
+        description: 'Certified users can earn UI-perks and other exclusive benefits'
+      }
+      ],
+      exploreItems: [{
         title: 'Fun & Lifestyle',
-        icon: 'ion-android-bicycle',
-        description: 'Our talents are reputable great minds',
-        url: '/categories/fun-lifestyle'
-
+        image: '/static/img/landing/fun.svg',
+        link: '/categories/fun-lifestyle'
       },
       {
         title: 'Graphics & Design',
-        icon: 'ion-paintbrush',
-        description: 'Our talents are reputable great minds',
-        url: '/categories/graphics-design'
+        image: '/static/img/landing/design.svg',
+        link: '/categories/graphics-design'
       },
       {
-        title: 'Digital Marketing',
-        icon: 'ion-arrow-graph-up-left',
-        description: 'Our talents are reputable great minds',
-        url: '/categories/digital-marketing'
+        title: 'Videos & Animation',
+        image: '/static/img/landing/video.svg',
+        link: '/categories/videos-and-animation'
       },
       {
-        title: 'Writing and translation',
-        icon: 'ion-edit',
-        description: 'Our talents are reputable great minds',
-        url: '/categories/writing-and-translation'
-      },
-      {
-        title: 'Videos and animation',
-        icon: 'ion-videocamera',
-        description: 'Our talents are reputable great minds',
-        url: '/categories/videos-and-animation'
-      },
-      {
-        title: 'Music & Audio',
-        icon: 'ion-ios-musical-note',
-        description: 'Our talents are reputable great minds',
-        url: '/categories/music-audio'
-      },
-      {
-        title: 'Programming & tech',
-        icon: 'ion-android-laptop',
-        description: 'Our talents are reputable great minds',
-        url: '/categories/programming-tech'
+        title: 'Music',
+        image: '/static/img/landing/music.svg',
+        link: '/categories/music-audio'
       },
       {
         title: 'Business',
-        icon: 'ion-stats-bars',
-        description: 'Our talents are reputable great minds',
-        url: '/categories/business'
-      }],
-      sliders: [
-        {
-          url: '/static/img/steemslide7.jpeg',
-          header: 'All your logo designs',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/steemslide8.jpeg',
-          header: 'Hand crafts and similar',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/steemslide2.jpeg',
-          header: 'We can act out your scripts',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/steemslide3.jpeg',
-          header: 'We will give your images limelight',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/steemslide4.jpeg',
-          header: 'We will write your code',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/agreement.jpeg',
-          header: "Let's Get Your Steemit Posts To Trend.",
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/steemslide7.jpeg',
-          header: 'All your logo designs',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/time.jpeg',
-          header: 'Let Us Render Some Virtual Assistance.',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/steemslide7.jpeg',
-          header: 'All your logo designs',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/steemslide8.jpeg',
-          header: 'Hand crafts and similar',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/steemslide2.jpeg',
-          header: 'Do something awesome',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/steemslide3.jpeg',
-          header: 'Do something awesome',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/steemslide4.jpeg',
-          header: 'Do something awesome',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/agreement.jpeg',
-          header: 'Do something awesome',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/time.jpeg',
-          header: 'Do something awesome',
-          small: 'Our talents are reputable great minds'
-        },
-        {
-          url: '/static/img/steemslide7.jpeg',
-          header: 'All your logo designs',
-          small: 'Our talents are reputable great minds'
-        }
+        image: '/static/img/landing/business.svg',
+        link: '/categories/business'
+      },
+      {
+        title: 'Digital Marketing',
+        image: '/static/img/landing/trend.svg',
+        link: '/categories/digital-marketing'
+      },
+      {
+        title: 'Writing & Translation',
+        image: '/static/img/landing/writing.svg',
+        link: '/categories/writing-and-translation'
+      },
+      {
+        title: 'Programming & Tech',
+        image: '/static/img/landing/programming.svg',
+        link: '/categories/programming-tech'
+      }
+      ],
+      coreItems: [{
+        image: '/static/img/landing/dream.jpg',
+        title: 'Be A Dream Builder',
+        description: 'Sell and offer your freelance services to the community'
+      },
+      {
+        image: '/static/img/landing/dream2.jpg',
+        title: 'Build a dream',
+        description: 'Avail of a gig, else, create a custom request'
+      },
+      {
+        image: '/static/img/landing/reach.jpg',
+        title: 'Become a Dream Builder',
+        description: 'Contribute knowledge to our knowledge bank, or read from it'
+      },
+      {
+        image: '/static/img/landing/praise.jpg',
+        title: 'A dream builder is reputable',
+        description: 'Did your freelancer treat you amazingly, tell the world'
+      },
+      {
+        image: '/static/img/landing/inspire.jpg',
+        title: 'Inspire reputable dream builders',
+        description: 'Seek out avenues to inspire SteemGiggers'
+      }
+      ],
+      tutorialPlaceholders: [{
+        title: 'Getting Started with SteemGigs',
+        image: '/static/img/landing/go.jpg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum',
+        author: 'surpassinggoogle'
+      },
+      {
+        title: 'How to create the perfect gigs',
+        image: '/static/img/landing/book.jpg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum',
+        author: 'surpassinggoogle'
+      },
+      {
+        title: 'Learn from the successes of others',
+        image: '/static/img/landing/class.jpg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum',
+        author: 'surpassinggoogle'
+      },
+      {
+        title: 'Share your skills with the world',
+        image: '/static/img/landing/teach.jpg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum',
+        author: 'surpassinggoogle'
+      }
       ]
     }
   },
@@ -266,125 +362,313 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
   .landing {
-    width: 100vw;
+    background-color: white;
     overflow: auto;
-    height: calc(100vh - 20px);
-    a {
-      color: #01579b;
+    height: calc(100vh - 40px);
+    section {
+      padding: 50px 100px;
     }
-    p {
-      font-size: 1.2rem;
-      &.link {
-        margin-top: 5rem
+    img {
+      object-fit: initial;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .landing {
+      section {
+        padding: 50px 30px;
       }
     }
-    h2 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: #474747;
+}
+
+  // Hero section within landing page
+  .hero-landing {
+    background-color: white;
+    h1 {
+      color: #6361D0;
     }
-    .main {
-      position: relative;
-      padding-top: 15vh;
-      padding-bottom: 15vh;
-      .input-container button{
-        margin-top: -3.6px;
-      }
-      img.bg{
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          z-index: 0;
-          filter: brightness(78%);
-      }
-      * {
-        position: relative;
-        z-index: 1;
-      }
-      input.my-input {
-        padding: 16px 15px;
-        min-width: 300px;
-        margin-top: 15px;
+    img {
+      padding: 60px;
+    }
+    .el-input-group__append {
+      background-color: #6361D0 !important;
+           }
+    button {
+      color: white !important;
+    }
+  }
+
+  // About section within landing page
+  .about-landing {
+    background-color: #F8F8F8;
+    text-align: center;
+    h4,
+    h2,
+    h3 {
+      margin: 0;
+    }
+    .about-item {
+      min-height: 420px;
+      img {
+        width: 65%;
+        min-width: 200px;
       }
     }
-    .navicon {
-      font-size: 1.7em;
-    }
-    .slide {
-      height: 400px;
-      box-shadow: 0 6px 24px 0 rgba(0, 0, 0, 0.4);
-      border-radius: 5px;
-      position: relative;
-      padding: 15px 10px;
+  }
+
+  // Core section within landing page
+  .core-landing {
+    background: linear-gradient(0deg, white 50%, #F8F8F8 50%);
+    .core-card {
+      margin: 0px 10px;
+      text-align: center;
+      border: 1px solid whitesmoke;
+      img {
+        height: 150px;
+      }
       h5 {
-        color: #ededed;
-        margin: 10px 0;
+        margin: 0;
+        color: #181566;
       }
+      div {
+        padding: 20px;
+      }
+    }
+  }
+
+  // Video Section within landing
+  .video-landing {
+    background: linear-gradient(0deg, white 50%, #F8F8F8 50%);
+    padding: 0 !important;
+    .video-col {
+      display: flex;
+      justify-content: center;
+    }
+    .sg-video {
+      width: 50%;
+      min-width: 350px;
+    }
+  }
+
+  // Stand out section within landing
+  .stand-landing {
+    .stand-item {
+      min-height: 105px;
       p {
-        color: #c8c8c8;
-        font-size: 1em;
-        margin: 5px 0;
+        margin-left: 30px;
+      }
+      .stand-item-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #181566;
+        h4 {
+          margin: 0;
+        }
+        i {
+          margin-right: 10px;
+          color: #6361D0;
+          font-weight: bold;
+          font-size: 18px;
+        }
       }
     }
-    .cat-showcase {
-      .category {
-        min-height: 230px;
-        cursor: pointer;
-        .cat-title {
-          transition: transform .2s ease-in;
+  }
+
+  // Quote section within landing page
+  .quote-landing {
+    background-color: #F8F8F8;
+    .el-row {
+      align-items: center;
+    }
+    .quote-text {
+      font-size: 20px;
+    }
+    .quote-mark {
+      height: 35px;
+    }
+    .quote-sig {
+      font-family: 'Dancing Script', cursive;
+      font-size: 25px;
+      font-weight: bold;
+    }
+    .quote-column {
+      padding-left: 25px;
+      padding-right: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: baseline;
+      height: 350px;
+      justify-content: center;
+    }
+  }
+
+  // Explore section within SteemGigs
+  .explore-landing {
+    text-align: center;
+    .explore-item-row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      height: fit-content;
+      align-items: center;
+      .explore-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 75p
+        a {
+              align-items: center;
+    display: inherit;
+    flex-direction: column;
+}
+        h5 {
+          margin-top: 10px;
+          color: #181566;
         }
-        &:hover {
-          .cat-title {
-            transform: translateY(-5px);
+      }
+    }
+  }
+
+  // Bropro section within landing page
+  .bropro-landing {
+    display: flex;
+    align-items: center;
+    .el-row {
+      display: flex;
+      align-items: center;
+    }
+    .bropro-subtitle {
+      text-transform: uppercase;
+      font-weight: bold;
+      color: #181566;
+      margin-bottom: -25px;
+      display: block;
+    }
+    img {
+      width: 100%;
+    }
+    .bropro-header {
+      font-family: 'Roboto Slab', serif;
+      display: flex;
+      font-size: 80px;
+      color: #6361D0;
+    }
+  }
+
+  // Get Started grey section within landing
+  .get-started-grey {
+    background-color: #f7f7f7;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    text-align: center;
+  }
+
+  // Surpassing Google section within landing page
+  .surpassing-landing {
+    text-align: center;
+    .surpassing-header {
+      font-family: 'Dancing Script', cursive;
+      color: #6361D0;
+      display: block;
+      font-size: 40px;
+      font-weight: bold;
+    }
+    button {
+      margin-bottom: 10px;
+    }
+  }
+
+  // Get Started Purple section within landing
+  .get-started-purple {
+    background-color: #6361d0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.09'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    color: white;
+    text-align: center;
+    h3 {
+      color: white !important;
+    }
+    button {
+      color: white;
+      border: 1px solid white;
+      background: 0;
+    }
+    button:hover {
+      color: white;
+      border: 1px solid white;
+      background: 0;
+      opacity: 0.8;
+    }
+  }
+
+  // Tutorial section within landing page
+  .tutorial-landing {
+    h3,
+    p {
+      text-align: center;
+    }
+    .tutorial-card {
+      background: white;
+      display: flex;
+      flex-direction: column;
+      width: auto;
+      margin: 0px 10px;
+      border: 1px solid whitesmoke;
+      border-radius: 5px;
+      img {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+      .tutorial-details {
+        padding: 15px;
+        p {
+          text-align: left;
+        }
+        h4 {
+          margin: 0 0 10px 0;
+        }
+        .author-row {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          img {
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
           }
-          .cat-description {
-            height: 100%;
-            opacity: 1;
-            transform: translateY(0);
+          span {
+            font-weight: bold;
+            color: #1E2F4F;
+            font-size: 13px;
           }
         }
-        i.cat-icon {
-          font-size: 3.5rem;
-          color: rgba(1, 87, 155, .83);
-        }
-        h6.cat-title {
-          font-size: 1.5rem
-        }
-        span.cat-description {
-          color: #949494;
-          height: 0;
-          @media (min-width: 768px) {
-            opacity: 0;
-          }
-          transform: translateY(10px);
-          transition: all .5s ease-in-out;
-        }
       }
     }
-    .trio {
-      background: linear-gradient(to bottom right,#6361D0,#393953);
-      h4 {
-        font-weight: 600;
-      }
-    }
-    .sm-banner {
-      background: linear-gradient(to bottom right,#6361D0,#393953);
-      padding: 50px;
-      h3 {
-        font-size: 2.5rem;
-        color: white
-      }
-    }
-    .page-footer {
-      background-color: #eee;
-      a, p {
-        color: #6361D0;
-      }
-    }
+  }
+
+  // Shared
+  .sg-video {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 3px 3px #bfbfbf0f;
+    width: 100%;
+  }
+
+  .fill-height {
+    height: 100%;
+    height: -moz-available;
+    /* WebKit-based browsers will ignore this. */
+    height: -webkit-fill-available;
+    /* Mozilla-based browsers will ignore this. */
+    height: fill-available;
+  }
+
+  .flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 </style>

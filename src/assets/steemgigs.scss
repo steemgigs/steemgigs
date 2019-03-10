@@ -1,4 +1,7 @@
 $codeBG: whitesmoke;
+
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script|Roboto+Slab|Roboto:500|Ubuntu:300');
+
 body {
   overflow: hidden;
   background: whitesmoke;
@@ -14,7 +17,6 @@ body {
   }
 }
 #app {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: whitesmoke;;
@@ -30,6 +32,7 @@ body {
 
 h1, h2, h4, h5 {
   margin-bottom: 15px;
+  font-family: 'Roboto', sans-serif;
 }
 
 h1 {
@@ -37,16 +40,19 @@ h1 {
 }
 h2 {
   font-size: 2.2em;
+  color: #181566;
 }
-h3 {
-  font-weight: bold;
-  color: #6361D0;
-  font-size: 1.5em;
-  margin: 0;
 
+h3 {
+  font-size: 1.5em;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  color: #181566;
 }
+
 h4 {
   font-size: 1.2em;
+  color: #181566;
 }
 
 h5 {
@@ -59,6 +65,7 @@ h6 {
 
 p {
   font-size: 14px;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 
@@ -67,6 +74,25 @@ p {
 .primary {
   background: #6361D0;
   border: 1px solid #6361D0;
+}
+
+.primary.is-disabled {
+  background: #6361d073;
+  border: 1px solid #6361d073;
+  border: 0;
+}
+
+.primary:hover {
+  background: #6361D0 !important;
+  border: 1px solid #6361D0 !important;
+  opacity: 0.6;
+}
+
+.secondary:hover {
+    background: 0 !important;
+    opacity: 0.6;
+    color: #606266;
+    border-color: #dcdfe6;
 }
 
 a {
@@ -2068,4 +2094,12 @@ hr {
   height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
   height: fill-available;
   border-radius: 5px;
+  }
+
+  .el-dialog {
+    min-width: 365px;
+  }
+
+  .el-dialog__body {
+    padding: 0;
   }

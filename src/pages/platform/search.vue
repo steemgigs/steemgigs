@@ -19,9 +19,9 @@
           <h3>Search Results for "{{this.searchTerm}}"</h3>
           <SortBar @adjustedSort='updateSort' :sortMethod='selectedOrder'/>
         </div>
-        <div class="col s12 m6 l3" v-for="(gig, index) in sortedResults" :key="index">
+        <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="3" v-for="(gig, index) in sortedResults" :key="index">
           <gig-card :gigData="gig" />
-        </div>
+        </el-col>
         <el-pagination class="search-pagination" background layout="prev, pager, next" :current-page.sync="currentPage" :page-count="pageCount"></el-pagination>
       </div>
       <!-- No Results to Show -->
@@ -47,9 +47,11 @@ import SearchPanel from '@/components/search/search-panel'
 import SortBar from '@/components/search/sort-bar'
 import CatNav from '@/components/layout/catNav'
 import { mapGetters } from 'vuex'
+import sort from '@/mixins/sort.js'
 
 export default {
   name: 'search',
+  mixins: [sort],
   data: function () {
     return {
       searchResults: [],
@@ -81,22 +83,7 @@ export default {
       'searchTerm',
       'isSearching'
     ]),
-    // Add client side sorting using lodash to ensure posts are sorted the same way as provided from API
-    sortedResults: function () {
-      let order = ''
-      let sortType = ''
-      if (this.selectedOrder === 'newest' || this.selectedOrder === 'price_high') {
-        order = 'desc'
-      } else {
-        order = 'asc'
-      }
-      if (this.selectedOrder === 'price_low' || this.selectedOrder === 'price_high') {
-        sortType = 'price'
-      } else {
-        sortType = '_id'
-      }
-      return _.orderBy(this.searchResults, sortType, order)
-    }
+
   }
 }
 </script>
