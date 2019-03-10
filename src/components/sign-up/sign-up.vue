@@ -7,7 +7,7 @@
             <el-col class="sign-up-item" v-for="(item, index) in signUpOptions" :key="index" :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
               <img :src="item.image" alt="Sign Up Image">
               <p>{{ item.text }}</p>
-              <el-button :type="item.buttonType" :class="item.buttonType" @click="handleNext(item.type)"> {{ item.buttonText }}</el-button>
+              <el-button :disabled="item.disabled" :type="item.buttonType" :class="item.buttonType" @click="handleNext(item.type)"> {{ item.buttonText }}</el-button>
               <p>{{ item.waitTime }}</p>
             </el-col>
     </el-row>
@@ -28,15 +28,17 @@ export default {
         waitTime: '3 - 10 Day Waiting Time ',
         buttonText: 'Sign Up For Free',
         buttonType: 'secondary',
-        type: 1
+        type: 1,
+        disabled: false
       },
       {
         image: '/static/img/sign-up/finish.svg',
         text: 'Sign up directly from SteemGigs, costs $2, but you get instant access.',
         waitTime: 'Instant Access',
-        buttonText: 'Get Instant Access',
+        buttonText: 'Get Instant Access (Coming Soon)',
         buttonType: 'primary',
-        type: 2
+        type: 2,
+        disabled: true
       }
       ]
     }
@@ -48,7 +50,7 @@ export default {
           window.open('https://signup.steemit.com/', '_blank')
           break
         case 2:
-          alert('launchNinja')
+          alert('Sign ups coming soon')
           break
       }
     }
