@@ -85,8 +85,10 @@
       </el-row>
       <el-row class="explore-item-row" :gutter="15">
         <el-col class="explore-item" v-for="(item, index) in exploreItems" :key="index" :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
-          <img :src="item.image" alt="Explore Image">
-          <h5>{{ item.title }}</h5>
+          <router-link :to="item.link">
+            <img :src="item.image" alt="Explore Image">
+            <h5>{{ item.title }}</h5>
+          </router-link>
         </el-col>
       </el-row>
     </section>
@@ -235,42 +237,42 @@ export default {
       exploreItems: [{
         title: 'Fun & Lifestyle',
         image: '/static/img/landing/fun.svg',
-        link: ''
+        link: '/categories/fun-lifestyle'
       },
       {
         title: 'Graphics & Design',
         image: '/static/img/landing/design.svg',
-        link: ''
+        link: '/categories/graphics-design'
       },
       {
         title: 'Videos & Animation',
         image: '/static/img/landing/video.svg',
-        link: ''
+        link: '/categories/videos-and-animation'
       },
       {
         title: 'Music',
         image: '/static/img/landing/music.svg',
-        link: ''
+        link: '/categories/music-audio'
       },
       {
         title: 'Business',
         image: '/static/img/landing/business.svg',
-        link: ''
+        link: '/categories/business'
       },
       {
         title: 'Digital Marketing',
         image: '/static/img/landing/trend.svg',
-        link: ''
+        link: '/categories/digital-marketing'
       },
       {
         title: 'Writing & Translation',
         image: '/static/img/landing/writing.svg',
-        link: ''
+        link: '/categories/writing-and-translation'
       },
       {
         title: 'Programming & Tech',
         image: '/static/img/landing/programming.svg',
-        link: ''
+        link: '/categories/programming-tech'
       }
       ],
       coreItems: [{
@@ -422,6 +424,7 @@ export default {
         align-items: center;
         h5 {
           margin-top: 10px;
+          color: #181566;
         }
       }
     }
