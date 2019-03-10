@@ -1,5 +1,5 @@
 <template>
-  <el-dialog class="sign-up-modal" :visible.sync="show" width="50%">
+  <el-dialog class="sign-up-modal" :visible.sync="show" width="50%" @closed="sendBasicEvent('closeSignUp')">
     <template slot="title"><h3>Get your Steem Account today</h3>
 </template>
     <p>Signing up to Steem unlocks your chance to use hundreds of awesome Steem apps as well as SteemGigs.</p>
@@ -15,8 +15,10 @@
 </template>
 
 <script>
+import modal from '@/mixins/modal.js'
 export default {
   name: 'sign-up',
+  mixins: [modal],
   props: {
     show: Boolean
   },
