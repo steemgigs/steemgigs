@@ -110,7 +110,7 @@
         <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
           <h3>All your freelance service needs and more</h3>
           <p>Whether you’re a freelancer, need a freelancer or want to be a freelancer, we have you covered.</p>
-          <el-button type="primary" class="primary">Explore SteemGigs</el-button>
+          <router-link to="/steemgigs"><el-button type="primary" class="primary">Explore SteemGigs</el-button></router-link>
         </el-col>
       </el-row>
     </section>
@@ -125,7 +125,7 @@
             industry, expertise etc. By means of your incessant contributions, we will surpass Google (attain limitlessness), reshaping the worldwide web with the freshness of our awesomeness.
           </p>
           <div>
-             <router-link to="/surpassinggoogle"><el-button type="primary" class="primary">Read the Knowledge Bank</el-button></router-link>
+             <router-link to="/categories/surpassinggoogle"><el-button type="primary" class="primary">Read the Knowledge Bank</el-button></router-link>
              <router-link to="/surpassing-google"><el-button type="secondary">Publish to the Knowledge Bank</el-button></router-link>
           </div>
         </el-col>
@@ -164,7 +164,7 @@
         <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
           <h3>Help someone build a dream today, offer a freelance service</h3>
           <p>Need inspiration? Check to see if there is an open custom request or micro task. SteemGigs is for everyone. </p>
-          <el-button>Explore SteemGigs</el-button>
+          <router-link to="/steemgigs"><el-button>Explore SteemGigs</el-button></router-link>
         </el-col>
       </el-row>
     </section>
@@ -494,6 +494,7 @@ export default {
       flex-direction: column;
       align-items: baseline;
       height: 350px;
+      justify-content: center;
     }
   }
 
@@ -565,6 +566,7 @@ export default {
       color: #6361D0;
       display: block;
       font-size: 40px;
+      font-weight: bold;
     }
     button {
       margin-bottom: 10px;
@@ -579,6 +581,17 @@ export default {
     text-align: center;
     h3 {
       color: white !important;
+    }
+    button {
+      color: white;
+      border: 1px solid white;
+      background: 0;
+    }
+    button:hover {
+      color: white;
+      border: 1px solid white;
+      background: 0;
+      opacity: 0.8;
     }
   }
 
