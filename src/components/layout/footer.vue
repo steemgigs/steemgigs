@@ -107,4 +107,10 @@ export default {
             -moz-columns: 2;
         }
     }
+      @media only screen and (max-width: 600px) {
+          .sg-footer {
+            padding: 50px 30px;
+          }
+      }
+
 </style>

@@ -2,15 +2,15 @@
   <div class="landing">
     <!-- Hero Section with Search -->
     <section class='hero-landing'>
-      <el-row :gutter="75">
-        <el-col class="hero-text fill-height flex-col" :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+      <el-row gutter="0">
+        <el-col class="hero-text fill-height flex-col" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <h1>Do The 'Dreaming', Leave 'The Building' To Us</h1>
           <p>Freelance services for your business, by reputable like-minds.</p>
           <el-input v-model="searchString" placeholder="Search SteemGigs">
             <el-button class="primary" slot="append">Search</el-button>
           </el-input>
         </el-col>
-        <el-col class="hero-img fill-height flex-col" :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+        <el-col class="hero-img fill-height flex-col" :xs="0" :sm="0" :md="12" :lg="12" :xl="12">
           <img src="/static/img/landing/landing_1.svg" alt="">
         </el-col>
       </el-row>
@@ -96,7 +96,7 @@
         </el-col>
       </el-row>
       <el-row class="explore-item-row" :gutter="15">
-        <el-col class="explore-item" v-for="(item, index) in exploreItems" :key="index" :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+        <el-col class="explore-item" v-for="(item, index) in exploreItems" :key="index" :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
           <router-link :to="item.link">
             <img :src="item.image" alt="Explore Image">
             <h5>{{ item.title }}</h5>
@@ -133,11 +133,11 @@
     </section>
     <!-- Quote Section -->
     <section class="quote-landing">
-      <el-row :gutter="50">
-        <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+      <el-row :gutter="50 ">
+        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <youtube class="sg-video" video-id="N0WleFfFUtU" player-width="100%" player-height="335"></youtube>
         </el-col>
-        <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+        <el-col class="quote-column" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <img class="quote-mark" src="/static/img/landing/quote-mark.svg" alt="quote-mark">
           <p class="quote-text">"Your noble dream is a SteemGig away"</p>
           <router-link to="/@eastmeal"><span class="quote-sig">@eastmeal</span></router-link>
@@ -147,13 +147,13 @@
     <!-- BroPro Section -->
     <section class="bropro-landing">
       <el-row :gutter="50">
-        <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <span class="bropro-subtitle">Try SteemGigs</span>
           <span class="bropro-header">BROPRO</span>
           <p>Talent is generic. A 'brother talent'? Now, that's great. Find that ever missing peice of the puzzle with broPRO.</p>
           <el-button disabled="true" type="secondary">Coming Soon</el-button>
         </el-col>
-        <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <img src="/static/img/landing/bropro.svg" alt="BroPro Image">
         </el-col>
       </el-row>
@@ -374,11 +374,22 @@ export default {
     }
   }
 
+  @media only screen and (max-width: 600px) {
+    .landing {
+      section {
+        padding: 50px 30px;
+      }
+    }
+}
+
   // Hero section within landing page
   .hero-landing {
     background-color: white;
     h1 {
       color: #6361D0;
+    }
+    img {
+      padding: 60px;
     }
   }
 
@@ -392,7 +403,7 @@ export default {
       margin: 0;
     }
     .about-item {
-      min-height: 380px;
+      min-height: 420px;
       img {
         width: 65%;
         min-width: 200px;
@@ -430,6 +441,7 @@ export default {
     }
     .sg-video {
       width: 50%;
+      min-width: 350px;
     }
   }
 
@@ -462,7 +474,6 @@ export default {
   .quote-landing {
     background-color: #F8F8F8;
     .el-row {
-      display: flex;
       align-items: center;
     }
     .quote-text {
@@ -476,6 +487,14 @@ export default {
       font-size: 25px;
       font-weight: bold;
     }
+    .quote-column {
+      padding-left: 25px;
+      padding-right: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: baseline;
+      height: 350px;
+    }
   }
 
   // Explore section within SteemGigs
@@ -485,12 +504,18 @@ export default {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      height: 300px;
+      height: fit-content;
       align-items: center;
       .explore-item {
         display: flex;
         flex-direction: column;
         align-items: center;
+        min-height: 75p
+        a {
+              align-items: center;
+    display: inherit;
+    flex-direction: column;
+}
         h5 {
           margin-top: 10px;
           color: #181566;
@@ -540,6 +565,9 @@ export default {
       color: #6361D0;
       display: block;
       font-size: 40px;
+    }
+    button {
+      margin-bottom: 10px;
     }
   }
 
@@ -605,6 +633,7 @@ export default {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 3px 3px #bfbfbf0f;
+    width: 100%;
   }
 
   .fill-height {
