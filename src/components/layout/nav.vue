@@ -292,5 +292,6 @@ export default {
     color: #ACACAC;
     font-weight: bold;
     margin-right: 10px;
+    cursor: pointer;
   }
 </style>
