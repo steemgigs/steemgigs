@@ -159,13 +159,26 @@
     <!-- Tutorials Section -->
     <section class="tutorial-landing">
       <el-row :gutter="15">
-        <el-row :gutter="15">
-          <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-            <h3>Tutorials</h3>
-            <p>You have successfully reached STEEMGIGS, a revolutionary freelance services marketplace & social network connected to a decentralized steem blockchain, with the power of Fiverr, Upwork & Freelancer combined.
-            </p>
-          </el-col>
-        </el-row>
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+          <h3>Tutorials</h3>
+          <p>You have successfully reached STEEMGIGS, a revolutionary freelance services marketplace & social network connected to a decentralized steem blockchain, with the power of Fiverr, Upwork & Freelancer combined.
+          </p>
+        </el-col>
+      </el-row>
+      <el-row :gutter="15">
+        <carousel :dots="false" :loop="true" :drag="false" :responsive="{0:{items:1,nav:false},800:{items:2,nav:true},1200:{items:4,nav:true}}">
+           <div @click="alert('Tutorials Coming Soon')" class="tutorial-card" v-for="(item, index) in tutorialPlaceholders" :key="index" :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+               <img :src="item.image" alt="Tutorial Image">
+               <div class="tutorial-details">
+                 <h4> {{ item.title }}</h4>
+               <div class="author-row">
+                 <img :src="'https://steemitimages.com/u/' + item.author + '/avatar'" alt="Author Image">
+                 <span> {{ item.author }}</span>
+               </div>
+               <p> {{ item.description }}</p>
+               </div>
+           </div>
+        </carousel>
       </el-row>
     </section>
     <sgfooter />
@@ -174,11 +187,13 @@
 
 <script>
 import sgfooter from '@/components/layout/footer'
+import carousel from 'vue-owl-carousel'
 
 export default {
   name: 'landing-page',
   components: {
-    sgfooter
+    sgfooter,
+    carousel
   },
   data () {
     return {
@@ -300,6 +315,31 @@ export default {
         title: 'Inspire reputable dream builders',
         description: 'Seek out avenues to inspire SteemGiggers'
       }
+      ],
+      tutorialPlaceholders: [{
+        title: 'Getting Started with SteemGigs',
+        image: '/static/img/landing/go.jpg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum',
+        author: 'surpassinggoogle'
+      },
+      {
+        title: 'How to create the perfect gigs',
+        image: '/static/img/landing/book.jpg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum',
+        author: 'surpassinggoogle'
+      },
+      {
+        title: 'Learn from the successes of others',
+        image: '/static/img/landing/class.jpg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum',
+        author: 'surpassinggoogle'
+      },
+      {
+        title: 'Share your skills with the world',
+        image: '/static/img/landing/teach.jpg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum',
+        author: 'surpassinggoogle'
+      }
       ]
     }
   },
@@ -334,9 +374,11 @@ export default {
   .about-landing {
     background-color: #F8F8F8;
     text-align: center;
-    h4, h2, h3 {
-          margin: 0;
-        }
+    h4,
+    h2,
+    h3 {
+      margin: 0;
+    }
     .about-item {
       min-height: 380px;
       img {
@@ -487,7 +529,46 @@ export default {
 
   // Tutorial section within landing page
   .tutorial-landing {
+    h3, p {
     text-align: center;
+    }
+    .tutorial-card {
+      background: white;
+      display: flex;
+      flex-direction: column;
+      width: auto;
+      margin: 0px 10px;
+      border: 1px solid whitesmoke;
+      border-radius: 5px;
+      img {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+      .tutorial-details {
+        padding: 15px;
+        p {
+          text-align: left;
+        }
+        h4 {
+          margin: 0 0 10px 0;
+        }
+      .author-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        img {
+          width: 25px;
+          height: 25px;
+          margin-right: 10px;
+        }
+        span {
+          font-weight: bold;
+          color: #1E2F4F;
+          font-size: 13px;
+        }
+      }
+      }
+    }
   }
 
   // Shared
