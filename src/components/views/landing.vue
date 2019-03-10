@@ -7,7 +7,7 @@
           <h1>Do The 'Dreaming', Leave 'The Building' To Us</h1>
           <p>Freelance services for your business, by reputable like-minds.</p>
           <el-input v-model="searchString" placeholder="Search SteemGigs" @keyup.native.enter="search">
-            <el-button class="primary" slot="append" @click="search()">Search</el-button>
+            <el-button class="primary" type="primary" slot="append" @click="search()">Search</el-button>
           </el-input>
         </el-col>
         <el-col class="hero-img fill-height flex-col" :xs="0" :sm="0" :md="12" :lg="12" :xl="12">
@@ -392,6 +392,12 @@ export default {
     }
     img {
       padding: 60px;
+    }
+    .el-input-group__append {
+      background-color: #6361D0 !important;
+           }
+    button {
+      color: white !important;
     }
   }
 
