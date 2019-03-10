@@ -373,6 +373,7 @@ export default {
     }
     img {
       object-fit: initial;
+      display: flex;
     }
   }
 
