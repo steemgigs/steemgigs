@@ -73,16 +73,18 @@
         </el-col>
       </el-row>
       <el-row :gutter="15">
-         <carousel :dots="false" :loop="true" :drag="false" :responsive="{0:{items:1,nav:false},800:{items:2,nav:false},1200:{items:4,nav:false}}">
-           <div class="core-card" v-for="(item, index) in coreItems" :key="index">
-             <img :src="item.image" alt="Core Image">
-             <div>
-             <h5>{{ item.title }}</h5>
-             <p> {{ item.description }}</p>
-             <router-link to="/steemgigs"><el-button type="secondary">Explore SteemGigs</el-button></router-link>
-             </div>
-           </div>
-         </carousel>
+        <carousel :dots="false" :loop="true" :drag="false" :responsive="{0:{items:1,nav:false},800:{items:2,nav:false},1200:{items:4,nav:false}}">
+          <div class="core-card" v-for="(item, index) in coreItems" :key="index">
+            <img :src="item.image" alt="Core Image">
+            <div>
+              <h5>{{ item.title }}</h5>
+              <p> {{ item.description }}</p>
+              <router-link to="/steemgigs">
+                <el-button type="secondary">Explore SteemGigs</el-button>
+              </router-link>
+            </div>
+          </div>
+        </carousel>
       </el-row>
     </section>
     <!-- Explore Marketplace -->
@@ -177,17 +179,17 @@
       </el-row>
       <el-row :gutter="15">
         <carousel :dots="false" :loop="true" :drag="false" :responsive="{0:{items:1,nav:false},800:{items:2,nav:false},1200:{items:4,nav:false}}">
-           <div @click="alert('Tutorials Coming Soon')" class="tutorial-card" v-for="(item, index) in tutorialPlaceholders" :key="index">
-               <img :src="item.image" alt="Tutorial Image">
-               <div class="tutorial-details">
-                 <h4> {{ item.title }}</h4>
-               <div class="author-row">
-                 <img :src="'https://steemitimages.com/u/' + item.author + '/avatar'" alt="Author Image">
-                 <span> {{ item.author }}</span>
-               </div>
-               <p> {{ item.description }}</p>
-               </div>
-           </div>
+          <div @click="alert('Tutorials Coming Soon')" class="tutorial-card" v-for="(item, index) in tutorialPlaceholders" :key="index">
+            <img :src="item.image" alt="Tutorial Image">
+            <div class="tutorial-details">
+              <h4> {{ item.title }}</h4>
+              <div class="author-row">
+                <img :src="'https://steemitimages.com/u/' + item.author + '/avatar'" alt="Author Image">
+                <span> {{ item.author }}</span>
+              </div>
+              <p> {{ item.description }}</p>
+            </div>
+          </div>
         </carousel>
       </el-row>
     </section>
@@ -554,8 +556,9 @@ export default {
 
   // Tutorial section within landing page
   .tutorial-landing {
-    h3, p {
-    text-align: center;
+    h3,
+    p {
+      text-align: center;
     }
     .tutorial-card {
       background: white;
@@ -577,21 +580,21 @@ export default {
         h4 {
           margin: 0 0 10px 0;
         }
-      .author-row {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        img {
-          width: 25px;
-          height: 25px;
-          margin-right: 10px;
+        .author-row {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          img {
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+          }
+          span {
+            font-weight: bold;
+            color: #1E2F4F;
+            font-size: 13px;
+          }
         }
-        span {
-          font-weight: bold;
-          color: #1E2F4F;
-          font-size: 13px;
-        }
-      }
       }
     }
   }
