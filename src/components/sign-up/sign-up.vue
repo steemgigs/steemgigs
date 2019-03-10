@@ -1,10 +1,10 @@
 <template>
-  <el-dialog class="sign-up-modal" :visible.sync="show" width="50%" @closed="sendBasicEvent('closeSignUp')">
+  <el-dialog class="sign-up-modal" :visible.sync="show" width="65%" @closed="sendBasicEvent('closeSignUp')">
     <template slot="title"><h3>Get your Steem Account today</h3>
 </template>
     <p>Signing up to Steem unlocks your chance to use hundreds of awesome Steem apps as well as SteemGigs.</p>
     <el-row :gutter="25">
-            <el-col class="sign-up-item" v-for="(item, index) in signUpOptions" :key="index" :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+            <el-col class="sign-up-item" v-for="(item, index) in signUpOptions" :key="index" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
               <img :src="item.image" alt="Sign Up Image">
               <p>{{ item.text }}</p>
               <el-button :disabled="item.disabled" :type="item.buttonType" :class="item.buttonType" @click="handleNext(item.type)"> {{ item.buttonText }}</el-button>
@@ -64,7 +64,7 @@ export default {
   .sign-up-modal {
     text-align: center;
     .el-dialog {
-      padding: 20px;
+      padding: 30px;
         .sign-up-item {
           padding: 10px;
         }
