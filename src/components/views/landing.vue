@@ -166,12 +166,18 @@
         </el-row>
       </el-row>
     </section>
+    <sgfooter />
   </div>
 </template>
 
 <script>
+import sgfooter from '@/components/layout/footer'
+
 export default {
   name: 'landing-page',
+  components: {
+    sgfooter
+  },
   data () {
     return {
       searchString: '',
