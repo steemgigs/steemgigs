@@ -4,8 +4,8 @@
       <div class="nav-wrapper container">
         <router-link to="/" class="brand-logo left"><img src="/static/img/logo.gif" alt="logo"></router-link>
         <ul class="right notIn" v-if="!$store.state.accessToken">
-          <li><a href="https://signup.steemit.com" rel="noopener noreferrer" target="_blank">Sign up</a></li>
-          <li><a data-target="loginPrompt" class="modal-trigger">Log in</a></li>
+          <li><span class="sign-up-option" @click="showSignUp = true">Sign up</span></li>
+          <li><el-button type="primary" class="primary">Launch SteemGigs</el-button></li>
         </ul>
         <ul class="right shrink nav-options-wrapper" v-if="$store.state.accessToken">
           <div class="hide-on-med-and-down left">
@@ -110,16 +110,18 @@
         <a :href="loginURL" class="modal-action modal-close indigo white-text btn">Proceed</a>
       </div>
     </div>
+    <signup :show="showSignUp" />
   </div>
 </template>
 
 <script>
 import sc2 from '@/services/sc2'
 import M from 'materialize-css'
+import signup from '@/components/sign-up/sign-up.vue'
 
 export default {
   components: {
-
+    signup
   },
   data () {
     return {
@@ -127,6 +129,7 @@ export default {
       metadata: '',
       searchTerm: '',
       isAuth: false,
+      showSignUp: false,
       loginURL: sc2.getLoginURL(),
       profile: this.$store.state.profile,
       tips: {
@@ -300,5 +303,11 @@ export default {
   .create-tip {
     margin-left: 20px;
     font-size: 15px;
+  }
+
+  .sign-up-option {
+    color: #ACACAC;
+    font-weight: bold;
+    margin-right: 10px;
   }
 </style>
