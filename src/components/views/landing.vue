@@ -125,8 +125,8 @@
         </el-col>
         <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
           <img class="quote-mark" src="/static/img/landing/quote-mark.svg" alt="quote-mark">
-          <p class="quote-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum</p>
-          <span class="quote-sig">@tobias-g</span>
+          <p class="quote-text">"Your noble dream is a SteemGig away"</p>
+          <router-link to="/@eastmeal"><span class="quote-sig">@eastmeal</span></router-link>
         </el-col>
       </el-row>
     </section>
@@ -387,6 +387,9 @@ export default {
     .el-row {
       display: flex;
       align-items: center;
+    }
+    .quote-text {
+      font-size: 20px;
     }
     .quote-mark {
       height: 35px;
