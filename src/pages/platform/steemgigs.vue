@@ -24,6 +24,7 @@ import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
 import GigCard from '@/components/snippets/gigCard'
+import Api from '@/services/api'
 
 export default {
   components: {
@@ -34,12 +35,32 @@ export default {
   },
   data () {
     return {
-      loading: true
+      loading: true,
+      gigs: ''
     }
   },
-  computed: {
-    gigs () {
-      return this.$store.state.posts.steemgigs || []
+  mounted () {
+    this.getSteemGigs()
+  },
+  methods: {
+    async getSteemGigs () {
+      try {
+        let searchQuery = {
+          'type': 'steemgigs_post',
+          'pageNumber': 1,
+          'order': 'newest',
+          'limit': 50
+        }
+        await Api.search(searchQuery).then(result => {
+          this.gigs = result.data.results
+        })
+      } catch (err) {
+        // Send error toast notification upon error
+        this.$notify.error({
+          title: 'Error',
+          message: `Sorry, there seems to have been an error. Error Details - ${err}`
+        })
+      }
     }
   }
 }
