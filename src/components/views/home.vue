@@ -10,19 +10,19 @@
       </carousel>
       <!-- Gigs -->
       <el-row :gutter="15">
-      <categoryPreview post_type="steemgigs_post" header="SteemGigs" description="See what the SteemGigs community has to offer" />
+      <categoryPreview post_type="steemgigs_post" :limit="cardCount.gigs" header="SteemGigs" description="See what the SteemGigs community has to offer" />
       </el-row>
       <!-- Gigs Requests -->
       <el-row :gutter="15">
-      <categoryPreview post_type="steemgigs_request" header="SteemGig Requests" description="Custom requests as provided by our community."></categoryPreview>
+      <categoryPreview post_type="steemgigs_request" :limit="cardCount.requests" header="SteemGig Requests" description="Custom requests as provided by our community."></categoryPreview>
       </el-row>
        <!-- Testimonial -->
        <el-row :gutter="15">
-         <categoryPreview post_type="steemgigs_testimonial" header="Testimonials" description="SteemGigs success-stories written by our users"></categoryPreview>
+         <categoryPreview post_type="steemgigs_testimonial" :limit='cardCount.testimonials' header="Testimonials" description="SteemGigs success-stories written by our users"></categoryPreview>
       </el-row>
       <!-- SurpassingGoogle -->
       <el-row :gutter="15">
-      <categoryPreview post_type="steemgigs_surpassinggoogle" header="SurpassingGoogle" description="The Knowledge-Bank of SteemGigs"></categoryPreview>
+      <categoryPreview post_type="steemgigs_surpassinggoogle" :limit="cardCount.surpassinggoogle" header="SurpassingGoogle" description="The Knowledge-Bank of SteemGigs"></categoryPreview>
       </el-row>
     </el-main>
   </div>
@@ -51,7 +51,13 @@ export default {
       userTags: [],
       errorText: '',
       successText: '',
-      isPosting: false
+      isPosting: false,
+      cardCount: {
+        gigs: 8,
+        requests: 4,
+        testimonials: 4,
+        surpassinggoogle: 4
+      }
     }
   },
   methods: {

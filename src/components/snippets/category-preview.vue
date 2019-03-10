@@ -54,7 +54,8 @@ export default {
   props: {
     post_type: String,
     header: String,
-    description: String
+    description: String,
+    limit: Number
   },
   methods: {
     async loadPosts () {
@@ -64,7 +65,7 @@ export default {
           'type': this.post_type,
           'pageNumber': 1,
           'order': this.selectedOrder,
-          'limit': 4
+          'limit': this.limit
         }
         await Api.search(searchQuery).then(result => {
           this.searchResults = result.data.results
