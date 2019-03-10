@@ -88,8 +88,8 @@ export default {
     a {
       padding: 11.5px 0.5em;
       line-height: 40px;
-      color: black;
-      font-weight: 500;
+      color: #273444;
+      font-weight: 300;
       position: relative;
       box-sizing: border-box;
       transition: all ease-in-out .3s;
