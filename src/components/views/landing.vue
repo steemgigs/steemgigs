@@ -366,6 +366,8 @@ export default {
 <style lang="scss">
   .landing {
     background-color: white;
+    overflow: auto;
+    height: calc(100vh - 40px);
     section {
       padding: 50px 100px;
     }
