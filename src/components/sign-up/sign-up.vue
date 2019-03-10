@@ -61,8 +61,6 @@ export default {
     text-align: center;
     .el-dialog {
       padding: 20px;
-      .el-dialog__body {
-        padding: 0;
         .sign-up-item {
           padding: 10px;
         }
@@ -73,5 +71,4 @@ export default {
         }
       }
     }
-  }
 </style>

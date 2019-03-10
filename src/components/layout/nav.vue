@@ -5,7 +5,7 @@
         <router-link to="/" class="brand-logo left"><img src="/static/img/logo.gif" alt="logo"></router-link>
         <ul class="right notIn" v-if="!$store.state.accessToken">
           <li><span class="sign-up-option" @click="showSignUp = true">Sign up</span></li>
-          <li><el-button type="primary" class="primary">Launch SteemGigs</el-button></li>
+          <li><el-button type="primary" class="primary" @click="showSignIn = true">Launch SteemGigs</el-button></li>
         </ul>
         <ul class="right shrink nav-options-wrapper" v-if="$store.state.accessToken">
           <div class="hide-on-med-and-down left">
@@ -99,29 +99,20 @@
         </ul>
       </div>
     </nav>
-    <div id="loginPrompt" class="modal">
-      <div class="modal-content grey-text text-darken-1 login-modal">
-        <h4>Redirection to SteemConnect V2</h4>
-        <hr class="grey lighten-2">
-        <p class="grey-text text-darken-3">You will be redirected to SteemConnect v2 to authenticate to the Steem blockchain<br/>SteemConnect is developed and maintained by Steemit, Inc. and Busy.org.<br />Steemgigs.org will never access your private keys.</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-        <a :href="loginURL" class="modal-action modal-close indigo white-text btn">Proceed</a>
-      </div>
-    </div>
+    <signin :show="showSignIn" @launchSignUp="showSignUp = true, showSignIn = false" />
     <signup :show="showSignUp" />
   </div>
 </template>
 
 <script>
-import sc2 from '@/services/sc2'
 import M from 'materialize-css'
 import signup from '@/components/sign-up/sign-up.vue'
+import signin from '@/components/sign-in/sign-in.vue'
 
 export default {
   components: {
-    signup
+    signup,
+    signin
   },
   data () {
     return {
@@ -130,7 +121,7 @@ export default {
       searchTerm: '',
       isAuth: false,
       showSignUp: false,
-      loginURL: sc2.getLoginURL(),
+      showSignIn: false,
       profile: this.$store.state.profile,
       tips: {
         gig: 'Offer a service (related to your expertise, talents/un(dis)talents, experience etc) in exchange for Steem, SBD, Steem Power or for free.',
