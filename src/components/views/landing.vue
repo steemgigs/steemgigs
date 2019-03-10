@@ -73,6 +73,16 @@
         </el-col>
       </el-row>
       <el-row :gutter="15">
+         <carousel :dots="false" :loop="true" :drag="false" :responsive="{0:{items:1,nav:false},800:{items:2,nav:false},1200:{items:4,nav:false}}">
+           <div class="core-card" v-for="(item, index) in coreItems" :key="index">
+             <img :src="item.image" alt="Core Image">
+             <div>
+             <h5>{{ item.title }}</h5>
+             <p> {{ item.description }}</p>
+             <router-link to="/steemgigs"><el-button type="secondary">Explore SteemGigs</el-button></router-link>
+             </div>
+           </div>
+         </carousel>
       </el-row>
     </section>
     <!-- Explore Marketplace -->
@@ -166,8 +176,8 @@
         </el-col>
       </el-row>
       <el-row :gutter="15">
-        <carousel :dots="false" :loop="true" :drag="false" :responsive="{0:{items:1,nav:false},800:{items:2,nav:true},1200:{items:4,nav:true}}">
-           <div @click="alert('Tutorials Coming Soon')" class="tutorial-card" v-for="(item, index) in tutorialPlaceholders" :key="index" :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+        <carousel :dots="false" :loop="true" :drag="false" :responsive="{0:{items:1,nav:false},800:{items:2,nav:false},1200:{items:4,nav:false}}">
+           <div @click="alert('Tutorials Coming Soon')" class="tutorial-card" v-for="(item, index) in tutorialPlaceholders" :key="index">
                <img :src="item.image" alt="Tutorial Image">
                <div class="tutorial-details">
                  <h4> {{ item.title }}</h4>
@@ -390,7 +400,22 @@ export default {
 
   // Core section within landing page
   .core-landing {
-    background-color: #F8F8F8;
+    background: linear-gradient(0deg, white 50%, #F8F8F8 50%);
+    .core-card {
+      margin: 0px 10px;
+      text-align: center;
+      border: 1px solid whitesmoke;
+      img {
+        height: 150px;
+      }
+      h5 {
+        margin: 0;
+        color: #181566;
+      }
+      div {
+        padding: 20px;
+      }
+    }
   }
 
   // Video Section within landing
