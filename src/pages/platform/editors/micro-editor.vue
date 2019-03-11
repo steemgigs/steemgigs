@@ -165,7 +165,7 @@
                 </div>
                 </el-col>
               </el-row>
-              <p>Consider embedding a short video clip of you, telling potential clients why they should avail of your service. This improves your general reputation even on steemit, make your content richer and more worthy of curation etc. (Optional)</p>
+              <p>Consider embedding a short video clip of you, telling potential participants how you would like your request to be catered to. This improves your general reputation even on steemit, make your content richer and more worthy of curation etc. (Optional)</p>
               <el-form-item label="Video URL" prop="videoURL">
                 <el-input v-model="newMicroTask.videoUrl"></el-input>
               </el-form-item>
