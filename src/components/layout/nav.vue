@@ -41,6 +41,12 @@
                     </el-tooltip>
                   </el-dropdown-item>
                   <el-dropdown-item>
+                    <router-link to="/create_microtask">Micro Task</router-link>
+                    <el-tooltip :content="tips.microTask" placement="bottom">
+                      <i class="el-icon-question create-tip"></i>
+                    </el-tooltip>
+                  </el-dropdown-item>
+                  <el-dropdown-item>
                     <router-link to="/create_testimonial">Testimonial</router-link>
                     <el-tooltip :content="tips.testimonial" placement="bottom">
                       <i class="el-icon-question create-tip"></i>
@@ -120,7 +126,8 @@ export default {
         untalented: 'Not an expert yet? No worries! On SteemGigs, you can hone your expertise while offering a service. Select this editor to do just so.',
         surpassingGoogle: 'Select this editor to contribute knowledge (based on your experience), specific to a niche, field, industry, expertise etc to our knowledge-bank.',
         testimonial: 'Share your overall SteemGigs experience with us. So, why not record your service progress & updates, successful deliveries, shout-outs, payments etc using this editor.',
-        custom: 'If you can\'t find the exact gig that you seek, you may want to do a custom request. Try this editor.'
+        custom: 'If you can\'t find the exact gig that you seek, you may want to do a custom request. Try this editor.',
+        microTask: 'A microtask can take different forms. Participants are required to carry out a simple action e.g join a telegram, subscribe to my YouTube, etc'
       }
     }
   },
