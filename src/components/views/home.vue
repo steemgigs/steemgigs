@@ -16,6 +16,10 @@
       <el-row :gutter="15">
       <categoryPreview post_type="steemgigs_request" :limit="cardCount.requests" header="SteemGig Requests" description="Custom requests as provided by our community."></categoryPreview>
       </el-row>
+      <!-- Microtasks -->
+      <el-row :gutter="15">
+      <categoryPreview post_type="microtask_post" :limit="cardCount.microTasks" header="Microtasks" description="A microtask can take different forms. Participants are required to carry out a simple action e.g join a telegram, subscribe to my YouTube, etc "></categoryPreview>
+      </el-row>
        <!-- Testimonial -->
        <el-row :gutter="15">
          <categoryPreview post_type="steemgigs_testimonial" :limit='cardCount.testimonials' header="Testimonials" description="SteemGigs success-stories written by our users"></categoryPreview>
@@ -56,7 +60,8 @@ export default {
         gigs: 8,
         requests: 4,
         testimonials: 4,
-        surpassinggoogle: 4
+        surpassinggoogle: 4,
+        microTasks: 4
       }
     }
   },
