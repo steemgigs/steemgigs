@@ -26,6 +26,7 @@ import NewGigRequest from '@/pages/platform/editors/gigrequest'
 import NewTestimonial from '@/pages/platform/editors/testimonial'
 import NewSurpassingGig from '@/pages/platform/editors/surpassinggoogle'
 import UntalentedEditor from '@/pages/platform/editors/untalented'
+import MicroTask from '@/pages/platform/editors/micro-editor'
 
 export default [
   {
@@ -87,6 +88,11 @@ export default [
     path: '/create_gig',
     name: 'STEEMGIGS | New Steemgig',
     component: NewSteemGig
+  },
+  {
+    path: '/create_microtask',
+    name: 'STEEMGIGS | New Micro Task',
+    component: MicroTask
   },
   {
     path: '/surpassinggoogle/:subcategory',
