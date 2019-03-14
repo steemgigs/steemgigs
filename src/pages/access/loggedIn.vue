@@ -16,7 +16,12 @@ export default {
       let {social, name, profilePic, about, location, coverPic, rep, balance, steemgigsWitness} = responseData
       this.$store.commit('SET_PROFILE', {social, name, profilePic, about, location, coverPic, rep, balance, steemgigsWitness})
     })
-    this.$router.push('/')
+    // Check if last know route is available to be pushed to, push to route if true else go to default page
+    if (window.localStorage.getItem('last-known-route')) {
+      this.$router.push(window.localStorage.getItem('last-known-route'))
+    } else {
+      this.$router.push('/')
+    }
   }
 }
 </script>
