@@ -1,8 +1,5 @@
 import Index from '@/pages/index'
 import LoggedIn from '@/pages/access/loggedIn'
-import Steemgigs from '@/pages/platform/steemgigs'
-import Testimonials from '@/pages/platform/testimonials'
-import GigRequests from '@/pages/platform/gigRequests'
 import featured from '@/pages/platform/featured'
 import Profile from '@/pages/platform/profile'
 import GigDetail from '@/pages/platform/gigDetail'
@@ -18,6 +15,7 @@ import Basket from '@/pages/platform/basket'
 import Dashboard from '@/pages/platform/dashboard'
 import faqs from '@/pages/platform/faqs'
 import privacy from '@/pages/platform/privacy-policy'
+import overview from '@/pages/platform/overview'
 
 // Editors
 
@@ -67,17 +65,22 @@ export default [
   {
     path: '/testimonials',
     name: 'STEEMGIGS | Testimonials',
-    component: Testimonials
+    component: overview
   },
   {
     path: '/steemgigs',
     name: 'STEEMGIGS | gigs',
-    component: Steemgigs
+    component: overview
   },
   {
     path: '/requested_gigs',
     name: 'STEEMGIGS | Requested Gigs',
-    component: GigRequests
+    component: overview
+  },
+  {
+    path: '/micro_tasks',
+    name: 'STEEMGIGS | Micro Tasks',
+    component: overview
   },
   {
     path: '/featured',
