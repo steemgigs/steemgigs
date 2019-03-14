@@ -78,6 +78,11 @@ export default [
     component: overview
   },
   {
+    path: '/micro_tasks',
+    name: 'STEEMGIGS | Micro Tasks',
+    component: overview
+  },
+  {
     path: '/featured',
     name: 'STEEMGIGS | Featured',
     component: featured

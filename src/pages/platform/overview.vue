@@ -41,6 +41,12 @@ export default {
             description: 'SteemGigs success stories written by our users',
             post_type: 'steemgigs_testimonial'
           }
+        case '/micro_tasks':
+          return {
+            title: 'Micro Tasks',
+            description: 'A microtask can take different forms. Participants are required to carry out a simple action e.g join a telegram, subscribe to my YouTube, etc',
+            post_type: 'microtask_post'
+          }
       }
     }
   }
