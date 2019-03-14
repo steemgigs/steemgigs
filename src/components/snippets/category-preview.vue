@@ -157,6 +157,9 @@ export default {
     },
     currentPage: function () {
       this.loadPosts()
+    },
+    category: function () {
+      this.loadPosts()
     }
   }
 }

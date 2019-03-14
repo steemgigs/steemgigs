@@ -2,8 +2,8 @@
   <page :pageClasses="['categories__view', 'row']">
     <cat-nav />
     <el-main>
-      <!-- Posts -->
-      <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+      <!-- Sub Categories --> 
+      <el-col class="subcategories" :xs="1" :sm="1" :md="1" :lg="6" :xl="6">
       <div class="subcats py-2">
         <ul>
           <li v-for="(subcategory, index) in categoryDetails.subcategories" :key="index">
@@ -14,8 +14,8 @@
         </ul>
       </div>
       </el-col>
-      <!-- Sub Categories -->
-       <el-col :xs="24" :sm="24" :md="18" :lg="18" :xl="18">
+      <!-- Posts -->
+       <el-col  :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
        <el-row :gutter="15">
             <categoryPreview mode="pages" :category="category" post_type="steemgigs_post" :limit="8" :header="categoryDetails.name" :description="categoryDetails.description"></categoryPreview>
         </el-row>
@@ -27,7 +27,6 @@
 <script>
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
-import Api from '@/services/api'
 import CategoryPreview from '@/components/snippets/category-preview'
 
 export default {
@@ -38,8 +37,7 @@ export default {
   },
   data () {
     return {
-      loading: true,
-      category: this.$route.params.category
+      loading: true
     }
   },
   computed: {
@@ -57,22 +55,19 @@ export default {
     },
     detailsname () {
       return this.categoryDetails.name
+    },
+    category () {
+      return this.$route.params.category
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  font-size: 3rem;
-}
-.margin-top {
-  margin-top: 10px;
-}
 .left-panel {
   text-align: center;
   font-size: 16px;
-  fonth-weight: 700;
+  font-weight: 700;
 }
 .subcats {
   &>ul {
@@ -94,4 +89,10 @@ h1 {
     }
   }
 }
+// Temp fix to not hiding via element media queries
+      @media only screen and (max-width: 1200px) {
+          .subcats {
+            display: none;
+          }
+      }
 </style>
