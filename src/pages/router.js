@@ -1,6 +1,5 @@
 import Index from '@/pages/index'
 import LoggedIn from '@/pages/access/loggedIn'
-import Steemgigs from '@/pages/platform/steemgigs'
 import Testimonials from '@/pages/platform/testimonials'
 import GigRequests from '@/pages/platform/gigRequests'
 import featured from '@/pages/platform/featured'
@@ -18,6 +17,7 @@ import Basket from '@/pages/platform/basket'
 import Dashboard from '@/pages/platform/dashboard'
 import faqs from '@/pages/platform/faqs'
 import privacy from '@/pages/platform/privacy-policy'
+import overview from '@/pages/platform/overview'
 
 // Editors
 
@@ -72,7 +72,7 @@ export default [
   {
     path: '/steemgigs',
     name: 'STEEMGIGS | gigs',
-    component: Steemgigs
+    component: overview
   },
   {
     path: '/requested_gigs',
