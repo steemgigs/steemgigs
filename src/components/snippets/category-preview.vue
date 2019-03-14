@@ -59,18 +59,26 @@ export default {
     header: String,
     description: String,
     limit: Number,
-    mode: String
+    mode: String,
+    category: String
   },
   methods: {
     async loadPosts () {
       this.isLoading = true
       try {
-        const searchQuery = {
+        let searchQuery = {
           'type': this.post_type,
           'pageNumber': this.currentPage,
           'order': this.selectedOrder,
           'limit': this.limit
         }
+
+        if (this.category) {
+          searchQuery = {
+            ...searchQuery, category: this.category
+          }
+        }
+
         await Api.search(searchQuery).then(result => {
           this.searchResults = result.data.results
           this.pageCount = result.data.pages
