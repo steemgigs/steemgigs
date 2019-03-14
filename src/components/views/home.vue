@@ -10,23 +10,23 @@
       </carousel>
       <!-- Gigs -->
       <el-row :gutter="15">
-      <categoryPreview post_type="steemgigs_post" :limit="cardCount.gigs" header="SteemGigs" description="See what the SteemGigs community has to offer" />
+      <categoryPreview post_type="steemgigs_post" mode="preview" :limit="cardCount.gigs" header="SteemGigs" description="See what the SteemGigs community has to offer" />
       </el-row>
       <!-- Gigs Requests -->
       <el-row :gutter="15">
-      <categoryPreview post_type="steemgigs_request" :limit="cardCount.requests" header="SteemGig Requests" description="Custom requests as provided by our community."></categoryPreview>
+      <categoryPreview post_type="steemgigs_request" mode="preview" :limit="cardCount.requests" header="SteemGig Requests" description="Custom requests as provided by our community."></categoryPreview>
       </el-row>
       <!-- Microtasks -->
       <el-row :gutter="15">
-      <categoryPreview post_type="microtask_post" :limit="cardCount.microTasks" header="Microtasks" description="A microtask can take different forms. Participants are required to carry out a simple action e.g join a telegram, subscribe to my YouTube, etc "></categoryPreview>
+      <categoryPreview post_type="microtask_post" mode="preview" :limit="cardCount.microTasks" header="Microtasks" description="A microtask can take different forms. Participants are required to carry out a simple action e.g join a telegram, subscribe to my YouTube, etc "></categoryPreview>
       </el-row>
        <!-- Testimonial -->
        <el-row :gutter="15">
-         <categoryPreview post_type="steemgigs_testimonial" :limit='cardCount.testimonials' header="Testimonials" description="SteemGigs success-stories written by our users"></categoryPreview>
+         <categoryPreview post_type="steemgigs_testimonial" mode="preview" :limit='cardCount.testimonials' header="Testimonials" description="SteemGigs success-stories written by our users"></categoryPreview>
       </el-row>
       <!-- SurpassingGoogle -->
       <el-row :gutter="15">
-      <categoryPreview post_type="steemgigs_surpassinggoogle" :limit="cardCount.surpassinggoogle" header="SurpassingGoogle" description="The Knowledge-Bank of SteemGigs"></categoryPreview>
+      <categoryPreview post_type="steemgigs_surpassinggoogle" mode="preview" :limit="cardCount.surpassinggoogle" header="SurpassingGoogle" description="The Knowledge-Bank of SteemGigs"></categoryPreview>
       </el-row>
     </el-main>
   </div>

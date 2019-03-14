@@ -3,7 +3,7 @@
     <cat-nav />
     <el-main>
         <el-row :gutter="15">
-            <categoryPreview :post_type="pageDetails.post_type" :limit="8" :header="pageDetails.title" :description="pageDetails.description"></categoryPreview>
+            <categoryPreview mode="pages" :post_type="pageDetails.post_type" :limit="8" :header="pageDetails.title" :description="pageDetails.description"></categoryPreview>
         </el-row>
     </el-main>
   </page>
