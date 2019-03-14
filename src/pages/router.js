@@ -1,6 +1,5 @@
 import Index from '@/pages/index'
 import LoggedIn from '@/pages/access/loggedIn'
-import Testimonials from '@/pages/platform/testimonials'
 import featured from '@/pages/platform/featured'
 import Profile from '@/pages/platform/profile'
 import GigDetail from '@/pages/platform/gigDetail'
@@ -66,7 +65,7 @@ export default [
   {
     path: '/testimonials',
     name: 'STEEMGIGS | Testimonials',
-    component: Testimonials
+    component: overview
   },
   {
     path: '/steemgigs',

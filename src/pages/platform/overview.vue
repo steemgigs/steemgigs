@@ -35,6 +35,12 @@ export default {
             description: 'Gig requests provided by our community',
             post_type: 'steemgigs_request'
           }
+        case '/testimonials':
+          return {
+            title: 'Testimonials',
+            description: 'SteemGigs success stories written by our users',
+            post_type: 'steemgigs_testimonial'
+          }
       }
     }
   }
