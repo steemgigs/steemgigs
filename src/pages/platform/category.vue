@@ -2,7 +2,7 @@
   <page :pageClasses="['categories__view', 'row']">
     <cat-nav />
     <el-main>
-      <!-- Sub Categories --> 
+      <!-- Sub Categories -->
       <el-col class="subcategories" :xs="1" :sm="1" :md="1" :lg="6" :xl="6">
       <div class="subcats py-2">
         <ul>

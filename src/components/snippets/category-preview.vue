@@ -60,7 +60,8 @@ export default {
     description: String,
     limit: Number,
     mode: String,
-    category: String
+    category: String,
+    subcategory: String
   },
   methods: {
     async loadPosts () {
@@ -72,10 +73,16 @@ export default {
           'order': this.selectedOrder,
           'limit': this.limit
         }
-
+        // Add category to query if present
         if (this.category) {
           searchQuery = {
             ...searchQuery, category: this.category
+          }
+        }
+        // Add subategory to query if present
+        if (this.subcategory) {
+          searchQuery = {
+            ...searchQuery, subcategory: this.subcategory
           }
         }
 
@@ -159,6 +166,9 @@ export default {
       this.loadPosts()
     },
     category: function () {
+      this.loadPosts()
+    },
+    subcategory: function () {
       this.loadPosts()
     }
   }
