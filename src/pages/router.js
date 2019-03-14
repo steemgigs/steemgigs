@@ -1,7 +1,6 @@
 import Index from '@/pages/index'
 import LoggedIn from '@/pages/access/loggedIn'
 import Testimonials from '@/pages/platform/testimonials'
-import GigRequests from '@/pages/platform/gigRequests'
 import featured from '@/pages/platform/featured'
 import Profile from '@/pages/platform/profile'
 import GigDetail from '@/pages/platform/gigDetail'
@@ -77,7 +76,7 @@ export default [
   {
     path: '/requested_gigs',
     name: 'STEEMGIGS | Requested Gigs',
-    component: GigRequests
+    component: overview
   },
   {
     path: '/featured',

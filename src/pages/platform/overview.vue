@@ -29,6 +29,12 @@ export default {
             description: 'See what the SteemGigs community has to offer',
             post_type: 'steemgigs_post'
           }
+        case '/requested_gigs':
+          return {
+            title: 'Requested Gigs',
+            description: 'Gig requests provided by our community',
+            post_type: 'steemgigs_request'
+          }
       }
     }
   }
