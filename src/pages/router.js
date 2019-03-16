@@ -7,6 +7,7 @@ import Categories from '@/pages/platform/category'
 import SubCategories from '@/pages/platform/subcategory'
 import SurpassingGoogle from '@/pages/platform/surpassinggoogle'
 import Search from '@/pages/platform/search'
+import UserSearch from '@/pages/platform/user-search'
 import Wallet from '@/pages/platform/wallet'
 import Settings from '@/pages/platform/settings'
 import Invite from '@/pages/platform/invite'
@@ -53,9 +54,14 @@ export default [
     component: privacy
   },
   {
-    path: '/search/:query/',
+    path: '/search/posts/:query',
     name: 'STEEMGIGS | Search',
     component: Search
+  },
+  {
+    path: '/search/users/:query',
+    name: 'STEEMGIGS | Search Users',
+    component: UserSearch
   },
   {
     path: '/complete',
