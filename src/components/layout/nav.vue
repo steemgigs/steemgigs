@@ -117,9 +117,10 @@
 <script>
 import M from 'materialize-css'
 import modal from '@/mixins/modal.js'
+import search from '@/mixins/search.js'
 
 export default {
-  mixins: [modal],
+  mixins: [modal, search],
   data () {
     return {
       user: '',
@@ -135,17 +136,6 @@ export default {
         custom: 'If you can\'t find the exact gig that you seek, you may want to do a custom request. Try this editor.',
         microTask: 'A microtask can take different forms. Participants are required to carry out a simple action e.g join a telegram, subscribe to my YouTube, etc'
       }
-    }
-  },
-  methods: {
-    initSearch (searchType) {
-      this.$store.commit('setSearchTerm', this.searchTerm)
-      if (searchType === 'posts') {
-        this.$router.push(`/search/posts/${this.searchTerm}`)
-      } else {
-        this.$router.push(`/search/users/${this.searchTerm}`)
-      }
-      this.searchTerm = ''
     }
   },
   computed: {
