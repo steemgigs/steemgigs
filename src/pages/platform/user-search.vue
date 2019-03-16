@@ -6,9 +6,9 @@
             <div v-if="users.length !== 0">
               <div class="search-header">
                 <h3>Search Results for "{{this.searchTerm}}"</h3>
-              </div>  
+              </div>
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="3" v-for="(profile, index) in users" :key="index">
-              <ProfileOverview mode="preview" :profile="profile" />
+               <router-link :to="'/@' + profile.username"><ProfileOverview mode="preview" :profile="profile" /></router-link>
             </el-col>
             </div>
             <el-col v-else :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
