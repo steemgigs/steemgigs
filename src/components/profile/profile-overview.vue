@@ -29,7 +29,7 @@
     </div>
     </span>
     </p>
-    <hr class="my-4">
+    <hr v-if="profile.certifiedUloggerStatus" class="my-4">
     <div class="button-row">
         <!-- Delegation Buttons only shown if a user is a certified ulogger -->
         <el-dropdown v-if="profile.certifiedUloggerStatus">
@@ -86,7 +86,7 @@ export default {
     box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
-
+    margin-bottom: 15px;
     .user-pict-img {
         height: 75px;
         width: 75px;
