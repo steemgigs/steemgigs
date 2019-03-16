@@ -2,6 +2,7 @@ import Index from '@/pages/index'
 import LoggedIn from '@/pages/access/loggedIn'
 import featured from '@/pages/platform/featured'
 import Profile from '@/pages/platform/profile'
+import EditProfile from '@/pages/platform/edit-profile'
 import GigDetail from '@/pages/platform/gigDetail'
 import Categories from '@/pages/platform/category'
 import SubCategories from '@/pages/platform/subcategory'
@@ -132,6 +133,11 @@ export default [
     path: '/@:username',
     name: 'STEEMGIGS | Profile',
     component: Profile
+  },
+  {
+    path: '/@:username/edit',
+    name: 'STEEMGIGS | Edit Profile',
+    component: EditProfile
   },
   {
     path: '/@:username/:task',
