@@ -15,6 +15,7 @@
         <span class="ratings">
    <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (No Reviews)
    </span>
+   <div v-if="mode !== 'preview'">
         <p class="location"><i class="icon ion-android-pin"></i> From <span class="right" v-text="profile.location || 'Not set'"></span></p>
         <p class="member_since"> <i class="icon ion-android-person"></i> Member since <span class="right" v-text="memberSince"></span></p>
         <p class="member_since"> <i class="icon ion-ios-briefcase"></i> Last delivery <span class="right">N/A</span></p>
@@ -56,6 +57,7 @@
             <el-button class="secondary explore-profile" type="secondary">Explore Profile</el-button>
         </router-link>
     </div>
+    </div>
 </div>
 </template>
 
@@ -65,7 +67,8 @@ export default {
   name: 'profile-overview',
   props: {
     profile: Object,
-    isProfilePage: Boolean
+    isProfilePage: Boolean,
+    mode: String
   },
   computed: {
     memberSince () {
