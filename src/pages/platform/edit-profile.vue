@@ -75,7 +75,7 @@
                         <el-row>
                             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                                 <el-form-item label="Vacaction Mode">
-                                    <el-checkbox v-model="profile.vacaction">Enable Vacation Mode</el-checkbox>
+                                    <el-checkbox v-model="profile.vacation">Enable Vacation Mode</el-checkbox>
                                 </el-form-item>
                             </el-col>
                         </el-row>
