@@ -1,13 +1,13 @@
 <template>
 <page :pageClasses="['edit-profile__view', 'row']">
-    <el-main>
+    <el-main class="edit-profile">
         <h3>Edit Profile</h3>
         <h5>Use the form below to edit your profile</h5>
         <el-row v-if="profile" :gutter="15">
             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                <div class="form-container">
+                <div class="edit-profile-container">
                     <el-form :model="profile" ref="profile" label-position="top">
-                        <h3>About You</h3>
+                        <h4>About You</h4>
                         <p>Tell us about you</p>
                         <!-- About Field -->
                         <el-row>
@@ -26,7 +26,8 @@
                             </el-col>
                         </el-row>
                         <!-- Skills, Learning & Languages -->
-                        <h3>Skills & Languages</h3>
+                        <el-row :gutter="15">
+                        <h4>Skills & Languages</h4>
                         <p>Let us know your talents</p>
                         <!-- Language Spoken List -->
                         <el-form-item label="Languages">
@@ -37,8 +38,9 @@
                             </el-input>
                             <el-button v-else class="button-new-tag" size="small" @click="showInput">+ Add Language</el-button>
                         </el-form-item>
+                        </el-row>
                         <!-- Social -->
-                        <h3>Social Links</h3>
+                        <h4>Social Links</h4>
                         <p>Share your profile media accounts to your customers</p>
                         <!--  Social Links -->
                         <el-row :gutter="15">
@@ -60,8 +62,10 @@
                                     <el-form-item label="Username">
                                         <el-input type="text" @keyup.enter="addToSocial" placeholder="Enter Username" v-model="socialName" />
                                     </el-form-item>
+                                     <el-form-item>
+                                     <el-button class="secondary" type="secondary" @click="alert('Submit')">Add Social Media Link</el-button>
+                                      </el-form-item>
                                 </el-col>
-                                <el-button class="secondary" type="secondary" @click="alert('Submit')">Add Social Media Link</el-button>
                             </el-row>
                         </el-row>
                         <!--  Vacation Mode -->
@@ -155,7 +159,26 @@ export default {
 </script>
 
 <style lang="scss">
+
 .social-row {
     margin-bottom: 15px;
+}
+
+.edit-profile {
+  .el-col {
+    padding: 0 !important;
+  }
+  .el-row {
+    margin: 0 !important;
+  }
+  .edit-profile-container {
+      background: white;
+      padding: 20px;
+      box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      h4 {
+        margin: 0;
+      }
+  }
 }
 </style>
