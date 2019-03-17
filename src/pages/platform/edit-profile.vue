@@ -17,15 +17,6 @@
                                 </el-form-item>
                             </el-col>
                         </el-row>
-                        <!-- Hobbies -->
-                        <el-form-item label="Hobbies">
-                            <el-tag :key="tag" v-for="tag in profile.skills" closable :disable-transitions="false" @close="handleClose(tag)">
-                                {{tag}}
-                            </el-tag>
-                            <el-input class="input-new-tag" v-if="newSkillVisible" v-model="newSkill" ref="saveTagInput" size="mini" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm">
-                            </el-input>
-                            <el-button v-else class="button-new-tag" size="small" @click="showInput">+ Add Hobby</el-button>
-                        </el-form-item>
                         <!--  Location Feild -->
                         <el-row>
                             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
@@ -45,24 +36,6 @@
                             <el-input class="input-new-tag" v-if="newLanguageVisible" v-model="newLanguage" ref="saveTagInput" size="mini" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm">
                             </el-input>
                             <el-button v-else class="button-new-tag" size="small" @click="showInput">+ Add Language</el-button>
-                        </el-form-item>
-                        <!-- Skills List -->
-                        <el-form-item label="Skills">
-                            <el-tag :key="tag" v-for="tag in profile.skills" closable :disable-transitions="false" @close="handleClose(tag)">
-                                {{tag}}
-                            </el-tag>
-                            <el-input class="input-new-tag" v-if="newSkillVisible" v-model="newSkill" ref="saveTagInput" size="mini" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm">
-                            </el-input>
-                            <el-button v-else class="button-new-tag" size="small" @click="showInput">+ Add Skill</el-button>
-                        </el-form-item>
-                        <!-- Learning -->
-                        <el-form-item label="Learning">
-                            <el-tag :key="tag" v-for="tag in profile.skills" closable :disable-transitions="false" @close="handleClose(tag)">
-                                {{tag}}
-                            </el-tag>
-                            <el-input class="input-new-tag" v-if="newSkillVisible" v-model="newSkill" ref="saveTagInput" size="mini" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm">
-                            </el-input>
-                            <el-button v-else class="button-new-tag" size="small" @click="showInput">+ Add New</el-button>
                         </el-form-item>
                         <!-- Social -->
                         <h3>Social Links</h3>
@@ -91,9 +64,6 @@
                                 <el-button class="secondary" type="secondary" @click="alert('Submit')">Add Social Media Link</el-button>
                             </el-row>
                         </el-row>
-                        <!-- Help with -->
-                        <h4>I can help with</h4>
-                        <p>Let people know the types of things you're looking to help them with</p>
                         <!--  Vacation Mode -->
                         <h4>Enable Vacation Mode</h4>
                         <p>Let people know if you're not</p>
@@ -107,7 +77,7 @@
                         </el-row>
                         <!-- Edit Profile Submission -->
                         <el-form-item>
-                            <el-button class="primary" type="primary" @click="submitForm('newMicroTask')">Create</el-button>
+                            <el-button class="primary" type="primary" @click="updateProfile()">Update Profile</el-button>
                         </el-form-item>
                     </el-form>
                 </div>
@@ -129,11 +99,7 @@ export default {
     return {
       profile: null,
       newLanguage: '',
-      newLanguageVisible: false,
-      newSkill: '',
-      newSkillVisible: false,
-      newHobbie: '',
-      newHobbieVisuble: false
+      newLanguageVisible: false
     }
   },
   mounted () {
@@ -143,14 +109,7 @@ export default {
     async getProfile () {
       await Api.fetchUserData(this.$route.params.username)
         .then(response => {
-          this.profile = { ...response.data,
-            ...{
-              skills: [],
-              interests: [],
-              learning: [],
-              helpWith: []
-            }
-          }
+          this.profile = response.data
         }).catch(err => {
           this.$notify.error({
             title: 'Error',
