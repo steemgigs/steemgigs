@@ -8,7 +8,7 @@
                 <div class="edit-profile-container">
                     <el-form :model="profile" ref="profile" label-position="top">
                         <h4>About You</h4>
-                        <p>Tell us about you</p>
+                        <p>Tell us a little more about you</p>
                         <!-- About Field -->
                         <el-row>
                             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
@@ -27,8 +27,8 @@
                         </el-row>
                         <!-- Skills, Learning & Languages -->
                         <el-row :gutter="15">
-                        <h4>Skills & Languages</h4>
-                        <p>Let us know your talents</p>
+                        <h4>Languages</h4>
+                        <p>Speak more than one language? Let the world know.</p>
                         <!-- Language Spoken List -->
                         <el-form-item label="Languages">
                             <el-tag :key="tag" v-for="tag in profile.languages" closable :disable-transitions="false" @close="handleClose(tag)">
@@ -49,8 +49,9 @@
                                 <el-button v-if="!((key == 'discord') || (key == 'github') || (key == 'facebook') || (key == 'website'))" type="secondary" @click="deleteSocial(key)">Delete</el-button>
                             </el-form-item>
                             <!-- Additional Social Links -->
+                            <div class="add-new-social">
                             <h5>Add your own social profiles</h5>
-                            <p>Use the form below to add your own social media links</p>
+                            <p>Add your own social media links below</p>
                             <el-row :gutter="15">
                                 <!-- Platform -->
                                 <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
@@ -68,10 +69,11 @@
                                       </el-form-item>
                                 </el-col>
                             </el-row>
+                            </div>
                         </el-row>
                         <!--  Vacation Mode -->
                         <h4>Enable Vacation Mode</h4>
-                        <p>Let people know if you're not</p>
+                        <p>Let people know that you're not available for work at this current time.</p>
                         <!-- Enable Vacation Mode -->
                         <el-row>
                             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
@@ -186,8 +188,10 @@ export default {
     }
     }
 }
-
 .edit-profile {
+  p, h5 {
+        margin-top: 5px;
+      }
   .el-col {
     padding: 0 !important;
   }
@@ -199,11 +203,17 @@ export default {
       padding: 20px;
       box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
       border-radius: 10px;
-      h4 {
+      h3, h4 {
         margin: 0;
       }
       textarea {
         min-height: 150px !important;
+      }
+      .add-new-social {
+        border: 1px dashed #dcdfe6;
+        padding: 0 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
       }
   }
 }
