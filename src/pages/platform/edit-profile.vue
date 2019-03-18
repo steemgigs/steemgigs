@@ -31,7 +31,7 @@
                         <p>Let us know your talents</p>
                         <!-- Language Spoken List -->
                         <el-form-item label="Languages">
-                            <el-tag :key="tag" v-for="tag in profile.languages" closable :disable-transitions="false" @close="removeLanguage(tag)">
+                            <el-tag :key="tag" v-for="tag in profile.languages" closable :disable-transitions="false" @close="handleClose(tag)">
                                 {{tag}}
                             </el-tag>
                             <el-input class="input-new-tag" v-if="newLanguageVisible" v-model="newLanguage" ref="saveTagInput" size="mini" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm">
@@ -136,23 +136,24 @@ export default {
         })
       })
     },
-    handleClose (valueLocation, tag) {
-      valueLocation.splice(this.dynamicTags.indexOf(tag), 1)
+    handleClose (tag) {
+      this.profile.languages.splice(this.profile.languages.indexOf(tag), 1)
     },
-    showInput (valueLocationVisible) {
-      valueLocationVisible = true
+
+    showInput () {
+      this.newLanguageVisible = true
       this.$nextTick(_ => {
         this.$refs.saveTagInput.$refs.input.focus()
       })
     },
 
-    handleInputConfirm (newTagValue, valueLocationVisible, valueLocation) {
-      let inputValue = newTagValue
+    handleInputConfirm () {
+      let inputValue = this.newLanguage
       if (inputValue) {
-        valueLocation.push(inputValue)
+        this.profile.languages.push(inputValue)
       }
-      valueLocationVisible = false
-      newTagValue = ''
+      this.newLanguageVisible = false
+      this.newLanguage = ''
     }
   }
 }
