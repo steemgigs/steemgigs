@@ -123,8 +123,7 @@
           <span class="surpassing-header">SurpassingGoogle</span>
           <span>The knowledge-bank of SteemGigs</span>
           <p>Every participant of our ecosystem will eventually become a 'dream-builder' (SteemGigger), building their dreams and those of others. To accomplish this, we have created a bank, for 'deposits & withdrawals' of all the bits & bytes that one
-            will ever need to build any noble dream (however limitless). We will vault all this knowledge in our bank, in the form of unadulterated excerpts from the brains, lives, experiences of 'reputable great minds', specific to every niche, field,
-            industry, expertise etc. By means of your incessant contributions, we will surpass Google (attain limitlessness), reshaping the worldwide web with the freshness of our awesomeness.
+            will ever need to build any noble dream (however limitless).
           </p>
           <div>
              <router-link to="/categories/surpassinggoogle"><el-button type="primary" class="primary">Read the Knowledge Bank</el-button></router-link>
@@ -438,7 +437,7 @@ export default {
 
   // About section within landing page
   .about-landing {
-    background-color: #F8F8F8;
+    background-color: #eaeaea;
     text-align: center;
     h4,
     h2,
@@ -456,7 +455,7 @@ export default {
 
   // Core section within landing page
   .core-landing {
-    background: linear-gradient(0deg, white 50%, #F8F8F8 50%);
+    background: linear-gradient(0deg, white 50%, #eaeaea 50%);
     .core-card {
       margin: 0px 10px;
       text-align: center;
@@ -476,7 +475,7 @@ export default {
 
   // Video Section within landing
   .video-landing {
-    background: linear-gradient(0deg, white 50%, #F8F8F8 50%);
+    background: linear-gradient(0deg, white 50%, #eaeaea 50%);
     padding: 0 !important;
     .video-col {
       display: flex;
@@ -515,7 +514,7 @@ export default {
 
   // Quote section within landing page
   .quote-landing {
-    background-color: #F8F8F8;
+    background-color: #eaeaea;
     .el-row {
       align-items: center;
     }
@@ -611,8 +610,19 @@ export default {
       font-size: 40px;
       font-weight: bold;
     }
+    .el-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    p {
+      max-width: 600px;
+    }
     button {
       margin-bottom: 10px;
+      &:first-child {
+        margin-right: 5px;
+      }
     }
   }
 
