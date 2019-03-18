@@ -114,11 +114,6 @@ export default {
   mounted () {
     this.getProfile()
   },
-  computed: {
-    reverseSocial () {
-      return _.reverseMap(this.profile.social)
-    }
-  },
   methods: {
     async getProfile () {
       this.$store.dispatch('setFullLoading', true)
