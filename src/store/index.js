@@ -36,6 +36,9 @@ export default new Vuex.Store({
   actions: {
     setFullLoading: function (context, payload) {
       context.commit('setFullLoading', payload)
+    },
+    setLoading: function (context, payload) {
+      context.commit('setLoading', payload)
     }
   },
   mutations: {

@@ -1,5 +1,6 @@
 <template>
-    <div class="category-preview" >
+    <div class="category-preview">
+      <div class="loading-wrapper">
         <div class="category-header">
           <div>
             <h3> {{ header }}</h3>
@@ -8,9 +9,9 @@
              <SortBar class="sort-bar" @adjustedSort='updateSort' :optionsType="optionsType" :sortMethod='selectedOrder'/>
         </div>
         <!-- If there are posts available to be shown, show posts -->
-        <div class="post-preview-wrapper" v-loading="isLoading" v-if="searchResults.length !== 0">
+        <div class="post-preview-wrapper" v-if="searchResults.length !== 0">
         <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6" v-for="(post, index) in sortedResults" :key="index">
-            <gig-card :gigData="post" v-if="post_type !== 'steemgigs_testimonial'" />
+            <gig-card v-loading="isLoading" :gigData="post" v-if="post_type !== 'steemgigs_testimonial'" />
             <testimonial-card v-else :testimonial="post" />
         </el-col>
         <el-row class="preview-footer">
@@ -27,6 +28,7 @@
              <router-link :to="linkDetails.editorLink.routerLink"><el-button class="secondary" type="secondary"> Create {{ linkDetails.editorLink.buttonText }}</el-button></router-link>
         </el-col>
         </el-row>
+        </div>
     </div>
 </template>
 
@@ -49,7 +51,7 @@ export default {
     return {
       selectedOrder: 'newest',
       searchResults: [],
-      isLoading: false,
+      isLoading: true,
       currentPage: 1,
       pageCount: 1
     }
@@ -85,7 +87,6 @@ export default {
             ...searchQuery, subcategory: this.subcategory
           }
         }
-
         await Api.search(searchQuery).then(result => {
           this.searchResults = result.data.results
           this.pageCount = result.data.pages
@@ -191,5 +192,9 @@ export default {
 .preview-footer {
   display: block;
   text-align: center;
+}
+
+.loading-wrapper {
+  min-height: 150px;
 }
 </style>

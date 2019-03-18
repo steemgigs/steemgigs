@@ -35,7 +35,6 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel'
 import {Plane} from 'vue-loading-spinner'
-import Api from '@/services/api'
 import CatNav from '@/components/layout/catNav'
 import CategoryPreview from '@/components/snippets/category-preview'
 
@@ -68,9 +67,6 @@ export default {
   methods: {
     getTags (entries) {
       this.userTags = entries
-    },
-    gettry () {
-      console.log(Api.fetchSurpassingGoogle)
     }
   }
 }

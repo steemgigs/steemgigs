@@ -3,7 +3,7 @@
     <cat-nav />
     <el-main>
     <div class="col s12 m4 l3">
-        <ProfileOverview :profile="profile" />
+        <ProfileOverview v-loading='this.profile.username === undefined' :profile="profile" />
         <ProfileExtras :profile="profile" />
     </div>
     <!-- Tab Selection -->
@@ -16,7 +16,7 @@
       <!-- Tab 1 -->
       <div v-if="currentView === 'active_gigs'" class="activeGigs">
         <!-- Loading Placeholder -->
-        <div v-if="loading">
+        <div v-if="!isLoading">
           <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
           <loading-placeholder class="card-panel" />
         </div>
@@ -34,7 +34,7 @@
        <!-- Tab 2 -->
       <div v-show="currentView === 'gig_request'">
          <!-- Loading Placeholder -->
-        <div v-if="loading">
+        <div v-if="!isLoading">
           <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
           <loading-placeholder class="card-panel" />
           </div>
@@ -52,7 +52,7 @@
        <!-- Tab 3 -->
       <div v-show="currentView === 'gig_contribution'">
         <!-- Loading Placeholder -->
-        <div v-if="loading">
+        <div v-if="!isLoading">
           <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
           <loading-placeholder class="card-panel" />
           </div>
@@ -94,17 +94,17 @@ export default {
   },
   data () {
     return {
-      profile: {
-      },
+      profile: {},
       profileFetched: false,
       usergigs: [],
       userRequests: [],
+      isLoading: true,
       currentView: 'active_gigs',
-      loading: true,
       loadingPlaceholderCount: 3
     }
   },
   beforeCreate () {
+    this.isLoading = true
     Api.fetchUserData(this.$route.params.username).then(response => {
       this.profile = response.data
       this.profileFetched = true
@@ -147,9 +147,6 @@ export default {
       this.profile = payload
       this.$store.commit('SET_PROFILE', payload)
     })
-  },
-  deforeDestroy () {
-    this.$eventBus.$off('profile-updated')
   }
 }
 </script>
