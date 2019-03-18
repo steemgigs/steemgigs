@@ -13,8 +13,8 @@
             <li>
                <el-input slot="reference" prefix-icon="el-icon-search" spellcheck="true" @keydown.enter.native="initSearch('posts')" size="medium" type="text" placeholder="Search SteemGigs" v-model="searchTerm" />
               <el-popover  popper-class="search-options" width="195" v-model="showSearchOptions">
-                <span @click="initSearch('posts')">Search Posts</span>
-                <span @click="initSearch('users')">Search Users</span>
+                <span @click="initSearch('posts')">Search Gig</span>
+                <span @click="initSearch('users')">Search By User</span>
                 </el-popover>
             </li>
             <!-- Menu Icons -->

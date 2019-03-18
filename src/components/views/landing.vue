@@ -8,8 +8,8 @@
           <p>Freelance services for your business, by reputable like-minds.</p>
           <el-input prefix-icon="el-icon-search" spellcheck="true" @keydown.enter.native="initSearch('posts')" size="medium" type="text" placeholder="Search SteemGigs" v-model="searchTerm" />
               <el-popover popper-class="search-options" v-model="showSearchOptions">
-                <span @click="initSearch('posts')">Search Posts</span>
-                <span @click="initSearch('users')">Search Users</span>
+                <span @click="initSearch('posts')">Search Gig</span>
+                <span @click="initSearch('users')">Search By User</span>
                 </el-popover>
         </el-col>
         <el-col class="hero-img fill-height flex-col" :xs="1" :sm="1" :md="12" :lg="12" :xl="12">
@@ -420,6 +420,9 @@ export default {
 
   .search-options {
     padding: 0 !important;
+    width: 100%;
+    margin-top: 10px;
+    position: inherit;
     span {
       display: block;
       color: #3f51b5;
