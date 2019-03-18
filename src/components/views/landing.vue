@@ -2,13 +2,15 @@
   <div class="landing">
     <!-- Hero Section with Search -->
     <section class='hero-landing'>
-      <el-row gutter="0">
+      <el-row :gutter="1">
         <el-col class="hero-text fill-height flex-col" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <h1>Do The 'Dreaming', Leave 'The Building' To Us</h1>
           <p>Freelance services for your business, by reputable like-minds.</p>
-          <el-input v-model="searchString" placeholder="Search SteemGigs" @keyup.native.enter="search">
-            <el-button class="primary" type="primary" slot="append" @click="search()">Search</el-button>
-          </el-input>
+          <el-input prefix-icon="el-icon-search" spellcheck="true" @keydown.enter.native="initSearch('posts')" size="medium" type="text" placeholder="Search SteemGigs" v-model="searchTerm" />
+              <el-popover popper-class="search-options" v-model="showSearchOptions">
+                <span @click="initSearch('posts')">Search Gig</span>
+                <span @click="initSearch('users')">Search By User</span>
+                </el-popover>
         </el-col>
         <el-col class="hero-img fill-height flex-col" :xs="1" :sm="1" :md="12" :lg="12" :xl="12">
           <img src="/static/img/landing/landing_1.svg" alt="">
@@ -23,7 +25,7 @@
           <p>Explore what is available on our platform below</p>
         </el-col>
       </el-row>
-      <el-row :gutter="15">
+      <el-row :gutter="25">
         <el-col class="about-item" v-for="(item, index) in aboutItems" :key="index" :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
           <img :src="item.image" alt="Do Image">
           <h4>{{ item.title }}</h4>
@@ -41,7 +43,7 @@
     </section>
     <!-- Stand out section -->
     <section class="stand-landing">
-      <el-row :gutter="15">
+      <el-row :gutter="15" class="stand-desc">
         <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
           <h3>How We Stand Out</h3>
           <p>You have successfully reached STEEMGIGS, a revolutionary freelance services marketplace & social network connected to a decentralized steem blockchain, with the power of Fiverr, Upwork & Freelancer combined. SteemGigs removes all barriers to entry
@@ -52,7 +54,7 @@
           </p>
         </el-col>
       </el-row>
-      <el-row :gutter="15">
+      <el-row :gutter="25">
         <el-col class="stand-item" v-for="(item, index) in standItems" :key="index" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <div class="stand-item-header">
             <i class="el-icon-check"></i>
@@ -121,8 +123,7 @@
           <span class="surpassing-header">SurpassingGoogle</span>
           <span>The knowledge-bank of SteemGigs</span>
           <p>Every participant of our ecosystem will eventually become a 'dream-builder' (SteemGigger), building their dreams and those of others. To accomplish this, we have created a bank, for 'deposits & withdrawals' of all the bits & bytes that one
-            will ever need to build any noble dream (however limitless). We will vault all this knowledge in our bank, in the form of unadulterated excerpts from the brains, lives, experiences of 'reputable great minds', specific to every niche, field,
-            industry, expertise etc. By means of your incessant contributions, we will surpass Google (attain limitlessness), reshaping the worldwide web with the freshness of our awesomeness.
+            will ever need to build any noble dream (however limitless).
           </p>
           <div>
              <router-link to="/categories/surpassinggoogle"><el-button type="primary" class="primary">Read the Knowledge Bank</el-button></router-link>
@@ -151,7 +152,7 @@
           <span class="bropro-subtitle">Try SteemGigs</span>
           <span class="bropro-header">BROPRO</span>
           <p>Talent is generic. A 'brother talent'? Now, that's great. Find that ever missing peice of the puzzle with broPRO.</p>
-          <el-button disabled="true" type="secondary">Coming Soon</el-button>
+          <el-button :disabled='true' type="secondary">Coming Soon</el-button>
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <img src="/static/img/landing/bropro.svg" alt="BroPro Image">
@@ -200,16 +201,18 @@
 <script>
 import sgfooter from '@/components/layout/footer'
 import carousel from 'vue-owl-carousel'
+import search from '@/mixins/search.js'
 
 export default {
   name: 'landing-page',
+  mixins: [search],
   components: {
     sgfooter,
     carousel
   },
   data () {
     return {
-      searchString: '',
+      searchTerm: '',
       aboutItems: [{
         image: '/static/img/landing/create_gig.svg',
         title: 'Create A Gig',
@@ -341,7 +344,7 @@ export default {
         author: 'surpassinggoogle'
       },
       {
-        title: 'Learn from the successes of others',
+        title: 'Learn from others',
         image: '/static/img/landing/class.jpg',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum',
         author: 'surpassinggoogle'
@@ -355,9 +358,12 @@ export default {
       ]
     }
   },
-  methods: {
-    search () {
-      this.$router.push(`search/${this.searchString}`)
+  computed: {
+    // Used to indicate if the search popover should show
+    showSearchOptions () {
+      if (this.searchTerm.length !== 0) {
+        return true
+      }
     }
   }
 }
@@ -373,6 +379,13 @@ export default {
     }
     img {
       object-fit: initial;
+    }
+  }
+
+  .el-button-group .el-button--primary:first-child {
+    border: 0;
+    &:hover {
+      border: 0;
     }
   }
 
@@ -403,11 +416,28 @@ export default {
     button {
       color: white !important;
     }
+
+  .search-options {
+    padding: 0 !important;
+    width: 100%;
+    margin-top: 10px;
+    position: inherit;
+    span {
+      display: block;
+      color: #3f51b5;
+      cursor: pointer;
+      word-break: break-all;
+      padding: 10px;
+      &:hover {
+        background-color: #ecf5ff;
+      }
+    }
+  }
   }
 
   // About section within landing page
   .about-landing {
-    background-color: #F8F8F8;
+    background-color: #f1f1f1;
     text-align: center;
     h4,
     h2,
@@ -415,17 +445,18 @@ export default {
       margin: 0;
     }
     .about-item {
-      min-height: 420px;
+      min-height: 485px;
       img {
         width: 65%;
         min-width: 200px;
+        min-height: 240px;
       }
     }
   }
 
   // Core section within landing page
   .core-landing {
-    background: linear-gradient(0deg, white 50%, #F8F8F8 50%);
+    background: linear-gradient(0deg, white 50%, #f1f1f1 50%);
     .core-card {
       margin: 0px 10px;
       text-align: center;
@@ -445,7 +476,7 @@ export default {
 
   // Video Section within landing
   .video-landing {
-    background: linear-gradient(0deg, white 50%, #F8F8F8 50%);
+    background: linear-gradient(0deg, white 50%, #f1f1f1 50%);
     padding: 0 !important;
     .video-col {
       display: flex;
@@ -459,8 +490,11 @@ export default {
 
   // Stand out section within landing
   .stand-landing {
+    .stand-desc {
+      margin-bottom: 25px;
+    }
     .stand-item {
-      min-height: 105px;
+      min-height: 120px;
       p {
         margin-left: 30px;
       }
@@ -484,7 +518,7 @@ export default {
 
   // Quote section within landing page
   .quote-landing {
-    background-color: #F8F8F8;
+    background-color: #f1f1f1;
     .el-row {
       align-items: center;
     }
@@ -580,8 +614,19 @@ export default {
       font-size: 40px;
       font-weight: bold;
     }
+    .el-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    p {
+      max-width: 600px;
+    }
     button {
       margin-bottom: 10px;
+      &:first-child {
+        margin-right: 5px;
+      }
     }
   }
 

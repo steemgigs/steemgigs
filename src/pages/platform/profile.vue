@@ -3,13 +3,8 @@
     <cat-nav />
     <el-main>
     <div class="col s12 m4 l3">
-        <div v-if="!profileFetched" class="card-panel">
-          <content-placeholders>
-            <content-placeholders-img />
-            <content-placeholders-text :lines="10" />
-          </content-placeholders>
-        </div>
-      <profile-card v-if="profileFetched" :profilepage="true" :profile="profile"></profile-card>
+        <ProfileOverview v-loading='this.profile.username === undefined' :profile="profile" />
+        <ProfileExtras :profile="profile" />
     </div>
     <!-- Tab Selection -->
     <div class="col s12 m8 l9 row">
@@ -21,7 +16,7 @@
       <!-- Tab 1 -->
       <div v-if="currentView === 'active_gigs'" class="activeGigs">
         <!-- Loading Placeholder -->
-        <div v-if="loading">
+        <div v-if="!isLoading">
           <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
           <loading-placeholder class="card-panel" />
         </div>
@@ -39,7 +34,7 @@
        <!-- Tab 2 -->
       <div v-show="currentView === 'gig_request'">
          <!-- Loading Placeholder -->
-        <div v-if="loading">
+        <div v-if="!isLoading">
           <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
           <loading-placeholder class="card-panel" />
           </div>
@@ -57,7 +52,7 @@
        <!-- Tab 3 -->
       <div v-show="currentView === 'gig_contribution'">
         <!-- Loading Placeholder -->
-        <div v-if="loading">
+        <div v-if="!isLoading">
           <div v-for="index in loadingPlaceholderCount" :key="index" class="col s12 m6 l3">
           <loading-placeholder class="card-panel" />
           </div>
@@ -82,7 +77,8 @@ import Api from '@/services/api'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
-import ProfileCard from '@/components/layout/profileCard'
+import ProfileOverview from '@/components/profile/profile-overview'
+import ProfileExtras from '@/components/profile/profile-extras'
 import RotatingCard from '@/components/snippets/rotatingCard'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
 
@@ -92,24 +88,24 @@ export default {
     CatNav,
     GigCard,
     RotatingCard,
-    ProfileCard,
-    LoadingPlaceholder
+    LoadingPlaceholder,
+    ProfileOverview,
+    ProfileExtras
   },
   data () {
     return {
-      profile: {
-      },
+      profile: {},
       profileFetched: false,
       usergigs: [],
       userRequests: [],
+      isLoading: true,
       currentView: 'active_gigs',
-      loading: true,
       loadingPlaceholderCount: 3
     }
   },
   beforeCreate () {
+    this.isLoading = true
     Api.fetchUserData(this.$route.params.username).then(response => {
-      console.log('from profile', response)
       this.profile = response.data
       this.profileFetched = true
     }).catch(err => {
@@ -118,7 +114,6 @@ export default {
     Api.fetchUserGigs(this.$route.params.username).then(response => {
       this.usergigs = response.data
       this.loading = false
-      console.log(response)
     }).catch(err => {
       console.log('error retrieving user gigs: \n error:', this.stringify(err))
     })
@@ -151,11 +146,7 @@ export default {
       payload.rep = this.profile.rep
       this.profile = payload
       this.$store.commit('SET_PROFILE', payload)
-      console.log('updating.....', payload)
     })
-  },
-  deforeDestroy () {
-    this.$eventBus.$off('profile-updated')
   }
 }
 </script>

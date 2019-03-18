@@ -1,5 +1,6 @@
 <template>
-    <div class="category-preview" >
+    <div class="category-preview">
+      <div class="loading-wrapper">
         <div class="category-header">
           <div>
             <h3> {{ header }}</h3>
@@ -8,14 +9,15 @@
              <SortBar class="sort-bar" @adjustedSort='updateSort' :optionsType="optionsType" :sortMethod='selectedOrder'/>
         </div>
         <!-- If there are posts available to be shown, show posts -->
-        <div class="post-preview-wrapper" v-loading="isLoading" v-if="searchResults.length !== 0">
+        <div class="post-preview-wrapper" v-if="searchResults.length !== 0">
         <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6" v-for="(post, index) in sortedResults" :key="index">
-            <gig-card :gigData="post" v-if="post_type !== 'steemgigs_testimonial'" />
+            <gig-card v-loading="isLoading" :gigData="post" v-if="post_type !== 'steemgigs_testimonial'" />
             <testimonial-card v-else :testimonial="post" />
         </el-col>
         <el-row class="preview-footer">
            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-        <router-link :to="linkDetails.moreLinkDetails.routerLink"><el-button class="secondary" type="secondary"> Explore {{ linkDetails.moreLinkDetails.buttonText }}</el-button></router-link>
+        <router-link v-if="mode === 'preview'" :to="linkDetails.moreLinkDetails.routerLink"><el-button class="secondary" type="secondary"> Explore {{ linkDetails.moreLinkDetails.buttonText }}</el-button></router-link>
+        <el-pagination v-else class="search-pagination" background layout="prev, pager, next" :current-page.sync="currentPage" :page-count="pageCount"></el-pagination>
         </el-col>
         </el-row>
         </div>
@@ -23,9 +25,10 @@
         <el-row class="preview-footer" v-else>
            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
              <p>Were weren't able to find any results in this category, why not use the button below to create your own</p>
-              <router-link :to="linkDetails.editorLink.routerLink"><el-button class="secondary" type="secondary"> Create {{ linkDetails.editorLink.buttonText }}</el-button></router-link>
+             <router-link :to="linkDetails.editorLink.routerLink"><el-button class="secondary" type="secondary"> Create {{ linkDetails.editorLink.buttonText }}</el-button></router-link>
         </el-col>
         </el-row>
+        </div>
     </div>
 </template>
 
@@ -48,27 +51,45 @@ export default {
     return {
       selectedOrder: 'newest',
       searchResults: [],
-      isLoading: false
+      isLoading: true,
+      currentPage: 1,
+      pageCount: 1
     }
   },
   props: {
     post_type: String,
     header: String,
     description: String,
-    limit: Number
+    limit: Number,
+    mode: String,
+    category: String,
+    subcategory: String
   },
   methods: {
     async loadPosts () {
       this.isLoading = true
       try {
-        const searchQuery = {
+        let searchQuery = {
           'type': this.post_type,
-          'pageNumber': 1,
+          'pageNumber': this.currentPage,
           'order': this.selectedOrder,
           'limit': this.limit
         }
+        // Add category to query if present
+        if (this.category) {
+          searchQuery = {
+            ...searchQuery, category: this.category
+          }
+        }
+        // Add subategory to query if present
+        if (this.subcategory) {
+          searchQuery = {
+            ...searchQuery, subcategory: this.subcategory
+          }
+        }
         await Api.search(searchQuery).then(result => {
           this.searchResults = result.data.results
+          this.pageCount = result.data.pages
         })
       } catch (err) {
         // Send error toast notification upon error
@@ -141,6 +162,15 @@ export default {
   watch: {
     selectedOrder: function () {
       this.loadPosts()
+    },
+    currentPage: function () {
+      this.loadPosts()
+    },
+    category: function () {
+      this.loadPosts()
+    },
+    subcategory: function () {
+      this.loadPosts()
     }
   }
 }
@@ -162,5 +192,9 @@ export default {
 .preview-footer {
   display: block;
   text-align: center;
+}
+
+.loading-wrapper {
+  min-height: 150px;
 }
 </style>

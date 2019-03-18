@@ -13,8 +13,12 @@ Vue.use(VueAnalytics, {
   id: 'UA-114994616-1',
   router
 })
-/*
-router.beforeEach((to, from, next) => {})
-*/
+
+// Store last page prior to login in local storage for redirect following login
+router.afterEach((to, from) => {
+  if (to.path !== '/complete') {
+    window.localStorage.setItem('last-known-route', to.path)
+  }
+})
 
 export default router

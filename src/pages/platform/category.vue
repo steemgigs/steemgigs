@@ -2,31 +2,8 @@
   <page :pageClasses="['categories__view', 'row']">
     <cat-nav />
     <el-main>
-    <div class="col s12 m12 l9 right center-align row">
-      <h3>{{ categoryDetails.name}}</h3>
-      <h5>{{ categoryDetails.description }}</h5>
-      <div v-if="loading">
-        <div class="col s12 m6 l4">
-          <loading-placeholder />
-        </div>
-        <div class="col s12 m6 l4">
-          <loading-placeholder />
-        </div>
-        <div class="col s12 m6 l4">
-          <loading-placeholder />
-        </div>
-      </div>
-      <div v-if="!loading">
-        <div v-if="gig.author && catgigs.length > 0" class="col s12 m6 l4 mt-3 left-align" v-for="(gig, index) in catgigs" :key="index">
-          <gig-card :gigData="gig" />
-        </div>
-        <div v-if="catgigs.length <= 0">
-          <h5>There are no posts yet in this category. Be the first to post in the <span class="grey-text text-darken-2">{{categoryDetails.name}}</span> category</h5>
-          <router-link :to="this.$route.params.category == 'surpassinggoogle' ? '/surpassing-google' : '/create_gig'"><el-button class="secondary" type="secondary">Create</el-button></router-link>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m4 l3 hide-on-med-and-down">
+      <!-- Sub Categories -->
+      <el-col class="subcategories" :xs="1" :sm="1" :md="1" :lg="6" :xl="6">
       <div class="subcats py-2">
         <ul>
           <li v-for="(subcategory, index) in categoryDetails.subcategories" :key="index">
@@ -36,7 +13,13 @@
           </li>
         </ul>
       </div>
-    </div>
+      </el-col>
+      <!-- Posts -->
+       <el-col  :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
+       <el-row :gutter="15">
+            <categoryPreview mode="pages" :category="category" post_type="steemgigs_post" :limit="8" :header="categoryDetails.name" :description="categoryDetails.description"></categoryPreview>
+        </el-row>
+        </el-col>
     </el-main>
   </page>
 </template>
@@ -44,33 +27,17 @@
 <script>
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
-import LoadingPlaceholder from '@/components/widgets/gigLoading'
-import GigCard from '@/components/snippets/gigCard'
-import Api from '@/services/api'
+import CategoryPreview from '@/components/snippets/category-preview'
 
 export default {
   components: {
     Page,
     CatNav,
-    LoadingPlaceholder,
-    GigCard
+    CategoryPreview
   },
   data () {
     return {
-      loading: true,
-      catgigs: []
-    }
-  },
-  methods: {
-    fetchCatPosts () {
-      this.loading = true
-      Api.fetchCatPosts(this.$route.params.category).then(result => {
-        this.catgigs = result.data
-        this.loading = false
-        console.log('fetchedCatPosts::', result.data)
-      }).catch(err => {
-        console.log('error fetching catPosts::', err)
-      })
+      loading: true
     }
   },
   computed: {
@@ -88,30 +55,19 @@ export default {
     },
     detailsname () {
       return this.categoryDetails.name
+    },
+    category () {
+      return this.$route.params.category
     }
-  },
-  watch: {
-    detailsname () {
-      this.fetchCatPosts()
-    }
-  },
-  mounted () {
-    this.fetchCatPosts()
   }
 }
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  font-size: 3rem;
-}
-.margin-top {
-  margin-top: 10px;
-}
 .left-panel {
   text-align: center;
   font-size: 16px;
-  fonth-weight: 700;
+  font-weight: 700;
 }
 .subcats {
   &>ul {
@@ -133,4 +89,10 @@ h1 {
     }
   }
 }
+// Temp fix to not hiding via element media queries
+      @media only screen and (max-width: 1200px) {
+          .subcats {
+            display: none;
+          }
+      }
 </style>

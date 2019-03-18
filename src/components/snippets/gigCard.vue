@@ -156,7 +156,7 @@ $blue: #6361D0;
       font-size: 13px;
       color: black;
       overflow: hidden;
-      word-break: break-word;
+      word-break: inherit;
     }
     .price {
       margin-top: 0.5em;
