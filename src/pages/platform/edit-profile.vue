@@ -128,19 +128,21 @@ export default {
       this.$store.dispatch('setFullLoading', false)
     },
     async updateProfile () {
+      this.$store.dispatch('setFullLoading', true)
       await Api.profileUpdate(this.profile, this.$store.state.accessToken).then((result) => {
         this.$notify({
           title: 'Success',
           message: 'Profile Successfully Updated',
           type: 'success'
-        }).catch((err) => {
-          this.isUpdating = false
-          this.$notify.error({
-            title: 'Error',
-            message: `There was an error updating your profile - Err Details: ${err}`
-          })
+        })
+      }).catch((err) => {
+        this.isUpdating = false
+        this.$notify.error({
+          title: 'Error',
+          message: `There was an error updating your profile - Err Details: ${err}`
         })
       })
+      this.$store.dispatch('setFullLoading', false)
     },
     handleClose (tag) {
       this.profile.languages.splice(this.profile.languages.indexOf(tag), 1)
@@ -186,6 +188,9 @@ export default {
       border-radius: 10px;
       h4 {
         margin: 0;
+      }
+      textarea {
+        min-height: 150px !important;
       }
   }
 }
