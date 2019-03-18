@@ -344,7 +344,7 @@ export default {
         author: 'surpassinggoogle'
       },
       {
-        title: 'Learn from the successes of others',
+        title: 'Learn from others',
         image: '/static/img/landing/class.jpg',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim massa vel pretium hendrerit. Donec erat turpis, imperdiet tempus bibendum',
         author: 'surpassinggoogle'
