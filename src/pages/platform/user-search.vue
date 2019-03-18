@@ -2,7 +2,7 @@
     <page :pageClasses="['user-search__view', 'row']">
        <cat-nav />
         <el-main>
-          <el-row>
+          <el-row :gutter="25">
             <div v-if="users.length !== 0">
               <div class="search-header">
                 <h3>Search Results for "{{this.searchTerm}}"</h3>

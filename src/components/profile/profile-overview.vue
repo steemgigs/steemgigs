@@ -11,7 +11,7 @@
          </span>
         </el-tooltip>
         </span>
-        <span class="expertise" v-text="profile.about"></span>
+        <p class="expertise" v-line-clamp:20="clamp"> {{ profile.about }}</p>
         <span class="ratings">
    <i class="icon ion-ios-star amber-text" v-for="(star, index) in 5" :key="index"></i> 5.0 (No Reviews)
    </span>
@@ -76,6 +76,13 @@ export default {
     },
     profileImage () {
       return `https://steemitimages.com/u/${this.profile.username}/avatar`
+    },
+    clamp () {
+      if (this.isProfilePage) {
+        return 0
+      } else {
+        return 2
+      }
     }
   }
 }
@@ -105,6 +112,7 @@ export default {
 
     .expertise {
         margin: 10px;
+        min-height: 45px
     }
 
     span {
