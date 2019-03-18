@@ -3,7 +3,7 @@
     <cat-nav />
     <el-main>
     <div class="col s12 m4 l3">
-        <ProfileOverview v-loading='this.profile.username === undefined' :profile="profile" />
+        <ProfileOverview v-loading='this.profile.username === undefined' :profile="profile" :isProfilePage='true' />
         <ProfileExtras :profile="profile" />
     </div>
     <!-- Tab Selection -->
