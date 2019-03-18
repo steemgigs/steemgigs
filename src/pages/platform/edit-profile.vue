@@ -54,16 +54,16 @@
                                 <!-- Platform -->
                                 <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                                     <el-form-item label="Platform">
-                                        <el-input type="text" v-model="socialFeed" placeholder="Enter Platform" />
+                                        <el-input type="text" v-model="social.platform" placeholder="Enter Platform" />
                                     </el-form-item>
                                 </el-col>
                                 <!-- Username -->
                                 <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                                     <el-form-item label="Username">
-                                        <el-input type="text" @keyup.enter="addToSocial" placeholder="Enter Username" v-model="socialName" />
+                                        <el-input type="text" @keyup.enter="addToSocial" placeholder="Enter Username" v-model="social.username" />
                                     </el-form-item>
                                      <el-form-item>
-                                     <el-button class="secondary" type="secondary" @click="alert('Submit')">Add Social Media Link</el-button>
+                                     <el-button class="secondary" type="secondary" @click="addToSocial">Add Social Media Link</el-button>
                                       </el-form-item>
                                 </el-col>
                             </el-row>
@@ -103,7 +103,11 @@ export default {
     return {
       profile: null,
       newLanguage: '',
-      newLanguageVisible: false
+      newLanguageVisible: false,
+      social: {
+        platform: '',
+        username: ''
+      }
     }
   },
   mounted () {
@@ -146,7 +150,6 @@ export default {
         this.$refs.saveTagInput.$refs.input.focus()
       })
     },
-
     handleInputConfirm () {
       let inputValue = this.newLanguage
       if (inputValue) {
@@ -154,6 +157,9 @@ export default {
       }
       this.newLanguageVisible = false
       this.newLanguage = ''
+    },
+    addToSocial () {
+      this.profile.social[this.social.platform] = this.social.username
     }
   }
 }
