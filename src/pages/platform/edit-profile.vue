@@ -44,8 +44,9 @@
                         <p>Share your profile media accounts to your customers</p>
                         <!--  Social Links -->
                         <el-row :gutter="15">
-                            <el-form-item v-for="(social, key, i) in profile.social" :key="i" :label="key">
+                            <el-form-item class="social-item" v-for="(social, key, i) in profile.social" :key="i" :label="key">
                                 <el-input type="text" :id="'social' + i" v-model="profile.social[key]" placeholder="Enter Username`" />
+                                <el-button v-if="!((key == 'discord') || (key == 'github') || (key == 'facebook') || (key == 'website'))" type="secondary" @click="deleteSocial(key)">Delete</el-button>
                             </el-form-item>
                             <!-- Additional Social Links -->
                             <h5>Add your own social profiles</h5>
@@ -113,6 +114,11 @@ export default {
   mounted () {
     this.getProfile()
   },
+  computed: {
+    reverseSocial () {
+      return _.reverseMap(this.profile.social)
+    }
+  },
   methods: {
     async getProfile () {
       this.$store.dispatch('setFullLoading', true)
@@ -162,7 +168,12 @@ export default {
       this.newLanguage = ''
     },
     addToSocial () {
-      this.profile.social[this.social.platform] = this.social.username
+      this.$set(this.profile.social, this.social.platform, this.social.username)
+      this.social.platform = ''
+      this.social.username = ''
+    },
+    deleteSocial (key) {
+      this.$delete(this.profile.social, key)
     }
   }
 }
@@ -170,8 +181,15 @@ export default {
 
 <style lang="scss">
 
-.social-row {
+.social-item {
     margin-bottom: 15px;
+    .el-form-item__content {
+    display: flex;
+    flex-direction: row;
+    button {
+      margin-left: 10px;
+    }
+    }
 }
 
 .edit-profile {
