@@ -80,7 +80,8 @@
             <content-placeholders-text :lines="10" />
           </content-placeholders>
         </div>
-        <profile-card v-if="profileLoaded" :profilepage="false" :profile="profile"></profile-card>
+        <ProfileOverview v-if="profileLoaded"  :profile="profile" />
+        <ProfileExtras v-if="profileLoaded" :profile="profile" />
       </div>
     </div>
     </el-main>
@@ -97,7 +98,6 @@ import { VueEditor } from 'vue2-editor'
 import VComment from '@/components/snippets/comment'
 import { Carousel, Slide } from 'vue-carousel'
 import SliderRange from 'vue-slider-component'
-import ProfileCard from '@/components/layout/profileCard'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
 import shareOptions from '@/components/snippets/share-options'
 import markdown from '@/components/snippets/markdown'
@@ -105,6 +105,8 @@ import moment from 'moment'
 import userStatus from '@/mixins/status.js'
 import form from '@/mixins/form.js'
 import actions from '@/mixins/actions.js'
+import ProfileOverview from '@/components/profile/profile-overview'
+import ProfileExtras from '@/components/profile/profile-extras'
 
 export default {
   mixins: [userStatus, form, actions],
@@ -118,9 +120,10 @@ export default {
     VComment,
     SliderRange,
     LoadingPlaceholder,
-    ProfileCard,
     shareOptions,
-    markdown
+    markdown,
+    ProfileOverview,
+    ProfileExtras
   },
   data () {
     return {
