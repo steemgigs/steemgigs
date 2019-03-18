@@ -115,6 +115,7 @@ export default {
   },
   methods: {
     async getProfile () {
+      this.$store.dispatch('setFullLoading', true)
       await Api.fetchUserData(this.$route.params.username)
         .then(response => {
           this.profile = response.data
@@ -124,6 +125,7 @@ export default {
             message: `There was an error getting your profile - Err Details: ${err}`
           })
         })
+      this.$store.dispatch('setFullLoading', false)
     },
     async updateProfile () {
       await Api.profileUpdate(this.profile, this.$store.state.accessToken).then((result) => {
@@ -143,7 +145,6 @@ export default {
     handleClose (tag) {
       this.profile.languages.splice(this.profile.languages.indexOf(tag), 1)
     },
-
     showInput () {
       this.newLanguageVisible = true
       this.$nextTick(_ => {
