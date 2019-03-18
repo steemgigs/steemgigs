@@ -8,7 +8,7 @@
                 <h3>Search Results for "{{this.searchTerm}}"</h3>
               </div>
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="3" v-for="(profile, index) in users" :key="index">
-               <router-link :to="'/@' + profile.username"><ProfileOverview mode="preview" :profile="profile" /></router-link>
+               <router-link class="profile-link" :to="'/@' + profile.username"><ProfileOverview mode="preview" :profile="profile" /></router-link>
             </el-col>
             </div>
             <el-col v-else :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
@@ -81,6 +81,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.search-header {
+  h3 {
+    margin-bottom: 20px;
+  }
+}
+
+.profile-link {
+  color: inherit !important;
+}
 
 </style>

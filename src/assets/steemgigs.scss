@@ -2109,3 +2109,14 @@ hr {
     line-height: 25px !important;
     text-transform: capitalize;
   }
+  
+  .el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #d0d0d0;
+    color: #fff;
+  }
+
+  .el-button--primary.is-active, .el-button--primary:active {
+    background: #6361D0;
+    border-color: #6361D0;
+    color: #fff;
+  }
