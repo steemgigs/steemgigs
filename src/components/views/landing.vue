@@ -25,7 +25,7 @@
           <p>Explore what is available on our platform below</p>
         </el-col>
       </el-row>
-      <el-row :gutter="15">
+      <el-row :gutter="25">
         <el-col class="about-item" v-for="(item, index) in aboutItems" :key="index" :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
           <img :src="item.image" alt="Do Image">
           <h4>{{ item.title }}</h4>
@@ -43,7 +43,7 @@
     </section>
     <!-- Stand out section -->
     <section class="stand-landing">
-      <el-row :gutter="15">
+      <el-row :gutter="15" class="stand-desc">
         <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
           <h3>How We Stand Out</h3>
           <p>You have successfully reached STEEMGIGS, a revolutionary freelance services marketplace & social network connected to a decentralized steem blockchain, with the power of Fiverr, Upwork & Freelancer combined. SteemGigs removes all barriers to entry
@@ -54,7 +54,7 @@
           </p>
         </el-col>
       </el-row>
-      <el-row :gutter="15">
+      <el-row :gutter="25">
         <el-col class="stand-item" v-for="(item, index) in standItems" :key="index" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <div class="stand-item-header">
             <i class="el-icon-check"></i>
@@ -437,7 +437,7 @@ export default {
 
   // About section within landing page
   .about-landing {
-    background-color: #eaeaea;
+    background-color: #f1f1f1;
     text-align: center;
     h4,
     h2,
@@ -445,17 +445,18 @@ export default {
       margin: 0;
     }
     .about-item {
-      min-height: 420px;
+      min-height: 485px;
       img {
         width: 65%;
         min-width: 200px;
+        min-height: 240px;
       }
     }
   }
 
   // Core section within landing page
   .core-landing {
-    background: linear-gradient(0deg, white 50%, #eaeaea 50%);
+    background: linear-gradient(0deg, white 50%, #f1f1f1 50%);
     .core-card {
       margin: 0px 10px;
       text-align: center;
@@ -475,7 +476,7 @@ export default {
 
   // Video Section within landing
   .video-landing {
-    background: linear-gradient(0deg, white 50%, #eaeaea 50%);
+    background: linear-gradient(0deg, white 50%, #f1f1f1 50%);
     padding: 0 !important;
     .video-col {
       display: flex;
@@ -489,8 +490,11 @@ export default {
 
   // Stand out section within landing
   .stand-landing {
+    .stand-desc {
+      margin-bottom: 25px;
+    }
     .stand-item {
-      min-height: 105px;
+      min-height: 120px;
       p {
         margin-left: 30px;
       }
@@ -514,7 +518,7 @@ export default {
 
   // Quote section within landing page
   .quote-landing {
-    background-color: #eaeaea;
+    background-color: #f1f1f1;
     .el-row {
       align-items: center;
     }
