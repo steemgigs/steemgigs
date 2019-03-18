@@ -3,13 +3,8 @@
     <cat-nav />
     <el-main>
     <div class="col s12 m4 l3">
-        <div v-if="!profileFetched" class="card-panel">
-          <content-placeholders>
-            <content-placeholders-img />
-            <content-placeholders-text :lines="10" />
-          </content-placeholders>
-        </div>
-      <profile-card v-if="profileFetched" :profilepage="true" :profile="profile"></profile-card>
+        <ProfileOverview :profile="profile" />
+        <ProfileExtras :profile="profile" />
     </div>
     <!-- Tab Selection -->
     <div class="col s12 m8 l9 row">
@@ -82,7 +77,8 @@ import Api from '@/services/api'
 import Page from '@/components/page'
 import CatNav from '@/components/layout/catNav'
 import GigCard from '@/components/snippets/gigCard'
-import ProfileCard from '@/components/layout/profileCard'
+import ProfileOverview from '@/components/profile/profile-overview'
+import ProfileExtras from '@/components/profile/profile-extras'
 import RotatingCard from '@/components/snippets/rotatingCard'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
 
@@ -92,8 +88,9 @@ export default {
     CatNav,
     GigCard,
     RotatingCard,
-    ProfileCard,
-    LoadingPlaceholder
+    LoadingPlaceholder,
+    ProfileOverview,
+    ProfileExtras
   },
   data () {
     return {
@@ -109,7 +106,6 @@ export default {
   },
   beforeCreate () {
     Api.fetchUserData(this.$route.params.username).then(response => {
-      console.log('from profile', response)
       this.profile = response.data
       this.profileFetched = true
     }).catch(err => {
@@ -118,7 +114,6 @@ export default {
     Api.fetchUserGigs(this.$route.params.username).then(response => {
       this.usergigs = response.data
       this.loading = false
-      console.log(response)
     }).catch(err => {
       console.log('error retrieving user gigs: \n error:', this.stringify(err))
     })
@@ -151,7 +146,6 @@ export default {
       payload.rep = this.profile.rep
       this.profile = payload
       this.$store.commit('SET_PROFILE', payload)
-      console.log('updating.....', payload)
     })
   },
   deforeDestroy () {

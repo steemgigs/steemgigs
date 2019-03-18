@@ -2,13 +2,15 @@
   <div class="landing">
     <!-- Hero Section with Search -->
     <section class='hero-landing'>
-      <el-row gutter="0">
+      <el-row :gutter="1">
         <el-col class="hero-text fill-height flex-col" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <h1>Do The 'Dreaming', Leave 'The Building' To Us</h1>
           <p>Freelance services for your business, by reputable like-minds.</p>
-          <el-input v-model="searchString" placeholder="Search SteemGigs" @keyup.native.enter="search">
-            <el-button class="primary" type="primary" slot="append" @click="search()">Search</el-button>
-          </el-input>
+          <el-input prefix-icon="el-icon-search" spellcheck="true" @keydown.enter.native="initSearch('posts')" size="medium" type="text" placeholder="Search SteemGigs" v-model="searchTerm" />
+              <el-popover popper-class="search-options" v-model="showSearchOptions">
+                <span @click="initSearch('posts')">Search Gig</span>
+                <span @click="initSearch('users')">Search By User</span>
+                </el-popover>
         </el-col>
         <el-col class="hero-img fill-height flex-col" :xs="1" :sm="1" :md="12" :lg="12" :xl="12">
           <img src="/static/img/landing/landing_1.svg" alt="">
@@ -151,7 +153,7 @@
           <span class="bropro-subtitle">Try SteemGigs</span>
           <span class="bropro-header">BROPRO</span>
           <p>Talent is generic. A 'brother talent'? Now, that's great. Find that ever missing peice of the puzzle with broPRO.</p>
-          <el-button disabled="true" type="secondary">Coming Soon</el-button>
+          <el-button :disabled='true' type="secondary">Coming Soon</el-button>
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <img src="/static/img/landing/bropro.svg" alt="BroPro Image">
@@ -200,16 +202,18 @@
 <script>
 import sgfooter from '@/components/layout/footer'
 import carousel from 'vue-owl-carousel'
+import search from '@/mixins/search.js'
 
 export default {
   name: 'landing-page',
+  mixins: [search],
   components: {
     sgfooter,
     carousel
   },
   data () {
     return {
-      searchString: '',
+      searchTerm: '',
       aboutItems: [{
         image: '/static/img/landing/create_gig.svg',
         title: 'Create A Gig',
@@ -355,9 +359,12 @@ export default {
       ]
     }
   },
-  methods: {
-    search () {
-      this.$router.push(`search/${this.searchString}`)
+  computed: {
+    // Used to indicate if the search popover should show
+    showSearchOptions () {
+      if (this.searchTerm.length !== 0) {
+        return true
+      }
     }
   }
 }
@@ -373,6 +380,13 @@ export default {
     }
     img {
       object-fit: initial;
+    }
+  }
+
+  .el-button-group .el-button--primary:first-child {
+    border: 0;
+    &:hover {
+      border: 0;
     }
   }
 
@@ -403,6 +417,23 @@ export default {
     button {
       color: white !important;
     }
+
+  .search-options {
+    padding: 0 !important;
+    width: 100%;
+    margin-top: 10px;
+    position: inherit;
+    span {
+      display: block;
+      color: #3f51b5;
+      cursor: pointer;
+      word-break: break-all;
+      padding: 10px;
+      &:hover {
+        background-color: #ecf5ff;
+      }
+    }
+  }
   }
 
   // About section within landing page

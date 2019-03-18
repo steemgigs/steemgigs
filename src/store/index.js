@@ -13,6 +13,7 @@ export default new Vuex.Store({
     lastPage: '',
     isLoading: false,
     searchTerm: '',
+    fullLoading: false,
     profile: {
       about: '',
       coverImage: '',
@@ -32,7 +33,15 @@ export default new Vuex.Store({
     },
     isSearching: false
   },
+  actions: {
+    setFullLoading: function (context, payload) {
+      context.commit('setFullLoading', payload)
+    }
+  },
   mutations: {
+    setFullLoading: function (state, status) {
+      state.fullLoading = status
+    },
     setSearchStatus: function (state, status) {
       state.isSearching = status
     },
@@ -196,6 +205,9 @@ export default new Vuex.Store({
     },
     isSearching: state => {
       return state.isSearching
+    },
+    fullLoading: state => {
+      return state.fullLoading
     }
   },
   plugins: [createPersist({

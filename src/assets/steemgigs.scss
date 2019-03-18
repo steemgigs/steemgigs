@@ -2103,3 +2103,9 @@ hr {
   .el-dialog__body {
     padding: 0;
   }
+
+  .el-form-item__label {
+    padding: 0 !important;
+    line-height: 25px !important;
+    text-transform: capitalize;
+  }
