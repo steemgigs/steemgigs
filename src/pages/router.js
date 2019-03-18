@@ -1,15 +1,14 @@
 import Index from '@/pages/index'
 import LoggedIn from '@/pages/access/loggedIn'
-import Steemgigs from '@/pages/platform/steemgigs'
-import Testimonials from '@/pages/platform/testimonials'
-import GigRequests from '@/pages/platform/gigRequests'
 import featured from '@/pages/platform/featured'
 import Profile from '@/pages/platform/profile'
+import EditProfile from '@/pages/platform/edit-profile'
 import GigDetail from '@/pages/platform/gigDetail'
 import Categories from '@/pages/platform/category'
 import SubCategories from '@/pages/platform/subcategory'
 import SurpassingGoogle from '@/pages/platform/surpassinggoogle'
 import Search from '@/pages/platform/search'
+import UserSearch from '@/pages/platform/user-search'
 import Wallet from '@/pages/platform/wallet'
 import Settings from '@/pages/platform/settings'
 import Invite from '@/pages/platform/invite'
@@ -18,6 +17,7 @@ import Basket from '@/pages/platform/basket'
 import Dashboard from '@/pages/platform/dashboard'
 import faqs from '@/pages/platform/faqs'
 import privacy from '@/pages/platform/privacy-policy'
+import overview from '@/pages/platform/overview'
 
 // Editors
 
@@ -55,9 +55,14 @@ export default [
     component: privacy
   },
   {
-    path: '/search/:query/',
+    path: '/search/posts/:query',
     name: 'STEEMGIGS | Search',
     component: Search
+  },
+  {
+    path: '/search/users/:query',
+    name: 'STEEMGIGS | Search Users',
+    component: UserSearch
   },
   {
     path: '/complete',
@@ -67,17 +72,22 @@ export default [
   {
     path: '/testimonials',
     name: 'STEEMGIGS | Testimonials',
-    component: Testimonials
+    component: overview
   },
   {
     path: '/steemgigs',
     name: 'STEEMGIGS | gigs',
-    component: Steemgigs
+    component: overview
   },
   {
     path: '/requested_gigs',
     name: 'STEEMGIGS | Requested Gigs',
-    component: GigRequests
+    component: overview
+  },
+  {
+    path: '/micro_tasks',
+    name: 'STEEMGIGS | Micro Tasks',
+    component: overview
   },
   {
     path: '/featured',
@@ -123,6 +133,11 @@ export default [
     path: '/@:username',
     name: 'STEEMGIGS | Profile',
     component: Profile
+  },
+  {
+    path: '/@:username/edit',
+    name: 'STEEMGIGS | Edit Profile',
+    component: EditProfile
   },
   {
     path: '/@:username/:task',

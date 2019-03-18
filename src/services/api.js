@@ -4,6 +4,9 @@ export default {
   search (searchQuery) {
     return axios.post('search/search_posts', { query: searchQuery })
   },
+  search_users (searchQuery) {
+    return axios.post('search/search_users', searchQuery)
+  },
   fetchUserData (username) {
     return axios.get(`profile/profile/${username}`)
   },

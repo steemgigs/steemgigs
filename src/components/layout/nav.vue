@@ -9,9 +9,15 @@
         </ul>
         <ul class="right shrink nav-options-wrapper" v-if="$store.state.accessToken">
           <div class="hide-on-med-and-down left">
+            <!-- Search Bar -->
             <li>
-              <el-input prefix-icon="el-icon-search" spellcheck="true" @keydown.enter.native="initSearch" size="medium" type="text" placeholder="Search SteemGigs" v-model="searchTerm" />
+               <el-input slot="reference" prefix-icon="el-icon-search" spellcheck="true" @keydown.enter.native="initSearch('posts')" size="medium" type="text" placeholder="Search SteemGigs" v-model="searchTerm" />
+              <el-popover  popper-class="search-options" width="195" v-model="showSearchOptions">
+                <span @click="initSearch('posts')">Search Gig</span>
+                <span @click="initSearch('users')">Search By User</span>
+                </el-popover>
             </li>
+            <!-- Menu Icons -->
             <li>
               <router-link to="/message"><i class="icon ion-android-chat x2"></i></router-link>
             </li>
@@ -89,6 +95,9 @@
                 <el-dropdown-item>
                   <router-link class="waves-effect" to="/faqs">Frequently Asked Questions</router-link>
                 </el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link class="waves-effect" :to="'@' + this.$store.state.username + '/edit'">Edit Profile</router-link>
+                </el-dropdown-item>
                 <el-dropdown-item><a class="waves-effect" href="https://discord.gg/wWrnSXK" target="_blank">Join our Discord</a></el-dropdown-item>
                 <el-dropdown-item>
                   <router-link class="waves-effect" to="/privacy">Privacy Policy</router-link>
@@ -111,9 +120,10 @@
 <script>
 import M from 'materialize-css'
 import modal from '@/mixins/modal.js'
+import search from '@/mixins/search.js'
 
 export default {
-  mixins: [modal],
+  mixins: [modal, search],
   data () {
     return {
       user: '',
@@ -131,13 +141,6 @@ export default {
       }
     }
   },
-  methods: {
-    initSearch () {
-      this.$store.commit('setSearchTerm', this.searchTerm)
-      this.$router.push(`/search/${this.searchTerm}`)
-      this.searchTerm = ''
-    }
-  },
   computed: {
     repp () {
       return this.profile.rep
@@ -147,6 +150,12 @@ export default {
     },
     wallet () {
       return this.profile.balance
+    },
+    // Used to indicate if the search popover should show
+    showSearchOptions () {
+      if (this.searchTerm.length !== 0) {
+        return true
+      }
     }
   },
   mounted () {
@@ -300,5 +309,19 @@ export default {
     font-weight: bold;
     margin-right: 10px;
     cursor: pointer;
+  }
+
+  .search-options {
+    padding: 0 !important;
+    span {
+      display: block;
+      color: #3f51b5;
+      cursor: pointer;
+      word-break: break-all;
+      padding: 10px;
+      &:hover {
+        background-color: #ecf5ff;
+      }
+    }
   }
 </style>

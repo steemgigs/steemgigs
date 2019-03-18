@@ -1,6 +1,6 @@
 <template>
     <el-container>
-  <div id="app">
+  <div id="app" v-loading.fullscreen.lock="fullLoading">
     <nav-bar @launchSignUp="showSignUp = true" @launchSignIn="showSignIn = true"/>
       <ElementLoading :active="this.$store.state.isLoading" spinner="spinner" color="#FF1480" :is-full-screen="true" />
    <router-view />
@@ -46,6 +46,7 @@ import M from 'materialize-css'
 import ElementLoading from 'vue-element-loading'
 import signup from '@/components/sign-up/sign-up.vue'
 import signin from '@/components/sign-in/sign-in.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
@@ -64,7 +65,6 @@ export default {
     }
   },
   mounted () {
-    this.$store.commit('setLoading', false)
     let elem = document.querySelector('.fixed-action-btn')
     M.FloatingActionButton.init(elem, {
       direction: 'top',
@@ -74,6 +74,11 @@ export default {
     this.navInstance = M.Sidenav.init(sidenav, {menuWidth: 200})
     let collapsible = document.querySelector('.collapsible')
     M.Collapsible.init(collapsible)
+  },
+  computed: {
+    ...mapGetters([
+      'fullLoading'
+    ])
   },
   methods: {
     closeNav (to) {

@@ -34,8 +34,8 @@ import { VueEditor } from 'vue2-editor'
 import VComment from '@/components/snippets/comment'
 import { Carousel, Slide } from 'vue-carousel'
 import SliderRange from 'vue-slider-component'
-import ProfileCard from '@/components/layout/profileCard'
 import LoadingPlaceholder from '@/components/widgets/gigLoading'
+
 export default {
   components: {
     Page,
@@ -45,8 +45,7 @@ export default {
     VueEditor,
     VComment,
     SliderRange,
-    LoadingPlaceholder,
-    ProfileCard
+    LoadingPlaceholder
   },
   data () {
     return {
