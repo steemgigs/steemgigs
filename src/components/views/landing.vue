@@ -697,15 +697,6 @@ export default {
     }
   }
 
-  // Shared
-  .sg-video {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 3px 3px #bfbfbf0f;
-    width: 100%;
-  }
-
   .fill-height {
     height: 100%;
     height: -moz-available;
