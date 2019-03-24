@@ -18,6 +18,7 @@ import Dashboard from '@/pages/platform/dashboard'
 import faqs from '@/pages/platform/faqs'
 import privacy from '@/pages/platform/privacy-policy'
 import overview from '@/pages/platform/overview'
+import About from '@/pages/platform/about'
 
 // Editors
 
@@ -33,6 +34,11 @@ export default [
     path: '/',
     name: 'STEEMGIGS | Home',
     component: Index
+  },
+  {
+    path: '/about',
+    name: 'STEEMGIGS | About',
+    component: About
   },
   {
     path: '/categories/:category',
