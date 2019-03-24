@@ -60,7 +60,7 @@
                 <p>In this version, the main aim was to display the expanse of our vision to every visitor, this includes users, potential investors, advisors, venture capitalists, web developers etc. This means that even where some features or functionalities
                     have not been entirely built, the framework for these features have been added to the website with a<em> 'coming soon'</em> status.</p>
                 <p>A key way of presenting our vision thus, was with our <em>new landing page</em>. <strong>It looks like this:</strong></p>
-                <p><img src="https://steemitimages.com/p/7258xSVeJbKkzXhyseBP4PYz11eBDT8sW2oR1a4vfVFS6HYpAfuK3WkLmbWYs9dZZtCTzmAD2dqM9fNEkzLH1gURDQXM9uazyLbYJ6zz2TYSGBq4PweJ5DFxBFjLSeCnFJX3GcsURSH9G?format=match&mode=fit&width=640" /> />
+                <p><img src="https://steemitimages.com/p/7258xSVeJbKkzXhyseBP4PYz11eBDT8sW2oR1a4vfVFS6HYpAfuK3WkLmbWYs9dZZtCTzmAD2dqM9fNEkzLH1gURDQXM9uazyLbYJ6zz2TYSGBq4PweJ5DFxBFjLSeCnFJX3GcsURSH9G?format=match&mode=fit&width=640" />
                 </p>
                 <p><br></p>
                 <p>Each visitor to<em> 'https://steemgigs.org'</em> should be able to attain full insight into the expanse of our vision, right from our landing page.</p>
@@ -274,6 +274,8 @@ export default {
     border-radius: 10px;
     ul {
         padding-left: inherit;
+        font-family: ubuntu;
+        font-size: 14px;
         li {
             list-style: disc;
         }
@@ -287,6 +289,7 @@ export default {
         border-radius: 10px;
         box-shadow: 0 0 3px 3px #bfbfbf0f;
         max-width: 100%;
+        height: 50%
     }
 }
 </style>

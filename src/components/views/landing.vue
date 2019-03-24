@@ -112,7 +112,7 @@
         <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
           <h3>All your freelance service needs and more</h3>
           <p>Whether you’re a freelancer, need a freelancer or want to be a freelancer, we have you covered.</p>
-          <router-link to="/steemgigs"><el-button type="primary" class="primary">Explore SteemGigs</el-button></router-link>
+          <router-link to="/about"><el-button type="primary" class="primary">About Steem Gigs</el-button></router-link>
         </el-col>
       </el-row>
     </section>
