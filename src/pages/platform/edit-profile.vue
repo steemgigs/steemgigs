@@ -256,9 +256,12 @@ export default {
     }
 }
 .edit-profile {
-  p, h5 {
+  p {
         margin-top: 5px;
-      }
+    }
+    h5 {
+        margin-top: 15px;
+    }
   .el-col {
     padding: 0 !important;
   }
