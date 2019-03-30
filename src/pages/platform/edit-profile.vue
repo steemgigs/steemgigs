@@ -97,6 +97,11 @@
                                 </el-col>
                             </el-row>
                             </div>
+                            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                            <el-form-item label="Social Reach">
+                                <el-input type="text" v-model="profile.socialReach" placeholder="Enter Social Reach`" />
+                            </el-form-item>
+                            </el-col>
                         </el-row>
                         <!--  Vacation Mode -->
                         <h4>Enable Vacation Mode</h4>
