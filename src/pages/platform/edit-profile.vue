@@ -39,7 +39,7 @@
                             <el-button v-else class="button-new-tag" size="small" @click="showInput('skills')">+ Add Skill</el-button>
                         </el-form-item>
                         </el-row>
-                                   <el-row :gutter="15">
+                        <el-row :gutter="15">
                         <h4>Learning</h4>
                         <p>What are you learning</p>
                         <!-- Learning List -->
@@ -50,6 +50,19 @@
                             <el-input class="input-new-tag" v-if="newLearningVisible" v-model="newLearning" ref="saveTagInput" size="mini" @keyup.enter.native="addLearning" @blur="addLearning">
                             </el-input>
                             <el-button v-else class="button-new-tag" size="small" @click="showInput('learning')">+ Add Learning</el-button>
+                        </el-form-item>
+                        </el-row>
+                        <!-- Help With -->
+                        <el-row :gutter="15">
+                        <h4>Help With</h4>
+                        <p>What types of projects are you looking to help with?</p>
+                        <el-form-item label="Help With">
+                            <el-tag :key="tag" v-for="tag in profile.helpWith" closable :disable-transitions="false" @close="handleClose(tag, 'helpWith')">
+                                {{tag}}
+                            </el-tag>
+                            <el-input class="input-new-tag" v-if="newHelpWithVisible" v-model="newHelpWith" ref="saveTagInput" size="mini" @keyup.enter.native="addHelpWith" @blur="addHelpWith">
+                            </el-input>
+                            <el-button v-else class="button-new-tag" size="small" @click="showInput('helpWith')">+ Add Help With</el-button>
                         </el-form-item>
                         </el-row>
                         <!-- Languages -->
@@ -141,6 +154,8 @@ export default {
       newLanguageVisible: false,
       newSkill: '',
       newSkillVisible: false,
+      newHelpWith: '',
+      newHelpWithVisible: false,
       newLearning: '',
       newLearningVisible: false,
       social: {
@@ -194,6 +209,9 @@ export default {
           case 'learning':
           this.profile.learning.splice(this.profile.learning.indexOf(tag), 1)
           break;
+          case 'helpWith':
+          this.profile.helpWith.splice(this.helpWith.learning.indexOf(tag), 1)
+          break;
         }
     },
     showInput (type) {
@@ -206,6 +224,9 @@ export default {
         break;
         case 'learning':
         this.newLearningVisible = true
+        break;
+        case 'helpWith':
+        this.newHelpWithVisible = true
         break;
         }
       this.$nextTick(_ => {
@@ -227,6 +248,14 @@ export default {
       }
       this.newSkillVisible = false
       this.newSkill = ''
+    },
+    addHelpWith () {
+      let inputValue = this.newHelpWith
+      if (inputValue) {
+        this.profile.helpWith.push(inputValue)
+      }
+      this.newHelpWithVisible = false
+      this.newHelpWith = ''
     },
     addLearning () {
       let inputValue = this.newLearning
