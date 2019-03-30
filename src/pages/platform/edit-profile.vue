@@ -39,6 +39,19 @@
                             <el-button v-else class="button-new-tag" size="small" @click="showInput('skills')">+ Add Skill</el-button>
                         </el-form-item>
                         </el-row>
+                                   <el-row :gutter="15">
+                        <h4>Learning</h4>
+                        <p>What are you learning</p>
+                        <!-- Learning List -->
+                        <el-form-item label="Learning">
+                            <el-tag :key="tag" v-for="tag in profile.learning" closable :disable-transitions="false" @close="handleClose(tag, 'learning')">
+                                {{tag}}
+                            </el-tag>
+                            <el-input class="input-new-tag" v-if="newLearningVisible" v-model="newLearning" ref="saveTagInput" size="mini" @keyup.enter.native="addLearning" @blur="addLearning">
+                            </el-input>
+                            <el-button v-else class="button-new-tag" size="small" @click="showInput('learning')">+ Add Learning</el-button>
+                        </el-form-item>
+                        </el-row>
                         <!-- Languages -->
                         <el-row :gutter="15">
                         <h4>Languages</h4>
@@ -123,6 +136,8 @@ export default {
       newLanguageVisible: false,
       newSkill: '',
       newSkillVisible: false,
+      newLearning: '',
+      newLearningVisible: false,
       social: {
         platform: '',
         username: ''
@@ -171,6 +186,9 @@ export default {
           case 'language':
           this.profile.languages.splice(this.profile.languages.indexOf(tag), 1)
           break;
+          case 'learning':
+          this.profile.learning.splice(this.profile.learning.indexOf(tag), 1)
+          break;
         }
     },
     showInput (type) {
@@ -180,6 +198,9 @@ export default {
         break;
         case 'language':
         this.newLanguageVisible = true
+        break;
+        case 'learning':
+        this.newLearningVisible = true
         break;
         }
       this.$nextTick(_ => {
@@ -201,6 +222,14 @@ export default {
       }
       this.newSkillVisible = false
       this.newSkill = ''
+    },
+    addLearning () {
+      let inputValue = this.newLearning
+      if (inputValue) {
+        this.profile.learning.push(inputValue)
+      }
+      this.newLearningVisible = false
+      this.newLearning = ''
     },
     addToSocial () {
       this.$set(this.profile.social, this.social.platform, this.social.username)
