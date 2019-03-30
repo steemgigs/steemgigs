@@ -25,18 +25,73 @@
                                 </el-form-item>
                             </el-col>
                         </el-row>
-                        <!-- Skills, Learning & Languages -->
+                        <!-- Skills -->
+                        <el-row :gutter="15">
+                        <h4>Skills & Hobbies</h4>
+                        <p>Let the world the talents you have to offer</p>
+                        <!-- Skills List -->
+                        <el-form-item label="Skills & Hobbies">
+                            <el-tag :key="tag" v-for="tag in profile.skillsAndHobbies" closable :disable-transitions="false" @close="handleClose(tag, 'skills')">
+                                {{tag}}
+                            </el-tag>
+                            <el-input class="input-new-tag" v-if="newSkillVisible" v-model="newSkill" ref="saveTagInput" size="mini" @keyup.enter.native="addSkill" @blur="addSkill">
+                            </el-input>
+                            <el-button v-else class="button-new-tag" size="small" @click="showInput('skills')">+ Add Skill</el-button>
+                        </el-form-item>
+                        </el-row>
+                        <el-row :gutter="15">
+                        <h4>Learning</h4>
+                        <p>What are you learning</p>
+                        <!-- Learning List -->
+                        <el-form-item label="Learning">
+                            <el-tag :key="tag" v-for="tag in profile.learning" closable :disable-transitions="false" @close="handleClose(tag, 'learning')">
+                                {{tag}}
+                            </el-tag>
+                            <el-input class="input-new-tag" v-if="newLearningVisible" v-model="newLearning" ref="saveTagInput" size="mini" @keyup.enter.native="addLearning" @blur="addLearning">
+                            </el-input>
+                            <el-button v-else class="button-new-tag" size="small" @click="showInput('learning')">+ Add Learning</el-button>
+                        </el-form-item>
+                        </el-row>
+                        <!-- Help With -->
+                        <el-row :gutter="15">
+                        <h4>Help With</h4>
+                        <p>What types of projects are you looking to help with?</p>
+                        <el-form-item label="Help With">
+                            <el-tag :key="tag" v-for="tag in profile.helpWith" closable :disable-transitions="false" @close="handleClose(tag, 'helpWith')">
+                                {{tag}}
+                            </el-tag>
+                            <el-input class="input-new-tag" v-if="newHelpWithVisible" v-model="newHelpWith" ref="saveTagInput" size="mini" @keyup.enter.native="addHelpWith" @blur="addHelpWith">
+                            </el-input>
+                            <el-button v-else class="button-new-tag" size="small" @click="showInput('helpWith')">+ Add Help With</el-button>
+                        </el-form-item>
+                        </el-row>
+                        <!-- I made this -->
+                        <el-row :gutter="15">
+                        <h4>I Made This</h4>
+                        <p>Share what you've created with the world</p>
+                        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                        <el-form-item label="Useful Information">
+                            <el-input type="textarea" rows="3" placeholder="Describe your work in the past, use examples to help tell everyone about what you've done" v-model="profile.portfolio.description" />
+                        </el-form-item>
+                        </el-col>
+                        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                        <el-form-item label="Link to Portfolio">
+                            <el-input type="text" placeholder="Enter Portfilio URL" v-model="profile.portfolio.url" />
+                        </el-form-item>
+                        </el-col>
+                        </el-row>
+                        <!-- Languages -->
                         <el-row :gutter="15">
                         <h4>Languages</h4>
                         <p>Speak more than one language? Let the world know.</p>
                         <!-- Language Spoken List -->
                         <el-form-item label="Languages">
-                            <el-tag :key="tag" v-for="tag in profile.languages" closable :disable-transitions="false" @close="handleClose(tag)">
+                            <el-tag :key="tag" v-for="tag in profile.languages" closable :disable-transitions="false" @close="handleClose(tag, 'language')">
                                 {{tag}}
                             </el-tag>
-                            <el-input class="input-new-tag" v-if="newLanguageVisible" v-model="newLanguage" ref="saveTagInput" size="mini" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm">
+                            <el-input class="input-new-tag" v-if="newLanguageVisible" v-model="newLanguage" ref="saveTagInput" size="mini" @keyup.enter.native="addLanguage" @blur="addLanguage">
                             </el-input>
-                            <el-button v-else class="button-new-tag" size="small" @click="showInput">+ Add Language</el-button>
+                            <el-button v-else class="button-new-tag" size="small" @click="showInput('language')">+ Add Language</el-button>
                         </el-form-item>
                         </el-row>
                         <!-- Social -->
@@ -70,6 +125,11 @@
                                 </el-col>
                             </el-row>
                             </div>
+                            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                            <el-form-item label="Social Reach">
+                                <el-input type="text" v-model="profile.socialReach" placeholder="Enter Social Reach`" />
+                            </el-form-item>
+                            </el-col>
                         </el-row>
                         <!--  Vacation Mode -->
                         <h4>Enable Vacation Mode</h4>
@@ -107,6 +167,12 @@ export default {
       profile: null,
       newLanguage: '',
       newLanguageVisible: false,
+      newSkill: '',
+      newSkillVisible: false,
+      newHelpWith: '',
+      newHelpWithVisible: false,
+      newLearning: '',
+      newLearningVisible: false,
       social: {
         platform: '',
         username: ''
@@ -147,22 +213,72 @@ export default {
       })
       this.$store.dispatch('setFullLoading', false)
     },
-    handleClose (tag) {
-      this.profile.languages.splice(this.profile.languages.indexOf(tag), 1)
+    handleClose (tag, type) {
+        switch(type) {
+          case 'skills':
+          this.profile.skillsAndHobbies.splice(this.profile.skillsAndHobbies.indexOf(tag), 1)
+          break;
+          case 'language':
+          this.profile.languages.splice(this.profile.languages.indexOf(tag), 1)
+          break;
+          case 'learning':
+          this.profile.learning.splice(this.profile.learning.indexOf(tag), 1)
+          break;
+          case 'helpWith':
+          this.profile.helpWith.splice(this.profile.helpWith.indexOf(tag), 1)
+          break;
+        }
     },
-    showInput () {
-      this.newLanguageVisible = true
+    showInput (type) {
+      switch(type) {
+        case 'skills':
+        this.newSkillVisible = true
+        break;
+        case 'language':
+        this.newLanguageVisible = true
+        break;
+        case 'learning':
+        this.newLearningVisible = true
+        break;
+        case 'helpWith':
+        this.newHelpWithVisible = true
+        break;
+        }
       this.$nextTick(_ => {
         this.$refs.saveTagInput.$refs.input.focus()
       })
     },
-    handleInputConfirm () {
+    addLanguage () {
       let inputValue = this.newLanguage
       if (inputValue) {
         this.profile.languages.push(inputValue)
       }
       this.newLanguageVisible = false
       this.newLanguage = ''
+    },
+     addSkill () {
+      let inputValue = this.newSkill
+      if (inputValue) {
+        this.profile.skillsAndHobbies.push(inputValue)
+      }
+      this.newSkillVisible = false
+      this.newSkill = ''
+    },
+    addHelpWith () {
+      let inputValue = this.newHelpWith
+      if (inputValue) {
+        this.profile.helpWith.push(inputValue)
+      }
+      this.newHelpWithVisible = false
+      this.newHelpWith = ''
+    },
+    addLearning () {
+      let inputValue = this.newLearning
+      if (inputValue) {
+        this.profile.learning.push(inputValue)
+      }
+      this.newLearningVisible = false
+      this.newLearning = ''
     },
     addToSocial () {
       this.$set(this.profile.social, this.social.platform, this.social.username)
@@ -189,9 +305,12 @@ export default {
     }
 }
 .edit-profile {
-  p, h5 {
+  p {
         margin-top: 5px;
-      }
+    }
+    h5 {
+        margin-top: 15px;
+    }
   .el-col {
     padding: 0 !important;
   }
