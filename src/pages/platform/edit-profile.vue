@@ -25,18 +25,32 @@
                                 </el-form-item>
                             </el-col>
                         </el-row>
-                        <!-- Skills, Learning & Languages -->
+                        <!-- Skills -->
+                        <el-row :gutter="15">
+                        <h4>Skills & Hobbies</h4>
+                        <p>Let the world the talents you have to offer</p>
+                        <!-- Skills List -->
+                        <el-form-item label="Skills & Hobbies">
+                            <el-tag :key="tag" v-for="tag in profile.skillsAndHobbies" closable :disable-transitions="false" @close="handleClose(tag, 'skills')">
+                                {{tag}}
+                            </el-tag>
+                            <el-input class="input-new-tag" v-if="newSkillVisible" v-model="newSkill" ref="saveTagInput" size="mini" @keyup.enter.native="addSkill" @blur="addSkill">
+                            </el-input>
+                            <el-button v-else class="button-new-tag" size="small" @click="showInput('skills')">+ Add Skill</el-button>
+                        </el-form-item>
+                        </el-row>
+                        <!-- Languages -->
                         <el-row :gutter="15">
                         <h4>Languages</h4>
                         <p>Speak more than one language? Let the world know.</p>
                         <!-- Language Spoken List -->
                         <el-form-item label="Languages">
-                            <el-tag :key="tag" v-for="tag in profile.languages" closable :disable-transitions="false" @close="handleClose(tag)">
+                            <el-tag :key="tag" v-for="tag in profile.languages" closable :disable-transitions="false" @close="handleClose(tag, 'language')">
                                 {{tag}}
                             </el-tag>
-                            <el-input class="input-new-tag" v-if="newLanguageVisible" v-model="newLanguage" ref="saveTagInput" size="mini" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm">
+                            <el-input class="input-new-tag" v-if="newLanguageVisible" v-model="newLanguage" ref="saveTagInput" size="mini" @keyup.enter.native="addLanguage" @blur="addLanguage">
                             </el-input>
-                            <el-button v-else class="button-new-tag" size="small" @click="showInput">+ Add Language</el-button>
+                            <el-button v-else class="button-new-tag" size="small" @click="showInput('language')">+ Add Language</el-button>
                         </el-form-item>
                         </el-row>
                         <!-- Social -->
@@ -107,6 +121,8 @@ export default {
       profile: null,
       newLanguage: '',
       newLanguageVisible: false,
+      newSkill: '',
+      newSkillVisible: false,
       social: {
         platform: '',
         username: ''
@@ -147,22 +163,44 @@ export default {
       })
       this.$store.dispatch('setFullLoading', false)
     },
-    handleClose (tag) {
-      this.profile.languages.splice(this.profile.languages.indexOf(tag), 1)
+    handleClose (tag, type) {
+        switch(type) {
+          case 'skills':
+          this.profile.skillsAndHobbies.splice(this.profile.skillsAndHobbies.indexOf(tag), 1)
+          break;
+          case 'language':
+          this.profile.languages.splice(this.profile.languages.indexOf(tag), 1)
+          break;
+        }
     },
-    showInput () {
-      this.newLanguageVisible = true
+    showInput (type) {
+      switch(type) {
+        case 'skills':
+        this.newSkillVisible = true
+        break;
+        case 'language':
+        this.newLanguageVisible = true
+        break;
+        }
       this.$nextTick(_ => {
         this.$refs.saveTagInput.$refs.input.focus()
       })
     },
-    handleInputConfirm () {
+    addLanguage () {
       let inputValue = this.newLanguage
       if (inputValue) {
         this.profile.languages.push(inputValue)
       }
       this.newLanguageVisible = false
       this.newLanguage = ''
+    },
+     addSkill () {
+      let inputValue = this.newSkill
+      if (inputValue) {
+        this.profile.skillsAndHobbies.push(inputValue)
+      }
+      this.newSkillVisible = false
+      this.newSkill = ''
     },
     addToSocial () {
       this.$set(this.profile.social, this.social.platform, this.social.username)
