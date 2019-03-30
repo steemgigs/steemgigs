@@ -65,6 +65,21 @@
                             <el-button v-else class="button-new-tag" size="small" @click="showInput('helpWith')">+ Add Help With</el-button>
                         </el-form-item>
                         </el-row>
+                        <!-- I made this -->
+                        <el-row :gutter="15">
+                        <h4>I Made This</h4>
+                        <p>Share what you've created with the world</p>
+                        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                        <el-form-item label="Useful Information">
+                            <el-input type="textarea" rows="3" placeholder="Describe your work in the past, use examples to help tell everyone about what you've done" v-model="profile.portfolio.description" />
+                        </el-form-item>
+                        </el-col>
+                        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                        <el-form-item label="Link to Portfolio">
+                            <el-input type="text" placeholder="Enter Portfilio URL" v-model="profile.portfolio.url" />
+                        </el-form-item>
+                        </el-col>
+                        </el-row>
                         <!-- Languages -->
                         <el-row :gutter="15">
                         <h4>Languages</h4>
@@ -210,7 +225,7 @@ export default {
           this.profile.learning.splice(this.profile.learning.indexOf(tag), 1)
           break;
           case 'helpWith':
-          this.profile.helpWith.splice(this.helpWith.learning.indexOf(tag), 1)
+          this.profile.helpWith.splice(this.profile.helpWith.indexOf(tag), 1)
           break;
         }
     },
