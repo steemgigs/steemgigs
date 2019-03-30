@@ -188,7 +188,6 @@ export default {
       opacity: 0.6;
     }
   }
-
   .noShow {
     margin-top: 20px;
   }
