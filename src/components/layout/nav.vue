@@ -99,7 +99,7 @@
                   <router-link class="waves-effect" to="/faqs">Frequently Asked Questions</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <router-link class="waves-effect" :to="'@' + this.$store.state.username + '/edit'">Edit Profile</router-link>
+                  <router-link class="waves-effect" :to="'/@' + this.$store.state.username + '/edit'">Edit Profile</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
                   <router-link class="waves-effect" to="/about">About SteemGigs</router-link>
