@@ -7,24 +7,24 @@
           <li><span class="sign-up-option" @click="sendBasicEvent('launchSignUp')">Sign up</span></li>
           <li><el-button type="primary" class="primary" @click="sendBasicEvent('launchSignIn')">Sign In</el-button></li>
         </ul>
-        <ul class="right shrink nav-options-wrapper" v-if="$store.state.accessToken">
-          <div class="hide-on-med-and-down left">
+        <ul class="right nav-options-wrapper" v-if="$store.state.accessToken">
+          <div class="left">
             <!-- Search Bar -->
             <li>
-               <el-input slot="reference" prefix-icon="el-icon-search" spellcheck="true" @keydown.enter.native="initSearch('posts')" size="medium" type="text" placeholder="Search SteemGigs" v-model="searchTerm" />
+              <el-input slot="reference" prefix-icon="el-icon-search" spellcheck="true" class="hide-on-med-and-down" @keydown.enter.native="initSearch('posts')" size="medium" type="text" placeholder="Search SteemGigs" v-model="searchTerm" />
               <el-popover  popper-class="search-options" width="195" v-model="showSearchOptions">
                 <span @click="initSearch('posts')">Search Gig</span>
                 <span @click="initSearch('users')">Search By User</span>
                 </el-popover>
             </li>
             <!-- Menu Icons -->
-            <li>
+            <li class="hide-on-med-and-down">
               <router-link to="/message"><i class="icon ion-android-chat x2"></i></router-link>
             </li>
-            <li>
+            <li class="hide-on-med-and-down">
               <router-link to="/dashboard"><i class="icon ion-speedometer x2"></i></router-link>
             </li>
-            <li>
+            <li class="hide-on-med-and-down">
               <router-link to="/cart"><i class="icon ion-bag x2"></i></router-link>
             </li>
             <!-- Create option menu -->
@@ -84,7 +84,10 @@
                   <router-link class="waves-effect" :to="'/@' + $store.state.username"> {{ $store.state.username + ' (' + repp + ') ' }} </router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <router-link class="waves-effect" to="/wallet">Wallet - {{ wallet }}</router-link>
+                  <router-link class="waves-effect" to="/bropro">BroPro</router-link>
+                </el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link class="waves-effect" to="/wallet">Wallet</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
                   <router-link class="waves-effect" to="/settings">Settings</router-link>
