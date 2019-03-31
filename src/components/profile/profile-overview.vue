@@ -112,7 +112,9 @@ export default {
 
     .expertise {
         margin: 10px;
-        min-height: 45px
+        min-height: 45px;
+        word-break: initial;
+        text-align: center;
     }
 
     span {

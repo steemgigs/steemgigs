@@ -79,4 +79,10 @@ export default {
     width: 100%;
     margin-top: 10px;
     }
+    .el-tag {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      white-space: normal;
+      height: auto;
+    }
 </style>
