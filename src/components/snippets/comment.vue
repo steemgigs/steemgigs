@@ -287,7 +287,7 @@ export default {
 .comment {
   position: relative;
   padding-left: 65px;
-  margin: 10px auto;
+  margin: 25px auto;
   a,.link,a *{
     cursor: pointer;
   }

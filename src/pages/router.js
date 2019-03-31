@@ -19,6 +19,7 @@ import faqs from '@/pages/platform/faqs'
 import privacy from '@/pages/platform/privacy-policy'
 import overview from '@/pages/platform/overview'
 import About from '@/pages/platform/about'
+import BroPro from '@/pages/platform/bropro'
 
 // Editors
 
@@ -44,6 +45,11 @@ export default [
     path: '/categories/:category',
     name: 'STEEMGIGS | Categories',
     component: Categories
+  },
+  {
+    path: '/bropro',
+    name: 'STEEMGIGS | BroPro',
+    component: BroPro
   },
   {
     path: '/categories/:category/:subcategory',

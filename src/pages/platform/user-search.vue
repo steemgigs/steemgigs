@@ -56,6 +56,11 @@ export default {
       return '/search/posts/' + this.searchTerm
     }
   },
+  watch: {
+    searchTerm: function () {
+      this.searchUsers()
+    }
+  },
   methods: {
     async searchUsers () {
       try {

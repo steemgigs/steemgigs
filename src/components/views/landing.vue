@@ -152,7 +152,7 @@
           <span class="bropro-subtitle">Try SteemGigs</span>
           <span class="bropro-header">BROPRO</span>
           <p>Talent is generic. A 'brother talent'? Now, that's great. Find that ever missing peice of the puzzle with broPRO.</p>
-          <el-button :disabled='true' type="secondary">Coming Soon</el-button>
+          <router-link to="/bropro"><el-button type="secondary">Find out more</el-button></router-link>
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <img src="/static/img/landing/bropro.svg" alt="BroPro Image">
