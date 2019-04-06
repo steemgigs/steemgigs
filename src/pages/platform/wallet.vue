@@ -148,8 +148,12 @@ export default {
   },
   mounted () {
     this.username = this.$route.params.username
-    this.getBalances()
-    this.getTransactions()
+    this.$store.dispatch('setFullLoading', true)
+     this.getBalances()
+     this.getTransactions()
+     .then(result => {
+       this.$store.dispatch('setFullLoading', false)
+       })
   },
   computed: {
     steemPower () {
