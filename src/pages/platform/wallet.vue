@@ -25,6 +25,8 @@
                           <div @click="launchTransfer('Steem')"><el-dropdown-item>Transfer</el-dropdown-item></div>
                           <el-dropdown-item>Power Up</el-dropdown-item>
                           <el-dropdown-item>Power Down</el-dropdown-item>
+                          <a :href="'https://blocktrades.us?affiliate_id=' + blocktradesAffiliateId" target="_blank"><el-dropdown-item>Buy</el-dropdown-item></a>
+                          <a :href="`https://blocktrades.us?affiliate_id=${this.blocktradesAffiliateId}`" target="_blank"><el-dropdown-item>Sell</el-dropdown-item></a>
                         </el-dropdown-menu>
                       </el-dropdown>
                      </el-col>
@@ -70,6 +72,8 @@
                           </span>
                         <el-dropdown-menu slot="dropdown">
                           <div @click="launchTransfer('SBD')"><el-dropdown-item>Transfer</el-dropdown-item></div>
+                          <a :href="`https://blocktrades.us?affiliate_id=${this.blocktradesAffiliateId}`" target="_blank"><el-dropdown-item>Buy</el-dropdown-item></a>
+                          <a :href="`https://blocktrades.us?affiliate_id=${this.blocktradesAffiliateId}`" target="_blank"><el-dropdown-item>Sell</el-dropdown-item></a>
                         </el-dropdown-menu>
                       </el-dropdown>
                      </el-col>
@@ -92,8 +96,8 @@
                           </span>
                         <el-dropdown-menu slot="dropdown">
                           <div @click="launchTransfer('Teardrops')"><el-dropdown-item>Transfer</el-dropdown-item></div>
-                          <el-dropdown-item>Buy</el-dropdown-item>
-                          <el-dropdown-item>Sell</el-dropdown-item>
+                          <a href="https://steem-engine.com/?p=market&t=TEARDROPS" target="_blank"><el-dropdown-item>Buy</el-dropdown-item></a>
+                         <a href="https://steem-engine.com/?p=market&t=TEARDROPS" target="_blank"><el-dropdown-item>Sell</el-dropdown-item></a>
                         </el-dropdown-menu>
                       </el-dropdown>
                      </el-col>
@@ -132,7 +136,8 @@ export default {
       balances: null,
       transactions: null,
       transferType: null,
-      showTransfer: false
+      showTransfer: false,
+      blocktradesAffiliateId: 'e2555430-2823-419e-9b4a-f614416df4ad'
     }
   },
   mounted () {
