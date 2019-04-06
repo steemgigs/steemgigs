@@ -3,7 +3,10 @@
     <div class="transction-details">
     <img :src="userImg" alt="User Image" />
     <!-- e.g Sent 15 Steem to SteemGigs -->
+    <div>
     <div>{{ type.primary }} {{ transaction.details.amount }} {{ type.secondary }} {{ relevantUser }}</div>
+    <div class="memo">{{ transaction.details.memo }}</div>
+    </div>
     </div>
     <div :class="type.class" class="indicator">
     {{ type.indicator }} {{ transaction.details.amount }}
@@ -52,8 +55,7 @@ export default {
 <style lang="scss">
 .transaction-item {
     background: white;
-    background: white;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     border-radius: 5px;
     padding: 15px;
     display: flex;
@@ -74,9 +76,15 @@ export default {
         display: flex;
         flex-direction: row;
         align-items: center;
+        .memo {
+           font-size: 13px;
+           width: 95%;
+           word-break: break-word;
+           color: #333333;
+        }
     img {
-        height: 50px;
-        width: 50px;
+        height: 35px;
+        width: 35px;
         border-radius: 50%;
         margin-right: 10px;
     }
