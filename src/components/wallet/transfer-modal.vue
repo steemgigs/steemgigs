@@ -9,12 +9,12 @@
                      <el-input v-model="transfer.to" placeholder="Enter Recipient"/>
                 </el-form-item>
                 <!-- Amount & Type -->
-                 <el-form-item label="Amount" prop="amount">
+                 <el-form-item v-if="defaultType" label="Amount" prop="amount">
                      <el-input v-model="transfer.amount" placeholder="Enter Amount">
                              <el-radio-group slot="append" v-model="transfer.type" size="small">
                                  <el-radio-button label="Steem"></el-radio-button>
                                  <el-radio-button label="SBD"></el-radio-button>
-                                 <el-radio-button label="Teadrops"></el-radio-button>
+                                 <el-radio-button label="Teardrops"></el-radio-button>
                             </el-radio-group>
                      </el-input>
                  </el-form-item>
@@ -43,7 +43,7 @@ export default {
             transfer: {
                 to: '',
                 amount: null,
-                type: this.defaultType,
+                type: '',
                 memo: ''
             },
             transferRules: {
@@ -52,12 +52,29 @@ export default {
                     }
                 }
     },
+    watch: {
+        defaultType () {
+            this.transfer.type = this.defaultType
+        }
+    },
     methods: {
         // Check that the form is valid and then route to relevant transfer based on type
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
+                    let url = ''
+                    switch(this.transfer.type) {
+                       case 'Steem':
+                       url = `https://app.steemconnect.com/sign/transfer?from=${this.$store.state.username}&to=${this.transfer.to}&amount=${this.transfer.amount}%20STEEM`
+                       break;
+                       case 'SBD':
+                       url = `https://app.steemconnect.com/sign/transfer?from=${this.$store.state.username}&to=${this.transfer.to}&amount=${this.transfer.amount}%20SBD`
+                       break;
+                       case 'Teardrops':
+                       url = `https://app.steemconnect.com/sign/custom-json?required_auths=%5B%22${this.$store.state.username}%22%5D&required_posting_auths=%5B%5D&id=ssc-mainnet1&json=%7B%22contractName%22%3A%22tokens%22%2C%22contractAction%22%3A%22transfer%22%2C%22contractPayload%22%3A%7B%22symbol%22%3A%22TEARDROPS%22%2C%22to%22%3A%22${this.transfer.to}%22%2C%22quantity%22%3A%22${this.transfer.amount}%22%2C%22memo%22%3A%22${this.transfer.memo}%22%7D%7D`
+                       break;
+                       }
+                    window.open(url, '_blank');
                     } else {
                         return false;
                     }
@@ -76,3 +93,5 @@ export default {
     }
 }
 </style>
+
+

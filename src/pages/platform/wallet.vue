@@ -22,7 +22,7 @@
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
                         <el-dropdown-menu slot="dropdown">
-                          <el-dropdown-item>Transfer</el-dropdown-item>
+                          <div @click="launchTransfer('Steem')"><el-dropdown-item>Transfer</el-dropdown-item></div>
                           <el-dropdown-item>Power Up</el-dropdown-item>
                           <el-dropdown-item>Power Down</el-dropdown-item>
                         </el-dropdown-menu>
@@ -46,8 +46,8 @@
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
                         <el-dropdown-menu slot="dropdown">
-                          <el-dropdown-item>Transfer</el-dropdown-item>
                           <el-dropdown-item>Power Up</el-dropdown-item>
+                          <el-dropdown-item>Power Down</el-dropdown-item>
                         </el-dropdown-menu>
                       </el-dropdown>
                      </el-col>
@@ -69,7 +69,7 @@
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
                         <el-dropdown-menu slot="dropdown">
-                          <el-dropdown-item>Transfer</el-dropdown-item>
+                          <div @click="launchTransfer('SBD')"><el-dropdown-item>Transfer</el-dropdown-item></div>
                         </el-dropdown-menu>
                       </el-dropdown>
                      </el-col>
@@ -91,7 +91,7 @@
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
                         <el-dropdown-menu slot="dropdown">
-                          <el-dropdown-item>Transfer</el-dropdown-item>
+                          <div @click="launchTransfer('Teardrops')"><el-dropdown-item>Transfer</el-dropdown-item></div>
                           <el-dropdown-item>Buy</el-dropdown-item>
                           <el-dropdown-item>Sell</el-dropdown-item>
                         </el-dropdown-menu>
@@ -109,22 +109,30 @@
             </el-col>
          </el-row>
       </el-main>
+      <!-- Transfer Modal -->
+      <transfermodal :showTransfer="showTransfer" :defaultType="transferType" />
    </page>
 </template>
 
 <script>
 import Api from '@/services/api'
 import transactionrow from '@/components/wallet/transaction-item'
+import transfermodal from '@/components/wallet/transfer-modal'
+import Page from '@/components/page'
 export default {
   name: 'wallet',
   components: {
-    transactionrow
+    transactionrow,
+    transfermodal,
+    Page
   },
   data () {
     return {
       username: '',
       balances: null,
-      transactions: null
+      transactions: null,
+      transferType: null,
+      showTransfer: false
     }
   },
   mounted () {
@@ -167,6 +175,11 @@ export default {
           message: `Sorry, unable to load transactions. Error Details - ${err}`
         })
       })
+    },
+    launchTransfer(type) {
+      this.showTransfer = false
+      this.transferType = type
+      this.showTransfer = true
     }
     }
 }
