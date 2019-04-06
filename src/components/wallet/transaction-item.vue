@@ -4,7 +4,10 @@
     <img :src="userImg" alt="User Image" />
     <!-- e.g Sent 15 Steem to SteemGigs -->
     <div>
-    <div>{{ type.primary }} {{ transaction.details.amount }} {{ type.secondary }} {{ relevantUser }}</div>
+    <div class="transaction-header">
+    <div class="main">{{ type.primary }} {{ transaction.details.amount }} {{ type.secondary }} {{ relevantUser }}</div> 
+    <span class="time">{{ timestamp }} </span>
+    </div>
     <div class="memo">{{ transaction.details.memo }}</div>
     </div>
     </div>
@@ -14,6 +17,7 @@
   </div>
 </template>
 <script>
+import moment from 'moment'
 export default {
     name: 'transaction-item',
     props: {
@@ -37,6 +41,9 @@ export default {
                     class: 'received'
                 }
             }
+        },
+        timestamp () {
+            return moment(this.transaction.timestamp).fromNow();
         },
         relevantUser () {
             if (this.user === this.transaction.details.from) {
@@ -76,6 +83,20 @@ export default {
         display: flex;
         flex-direction: row;
         align-items: center;
+        .transaction-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            .main {
+                font-weight: 500;
+            }
+            .time {
+                color: #333332;
+                font-size: 12px;
+                margin-left: 10px;
+                font-style: italic;
+            }
+        }
         .memo {
            font-size: 13px;
            width: 95%;
