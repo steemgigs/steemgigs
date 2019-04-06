@@ -3,7 +3,7 @@
      <el-row :gutter="20">
          <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
              <el-form :model="transfer" :rules="transferRules" ref="transfer" label-position="top">
-                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et mauris pharetra, tincidunt nulla at, ullamcorper purus. Nullam vel varius neque. </p>
+                 <p>Enter the recipient, amount and a memo, then click the button below to be redirected to SteemConnect to complete your transaction.</p>
                  <!-- To -->
                  <el-form-item label="To" prop="to">
                      <el-input v-model="transfer.to" placeholder="Enter Recipient"/>

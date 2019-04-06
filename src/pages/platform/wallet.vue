@@ -23,8 +23,7 @@
                           </span>
                         <el-dropdown-menu slot="dropdown">
                           <div @click="launchTransfer('Steem')"><el-dropdown-item>Transfer</el-dropdown-item></div>
-                          <el-dropdown-item>Power Up</el-dropdown-item>
-                          <el-dropdown-item>Power Down</el-dropdown-item>
+                          <div @click="launchPower('up')"><el-dropdown-item>Power Up</el-dropdown-item></div>
                           <a :href="'https://blocktrades.us?affiliate_id=' + blocktradesAffiliateId" target="_blank"><el-dropdown-item>Buy</el-dropdown-item></a>
                           <a :href="`https://blocktrades.us?affiliate_id=${this.blocktradesAffiliateId}`" target="_blank"><el-dropdown-item>Sell</el-dropdown-item></a>
                         </el-dropdown-menu>
@@ -48,8 +47,7 @@
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
                         <el-dropdown-menu slot="dropdown">
-                          <el-dropdown-item>Power Up</el-dropdown-item>
-                          <el-dropdown-item>Power Down</el-dropdown-item>
+                          <div @click="launchPower('down')"><el-dropdown-item>Power Down</el-dropdown-item></div>
                         </el-dropdown-menu>
                       </el-dropdown>
                      </el-col>
@@ -115,6 +113,8 @@
       </el-main>
       <!-- Transfer Modal -->
       <transfermodal :showTransfer="showTransfer" :defaultType="transferType" />
+      <!-- Transfer Modal -->
+      <powermodal :powerVisible="powerVisible" :type="powerType" />
    </page>
 </template>
 
@@ -122,12 +122,14 @@
 import Api from '@/services/api'
 import transactionrow from '@/components/wallet/transaction-item'
 import transfermodal from '@/components/wallet/transfer-modal'
+import powermodal from '@/components/wallet/power-modal'
 import Page from '@/components/page'
 export default {
   name: 'wallet',
   components: {
     transactionrow,
     transfermodal,
+    powermodal,
     Page
   },
   data () {
@@ -137,6 +139,8 @@ export default {
       transactions: null,
       transferType: null,
       showTransfer: false,
+      powerType: 'up',
+      powerVisible: false,
       blocktradesAffiliateId: 'e2555430-2823-419e-9b4a-f614416df4ad'
     }
   },
@@ -185,6 +189,11 @@ export default {
       this.showTransfer = false
       this.transferType = type
       this.showTransfer = true
+    },
+    launchPower(type) {
+      this.powerVisible = false
+      this.powerType = type
+      this.powerVisible = true
     }
     }
 }
