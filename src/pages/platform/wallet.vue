@@ -1,6 +1,7 @@
 <template>
    <page :pageClasses="['wallet__view', 'row']">
       <el-main>
+        <h3>Balances for @{{this.username}}</h3>
          <!-- Balance List -->
          <el-row :gutter="20">
             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
@@ -104,6 +105,7 @@
             </el-col>
          </el-row>
          <!-- Transaction List-->
+        <h3>Recent Transactions</h3>
          <el-row :gutter="20">
             <!-- Transaction Item -->
             <el-col v-for="(transaction, index) in transactions" :key="index" :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
@@ -200,7 +202,11 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped> 
+
+h3 {
+  margin-bottom: 20px;
+}
 .balance-container {
     background: white;
     margin-bottom: 20px;
