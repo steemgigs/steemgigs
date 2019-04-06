@@ -5,7 +5,7 @@
          <!-- Balance List -->
          <el-row :gutter="20">
             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-               <div class="balance-container">
+               <div class="balance-container" v-loading="balancesLoading">
                   <!-- Steem Balance -->
                   <div class="balance-row">
                      <el-col :xs="12" :sm="12" :md="18" :lg="18" :xl="18">
@@ -107,7 +107,7 @@
          </el-row>
          <!-- Transaction List-->
         <h3>Recent Transactions</h3>
-         <el-row :gutter="20">
+         <el-row :gutter="20" class="transactions" v-loading="transactionsLoading">
             <!-- Transaction Item -->
             <el-col v-for="(transaction, index) in transactions" :key="index" :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                <transactionrow :transaction="transaction" :user="username"/>
@@ -141,6 +141,8 @@ export default {
       balances: null,
       transactions: null,
       transferType: null,
+      balancesLoading: false,
+      transactionsLoading: false,
       showTransfer: false,
       powerType: 'up',
       powerVisible: false,
@@ -149,12 +151,8 @@ export default {
   },
   mounted () {
     this.username = this.$route.params.username
-    this.$store.dispatch('setFullLoading', true)
      this.getBalances()
      this.getTransactions()
-     .then(result => {
-       this.$store.dispatch('setFullLoading', false)
-       })
   },
   computed: {
     steemPower () {
@@ -167,6 +165,7 @@ export default {
   },
   methods: {
     async getBalances () {
+      this.balancesLoading = true
       await Api.getBalances(this.username)
       .then(result => {
         if (result.data.length === 0) {
@@ -178,6 +177,7 @@ export default {
         this.$router.push('/')
         } else {
           this.balances = result.data
+          this.balancesLoading = false
         }
       })
       .catch(err => {
@@ -189,9 +189,11 @@ export default {
       })
     },
     async getTransactions () {
+      this.transactionsLoading = true
       await Api.getTransactions(this.username)
       .then(result => {
         this.transactions = result.data
+        this.transactionsLoading = false
       })
       .catch(err => {
         // Send error toast notification upon error
@@ -220,6 +222,9 @@ export default {
 
 h3 {
   margin-bottom: 20px;
+}
+.transactions {
+  min-height: 100px;
 }
 .balance-container {
     background: white;
