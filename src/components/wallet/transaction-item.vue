@@ -3,7 +3,7 @@
     <div class="transction-details">
     <img :src="userImg" alt="User Image" />
     <!-- e.g Sent 15 Steem to SteemGigs -->
-    <div>
+    <div class="main-content">
     <div class="transaction-header">
     <div class="main">{{ type.primary }} {{ transaction.details.amount }} {{ type.secondary }} {{ relevantUser }}</div> 
     <span class="time">{{ timestamp }} </span>
@@ -102,6 +102,7 @@ export default {
            width: 95%;
            word-break: break-word;
            color: #333333;
+           margin-bottom: 2.5px;
         }
     img {
         height: 35px;
@@ -110,6 +111,24 @@ export default {
         margin-right: 10px;
     }
 
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .indicator {
+        display: none;
+    }
+    .transction-details {
+        flex: 1;
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+    }
+    .transaction-header {
+        flex: 1;
+        justify-content: space-between;
     }
 }
 </style>
