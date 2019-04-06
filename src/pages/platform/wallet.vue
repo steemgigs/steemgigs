@@ -13,8 +13,20 @@
                            <p>Tradeable tokens that may be transferred anywhere at anytime. Steem can be converted to STEEM POWER in a process called powering up. </p>
                         </div>
                      </el-col>
-                     <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
+                     <el-col :xs="12" :sm="12" :md="5" :lg="5" :xl="5">
                         <span class="amount">{{ balances.steem_balance }}</span>
+                     </el-col>
+                     <el-col :xs="12" :sm="12" :md="1" :lg="1" :xl="1">
+                        <el-dropdown>
+                          <span class="el-dropdown-link">
+                            <i class="el-icon-arrow-down el-icon--right"></i>
+                          </span>
+                        <el-dropdown-menu slot="dropdown">
+                          <el-dropdown-item>Transfer</el-dropdown-item>
+                          <el-dropdown-item>Power Up</el-dropdown-item>
+                          <el-dropdown-item>Power Down</el-dropdown-item>
+                        </el-dropdown-menu>
+                      </el-dropdown>
                      </el-col>
                   </div>
                   <!-- Steem Power Balance -->
@@ -25,8 +37,19 @@
                            <p>Influence tokens which give you more control over post payouts and allow you to earn on curation rewards.</p>
                         </div>
                      </el-col>
-                     <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
+                     <el-col :xs="12" :sm="12" :md="5" :lg="5" :xl="5">
                         <span class="amount">{{ steemPower }}</span>
+                     </el-col>
+                     <el-col :xs="12" :sm="12" :md="1" :lg="1" :xl="1">
+                        <el-dropdown>
+                          <span class="el-dropdown-link">
+                            <i class="el-icon-arrow-down el-icon--right"></i>
+                          </span>
+                        <el-dropdown-menu slot="dropdown">
+                          <el-dropdown-item>Transfer</el-dropdown-item>
+                          <el-dropdown-item>Power Up</el-dropdown-item>
+                        </el-dropdown-menu>
+                      </el-dropdown>
                      </el-col>
                   </div>
                   <!-- SBD Balance -->
@@ -37,8 +60,18 @@
                            <p>Tradeable tokens that may be transferred anywhere at anytime.</p>
                         </div>
                      </el-col>
-                     <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
+                     <el-col :xs="12" :sm="12" :md="5" :lg="5" :xl="5">
                         <span class="amount">{{ balances.sbd_balance }}</span>
+                     </el-col>
+                     <el-col :xs="12" :sm="12" :md="1" :lg="1" :xl="1">
+                        <el-dropdown>
+                          <span class="el-dropdown-link">
+                            <i class="el-icon-arrow-down el-icon--right"></i>
+                          </span>
+                        <el-dropdown-menu slot="dropdown">
+                          <el-dropdown-item>Transfer</el-dropdown-item>
+                        </el-dropdown-menu>
+                      </el-dropdown>
                      </el-col>
                   </div>
                   <!-- Teardrops Balance -->
@@ -49,8 +82,20 @@
                            <p>A steem-based token that you can use across steemgigs.org, ulogs.org and macrohard.pro. Teardrops can be transfered, used or kept to be powered up in the near future.</p>
                         </div>
                      </el-col>
-                     <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
+                     <el-col :xs="12" :sm="12" :md="5" :lg="5" :xl="5">
                         <span class="amount">{{ balances.teardrop_balance }} TEARDROPS</span>
+                     </el-col>
+                     <el-col :xs="12" :sm="12" :md="1" :lg="1" :xl="1">
+                        <el-dropdown>
+                          <span class="el-dropdown-link">
+                            <i class="el-icon-arrow-down el-icon--right"></i>
+                          </span>
+                        <el-dropdown-menu slot="dropdown">
+                          <el-dropdown-item>Transfer</el-dropdown-item>
+                          <el-dropdown-item>Buy</el-dropdown-item>
+                          <el-dropdown-item>Sell</el-dropdown-item>
+                        </el-dropdown-menu>
+                      </el-dropdown>
                      </el-col>
                   </div>
                </div>
