@@ -48,7 +48,7 @@
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
                         <el-dropdown-menu slot="dropdown">
-                          <div @click="launchPower('down')"><el-dropdown-item>Power Down</el-dropdown-item></div>
+                          <el-dropdown-item disabled="true">Power Down (Coming Soon)</el-dropdown-item>
                         </el-dropdown-menu>
                       </el-dropdown>
                      </el-col>
@@ -97,6 +97,7 @@
                           <div @click="launchTransfer('Teardrops')"><el-dropdown-item>Transfer</el-dropdown-item></div>
                           <a href="https://steem-engine.com/?p=market&t=TEARDROPS" target="_blank"><el-dropdown-item>Buy</el-dropdown-item></a>
                          <a href="https://steem-engine.com/?p=market&t=TEARDROPS" target="_blank"><el-dropdown-item>Sell</el-dropdown-item></a>
+                         <el-dropdown-item disabled="true">Power Up (Coming Soon)</el-dropdown-item>
                         </el-dropdown-menu>
                       </el-dropdown>
                      </el-col>
