@@ -105,7 +105,7 @@ export default {
         }
     img {
         height: 35px;
-        width: 35px;
+        min-width: 35px;
         border-radius: 50%;
         margin-right: 10px;
     }
