@@ -164,7 +164,16 @@ export default {
     async getBalances () {
       await Api.getBalances(this.username)
       .then(result => {
-        this.balances = result.data
+        if (result.data.length === 0) {
+        // Handle incorrect username, this should be validated in a different way, however if balances couldn't be found, push back to homepage
+        this.$notify.error({
+          title: 'Error',
+          message: `Sorry, unable to load balances for that user, please check the username.`
+        })
+        this.$router.push('/')
+        } else {
+          this.balances = result.data
+        }
       })
       .catch(err => {
         // Send error toast notification upon error
