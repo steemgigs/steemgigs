@@ -1,9 +1,9 @@
 <template>
    <page :pageClasses="['wallet__view', 'row']">
       <el-main>
-        <h3>Balances for @{{this.username}}</h3>
+        <h4>Balances for @{{this.username}}</h4>
          <!-- Balance List -->
-         <el-row :gutter="20">
+         <el-row :gutter="20" v-if="balances">
             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                <div class="balance-container" v-loading="balancesLoading">
                   <!-- Steem Balance -->
@@ -48,7 +48,7 @@
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
                         <el-dropdown-menu slot="dropdown">
-                          <el-dropdown-item disabled="true">Power Down (Coming Soon)</el-dropdown-item>
+                          <el-dropdown-item :disabled="true">Power Down (Coming Soon)</el-dropdown-item>
                         </el-dropdown-menu>
                       </el-dropdown>
                      </el-col>
@@ -97,7 +97,7 @@
                           <div @click="launchTransfer('Teardrops')"><el-dropdown-item>Transfer</el-dropdown-item></div>
                           <a href="https://steem-engine.com/?p=market&t=TEARDROPS" target="_blank"><el-dropdown-item>Buy</el-dropdown-item></a>
                          <a href="https://steem-engine.com/?p=market&t=TEARDROPS" target="_blank"><el-dropdown-item>Sell</el-dropdown-item></a>
-                         <el-dropdown-item disabled="true">Power Up (Coming Soon)</el-dropdown-item>
+                         <el-dropdown-item :disabled="true">Power Up (Coming Soon)</el-dropdown-item>
                         </el-dropdown-menu>
                       </el-dropdown>
                      </el-col>
@@ -106,7 +106,7 @@
             </el-col>
          </el-row>
          <!-- Transaction List-->
-        <h3>Recent Transactions</h3>
+        <h4>Recent Transactions</h4>
          <el-row :gutter="20" class="transactions" v-loading="transactionsLoading">
             <!-- Transaction Item -->
             <el-col v-for="(transaction, index) in transactions" :key="index" :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
@@ -220,8 +220,8 @@ export default {
 
 <style lang="scss" scoped> 
 
-h3 {
-  margin-bottom: 20px;
+h4 {
+  margin: 0 15px 15px 0;
 }
 .transactions {
   min-height: 100px;
@@ -230,19 +230,24 @@ h3 {
     background: white;
     margin-bottom: 20px;
     border-radius: 5px;
-    padding: 15px;
+    padding: 10px 15px;
 .balance-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  border-top: 1.5px solid whitesmoke;
+  padding: 12.5px 0;
+  &:first-child {
+    border: 0;
+  }
   .details {
     span {
       font-weight: 500;
-      color: #181566;
+      color: #333333;
     }
     p {
-      margin-top: 2.5px;
+      margin: 0 0 2.5px 0;
     }
   }
   .amount {

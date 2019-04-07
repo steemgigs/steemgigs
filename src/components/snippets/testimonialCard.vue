@@ -11,7 +11,7 @@
         </div>
         <router-link class="grey-text text-darken-3" :to="username + '/' + permlink">
         </router-link>
-           <router-link :to="username + '/' + permlink"><el-button class="secondary" type="secondary">View Testimonial</el-button></router-link>
+           <router-link :to="username + '/' + permlink"><el-button  type="secondary">View Testimonial</el-button></router-link>
       </div>
     </div>
     <gig-action :gigData="testimonial" />
