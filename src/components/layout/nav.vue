@@ -5,7 +5,7 @@
         <router-link to="/" class="brand-logo left"><img src="/static/img/logo.gif" alt="logo"></router-link>
         <ul class="right notIn" v-if="!$store.state.accessToken">
           <li><span class="sign-up-option" @click="sendBasicEvent('launchSignUp')">Sign up</span></li>
-          <li><el-button type="primary" class="primary" @click="sendBasicEvent('launchSignIn')">Sign In</el-button></li>
+          <li><el-button type="primary"  @click="sendBasicEvent('launchSignIn')">Sign In</el-button></li>
         </ul>
         <ul class="right nav-options-wrapper" v-if="$store.state.accessToken">
           <div class="left">
@@ -31,7 +31,7 @@
             <li>
               <el-dropdown trigger="click">
                 <span class="el-dropdown-link">
-                  <el-button type="primary" class="primary" size="medium">Create</el-button>
+                  <el-button type="primary"  size="medium">Create</el-button>
                   </span>
                 <el-dropdown-menu class="creation-dropdown" slot="dropdown">
                   <el-dropdown-item>
@@ -87,7 +87,7 @@
                   <router-link class="waves-effect" to="/bropro">BroPro</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <router-link class="waves-effect" to="/wallet">Wallet</router-link>
+                  <router-link class="waves-effect" :to="'/wallet/@' + $store.state.username">Wallet</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
                   <router-link class="waves-effect" to="/settings">Settings</router-link>

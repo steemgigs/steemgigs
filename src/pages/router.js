@@ -162,7 +162,7 @@ export default [
     component: Basket
   },
   {
-    path: '/wallet',
+    path: '/wallet/@:username',
     name: 'STEEMGIGS | Wallet',
     component: Wallet
   },

@@ -2,7 +2,7 @@
     <div class="center center-align witness-card">
       <div class="card-content">
         <p>Support Steemgigs</p>
-        <a target="_blank" href="https://steemconnect.com/sign/account-witness-vote?witness=steemgigs&approve=true"><el-button type="primary" class="primary">Vote as witness</el-button></a>
+        <a target="_blank" href="https://steemconnect.com/sign/account-witness-vote?witness=steemgigs&approve=true"><el-button type="primary" >Vote as witness</el-button></a>
       </div>
     </div>
 </template>

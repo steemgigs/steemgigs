@@ -9,6 +9,7 @@
                   <el-option label="Any" value="Any"></el-option>
                   <el-option label="STEEM" value="STEEM"></el-option>
                   <el-option label="SBD" value="SBD"></el-option>
+                  <el-option label="TEARDROPS" value="TEARDROPS"></el-option>
               </el-select>
           </el-form-item>
           <!--  Category -->
@@ -39,7 +40,7 @@
           <el-checkbox v-model="freeGigsOnly">Show only FREE gigs</el-checkbox>
           </el-form-item>
             <el-form-item>
-                <el-button type="primary" class="primary" @click="search">Search</el-button>
+                <el-button type="primary"  @click="search">Search</el-button>
             </el-form-item>
         </el-form>
     </div>
