@@ -9,6 +9,7 @@
                   <el-option label="Any" value="Any"></el-option>
                   <el-option label="STEEM" value="STEEM"></el-option>
                   <el-option label="SBD" value="SBD"></el-option>
+                  <el-option label="TEARDROPS" value="TEARDROPS"></el-option>
               </el-select>
           </el-form-item>
           <!--  Category -->
