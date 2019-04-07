@@ -15,7 +15,7 @@
               <h3>We couldn't find any users that match your query</h3>
               <h5>We couldn't find anything for that, why not try another search or alternatively check out some more gigs</h5>
               <router-link :to="searchLink">
-              <el-button type="secondary" class="secondary">Search Posts</el-button>
+              <el-button type="secondary" >Search Posts</el-button>
               </router-link>
             </el-col>
           </el-row>

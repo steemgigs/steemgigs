@@ -120,7 +120,7 @@
                                         <el-input type="text" @keyup.enter="addToSocial" placeholder="Enter Username" v-model="social.username" />
                                     </el-form-item>
                                      <el-form-item>
-                                     <el-button class="secondary" type="secondary" @click="addToSocial">Add Social Media Link</el-button>
+                                     <el-button  type="secondary" @click="addToSocial">Add Social Media Link</el-button>
                                       </el-form-item>
                                 </el-col>
                             </el-row>
@@ -144,7 +144,7 @@
                         </el-row>
                         <!-- Edit Profile Submission -->
                         <el-form-item>
-                            <el-button class="primary" type="primary" @click="updateProfile()">Update Profile</el-button>
+                            <el-button  type="primary" @click="updateProfile()">Update Profile</el-button>
                         </el-form-item>
                     </el-form>
                 </div>

@@ -29,7 +29,7 @@
         <h3>No Results to Show</h3>
         <h5>We couldn't find anything for that, why not try another search or alternatively check out some more gigs</h5>
         <router-link to="/steemgigs">
-          <el-button type="secondary" class="secondary">Explore Gigs</el-button>
+          <el-button type="secondary" >Explore Gigs</el-button>
         </router-link>
       </div>
       </el-col>

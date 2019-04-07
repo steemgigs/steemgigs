@@ -9,7 +9,7 @@ import VTooltip from 'v-tooltip'
 import VueContentPlaceholders from 'vue-content-placeholders'
 import Vuex from 'vuex'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import "./assets/element-variables.scss";
 import VueYouTubeEmbed from 'vue-youtube-embed'
 import SocialSharing from 'vue-social-sharing'
 import lineClamp from 'vue-line-clamp'
