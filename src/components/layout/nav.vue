@@ -87,7 +87,7 @@
                   <router-link class="waves-effect" to="/bropro">BroPro</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <router-link class="waves-effect" to="/wallet">Wallet</router-link>
+                  <router-link class="waves-effect" :to="'/wallet/@' + $store.state.username">Wallet</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
                   <router-link class="waves-effect" to="/settings">Settings</router-link>

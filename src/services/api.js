@@ -93,5 +93,11 @@ export default {
         token: token
       }
     })
+  },
+  getBalances (username) {
+    return axios.get(`profile/wallet/${username}`)
+  },
+  getTransactions (username) {
+    return axios.get(`profile/transactions/${username}`)
   }
 }
