@@ -3,7 +3,7 @@
       <el-main>
         <h4>Balances for @{{this.username}}</h4>
          <!-- Balance List -->
-         <el-row :gutter="20">
+         <el-row :gutter="20" v-if="balances">
             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                <div class="balance-container" v-loading="balancesLoading">
                   <!-- Steem Balance -->
@@ -48,7 +48,7 @@
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
                         <el-dropdown-menu slot="dropdown">
-                          <el-dropdown-item disabled="true">Power Down (Coming Soon)</el-dropdown-item>
+                          <el-dropdown-item :disabled="true">Power Down (Coming Soon)</el-dropdown-item>
                         </el-dropdown-menu>
                       </el-dropdown>
                      </el-col>
@@ -97,7 +97,7 @@
                           <div @click="launchTransfer('Teardrops')"><el-dropdown-item>Transfer</el-dropdown-item></div>
                           <a href="https://steem-engine.com/?p=market&t=TEARDROPS" target="_blank"><el-dropdown-item>Buy</el-dropdown-item></a>
                          <a href="https://steem-engine.com/?p=market&t=TEARDROPS" target="_blank"><el-dropdown-item>Sell</el-dropdown-item></a>
-                         <el-dropdown-item disabled="true">Power Up (Coming Soon)</el-dropdown-item>
+                         <el-dropdown-item :disabled="true">Power Up (Coming Soon)</el-dropdown-item>
                         </el-dropdown-menu>
                       </el-dropdown>
                      </el-col>
