@@ -71,6 +71,7 @@
                     <el-option value="STEEM">STEEM</el-option>
                     <el-option value="SBD">SBD</el-option>
                     <el-option value="SP" >SP</el-option>
+                    <el-option value="TEARDROPS" >TEARDROPS</el-option>
                   </el-select>
                 </el-form-item>
                 </el-col>
