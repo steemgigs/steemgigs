@@ -39,7 +39,7 @@
           <el-checkbox v-model="freeGigsOnly">Show only FREE gigs</el-checkbox>
           </el-form-item>
             <el-form-item>
-                <el-button type="primary" class="primary" @click="search">Search</el-button>
+                <el-button type="primary"  @click="search">Search</el-button>
             </el-form-item>
         </el-form>
     </div>

@@ -39,7 +39,7 @@
                      <a v-if="resteeming && this.currentGig.author !== this.$store.state.username" v-tooltip="{ content: 'resteem', classes: ['tooltip'] }" :class="!resteem ? 'grey-text' : 'indigo-text'" @click="reblog(currentGig)"><i class="icon ion-ios-redo" aria-hidden="true"></i></a>
                   </div>
                   <a @click="launchComment()" class="reply">
-                    <el-button type="secondary" class="secondary">Reply</el-button>
+                    <el-button type="secondary" >Reply</el-button>
                     </a>
                   <div class="vote-slider py-3" v-if="upvoteActive">
                     <div class="col s9">

@@ -68,33 +68,6 @@ p {
   font-family: sans-serif;
 }
 
-
-// Primary button styling
-
-.primary {
-  background: #6361D0;
-  border: 1px solid #6361D0;
-}
-
-.primary.is-disabled {
-  background: #6361d073;
-  border: 1px solid #6361d073;
-  border: 0;
-}
-
-.primary:hover {
-  background: #6361D0 !important;
-  border: 1px solid #6361D0 !important;
-  opacity: 0.6;
-}
-
-.secondary:hover {
-    background: 0 !important;
-    opacity: 0.6;
-    color: #606266;
-    border-color: #dcdfe6;
-}
-
 a {
   color: #3f51b5;
   cursor: pointer;
@@ -2048,7 +2021,6 @@ hr {
 .el-tag {
   margin-right: 10px;
   border: 1px solid rgba(98, 94, 211, 0.29);
-  color: #625ed3;
   background-color: rgba(98, 94, 211, 0.14);
   margin-bottom: 10px;
 }
@@ -2112,12 +2084,6 @@ hr {
   
   .el-pagination.is-background .el-pager li:not(.disabled).active {
     background-color: #d0d0d0;
-    color: #fff;
-  }
-
-  .el-button--primary.is-active, .el-button--primary:active {
-    background: #6361D0;
-    border-color: #6361D0;
     color: #fff;
   }
 

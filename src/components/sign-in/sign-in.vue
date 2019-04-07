@@ -3,7 +3,7 @@
     <template slot="title"><h3>Sign in via SteemConnect</h3>
 </template>
     <p>To access SteemGigs you must login with SteemConnect, continue using the button below.</p>
-    <a :href="loginURL"><el-button type="primary" class="primary">Login via SteemConnect</el-button></a>
+    <a :href="loginURL"><el-button type="primary" >Login via SteemConnect</el-button></a>
     <span class="need-steem" @click="sendBasicEvent('launchSignUp')">I don't have a Steem account</span>
   </el-dialog>
 </template>

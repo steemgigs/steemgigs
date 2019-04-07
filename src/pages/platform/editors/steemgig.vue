@@ -141,7 +141,7 @@
           </el-collapse>
           <!-- Form Submission -->
           <el-form-item>
-            <el-button class="primary" type="primary" @click="submitForm('newGigData')">Create</el-button>
+            <el-button  type="primary" @click="submitForm('newGigData')">Create</el-button>
             <el-button @click="resetForm('newGigData')">Reset</el-button>
           </el-form-item>
         </el-form>

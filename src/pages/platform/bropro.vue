@@ -20,7 +20,7 @@
                      <h4>{{ bro.name }} </h4>
                      <p>{{ bro.description }}</p>
                      <h6>Starting at {{ bro.price }}</h6>
-                     <el-button @click="dialogVisible = true" class="secondary" type="secondary">Buy Now</el-button>
+                     <el-button @click="dialogVisible = true"  type="secondary">Buy Now</el-button>
                  </div>
              </el-col>
         </el-row>
@@ -30,7 +30,7 @@
       <p class="dialog-message">To get this experience all you need to do is send teardrops to the user you wish to utilise with memo "bropro" via steem-engine.com. If you don't have the specified teardrops amount, you can use the button below to access the market to buy teardrops. If you have any questions or concerns, all our BroPro members are available on our Discord to help with your queries.</p>
       <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">Cancel</el-button>
-    <a href="https://steem-engine.com/?p=market&t=TEARDROPS" class="get-tokens" target="_blank"><el-button type="primary" class="primary" @click="dialogVisible = false">Go To Market</el-button></a>
+    <a href="https://steem-engine.com/?p=market&t=TEARDROPS" class="get-tokens" target="_blank"><el-button type="primary"  @click="dialogVisible = false">Go To Market</el-button></a>
   </span>
 </el-dialog>
   </page>
