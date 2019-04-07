@@ -43,7 +43,7 @@ export default {
             }
         },
         timestamp () {
-            return moment(this.transaction.timestamp).fromNow();
+            return  moment.utc(this.transaction.timestamp).fromNow();    
         },
         relevantUser () {
             if (this.user === this.transaction.details.from) {
