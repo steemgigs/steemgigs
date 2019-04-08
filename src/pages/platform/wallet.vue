@@ -115,9 +115,9 @@
          </el-row>
       </el-main>
       <!-- Transfer Modal -->
-      <transfermodal :showTransfer="showTransfer" :defaultType="transferType" />
+      <transfermodal @closedModal="handleClose" :showTransfer="showTransfer" :defaultType="transferType" />
       <!-- Transfer Modal -->
-      <powermodal :powerVisible="powerVisible" :type="powerType" />
+      <powermodal @closedModal="handleClose" :powerVisible="powerVisible" :type="powerType" />
    </page>
 </template>
 
@@ -211,14 +211,22 @@ export default {
       })
     },
     launchTransfer(type) {
-      this.showTransfer = false
       this.transferType = type
       this.showTransfer = true
     },
     launchPower(type) {
-      this.powerVisible = false
       this.powerType = type
       this.powerVisible = true
+    },
+    handleClose(type) {
+      switch (type.name) {
+        case 'transfer':
+        this.showTransfer = false;
+        break;
+        case 'power': 
+        thus.powerVisible = false;
+        break;
+      }
     }
     }
 }

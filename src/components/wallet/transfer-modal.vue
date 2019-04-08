@@ -1,5 +1,5 @@
 <template>
-<el-dialog title="Transfer" custom-class="transfer-modal" :visible.sync="showTransfer" width="65%">
+<el-dialog title="Transfer" custom-class="transfer-modal"  @close="emitClose" :visible.sync="showTransfer" width="65%">
      <el-row :gutter="20">
          <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
              <el-form :model="transfer" :rules="transferRules" ref="transfer" label-position="top">
@@ -80,6 +80,11 @@ export default {
                     }
                 });
       },
+      emitClose() {
+          this.$emit('closedModal', {
+              name: 'transfer'
+          })
+      }
     }
 }
 </script>
