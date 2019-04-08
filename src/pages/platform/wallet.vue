@@ -18,7 +18,7 @@
                         <span class="amount">{{ balances.steem_balance }}</span>
                      </el-col>
                      <el-col :xs="2" :sm="2" :md="2" :lg="1" :xl="1">
-                        <el-dropdown>
+                        <el-dropdown v-if="currentUser">
                           <span class="el-dropdown-link">
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
@@ -43,7 +43,7 @@
                         <span class="amount">{{ steemPower }}</span>
                      </el-col>
                      <el-col :xs="2" :sm="2" :md="2" :lg="1" :xl="1">
-                        <el-dropdown>
+                        <el-dropdown v-if="currentUser">
                           <span class="el-dropdown-link">
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
@@ -65,7 +65,7 @@
                         <span class="amount">{{ balances.sbd_balance }}</span>
                      </el-col>
                      <el-col :xs="2" :sm="2" :md="2" :lg="1" :xl="1">
-                        <el-dropdown>
+                        <el-dropdown v-if="currentUser">
                           <span class="el-dropdown-link">
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
@@ -89,7 +89,7 @@
                         <span class="amount">{{ balances.teardrop_balance }} TEARDROPS</span>
                      </el-col>
                      <el-col :xs="2" :sm="2" :md="2" :lg="1" :xl="1">
-                        <el-dropdown>
+                        <el-dropdown v-if="currentUser">
                           <span class="el-dropdown-link">
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
@@ -160,6 +160,13 @@ export default {
         return this.balances.steem_power + ` (${this.balances.delegated_steem_power.toFixed(3)}) SP`  
       } else {
         return this.balances.steem_power + 'SP'
+      }
+    },
+    currentUser () {
+      if (this.username === this.$store.state.username) {
+        return true
+      } else {
+        return false
       }
     }
   },
