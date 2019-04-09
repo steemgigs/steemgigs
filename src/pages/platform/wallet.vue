@@ -18,7 +18,7 @@
                         <span class="amount">{{ balances.steem_balance }}</span>
                      </el-col>
                      <el-col :xs="2" :sm="2" :md="2" :lg="1" :xl="1">
-                        <el-dropdown>
+                        <el-dropdown v-if="currentUser">
                           <span class="el-dropdown-link">
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
@@ -43,7 +43,7 @@
                         <span class="amount">{{ steemPower }}</span>
                      </el-col>
                      <el-col :xs="2" :sm="2" :md="2" :lg="1" :xl="1">
-                        <el-dropdown>
+                        <el-dropdown v-if="currentUser">
                           <span class="el-dropdown-link">
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
@@ -65,7 +65,7 @@
                         <span class="amount">{{ balances.sbd_balance }}</span>
                      </el-col>
                      <el-col :xs="2" :sm="2" :md="2" :lg="1" :xl="1">
-                        <el-dropdown>
+                        <el-dropdown v-if="currentUser">
                           <span class="el-dropdown-link">
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
@@ -89,7 +89,7 @@
                         <span class="amount">{{ balances.teardrop_balance }} TEARDROPS</span>
                      </el-col>
                      <el-col :xs="2" :sm="2" :md="2" :lg="1" :xl="1">
-                        <el-dropdown>
+                        <el-dropdown v-if="currentUser">
                           <span class="el-dropdown-link">
                             <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
@@ -115,9 +115,9 @@
          </el-row>
       </el-main>
       <!-- Transfer Modal -->
-      <transfermodal :showTransfer="showTransfer" :defaultType="transferType" />
+      <transfermodal @closedModal="handleClose" :showTransfer="showTransfer" :defaultType="transferType" />
       <!-- Transfer Modal -->
-      <powermodal :powerVisible="powerVisible" :type="powerType" />
+      <powermodal @closedModal="handleClose" :powerVisible="powerVisible" :type="powerType" />
    </page>
 </template>
 
@@ -160,6 +160,13 @@ export default {
         return this.balances.steem_power + ` (${this.balances.delegated_steem_power.toFixed(3)}) SP`  
       } else {
         return this.balances.steem_power + 'SP'
+      }
+    },
+    currentUser () {
+      if (this.username === this.$store.state.username) {
+        return true
+      } else {
+        return false
       }
     }
   },
@@ -204,14 +211,22 @@ export default {
       })
     },
     launchTransfer(type) {
-      this.showTransfer = false
       this.transferType = type
       this.showTransfer = true
     },
     launchPower(type) {
-      this.powerVisible = false
       this.powerType = type
       this.powerVisible = true
+    },
+    handleClose(type) {
+      switch (type.name) {
+        case 'transfer':
+        this.showTransfer = false;
+        break;
+        case 'power': 
+        thus.powerVisible = false;
+        break;
+      }
     }
     }
 }

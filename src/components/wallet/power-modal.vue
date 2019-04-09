@@ -1,5 +1,5 @@
 <template>
-<el-dialog :title="`Power ${type}` " custom-class="power-modal" :visible.sync="powerVisible" width="65%">
+<el-dialog :title="`Power ${type}` " custom-class="power-modal" @close="emitClose" :visible.sync="powerVisible" width="65%">
      <el-row :gutter="20">
          <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
              <el-form :model="power" label-position="top">
@@ -45,6 +45,11 @@ export default {
                        }
                     window.open(url, '_blank');
       },
+         emitClose() {
+          this.$emit('closedModal', {
+              name: 'power'
+          })
+      }
     }
 }
 </script>
