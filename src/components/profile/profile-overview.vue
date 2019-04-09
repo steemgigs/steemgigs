@@ -53,8 +53,11 @@
             </a>
             </el-dropdown-menu>
         </el-dropdown>
-        <router-link v-if="isProfilePage" :to="'/@' + profile.username">
+        <router-link v-if="!isProfilePage" :to="'/@' + profile.username">
             <el-button class="secondary explore-profile" type="secondary">Explore Profile</el-button>
+        </router-link>
+        <router-link v-if="isProfilePage" :to="'wallet/@' + profile.username">
+            <el-button class="secondary explore-profile" type="secondary">View Wallet</el-button>
         </router-link>
     </div>
     </div>
