@@ -84,6 +84,9 @@
                   <router-link class="waves-effect" :to="'/@' + $store.state.username"> {{ $store.state.username + ' (' + repp + ') ' }} </router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
+                  <a class="waves-effect" @click.prevent="follow()">Follow SteemGigs <i class="icon ion-star follow-icon"></i><!-- star-outline icon when off --></a>
+                </el-dropdown-item>
+                <el-dropdown-item>
                   <router-link class="waves-effect" to="/bropro">BroPro</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
@@ -329,5 +332,10 @@ export default {
         background-color: #ecf5ff;
       }
     }
+  }
+
+  .follow-icon {
+    float: right;
+    font-size: 18px;
   }
 </style>
