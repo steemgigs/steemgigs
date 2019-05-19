@@ -174,6 +174,17 @@ export default {
       sc2.follow(this.$store.state.username, 'steemgigs', function (err, res) {
         if (res != null) {
           this.$store.commit('setFollower', true)
+          this.$notify({
+            title: 'Success',
+            message: 'Following Steemgigs',
+            type: 'success'
+          })
+        } else if (err != null) {
+          this.$notify({
+            title: 'Error',
+            message: 'An error has occurred, try later',
+            type: 'error'
+          })
         }
       }.bind(this))
     }
