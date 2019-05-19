@@ -173,7 +173,9 @@ export default {
     followSteemgigs () {
       sc2.setAccessToken(this.$store.state.accessToken)
       sc2.follow(this.$store.state.username, 'steemgigs', function (err, res) {
-        this.$store.commit('setFollower', true)
+        if (res != null) {
+          this.$store.commit('setFollower', true)
+        }
       }.bind(this))
     }
   },
