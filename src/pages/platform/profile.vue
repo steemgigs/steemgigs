@@ -11,7 +11,7 @@
       <ul class="tabs">
         <li class="tab col s4"><a :class="{active: currentView === 'active_gigs'}" @click="changeView('active_gigs')">Active SteemGigs</a></li>
         <li class="tab col s4"><a :class="{active: currentView === 'gig_request'}" @click="changeView('gig_request')">Custom Requests</a></li>
-        <li class="tab col s4"><a :class="{active: currentView === 'gig_contribution'}" @click="changeView('gig_contribution')">Contributions</a></li>
+        <li class="tab col s4"><a :class="{active: currentView === 'gig_contribution'}" @click="changeView('gig_contribution')">Resource Materials</a></li>
       </ul>
       <!-- Tab 1 -->
       <div v-if="currentView === 'active_gigs'" class="activeGigs">
