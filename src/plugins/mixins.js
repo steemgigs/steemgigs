@@ -1,5 +1,3 @@
-import sc2 from '@/services/sc2'
-
 export default {
   methods: {
     logout () {
@@ -62,12 +60,6 @@ export default {
     monthFromArray (index) {
       let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
       return months[index]
-    },
-    follow () {
-      sc2.setAccessToken(this.$store.state.accessToken)
-      sc2.follow(this.$store.state.username, 'steemgigs', function (err, res) {
-        console.log(err, res)
-      })
     }
   }
 }

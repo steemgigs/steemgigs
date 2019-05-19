@@ -84,7 +84,7 @@
                   <router-link class="waves-effect" :to="'/@' + $store.state.username"> {{ $store.state.username + ' (' + repp + ') ' }} </router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <a class="waves-effect" @click.prevent="follow()">Follow SteemGigs <i class="icon ion-star follow-icon"></i><!-- star-outline icon when off --></a>
+                  <a class="waves-effect" v-if="!$store.state.profile.follower" @click.prevent="followSteemgigs()">Follow SteemGigs</a>
                 </el-dropdown-item>
                 <el-dropdown-item>
                   <router-link class="waves-effect" to="/bropro">BroPro</router-link>
@@ -130,6 +130,8 @@
 import M from 'materialize-css'
 import modal from '@/mixins/modal.js'
 import search from '@/mixins/search.js'
+import sc2 from '@/services/sc2'
+import steem from 'steem';
 
 export default {
   mixins: [modal, search],
@@ -167,14 +169,30 @@ export default {
       }
     }
   },
+  methods: {
+    followSteemgigs () {
+      sc2.setAccessToken(this.$store.state.accessToken)
+      sc2.follow(this.$store.state.username, 'steemgigs', function (err, res) {
+        this.$store.commit('setFollower', true)
+      }.bind(this))
+    }
+  },
   mounted () {
     this.$eventBus.$on('profile-fetched', () => {
       this.profile = this.$store.state.profile
     })
+
     let elem = document.querySelector('.modal')
     M.Modal.init(elem, {
       dismissible: true
     })
+
+    const username = this.$store.state.username;
+    steem.api.setOptions({ url: 'https://api.steemit.com'});
+    steem.api.getFollowers('steemgigs', username, 'blog', 1, function(err, result) {
+      let follower = Array.isArray(result) && result.length > 0 && result[0].follower == username;
+      this.$store.commit('setFollower', follower)
+    }.bind(this))
   },
   beforeDestroy () {
     this.$eventBus.$off('profile-fetched')
@@ -332,10 +350,5 @@ export default {
         background-color: #ecf5ff;
       }
     }
-  }
-
-  .follow-icon {
-    float: right;
-    font-size: 18px;
   }
 </style>
