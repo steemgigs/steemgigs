@@ -131,7 +131,6 @@ import M from 'materialize-css'
 import modal from '@/mixins/modal.js'
 import search from '@/mixins/search.js'
 import sc2 from '@/services/sc2'
-import steem from 'steem';
 
 export default {
   mixins: [modal, search],
@@ -188,13 +187,6 @@ export default {
     M.Modal.init(elem, {
       dismissible: true
     })
-
-    const username = this.$store.state.username;
-    steem.api.setOptions({ url: 'https://api.steemit.com'});
-    steem.api.getFollowers('steemgigs', username, 'blog', 1, function(err, result) {
-      let follower = Array.isArray(result) && result.length > 0 && result[0].follower == username;
-      this.$store.commit('setFollower', follower)
-    }.bind(this))
   },
   beforeDestroy () {
     this.$eventBus.$off('profile-fetched')
