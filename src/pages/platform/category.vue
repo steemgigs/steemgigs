@@ -17,7 +17,7 @@
       <!-- Posts -->
        <el-col  :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
        <el-row :gutter="15">
-            <categoryPreview mode="pages" :category="category" post_type="steemgigs_post" :limit="8" :header="categoryDetails.name" :description="categoryDetails.description"></categoryPreview>
+            <categoryPreview mode="pages" :category="category" :post_type="categoryDetails.type" :limit="8" :header="categoryDetails.name" :description="categoryDetails.description"></categoryPreview>
         </el-row>
         </el-col>
     </el-main>
@@ -46,6 +46,13 @@ export default {
       let details = {}
       this.categories.forEach((category, index) => {
         if (this.slugify(category.name) === pageCategory) {
+          switch (category.name) {
+            case 'SurpassingGoogle':
+            details.type = "steemgigs_surpassinggoogle"
+            break
+            default:
+            details.type = "steemgigs_post"
+          }
           details.name = this.capitalize(category.name)
           details.description = category.description
           details.subcategories = category.subcategories

@@ -37,6 +37,7 @@ import { Carousel, Slide } from 'vue-carousel'
 import {Plane} from 'vue-loading-spinner'
 import CatNav from '@/components/layout/catNav'
 import CategoryPreview from '@/components/snippets/category-preview'
+import SteemApi from '@/services/steem-api'
 
 export default {
   components: {
@@ -64,9 +65,22 @@ export default {
       }
     }
   },
+  mounted() {
+    this.setFollowerState();
+  },
   methods: {
     getTags (entries) {
       this.userTags = entries
+    },
+    setFollowerState () {
+      const username = this.$store.state.username
+      SteemApi.isFollower(username)
+        .then((res) => {
+          this.$store.commit('setFollower', res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }
