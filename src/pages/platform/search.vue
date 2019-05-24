@@ -18,6 +18,7 @@
         <div class="search-header">
           <h3>Search Results for "{{this.searchTerm}}"</h3>
           <SortBar @adjustedSort='updateSort' :sortMethod='selectedOrder'/>
+          <p class="suggestion-text">Still can't find your desired Gig? <router-link to="/steemgigs_request">Create a Custom Request</router-link> or a <router-link to="/create_microtask">Micro-Task</router-link></p>
         </div>
         <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="3" v-for="(gig, index) in sortedResults" :key="index">
           <gig-card :gigData="gig" />
@@ -27,9 +28,24 @@
       <!-- No Results to Show -->
       <div v-else class="col s12 m12 l12 center-align row">
         <h3>No Results to Show</h3>
-        <h5>We couldn't find anything for that, why not try another search or alternatively check out some more gigs</h5>
+        <h5>We couldn't find anything for that, why not try another search or alternatively check out some other aspects of SteemGigs</h5>
+        <router-link to="/steemgigs_request">
+          <el-button type="secondary" class="margined-buttons">Create Custom Request</el-button>
+        </router-link>
+        <router-link to="/bropro">
+          <el-button type="secondary" class="margined-buttons">Consult a BroPro</el-button>
+        </router-link>
         <router-link to="/steemgigs">
-          <el-button type="secondary" >Explore Gigs</el-button>
+          <el-button type="secondary" class="margined-buttons">Explore Gigs</el-button>
+        </router-link>
+        <router-link to="/create_gig">
+          <el-button type="secondary" class="margined-buttons">Create a Gig</el-button>
+        </router-link>
+        <router-link to="/create_microtask">
+          <el-button type="secondary" class="margined-buttons">Create a Micro-Task</el-button>
+        </router-link>
+        <router-link to="/surpassing-google">
+          <el-button type="secondary" class="margined-buttons">Contribute Knowledge</el-button>
         </router-link>
       </div>
       </el-col>
@@ -89,7 +105,14 @@ export default {
 </script>
 
 <style>
-
+.suggestion-text{
+  flex-basis: 100%;
+  margin: 0;
+  display: block !important;
+}
+.margined-buttons{
+  margin: 6px 4px;
+}
 .search-page {
   padding: 30px 30px;
 }
