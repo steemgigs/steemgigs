@@ -21,8 +21,7 @@ export default new Vuex.Store({
       name: '',
       profileImage: 'https://via.placeholder.com/100x100',
       rep: '',
-      steemgigsWitness: '',
-      follower: false
+      steemgigsWitness: ''
     },
     posts: {
       steemgigs: [],
@@ -201,9 +200,6 @@ export default new Vuex.Store({
     },
     setSearchTerm (state, term) {
       state.searchTerm = term
-    },
-    setFollower (state, follower) {
-      state.profile.follower = follower
     }
   },
   getters: {
