@@ -269,6 +269,7 @@ $slideHeight: 330px;
   .VueCarousel-wrapper {
     border-radius: 10px;
     border: 1px solid $blue;
+    height: 330px;
   }
   .VueCarousel-dot-container {
     display: inline-block !important;
