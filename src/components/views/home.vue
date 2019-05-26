@@ -3,11 +3,62 @@
     <cat-nav />
 
     <el-main>
-          <carousel id="home_ad_slider" :navigationEnabled="false" :autoplay="true" :autoplayHoverPause="true" :perPage="1">
-      <slide>
-        <img src="/static/img/share.png" class="responsive-img" alt="">
-      </slide>
-      </carousel>
+       <el-row :gutter="15">
+      <el-col :xs="0" :sm="10" :md="7" :lg="6" :xl="6">
+      <div class="card welcome">
+        <div class="cardbody">
+        <div class="profilePic">
+        <img :src="'https://steemitimages.com/u/' + $store.state.username + '/avatar'" class="user-pict-img" :alt="$store.state.username" width="60" height="60">
+        </div>
+        <span class="greetings">Hi
+        <router-link :to="'/@' + $store.state.username">@{{ $store.state.username }}!</router-link>
+        </span>
+        <carousel :navigationEnabled="false" :autoplay="false" :perPage="1" :paginationPadding="5" paginationActiveColor="#6361D0">
+        <slide>
+        <p class="g2">Get Offers from Sellers</p>
+        <p class="g2">to Build your Project!</p>
+          <router-link to="/steemgigs_request"><el-button  type="secondary  wl-card">Create a Request</el-button></router-link>
+          <router-link to="/create_microtask"><el-button  type="secondary wl-card">Create A Micro-Task</el-button></router-link>
+        </slide>
+        <slide>
+        <p class="g2">Get Perfect Byer</p>
+        <p class="g2">for your Skills and Work!</p>
+          <router-link to="/requested_gigs"><el-button  type="secondary  wl-card">Check Requests</el-button></router-link>
+          <router-link to="/create_gig"><el-button  type="secondary wl-card">Create A Gig</el-button></router-link>
+        </slide>
+        </carousel>
+        </div>
+      </div>
+      </el-col>
+      <el-col :xs="24" :sm="14" :md="17" :lg="18" :xl="18">
+        <carousel id="home_ad_slider" :navigationEnabled="false" :autoplay="true" :loop="true" :autoplayHoverPause="true" :perPage="1" :autoplayTimeout="4500" :paginationPadding="5" :paginationSize="15" paginationActiveColor="#6361D0">
+        <slide>
+          <img src="/static/img/bropro.png" class="responsive-img" alt="">
+          <router-link to="/bropro">
+          <el-button  type="secondary innerSlideBtn">Visit BroPro</el-button>
+          </router-link>
+        </slide>
+        <slide>
+          <img src="/static/img/homeslide.png" class="responsive-img" alt="">
+          <router-link to="/surpassing-google">
+          <el-button  type="secondary innerSlideBtn">Contribute Knowledge</el-button>
+          </router-link>
+        </slide>
+          <slide>
+            <img src="/static/img/share.png" class="responsive-img" alt="">
+            <router-link to="/create_gig">
+            <el-button  type="secondary innerSlideBtn">Create A Gig</el-button>
+            </router-link>
+          </slide>
+          <slide>
+            <img src="/static/img/customrequest.png" class="responsive-img" alt="">
+            <router-link to="/steemgigs_request">
+            <el-button  type="secondary innerSlideBtn">Create a Custom Request</el-button>
+            </router-link>
+          </slide>
+        </carousel>
+        </el-col>
+      </el-row>
       <!-- Gigs -->
       <el-row :gutter="15">
       <categoryPreview post_type="steemgigs_post" mode="preview" :limit="cardCount.gigs" header="SteemGigs" description="See what the SteemGigs community has to offer" />
@@ -74,6 +125,74 @@ export default {
 
 <style lang="scss">
 $blue: #6361D0;
+$slideHeight: 330px;
+.innerSlideBtn{
+  position: absolute;
+  right: 50%;
+  bottom: 1.8em;
+  transform: translate(50%);
+  opacity: 0.7;
+  &:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    opacity: 1;
+  }
+}
+.welcome, #home_ad_slider {
+  .VueCarousel-pagination {
+  display: inline-block !important;
+  }
+}
+.card.welcome {
+  margin: 0 !important;
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  border: 1px solid $blue;
+  transition: all .2s ease-in;
+  height: $slideHeight !important;  
+  overflow: hidden;
+  z-index: 1;
+  &:hover {
+    box-shadow: 0 3px 30px rgba(0, 0, 0, 0.15);
+  }
+  .cardbody{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: $slideHeight;
+  }
+  .wl-card{
+    margin: 3px 0;
+    width: 200px;
+  }
+  .greetings{
+    word-break: break-word;
+    font-size: 1.1rem;
+    margin: 0;
+    margin-bottom: 0.9em;
+  }
+  .g2{
+    padding: 0 30px;
+    word-break: break-word;
+    margin:0 !important;
+  }
+  .g2:nth-child(2){
+    margin-bottom: 0.8em !important;
+  }
+}
+.VueCarousel-dot-button{
+  border: 1px solid $blue !important;
+  vertical-align: middle;
+}
+.VueCarousel-dot-button:focus{
+  outline: none !important;
+}
+.VueCarousel-slide{
+  position: relative !important;
+}
+
 .steemgigs_ads {
   box-sizing: border-box;
   padding: 0;
@@ -125,7 +244,7 @@ $blue: #6361D0;
 #home_ad_slider {
     margin-bottom: 20px;
   img {
-    height: 215px;
+    height: $slideHeight;
     background: #ccc;
     width: 100%;
     object-fit: cover;
@@ -143,8 +262,8 @@ $blue: #6361D0;
     display: inline-block !important;
     margin: 0 auto !important;
     position: absolute !important;
-    left: 1em !important;
-    bottom: 1em !important;
+    left: 1.5em !important;
+    bottom: 2.5em !important;
   }
 }
 section {
@@ -213,5 +332,7 @@ section {
 
 .VueCarousel-wrapper {
   border-radius: 10px;
-}
+  border: 1px solid $blue;
+  height: $slideHeight;
+ }
 </style>

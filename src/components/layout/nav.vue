@@ -4,20 +4,32 @@
       <div class="nav-wrapper container">
         <router-link to="/" class="brand-logo left"><img src="/static/img/logo.gif" alt="logo"></router-link>
         <ul class="right notIn" v-if="!$store.state.accessToken">
+          <li><span class="sign-up-option nav-options"><router-link to="/bropro">BroPro</router-link></span></li>
+          <li><span class="sign-up-option">|</span></li>
+          <li><span class="sign-up-option nav-options"><router-link to="/surpassing-google">SurpassingGoogle</router-link></span></span></li>
+          <li><span class="sign-up-option">|</span></li>
           <li><span class="sign-up-option" @click="sendBasicEvent('launchSignUp')">Sign up</span></li>
           <li><el-button type="primary"  @click="sendBasicEvent('launchSignIn')">Sign In</el-button></li>
         </ul>
-        <ul class="right nav-options-wrapper" v-if="$store.state.accessToken">
-          <div class="left">
-            <!-- Search Bar -->
-            <li>
+        <ul class="left nav-options-wrapper" v-if="$store.state.accessToken">
+          <!-- Search Bar -->
+            <li class="search-bar">
               <el-input slot="reference" prefix-icon="el-icon-search" spellcheck="true" class="hide-on-med-and-down" @keydown.enter.native="initSearch('posts')" size="medium" type="text" placeholder="Search SteemGigs" v-model="searchTerm" />
               <el-popover  popper-class="search-options" width="195" v-model="showSearchOptions">
                 <span @click="initSearch('posts')">Search Gig</span>
                 <span @click="initSearch('users')">Search By User</span>
                 </el-popover>
             </li>
+        </ul>
+        <ul class="right nav-options-wrapper" v-if="$store.state.accessToken">
+          <div class="left">            
             <!-- Menu Icons -->
+            <li><span class="sign-up-option nav-options"><router-link to="/bropro">BroPro</router-link></span></li>
+            <li><span class="sign-up-option">|</span></li>
+            <li><span class="sign-up-option nav-options">
+              <router-link :to="'/@' + $store.state.username">Profile</router-link>
+            </span></li>
+            <li><span class="sign-up-option">|</span></li>
             <li class="hide-on-med-and-down">
               <router-link to="/message"><i class="icon ion-android-chat x2"></i></router-link>
             </li>
@@ -84,8 +96,8 @@
                   <router-link class="waves-effect" :to="'/@' + $store.state.username"> {{ $store.state.username + ' (' + repp + ') ' }} </router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <router-link class="waves-effect" to="/bropro">BroPro</router-link>
-                </el-dropdown-item>
+                  <a class="waves-effect" v-if="!$store.state.profile.follower" @click.prevent="followSteemgigs()">Follow SteemGigs</a>
+                </el-dropdown-item>                
                 <el-dropdown-item>
                   <router-link class="waves-effect" :to="'/wallet/@' + $store.state.username">Wallet</router-link>
                 </el-dropdown-item>
@@ -181,6 +193,15 @@ export default {
 
 <style lang="scss" scoped>
   $blue:#6361D0;
+  
+  .search-bar{
+  margin-left: 17px;
+  }
+  
+  .brand-logo{
+  position: relative !important;
+  }
+  
   nav a.brand-logo,
   nav li a,
   nav a {
@@ -293,6 +314,20 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+  
+  .nav-options{
+  color: #6361D0;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
   }
 
   .profile-list {
