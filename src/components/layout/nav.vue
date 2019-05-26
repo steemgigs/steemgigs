@@ -139,6 +139,7 @@
 import M from 'materialize-css'
 import modal from '@/mixins/modal.js'
 import search from '@/mixins/search.js'
+import sc2 from '@/services/sc2'
 
 export default {
   mixins: [modal, search],
@@ -176,10 +177,32 @@ export default {
       }
     }
   },
+  methods: {
+    followSteemgigs () {
+      sc2.setAccessToken(this.$store.state.accessToken)
+      sc2.follow(this.$store.state.username, 'steemgigs', function (err, res) {
+        if (res != null) {
+          this.$store.commit('setFollower', true)
+          this.$notify({
+            title: 'Success',
+            message: 'Following Steemgigs',
+            type: 'success'
+          })
+        } else if (err != null) {
+          this.$notify({
+            title: 'Error',
+            message: 'An error has occurred, try later',
+            type: 'error'
+          })
+        }
+      }.bind(this))
+    }
+  },
   mounted () {
     this.$eventBus.$on('profile-fetched', () => {
       this.profile = this.$store.state.profile
     })
+
     let elem = document.querySelector('.modal')
     M.Modal.init(elem, {
       dismissible: true
