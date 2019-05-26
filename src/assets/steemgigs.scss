@@ -2094,16 +2094,13 @@ hr {
     }
 
 // View carousel customizations
-.VueCarousel-wrapper {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
+.VueCarousel {
+  .VueCarousel-wrapper {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 
-.VueCarousel-pagination {
-  display: none !important;
-}
-
-.VueCarousel .VueCarousel-wrapper {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  .VueCarousel-pagination {
+    display: none !important;
+  }
 }
