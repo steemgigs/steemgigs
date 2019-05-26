@@ -5,21 +5,23 @@
           <div>
             <h3> {{ header }}</h3>
             <span class="header-desc"> {{ description }}</span>
-            </div>
-             <SortBar class="sort-bar" @adjustedSort='updateSort' :optionsType="optionsType" :sortMethod='selectedOrder'/>
+          </div>
+          <SortBar class="sort-bar" @adjustedSort='updateSort' :optionsType="optionsType" :sortMethod='selectedOrder'/>
         </div>
         <!-- If there are posts available to be shown, show posts -->
         <div class="post-preview-wrapper" v-if="searchResults.length !== 0">
-        <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6" v-for="(post, index) in sortedResults" :key="index">
-            <gig-card v-loading="isLoading" :gigData="post" v-if="post_type !== 'steemgigs_testimonial'" />
-            <testimonial-card v-else :testimonial="post" />
-        </el-col>
-        <el-row class="preview-footer">
-           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-        <router-link v-if="mode === 'preview'" :to="linkDetails.moreLinkDetails.routerLink"><el-button  type="secondary"> Explore {{ linkDetails.moreLinkDetails.buttonText }}</el-button></router-link>
-        <el-pagination v-else class="search-pagination" background layout="prev, pager, next" :current-page.sync="currentPage" :page-count="pageCount"></el-pagination>
-        </el-col>
-        </el-row>
+          <el-row :gutter="18">
+            <el-col :xs="24" :sm="12" :md="6" :lg="5" v-for="(post, index) in sortedResults" :key="index">
+              <gig-card v-loading="isLoading" :gigData="post" v-if="post_type !== 'steemgigs_testimonial'" />
+              <testimonial-card v-else :testimonial="post" />
+            </el-col>
+          </el-row>
+          <el-row class="preview-footer">
+            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+              <router-link v-if="mode === 'preview'" :to="linkDetails.moreLinkDetails.routerLink"><el-button  type="secondary"> Explore {{ linkDetails.moreLinkDetails.buttonText }}</el-button></router-link>
+              <el-pagination v-else class="search-pagination" background layout="prev, pager, next" :current-page.sync="currentPage" :page-count="pageCount"></el-pagination>
+            </el-col>
+          </el-row>
         </div>
         <!-- Else show a placeholder card -->
         <el-row class="preview-footer" v-else>
