@@ -21,8 +21,7 @@
            <h5 class="card-title">I made this</h5>
            <p>{{ profile.portfolio.description || 'Not Available' }}</p>
            <h5 class="card-title">Portfolio URL</h5>
-            <p class="not-avail" v-if='profile.portfolio.url.length === 0'>Not Available</p>
-            <a target='_blank' v-bind:href="profile.portfolio.url" v-html="profile.portfolio.url"></a>
+           <p>{{ profile.portfolio.url || 'Not Available' }}</p>
             <h5 class="card-title">Links</h5>
             <p class="social-link" v-for="(social, key, index) in profile.social" :key="index">
                <span class="site-label">{{ key }}: </span><span class="site-link" v-html="(social.match(/^(http|https):/)) ? `<a target='_blank' href='${social}'>${social}</a>` : social || ' Link not provided'"/>
