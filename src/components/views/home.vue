@@ -258,6 +258,10 @@ $slideHeight: 330px;
     margin-left: 1em;
     color: white;
   }
+  .VueCarousel-wrapper {
+    border-radius: 10px;
+    border: 1px solid $blue;
+  }
   .VueCarousel-dot-container {
     display: inline-block !important;
     margin: 0 auto !important;
@@ -329,10 +333,4 @@ section {
 .feed-option {
   text-transform: capitalize;
 }
-
-.VueCarousel-wrapper {
-  border-radius: 10px;
-  border: 1px solid $blue;
-  height: $slideHeight;
- }
 </style>
