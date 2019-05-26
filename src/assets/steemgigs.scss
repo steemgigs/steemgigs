@@ -2104,3 +2104,10 @@ hr {
     display: none !important;
   }
 }
+
+// This change was made to adjust 5 cards on large breakpoint to the container
+@media only screen and (min-width: 1200px) {
+  .el-col-lg-5 {
+    width: 20%;
+  }
+}
