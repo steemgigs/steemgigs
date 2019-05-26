@@ -38,12 +38,6 @@
           <el-button  type="secondary innerSlideBtn">Visit BroPro</el-button>
           </router-link>
         </slide>
-        <slide>
-          <img src="/static/img/homeslide.png" class="responsive-img" alt="">
-          <router-link to="/surpassing-google">
-          <el-button  type="secondary innerSlideBtn">Contribute Knowledge</el-button>
-          </router-link>
-        </slide>
           <slide>
             <img src="/static/img/share.png" class="responsive-img" alt="">
             <router-link to="/create_gig">
