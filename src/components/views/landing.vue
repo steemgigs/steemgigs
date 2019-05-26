@@ -12,7 +12,7 @@
                 <span @click="initSearch('users')">Search By User</span>
                 </el-popover>
                 <p class="sug-text">Create a <router-link to="/steemgigs_request"><span class="blue-color">'Custom Request'</span></router-link> or a <router-link to="/create_microtask"><span class="blue-color">'Micro-Task'</span></router-link></p>
-                <p>Popular: 
+                <p class="sug-text">Popular: 
                   <router-link to="/categories/graphics-design"><span class="p-tag">Ghraphics & Design</span></router-link>
                   <router-link to="/categories/digital-marketing"><span class="p-tag">Digital Marketing</span></router-link>
                   <router-link to="/categories/untalented-steemgigs"><span class="p-tag">Untalented-Steemgigs</span></router-link>
@@ -378,10 +378,10 @@ export default {
 <style lang="scss">
     .blue-color{
       color: #6361d0 !important;
-      curson: pointer;
+      cursor: pointer;
     }
     .sug-text{
-      margin: 3px 0;
+      margin: 4px 0;
       text-align: right;
       font-size: 0.9em;
     }
