@@ -10,7 +10,7 @@
         </div>
         <!-- If there are posts available to be shown, show posts -->
         <div class="post-preview-wrapper" v-if="searchResults.length !== 0">
-        <el-col :xs="24" :sm="12" :md="6" :lg="5" v-for="(post, index) in sortedResults" :key="index">
+        <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6" v-for="(post, index) in sortedResults" :key="index">
             <gig-card v-loading="isLoading" :gigData="post" v-if="post_type !== 'steemgigs_testimonial'" />
             <testimonial-card v-else :testimonial="post" />
         </el-col>

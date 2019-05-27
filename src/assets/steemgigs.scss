@@ -89,13 +89,13 @@ p {
 
   /* Track */
   ::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 5px grey;
+      box-shadow: inset 0 0 5px grey; 
       border-radius: 10px;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-      background: #8e99d9;
+      background: #8e99d9; 
       border-radius: 10px;
   }
 }
@@ -118,7 +118,7 @@ p {
   img {
     max-width: 100%;
   }
-  h2.headline {
+  h2.headline {    
     font-size: 1rem;
     font-weight: bold;
   }
@@ -267,7 +267,7 @@ img {
 .back {
   .vue-input-tag-wrapper {
     min-height: 2.45em;
-    height: auto;
+    height: auto;  
   }
   .vue-input-tag-wrapper input[type=text]:not(.browser-default) {
     width: 100%;
@@ -2081,24 +2081,17 @@ hr {
     line-height: 25px !important;
     text-transform: capitalize;
   }
-
+  
   .el-pagination.is-background .el-pager li:not(.disabled).active {
     background-color: #d0d0d0;
     color: #fff;
   }
 
-  // Shared
-  .sg-video {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 3px 3px #bfbfbf0f;
-    width: 100%;
-  }
-
-// This change was made to adjust 5 cards on large breakpoint to the container
-@media only screen and (min-width: 1200px) {
-  .el-col-lg-5 {
-    width: 20%;
-  }
-}
+    // Shared
+    .sg-video {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 3px 3px #bfbfbf0f;
+      width: 100%;
+    }
