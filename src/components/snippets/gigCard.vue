@@ -149,15 +149,10 @@ $blue: #6361D0;
   cursor: pointer;
   .card-image {
     position: relative;
-    width: 100%;
+    object-fit: cover;
     max-height: 10em;
     overflow: hidden;
-    padding: 0;
-
-    img {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
+    padding: 10px;
   }
   .card-cont {
     height: 20em;

@@ -5,8 +5,8 @@
           <div>
             <h3> {{ header }}</h3>
             <span class="header-desc"> {{ description }}</span>
-          </div>
-          <SortBar class="sort-bar" @adjustedSort='updateSort' :optionsType="optionsType" :sortMethod='selectedOrder'/>
+            </div>
+             <SortBar class="sort-bar" @adjustedSort='updateSort' :optionsType="optionsType" :sortMethod='selectedOrder'/>
         </div>
         <!-- If there are posts available to be shown, show posts -->
         <div class="post-preview-wrapper" v-if="searchResults.length !== 0">
