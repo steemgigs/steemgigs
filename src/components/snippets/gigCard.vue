@@ -26,6 +26,7 @@
           </span>
           <span v-if="!price">FREE</span>
         </p>
+        <span class="p-tag" v-if="catName == 'Untalented-Steemgigs'">Non-Expert</span>
       </div>
     </div>
     <gig-action :gigData="gigData" />
@@ -56,6 +57,9 @@ export default {
     meantFor: {
       type: String,
       default: 'results'
+    },
+    catName: {
+      type: String
     },
     gigData: Object,
     type: {
@@ -114,6 +118,26 @@ export default {
 
 <style lang="scss" scoped>
 $blue: #6361D0;
+.p-tag{
+    bottom: 0px;
+    right: 6px;
+    position: absolute;
+    display: inline-block;
+    border: 1px solid #6361D0;
+    padding: 0 4px;
+    font-size: 0.85em;
+    margin: 0px 0;
+    cursor: pointer;
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+    transition: 0.4s;
+    background-color: transparent;
+  }
+  .p-tag:hover{
+    color: #6361D0;
+    border-color: #d0d0f1;
+    background-color: #efeffa;
+  }
 .card.gig {
   box-shadow: 0 3px 13px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
@@ -135,6 +159,9 @@ $blue: #6361D0;
     overflow: hidden;
   }
   .card-content {
+    min-height: 9.6em !important;
+    position: relative !important;
+    padding: 9px !important;
     .sellerPic {
       border-radius: 50%;
       border: 1px solid #6361D0;
