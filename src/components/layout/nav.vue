@@ -4,8 +4,8 @@
       <div class="nav-wrapper container">
         <router-link to="/" class="brand-logo left"><img src="/static/img/logo.gif" alt="logo"></router-link>
         <ul class="right notIn" v-if="!$store.state.accessToken">
-          <li><span class="sign-up-option nav-options"><router-link to="/bropro">BroPro</router-link></span></li>
-          <li><span class="sign-up-option nav-options"><router-link to="/surpassing-google">SurpassingGoogle</router-link></span></span></li>
+          <li><span class="sign-up-option nav-options extra-op"><router-link to="/bropro">BroPro</router-link></span></li>
+          <li><span class="sign-up-option nav-options extra-op"><router-link to="/surpassing-google">SurpassingGoogle</router-link></span></span></li>
           <li><span class="sign-up-option" @click="sendBasicEvent('launchSignUp')">Sign up</span></li>
           <li><el-button type="primary"  @click="sendBasicEvent('launchSignIn')">Sign In</el-button></li>
         </ul>
@@ -22,8 +22,8 @@
         <ul class="right nav-options-wrapper" v-if="$store.state.accessToken">
           <div class="left">            
             <!-- Menu Icons -->
-            <li><span class="sign-up-option nav-options"><router-link to="/bropro">BroPro</router-link></span></li>
-            <li><span class="sign-up-option nav-options">
+            <li><span class="sign-up-option nav-options extra-op"><router-link to="/bropro">BroPro</router-link></span></li>
+            <li><span class="sign-up-option nav-options extra-op">
               <router-link :to="'/@' + $store.state.username">Profile</router-link>
             </span></li>
             <li class="hide-on-med-and-down">
@@ -212,7 +212,11 @@ export default {
 
 <style lang="scss" scoped>
   $blue:#6361D0;
-  
+  @media only screen and (min-width: 601px) {
+    .extra-op{
+      display: none;
+    }
+  }
   .search-bar{
   margin-left: 17px;
   }
