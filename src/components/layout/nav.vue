@@ -212,9 +212,9 @@ export default {
 
 <style lang="scss" scoped>
   $blue:#6361D0;
-  @media only screen and (min-width: 601px) {
+  @media only screen and (max-width: 701px) {
     .extra-op{
-      display: none;
+      display: none !important;
     }
   }
   .search-bar{
