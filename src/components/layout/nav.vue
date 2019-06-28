@@ -5,9 +5,7 @@
         <router-link to="/" class="brand-logo left"><img src="/static/img/logo.gif" alt="logo"></router-link>
         <ul class="right notIn" v-if="!$store.state.accessToken">
           <li><span class="sign-up-option nav-options"><router-link to="/bropro">BroPro</router-link></span></li>
-          <li><span class="sign-up-option">|</span></li>
           <li><span class="sign-up-option nav-options"><router-link to="/surpassing-google">SurpassingGoogle</router-link></span></span></li>
-          <li><span class="sign-up-option">|</span></li>
           <li><span class="sign-up-option" @click="sendBasicEvent('launchSignUp')">Sign up</span></li>
           <li><el-button type="primary"  @click="sendBasicEvent('launchSignIn')">Sign In</el-button></li>
         </ul>
@@ -25,11 +23,9 @@
           <div class="left">            
             <!-- Menu Icons -->
             <li><span class="sign-up-option nav-options"><router-link to="/bropro">BroPro</router-link></span></li>
-            <li><span class="sign-up-option">|</span></li>
             <li><span class="sign-up-option nav-options">
               <router-link :to="'/@' + $store.state.username">Profile</router-link>
             </span></li>
-            <li><span class="sign-up-option">|</span></li>
             <li class="hide-on-med-and-down">
               <router-link to="/message"><i class="icon ion-android-chat x2"></i></router-link>
             </li>
