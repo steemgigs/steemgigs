@@ -381,9 +381,10 @@ export default {
       cursor: pointer;
     }
     .sug-text{
-      margin: 4px 0;
-      text-align: right;
+      margin:0;
+      margin-top: 6px;
       font-size: 0.9em;
+      text-align:right;
     }
     .p-tag{
     color: #6361D0;
