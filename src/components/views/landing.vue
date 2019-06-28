@@ -13,7 +13,7 @@
                 </el-popover>
                 <p class="sug-text">Create a <router-link to="/steemgigs_request"><span class="blue-color">'Custom Request'</span></router-link> or a <router-link to="/create_microtask"><span class="blue-color">'Micro-Task'</span></router-link></p>
                 <p class="sug-text">Popular: 
-                  <router-link to="/categories/graphics-design"><span class="p-tag">Ghraphics & Design</span></router-link>
+                  <router-link to="/categories/graphics-design"><span class="p-tag">Graphics & Design</span></router-link>
                   <router-link to="/categories/digital-marketing"><span class="p-tag">Digital Marketing</span></router-link>
                   <router-link to="/categories/untalented-steemgigs"><span class="p-tag">Untalented-Steemgigs</span></router-link>
                 </p>
