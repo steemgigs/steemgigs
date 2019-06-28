@@ -390,7 +390,7 @@ export default {
     display: inline-block;
     border: 1px solid #6361D0;
     padding: 0 5px;
-    margin: 0 3px;
+    margin: 4px 3px;
     cursor: pointer;
     -webkit-transition: 0.4s;
     -moz-transition: 0.4s;
