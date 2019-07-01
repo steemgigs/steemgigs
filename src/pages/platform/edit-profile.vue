@@ -1,5 +1,21 @@
 <template>
 <page :pageClasses="['edit-profile__view', 'row']">
+    <!-- Popup if User is not certified -->
+    <div class="fancypopup" v-if="!certified">
+      <div class="popup-body">
+        <span class="popup-close" @click="closePopup">X</span>
+        <span class="pop-heading">Get Certified</span>
+        <p>Become a Certified User to Get free Teardrop Tokens Rewards when Doing Work on SteemGigs and Ulogs. Simply Update your Profile with All of your Info and Apply for being a Certified!</p>
+        <div class="button-flex">
+          <a href="https://ulogs.org/@surpassinggoogle/syi5zn5a" target="_blank">
+            <el-button type="primary" @click="closePopup" class="primary certified-button">Get Certified</el-button>
+          </a>
+          <a href="https://goo.gl/forms/7NxDYt4HX5GAgkae2" target="_blank">
+            <el-button type="primary" @click="closePopup" class="primary certified-button">Not Now</el-button>
+          </a>
+        </div>
+      </div>
+    </div>
     <el-main class="edit-profile">
         <h3>Edit Profile</h3>
         <h5>Use the form below to edit your profile</h5>
@@ -164,6 +180,7 @@ export default {
   },
   data () {
     return {
+      certified: true,
       profile: null,
       newLanguage: '',
       newLanguageVisible: false,
@@ -183,6 +200,10 @@ export default {
     this.getProfile()
   },
   methods: {
+    async closePopup () {
+      this.certified = true;
+      this.$store.dispatch('setFullLoading', false)
+    },
     async getProfile () {
       this.$store.dispatch('setFullLoading', true)
       await Api.fetchUserData(this.$route.params.username)
@@ -199,6 +220,9 @@ export default {
     async updateProfile () {
       this.$store.dispatch('setFullLoading', true)
       await Api.profileUpdate(this.profile, this.$store.state.accessToken).then((result) => {
+        if(!this.profile.certifiedUloggerStatus){
+          this.certified = false;
+        }
         this.$notify({
           title: 'Success',
           message: 'Profile Successfully Updated',
@@ -293,7 +317,58 @@ export default {
 </script>
 
 <style lang="scss">
-
+.button-flex{
+  display: flex;
+  justify-content: center;
+  flex-wrap:wrap;
+}
+.certified-button{
+  margin: 0 5px;
+  min-width: 120px;
+  max-width: 200px;
+}
+.fancypopup{
+  background-image: url(https://user-images.githubusercontent.com/23729959/57933050-cee25600-78ee-11e9-9a99-569b3ca1b852.jpg);
+  background-repeat: no-repeat;
+  background-position: 180% 170%;
+  background-size: 70%;
+  width: 32%;
+  height: 55%;
+  border-radius:15px;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  border-top: 2px solid rgba(98, 94, 211, 1);
+  border-right: 2px solid rgba(98, 94, 211, 1);
+  background-color:#fff;
+  z-index:99;
+  position: absolute;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.fancypopup p{
+  font-size: 16px;
+}
+.pop-heading{
+    font-family: Dancing Script,cursive;
+    color: rgba(98, 94, 211, 1);
+    font-size: 60px;
+}
+.popup-body{
+  padding: 10px 20px;
+}
+.popup-close{
+  cursor: pointer;
+  color: rgba(98, 94, 211, 1);
+  font-size: 18px;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  user-select: none;
+}
 .social-item {
     margin-bottom: 15px;
     .el-form-item__content {

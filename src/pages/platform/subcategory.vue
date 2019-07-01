@@ -5,7 +5,7 @@
       <!-- Posts -->
        <el-col  :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
        <el-row :gutter="15">
-            <categoryPreview mode="pages" :category="adjustedCategory" :subcategory="adjustedSubcategory" post_type="categoryDetails.type" :limit="8" :header="combinedHeader" :description="categoryDetails.description"></categoryPreview>
+            <categoryPreview mode="pages" :category="adjustedCategory" :subcategory="adjustedSubcategory" :post_type="categoryDetails.type" :limit="8" :header="combinedHeader" :description="categoryDetails.description"></categoryPreview>
         </el-row>
         </el-col>
     </el-main>
