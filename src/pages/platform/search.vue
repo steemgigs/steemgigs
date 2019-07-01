@@ -111,7 +111,7 @@ export default {
   display: block !important;
 }
 .margined-buttons{
-  margin: 6px 4px;
+  margin: 6px 4px !important;
 }
 .search-page {
   padding: 30px 30px;
@@ -128,6 +128,7 @@ export default {
 .search-header {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 0px 10px 10px 10px;
   align-items: center;
