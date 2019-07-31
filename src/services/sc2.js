@@ -1,7 +1,7 @@
 // import sc2 from 'sc2-sdk'
 import sc2 from 'steemconnect'
 
-const sc = sc2.Initialize({
+const sc = new sc2.Client({
   baseURL: 'https://steemconnect.com',
   app: 'steemgigs.app',
   // app: 'steemgig.app',
