@@ -9,7 +9,9 @@
 import Api from '@/services/api'
 export default {
   mounted () {
-    let {access_token: accessToken, expires_in: tokenExpires, username} = this.$route.query
+    // Token expiration is sette for one day (86400 seconds = 1 day).
+    const tokenExpires = 86400;
+    let { code: accessToken, username } = this.$route.query
     this.$store.commit('SET_USER', {accessToken, tokenExpires, username})
     Api.loggedIn(username, accessToken).then(response => {
       let responseData = response.data.profile
