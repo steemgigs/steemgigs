@@ -72,6 +72,7 @@
                     <el-option value="SBD">SBD</el-option>
                     <el-option value="SP" >SP</el-option>
                     <el-option value="TEARDROPS">TEARDROPS</el-option>
+                    <el-option value="MARLIANS">MARLIANS</el-option>
                     <el-option value="Upvote">Upvote</el-option>
                   </el-select>
                 </el-form-item>
