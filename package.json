@@ -15,7 +15,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.21.1",
     "country-list": "^1.1.0",
     "element-ui": "^2.4.11",
     "express": "^4.16.4",
