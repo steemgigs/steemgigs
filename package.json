@@ -25,7 +25,7 @@
     "marked": "^0.3.19",
     "material-icons": "^0.1.0",
     "materialize-css": "^1.0.0-alpha.3",
-    "moment": "^2.20.1",
+    "moment": "^2.29.4",
     "steemconnect": "^3.0.3",
     "serve-static": "^1.13.2",
     "simplemde": "^1.11.2",
